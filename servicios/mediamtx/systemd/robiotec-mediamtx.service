@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec MediaMTX
+After=network-online.target robiotec-apicentral.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/mediamtx
+EnvironmentFile=/root/robiotec/mediamtx/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/mediamtx/logs
+ExecStart=/root/robiotec/servicios/mediamtx/scripts/start.sh
+Restart=always
+RestartSec=3
+StandardOutput=append:/root/robiotec/servicios/mediamtx/logs/mediamtx.log
+StandardError=append:/root/robiotec/servicios/mediamtx/logs/mediamtx.log
+
+[Install]
+WantedBy=multi-user.target

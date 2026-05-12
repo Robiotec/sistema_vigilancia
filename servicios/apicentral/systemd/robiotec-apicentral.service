@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec API Central
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/apicentral
+EnvironmentFile=-/root/robiotec/apicentral/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/apicentral/logs
+ExecStart=/root/robiotec/servicios/apicentral/scripts/start.sh
+Restart=always
+RestartSec=3
+StandardOutput=append:/root/robiotec/servicios/apicentral/logs/apicentral.log
+StandardError=append:/root/robiotec/servicios/apicentral/logs/apicentral.log
+
+[Install]
+WantedBy=multi-user.target

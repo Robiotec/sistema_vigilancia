@@ -1,0 +1,13 @@
+[Unit]
+Description=Robiotec OSINT data downloader
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/robiotec/osint
+EnvironmentFile=-/root/robiotec/servicios/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/osint/logs
+ExecStart=/root/robiotec/servicios/osint/scripts/download.sh
+StandardOutput=journal
+StandardError=journal

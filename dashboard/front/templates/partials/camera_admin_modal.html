@@ -1,0 +1,359 @@
+<div class="camera-register-modal" id="camera-register-modal" hidden>
+  <div class="camera-register-modal-backdrop" id="camera-register-backdrop"></div>
+  <section class="camera-register-dialog camera-admin-management-dialog" aria-modal="true" role="dialog" aria-labelledby="camera-register-title">
+    <header class="camera-register-dialog-head">
+      <div>
+        <div class="ops-eyebrow">Centro de cámaras</div>
+        <h2 id="camera-register-title">Administrar cámaras</h2>
+        <p>
+          Registra una cámara nueva o selecciona una existente del directorio para editarla sin salir del visor principal.
+        </p>
+      </div>
+      <button class="camera-register-close" id="camera-register-close" type="button" aria-label="Cerrar administrador de cámaras">&times;</button>
+    </header>
+
+    <div class="user-admin-workbench camera-admin-modal-workbench">
+      <section class="ops-card page-panel user-admin-main-card camera-admin-modal-main-card">
+        <div class="ops-head user-admin-detail-head">
+          <div>
+            <div class="ops-eyebrow">Edición</div>
+            <h2 id="camera-admin-detail-title">Registrar nueva cámara</h2>
+            <p class="user-admin-detail-copy" id="camera-admin-detail-copy">
+              Completa el formulario para crear una cámara nueva. Si seleccionas una del panel derecho, aquí podrás actualizarla o eliminarla.
+            </p>
+          </div>
+        </div>
+
+        <form class="user-admin-form" id="camera-admin-form" novalidate>
+          <div class="camera-admin-mode-switch" aria-label="Modo de administración">
+            <button class="camera-admin-quick-action is-active" id="camera-admin-reset" type="button">
+              <span class="camera-admin-quick-action-title">Nueva cámara</span>
+              <span class="camera-admin-quick-action-note">Crear o editar stream</span>
+            </button>
+            <button class="camera-admin-quick-action camera-admin-quick-action-rbox" id="camera-admin-rbox" type="button">
+              <span class="camera-admin-quick-action-title">Registrar RBox</span>
+              <span class="camera-admin-quick-action-note">Base publicadora</span>
+            </button>
+          </div>
+
+          <div class="user-admin-form-grid camera-admin-form-grid">
+            <label class="camera-register-field" data-camera-step="identity">
+              <span class="camera-register-label">
+                <span class="camera-register-step">1</span>
+                <span>Nombre</span>
+              </span>
+              <input
+                id="camera-admin-name"
+                name="nombre"
+                type="text"
+                maxlength="120"
+                placeholder="cam.patio.norte"
+                autocomplete="off"
+                required
+              />
+              <span class="camera-register-help">Usa un nombre corto y claro para ubicar rápido la cámara dentro del directorio.</span>
+            </label>
+
+            <label class="camera-register-field" data-camera-step="identity">
+              <span class="camera-register-label">
+                <span class="camera-register-step">2</span>
+                <span>Organización</span>
+              </span>
+              <select id="camera-admin-organization" name="organizacion_id" required>
+                <option value="">Selecciona una organización</option>
+              </select>
+              <span class="camera-register-help">La cámara siempre quedará asociada a una organización visible para tu sesión actual.</span>
+            </label>
+
+            <label class="camera-register-field" data-camera-step="type">
+              <span class="camera-register-label">
+                <span class="camera-register-step">3</span>
+                <span>Tipo de cámara</span>
+              </span>
+              <select id="camera-admin-type" name="tipo_camara_codigo" required>
+                <option value="">Selecciona el tipo</option>
+              </select>
+              <span class="camera-register-help" id="camera-admin-type-help">Selecciona fija, PTZ, personalizada o montada en vehículo.</span>
+            </label>
+
+            <label class="camera-register-field camera-admin-code-field" data-camera-step="code">
+              <span class="camera-register-label">
+                <span class="camera-register-step">ID</span>
+                <span>ID único / path MediaMTX</span>
+              </span>
+              <span class="camera-admin-copy-wrap">
+                <input
+                  id="camera-admin-code"
+                  name="codigo_unico"
+                  type="text"
+                  maxlength="120"
+                  autocomplete="off"
+                  placeholder="Se genera automáticamente"
+                />
+                <button class="vehicle-item-copy camera-admin-copy-button" type="button" data-camera-copy-target="camera-admin-code">Copiar</button>
+              </span>
+              <span class="camera-register-help">Este es el identificador que usa MediaMTX como path para publicar o leer video.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rbox-wrap" data-camera-step="rbox">
+              <span class="camera-register-label">
+                <span class="camera-register-step">4</span>
+                <span>RBox asociada</span>
+              </span>
+              <select id="camera-admin-rbox-mode" name="usa_rbox">
+                <option value="no">No</option>
+                <option value="existing">Sí, asociar existente</option>
+                <option value="create">Sí, crear RBox</option>
+              </select>
+              <span class="camera-register-help">Si la cámara usa RBox, puedes asociar una existente o crear una nueva desde aquí.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rbox-existing-wrap" data-camera-step="rbox" hidden>
+              <span class="camera-register-label">
+                <span class="camera-register-step">4A</span>
+                <span>Seleccionar RBox</span>
+              </span>
+              <select id="camera-admin-rbox-select" name="rbox_id">
+                <option value="">Selecciona una RBox</option>
+              </select>
+              <span class="camera-register-help">La RBox consultará la API para obtener las cámaras asociadas y publicar hacia MediaMTX.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rbox-create-name-wrap" data-camera-step="rbox" hidden>
+              <span class="camera-register-label">
+                <span class="camera-register-step">4B</span>
+                <span>Nombre de RBox</span>
+              </span>
+              <input
+                id="camera-admin-rbox-create-name"
+                name="rbox_nombre"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="RBox acceso norte"
+              />
+              <span class="camera-register-help">El código único de la RBox se generará automáticamente al crearla.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rbox-create-ip-wrap" data-camera-step="rbox" hidden>
+              <span class="camera-register-label">
+                <span class="camera-register-step">4C</span>
+                <span>IP server RBox</span>
+              </span>
+              <input
+                id="camera-admin-rbox-create-ip"
+                name="rbox_ip_server"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="10.0.0.20"
+              />
+              <span class="camera-register-help">Opcional. Guarda la IP desde donde la RBox se conectará o quedará identificada.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-brand-wrap" data-camera-step="connection">
+              <span class="camera-register-label">
+                <span class="camera-register-step">5</span>
+                <span>Marca</span>
+              </span>
+              <select id="camera-admin-brand" name="marca">
+                <option value="">Selecciona la marca</option>
+              </select>
+              <span class="camera-register-help" id="camera-admin-brand-help">Selecciona Hikvision o Dahua para generar automáticamente el enlace RTSP.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rtsp-ip-wrap" data-camera-step="connection">
+              <span class="camera-register-label">
+                <span class="camera-register-step">6</span>
+                <span>IP o host</span>
+              </span>
+              <input
+                id="camera-admin-rtsp-ip"
+                name="rtsp_host"
+                type="text"
+                maxlength="255"
+                autocomplete="off"
+                placeholder="192.168.1.64"
+              />
+              <span class="camera-register-help">Dirección IP o DNS de la cámara, DVR o equipo que entrega el video.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rtsp-port-wrap" data-camera-step="connection">
+              <span class="camera-register-label">
+                <span class="camera-register-step">7</span>
+                <span>Puerto RTSP</span>
+              </span>
+              <input
+                id="camera-admin-rtsp-port"
+                name="rtsp_port"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="554"
+              />
+              <span class="camera-register-help">Déjalo en 554 si la cámara usa el puerto RTSP por defecto.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-stream-user-wrap" data-camera-step="credentials">
+              <span class="camera-register-label">
+                <span class="camera-register-step">8</span>
+                <span>Usuario RTSP</span>
+              </span>
+              <input
+                id="camera-admin-stream-user"
+                name="usuario_stream"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="operador_cam"
+              />
+              <span class="camera-register-help">Usuario de acceso RTSP.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-stream-password-wrap" data-camera-step="credentials">
+              <span class="camera-register-label">
+                <span class="camera-register-step">9</span>
+                <span>Clave RTSP</span>
+              </span>
+              <input
+                id="camera-admin-stream-password"
+                name="password_stream"
+                type="password"
+                maxlength="120"
+                autocomplete="new-password"
+                placeholder="Deja en blanco para conservar la actual al editar"
+              />
+              <span class="camera-register-help">Si editas una cámara y dejas este campo vacío, la clave actual se conserva.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rtsp-channel-wrap" data-camera-step="advanced">
+              <span class="camera-register-label">
+                <span class="camera-register-step">10</span>
+                <span>Canal</span>
+              </span>
+              <input
+                id="camera-admin-rtsp-channel"
+                name="rtsp_channel"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="1"
+              />
+              <span class="camera-register-help">Canal de video que corresponde a la cámara o DVR.</span>
+            </label>
+
+            <label class="camera-register-field" id="camera-admin-rtsp-substream-wrap" data-camera-step="advanced">
+              <span class="camera-register-label">
+                <span class="camera-register-step">11</span>
+                <span>Calidad</span>
+              </span>
+              <select id="camera-admin-rtsp-substream" name="rtsp_substream">
+                <option value="false">Mainstream</option>
+                <option value="true">Substream</option>
+              </select>
+              <span class="camera-register-help">Elige flujo principal o substream.</span>
+            </label>
+          </div>
+
+          <div class="camera-admin-conditional-grid" id="camera-admin-vehicle-fields" hidden>
+            <label class="camera-register-field">
+              <span class="camera-register-label">
+                <span class="camera-register-step">15</span>
+                <span>Vehículo asociado</span>
+              </span>
+              <select id="camera-admin-vehicle" name="vehiculo_id">
+                <option value="">Selecciona un vehículo</option>
+              </select>
+              <span class="camera-register-help">La cámara móvil se enlazará al vehículo elegido para usar su posición actual cuando exista.</span>
+            </label>
+
+            <label class="camera-register-field">
+              <span class="camera-register-label">
+                <span class="camera-register-step">16</span>
+                <span>Posición en el vehículo</span>
+              </span>
+              <input
+                id="camera-admin-vehicle-position"
+                name="vehiculo_posicion"
+                type="text"
+                maxlength="50"
+                autocomplete="off"
+                placeholder="frontal, lateral derecho, torreta..."
+              />
+              <span class="camera-register-help">Opcional. Sirve para saber dónde está montada la cámara dentro del vehículo.</span>
+            </label>
+          </div>
+
+          <div class="user-admin-note">
+            __CAMERA_ADMIN_ACCESS_NOTE__
+          </div>
+
+          <div class="camera-register-actions">
+            <div class="ops-note camera-register-feedback user-admin-feedback" id="camera-admin-feedback" hidden></div>
+            <div class="camera-admin-rtsp-preview" id="camera-admin-generated-result" hidden></div>
+            <div class="camera-admin-action-intro">
+              <span class="camera-admin-action-kicker">Acciones rápidas</span>
+              <p class="camera-admin-action-copy">
+                Crea la cámara con los datos necesarios. El ID único y los enlaces generados aparecerán al guardar.
+              </p>
+            </div>
+            <div class="camera-admin-action-cluster">
+              <div class="camera-admin-action-group" aria-label="Acciones de creación de cámaras">
+                <button class="camera-register-submit camera-admin-submit-primary" id="camera-admin-submit" type="submit">Crear cámara</button>
+              </div>
+              <button class="camera-register-secondary camera-register-danger camera-admin-delete-action" id="camera-admin-delete" type="button" hidden>Eliminar cámara</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="user-admin-rail">
+        <div class="user-admin-rail-head">
+          <div class="ops-eyebrow">Directorio</div>
+          <h3>Cámaras registradas</h3>
+          <p>Selecciona una cámara para cargarla en el formulario y administrarla sin salir de este modal.</p>
+        </div>
+        <div class="user-admin-rail-list" id="camera-admin-rail-list"></div>
+        <div class="camera-admin-rbox-directory">
+          <div class="user-admin-rail-head">
+            <div class="ops-eyebrow">RBox</div>
+            <h3>RBox registradas</h3>
+            <p>Consulta las bases creadas y copia su código para configurar publicadores.</p>
+          </div>
+          <div class="user-admin-rail-list" id="camera-admin-rbox-list"></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<div class="camera-register-modal" id="camera-admin-map-modal" hidden>
+  <div class="camera-register-modal-backdrop" id="camera-admin-map-backdrop"></div>
+  <section class="camera-register-dialog camera-admin-map-dialog" aria-modal="true" role="dialog" aria-labelledby="camera-admin-map-title">
+    <header class="camera-register-dialog-head">
+      <div>
+        <div class="ops-eyebrow">Mapa de ubicación</div>
+        <h2 id="camera-admin-map-title">Selecciona dónde quedará instalada la cámara</h2>
+        <p>
+          Haz clic sobre el mapa satelital para fijar la posición de la cámara estática. Cuando confirmes, las coordenadas se copiarán al formulario.
+        </p>
+      </div>
+      <button class="camera-register-close" id="camera-admin-map-close" type="button" aria-label="Cerrar selector de ubicación">&times;</button>
+    </header>
+
+    <div class="camera-register-map-stack">
+      <div class="camera-register-map-head">
+        <strong>Ubicación seleccionada</strong>
+        <span id="camera-admin-map-location">Haz clic sobre el mapa para elegir la posición exacta.</span>
+      </div>
+      <div class="camera-register-map" id="camera-admin-map"></div>
+    </div>
+
+    <div class="camera-register-action-row">
+      <button class="camera-register-secondary" id="camera-admin-map-cancel" type="button">Cancelar</button>
+      <button class="camera-register-submit" id="camera-admin-map-apply" type="button">Usar esta ubicación</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec Dashboard
+After=network-online.target robiotec-apicentral.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/dashboard
+EnvironmentFile=-/root/robiotec/dashboard/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/dashboard/logs
+ExecStart=/root/robiotec/servicios/dashboard/scripts/start.sh
+Restart=always
+RestartSec=3
+StandardOutput=append:/root/robiotec/servicios/dashboard/logs/dashboard.log
+StandardError=append:/root/robiotec/servicios/dashboard/logs/dashboard.log
+
+[Install]
+WantedBy=multi-user.target

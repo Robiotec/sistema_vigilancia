@@ -1,0 +1,467 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "86531",
+      "codigo_alfanumerico": "PFLEG-20260124-086531",
+      "latitud": 1.3576287549839277,
+      "longitud": -78.70929471423338,
+      "circunstancias_hecho": "NO está habilitado oficialmente como paso fronterizo internacional regular.\r\nNO opera con controles migratorios y aduaneros permanentes.\r\nNO funciona como CEBAF (Centro Binacional de Atención en Frontera).\r\nNO canaliza tránsito formal de personas, vehículos ni comercio.",
+      "fecha_infraccion": "2026-01-24T22:56:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.primicias.ec/noticias/en-exclusiva/puente-mataje-armados-colombianos-narcotrafico/"
+      ],
+      "fecha_creacion": "2026-01-24T22:58:06.577Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a450439-e7cd-4aac-9351-01cf23d5a709.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a450439-e7cd-4aac-9351-01cf23d5a709.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86521",
+      "codigo_alfanumerico": "PFLEG-20260124-086521",
+      "latitud": -4.977777844397126,
+      "longitud": -79.11601114857149,
+      "circunstancias_hecho": "Paso fronterizo Zumba. Habilitado oficialmente como paso internacional secundario.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:40:39.530Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/055a34e5-6728-4fcf-b68b-f82f4c7b19d6.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/055a34e5-6728-4fcf-b68b-f82f4c7b19d6.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86520",
+      "codigo_alfanumerico": "PFLEG-20260124-086520",
+      "latitud": -4.392705971623467,
+      "longitud": -79.9643678769852,
+      "circunstancias_hecho": "Puente Internacional Macará. De uso binacional tradicional, especialmente local.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:39:06.305Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/86f5bb3c-38ef-49a6-b2d7-cffeb5583940.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/86f5bb3c-38ef-49a6-b2d7-cffeb5583940.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86518",
+      "codigo_alfanumerico": "PFLEG-20260124-086518",
+      "latitud": -4.477107148636861,
+      "longitud": -80.39623719871939,
+      "circunstancias_hecho": "Puente fronterizo Lalamor no está funcionando como un paso fronterizo internacional normalizado con migración y aduana a cargo de ambos países en forma permanente.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:31:25.244Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/057f17e4-7e14-41c1-b65f-78d2d58b984d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/057f17e4-7e14-41c1-b65f-78d2d58b984d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAPOTILLO"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 15,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86506",
+      "codigo_alfanumerico": "PFOFI-20260124-086506",
+      "latitud": -3.4967584089341095,
+      "longitud": -80.21652424865721,
+      "circunstancias_hecho": "Puente Internacional de Huaquillas",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.mit.gob.ec/cebaf-huaquillas-agilita-la-interconexion-entre-ecuador-y-peru/"
+      ],
+      "fecha_creacion": "2026-01-24T21:56:24.858Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3bcb8c7d-0942-46b9-8cc2-a4f3367cf71c.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3bcb8c7d-0942-46b9-8cc2-a4f3367cf71c.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "HUAQUILLAS"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_OFICIAL",
+        "nombre": "Paso Fronterizo Oficial",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86504",
+      "codigo_alfanumerico": "PFLEG-20260124-086504",
+      "latitud": 0.25113330787072025,
+      "longitud": -76.87604432215156,
+      "circunstancias_hecho": "Infraestructura local en un corredor fluvial securitizado. La zona es altamente sensible en seguridad, por presencia histórica de: Disidencias de las FARC (Comandos de la Frontera), ELN y y rutas fluviales de narcotráfico Putumayo–Sucumbíos.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:48:03.617Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 15,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86475",
+      "codigo_alfanumerico": "PFOFI-20260124-086475",
+      "latitud": 0.8139427120406769,
+      "longitud": -77.66403963094045,
+      "circunstancias_hecho": "Puente Internacional de Rumichaca",
+      "fecha_infraccion": "2026-01-24T20:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:00:33.958Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1b1c1506-bc18-4f7e-8129-32e6fe08a810.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1b1c1506-bc18-4f7e-8129-32e6fe08a810.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_OFICIAL",
+        "nombre": "Paso Fronterizo Oficial",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_Fronterizo_Oficial_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 22,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83518",
+      "codigo_alfanumerico": "PFOFI-20260117-083518",
+      "latitud": 0.8140096841490548,
+      "longitud": -77.66497923978098,
+      "circunstancias_hecho": "Centro Nacional de Atención en Frontera (CENAF) - Rumichaca",
+      "fecha_infraccion": "2026-01-17T21:48:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.comunidadandina.org/StaticFiles/DocOf/DEC502.pdf"
+      ],
+      "fecha_creacion": "2026-01-17T21:57:21.516Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/97c7841b-9102-4a79-896f-e1ee8deb81fb.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/97c7841b-9102-4a79-896f-e1ee8deb81fb.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_OFICIAL",
+        "nombre": "Paso Fronterizo Oficial",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83517",
+      "codigo_alfanumerico": "PFLEG-20260117-083517",
+      "latitud": 0.22833326706145404,
+      "longitud": -76.873139861468,
+      "circunstancias_hecho": "Centro Binacional de Atención en Frontera (CEBAF) - San Miguel / Río Mataje",
+      "fecha_infraccion": "2026-01-17T21:48:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.comunidadandina.org/StaticFiles/DocOf/DEC502.pdf"
+      ],
+      "fecha_creacion": "2026-01-17T21:55:31.705Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/05cccf87-7386-4d4b-8711-8f582983d455.JPG",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/05cccf87-7386-4d4b-8711-8f582983d455.JPG"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83516",
+      "codigo_alfanumerico": "PFLEG-20260117-083516",
+      "latitud": -4.389866199194194,
+      "longitud": -79.96396834406335,
+      "circunstancias_hecho": "Centro Binacional de Atención en Frontera (CEBAF) - Macará",
+      "fecha_infraccion": "2026-01-17T21:48:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.comunidadandina.org/StaticFiles/DocOf/DEC502.pdf"
+      ],
+      "fecha_creacion": "2026-01-17T21:53:06.986Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f76fc5fd-2fef-48d1-8670-074628278a47.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f76fc5fd-2fef-48d1-8670-074628278a47.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACARA"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_SECUNDARIO",
+        "nombre": "Paso Fronterizo Secundario Autorizado",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83514",
+      "codigo_alfanumerico": "PFOFI-20260117-083514",
+      "latitud": -3.4972746373615005,
+      "longitud": -80.21641433095853,
+      "circunstancias_hecho": "Centro Binacional de Atención en Frontera (CEBAF) - Huaquillas",
+      "fecha_infraccion": "2026-01-17T21:48:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.comunidadandina.org/StaticFiles/DocOf/DEC502.pdf"
+      ],
+      "fecha_creacion": "2026-01-17T21:50:28.638Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c33ac2a-25ae-44ed-b8f2-121b7a622d6e.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c33ac2a-25ae-44ed-b8f2-121b7a622d6e.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "HUAQUILLAS"
+      },
+      "tipo_evento": {
+        "id": "PASO_FRONTERIZO_OFICIAL",
+        "nombre": "Paso Fronterizo Oficial",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_OFICIAL",
+          "nombre": "Paso Fronterizo Oficial",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_Paso_Fronterizo_Oficial_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "statusCode": 200,
+  "data": {
+    "ZOOM_DEFAULT_MAPA": {
+      "id": "ZOOM_DEFAULT_MAPA",
+      "nombre": "Zoom Default Mapa",
+      "valor_texto": null,
+      "valor_numerico": 8
+    },
+    "ZOOM_MAX_MAPA": {
+      "id": "ZOOM_MAX_MAPA",
+      "nombre": "Zoom Max Mapa",
+      "valor_texto": null,
+      "valor_numerico": 16
+    },
+    "ZOOM_MIN_MAPA": {
+      "id": "ZOOM_MIN_MAPA",
+      "nombre": "Zoom Min Mapa",
+      "valor_texto": null,
+      "valor_numerico": 6
+    },
+    "ZOOM_MAX_CAPA_TERRITORIAL": {
+      "id": "ZOOM_MAX_CAPA_TERRITORIAL",
+      "nombre": "Zoom max Capa Territorial",
+      "valor_texto": null,
+      "valor_numerico": 9
+    },
+    "LABEL_CAPAS_TERRITORIALES": {
+      "id": "LABEL_CAPAS_TERRITORIALES",
+      "nombre": "Label Capa Territorial",
+      "valor_texto": "Zoom máximo 9 en esta capa",
+      "valor_numerico": null
+    },
+    "LABEL_INCIDENCIAS": {
+      "id": "LABEL_INCIDENCIAS",
+      "nombre": "Label incidencias",
+      "valor_texto": "Datos de los Últimos 23 Días",
+      "valor_numerico": null
+    }
+  }
+}

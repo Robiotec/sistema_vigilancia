@@ -1,0 +1,1942 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "86575",
+      "codigo_alfanumerico": "PFILEG-20260125-086575",
+      "latitud": -0.9238489114805165,
+      "longitud": -75.38074603317939,
+      "circunstancias_hecho": "Río Napo. Función: Gran eje logístico amazónico. Uso criminal: Redistribución hacia Brasil y Perú. Nota: Más control, pero imposible de cerrar totalmente.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T19:06:28.535Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d3134f4a-33c3-49ba-875f-5fb37caa3730.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d3134f4a-33c3-49ba-875f-5fb37caa3730.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "AGUARICO"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86574",
+      "codigo_alfanumerico": "PFILEG-20260125-086574",
+      "latitud": -1.589221570906539,
+      "longitud": -75.61677476504185,
+      "circunstancias_hecho": "Río Curaray. Función: Ruta profunda, muy aislada. Uso criminal: Opción de contingencia",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T19:04:51.928Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0b28119c-d54c-4ba6-8461-213fcb53505b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0b28119c-d54c-4ba6-8461-213fcb53505b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 16,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86572",
+      "codigo_alfanumerico": "PFILEG-20260125-086572",
+      "latitud": -2.1242243498766307,
+      "longitud": -76.04296095141792,
+      "circunstancias_hecho": "Río Tigre. Función: Conector fluvial Ecuador–Perú. Uso criminal: Tráfico combinado: droga + minería ilegal. Insumos y combustible. Nota: Aprovecha infraestructura petrolera y pistas informales",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T19:00:59.357Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9b950634-b510-453f-b1a3-fac287787602.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9b950634-b510-453f-b1a3-fac287787602.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PASTAZA"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86571",
+      "codigo_alfanumerico": "PFILEG-20260125-086571",
+      "latitud": -2.3994271262955795,
+      "longitud": -76.3919364549109,
+      "circunstancias_hecho": "Río Corrientes. Provincia: Orellana / Perú. Función: Ruta secundaria de paso. Uso criminal: Evitar controles del Napo y Amazonas",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:57:27.237Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c78ddd52-9cd5-4b5a-b1c4-d719f178e7ce.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c78ddd52-9cd5-4b5a-b1c4-d719f178e7ce.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PASTAZA"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86570",
+      "codigo_alfanumerico": "PFILEG-20260125-086570",
+      "latitud": -2.5912089303877477,
+      "longitud": -76.6373701504846,
+      "circunstancias_hecho": "Río Pastaza. Función: Corredor longitudinal de tránsito. Uso criminal: Almacenamiento temporal; Desvío de rutas; Paso silencioso hacia Perú. Clave: No es productor, es zona colchón logística",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:54:47.638Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PASTAZA"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86569",
+      "codigo_alfanumerico": "PFILEG-20260125-086569",
+      "latitud": -3.003316606999382,
+      "longitud": -77.84229186555186,
+      "circunstancias_hecho": "Río Santiago. Función: Conector Morona–Perú profundo. Uso criminal: Tránsito fluvial de bajo volumen, alta frecuencia; Rutas alternas cuando hay presión en otros ejes. Riesgo: Alto por invisibilidad, no por volumen.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:52:02.141Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86568",
+      "codigo_alfanumerico": "PFILEG-20260125-086568",
+      "latitud": -2.954569397439716,
+      "longitud": -77.71295070367434,
+      "circunstancias_hecho": "Río Morona. Función: Eje fluvial transfronterizo directo con Perú.\r\nUso criminal: Paso de droga (pasta base y clorhidrato); Armas ligeras; Dinero; Ventaja criminal: Comunidades binacionales, múltiples afluentes, casi nulo control permanente.",
+      "fecha_infraccion": "2026-01-25T18:48:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:49:35.577Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86556",
+      "codigo_alfanumerico": "PFILEG-20260125-086556",
+      "latitud": -4.317706535559569,
+      "longitud": -78.64516861794493,
+      "circunstancias_hecho": "Paso clandestino al Peru desde campamentos consolidados de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:27:34.353Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86542",
+      "codigo_alfanumerico": "PFILEG-20260125-086542",
+      "latitud": -4.937308939172445,
+      "longitud": -78.9850909773269,
+      "circunstancias_hecho": "Paso fronterizo clandestino.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:34:14.512Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86541",
+      "codigo_alfanumerico": "PFILEG-20260125-086541",
+      "latitud": -4.955698200508029,
+      "longitud": -78.99085035084929,
+      "circunstancias_hecho": "Paso clandestino con marea baja.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:32:51.912Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86539",
+      "codigo_alfanumerico": "PFILEG-20260125-086539",
+      "latitud": -4.9637207070914755,
+      "longitud": -78.99118818994043,
+      "circunstancias_hecho": "Puente fronterizo clandestino sobre el rio.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:28:09.434Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86538",
+      "codigo_alfanumerico": "PFILEG-20260125-086538",
+      "latitud": -4.976599976800728,
+      "longitud": -78.99856020671574,
+      "circunstancias_hecho": "Paso clandestino a nivel de 7 de Agosto.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:25:56.719Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86537",
+      "codigo_alfanumerico": "PFILEG-20260125-086537",
+      "latitud": -4.991841031833075,
+      "longitud": -79.00490732641056,
+      "circunstancias_hecho": "Paso clandestino a Peru en campamento de minería ilegal aluvial.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:25:15.836Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c52d26eb-1c26-4a34-8757-ee9e0d6ca5ce.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c52d26eb-1c26-4a34-8757-ee9e0d6ca5ce.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86535",
+      "codigo_alfanumerico": "PFILEG-20260125-086535",
+      "latitud": -5.014950395652948,
+      "longitud": -79.01482036565018,
+      "circunstancias_hecho": "Paso clandestino dentro de campamento de minería ilegal aluvial.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:19:08.206Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0213ccdb-f2e7-494c-8430-8f72f0dbda49.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0213ccdb-f2e7-494c-8430-8f72f0dbda49.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86530",
+      "codigo_alfanumerico": "PFILEG-20260124-086530",
+      "latitud": -4.96453438795308,
+      "longitud": -79.14210793728552,
+      "circunstancias_hecho": "Paso informal fluvial al Peru. Con marea baja se cruza a pie.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:54:22.688Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86529",
+      "codigo_alfanumerico": "PFILEG-20260124-086529",
+      "latitud": -4.9670391393093185,
+      "longitud": -79.21243111248656,
+      "circunstancias_hecho": "Paso informal sobre el Rio Canchis desde los Pachacos.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:52:58.002Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86528",
+      "codigo_alfanumerico": "PFILEG-20260124-086528",
+      "latitud": -4.6581680195753075,
+      "longitud": -79.46427710748448,
+      "circunstancias_hecho": "Paso informal a nivel de Espindola. Peru tiene algo de control, pero bajo.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:50:53.169Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ESPINDOLA"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86527",
+      "codigo_alfanumerico": "PFILEG-20260124-086527",
+      "latitud": -4.526044668600981,
+      "longitud": -79.54314343595837,
+      "circunstancias_hecho": "Paso informal fluvial.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:48:59.676Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86526",
+      "codigo_alfanumerico": "PFILEG-20260124-086526",
+      "latitud": -4.438400502792478,
+      "longitud": -79.63732716726523,
+      "circunstancias_hecho": "Cruce fronterizo informal.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:47:17.231Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86525",
+      "codigo_alfanumerico": "PFILEG-20260124-086525",
+      "latitud": -4.447915639508662,
+      "longitud": -79.68210959636879,
+      "circunstancias_hecho": "Paso informal con animales de carga entre cerros - base en Chaguarpamba Alto.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:46:29.705Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86524",
+      "codigo_alfanumerico": "PFILEG-20260124-086524",
+      "latitud": -4.472367289424812,
+      "longitud": -79.70904532117387,
+      "circunstancias_hecho": "Paso informal con animales de carga entre los cerros.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:45:09.156Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86523",
+      "codigo_alfanumerico": "PFILEG-20260124-086523",
+      "latitud": -4.3892181528996,
+      "longitud": -79.91407956149172,
+      "circunstancias_hecho": "Paso informal alterno.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:43:12.390Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACARA"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86522",
+      "codigo_alfanumerico": "PFILEG-20260124-086522",
+      "latitud": -4.489522519597835,
+      "longitud": -79.80254100179572,
+      "circunstancias_hecho": "Pasa informal en las faldas del cerro.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:42:10.459Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86519",
+      "codigo_alfanumerico": "PFILEG-20260124-086519",
+      "latitud": -4.389653000525271,
+      "longitud": -80.24242844752186,
+      "circunstancias_hecho": "Cruces fluviales frecuentes.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:33:43.384Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86517",
+      "codigo_alfanumerico": "PFILEG-20260124-086517",
+      "latitud": -4.385829164577906,
+      "longitud": -80.4539523379231,
+      "circunstancias_hecho": "Paso informal terrestre con marea baja.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:26:05.219Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86516",
+      "codigo_alfanumerico": "PFILEG-20260124-086516",
+      "latitud": -4.3350381812323135,
+      "longitud": -80.42599128026612,
+      "circunstancias_hecho": "Paso informal terrestre con marea baja. Concurrencia importante.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:24:03.795Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86515",
+      "codigo_alfanumerico": "PFILEG-20260124-086515",
+      "latitud": -4.311665847281312,
+      "longitud": -80.40597258590934,
+      "circunstancias_hecho": "Paso informal fluvial",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:22:04.990Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAPOTILLO"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86514",
+      "codigo_alfanumerico": "PFILEG-20260124-086514",
+      "latitud": -4.280609666730967,
+      "longitud": -80.3673702115139,
+      "circunstancias_hecho": "Paso informal fluvial al Peru",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:19:55.547Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAPOTILLO"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86513",
+      "codigo_alfanumerico": "PFILEG-20260124-086513",
+      "latitud": -4.024306837133437,
+      "longitud": -80.45229463082875,
+      "circunstancias_hecho": "Paso informal fluvial.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:15:08.298Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86512",
+      "codigo_alfanumerico": "PFILEG-20260124-086512",
+      "latitud": -3.841300762921945,
+      "longitud": -80.16021989161064,
+      "circunstancias_hecho": "Paso informal de puesto policial peruano.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:12:36.377Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86511",
+      "codigo_alfanumerico": "PFILEG-20260124-086511",
+      "latitud": -3.6865281299506565,
+      "longitud": -80.19898014189873,
+      "circunstancias_hecho": "Paso informal entre Matapalo (PER) y Rancho Chico (ECU)",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:07:20.231Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86510",
+      "codigo_alfanumerico": "PFILEG-20260124-086510",
+      "latitud": -3.6641582681233222,
+      "longitud": -80.18599107087665,
+      "circunstancias_hecho": "Paso informal al Peru por tierra seguido por un paso fluvial.",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:05:48.099Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ARENILLAS"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86509",
+      "codigo_alfanumerico": "PFILEG-20260124-086509",
+      "latitud": -3.6262314446384387,
+      "longitud": -80.1900013384669,
+      "circunstancias_hecho": "Pasa clandestino fluvial entre Carcabón (ECU) y Estero Quiñones / Pueblo Nuevo (PER)",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:04:00.826Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ARENILLAS"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 40,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86508",
+      "codigo_alfanumerico": "PFILEG-20260124-086508",
+      "latitud": -3.55840600679008,
+      "longitud": -80.21127148908388,
+      "circunstancias_hecho": "Puente Rio Zarumilla",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T22:01:35.055Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 13,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86507",
+      "codigo_alfanumerico": "PFILEG-20260124-086507",
+      "latitud": -3.481376882564201,
+      "longitud": -80.24311943072745,
+      "circunstancias_hecho": "Puente Internacional Aguas Verdes-Huaquillas",
+      "fecha_infraccion": "2026-01-24T21:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:58:10.368Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9dceb3f0-f143-4248-9c8f-077ceb5ee892.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9dceb3f0-f143-4248-9c8f-077ceb5ee892.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "HUAQUILLAS"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86503",
+      "codigo_alfanumerico": "PFILEG-20260124-086503",
+      "latitud": 0.38922009024093235,
+      "longitud": -77.16769078860408,
+      "circunstancias_hecho": "Paso fronterizo fluvial usado con alta frecuencia.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:44:38.228Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 18,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86502",
+      "codigo_alfanumerico": "PFILEG-20260124-086502",
+      "latitud": 0.6559677804720938,
+      "longitud": -77.52647931477406,
+      "circunstancias_hecho": "Paso informa a COL desde Santa Barbara.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:43:11.585Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SUCUMBIOS"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 15,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86498",
+      "codigo_alfanumerico": "PFILEG-20260124-086498",
+      "latitud": 1.2750901136200712,
+      "longitud": -78.64696674073453,
+      "circunstancias_hecho": "paso fronterizo clandestino usado por narcotraficantes.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:40:43.949Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 20,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86496",
+      "codigo_alfanumerico": "PFILEG-20260124-086496",
+      "latitud": 1.2672431931569041,
+      "longitud": -78.63866383620378,
+      "circunstancias_hecho": "Paso clandestino usado por grupos criminales fronterizos.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:39:25.796Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 24,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86493",
+      "codigo_alfanumerico": "PFILEG-20260124-086493",
+      "latitud": 1.357694673482144,
+      "longitud": -78.70950026655422,
+      "circunstancias_hecho": "Aunque no no habilitado oficialmente para tránsito internacional regular, el paso fronterizo en Mataje es usado para pasos fronterizos irregulares.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:36:35.458Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 22,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86488",
+      "codigo_alfanumerico": "PFILEG-20260124-086488",
+      "latitud": 0.9388361221212472,
+      "longitud": -78.18619300768485,
+      "circunstancias_hecho": "Puente peatonal que une ECU-COL a nivel de el Chical. Bastante movimiento irregular en el área dada la cantidad de plantaciones de hoja coca.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:32:27.234Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 15,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86487",
+      "codigo_alfanumerico": "PFILEG-20260124-086487",
+      "latitud": 0.8803793219488549,
+      "longitud": -78.0418122689363,
+      "circunstancias_hecho": "Paso informar en Mayasquer usado por campesinos y los CDF",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:30:26.463Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 22,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86486",
+      "codigo_alfanumerico": "PFILEG-20260124-086486",
+      "latitud": 0.8341886519442534,
+      "longitud": -77.79469802469198,
+      "circunstancias_hecho": "En este sector de la quebrada, múltiples pasos clandestinos--área caliente por los Comandos de la Frontera.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:27:47.263Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_CLANDESTINO",
+        "nombre": "Paso Clandestino",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86484",
+      "codigo_alfanumerico": "PFILEG-20260124-086484",
+      "latitud": 0.839454817297661,
+      "longitud": -77.76109098623417,
+      "circunstancias_hecho": "Paso altamente irregular, puente de cemento con trafico constante de camiones. Bodegas sospechosas cerca.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:25:29.398Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/26ba62f7-e9fa-47c3-afa8-0ccb4c568357.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/26ba62f7-e9fa-47c3-afa8-0ccb4c568357.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 21,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86482",
+      "codigo_alfanumerico": "PFILEG-20260124-086482",
+      "latitud": 0.8432311429429448,
+      "longitud": -77.70594913766199,
+      "circunstancias_hecho": "Pequeño puente peatonal cerca de la empresa eléctrica - paso a Colombia",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:22:10.096Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 19,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86481",
+      "codigo_alfanumerico": "PFILEG-20260124-086481",
+      "latitud": 0.8495833576614429,
+      "longitud": -77.71988720880238,
+      "circunstancias_hecho": "Paso Informal a Colombia - con puente peatonal sobre rio Carchi",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:20:32.533Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 17,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86478",
+      "codigo_alfanumerico": "PFILEG-20260124-086478",
+      "latitud": 0.80176872336352,
+      "longitud": -77.67372771805663,
+      "circunstancias_hecho": "Pese a un cierre 'oficial' todavía se cruza en Urbina informalmente hacia Colombia y viceversa",
+      "fecha_infraccion": "2026-01-24T20:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.eluniverso.com/noticias/ecuador/ecuador-reduce-pasos-fronterizos-internacionales-estos-seran-los-unicos-habilitados-desde-el-24-de-diciembre-nota/?utm_source=chatgpt.com",
+        "https://www.instagram.com/p/DTi7eI2Ep7r/?img_index=2"
+      ],
+      "fecha_creacion": "2026-01-24T21:08:23.939Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86477",
+      "codigo_alfanumerico": "PFILEG-20260124-086477",
+      "latitud": 0.6717796435877031,
+      "longitud": -77.58842688684041,
+      "circunstancias_hecho": "Pese a ser oficialmente cerrado, todavía existe trafico entre ECU-COL",
+      "fecha_infraccion": "2026-01-24T20:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.eluniverso.com/noticias/ecuador/ecuador-reduce-pasos-fronterizos-internacionales-estos-seran-los-unicos-habilitados-desde-el-24-de-diciembre-nota/?utm_source=chatgpt.com",
+        "https://www.instagram.com/p/DTi7eI2Ep7r/?img_index=2"
+      ],
+      "fecha_creacion": "2026-01-24T21:05:31.953Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 17,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86476",
+      "codigo_alfanumerico": "PFILEG-20260124-086476",
+      "latitud": 0.8024608693360067,
+      "longitud": -77.85555628277817,
+      "circunstancias_hecho": "Pese a ser cerrado oficialmente, todavía existe trafico entre ECU-COL",
+      "fecha_infraccion": "2026-01-24T20:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.eluniverso.com/noticias/ecuador/ecuador-reduce-pasos-fronterizos-internacionales-estos-seran-los-unicos-habilitados-desde-el-24-de-diciembre-nota/?utm_source=chatgpt.com",
+        "https://www.instagram.com/p/DTi7eI2Ep7r/?img_index=2"
+      ],
+      "fecha_creacion": "2026-01-24T21:03:58.243Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "PASO_INFORMAL",
+        "nombre": "Paso Informal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "PASO_ILEGAL",
+          "nombre": "Paso Fronterizo Ilegal",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_Paso_InformalPaso_Clandestino_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

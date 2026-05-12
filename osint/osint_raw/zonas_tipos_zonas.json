@@ -1,0 +1,20 @@
+{
+  "statusCode": 200,
+  "data": [
+    {
+      "id": 3,
+      "nombre": "Grupos Criminales",
+      "tipo_evento_id": null
+    },
+    {
+      "id": 2,
+      "nombre": "Rutas de Narcotrafico",
+      "tipo_evento_id": null
+    },
+    {
+      "id": 1,
+      "nombre": "Cantones",
+      "tipo_evento_id": null
+    }
+  ]
+}

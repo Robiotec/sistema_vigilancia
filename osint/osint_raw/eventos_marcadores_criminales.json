@@ -1,0 +1,3657 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "448653",
+      "codigo_alfanumerico": "MCRI-20260325-448653",
+      "latitud": 36.5286498,
+      "longitud": -6.3090827,
+      "circunstancias_hecho": "En Cádiz, en el P.º Fernando Quiñones frente al Castillo de Santa Catalina y cerca del Puerto de Cádiz, un graffiti de Los Tiguerones alerta sobre su posible presencia y expansión en zonas portuarias de Europa.",
+      "fecha_infraccion": "2026-03-25T23:36:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://periodismodeinvestigacion.com/2026/03/24/narrativas-crimenes-y-hasta-abogado-las-conexiones-de-pipo-y-willy/"
+      ],
+      "fecha_creacion": "2026-03-26T00:01:03.078Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8250e39d-0e52-4a82-90ad-3c743a1ebae9.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 29,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "93688",
+      "codigo_alfanumerico": "MCRI-20260218-093688",
+      "latitud": -2.131821472085998,
+      "longitud": -79.96828265213944,
+      "circunstancias_hecho": "Marcador Criminal - Tiguerones / Tiguerones Igualitos",
+      "fecha_infraccion": "2026-02-18T17:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-18T17:20:00.598Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0614b698-290a-4532-9898-43f59edc8f18.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0614b698-290a-4532-9898-43f59edc8f18.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_TERRITORIO_GRAFITI_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 84,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "93672",
+      "codigo_alfanumerico": "MCRI-20260217-093672",
+      "latitud": -2.1389440170159464,
+      "longitud": -79.8886857129669,
+      "circunstancias_hecho": "Grafiti criminal CK",
+      "fecha_infraccion": "2026-02-17T20:36:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-17T20:37:30.539Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/48461eab-d998-4aed-ad37-b0bf0519f17d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/48461eab-d998-4aed-ad37-b0bf0519f17d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_TERRITORIO_GRAFITI_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 333,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86657",
+      "codigo_alfanumerico": "MCRI-20260123-086657",
+      "latitud": -0.9579051635774055,
+      "longitud": -80.72549740846902,
+      "circunstancias_hecho": "Probabilidad Media",
+      "fecha_infraccion": "2026-01-23T14:55:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T17:18:03.793Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/60f75394-852e-42f4-906f-88e3ebeaf068.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/60f75394-852e-42f4-906f-88e3ebeaf068.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 765,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83402",
+      "codigo_alfanumerico": "MCRI-20260112-083402",
+      "latitud": -2.1334858364051295,
+      "longitud": -79.88926821682048,
+      "circunstancias_hecho": "Graffiti referencial a banda Chone Killers",
+      "fecha_infraccion": "2026-01-12T22:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-12T23:28:37.723Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fc9603dc-95ad-43b6-91fb-aea040b02fe4.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fc9603dc-95ad-43b6-91fb-aea040b02fe4.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 976,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83387",
+      "codigo_alfanumerico": "MCRI-20260112-083387",
+      "latitud": -2.1206145682814532,
+      "longitud": -79.97122133065376,
+      "circunstancias_hecho": "Alias \"El Gato\" dejó una marca en una pared de una casa abandonada en Casuarina y una calle sin nombre, muy cerca hay un Tuti",
+      "fecha_infraccion": "2026-01-12T16:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-12T17:19:40.953Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a6a81d7e-8401-407e-b50b-199f8b05cf9b.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a6a81d7e-8401-407e-b50b-199f8b05cf9b.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 354,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83374",
+      "codigo_alfanumerico": "MCRI-20260111-083374",
+      "latitud": -2.1377076888844537,
+      "longitud": -79.8850189223248,
+      "circunstancias_hecho": "Chone Killers Ben 10 La L",
+      "fecha_infraccion": "2026-01-11T05:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-12T04:00:22.894Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/33adf748-a4ec-438b-8849-21b0f8a02763.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/33adf748-a4ec-438b-8849-21b0f8a02763.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 909,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83373",
+      "codigo_alfanumerico": "MCRI-20260111-083373",
+      "latitud": -2.136259128880234,
+      "longitud": -79.88609274130334,
+      "circunstancias_hecho": "Chone Killers Ben 10",
+      "fecha_infraccion": "2026-01-11T05:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-12T03:55:05.005Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1c236da6-82f4-45c0-84bd-880516fad579.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1c236da6-82f4-45c0-84bd-880516fad579.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 846,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83365",
+      "codigo_alfanumerico": "MCRI-20260111-083365",
+      "latitud": -2.1853167238637954,
+      "longitud": -79.94768865863342,
+      "circunstancias_hecho": "Grafiti Criminal",
+      "fecha_infraccion": "2026-01-11T21:56:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T21:59:20.787Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d6045406-d129-4ff4-83d0-0c4bf1ffe9cd.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d6045406-d129-4ff4-83d0-0c4bf1ffe9cd.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 865,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83360",
+      "codigo_alfanumerico": "MCRI-20260111-083360",
+      "latitud": -3.2586125,
+      "longitud": -79.9779844,
+      "circunstancias_hecho": "Presencia de graffiti en Machala\r\nSector: Cdla. Martha Bucaram – Machala.\r\nCerca de la Casa Comunal - Barrio \"Las Tinas\".",
+      "fecha_infraccion": "2026-01-11T18:40:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T18:46:16.831Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b1d204e2-50d3-43a5-b741-ab85744aefdf.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b1d204e2-50d3-43a5-b741-ab85744aefdf.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83358",
+      "codigo_alfanumerico": "MCRI-20260111-083358",
+      "latitud": -0.1879658993446414,
+      "longitud": -78.49118240608213,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Vatos Locos\" en Quito, sector: La Carolina, diagonal a la Empresa Eléctrica Quito, a una cuadra de GT Óptica Ec.",
+      "fecha_infraccion": "2026-01-11T16:44:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T17:23:29.431Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f8d93362-cde6-4340-9634-0a0696309d06.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f8d93362-cde6-4340-9634-0a0696309d06.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83353",
+      "codigo_alfanumerico": "MCRI-20260111-083353",
+      "latitud": -2.1418875,
+      "longitud": -79.9422969,
+      "circunstancias_hecho": "En el punto registrado se observa presencia de marcador criminal atribuido al grupo delictivo Latin Kings.",
+      "fecha_infraccion": "2026-01-11T15:40:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T15:41:50.674Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b744e5c0-3714-4025-bf6e-ad6bd99df6a4.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b744e5c0-3714-4025-bf6e-ad6bd99df6a4.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 460,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83352",
+      "codigo_alfanumerico": "MCRI-20260111-083352",
+      "latitud": -2.1046125,
+      "longitud": -79.9265781,
+      "circunstancias_hecho": "En el punto registrado se observa presencia de marcador criminal atribuido al grupo delictivo Latin Kings.",
+      "fecha_infraccion": "2026-01-11T15:34:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T15:40:23.993Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/485b89d6-3841-4eca-a1b1-8e3c6ad18006.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/485b89d6-3841-4eca-a1b1-8e3c6ad18006.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 247,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83351",
+      "codigo_alfanumerico": "MCRI-20260111-083351",
+      "latitud": -2.2124125,
+      "longitud": -79.9119219,
+      "circunstancias_hecho": "Presencia de graffiti en Guayaquil\r\nSector: (Letamendi y Av. 19 S) - Guayaquil.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:43:33.271Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b25da507-7e90-454f-a205-388015419344.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b25da507-7e90-454f-a205-388015419344.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83350",
+      "codigo_alfanumerico": "MCRI-20260111-083350",
+      "latitud": -3.2534125,
+      "longitud": -79.9830781,
+      "circunstancias_hecho": "Presencia de graffiti en Machala\r\nSector: Sector Colegio de Medios vía a Pto. Bolívar - Machala.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:42:05.813Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/65ef1c33-5dd5-438e-a6a3-3bd35b6f7279.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/65ef1c33-5dd5-438e-a6a3-3bd35b6f7279.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83349",
+      "codigo_alfanumerico": "MCRI-20260110-083349",
+      "latitud": -3.2586125,
+      "longitud": -79.9779844,
+      "circunstancias_hecho": "Presencia de graffiti en Machala\r\nSector: Cdla. Martha Bucaram – Machala.",
+      "fecha_infraccion": "2026-01-10T23:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:40:37.066Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/2caaa884-7444-4cc3-8494-f7dd6a342deb.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/2caaa884-7444-4cc3-8494-f7dd6a342deb.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 624,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83348",
+      "codigo_alfanumerico": "MCRI-20260111-083348",
+      "latitud": -0.1048936040748531,
+      "longitud": -78.45533648797455,
+      "circunstancias_hecho": "Presencia de graffiti en Quito\r\nSector: Av. Padre Luis Vacarí - Quito.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:38:48.288Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7985a396-49fa-4f13-bdc1-41fd90d9db16.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7985a396-49fa-4f13-bdc1-41fd90d9db16.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 528,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83347",
+      "codigo_alfanumerico": "MCRI-20260110-083347",
+      "latitud": -3.2496375,
+      "longitud": -79.9754531,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Sector Colegio - Machala.",
+      "fecha_infraccion": "2026-01-10T20:35:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:36:45.225Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/192b49fb-7099-4d97-86c0-6192dc568d6e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/192b49fb-7099-4d97-86c0-6192dc568d6e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 452,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83346",
+      "codigo_alfanumerico": "MCRI-20260111-083346",
+      "latitud": -3.2534125,
+      "longitud": -79.9830781,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Sector Colegio de Medios vía a Pto. Bolívar - Machala.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:33:54.033Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/84413ae8-d30a-4810-aaad-0194c88e456a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/84413ae8-d30a-4810-aaad-0194c88e456a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 555,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83345",
+      "codigo_alfanumerico": "MCRI-20260111-083345",
+      "latitud": -2.2124125,
+      "longitud": -79.9119219,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: (Letamendi y Av. 19 S) - Guayaquil.",
+      "fecha_infraccion": "2026-01-11T00:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:32:03.225Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/598fbdfb-8283-4e72-bffc-b69746094637.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/598fbdfb-8283-4e72-bffc-b69746094637.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1550,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83344",
+      "codigo_alfanumerico": "MCRI-20260110-083344",
+      "latitud": -2.1695625,
+      "longitud": -79.83807809999999,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Divino Niño (Principal) - Durán.",
+      "fecha_infraccion": "2026-01-10T21:55:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:29:55.336Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9211c661-832a-47de-8cae-970203a79288.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9211c661-832a-47de-8cae-970203a79288.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83343",
+      "codigo_alfanumerico": "MCRI-20260110-083343",
+      "latitud": -2.1695625,
+      "longitud": -79.83807809999999,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Cdla. Pedro Menéndez Gilbert - Durán.",
+      "fecha_infraccion": "2026-01-10T17:20:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:26:15.826Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/59cf9874-fd38-4a73-ada9-8726fa44d80f.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/59cf9874-fd38-4a73-ada9-8726fa44d80f.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 268,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83342",
+      "codigo_alfanumerico": "MCRI-20260111-083342",
+      "latitud": -2.1565375,
+      "longitud": -79.8409844,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Maldonado - Durán.\r\nUbicación del sector mas no del punto exacto.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:22:59.139Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a4d91163-880f-41b9-a64f-88b8943b397a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a4d91163-880f-41b9-a64f-88b8943b397a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 233,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83341",
+      "codigo_alfanumerico": "MCRI-20260111-083341",
+      "latitud": -2.1546125,
+      "longitud": -79.8360156,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Los Esteros - Durán.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:17:40.173Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dd9dc89a-4bd8-475e-a72e-3a8912ebf48e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dd9dc89a-4bd8-475e-a72e-3a8912ebf48e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 239,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83340",
+      "codigo_alfanumerico": "MCRI-20260110-083340",
+      "latitud": -2.1508125,
+      "longitud": -79.8324219,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Cdla. Héctor Cobos - Durán.",
+      "fecha_infraccion": "2026-01-10T23:50:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:15:18.251Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c46f632e-55d9-487e-ae27-3f716d5b3de1.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c46f632e-55d9-487e-ae27-3f716d5b3de1.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 198,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83339",
+      "codigo_alfanumerico": "MCRI-20260111-083339",
+      "latitud": -2.1471875,
+      "longitud": -79.8323594,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Cdla. Héctor Cobos - Durán.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T07:13:26.422Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7d19df5-8cde-44c5-b74f-9c83d414dd8a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7d19df5-8cde-44c5-b74f-9c83d414dd8a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 185,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83338",
+      "codigo_alfanumerico": "MCRI-20260110-083338",
+      "latitud": -2.1532375,
+      "longitud": -79.8286719,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Cooperativa Antonio José de Sucre- Durán.",
+      "fecha_infraccion": "2026-01-10T20:50:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:53:50.072Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/84da9fe9-a1bd-415c-a065-35c2a1645fa0.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/84da9fe9-a1bd-415c-a065-35c2a1645fa0.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 192,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83337",
+      "codigo_alfanumerico": "MCRI-20260110-083337",
+      "latitud": -2.1661125,
+      "longitud": -79.7968594,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Recreo etapa 4 - Durán.",
+      "fecha_infraccion": "2026-01-10T18:15:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:51:38.222Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/20364b9d-97db-4bd5-ba14-32ace9faf927.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/20364b9d-97db-4bd5-ba14-32ace9faf927.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 138,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83336",
+      "codigo_alfanumerico": "MCRI-20260111-083336",
+      "latitud": -2.1658375,
+      "longitud": -79.7969844,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Recreo etapa 3 - Durán.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:48:27.529Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/75936893-6631-46f6-99bf-cc48534e3015.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/75936893-6631-46f6-99bf-cc48534e3015.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83335",
+      "codigo_alfanumerico": "MCRI-20260110-083335",
+      "latitud": -2.1658375,
+      "longitud": -79.7969844,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Recreo etapa 3 - Durán.",
+      "fecha_infraccion": "2026-01-10T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:43:11.495Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b12ca31d-fb5c-4eb4-be53-8b196b10049d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b12ca31d-fb5c-4eb4-be53-8b196b10049d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 317,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83334",
+      "codigo_alfanumerico": "MCRI-20260111-083334",
+      "latitud": -0.09898034548137208,
+      "longitud": -78.45365742163844,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Pipos\" en Quito, sector: AKi Carapungo ‎Parque de la Juventud.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:14:02.137Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/58c111c2-7e67-4c22-b83f-a4a4c9351e59.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/58c111c2-7e67-4c22-b83f-a4a4c9351e59.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 431,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83333",
+      "codigo_alfanumerico": "MCRI-20260111-083333",
+      "latitud": -0.09683667873292817,
+      "longitud": -78.45327932255572,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Pipos\" en Quito, sector: Parque de la Juventud Carapungo.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:10:11.415Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8efa4cc1-a0a4-44a4-b580-f5e2f38ebb1f.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8efa4cc1-a0a4-44a4-b580-f5e2f38ebb1f.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 448,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83332",
+      "codigo_alfanumerico": "MCRI-20260111-083332",
+      "latitud": -0.08887590264723158,
+      "longitud": -78.44734105099026,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Carapungo / Cuerpo de bomberos ‎Carapungo.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:07:38.764Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ed22a14d-3521-4079-86b9-8fae13d79876.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ed22a14d-3521-4079-86b9-8fae13d79876.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 511,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83331",
+      "codigo_alfanumerico": "MCRI-20260111-083331",
+      "latitud": -0.27795478119883027,
+      "longitud": -78.52804512313995,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Vía Picoasá sector Santa Rosa de la Argelia.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T06:05:18.510Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f83b83af-5c06-4e3f-a2f5-7372972a74ca.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f83b83af-5c06-4e3f-a2f5-7372972a74ca.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 260,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83330",
+      "codigo_alfanumerico": "MCRI-20260111-083330",
+      "latitud": -0.27748057224839345,
+      "longitud": -78.52850109867248,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Vía Picoasá sector Santa Rosa de la Argelia.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:58:47.422Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3280e097-cb7f-4f31-888b-b805d89c907c.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3280e097-cb7f-4f31-888b-b805d89c907c.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 318,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83329",
+      "codigo_alfanumerico": "MCRI-20260111-083329",
+      "latitud": -0.26373071854232605,
+      "longitud": -78.52662022883605,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los VES Crew\" en Quito, sector: Frente al Colegio Sucre.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:49:33.390Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c3cf499-5923-490b-a4a7-86f7dca86458.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c3cf499-5923-490b-a4a7-86f7dca86458.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 327,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83328",
+      "codigo_alfanumerico": "MCRI-20260111-083328",
+      "latitud": -0.261581762863853,
+      "longitud": -78.52578294967655,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los TWS Crew\" en Quito, sector: Paredes de los Condominios Jardines del Sur, diagonal a la Universidad Salesiana Uespa.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:45:02.628Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 274,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83327",
+      "codigo_alfanumerico": "MCRI-20260111-083327",
+      "latitud": -0.26099355104368527,
+      "longitud": -78.52685382789156,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector:  Parque El Calzado (Solanda).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:42:13.074Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 270,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83326",
+      "codigo_alfanumerico": "MCRI-20260111-083326",
+      "latitud": -0.2565614561307627,
+      "longitud": -78.52426281398317,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Inkas Beach\" en Quito, sector: Av. Moraspungo alado Izquierdo del hospital IESS Quito Sur.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:36:15.859Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 319,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83325",
+      "codigo_alfanumerico": "MCRI-20260111-083325",
+      "latitud": -0.25507394579384157,
+      "longitud": -78.52295981563897,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los ODKS Crew\" en Quito, sector: Av. Moraspungo al frente de la Gasolinera Petro Ecuador.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:24:48.345Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 342,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83324",
+      "codigo_alfanumerico": "MCRI-20260111-083324",
+      "latitud": -0.249249409149396,
+      "longitud": -78.52099760340086,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Moon Crew\" en Quito, sector: Av. Maldonado, alado de la Gasolinera Terpel sentido  Sur-Norte.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:21:35.754Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 335,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83323",
+      "codigo_alfanumerico": "MCRI-20260111-083323",
+      "latitud": -0.24592358708813947,
+      "longitud": -78.51967251183488,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los VES Crew\" en Quito, sector: Av. Maldonado, paredes de la Clínica la Villaflora sentido Sur-Norte.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:05:22.644Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 186,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83322",
+      "codigo_alfanumerico": "MCRI-20260111-083322",
+      "latitud": -0.24574738011978128,
+      "longitud": -78.51895789881135,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los FDS Crew RFS\" en Quito, sector: Debajo del puente alado Izquierdo de la Plaza Produbanco.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:02:21.224Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 334,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83321",
+      "codigo_alfanumerico": "MCRI-20260111-083321",
+      "latitud": -0.28575633142951695,
+      "longitud": -78.52381013082733,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: la Argelia a 50 metros de la Simón Bolívar.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:55:46.556Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a57e5ef6-6845-4cf8-919c-70ad9faf0717.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a57e5ef6-6845-4cf8-919c-70ad9faf0717.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 385,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83320",
+      "codigo_alfanumerico": "MCRI-20260111-083320",
+      "latitud": -0.2627510749822474,
+      "longitud": -78.54738659524536,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Vatos Locos\" en Quito, sector: Pilaló y Mulalillo (frente a casa de tres pisos color café)",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:50:21.347Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8e6683c-d6c2-4e2f-ab29-ce4a82f29aa0.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8e6683c-d6c2-4e2f-ab29-ce4a82f29aa0.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 295,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83319",
+      "codigo_alfanumerico": "MCRI-20260111-083319",
+      "latitud": -0.2624903669719362,
+      "longitud": -78.54874825503063,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Vatos Locos\" en Quito, sector: Mariscal sucre (a lado del taller loco X motos).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:47:52.387Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4bc843d8-e25b-477c-b08b-854824f2ffe1.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4bc843d8-e25b-477c-b08b-854824f2ffe1.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 254,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83318",
+      "codigo_alfanumerico": "MCRI-20260111-083318",
+      "latitud": -0.2638739511132811,
+      "longitud": -78.55055898147583,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Tabiazo - Referencia semáforo y gasolinera Petro Ecuador.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:41:16.511Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c7d799a0-ae18-43c7-beae-ffbffb3a1768.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c7d799a0-ae18-43c7-beae-ffbffb3a1768.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 265,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83317",
+      "codigo_alfanumerico": "MCRI-20260111-083317",
+      "latitud": -0.26513464719530105,
+      "longitud": -78.5520922894104,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Tabiazo (referencia por las Terrazas de Santa Bárbara).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:35:57.647Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a638ae4-6f95-4821-b43b-5c43128fbc8d.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a638ae4-6f95-4821-b43b-5c43128fbc8d.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 238,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83316",
+      "codigo_alfanumerico": "MCRI-20260111-083316",
+      "latitud": -0.24646395570003604,
+      "longitud": -78.51967179350498,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Av. P Maldonado (Villaflora).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T04:13:01.586Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/87789625-d5d0-4078-85fd-628aa066b088.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/87789625-d5d0-4078-85fd-628aa066b088.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 375,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83315",
+      "codigo_alfanumerico": "MCRI-20260111-083315",
+      "latitud": -0.2657475905904798,
+      "longitud": -78.55276292886866,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector: Cuchara (cerca de escuela Racing Motos Práctico).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T03:42:34.405Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e185d31f-a975-4407-84cc-a7324e07da14.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e185d31f-a975-4407-84cc-a7324e07da14.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 331,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83314",
+      "codigo_alfanumerico": "MCRI-20260111-083314",
+      "latitud": -0.18791573414525037,
+      "longitud": -78.49113485886078,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Vatos Locos\" en Quito, sector: Frente al Hotel Zumag Internacional, La Carolina.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T03:38:35.277Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/20e90d97-bee3-4d0c-8b77-d54476fd6762.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/20e90d97-bee3-4d0c-8b77-d54476fd6762.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1150,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83313",
+      "codigo_alfanumerico": "MCRI-20260111-083313",
+      "latitud": -0.24522411485858778,
+      "longitud": -78.51452116494293,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, Sector: Av Napo frente a la parada del corredor Chimbacalle.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T03:32:09.810Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b78c2c08-117c-44cf-ba2a-2af6cbc32a21.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b78c2c08-117c-44cf-ba2a-2af6cbc32a21.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 470,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83311",
+      "codigo_alfanumerico": "MCRI-20260111-083311",
+      "latitud": -0.33122191704183623,
+      "longitud": -78.55202687567139,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Vatos Locos\" en Quito, sector: Frente del Mercado de Guamaní, La Arcadia.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T03:11:21.579Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ac138284-c71b-413d-aab7-392053c44749.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ac138284-c71b-413d-aab7-392053c44749.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 325,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83310",
+      "codigo_alfanumerico": "MCRI-20260111-083310",
+      "latitud": -0.34219753787052504,
+      "longitud": -78.54882079915232,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Topos\" en Quito, sector: Av. Maldonado Terminal de Guamaní ‎Santa Rosa de la Argelia.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T03:03:53.593Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/06bf5d7d-75f2-43fd-b4ae-0e183b8be2ea.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/06bf5d7d-75f2-43fd-b4ae-0e183b8be2ea.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 494,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83309",
+      "codigo_alfanumerico": "MCRI-20260110-083309",
+      "latitud": -2.1667125,
+      "longitud": -79.7920156,
+      "circunstancias_hecho": "Presencia se graffitis en Durán.\r\nSector: Recreo etapa 3 - Durán.\r\nCerca de Distribuidores de Productos Omnilife.",
+      "fecha_infraccion": "2026-01-10T23:55:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:53:22.480Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/075c2405-2c2c-4cfe-a232-e592039c5971.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/075c2405-2c2c-4cfe-a232-e592039c5971.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83308",
+      "codigo_alfanumerico": "MCRI-20260111-083308",
+      "latitud": -2.1667875,
+      "longitud": -79.7919531,
+      "circunstancias_hecho": "Presencia de graffiti en Durán.\r\nSector: Recreo etapa 3 - Durán.\r\nCerca de la Distribuidora de Productos Omnilife.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:50:06.690Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f66a7a3-a31f-4aa9-9116-91de795f1858.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f66a7a3-a31f-4aa9-9116-91de795f1858.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 337,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83307",
+      "codigo_alfanumerico": "MCRI-20260111-083307",
+      "latitud": -0.9853393999999999,
+      "longitud": -80.7069095,
+      "circunstancias_hecho": "Se observa la presencia de un marcador criminal atribuido al grupo delictivo Tiguerones en el sector Cuba, parroquia Eloy Alfaro, cantón Manta, provincia de Manabí, junto al taller de motos “Tecnimotos Constantine”.",
+      "fecha_infraccion": "2026-01-11T01:53:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:29:47.024Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a21ccf61-e29f-4b56-916c-7cba8a8442b6.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a21ccf61-e29f-4b56-916c-7cba8a8442b6.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 783,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83306",
+      "codigo_alfanumerico": "MCRI-20260110-083306",
+      "latitud": -2.1718625,
+      "longitud": -79.79729689999999,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Recreo etapa 3 - Durán.",
+      "fecha_infraccion": "2026-01-10T23:10:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:24:48.776Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/175e0712-c831-41aa-9058-f2f95287af58.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/175e0712-c831-41aa-9058-f2f95287af58.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 383,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83305",
+      "codigo_alfanumerico": "MCRI-20260111-083305",
+      "latitud": -2.1716625,
+      "longitud": -79.8497344,
+      "circunstancias_hecho": "n el punto registrado se observa presencia de marcador criminal atribuido al grupo delictivo Latin Kings.",
+      "fecha_infraccion": "2026-01-11T02:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:22:12.920Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/80ce3fdc-1448-4977-a284-804002242997.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/80ce3fdc-1448-4977-a284-804002242997.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 342,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83304",
+      "codigo_alfanumerico": "MCRI-20260110-083304",
+      "latitud": -2.1700875,
+      "longitud": -79.8402031,
+      "circunstancias_hecho": "Presencia de graffiti en Durán.\r\nSector: Estación de servicio Mobil Durán.\r\nCerca del Estadio Municipal de Durán.",
+      "fecha_infraccion": "2026-01-10T22:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:17:43.663Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4f59632c-0f4f-47b3-87fb-2e38d207c6c2.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4f59632c-0f4f-47b3-87fb-2e38d207c6c2.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 263,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83303",
+      "codigo_alfanumerico": "MCRI-20260111-083303",
+      "latitud": -2.1712303,
+      "longitud": -79.8352288,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Durán, frente al punto Fritega y junto a la pizzería Jim’s Pizza, se observa presencia de marcador criminal atribuido al grupo delictivo Latin Kings.",
+      "fecha_infraccion": "2026-01-11T01:53:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:14:22.294Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e5a6f390-de9a-4d77-8ea7-ef2a3c392270.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e5a6f390-de9a-4d77-8ea7-ef2a3c392270.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 311,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83302",
+      "codigo_alfanumerico": "MCRI-20260111-083302",
+      "latitud": -2.1700375,
+      "longitud": -79.8395156,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Estación de servicio Mobil Durán.\r\nCerca del Estadio Municipal de Durán.",
+      "fecha_infraccion": "2026-01-11T00:08:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:13:57.821Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/59146a28-fe35-4ba0-a344-9cff4843f8ae.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/59146a28-fe35-4ba0-a344-9cff4843f8ae.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 289,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83301",
+      "codigo_alfanumerico": "MCRI-20260111-083301",
+      "latitud": -2.0822625,
+      "longitud": -79.9238594,
+      "circunstancias_hecho": "En el punto registrado se observa presencia de marcador criminal atribuido al grupo delictivo Latin Kings.",
+      "fecha_infraccion": "2026-01-11T01:53:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:02:38.851Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b2b6fe13-2a58-407d-b49f-1e7101f88d7f.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b2b6fe13-2a58-407d-b49f-1e7101f88d7f.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 424,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83300",
+      "codigo_alfanumerico": "MCRI-20260110-083300",
+      "latitud": -2.1765375,
+      "longitud": -79.84235939999999,
+      "circunstancias_hecho": "Presencia de graffiti en Durán\r\nSector: Cdla. Primavera 2.\r\nEn las afueras del colegio \"Provincia del Cañar\".",
+      "fecha_infraccion": "2026-01-10T23:55:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T02:01:42.588Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4fc4cf2d-cbdc-45ce-b7df-9e703b81aba5.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4fc4cf2d-cbdc-45ce-b7df-9e703b81aba5.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 423,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83299",
+      "codigo_alfanumerico": "MCRI-20260111-083299",
+      "latitud": -2.0895875,
+      "longitud": -79.9332656,
+      "circunstancias_hecho": "En el punto registrado se observa presencia de marcador criminal atribuido al grupo delictivo los Tiguerones.",
+      "fecha_infraccion": "2026-01-11T01:53:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T01:59:27.104Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/16060d1f-4687-4083-b0fd-410af384095b.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/16060d1f-4687-4083-b0fd-410af384095b.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 370,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83298",
+      "codigo_alfanumerico": "MCRI-20260110-083298",
+      "latitud": -2.1834808,
+      "longitud": -79.8541822,
+      "circunstancias_hecho": "Graffiti en Durán\r\nSector: Cdla. Abel Gilbert 3.",
+      "fecha_infraccion": "2026-01-10T23:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T01:55:01.394Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/af998886-4e3b-4148-9d7f-c247eae3d31f.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/af998886-4e3b-4148-9d7f-c247eae3d31f.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 474,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83297",
+      "codigo_alfanumerico": "MCRI-20260110-083297",
+      "latitud": -1.3692196557646596,
+      "longitud": -79.90603888148985,
+      "circunstancias_hecho": "Lápidas marcadas con referencia de grupo criminal local Mafia Duende",
+      "fecha_infraccion": "2026-01-10T17:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T21:46:29.729Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6403a8b6-cddc-4bcd-a852-65ef79118101.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6403a8b6-cddc-4bcd-a852-65ef79118101.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 43,
+        "nombre": "Mafia Duende",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/mafiaduendeTrebol.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "BALZAR"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 467,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83296",
+      "codigo_alfanumerico": "MCRI-20260110-083296",
+      "latitud": -0.9584625000000001,
+      "longitud": -80.7157344,
+      "circunstancias_hecho": "En la provincia de Manabí, cantón Manta, barrio Jocay de la parroquia Tarqui, se observa presencia de marcador criminal atribuido al grupo delictivo R13, fracción de Los R o R7.",
+      "fecha_infraccion": "2026-01-10T16:15:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T16:18:17.885Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8ca34a32-d8a1-41f0-be20-f5c980197b66.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8ca34a32-d8a1-41f0-be20-f5c980197b66.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 46,
+        "nombre": "R7",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 999,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83295",
+      "codigo_alfanumerico": "MCRI-20260110-083295",
+      "latitud": -2.9412375,
+      "longitud": -78.9669844,
+      "circunstancias_hecho": "En la provincia del Azuay, cantón Cuenca, en el sector El Valle, específicamente en las inmediaciones del Puente del Valle, se observa la presencia de un marcador criminal presuntamente vinculado a un grupo delictivo denominado Los Vatos.",
+      "fecha_infraccion": "2026-01-10T16:10:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T16:14:11.245Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45d2e58a-5cf4-4aac-9f71-7b7d72351c66.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45d2e58a-5cf4-4aac-9f71-7b7d72351c66.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "CUENCA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 361,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83294",
+      "codigo_alfanumerico": "MCRI-20260110-083294",
+      "latitud": -2.9094854,
+      "longitud": -78.9831951,
+      "circunstancias_hecho": "En la provincia del Azuay, cantón Cuenca, en el sector Cañaribamba, específicamente en la ciudadela Casa Para Todos, se observa la presencia de un marcador criminal atribuido a Wickends, fracción vinculada al grupo delictivo Los Lobos",
+      "fecha_infraccion": "2026-01-10T16:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T16:11:38.785Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8e6b38f-f369-4b04-b23b-2e1d58dbff94.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8e6b38f-f369-4b04-b23b-2e1d58dbff94.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "CUENCA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 518,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83293",
+      "codigo_alfanumerico": "MCRI-20260110-083293",
+      "latitud": -2.1583375,
+      "longitud": -79.8303281,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Durán, específicamente en una esquina del sector, se observa la presencia de un marcador criminal atribuido a Ben 10, facción del grupo delictivo Chone Killers.",
+      "fecha_infraccion": "2026-01-10T16:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T16:06:48.166Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fab9b30e-e78c-48d3-9907-ac4705cb22a6.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fab9b30e-e78c-48d3-9907-ac4705cb22a6.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 330,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83291",
+      "codigo_alfanumerico": "MCRI-20260110-083291",
+      "latitud": -2.1406625,
+      "longitud": -79.93014060000002,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte Martha Bucaramanga, se observa la presencia de un marcador criminal presuntamente vinculado a un grupo delictivo denominado Las Nietas.",
+      "fecha_infraccion": "2026-01-10T15:55:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:58:20.148Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4a223a92-c395-41e8-893a-bbf9a1fd8f42.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4a223a92-c395-41e8-893a-bbf9a1fd8f42.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 537,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83289",
+      "codigo_alfanumerico": "MCRI-20260110-083289",
+      "latitud": -0.2453625,
+      "longitud": -79.1654531,
+      "circunstancias_hecho": "En la provincia de Santo Domingo, específicamente en el centro oeste, en la intersección de las calles Río Zamora y Río Mataje, se observa la presencia de un marcador criminal presuntamente vinculado al grupo delictivo R7.",
+      "fecha_infraccion": "2026-01-10T15:50:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:52:19.506Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fb20e620-843c-494d-bc90-522e4349377d.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fb20e620-843c-494d-bc90-522e4349377d.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 46,
+        "nombre": "R7",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SANTO DOMINGO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 587,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83288",
+      "codigo_alfanumerico": "MCRI-20260110-083288",
+      "latitud": -2.0895625,
+      "longitud": -79.9000781,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Vergeles, específicamente junto a un local de repuestos de motos, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Choneros.",
+      "fecha_infraccion": "2026-01-10T15:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:34:10.171Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a147695c-89b4-4623-8d7f-912d897f9875.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a147695c-89b4-4623-8d7f-912d897f9875.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 627,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83287",
+      "codigo_alfanumerico": "MCRI-20260110-083287",
+      "latitud": -3.2434625,
+      "longitud": -79.95717189999999,
+      "circunstancias_hecho": "En la provincia de El Oro, cantón Machala, específicamente en Sauces 1, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Lobos.",
+      "fecha_infraccion": "2026-01-10T15:20:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:25:50.132Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a8d63941-9a69-4ef8-b3ee-de7ebb7c5517.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a8d63941-9a69-4ef8-b3ee-de7ebb7c5517.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 522,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83286",
+      "codigo_alfanumerico": "MCRI-20260110-083286",
+      "latitud": -2.8909125,
+      "longitud": -78.9959531,
+      "circunstancias_hecho": "En la provincia del Azuay, cantón Cuenca, en el sector Loja Argelia, específicamente en las inmediaciones del Terminal Terrestre, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Lobos.",
+      "fecha_infraccion": "2026-01-10T15:20:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:22:27.436Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8eb9cf06-4616-43d6-8098-b2ef12644cb6.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8eb9cf06-4616-43d6-8098-b2ef12644cb6.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "CUENCA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 580,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83285",
+      "codigo_alfanumerico": "MCRI-20260110-083285",
+      "latitud": -2.8875125,
+      "longitud": -78.9972031,
+      "circunstancias_hecho": "En la provincia del Azuay, cantón Cuenca, en el sector Loja Argelia, específicamente en las inmediaciones del colegio Manuel J. Calle, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Lobos.",
+      "fecha_infraccion": "2026-01-10T15:15:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T15:17:22.513Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ed3853b8-faf1-405f-b702-59f4176994e3.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ed3853b8-faf1-405f-b702-59f4176994e3.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "CUENCA"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 534,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83282",
+      "codigo_alfanumerico": "MCRI-20260110-083282",
+      "latitud": -2.0827625,
+      "longitud": -79.92514059999999,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Bastión Popular, Bloque 10, se observa la presencia de un marcador criminal tipo grafiti en una unidad educativa del sector, vinculado al grupo delictivo Los Tiguerones.",
+      "fecha_infraccion": "2026-01-10T14:45:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:49:00.932Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3943b9b1-f639-4521-80c9-5fb89f014b5a.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3943b9b1-f639-4521-80c9-5fb89f014b5a.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83281",
+      "codigo_alfanumerico": "MCRI-20260110-083281",
+      "latitud": -2.0827625,
+      "longitud": -79.92514059999999,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Bastión Popular, Bloque 10, específicamente en diagonal a una despensa y a una cuadra antes del sexto Pasaje 38 N.O., se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Tiguerones.",
+      "fecha_infraccion": "2026-01-10T14:40:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:45:38.131Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3c46765e-581e-4691-bdc4-d6356922b08d.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3c46765e-581e-4691-bdc4-d6356922b08d.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 499,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83280",
+      "codigo_alfanumerico": "MCRI-20260110-083280",
+      "latitud": -2.0801375,
+      "longitud": -79.92410939999999,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Bastión Popular, Bloque 10, específicamente junto a la Despensa Lanxito, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Tiguerones.",
+      "fecha_infraccion": "2026-01-10T14:35:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:41:40.249Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/478fc6eb-e53a-4cbd-99c2-f44f247a24e7.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/478fc6eb-e53a-4cbd-99c2-f44f247a24e7.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83279",
+      "codigo_alfanumerico": "MCRI-20260110-083279",
+      "latitud": -2.0802125,
+      "longitud": -79.9241406,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Bastión Popular, Bloque 10, específicamente junto a la Despensa Lanxito, se observa la presencia de un marcador criminal vinculado al grupo delictivo Las Águilas.",
+      "fecha_infraccion": "2026-01-10T14:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:38:15.435Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/457e155d-a18b-4219-abd2-cc291c73b6a5.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/457e155d-a18b-4219-abd2-cc291c73b6a5.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 30,
+        "nombre": "Aguilas",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/aguila.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 525,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83278",
+      "codigo_alfanumerico": "MCRI-20260110-083278",
+      "latitud": -2.1056125,
+      "longitud": -79.9248281,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de Bastión Popular, específicamente junto a CORA Refrigeración Cía. Ltda., se observa la presencia de un marcador criminal vinculado al grupo delictivo Chone Killers.",
+      "fecha_infraccion": "2026-01-10T14:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:34:17.677Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0df1cfe2-62b8-42f9-a298-f09f3770f6fb.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0df1cfe2-62b8-42f9-a298-f09f3770f6fb.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 447,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83277",
+      "codigo_alfanumerico": "MCRI-20260110-083277",
+      "latitud": -2.1291875,
+      "longitud": -79.9333906,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de La Florida, específicamente frente al restaurante “Los 3 Sabores”, se observa la presencia de un marcador criminal vinculado al grupo delictivo Chone Killers.",
+      "fecha_infraccion": "2026-01-10T14:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:31:27.980Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8af0837-6e78-4d7e-be55-070c0c54d50a.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8af0837-6e78-4d7e-be55-070c0c54d50a.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 481,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83275",
+      "codigo_alfanumerico": "MCRI-20260110-083275",
+      "latitud": -2.1513375,
+      "longitud": -79.92101559999999,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte este de Mapasingue, específicamente junto a la BarberShop Gospel RC 91, en la esquina del parque Virgen del Cisne, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Lobos.",
+      "fecha_infraccion": "2026-01-10T14:15:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:23:24.294Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5e132e60-5f54-4646-9ab1-404d244528bf.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5e132e60-5f54-4646-9ab1-404d244528bf.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 762,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83274",
+      "codigo_alfanumerico": "MCRI-20260110-083274",
+      "latitud": -2.1586375,
+      "longitud": -79.9387031,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte oeste de Mapasingue, específicamente frente al punto Refrescoco, Productos de Coco, se observa la presencia de un marcador criminal asociado al grupo delictivo Chone Killers.",
+      "fecha_infraccion": "2026-01-10T14:10:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:15:46.442Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dcc61aee-e0ec-4b90-a917-252572822d0b.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dcc61aee-e0ec-4b90-a917-252572822d0b.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 780,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83273",
+      "codigo_alfanumerico": "MCRI-20260110-083273",
+      "latitud": -2.1384875,
+      "longitud": -79.9659844,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte oeste de Socio Vivienda, específicamente junto a la panadería “Panadería y Dulcería Abraham”, se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Fatales.",
+      "fecha_infraccion": "2026-01-10T14:10:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:11:57.226Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/86d11232-e4f5-4f7b-96a0-1053452cc21d.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/86d11232-e4f5-4f7b-96a0-1053452cc21d.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 345,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83272",
+      "codigo_alfanumerico": "MCRI-20260110-083272",
+      "latitud": -2.1099375,
+      "longitud": -79.9452031,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte Industrial Inmaconsa, específicamente en la pared ubicada del lado de la avenida Pechiche, junto a Plastiuniversal S.A., se observa la presencia de un marcador criminal asociado al grupo delictivo Los Fatales.",
+      "fecha_infraccion": "2026-01-10T14:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:08:37.732Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d3f22d3a-4ad1-43c8-9f8a-f84ced3e32e3.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d3f22d3a-4ad1-43c8-9f8a-f84ced3e32e3.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 36,
+        "nombre": "Fatales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_FATALES.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 323,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83271",
+      "codigo_alfanumerico": "MCRI-20260110-083271",
+      "latitud": -2.1259375,
+      "longitud": -79.94754689999999,
+      "circunstancias_hecho": "En la provincia del Guayas, cantón Guayaquil, en el sector norte de la Cooperativa Las Palmeras, a dos cuadras de la avenida Perimetral, específicamente en la avenida 44 N.O., se observa la presencia de un marcador criminal vinculado al grupo delictivo Los Tiguerones,",
+      "fecha_infraccion": "2026-01-10T14:01:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T14:05:55.373Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/478d4ce1-c3f3-4cac-b245-28806da41d98.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/478d4ce1-c3f3-4cac-b245-28806da41d98.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 459,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83264",
+      "codigo_alfanumerico": "MCRI-20260109-083264",
+      "latitud": -1.3666664897748508,
+      "longitud": -79.90663821036868,
+      "circunstancias_hecho": "Banda Local Mafia Duende 🍀 Balzar\r\n",
+      "fecha_infraccion": "2026-01-09T05:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-10T02:55:46.477Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/22a21a7e-0a59-4946-b77f-62c57017e12e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/22a21a7e-0a59-4946-b77f-62c57017e12e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 43,
+        "nombre": "Mafia Duende",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/mafiaduendeTrebol.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "BALZAR"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 701,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

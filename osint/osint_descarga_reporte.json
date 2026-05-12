@@ -1,0 +1,24 @@
+{
+  "downloaded_at": "2026-05-12T04:30:25.345288+00:00",
+  "base_url": "https://vectorinternational.ai/api",
+  "endpoints": {
+    "punto_interes_gdos": "/punto-interes/gdos",
+    "zonas_poligonos_gdo": "/zonas/poligonos-gdo",
+    "rutas_narcotrafico": "/rutas-narcotrafico",
+    "punto_interes_policias": "/punto-interes/policias",
+    "zonas_tipos_zonas": "/zonas/tipos-zonas",
+    "parametros": "/parametros",
+    "eventos_tipos_eventos": "/eventos/tipos-eventos",
+    "eventos_unidades_ffaa": "/eventos/eventos-capas-id?id_tipo_evento=UNIDADES_FFAA",
+    "eventos_residencias_criminales": "/eventos/eventos-capas-id?id_tipo_evento=RESIDENCIAS_CRIMINALES",
+    "eventos_marcadores_criminales": "/eventos/eventos-capas-id?id_tipo_evento=MARCADORES_CRIMINALES",
+    "eventos_operativos_ffoo": "/eventos/eventos-capas-id?id_tipo_evento=OPERATIVOS_FFOO",
+    "eventos_homicido_sicariato": "/eventos/eventos-capas-id?id_tipo_evento=HOMICIDO_SICARIATO",
+    "eventos_paso_ilegal": "/eventos/eventos-capas-id?id_tipo_evento=PASO_ILEGAL",
+    "eventos_paso_oficial": "/eventos/eventos-capas-id?id_tipo_evento=PASO_OFICIAL",
+    "eventos_mineria_ilegal": "/eventos/eventos-capas-id?id_tipo_evento=MINERIA_ILEGAL"
+  },
+  "feature_count": 29729,
+  "geojson_file": "/root/robiotec/osint/osint_layers.geojson",
+  "geojson_size_mb": 23.67
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Robiotec ARCOM downloader every Monday
+
+[Timer]
+OnCalendar=Mon *-*-* 04:00:00
+Persistent=true
+Unit=robiotec-arcom-download.service
+
+[Install]
+WantedBy=timers.target

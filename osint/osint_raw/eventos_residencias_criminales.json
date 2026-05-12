@@ -1,0 +1,2853 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "93599",
+      "codigo_alfanumerico": "LCRI-20260214-093599",
+      "latitud": -0.9980219907692461,
+      "longitud": -80.68129109573553,
+      "circunstancias_hecho": "Casa usada por alias 'Fito' y su novia.",
+      "fecha_infraccion": "2026-02-14T19:36:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-14T19:36:46.616Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MONTECRISTI"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86975",
+      "codigo_alfanumerico": "LCRI-20260207-086975",
+      "latitud": -2.18500638090603,
+      "longitud": -79.89630638161466,
+      "circunstancias_hecho": "Punto permanente de venta de diversas drogas a estudiantes universitarios",
+      "fecha_infraccion": "2026-02-07T17:00:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-07T19:23:31.425Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 55,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86889",
+      "codigo_alfanumerico": "LCRI-20260204-086889",
+      "latitud": -0.5789717905895911,
+      "longitud": -79.36948686509228,
+      "circunstancias_hecho": "Operativo FFAA en complejo residencial MIDUVI utilizado por Choneros; mantener vigilancia en caso de que regresen los criminales.",
+      "fecha_infraccion": "2026-02-04T15:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-04T16:01:46.509Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "BUENA FE"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 33,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86871",
+      "codigo_alfanumerico": "LCRI-20260203-086871",
+      "latitud": -3.1133916180342376,
+      "longitud": -78.02715564285278,
+      "circunstancias_hecho": "Campamento de Minería Ilegal. La extracción aluvial es rio abajo hacia el Rio Santiago; este nodo logístico es aguas arriba, oculto en la selva.\r\nAlojamiento, bodega para insumos (combustible, víveres, repuestos), taller,  y patio de acopio y clasificación.",
+      "fecha_infraccion": "2026-02-03T16:58:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-03T17:02:16.640Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 84,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86857",
+      "codigo_alfanumerico": "LCRI-20260131-086857",
+      "latitud": 1.4418036092621227,
+      "longitud": -78.86595761315918,
+      "circunstancias_hecho": "Viviendas utilizadas como bodegas para narcóticos. También se guarda combustible ilegal.",
+      "fecha_infraccion": "2026-01-31T11:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-03T11:08:00.600Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 84,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86856",
+      "codigo_alfanumerico": "LCRI-20260131-086856",
+      "latitud": 1.3726016903964233,
+      "longitud": -78.90245611925454,
+      "circunstancias_hecho": "Viviendas usadas para bodegaje y transporte de narcóticos.",
+      "fecha_infraccion": "2026-01-31T11:04:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-03T11:05:38.739Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "ELOY ALFARO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 53,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86855",
+      "codigo_alfanumerico": "LCRI-20260202-086855",
+      "latitud": -0.9640692337470032,
+      "longitud": -80.70954606442524,
+      "circunstancias_hecho": "Localidad relacionada a Clan Figueroa",
+      "fecha_infraccion": "2026-02-02T22:53:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-02T22:55:55.919Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 303,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86834",
+      "codigo_alfanumerico": "LCRI-20260202-086834",
+      "latitud": 1.2864969841210805,
+      "longitud": -78.83431295488474,
+      "circunstancias_hecho": "Local de compra de oro; alta probabilidad de comercio de oro ilegal paralelo.",
+      "fecha_infraccion": "2026-02-02T15:32:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-02T15:43:02.079Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 36,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86833",
+      "codigo_alfanumerico": "LCRI-20260202-086833",
+      "latitud": 1.285914423525076,
+      "longitud": -78.83404229333222,
+      "circunstancias_hecho": "Compra de oro; alta prob. de compra de oro ilegal paralela.",
+      "fecha_infraccion": "2026-02-02T15:32:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-02T15:41:30.305Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 31,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86832",
+      "codigo_alfanumerico": "LCRI-20260202-086832",
+      "latitud": 1.2854862178489603,
+      "longitud": -78.83376856181232,
+      "circunstancias_hecho": "Local de Compra de Oro; alta probabilidad de compra de oro ilegal paralela.",
+      "fecha_infraccion": "2026-02-02T15:32:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-02T15:40:18.151Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 75,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86831",
+      "codigo_alfanumerico": "LCRI-20260202-086831",
+      "latitud": 1.2839887089953976,
+      "longitud": -78.8331378043182,
+      "circunstancias_hecho": "Locales de Compra de Oro. Alta probabilidad de compra de oro ilegal paralela.",
+      "fecha_infraccion": "2026-02-02T15:32:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-02T15:38:00.117Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 96,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86830",
+      "codigo_alfanumerico": "LCRI-20260201-086830",
+      "latitud": -2.251517838768228,
+      "longitud": -79.89061331498361,
+      "circunstancias_hecho": "Residencia sospechosa Mafia 18",
+      "fecha_infraccion": "2026-02-01T15:38:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-01T15:39:02.816Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 42,
+        "nombre": "Mafia 18",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 170,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86794",
+      "codigo_alfanumerico": "LCRI-20260126-086794",
+      "latitud": -4.101083729015098,
+      "longitud": -79.95803114967627,
+      "circunstancias_hecho": "Residencia de policía corrupto, posible vínculo con alias José B., alias ‘Josho’, porta vehículos con lema de \"Plata o plomo\"\r\n\r\nhttps://www.codigovidrio.com/code/la-policia-detuvo-a-16-militares-que-vendian-informacion-de-operaciones-en-loja/",
+      "fecha_infraccion": "2026-01-26T04:56:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-30T05:06:09.975Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "CELICA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 88,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86793",
+      "codigo_alfanumerico": "LCRI-20260126-086793",
+      "latitud": -4.101956899675435,
+      "longitud": -79.95801164841393,
+      "circunstancias_hecho": "Residencia de policía corrupto, cuñado de alias \"Josho\"",
+      "fecha_infraccion": "2026-01-26T04:56:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-30T05:04:07.687Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "CELICA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 224,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86760",
+      "codigo_alfanumerico": "LCRI-20260128-086760",
+      "latitud": -1.7104102,
+      "longitud": -79.39049469999999,
+      "circunstancias_hecho": "La hacienda La Clementina, en La Unión, Babahoyo, es señalada como refugio de la banda Los AK47, brazo armado de Los Choneros. La Policía no registra denuncias recientes, pero la propiedad ha sido usada para ocultar vehículos, motos robadas y armas por grupos criminales.",
+      "fecha_infraccion": "2026-01-28T10:55:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-28T15:54:07.666Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 31,
+        "nombre": "AK47",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/AK47.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "BABAHOYO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 141,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86741",
+      "codigo_alfanumerico": "LCRI-20260127-086741",
+      "latitud": 1.0145590682579728,
+      "longitud": -78.66200379861634,
+      "circunstancias_hecho": "Campamento Armado F.O.S.",
+      "fecha_infraccion": "2026-01-27T22:20:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:21:57.149Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 185,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86733",
+      "codigo_alfanumerico": "LCRI-20260127-086733",
+      "latitud": 0.9594435657285333,
+      "longitud": -78.58794652767094,
+      "circunstancias_hecho": "Punto Logístico Clandestino\r\nCasas de apoyo para: Minería ilegal y/o\r\nNarcotráfico (almacenamiento temporal, descanso, vigilancia); Ubicación elevada → control visual y seguridad; Selva densa → ocultamiento",
+      "fecha_infraccion": "2026-01-27T22:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:08:19.827Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 109,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86688",
+      "codigo_alfanumerico": "LCRI-20260127-086688",
+      "latitud": 1.2105447013931463,
+      "longitud": -79.04159164937376,
+      "circunstancias_hecho": "Puerto usado para el narcotrafico. Grupos criminales asociados: Chechenos, Segunda Marquetalia.",
+      "fecha_infraccion": "2026-01-27T18:39:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T18:41:51.116Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "ELOY ALFARO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 187,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86674",
+      "codigo_alfanumerico": "LCRI-20260126-086674",
+      "latitud": -2.120127628659038,
+      "longitud": -79.9690195419595,
+      "circunstancias_hecho": "Un mando medio de los Tiguerones frecuenta este club nocturno ubicado en la planta alta del local, el club abre de 3pm a 9pm",
+      "fecha_infraccion": "2026-01-26T20:00:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T19:46:22.985Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 119,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86673",
+      "codigo_alfanumerico": "LCRI-20260126-086673",
+      "latitud": -2.119557461204435,
+      "longitud": -79.95423750768254,
+      "circunstancias_hecho": "Integrantes de los Tiguerones frecuentan este centro de diversión para adultos, lo hacen viernes y sábados, casualmente se encuentra frente a un UPC. El establecimiento abre a las 11am y cierra a las 9pm",
+      "fecha_infraccion": "2026-01-26T16:00:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T19:37:41.532Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 205,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86619",
+      "codigo_alfanumerico": "LCRI-20260125-086619",
+      "latitud": 0.9412283338108299,
+      "longitud": -78.58534516335112,
+      "circunstancias_hecho": "Campamento Armando - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:42:43.607Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 124,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86615",
+      "codigo_alfanumerico": "LCRI-20260125-086615",
+      "latitud": 0.9572048118358996,
+      "longitud": -78.7712897677804,
+      "circunstancias_hecho": "Centro logístico vinculado al Frente Oliver Sinisterra.",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:35:42.431Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 80,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86614",
+      "codigo_alfanumerico": "LCRI-20260125-086614",
+      "latitud": 0.9415535889040123,
+      "longitud": -78.7648477229701,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:32:57.850Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 63,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86613",
+      "codigo_alfanumerico": "LCRI-20260125-086613",
+      "latitud": 0.942811977221737,
+      "longitud": -78.76257168174659,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:32:30.956Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 94,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86609",
+      "codigo_alfanumerico": "LCRI-20260125-086609",
+      "latitud": 0.9271644212410591,
+      "longitud": -78.6618097358577,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:25:15.723Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 87,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86608",
+      "codigo_alfanumerico": "LCRI-20260125-086608",
+      "latitud": 0.932943659367141,
+      "longitud": -78.67320783831451,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:24:05.896Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 112,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86607",
+      "codigo_alfanumerico": "LCRI-20260125-086607",
+      "latitud": 0.9220965431137557,
+      "longitud": -78.7142044352112,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:21:57.244Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 102,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86606",
+      "codigo_alfanumerico": "LCRI-20260125-086606",
+      "latitud": 0.9214674790401395,
+      "longitud": -78.64637570077143,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:20:59.397Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 91,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86605",
+      "codigo_alfanumerico": "LCRI-20260125-086605",
+      "latitud": 0.9193497899988835,
+      "longitud": -78.6441789012992,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:20:28.465Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 128,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86604",
+      "codigo_alfanumerico": "LCRI-20260125-086604",
+      "latitud": 0.9239269528570806,
+      "longitud": -78.63335103150867,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:19:43.709Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 153,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86603",
+      "codigo_alfanumerico": "LCRI-20260125-086603",
+      "latitud": 0.9428130822513789,
+      "longitud": -78.61340820564081,
+      "circunstancias_hecho": "Campamento Armado - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:12:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:14:35.754Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 396,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86495",
+      "codigo_alfanumerico": "LCRI-20260124-086495",
+      "latitud": 1.267069533923402,
+      "longitud": -78.6385305832391,
+      "circunstancias_hecho": "Área altamente irregular usada por Tiguerones en ECU y Comandos de la Frontera en COL.",
+      "fecha_infraccion": "2026-01-24T21:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T21:38:46.115Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 393,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86468",
+      "codigo_alfanumerico": "LCRI-20260124-086468",
+      "latitud": -2.2535130038113453,
+      "longitud": -79.88625745914995,
+      "circunstancias_hecho": "Vivienda vinculada a alias 'Frenillo,' uno de los cabecillas de Mafia 18; hijo de alias 'Samir.'",
+      "fecha_infraccion": "2026-01-24T19:01:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T19:50:55.409Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 42,
+        "nombre": "Mafia 18",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 190,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86467",
+      "codigo_alfanumerico": "LCRI-20260124-086467",
+      "latitud": -2.2537519519941593,
+      "longitud": -79.8861476468889,
+      "circunstancias_hecho": "Parque usado para reuniones de BDL Mafia 18 - en conexión con GDOs Chonekilles y  Ñetas.",
+      "fecha_infraccion": "2026-01-24T19:01:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-24T19:48:53.336Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 42,
+        "nombre": "Mafia 18",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1063,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86384",
+      "codigo_alfanumerico": "LCRI-20260120-086384",
+      "latitud": -2.1340906470073606,
+      "longitud": -79.89429504522933,
+      "circunstancias_hecho": "Residencia sospechosa, inquilinos inciertos, vehículos y motocicletas de alta gama con seguridad",
+      "fecha_infraccion": "2026-01-20T05:00:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-22T04:32:38.918Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 785,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86382",
+      "codigo_alfanumerico": "LCRI-20260121-086382",
+      "latitud": -2.1398826996151743,
+      "longitud": -79.86522847585964,
+      "circunstancias_hecho": "No una residencia per se, pero aquí se tiene un 'restaurante/cafe' que suelen frecuentar con bastante recurrencia los 'chicos' de la mafia Sambo.",
+      "fecha_infraccion": "2026-01-21T17:12:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-21T17:14:27.297Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1458,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86362",
+      "codigo_alfanumerico": "LCRI-20260120-086362",
+      "latitud": -2.120643085807987,
+      "longitud": -79.87064117439158,
+      "circunstancias_hecho": "Residencia vinculada a A.F., denunciado por testaferrismo en caso Metástasis y ahora vinculado a alias 'Marino.'",
+      "fecha_infraccion": "2026-01-20T23:52:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-20T23:55:31.806Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 39,
+        "nombre": "Lagartos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Lagartos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1105,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83963",
+      "codigo_alfanumerico": "LCRI-20260120-083963",
+      "latitud": -2.1237588387427215,
+      "longitud": -79.57745185277861,
+      "circunstancias_hecho": "Bodegas vinculadas a GDO Los Águilas donde se almacenan armas/drogas/cosas robadas",
+      "fecha_infraccion": "2026-01-20T16:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-20T16:19:06.227Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 30,
+        "nombre": "Aguilas",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/aguila.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MILAGRO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 271,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83962",
+      "codigo_alfanumerico": "LCRI-20260120-083962",
+      "latitud": -2.1212191446328044,
+      "longitud": -79.58875950547375,
+      "circunstancias_hecho": "Vivienda relacionada a alias 'Alan' y su hermano alias 'Loco Ariel'",
+      "fecha_infraccion": "2026-01-20T16:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-20T16:17:30.860Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 30,
+        "nombre": "Aguilas",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/aguila.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MILAGRO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 324,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83579",
+      "codigo_alfanumerico": "LCRI-20260119-083579",
+      "latitud": -0.9487385849925797,
+      "longitud": -80.69794786205082,
+      "circunstancias_hecho": "Casa de seguridad oculta debajo de centro recreativo.",
+      "fecha_infraccion": "2026-01-19T12:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-19T12:26:12.131Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 503,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83578",
+      "codigo_alfanumerico": "LCRI-20260119-083578",
+      "latitud": -0.957281722148086,
+      "longitud": -80.81265189461163,
+      "circunstancias_hecho": "Aquí, expendio de drogas y reuniones clandestinas. Casa usada también como bodega (narcolanchas). En la regeneración urbana trataron de sacar esto porque no está asentado de forma legal; sin embargo, amenazas de Choneros directas a funcionarios municipales lo evitaron.",
+      "fecha_infraccion": "2026-01-19T12:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-19T12:24:48.548Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 302,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83577",
+      "codigo_alfanumerico": "LCRI-20260119-083577",
+      "latitud": -0.9563455017137911,
+      "longitud": -80.81186971772155,
+      "circunstancias_hecho": "Aquí, expendio de drogas y reuniones clandestinas. En la regeneración urbana trataron de sacar esto porque no está asentado de forma legal; sin embargo, amenazas de Choneros directas a funcionarios municipales lo evitaron.",
+      "fecha_infraccion": "2026-01-19T12:19:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-19T12:22:38.398Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 326,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83568",
+      "codigo_alfanumerico": "LCRI-20260117-083568",
+      "latitud": -0.127491986685955,
+      "longitud": -78.46623585392416,
+      "circunstancias_hecho": "Casa usada para microtráfico",
+      "fecha_infraccion": "2026-01-17T17:44:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T17:46:08.783Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 621,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83567",
+      "codigo_alfanumerico": "LCRI-20260117-083567",
+      "latitud": -2.132016018377692,
+      "longitud": -79.97176729079263,
+      "circunstancias_hecho": "Residencia criminal asociada a Los Tiguerones (tb usada como bodegas); nota--aquí cambian mucho de casa.",
+      "fecha_infraccion": "2026-01-17T22:22:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T14:00:41.306Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 243,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83566",
+      "codigo_alfanumerico": "LCRI-20260117-083566",
+      "latitud": -2.118060912004904,
+      "longitud": -79.58756423662545,
+      "circunstancias_hecho": "Bodega asociada a Los Aguilas - alias 'alan' 'doble A' 'la firma'",
+      "fecha_infraccion": "2026-01-17T03:33:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:59:12.410Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 30,
+        "nombre": "Aguilas",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/aguila.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MILAGRO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 363,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83565",
+      "codigo_alfanumerico": "LCRI-20260117-083565",
+      "latitud": -2.179771556292603,
+      "longitud": -79.87558960796784,
+      "circunstancias_hecho": "En esta zona se ha detectado el uso de departamentos de parte de GDOs para varios actos ilícitos: narcotráfico, microtráfico, prostitución, y demás.",
+      "fecha_infraccion": "2026-01-17T15:45:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:46:21.636Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 680,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83564",
+      "codigo_alfanumerico": "LCRI-20260117-083564",
+      "latitud": -2.1219687123178823,
+      "longitud": -79.96718472704215,
+      "circunstancias_hecho": "Obligado en este centro a vender H por Tiguerones",
+      "fecha_infraccion": "2026-01-17T20:35:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:43:00.737Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 295,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83563",
+      "codigo_alfanumerico": "LCRI-20260115-083563",
+      "latitud": -2.1202856378736787,
+      "longitud": -79.9682523169394,
+      "circunstancias_hecho": "vivienda vinculada a microtráfico--alias La Jovita",
+      "fecha_infraccion": "2026-01-15T18:10:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:39:28.268Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 248,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83562",
+      "codigo_alfanumerico": "LCRI-20260118-083562",
+      "latitud": -2.1267729302351395,
+      "longitud": -79.89995640346777,
+      "circunstancias_hecho": "Casa asociada al microtráfico - La Madrina",
+      "fecha_infraccion": "2026-01-18T13:07:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:36:26.567Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 710,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83561",
+      "codigo_alfanumerico": "LCRI-20260116-083561",
+      "latitud": -3.2587449016484458,
+      "longitud": -79.92895191600797,
+      "circunstancias_hecho": "Residencia criminal - lobos; bodega",
+      "fecha_infraccion": "2026-01-16T19:55:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:32:30.641Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 316,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83559",
+      "codigo_alfanumerico": "LCRI-20260115-083559",
+      "latitud": -3.269973576914168,
+      "longitud": -79.99732157256506,
+      "circunstancias_hecho": "casa vinculada al microtrafico",
+      "fecha_infraccion": "2026-01-15T12:54:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:29:21.752Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 351,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83558",
+      "codigo_alfanumerico": "LCRI-20260113-083558",
+      "latitud": -1.0221613568424552,
+      "longitud": -79.44939534641878,
+      "circunstancias_hecho": "bodegaje",
+      "fecha_infraccion": "2026-01-13T22:38:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:18:18.595Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUEVEDO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 318,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83557",
+      "codigo_alfanumerico": "LCRI-20260114-083557",
+      "latitud": -0.24598727256806002,
+      "longitud": -79.19629217738711,
+      "circunstancias_hecho": "vivienda asociada a los lobos\r\n\"se alinean o pagan piso\"",
+      "fecha_infraccion": "2026-01-14T15:21:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:13:51.876Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SANTO DOMINGO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 287,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83556",
+      "codigo_alfanumerico": "LCRI-20260115-083556",
+      "latitud": -0.2561117829803773,
+      "longitud": -79.20996597745126,
+      "circunstancias_hecho": "casa / bodega asociada a gdo los lobos",
+      "fecha_infraccion": "2026-01-15T09:05:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:10:05.412Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "SANTO DOMINGO"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 280,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83555",
+      "codigo_alfanumerico": "LCRI-20260116-083555",
+      "latitud": -2.145778454527221,
+      "longitud": -79.8283089567166,
+      "circunstancias_hecho": "Complejo residencial asociado a Chonekillers",
+      "fecha_infraccion": "2026-01-16T01:57:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T13:00:34.182Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 32,
+        "nombre": "Chonekillers",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 214,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83554",
+      "codigo_alfanumerico": "LCRI-20260117-083554",
+      "latitud": -2.2327512496684294,
+      "longitud": -79.91139254017624,
+      "circunstancias_hecho": "casa utilizada a los choneros",
+      "fecha_infraccion": "2026-01-17T14:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:57:58.308Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 796,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83553",
+      "codigo_alfanumerico": "LCRI-20260118-083553",
+      "latitud": -2.133227537134651,
+      "longitud": -79.96900997992532,
+      "circunstancias_hecho": "Residencia criminal asociada a Los Tiguerones (tb usada como bodegas); nota--aquí cambian mucho de casa.",
+      "fecha_infraccion": "2026-01-18T12:31:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:49:19.853Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 297,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83552",
+      "codigo_alfanumerico": "LCRI-20260118-083552",
+      "latitud": -2.659257362234659,
+      "longitud": -80.36744689881091,
+      "circunstancias_hecho": "Residencia criminal asociada a operador de Los Choneros.",
+      "fecha_infraccion": "2026-01-18T12:31:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:45:38.019Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 33,
+        "nombre": "Choneros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
+        "color": null
+      },
+      "canton": {
+        "nombre": "PLAYAS"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 362,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83550",
+      "codigo_alfanumerico": "LCRI-20260118-083550",
+      "latitud": 0.9159510729127669,
+      "longitud": -79.69141762770994,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal vinculada al microtráfico.",
+      "fecha_infraccion": "2026-01-18T12:31:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:39:27.662Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 47,
+        "nombre": "Tiguerones",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "ESMERALDAS"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 355,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83549",
+      "codigo_alfanumerico": "LCRI-20260118-083549",
+      "latitud": -0.9696018515950713,
+      "longitud": -80.76280106791081,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal. Ubicación referencial: sector norte de Manta, área residencial privada cercana a la avenida Circunvalación, con fácil acceso a zonas comerciales, educativas y de servicios.",
+      "fecha_infraccion": "2026-01-18T12:31:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:34:34.190Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 311,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83548",
+      "codigo_alfanumerico": "LCRI-20260118-083548",
+      "latitud": -0.9691041646986095,
+      "longitud": -80.76288682631989,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal. Ubicación referencial: sector norte de Manta, área residencial privada cercana a la avenida Circunvalación, con fácil acceso a zonas comerciales, educativas y de servicios.",
+      "fecha_infraccion": "2026-01-18T12:31:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T12:33:56.118Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 544,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83509",
+      "codigo_alfanumerico": "LCRI-20260117-083509",
+      "latitud": -0.9545465601630337,
+      "longitud": -80.771335891996,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: sector sur de Manta, área residencial privada frente al océano Pacífico, con acceso desde la avenida del Malecón / vía a San Mateo, cercana a zonas turísticas, comerciales y recreativas.",
+      "fecha_infraccion": "2026-01-17T21:30:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T21:31:38.456Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 543,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83508",
+      "codigo_alfanumerico": "LCRI-20260117-083508",
+      "latitud": -0.9633312728094261,
+      "longitud": -80.75446542457162,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal. Ubicación referencial: sector norte de Manta, área urbana residencial con acceso desde la avenida Circunvalación, cercana a zonas comerciales, educativas y de servicio.",
+      "fecha_infraccion": "2026-01-17T21:25:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T21:27:50.256Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 552,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83507",
+      "codigo_alfanumerico": "LCRI-20260117-083507",
+      "latitud": -0.9540345571188724,
+      "longitud": -80.7632768456468,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: sector Barbasquillo, al sur de Manta, área residencial–turística cercana al mar, con acceso desde la avenida Barbasquillo, rodeada de edificios residenciales, hoteles y zonas comerciales.",
+      "fecha_infraccion": "2026-01-17T21:20:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T21:24:23.117Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 555,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83505",
+      "codigo_alfanumerico": "LCRI-20260117-083505",
+      "latitud": -2.17769037075416,
+      "longitud": -79.87730851976221,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia bajo observación. Ubicación referencial: sector Puerto Santa Ana, centro-norte de Guayaquil, a orillas del río Guayas, junto al Cerro Santa Ana, sobre la avenida Pedro Menéndez Gilbert, área urbana de alta afluencia.",
+      "fecha_infraccion": "2026-01-17T21:05:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T21:16:22.390Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 626,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83504",
+      "codigo_alfanumerico": "LCRI-20260117-083504",
+      "latitud": -2.1140125,
+      "longitud": -79.8602969,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: Isla Mocolí, cantón Samborondón (Guayas), sector residencial privado cercano al río y a otras urbanizaciones cerradas, con acceso desde la vía a Samborondón, al norte de Guayaquil.",
+      "fecha_infraccion": "2026-01-17T21:00:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T21:06:34.743Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1111,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83503",
+      "codigo_alfanumerico": "LCRI-20260117-083503",
+      "latitud": -2.106614,
+      "longitud": -79.859479,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: Isla Mocolí, cantón Samborondón (Guayas), sector residencial privado cercano al río, con acceso desde la vía a Samborondón, al norte de Guayaquil.",
+      "fecha_infraccion": "2026-01-17T20:55:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:56:01.692Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1196,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83502",
+      "codigo_alfanumerico": "LCRI-20260117-083502",
+      "latitud": -2.102038840202056,
+      "longitud": -79.85845568224372,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: Isla Mocolí, cantón Samborondón (Guayas), sector residencial privado cercano al río, con acceso desde la vía a Samborondón, en el km 6, al norte de Guayaquil, Ecuador.",
+      "fecha_infraccion": "2026-01-17T20:45:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:50:55.469Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 973,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83501",
+      "codigo_alfanumerico": "LCRI-20260117-083501",
+      "latitud": -2.1011375,
+      "longitud": -79.86445309999999,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: Isla Mocolí, cantón Samborondón (Guayas), sector residencial privado cercano a un campo de golf.",
+      "fecha_infraccion": "2026-01-17T20:40:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:46:38.568Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1327,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83500",
+      "codigo_alfanumerico": "LCRI-20260117-083500",
+      "latitud": -2.1017683759849746,
+      "longitud": -79.85756273862303,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia bajo observación. Ubicación referencial: Isla Mocolí, cantón Samborondón (Guayas), área residencial privada cercana al río.",
+      "fecha_infraccion": "2026-01-17T20:30:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:38:44.891Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1019,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83499",
+      "codigo_alfanumerico": "LCRI-20260117-083499",
+      "latitud": -2.069573725659672,
+      "longitud": -79.83529857683189,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: área residencial del cantón Samborondón (Guayas), en el entorno cercano al Quinto Redondel de Ciudad Celeste.",
+      "fecha_infraccion": "2026-01-17T20:30:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:32:27.506Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 625,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83497",
+      "codigo_alfanumerico": "LCRI-20260117-083497",
+      "latitud": -2.1219125,
+      "longitud": -79.8672656,
+      "circunstancias_hecho": "En esta zona se ha detectado una residencia criminal bajo observación. Ubicación referencial: sector aledaño al puente que conecta Guayaquil con Samborondón, en un entorno residencial privado.",
+      "fecha_infraccion": "2026-01-17T20:20:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:24:34.415Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1289,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83496",
+      "codigo_alfanumerico": "LCRI-20260117-083496",
+      "latitud": -1.9938151242018556,
+      "longitud": -79.8660268607479,
+      "circunstancias_hecho": "¡ATENCIÓN! En esta zona se ha detectado una residencia criminal. Ubicación referencial: km 15 de la vía a Salitre, sector residencial cerrado, eje Guayaquil, Samborondón/Daule.",
+      "fecha_infraccion": "2026-01-17T19:59:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T20:14:59.598Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 48,
+        "nombre": "Incierto",
+        "url_icono": null,
+        "color": null
+      },
+      "canton": {
+        "nombre": "SAMBORONDON"
+      },
+      "tipo_evento": {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_RESIDENCIAS_CRIMINALES_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 596,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

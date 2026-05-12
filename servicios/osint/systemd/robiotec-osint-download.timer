@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Robiotec OSINT downloader daily
+
+[Timer]
+OnCalendar=*-*-* 04:30:00
+Persistent=true
+Unit=robiotec-osint-download.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Robiotec ARCOM data downloader
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/root/robiotec/arcom
+EnvironmentFile=-/root/robiotec/servicios/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/arcom/logs
+ExecStart=/root/robiotec/servicios/arcom/scripts/download.sh
+StandardOutput=journal
+StandardError=journal

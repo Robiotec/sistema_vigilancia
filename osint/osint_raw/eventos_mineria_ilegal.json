@@ -1,0 +1,2810 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "117939",
+      "codigo_alfanumerico": "MILEG-20260302-117939",
+      "latitud": -3.1685566,
+      "longitud": -78.4453516,
+      "circunstancias_hecho": "Un operativo militar desmanteló un campamento de minería ilegal en Gualaquiza, sector Río Negro, Morona Santiago. Se inhabilitaron excavadoras, motores de succión, una clasificadora tipo Z y 1.500 galones de combustible, afectando la logística de estas estructuras ilícitas.",
+      "fecha_infraccion": "2026-03-02T22:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DefensaEc/status/2028831387080359990?s=20",
+        "https://x.com/EjercitoECU/status/2028597627315474746?s=20",
+        "https://www.facebook.com/share/p/1B8dRvwMm7/"
+      ],
+      "fecha_creacion": "2026-03-04T22:35:35.624Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7e0463f3-3934-4f0f-94fe-acc977b9678a.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/46a8db4a-788b-45fc-8008-ce218ad5de10.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6b9662ec-7bf8-446f-a23d-d401b8ed0548.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN JUAN BOSCO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_MINERIA_ILEGAL_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "117938",
+      "codigo_alfanumerico": "MILEG-20260303-117938",
+      "latitud": 0.06212117919751296,
+      "longitud": -77.21379865341189,
+      "circunstancias_hecho": "Las Fuerzas Armadas intervinieron y neutralizaron un punto de minería ilegal en Cascales, Sucumbíos, a orillas del río Aguarico. Durante la operación se destruyó una draga artesanal y equipos logísticos, afectando directamente a economías criminales en la Amazonía.",
+      "fecha_infraccion": "2026-03-03T19:45:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DefensaEc/status/2028919383725048205?s=20",
+        "https://www.instagram.com/p/DVb1bIRClxu/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+      ],
+      "fecha_creacion": "2026-03-04T22:17:52.261Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/61637ca3-489c-4b37-9c61-e99e84274809.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0d06269e-8b23-4846-ac48-1f2a9155c9c0.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4b8a8d3b-bcbc-4721-a6f5-a9bb004ca4af.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CASCALES"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_MINERIA_ILEGAL_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "103435",
+      "codigo_alfanumerico": "MILEG-20260301-103435",
+      "latitud": -0.3659083,
+      "longitud": -77.4701972,
+      "circunstancias_hecho": "Un informe del MAAP revela que entre 2017 y 2024, la minería ilegal ha destruido un área equivalente a 2500 canchas de fútbol en la provincia del Napo, Ecuador. Una concesión china al margen de la ley, según los expertos, amenaza a la ciudad de Tena.",
+      "fecha_infraccion": "2026-03-01T14:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/MongabayLatam/status/2028120579593646487?s=20"
+      ],
+      "fecha_creacion": "2026-03-03T22:43:06.409Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/bb0dd750-1ff2-4a5f-8bd8-2af5fde404d3.webp",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f4235a30-d450-4fb1-a568-60323e7d6260.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "EL CHACO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_MINERIA_ILEGAL_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86868",
+      "codigo_alfanumerico": "MILEG-20260203-086868",
+      "latitud": -3.111055404509747,
+      "longitud": -78.02473106088259,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-02-03T16:52:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-02-03T16:53:17.772Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fdc822d7-2b4f-401e-bdb0-8a0868f611f0.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fdc822d7-2b4f-401e-bdb0-8a0868f611f0.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 32,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86742",
+      "codigo_alfanumerico": "MILEG-20260127-086742",
+      "latitud": 1.0164572897785669,
+      "longitud": -78.64649128003782,
+      "circunstancias_hecho": "Campamento Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:20:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:23:15.488Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5e557681-41a6-4ca9-9e9e-0266f5febae9.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5e557681-41a6-4ca9-9e9e-0266f5febae9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86740",
+      "codigo_alfanumerico": "MILEG-20260127-086740",
+      "latitud": 1.0152808980817507,
+      "longitud": -78.65987801049805,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:20:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:21:28.283Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c5b8e8de-7db7-475c-8db4-679fcc651fda.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c5b8e8de-7db7-475c-8db4-679fcc651fda.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 48,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86739",
+      "codigo_alfanumerico": "MILEG-20260127-086739",
+      "latitud": 1.0367737062440496,
+      "longitud": -78.68051701742121,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:11:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:19:28.028Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ad96dfff-002a-4d6e-b816-bb4b2438f48b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ad96dfff-002a-4d6e-b816-bb4b2438f48b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86737",
+      "codigo_alfanumerico": "MILEG-20260127-086737",
+      "latitud": 1.0534412046504158,
+      "longitud": -78.6939637971612,
+      "circunstancias_hecho": "Campamento Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:11:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:15:49.130Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/06bb68ee-78d8-41c1-a650-6eab2a14053d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/06bb68ee-78d8-41c1-a650-6eab2a14053d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 17,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86736",
+      "codigo_alfanumerico": "MILEG-20260127-086736",
+      "latitud": 1.0803077837301114,
+      "longitud": -78.69043766534962,
+      "circunstancias_hecho": "Campamento Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:11:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:14:26.491Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cd1f2d59-c240-40c4-845d-62dbe2b2d89e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cd1f2d59-c240-40c4-845d-62dbe2b2d89e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86735",
+      "codigo_alfanumerico": "MILEG-20260127-086735",
+      "latitud": 1.065747893487858,
+      "longitud": -78.60468818511963,
+      "circunstancias_hecho": "Campamento Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:11:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:12:02.619Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86734",
+      "codigo_alfanumerico": "MILEG-20260127-086734",
+      "latitud": 1.0080094057253368,
+      "longitud": -78.62620338744479,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T22:06:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T22:10:35.917Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/feb65a2a-e749-4ab6-8a77-2079104b4742.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/feb65a2a-e749-4ab6-8a77-2079104b4742.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 22,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86732",
+      "codigo_alfanumerico": "MILEG-20260127-086732",
+      "latitud": 0.9580126103593647,
+      "longitud": -78.644991042887,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:55:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:56:47.620Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cf9ac2cf-161c-4840-b4a2-4e3a85f488d6.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cf9ac2cf-161c-4840-b4a2-4e3a85f488d6.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86731",
+      "codigo_alfanumerico": "MILEG-20260127-086731",
+      "latitud": 1.0811234385266704,
+      "longitud": -78.63200641368226,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:51:15.045Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1cebf088-162b-4b5b-8c0a-7beec94d4236.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1cebf088-162b-4b5b-8c0a-7beec94d4236.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86730",
+      "codigo_alfanumerico": "MILEG-20260127-086730",
+      "latitud": 1.0935023031043685,
+      "longitud": -78.64657354382322,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:49:44.904Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e75e6fc4-5ee2-4111-bab1-e14caedabfa5.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e75e6fc4-5ee2-4111-bab1-e14caedabfa5.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86728",
+      "codigo_alfanumerico": "MILEG-20260127-086728",
+      "latitud": 1.0301565761938083,
+      "longitud": -78.75254209612316,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:37:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:42:28.211Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1673f0ca-bb10-4c19-b8ad-8f6625ab22b9.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1673f0ca-bb10-4c19-b8ad-8f6625ab22b9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 17,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86727",
+      "codigo_alfanumerico": "MILEG-20260127-086727",
+      "latitud": 1.0223152867428502,
+      "longitud": -78.72459129357209,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:37:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:40:02.903Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3314f7ed-0ada-4f93-9213-5aa7227d0330.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3314f7ed-0ada-4f93-9213-5aa7227d0330.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86726",
+      "codigo_alfanumerico": "MILEG-20260127-086726",
+      "latitud": 1.0049399403808517,
+      "longitud": -78.6936523147888,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-27T21:37:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:38:24.324Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a2be33b6-9e76-4a14-841b-935a90f70a8f.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a2be33b6-9e76-4a14-841b-935a90f70a8f.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 11,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86725",
+      "codigo_alfanumerico": "MILEG-20260127-086725",
+      "latitud": 0.3981597,
+      "longitud": -78.5276543,
+      "circunstancias_hecho": "Minería informal / artesanal dispersa:\r\nPrincipalmente oro aluvial; Actividad intermitente; Escala pequeña",
+      "fecha_infraccion": "2026-01-27T21:22:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-27T21:34:32.294Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7d6cc9e-0b80-465b-8461-d533864cb843.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7d6cc9e-0b80-465b-8461-d533864cb843.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "COTACACHI"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 36,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86723",
+      "codigo_alfanumerico": "MILEG-20260127-086723",
+      "latitud": 0.6192562009629117,
+      "longitud": -78.31586844799804,
+      "circunstancias_hecho": "Buenos Aires (Imbabura): parroquia rural históricamente vinculada a minería ilegal de oro, caracterizada por ciclos de ocupación masiva, intervención estatal y reconfiguración criminal. Funciona como antecedente clave para entender la expansión de economías mineras ilícitas en Ecuador.",
+      "fecha_infraccion": "2026-01-27T21:04:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://planv.com.ec/historias/buenos-aires-una-bomba-tiempo-la-mineria-ilegal/"
+      ],
+      "fecha_creacion": "2026-01-27T21:06:33.744Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/39556ab9-4130-47ab-8d0a-df1dc89b36cb.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/39556ab9-4130-47ab-8d0a-df1dc89b36cb.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN MIGUEL DE URCUQUI"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 26,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86646",
+      "codigo_alfanumerico": "MILEG-20260126-086646",
+      "latitud": 0.9831760241277806,
+      "longitud": -78.59877251234501,
+      "circunstancias_hecho": "Minería ilegal en ladera del cerro.",
+      "fecha_infraccion": "2026-01-26T15:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T15:01:30.294Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3535fa15-3e7f-4181-bce6-bd37418054e2.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3535fa15-3e7f-4181-bce6-bd37418054e2.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_MINERIA_ILEGAL_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 33,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86620",
+      "codigo_alfanumerico": "MILEG-20260125-086620",
+      "latitud": 0.9422029537647993,
+      "longitud": -78.5850182332878,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:43:36.864Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9fbe120a-94bb-4cff-9e96-e2cb4d5b53f1.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9fbe120a-94bb-4cff-9e96-e2cb4d5b53f1.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86618",
+      "codigo_alfanumerico": "MILEG-20260125-086618",
+      "latitud": 0.9971140569264221,
+      "longitud": -78.7869584918549,
+      "circunstancias_hecho": "Gran Complejo de Minería Ilegal",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:39:24.834Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fc3b2a90-58aa-4559-b224-55db79a28b10.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fc3b2a90-58aa-4559-b224-55db79a28b10.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86617",
+      "codigo_alfanumerico": "MILEG-20260125-086617",
+      "latitud": 0.9942854292411195,
+      "longitud": -78.78636325371536,
+      "circunstancias_hecho": "Área de Minería Ilegal",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:38:29.037Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5d1c9297-ba40-40fb-96b5-8a27a52db72a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5d1c9297-ba40-40fb-96b5-8a27a52db72a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86616",
+      "codigo_alfanumerico": "MILEG-20260125-086616",
+      "latitud": 0.984385413901166,
+      "longitud": -78.78187030874705,
+      "circunstancias_hecho": "Campamento de Minería Ilegal",
+      "fecha_infraccion": "2026-01-25T22:34:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:37:20.773Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1b775862-be89-485e-a4fb-061219b807a3.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1b775862-be89-485e-a4fb-061219b807a3.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86612",
+      "codigo_alfanumerico": "MILEG-20260125-086612",
+      "latitud": 0.9457777799618887,
+      "longitud": -78.76546021344625,
+      "circunstancias_hecho": "Mega complejo de minería ilegal - Frente Oliver Sinisterra",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:30:08.429Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8c728e94-acc8-4834-b9c0-948a53e3022a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8c728e94-acc8-4834-b9c0-948a53e3022a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 19,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86611",
+      "codigo_alfanumerico": "MILEG-20260125-086611",
+      "latitud": 0.944599972681555,
+      "longitud": -78.75795173983924,
+      "circunstancias_hecho": "Campamento de minería ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:29:04.696Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ddb8eaa8-e442-46ab-96d3-e6e6db93ad74.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ddb8eaa8-e442-46ab-96d3-e6e6db93ad74.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86610",
+      "codigo_alfanumerico": "MILEG-20260125-086610",
+      "latitud": 0.9365880985422474,
+      "longitud": -78.73977859705363,
+      "circunstancias_hecho": "Campamento de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T22:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:27:06.607Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/aa81ef87-a2e2-48c4-916d-04bfb1df9bc3.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/aa81ef87-a2e2-48c4-916d-04bfb1df9bc3.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86602",
+      "codigo_alfanumerico": "MILEG-20260125-086602",
+      "latitud": 0.942293090987388,
+      "longitud": -78.61232714807129,
+      "circunstancias_hecho": "Campamento de minería ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T22:12:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:13:12.366Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4c453c3c-804b-465f-aee1-3b18a54b6ff9.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4c453c3c-804b-465f-aee1-3b18a54b6ff9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86601",
+      "codigo_alfanumerico": "MILEG-20260125-086601",
+      "latitud": 0.9209471840018162,
+      "longitud": -78.64769504603795,
+      "circunstancias_hecho": "Campamento Minería Ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T22:03:14.527Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/09782fc1-1824-4225-a7d1-2d118933a373.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/09782fc1-1824-4225-a7d1-2d118933a373.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86600",
+      "codigo_alfanumerico": "MILEG-20260125-086600",
+      "latitud": 0.93898584062022,
+      "longitud": -78.6865881079242,
+      "circunstancias_hecho": "Campamento Minería Ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.instagram.com/llamingoec_oficial/reel/DTa87-1j_Xr/"
+      ],
+      "fecha_creacion": "2026-01-25T22:00:21.855Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4c66633a-4b7e-4bd3-ae7e-7c31f73dc00e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4c66633a-4b7e-4bd3-ae7e-7c31f73dc00e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86599",
+      "codigo_alfanumerico": "MILEG-20260125-086599",
+      "latitud": 0.9311999025287646,
+      "longitud": -78.68707005320546,
+      "circunstancias_hecho": "Campamento de minería ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:59:02.499Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0d7d41f5-b580-4056-8a70-7faa7a1934fa.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0d7d41f5-b580-4056-8a70-7faa7a1934fa.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86598",
+      "codigo_alfanumerico": "MILEG-20260125-086598",
+      "latitud": 0.9335507141177773,
+      "longitud": -78.67317284363271,
+      "circunstancias_hecho": "Campamento Minería Ilegal - FOS",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:57:40.331Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86597",
+      "codigo_alfanumerico": "MILEG-20260125-086597",
+      "latitud": 0.9202407218590606,
+      "longitud": -78.70104363775476,
+      "circunstancias_hecho": "Campamento Minería Ilegal - Frente Oliver Sinisterra.",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:55:47.837Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86596",
+      "codigo_alfanumerico": "MILEG-20260125-086596",
+      "latitud": 0.920605137783264,
+      "longitud": -78.70092639414149,
+      "circunstancias_hecho": "Campamento Minería Ilegal - Frente Oliver Sinisterra.",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:55:19.903Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6159f113-8ced-45c6-86f5-b70826a22132.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6159f113-8ced-45c6-86f5-b70826a22132.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86595",
+      "codigo_alfanumerico": "MILEG-20260125-086595",
+      "latitud": 0.9217934927321261,
+      "longitud": -78.71441901193239,
+      "circunstancias_hecho": "Campamento de minería ilegal. Frente Oliver Sinisterra.",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:53:15.303Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/168eb725-8318-485e-83d5-c3365a918561.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/168eb725-8318-485e-83d5-c3365a918561.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 12,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86594",
+      "codigo_alfanumerico": "MILEG-20260125-086594",
+      "latitud": 0.9876121288732129,
+      "longitud": -78.66764127861335,
+      "circunstancias_hecho": "Campamento de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T21:42:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:48:07.980Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f126e16-9fd3-43b5-9005-b79528b78dc9.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f126e16-9fd3-43b5-9005-b79528b78dc9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 12,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86593",
+      "codigo_alfanumerico": "MILEG-20260125-086593",
+      "latitud": 0.8887742577837866,
+      "longitud": -78.44293654428103,
+      "circunstancias_hecho": "Lo más probable es que esto sea un claro para campamento minero ilegal pequeño (artesanal o de bajo perfil)",
+      "fecha_infraccion": "2026-01-25T21:27:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:33:18.597Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6556e55c-70bd-4fc5-99c7-c6699cf50fd7.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6556e55c-70bd-4fc5-99c7-c6699cf50fd7.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MIRA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 27,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86592",
+      "codigo_alfanumerico": "MILEG-20260125-086592",
+      "latitud": 0.8925203562996008,
+      "longitud": -78.44304206954742,
+      "circunstancias_hecho": "Campamento minero pequeño o aislado, muy probablemente relacionado con minería ilegal de oro en la cuenca del río Mira",
+      "fecha_infraccion": "2026-01-25T21:27:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:29:14.882Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1a8fcb0f-a074-4d75-b2f5-b6e6394444b7.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1a8fcb0f-a074-4d75-b2f5-b6e6394444b7.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 20,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86591",
+      "codigo_alfanumerico": "MILEG-20260125-086591",
+      "latitud": -3.0522758936699024,
+      "longitud": -79.71858658779146,
+      "circunstancias_hecho": "ALTA susceptibilidad a infiltración por GDOs.",
+      "fecha_infraccion": "2026-01-25T21:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:19:15.059Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CAMILO PONCE ENRIQUEZ"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 16,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86590",
+      "codigo_alfanumerico": "MILEG-20260125-086590",
+      "latitud": -3.045600038341034,
+      "longitud": -79.7213988662202,
+      "circunstancias_hecho": "ALTA susceptibilidad a infiltración por GDOs.",
+      "fecha_infraccion": "2026-01-25T21:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:18:45.912Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CAMILO PONCE ENRIQUEZ"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 13,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86589",
+      "codigo_alfanumerico": "MILEG-20260125-086589",
+      "latitud": -3.0403725726651776,
+      "longitud": -79.7161484125466,
+      "circunstancias_hecho": "ALTA susceptibilidad a infiltración por GDOs.",
+      "fecha_infraccion": "2026-01-25T21:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:18:22.192Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CAMILO PONCE ENRIQUEZ"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86588",
+      "codigo_alfanumerico": "MILEG-20260125-086588",
+      "latitud": -3.0491966231074703,
+      "longitud": -79.72314829632568,
+      "circunstancias_hecho": "Susceptibilidad: ALTA a infiltración de GDO. Históricamente asociado a minería artesanal y pequeña minería.\r\nAlta densidad de bocaminas.\r\nControl operativo fragmentado.\r\nFlujo importante de oro físico en efectivo.",
+      "fecha_infraccion": "2026-01-25T21:14:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:15:56.815Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b736f9be-62fd-4d6f-bac4-c3ceb8736b8d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b736f9be-62fd-4d6f-bac4-c3ceb8736b8d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CAMILO PONCE ENRIQUEZ"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 17,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86587",
+      "codigo_alfanumerico": "MILEG-20260125-086587",
+      "latitud": -4.393605756058469,
+      "longitud": -79.89207516739808,
+      "circunstancias_hecho": "Evidencia clara y activa de minería ilegal aluvial de oro a mediana escala",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:08:07.770Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b5eb1e67-103d-4ab7-ab13-6caf7ba8b2e7.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b5eb1e67-103d-4ab7-ab13-6caf7ba8b2e7.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACARA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 18,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86586",
+      "codigo_alfanumerico": "MILEG-20260125-086586",
+      "latitud": -3.825837042280073,
+      "longitud": -79.71135981838613,
+      "circunstancias_hecho": "Minería ilegal aluvial de oro en el río Puyango",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:01:14.375Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/48565e5f-62d5-4a28-8132-027e0bcc97ed.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/48565e5f-62d5-4a28-8132-027e0bcc97ed.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PIÑAS"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 40,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86585",
+      "codigo_alfanumerico": "MILEG-20260125-086585",
+      "latitud": -3.8260581585629043,
+      "longitud": -79.71313431725507,
+      "circunstancias_hecho": "Minería ilegal aluvial de oro en el río Puyango",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T21:00:19.821Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cc6b6bb2-cd58-4fb1-bcb4-3064d7fc5362.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cc6b6bb2-cd58-4fb1-bcb4-3064d7fc5362.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PIÑAS"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 22,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86584",
+      "codigo_alfanumerico": "MILEG-20260125-086584",
+      "latitud": -4.328594371536964,
+      "longitud": -80.04695017474364,
+      "circunstancias_hecho": "Campamento minero pequeño o mediano, muy probablemente relacionado con minería ilegal de oro (artesanal o semi-mecanizada).",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T20:54:28.998Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b3cc9ddd-bbce-4ee9-a36b-7fdc168b03e4.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b3cc9ddd-bbce-4ee9-a36b-7fdc168b03e4.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACARA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 12,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86583",
+      "codigo_alfanumerico": "MILEG-20260125-086583",
+      "latitud": -3.04618698743742,
+      "longitud": -78.10028557030694,
+      "circunstancias_hecho": "Campamento de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.primicias.ec/seguridad/diagnostico-mineria-ilegal-ecuador-cuatro-enclaves-productivos-violencia-perdidas-millonarias-100377/"
+      ],
+      "fecha_creacion": "2026-01-25T19:51:28.030Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/10607d42-ab90-42f6-a46a-b0c32a7a9b46.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/10607d42-ab90-42f6-a46a-b0c32a7a9b46.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86582",
+      "codigo_alfanumerico": "MILEG-20260125-086582",
+      "latitud": -3.037411239277804,
+      "longitud": -78.0435187994248,
+      "circunstancias_hecho": "Áreas de minería ilegal aluvial.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.primicias.ec/seguridad/diagnostico-mineria-ilegal-ecuador-cuatro-enclaves-productivos-violencia-perdidas-millonarias-100377/"
+      ],
+      "fecha_creacion": "2026-01-25T19:49:20.996Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86581",
+      "codigo_alfanumerico": "MILEG-20260125-086581",
+      "latitud": 0.39841193645009393,
+      "longitud": -77.4070808473951,
+      "circunstancias_hecho": "Varios campamentos de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/mineria-ecuador-norte/"
+      ],
+      "fecha_creacion": "2026-01-25T19:44:48.672Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4dc72ae9-4ad8-4f5c-af13-329afaae060b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4dc72ae9-4ad8-4f5c-af13-329afaae060b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SUCUMBIOS"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 36,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86580",
+      "codigo_alfanumerico": "MILEG-20260125-086580",
+      "latitud": -1.0586760144917562,
+      "longitud": -77.81280837881165,
+      "circunstancias_hecho": "Vastos campamentos de minería ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/mineria-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T19:30:09.817Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1e7c237f-fdcd-4b92-93bd-89baf3ff925b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1e7c237f-fdcd-4b92-93bd-89baf3ff925b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TENA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86579",
+      "codigo_alfanumerico": "MILEG-20260125-086579",
+      "latitud": -0.18546021347084143,
+      "longitud": -77.29379131139945,
+      "circunstancias_hecho": "Enormes Campamentos de Minería Ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://ecociencia.org/maap-219-expansion-de-la-mineria-ilegal-en-la-amazonia-ecuatoriana-zona-punino/"
+      ],
+      "fecha_creacion": "2026-01-25T19:27:17.818Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ad56266f-345c-42e3-8dba-bf638af603d3.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ad56266f-345c-42e3-8dba-bf638af603d3.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 13,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86578",
+      "codigo_alfanumerico": "MILEG-20260125-086578",
+      "latitud": -0.23349638065509978,
+      "longitud": -77.26995079064562,
+      "circunstancias_hecho": "Enormes Campamentos de Minería Ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://ecociencia.org/maap-219-expansion-de-la-mineria-ilegal-en-la-amazonia-ecuatoriana-zona-punino/"
+      ],
+      "fecha_creacion": "2026-01-25T19:25:27.899Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/71fb0ed8-a17f-40ae-933b-562f6896d917.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/71fb0ed8-a17f-40ae-933b-562f6896d917.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86577",
+      "codigo_alfanumerico": "MILEG-20260125-086577",
+      "latitud": -0.21525707439953287,
+      "longitud": -77.19410019163352,
+      "circunstancias_hecho": "Enormes Campamentos de Minería Ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://ecociencia.org/maap-219-expansion-de-la-mineria-ilegal-en-la-amazonia-ecuatoriana-zona-punino/"
+      ],
+      "fecha_creacion": "2026-01-25T19:24:05.974Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dc9e3570-2545-46ac-91a4-f69d57a76569.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/dc9e3570-2545-46ac-91a4-f69d57a76569.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86576",
+      "codigo_alfanumerico": "MILEG-20260125-086576",
+      "latitud": -0.2337307906962515,
+      "longitud": -77.22136222726002,
+      "circunstancias_hecho": "Enormes Campamentos de Minería Ilegal.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://ecociencia.org/maap-219-expansion-de-la-mineria-ilegal-en-la-amazonia-ecuatoriana-zona-punino/"
+      ],
+      "fecha_creacion": "2026-01-25T19:23:22.007Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86563",
+      "codigo_alfanumerico": "MILEG-20260125-086563",
+      "latitud": -3.9845687058414456,
+      "longitud": -78.83245937484422,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:24:53.482Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/99383580-350c-4b98-b754-0c38a6980632.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/99383580-350c-4b98-b754-0c38a6980632.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAMORA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86562",
+      "codigo_alfanumerico": "MILEG-20260125-086562",
+      "latitud": -3.913072586949836,
+      "longitud": -78.82622121708437,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:21:47.960Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e95ee240-4889-4748-b9cc-55c09e23a124.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e95ee240-4889-4748-b9cc-55c09e23a124.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CENTINELA DEL CONDOR"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86561",
+      "codigo_alfanumerico": "MILEG-20260125-086561",
+      "latitud": -4.030808948720524,
+      "longitud": -78.64757836328127,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:18:54.567Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/641c8e2f-1929-409c-ac9e-edffc6307ccc.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/641c8e2f-1929-409c-ac9e-edffc6307ccc.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PAQUISHA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 9,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86560",
+      "codigo_alfanumerico": "MILEG-20260125-086560",
+      "latitud": -4.111949009632038,
+      "longitud": -78.63920464412334,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:17:01.951Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7f2c1a5-d730-41f6-b8d3-5714a2d83341.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e7f2c1a5-d730-41f6-b8d3-5714a2d83341.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86559",
+      "codigo_alfanumerico": "MILEG-20260125-086559",
+      "latitud": -4.162921808283044,
+      "longitud": -78.64112471315293,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:15:35.061Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/70f72c64-914f-482d-9c35-623ad992e105.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/70f72c64-914f-482d-9c35-623ad992e105.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86558",
+      "codigo_alfanumerico": "MILEG-20260125-086558",
+      "latitud": -4.2322000193042,
+      "longitud": -78.65691393702566,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:13:03.561Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f69cd1c7-e846-490f-a095-f44cda1cde91.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f69cd1c7-e846-490f-a095-f44cda1cde91.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86557",
+      "codigo_alfanumerico": "MILEG-20260125-086557",
+      "latitud": -4.280670365588188,
+      "longitud": -78.64859969133876,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T18:12:03.885Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ec6b437c-a605-41ca-b3f6-652c1564e01c.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ec6b437c-a605-41ca-b3f6-652c1564e01c.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86555",
+      "codigo_alfanumerico": "MILEG-20260125-086555",
+      "latitud": -4.383236910536539,
+      "longitud": -78.69603231585923,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T16:25:41.591Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86554",
+      "codigo_alfanumerico": "MILEG-20260125-086554",
+      "latitud": -4.338207096945464,
+      "longitud": -78.68067633441402,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T16:24:30.923Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86553",
+      "codigo_alfanumerico": "MILEG-20260125-086553",
+      "latitud": -4.333724581000628,
+      "longitud": -78.65887533954097,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T16:23:16.231Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86552",
+      "codigo_alfanumerico": "MILEG-20260125-086552",
+      "latitud": -4.318248384322953,
+      "longitud": -78.6638187408447,
+      "circunstancias_hecho": "Corredor minero ilegal consolidado, con decenas de frentes activos e inactivos, operando a ambos lados de los ríos Shaime y Nangaritza, con infraestructura vial informal, pozas de decantación masivas y coexistencia directa con presencia militar, lo que sugiere tolerancia, captura o incapacidad de control.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.maapprogram.org/es/minera-nangaritza-ecuador/"
+      ],
+      "fecha_creacion": "2026-01-25T16:22:11.736Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86551",
+      "codigo_alfanumerico": "MILEG-20260125-086551",
+      "latitud": -4.889727831531751,
+      "longitud": -78.9416292331163,
+      "circunstancias_hecho": "Minería ilegal en ladera.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:16:38.851Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a49b07f6-b0f4-4a27-b3eb-fc7ec4af92f2.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a49b07f6-b0f4-4a27-b3eb-fc7ec4af92f2.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 12,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86550",
+      "codigo_alfanumerico": "MILEG-20260125-086550",
+      "latitud": -4.888562722907779,
+      "longitud": -78.92549813256838,
+      "circunstancias_hecho": "Minería ilegal en ladera.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:15:17.245Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3057df33-f728-4926-9091-dc11983c2509.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3057df33-f728-4926-9091-dc11983c2509.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86549",
+      "codigo_alfanumerico": "MILEG-20260125-086549",
+      "latitud": -4.893349249101551,
+      "longitud": -78.90803725877528,
+      "circunstancias_hecho": "Minería ilegal en ladera.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:08:52.838Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/930b8476-a26d-4155-b8db-35f76a704583.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/930b8476-a26d-4155-b8db-35f76a704583.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86548",
+      "codigo_alfanumerico": "MILEG-20260125-086548",
+      "latitud": -4.892424610209892,
+      "longitud": -78.90515299214638,
+      "circunstancias_hecho": "Minería ilegal en ladera.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:07:58.837Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9dd693b3-ddc5-460d-af8b-f1acb29b76d9.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9dd693b3-ddc5-460d-af8b-f1acb29b76d9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86547",
+      "codigo_alfanumerico": "MILEG-20260125-086547",
+      "latitud": -4.89360041744915,
+      "longitud": -78.91917048251287,
+      "circunstancias_hecho": "Área de depósito / lavado residual de minería aluvial, con probable reconversión incipiente a pasto o abandono reciente.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:06:34.465Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/39b67eef-6102-4d72-b622-9e038d853604.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/39b67eef-6102-4d72-b622-9e038d853604.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86546",
+      "codigo_alfanumerico": "MILEG-20260125-086546",
+      "latitud": -4.893982381946256,
+      "longitud": -78.90458733019155,
+      "circunstancias_hecho": "Actividad: Minería ilegal (aluvial / ladera)\r\nEstado: Inactivo reciente o intermitente\r\nNivel de certeza: Muy alto\r\nRiesgo: Ambiental severo + enclave criminal\r\nFunción probable: Lavado de material aurífero",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:04:24.418Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0265494c-e168-4747-bb49-2e4ffb7510d7.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0265494c-e168-4747-bb49-2e4ffb7510d7.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86545",
+      "codigo_alfanumerico": "MILEG-20260125-086545",
+      "latitud": -4.896476272946689,
+      "longitud": -78.97445807073107,
+      "circunstancias_hecho": "Preparación de un campamento de minería ilegal aluvial.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T16:00:11.410Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fd3b0eb9-01b9-4986-bad6-3d78d0682988.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fd3b0eb9-01b9-4986-bad6-3d78d0682988.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86544",
+      "codigo_alfanumerico": "MILEG-20260125-086544",
+      "latitud": -4.907607333657008,
+      "longitud": -78.97789156040558,
+      "circunstancias_hecho": "Campamento de minería ilegal aluvial (oro).",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:37:49.135Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/be073ca4-3770-413f-b805-a701c8b3614d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/be073ca4-3770-413f-b805-a701c8b3614d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86543",
+      "codigo_alfanumerico": "MILEG-20260125-086543",
+      "latitud": -4.923009148788169,
+      "longitud": -78.98149680654258,
+      "circunstancias_hecho": "Campamento de minería ilegal aluvial (oro).",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:35:36.487Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a0179773-3b5b-4f83-b238-eea2abef735b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a0179773-3b5b-4f83-b238-eea2abef735b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86540",
+      "codigo_alfanumerico": "MILEG-20260125-086540",
+      "latitud": -4.9558164181302775,
+      "longitud": -78.99134782104035,
+      "circunstancias_hecho": "Campamento de minería ilegal aluvial (oro).",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:32:19.438Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/735c7932-d1e9-47d4-b91d-621be102df4e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/735c7932-d1e9-47d4-b91d-621be102df4e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86536",
+      "codigo_alfanumerico": "MILEG-20260125-086536",
+      "latitud": -4.991886356206651,
+      "longitud": -79.0048148056579,
+      "circunstancias_hecho": "Campamento de minería ilegal aluvial.",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:24:44.962Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/82e3f557-4b23-4b38-85f0-6525d4c002de.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/82e3f557-4b23-4b38-85f0-6525d4c002de.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86534",
+      "codigo_alfanumerico": "MILEG-20260125-086534",
+      "latitud": -5.015129350515682,
+      "longitud": -79.0149114292221,
+      "circunstancias_hecho": "Minería aluvial ilegal (oro)",
+      "fecha_infraccion": "2026-01-25T15:16:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T15:17:40.693Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ce30c1e0-95eb-4fb8-9792-ff1eda065247.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ce30c1e0-95eb-4fb8-9792-ff1eda065247.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_MINERIA_ILEGAL_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

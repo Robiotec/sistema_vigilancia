@@ -1,0 +1,21 @@
+[project]
+name = "robiotec-dashboard"
+version = "0.1.0"
+description = "Dashboard web Robiotec para videovigilancia inteligente"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "jinja2>=3.1.4",
+    "pydantic-settings>=2.4.0",
+    "python-multipart>=0.0.9",
+    "uvicorn>=0.30.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = false
+

@@ -1,0 +1,2373 @@
+{
+  "statusCode": 200,
+  "message": "OK",
+  "data": [
+    {
+      "id": "86795",
+      "codigo_alfanumerico": "UFA-20260125-086795",
+      "latitud": -4.1009092070016875,
+      "longitud": -79.95652923614885,
+      "circunstancias_hecho": "Batallon de infantería N19 Carchi",
+      "fecha_infraccion": "2026-01-25T05:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.facebook.com/photo.php?fbid=5712076058806194&id=271646809515840&set=a.1030629900284190"
+      ],
+      "fecha_creacion": "2026-01-30T06:06:13.431Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f51b3976-0601-4d5c-b380-e2f2a2f0bdcb.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f51b3976-0601-4d5c-b380-e2f2a2f0bdcb.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CELICA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86712",
+      "codigo_alfanumerico": "UFA-20260127-086712",
+      "latitud": 0.9434292585330045,
+      "longitud": -79.69802129891968,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBatallón de Infantería de Marina 12",
+      "fecha_infraccion": "2026-01-27T20:28:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.youtube.com/watch?v=wCSz2qUrX4c"
+      ],
+      "fecha_creacion": "2026-01-27T20:30:58.690Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a186a295-6cd1-40f6-9ac1-e39c2bdcbe79.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a186a295-6cd1-40f6-9ac1-e39c2bdcbe79.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ESMERALDAS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BATALLON_NAVAL",
+        "nombre": "Armada - Batallón Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_ARMADA_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86672",
+      "codigo_alfanumerico": "UFA-20260126-086672",
+      "latitud": -3.9863284676521102,
+      "longitud": -80.12456628869154,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nPuesto Táctico Militar El Limo\r\n(antiguo Destacamento)",
+      "fecha_infraccion": "2026-01-26T18:21:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": [
+        "https://www.facebook.com/GADPRElLimo/posts/el-gad-parroquial-el-limo-est%C3%A1-cogiendo-el-lastre-del-antiguo-destacamento-milit/3069409133284798/"
+      ],
+      "fecha_creacion": "2026-01-26T18:34:24.436Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b3b7a20e-29c5-4c44-a446-685bbfb40a04.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b3b7a20e-29c5-4c44-a446-685bbfb40a04.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PUYANGO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86671",
+      "codigo_alfanumerico": "UFA-20260126-086671",
+      "latitud": -4.2742277216122595,
+      "longitud": -80.1969978720115,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nPuesto Táctico Militar Delta Saucillo",
+      "fecha_infraccion": "2026-01-26T18:21:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:31:03.028Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6279a834-d250-4e20-a125-d3e27b56ebff.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6279a834-d250-4e20-a125-d3e27b56ebff.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAPOTILLO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86670",
+      "codigo_alfanumerico": "UFA-20260126-086670",
+      "latitud": -4.416098477927979,
+      "longitud": -79.43221533624094,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar El Ingenio",
+      "fecha_infraccion": "2026-01-26T18:21:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:26:45.736Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8d9eea6b-47f1-47d3-a4b6-dac46c4375c8.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8d9eea6b-47f1-47d3-a4b6-dac46c4375c8.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ESPINDOLA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86668",
+      "codigo_alfanumerico": "UFA-20260126-086668",
+      "latitud": -4.579477192984494,
+      "longitud": -79.4258330978283,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Amaluza",
+      "fecha_infraccion": "2026-01-26T18:21:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:23:05.049Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/66fbdc6f-c00e-445f-8ac9-d78d2c791425.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/66fbdc6f-c00e-445f-8ac9-d78d2c791425.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ESPINDOLA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86667",
+      "codigo_alfanumerico": "UFA-20260126-086667",
+      "latitud": -3.9134109230356273,
+      "longitud": -78.49113821813852,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Paquisha Alto",
+      "fecha_infraccion": "2026-01-26T18:09:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:17:54.024Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1fd0e98a-c7c6-4058-abf1-28d2c494cc6e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1fd0e98a-c7c6-4058-abf1-28d2c494cc6e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PAQUISHA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86666",
+      "codigo_alfanumerico": "UFA-20260126-086666",
+      "latitud": -3.4969583390780494,
+      "longitud": -78.23151826932386,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Coangos",
+      "fecha_infraccion": "2026-01-26T18:09:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:15:50.851Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b526a38e-bcaf-4829-9e4d-5387936abb48.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b526a38e-bcaf-4829-9e4d-5387936abb48.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN JUAN BOSCO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86665",
+      "codigo_alfanumerico": "UFA-20260126-086665",
+      "latitud": -3.0646736356070394,
+      "longitud": -77.94659850325235,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar ETZA",
+      "fecha_infraccion": "2026-01-26T18:09:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:13:04.660Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/169a80b8-acec-4910-9f4b-84ea4aedccab.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/169a80b8-acec-4910-9f4b-84ea4aedccab.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86664",
+      "codigo_alfanumerico": "UFA-20260126-086664",
+      "latitud": -2.8815253768717852,
+      "longitud": -77.70196604353974,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Morona",
+      "fecha_infraccion": "2026-01-26T18:09:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:10:22.391Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8bdc3657-052f-4d6c-b337-fd034eeac652.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8bdc3657-052f-4d6c-b337-fd034eeac652.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86663",
+      "codigo_alfanumerico": "UFA-20260126-086663",
+      "latitud": -0.928762000176695,
+      "longitud": -75.3895186963259,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Yasuní",
+      "fecha_infraccion": "2026-01-26T18:02:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:07:07.847Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f7ee2efd-7bff-4ef2-b3f9-635c4ac5c1c5.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f7ee2efd-7bff-4ef2-b3f9-635c4ac5c1c5.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "AGUARICO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86662",
+      "codigo_alfanumerico": "UFA-20260126-086662",
+      "latitud": 0.22605041150983657,
+      "longitud": -76.87229778636933,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Tcrn. Lauro Guerrero",
+      "fecha_infraccion": "2026-01-26T18:02:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:03:46.394Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/296617d7-41f7-4340-ab51-292e5c838c5e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/296617d7-41f7-4340-ab51-292e5c838c5e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86661",
+      "codigo_alfanumerico": "UFA-20260126-086661",
+      "latitud": 0.6454458370562584,
+      "longitud": -77.52205456250118,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Teniente Lorenzo García",
+      "fecha_infraccion": "2026-01-26T17:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T18:00:15.385Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6b57f0a4-c17b-4327-8f6a-765f36425b30.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6b57f0a4-c17b-4327-8f6a-765f36425b30.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SUCUMBIOS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86660",
+      "codigo_alfanumerico": "UFA-20260126-086660",
+      "latitud": 0.8681927859039913,
+      "longitud": -78.44333604834698,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Soldado Domingo Yépez",
+      "fecha_infraccion": "2026-01-26T17:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T17:55:17.901Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3d0d935c-8528-462b-a373-80d65f79729b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3d0d935c-8528-462b-a373-80d65f79729b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "IBARRA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86659",
+      "codigo_alfanumerico": "UFA-20260126-086659",
+      "latitud": 0.9351668587899029,
+      "longitud": -78.18676602318313,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar El Chical",
+      "fecha_infraccion": "2026-01-26T17:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T17:52:25.652Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4f4fc609-a941-4446-be50-eb8fb18b72ec.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4f4fc609-a941-4446-be50-eb8fb18b72ec.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86658",
+      "codigo_alfanumerico": "UFA-20260126-086658",
+      "latitud": 1.345599452939492,
+      "longitud": -78.7169676250907,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Mataje",
+      "fecha_infraccion": "2026-01-26T17:47:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-26T17:49:06.839Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a1bd1a8-ae6d-4eec-9786-dc5471e1135c.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3a1bd1a8-ae6d-4eec-9786-dc5471e1135c.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN LORENZO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86573",
+      "codigo_alfanumerico": "UFA-20260125-086573",
+      "latitud": -2.1200616187305865,
+      "longitud": -76.04828230718249,
+      "circunstancias_hecho": "Ejército Ecuatoriano. Destacamento Militar Tigre.",
+      "fecha_infraccion": "2026-01-25T18:50:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T19:02:02.937Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45f1819a-053f-4469-b3ae-d4a8f1f46a44.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45f1819a-053f-4469-b3ae-d4a8f1f46a44.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "PASTAZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86567",
+      "codigo_alfanumerico": "UFA-20260125-086567",
+      "latitud": -2.9966233821828396,
+      "longitud": -77.8445252913731,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Soldado Monge",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:39:59.033Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b79a1706-5063-48e4-9157-b0f6ee636a32.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b79a1706-5063-48e4-9157-b0f6ee636a32.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TIWINTZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86566",
+      "codigo_alfanumerico": "UFA-20260125-086566",
+      "latitud": -4.9676218201443225,
+      "longitud": -79.11587253655014,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Balza",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:36:52.733Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9cb86937-eac0-4e8d-bcae-6eb0eab1a946.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9cb86937-eac0-4e8d-bcae-6eb0eab1a946.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86565",
+      "codigo_alfanumerico": "UFA-20260125-086565",
+      "latitud": -4.333139569156474,
+      "longitud": -78.66503249652182,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Militar Shaime",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:33:27.311Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/450ddf80-1ccd-4caa-b21d-fa9aaf4c021b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/450ddf80-1ccd-4caa-b21d-fa9aaf4c021b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "NANGARITZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "86564",
+      "codigo_alfanumerico": "UFA-20260125-086564",
+      "latitud": -3.7720156100058064,
+      "longitud": -78.42489880585202,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nDestacamento Machinaza",
+      "fecha_infraccion": "2026-01-25T18:08:00.000Z",
+      "verificado": null,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-25T18:30:56.965Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c12c2da9-1a91-43a3-9057-1972e2274ca7.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c12c2da9-1a91-43a3-9057-1972e2274ca7.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "YANTZAZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_DESTACAMENTO",
+        "nombre": "Ejército - Destacamento Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_FFAA_EJERCITO_OFF_OP.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83547",
+      "codigo_alfanumerico": "UFA-20260118-083547",
+      "latitud": -0.8522042496268499,
+      "longitud": -78.62042968311313,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nFuerte Militar Patria\r\nBase estratégica nacional de reacción rápida y entrenamiento avanzado del Ejército Ecuatoriano, con capacidad de proyección inmediata hacia cualquier región del país.",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:28:17.904Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/150be19b-acdc-4ddd-818c-55e50209f876.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/150be19b-acdc-4ddd-818c-55e50209f876.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LATACUNGA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83546",
+      "codigo_alfanumerico": "UFA-20260118-083546",
+      "latitud": -0.9993800201016707,
+      "longitud": -79.46761582136776,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nGrupo de Fuerzas Especiales N.º 26 \"Cenepa\"\r\nOperaciones especiales (captura/neutralización de objetivos de alto valor).",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:25:35.309Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/11417f3f-a0c2-4997-9772-0137933d5397.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/11417f3f-a0c2-4997-9772-0137933d5397.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUEVEDO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83545",
+      "codigo_alfanumerico": "UFA-20260118-083545",
+      "latitud": 0.7939752773197577,
+      "longitud": -77.7400031774181,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nFuerte Militar Tulcán\r\nBrigada de Infantería N.º 31 “Andes”\r\nBatallón de Infantería Motorizado N.º 39 “Mayor Galo Molina”",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:19:57.990Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b06f01a7-1b2c-4124-bd40-bbbabf66b2dc.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b06f01a7-1b2c-4124-bd40-bbbabf66b2dc.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TULCAN"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83544",
+      "codigo_alfanumerico": "UFA-20260118-083544",
+      "latitud": 0.07879763478349645,
+      "longitud": -76.87398455790411,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nGrupo de Fuerzas Especiales N.º 53 “Rayo”\r\nUnidad especializada en operaciones tácticas en entornos complejos como la selva, la frontera nororiental del país y otras zonas donde se requiere capacidad de respuesta militar avanzada.",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:12:42.548Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a7fb92d6-2349-445a-b7f8-30f606aa53eb.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a7fb92d6-2349-445a-b7f8-30f606aa53eb.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83543",
+      "codigo_alfanumerico": "UFA-20260118-083543",
+      "latitud": 0.06786687142786742,
+      "longitud": -76.99409094310907,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBatallón de Selva N.º 56 \"Tungurahua\"\r\nRol: control fronterizo activo y combate en selva profunda en la frontera norte, con énfasis en interdicción fluvial, disuasión y respuesta inmediata.",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:08:36.361Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45bb9725-c896-4199-a1bf-f4ed6f95ba3d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/45bb9725-c896-4199-a1bf-f4ed6f95ba3d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83542",
+      "codigo_alfanumerico": "UFA-20260118-083542",
+      "latitud": -0.48037060704782464,
+      "longitud": -76.96981611877993,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBrigada de Selva N.º 19 \"Napo\"\r\nFuerte Militar Napo\r\nComando militar principal de Orellana.",
+      "fecha_infraccion": "2026-01-18T02:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T02:03:01.361Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/eab22617-1f95-4fc2-9d29-103854816f06.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/eab22617-1f95-4fc2-9d29-103854816f06.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83541",
+      "codigo_alfanumerico": "UFA-20260118-083541",
+      "latitud": -1.508862694163768,
+      "longitud": -78.05734575911607,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBrigada de Selva N.º 17 “Pastaza”\r\nFuerte Militar Amazonas\r\nRol: comandar, coordinar y sostener la presencia militar del Ejército Ecuatoriano en la Amazonía central.",
+      "fecha_infraccion": "2026-01-18T01:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T01:57:43.699Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cffac2ee-caf0-421c-8e39-88405daa1085.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/cffac2ee-caf0-421c-8e39-88405daa1085.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MERA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83540",
+      "codigo_alfanumerico": "UFA-20260118-083540",
+      "latitud": -1.504606286311703,
+      "longitud": -78.0656243643158,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nGrupo de Aéreo del Ejército N.º 44 “PASTAZA”\r\nUnidad de aviación orgánica del Ejército Ecuatoriano encargada de operar medios aéreos propios.",
+      "fecha_infraccion": "2026-01-18T01:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://prezi.com/p/n8jwttlqedzs/organigrama-gae-44-paztaza/"
+      ],
+      "fecha_creacion": "2026-01-18T01:46:52.110Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e1fd96b6-949f-4a3d-9094-339e89093880.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e1fd96b6-949f-4a3d-9094-339e89093880.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MERA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83539",
+      "codigo_alfanumerico": "UFA-20260118-083539",
+      "latitud": -2.381045036845608,
+      "longitud": -77.50287895448629,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBatallón de Selva N.º 50 «Morona»\r\nEnfocada en defensa territorial y apoyo a acciones de seguridad del Estado.",
+      "fecha_infraccion": "2026-01-18T01:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T01:35:52.505Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b421635a-777b-406e-9a9b-2a0e2d775e48.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b421635a-777b-406e-9a9b-2a0e2d775e48.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "TAISHA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83537",
+      "codigo_alfanumerico": "UFA-20260118-083537",
+      "latitud": -3.4316702381620754,
+      "longitud": -78.56530305190935,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBatallón de Selva N.º 63 (Gualaquiza)\r\nFunciones logísticas y de control territorial.",
+      "fecha_infraccion": "2026-01-18T01:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T01:32:18.954Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/76a020b1-2586-464e-91bf-6de128cc5dfc.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/76a020b1-2586-464e-91bf-6de128cc5dfc.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUALAQUIZA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83536",
+      "codigo_alfanumerico": "UFA-20260118-083536",
+      "latitud": -2.754883788875728,
+      "longitud": -78.26237600919636,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBrigada de Selva N.º 21 «Cóndor»\r\nDedicada a operaciones en la región amazónica y presencia en Morona Santiago.",
+      "fecha_infraccion": "2026-01-18T01:25:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-18T01:29:40.221Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a374106a-373f-4148-9ad1-dbac88d75a63.jpeg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a374106a-373f-4148-9ad1-dbac88d75a63.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SANTIAGO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_CUARTEL_BRIGADA",
+        "nombre": "Ejército - Cuartel de Brigada",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83528",
+      "codigo_alfanumerico": "UFA-20260117-083528",
+      "latitud": -3.2577134226545263,
+      "longitud": -79.96737658686448,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nFuerte Militar Héroes de Chacras\r\nDiseñado para asegurar presencia, disuasión y vigilancia en una de las zonas más sensibles de El Oro",
+      "fecha_infraccion": "2026-01-17T22:29:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T22:32:00.714Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/257cb7c0-3c38-4b1c-90ae-317128cfb2a2.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/257cb7c0-3c38-4b1c-90ae-317128cfb2a2.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83524",
+      "codigo_alfanumerico": "UFA-20260117-083524",
+      "latitud": -3.9804836584146224,
+      "longitud": -79.2056558239767,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBrigada de Infantería N.º 7 “Loja”\r\nFunción clave en la defensa del flanco sur del Ecuador",
+      "fecha_infraccion": "2026-01-17T22:12:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T22:19:37.415Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/596bbdcb-9a15-42f6-926e-f61608c582e5.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/596bbdcb-9a15-42f6-926e-f61608c582e5.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LOJA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_CUARTEL_BRIGADA",
+        "nombre": "Ejército - Cuartel de Brigada",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83522",
+      "codigo_alfanumerico": "UFA-20260117-083522",
+      "latitud": -4.862670899980771,
+      "longitud": -79.13072380133617,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBatallón de Selva N.° 17 - Zumba\r\nUnidad táctica especializada del Ejército Ecuatoriano diseñada para operar de manera permanente en ambiente selvático y fronterizo en el sur del país.",
+      "fecha_infraccion": "2026-01-17T22:12:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T22:13:36.994Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/eef51011-881c-4dbd-8dc4-91107a2b12af.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/eef51011-881c-4dbd-8dc4-91107a2b12af.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHINCHIPE"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83494",
+      "codigo_alfanumerico": "UFA-20260117-083494",
+      "latitud": -2.264330605197811,
+      "longitud": -79.90842181072861,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval Sur - Guayaquil\r\nRol operativo–estratégico orientado al control del Golfo de Guayaquil y de la principal puerta marítima del país.",
+      "fecha_infraccion": "2026-01-17T14:12:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://hospitalnaval.armada.mil.ec/"
+      ],
+      "fecha_creacion": "2026-01-17T14:15:46.506Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1dcf7fce-f65f-4f4e-8fec-bc4e1d14f392.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1dcf7fce-f65f-4f4e-8fec-bc4e1d14f392.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83493",
+      "codigo_alfanumerico": "UFA-20260117-083493",
+      "latitud": -4.0532924284529965,
+      "longitud": -78.93039869929304,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nBS 62 Zamora",
+      "fecha_infraccion": "2026-01-17T01:34:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T01:36:09.339Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a0d20a95-5dff-4830-b439-eac9066735ca.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a0d20a95-5dff-4830-b439-eac9066735ca.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ZAMORA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83486",
+      "codigo_alfanumerico": "UFA-20260116-083486",
+      "latitud": -2.1664468196935043,
+      "longitud": -79.88028677772337,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea Simón Bolívar\r\nRol principal: nodo clave de control aéreo, logística y proyección operativa en el litoral y el suroccidente del país.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:33:56.079Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a1ba993f-5156-4e6b-90fc-0e201c87a8e8.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a1ba993f-5156-4e6b-90fc-0e201c87a8e8.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83485",
+      "codigo_alfanumerico": "UFA-20260116-083485",
+      "latitud": -2.1912907726019877,
+      "longitud": -80.98810022765109,
+      "circunstancias_hecho": "Armada del Ecuador\r\nEscuela Superior Naval\r\nPrincipal centro de formación académica y profesional de oficiales de la Armada del Ecuador",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://essuna.armada.mil.ec/en"
+      ],
+      "fecha_creacion": "2026-01-17T00:31:22.829Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ba8a6c65-d5a9-4aaa-8394-6b1fd4d86841.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ba8a6c65-d5a9-4aaa-8394-6b1fd4d86841.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SALINAS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_ESCUELA",
+        "nombre": "Armada - Escuela",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83484",
+      "codigo_alfanumerico": "UFA-20260116-083484",
+      "latitud": -2.1965972516189685,
+      "longitud": -80.98716889160009,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nGA 5 'Atahualpa'\r\nRol principalmente de apoyo estratégico, entrenamiento y presencia disuasiva",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:28:33.356Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/13e511f2-9df3-4540-95d1-7e605f6dc066.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/13e511f2-9df3-4540-95d1-7e605f6dc066.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SALINAS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83483",
+      "codigo_alfanumerico": "UFA-20260116-083483",
+      "latitud": -0.4798249098703099,
+      "longitud": -76.98255041753008,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nEscuela de Selva y Contrainsurgencia del Ejército (ESCE)\r\nRol doctrinario, formativo y operacional clave para el Ejército ecuatoriano, especialmente en el teatro amazónico.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://cedeejercito.mil.ec/escuela-de-selva-y-contrainsurgencia-del-ejercito/"
+      ],
+      "fecha_creacion": "2026-01-17T00:24:31.533Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8e845a98-e609-4acd-8144-fc2c1792be58.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8e845a98-e609-4acd-8144-fc2c1792be58.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_ESCUELA",
+        "nombre": "Ejército - Escuela",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83482",
+      "codigo_alfanumerico": "UFA-20260116-083482",
+      "latitud": -0.4807252789129666,
+      "longitud": -76.96998445323987,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nIV División de Ejército “Amazonas”\r\nRol principal: control amazónico.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:22:07.945Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7aef5f85-e0e0-43fd-b963-1c39b58c5264.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7aef5f85-e0e0-43fd-b963-1c39b58c5264.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ORELLANA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_CUARTEL_BRIGADA",
+        "nombre": "Ejército - Cuartel de Brigada",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83481",
+      "codigo_alfanumerico": "UFA-20260116-083481",
+      "latitud": -2.890980721185818,
+      "longitud": -79.0010772490888,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nIII División de Ejército “Tarqui”\r\nRol principal: comando militar del sur.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:10:16.893Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f5ca084e-f267-4924-a610-662e0555927a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f5ca084e-f267-4924-a610-662e0555927a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CUENCA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_CUARTEL_BRIGADA",
+        "nombre": "Ejército - Cuartel de Brigada",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83480",
+      "codigo_alfanumerico": "UFA-20260116-083480",
+      "latitud": -0.08654890539293802,
+      "longitud": -78.48658730425971,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nESMIL Eloy Alfaro\r\nRol principal: formación de oficiales del Ejército.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://esmil.mil.ec/"
+      ],
+      "fecha_creacion": "2026-01-17T00:06:50.504Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/03dff04b-b28b-41c8-a5c4-e68d12db4d3b.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/03dff04b-b28b-41c8-a5c4-e68d12db4d3b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_ESCUELA",
+        "nombre": "Ejército - Escuela",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83479",
+      "codigo_alfanumerico": "UFA-20260116-083479",
+      "latitud": -2.114334964319011,
+      "longitud": -79.9284933975289,
+      "circunstancias_hecho": "Ejército Ecuatoriano\r\nFuerte Militar Huancavilca\r\nRol principal: comando terrestre Costa-Sur.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:04:23.816Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/10c8b6ce-274d-45b5-90b5-08800d9dd705.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/10c8b6ce-274d-45b5-90b5-08800d9dd705.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_EJ_BATALLON",
+        "nombre": "Ejército - Batallón / Fuerte Militar",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83478",
+      "codigo_alfanumerico": "UFA-20260116-083478",
+      "latitud": -0.9554997651760441,
+      "longitud": -80.68453025138346,
+      "circunstancias_hecho": "Armada del Ecuador\r\nEstación Aeronaval de Manta\r\nRol principal: operaciones aeronavales conjuntas.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-17T00:02:02.466Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83477",
+      "codigo_alfanumerico": "UFA-20260116-083477",
+      "latitud": -0.9025363111474277,
+      "longitud": -89.61441460890076,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval San Cristóbal\r\nRol principal: soberanía y control insular.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-16T23:58:43.878Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8304ca3d-b1fb-4933-8190-5d5715cc2852.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/8304ca3d-b1fb-4933-8190-5d5715cc2852.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN CRISTOBAL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83476",
+      "codigo_alfanumerico": "UFA-20260116-083476",
+      "latitud": -0.9372534975533368,
+      "longitud": -80.5856714902033,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval de Jaramijó\r\nRol principal: control portuario y litoral central.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-16T23:55:31.476Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/37c00837-68cc-4261-ad41-755ce6be1f2f.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/37c00837-68cc-4261-ad41-755ce6be1f2f.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "JARAMIJO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83475",
+      "codigo_alfanumerico": "UFA-20260116-083475",
+      "latitud": 0.981318022592661,
+      "longitud": -79.65029973344232,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval de Esmeraldas\r\nRol principal: control marítimo del norte.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-16T23:45:48.335Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b204db37-4829-4a0a-b76d-52d348be442d.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b204db37-4829-4a0a-b76d-52d348be442d.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ESMERALDAS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83474",
+      "codigo_alfanumerico": "UFA-20260116-083474",
+      "latitud": -2.1590413812243296,
+      "longitud": -79.87914317619564,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval Norte\r\nRol principal: apoyo operativo y logístico.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.armada.mil.ec/blog/armada-en-la-historia-2/la-base-naval-norte-en-la-historia-520"
+      ],
+      "fecha_creacion": "2026-01-16T23:41:30.756Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/61150241-41ab-48e0-a539-4644cc3307e8.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/61150241-41ab-48e0-a539-4644cc3307e8.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83473",
+      "codigo_alfanumerico": "UFA-20260116-083473",
+      "latitud": -2.1880904360206976,
+      "longitud": -79.91882657788787,
+      "circunstancias_hecho": "Armada del Ecuador\r\nBase Naval San Eduardo\r\nRol principal: comando y operaciones navales principales.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.armada.mil.ec/blog/armada-en-la-historia-2/la-base-naval-norte-en-la-historia-520"
+      ],
+      "fecha_creacion": "2026-01-16T23:34:55.620Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f71cbc73-9ca1-4969-8926-a01029a82f43.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f71cbc73-9ca1-4969-8926-a01029a82f43.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "FFAA_AR_BASE_NAVAL",
+        "nombre": "Armada - Base Naval",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ARMADA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 2,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83472",
+      "codigo_alfanumerico": "UFA-20260116-083472",
+      "latitud": 0.0900877933623382,
+      "longitud": -76.86966082083322,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea Lago Agrio\r\nRol principal: control de frontera norte y Amazonía.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.fae.mil.ec/balag/"
+      ],
+      "fecha_creacion": "2026-01-16T23:29:49.038Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ccb0eed6-8137-4a4d-b1ca-cce8b1b2f17c.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ccb0eed6-8137-4a4d-b1ca-cce8b1b2f17c.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83471",
+      "codigo_alfanumerico": "UFA-20260116-083471",
+      "latitud": -0.9223183445213334,
+      "longitud": -78.61930504234672,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea de Latacunga\r\nRol principal: transporte aéreo estratégico y despliegue nacional.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.fae.mil.ec/baco/"
+      ],
+      "fecha_creacion": "2026-01-16T23:25:56.834Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/189a8d6d-8f75-404b-add6-eeb70590d797.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/189a8d6d-8f75-404b-add6-eeb70590d797.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LATACUNGA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83470",
+      "codigo_alfanumerico": "UFA-20260116-083470",
+      "latitud": -0.13518872869848314,
+      "longitud": -78.49315565488801,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea Mariscal Sucre\r\nRol principal: defensa aérea de la capital y centro político.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.fae.mil.ec/bamas/"
+      ],
+      "fecha_creacion": "2026-01-16T23:21:46.827Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1d1bc4c0-9daf-43e1-9b4e-dc9e400cde63.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/1d1bc4c0-9daf-43e1-9b4e-dc9e400cde63.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83469",
+      "codigo_alfanumerico": "UFA-20260116-083469",
+      "latitud": -2.20043064435894,
+      "longitud": -80.98971979252553,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea de Salinas\r\n(Cosme Rennella B.)\r\nRol principal: entrenamiento, defensa aérea y control costero.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.rutadelsol.com.ec/fae-salinas/"
+      ],
+      "fecha_creacion": "2026-01-16T23:17:20.713Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/da5e8514-4480-49c9-98ca-0fc80a72079a.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/da5e8514-4480-49c9-98ca-0fc80a72079a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SALINAS"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 8,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83468",
+      "codigo_alfanumerico": "UFA-20260116-083468",
+      "latitud": -2.2557703470350066,
+      "longitud": -79.67709934975919,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Aérea de Taura\r\nRol principal: aviación de combate y entrenamiento avanzado.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://es.wikipedia.org/wiki/Base_A%C3%A9rea_de_Taura"
+      ],
+      "fecha_creacion": "2026-01-16T23:14:19.528Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7965488c-2991-4873-9d7a-17d791a2d720.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7965488c-2991-4873-9d7a-17d791a2d720.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN JACINTO DE YAGUACHI"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    },
+    {
+      "id": "83467",
+      "codigo_alfanumerico": "UFA-20260116-083467",
+      "latitud": -0.9505772958578641,
+      "longitud": -80.67572923276117,
+      "circunstancias_hecho": "Fuerza Aérea Ecuatoriana (FAE)\r\nBase Militar Eloy Alfaro \r\n(Ala de Combate 23)\r\nRol principal: proyección aérea costera y control del Pacífico.",
+      "fecha_infraccion": "2026-01-16T23:05:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.ecured.cu/Entrega_de_la_Base_Manta"
+      ],
+      "fecha_creacion": "2026-01-16T23:08:33.297Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c4c5efc6-a6bc-4bc3-962e-04b16698ca7e.jpg",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c4c5efc6-a6bc-4bc3-962e-04b16698ca7e.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MANTA"
+      },
+      "tipo_evento": {
+        "id": "FFAA_FAE_BASE",
+        "nombre": "Fuerza Aérea - Base Aérea",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_FUERZA_AEREA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": {
+          "id": "UNIDADES_FFAA",
+          "nombre": "Unidades FFAA",
+          "color": null,
+          "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_EJERCITO_ON.svg"
+        }
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null
+    }
+  ]
+}

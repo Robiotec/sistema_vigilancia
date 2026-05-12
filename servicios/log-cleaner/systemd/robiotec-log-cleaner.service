@@ -1,0 +1,6 @@
+[Unit]
+Description=Robiotec weekly service log cleaner
+
+[Service]
+Type=oneshot
+ExecStart=/root/robiotec/servicios/log-cleaner/scripts/clean-logs.sh

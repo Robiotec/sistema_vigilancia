@@ -1,0 +1,165 @@
+{
+  "statusCode": 200,
+  "data": {
+    "label_rango": "Datos de los Últimos 23 Días",
+    "data": [
+      {
+        "id": "ATAQUE_ARMADO",
+        "nombre": "Ataque Armado",
+        "cantidad_eventos": "14",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "EXPLOSION",
+        "nombre": "Explosión",
+        "cantidad_eventos": "15",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "EXTORSION_VACUNA",
+        "nombre": "Extorsión",
+        "cantidad_eventos": "1",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "FEMINICIDIO",
+        "nombre": "Feminicidio",
+        "cantidad_eventos": "6",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "HOMICIDO_SICARIATO",
+        "nombre": "Homicidios/Sicariatos",
+        "cantidad_eventos": "105",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "MINERIA_ILEGAL",
+        "nombre": "Minería Ilegal",
+        "cantidad_eventos": "77",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "ROBO_ASALTO",
+        "nombre": "Robos/Asaltos",
+        "cantidad_eventos": "15",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "SECUESTO_RETENCION",
+        "nombre": "Secuestros",
+        "cantidad_eventos": "2",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "AMENAZAS",
+        "nombre": "Amenazas",
+        "cantidad_eventos": "8",
+        "grupo": "Señales",
+        "color": "#E8AB01",
+        "tipo_zona": null,
+        "orden_categoria": 2
+      },
+      {
+        "id": "RESIDENCIAS_CRIMINALES",
+        "nombre": "Localidades Criminales ",
+        "cantidad_eventos": "73",
+        "grupo": "Señales",
+        "color": "#E8AB01",
+        "tipo_zona": null,
+        "orden_categoria": 2
+      },
+      {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "cantidad_eventos": "89",
+        "grupo": "Señales",
+        "color": "#E8AB01",
+        "tipo_zona": null,
+        "orden_categoria": 2
+      },
+      {
+        "id": "PASO_ILEGAL",
+        "nombre": "Paso Fronterizo Ilegal",
+        "cantidad_eventos": "49",
+        "grupo": "Señales",
+        "color": "#E8AB01",
+        "tipo_zona": null,
+        "orden_categoria": 2
+      },
+      {
+        "id": "NOTICIAS",
+        "nombre": "Noticias",
+        "cantidad_eventos": "33",
+        "grupo": "Intervención",
+        "color": "#27a044",
+        "tipo_zona": null,
+        "orden_categoria": 3
+      },
+      {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "cantidad_eventos": "126",
+        "grupo": "Intervención",
+        "color": "#0933DD",
+        "tipo_zona": null,
+        "orden_categoria": 4
+      },
+      {
+        "id": "PASO_OFICIAL",
+        "nombre": "Paso Fronterizo Oficial",
+        "cantidad_eventos": "11",
+        "grupo": "Intervención",
+        "color": "#0933DD",
+        "tipo_zona": null,
+        "orden_categoria": 4
+      },
+      {
+        "id": "UNIDADES_FFAA",
+        "nombre": "Unidades FFAA",
+        "cantidad_eventos": "57",
+        "grupo": "Intervención",
+        "color": "#0933DD",
+        "tipo_zona": null,
+        "orden_categoria": 4
+      },
+      {
+        "id": "UNIDADES_PPNN",
+        "nombre": "Unidades PPNN",
+        "cantidad_eventos": 1500,
+        "grupo": "Intervención",
+        "color": "#0933DD",
+        "tipo_zona": {
+          "id": 4,
+          "nombre": "Unidades PPNN",
+          "tipo_evento_id": null
+        },
+        "orden_categoria": 4
+      }
+    ]
+  }
+}
