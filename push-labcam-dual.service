@@ -1,0 +1,20 @@
+[Unit]
+Description=FFmpeg Push LabCam Multi Camera Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/robiotec/Documentos/rbox
+ExecStart=/bin/bash -c 'source /home/robiotec/Documentos/rbox/.venv/bin/activate && exec /bin/bash /home/robiotec/Documentos/rbox/push_labcam_dual.sh'
+Restart=always
+RestartSec=5
+LimitNOFILE=65536
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=push-labcam-dual
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target
