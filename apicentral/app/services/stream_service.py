@@ -23,7 +23,7 @@ def get_stream_by_path(db: Session, path: str) -> StreamPath | None:
 
 def build_viewer_url(path: str, token: str | None = None) -> str:
     base_url = get_settings().mediamtx_webrtc_base_url.rstrip("/")
-    url = f"{base_url}/{path}/whep"
+    url = f"{base_url}/{path}"
     if token:
         return f"{url}?token={token}"
     return url
@@ -114,4 +114,3 @@ def can_publish(db: Session, stream_path: StreamPath, raw_token: str | None) -> 
 
 def can_user_read(db: Session, user: User, stream_path: StreamPath) -> bool:
     return stream_path.active and resource_is_active(db, stream_path) and user_can_access_stream(db, user, stream_path)
-

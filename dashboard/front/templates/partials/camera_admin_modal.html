@@ -151,6 +151,24 @@
               <span class="camera-register-help">Opcional. Guarda la IP desde donde la RBox se conectará o quedará identificada.</span>
             </label>
 
+            <label class="camera-register-field" id="camera-admin-rbox-create-port-wrap" data-camera-step="rbox" hidden>
+              <span class="camera-register-label">
+                <span class="camera-register-step">4D</span>
+                <span>Puerto server RBox</span>
+              </span>
+              <input
+                id="camera-admin-rbox-create-port"
+                name="rbox_puerto_servidor"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                max="65535"
+                autocomplete="off"
+                placeholder="8554"
+              />
+              <span class="camera-register-help">Opcional. Puerto del servidor donde la RBox publicará o consultará streams.</span>
+            </label>
+
             <label class="camera-register-field" id="camera-admin-brand-wrap" data-camera-step="connection">
               <span class="camera-register-label">
                 <span class="camera-register-step">5</span>

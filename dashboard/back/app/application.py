@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from html import escape
 from pathlib import Path
@@ -398,6 +399,17 @@ def _camera_payload_from_form(p: dict[str, Any], token: str, existing: dict[str,
     )
 
 
+def _strip_camera_inference_suffix(value: Any) -> str:
+    return re.sub(r"\s*-\s*INF\s*$", "", _text(value)).strip()
+
+
+def _camera_name_with_inference(value: Any, enabled: bool) -> str:
+    base_name = _strip_camera_inference_suffix(value)
+    if not base_name:
+        return ""
+    return f"{base_name} - INF" if enabled else base_name
+
+
 @app.get("/api/camera-form-options")
 def camera_form_options(request: Request):
     token = _token(request)
@@ -578,6 +590,53 @@ async def camera_update(camera_id: str, request: Request):
     except RuntimeError as exc:
         return _api_error_response(exc)
     return JSONResponse({"camera": _camera_item(camera, {"path": camera.get("unique_code")})})
+
+
+@app.patch("/api/cameras/{camera_id}/inference")
+async def camera_inference_update(camera_id: str, request: Request):
+    token = _token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    p = await request.json()
+    cameras = _api("/cameras", token=token) or []
+    source_id = _resolve_source_id(cameras, camera_id)
+    if not source_id:
+        return JSONResponse({"error": "camera_not_found"}, status_code=404)
+    existing = next((item for item in cameras if str(item.get("id")) == str(source_id)), None) or {}
+    inference_enabled = bool(p.get("hacer_inferencia"))
+    data = _camera_payload_from_form(
+        {
+            "nombre": _camera_name_with_inference(existing.get("name"), inference_enabled),
+            "organizacion_id": existing.get("company_id"),
+            "tipo_camara_codigo": existing.get("camera_type") or "fixed",
+            "protocolo_codigo": existing.get("protocol") or "rtsp",
+            "url_rtsp": existing.get("rtsp_url"),
+            "codigo_unico": existing.get("unique_code"),
+            "marca": existing.get("brand") or "custom",
+            "modelo": existing.get("model"),
+            "ip_camaras_fijas": existing.get("ip"),
+            "puerto": existing.get("port"),
+            "canal": existing.get("channel"),
+            "calidad": existing.get("quality"),
+            "substream": existing.get("stream") == 1 or existing.get("quality") == "substream",
+            "usuario_stream": existing.get("username"),
+            "usa_rbox": existing.get("uses_rbox"),
+            "rbox_id": existing.get("rbox_id"),
+            "vehiculo_id": existing.get("vehicle_id") or existing.get("drone_id"),
+            "vehiculo_posicion": existing.get("vehicle_position"),
+            "activa": existing.get("active", True),
+            "hacer_inferencia": inference_enabled,
+        },
+        token,
+        existing,
+    )
+    try:
+        camera = _api(f"/cameras/{source_id}", method="PUT", token=token, data=data)
+    except RuntimeError as exc:
+        return _api_error_response(exc)
+    item = _camera_item(camera, {"path": camera.get("unique_code")})
+    item["hacer_inferencia"] = inference_enabled
+    return JSONResponse({"camera": item})
 
 
 @app.delete("/api/cameras/{camera_id}")

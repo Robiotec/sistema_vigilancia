@@ -4,9 +4,18 @@
     "label_rango": "Datos de los Últimos 23 Días",
     "data": [
       {
+        "id": "ABIGEATO",
+        "nombre": "Abigeato",
+        "cantidad_eventos": "3",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
         "id": "ATAQUE_ARMADO",
         "nombre": "Ataque Armado",
-        "cantidad_eventos": "14",
+        "cantidad_eventos": "17",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -15,7 +24,7 @@
       {
         "id": "EXPLOSION",
         "nombre": "Explosión",
-        "cantidad_eventos": "15",
+        "cantidad_eventos": "14",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -24,7 +33,7 @@
       {
         "id": "EXTORSION_VACUNA",
         "nombre": "Extorsión",
-        "cantidad_eventos": "1",
+        "cantidad_eventos": "68",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -33,7 +42,7 @@
       {
         "id": "FEMINICIDIO",
         "nombre": "Feminicidio",
-        "cantidad_eventos": "6",
+        "cantidad_eventos": "2",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -42,7 +51,16 @@
       {
         "id": "HOMICIDO_SICARIATO",
         "nombre": "Homicidios/Sicariatos",
-        "cantidad_eventos": "105",
+        "cantidad_eventos": "85",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "MICROTRAFICO_DROGAS",
+        "nombre": "Microtráfico",
+        "cantidad_eventos": "11",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -58,9 +76,18 @@
         "orden_categoria": 1
       },
       {
+        "id": "PRODUCCION_NARCOTICOS",
+        "nombre": "Producción de Narcóticos",
+        "cantidad_eventos": "9",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
         "id": "ROBO_ASALTO",
         "nombre": "Robos/Asaltos",
-        "cantidad_eventos": "15",
+        "cantidad_eventos": "290",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -69,7 +96,16 @@
       {
         "id": "SECUESTO_RETENCION",
         "nombre": "Secuestros",
-        "cantidad_eventos": "2",
+        "cantidad_eventos": "3",
+        "grupo": "Delitos",
+        "color": "#DD0B0C",
+        "tipo_zona": null,
+        "orden_categoria": 1
+      },
+      {
+        "id": "VIOLACION",
+        "nombre": "Violación",
+        "cantidad_eventos": "4",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -78,7 +114,7 @@
       {
         "id": "AMENAZAS",
         "nombre": "Amenazas",
-        "cantidad_eventos": "8",
+        "cantidad_eventos": "5",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -87,7 +123,7 @@
       {
         "id": "RESIDENCIAS_CRIMINALES",
         "nombre": "Localidades Criminales ",
-        "cantidad_eventos": "73",
+        "cantidad_eventos": "74",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -96,7 +132,7 @@
       {
         "id": "MARCADORES_CRIMINALES",
         "nombre": "Marcadores Criminales",
-        "cantidad_eventos": "89",
+        "cantidad_eventos": "92",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -114,7 +150,7 @@
       {
         "id": "NOTICIAS",
         "nombre": "Noticias",
-        "cantidad_eventos": "33",
+        "cantidad_eventos": "48",
         "grupo": "Intervención",
         "color": "#27a044",
         "tipo_zona": null,
@@ -123,7 +159,7 @@
       {
         "id": "OPERATIVOS_FFOO",
         "nombre": "Operativos FFOO",
-        "cantidad_eventos": "126",
+        "cantidad_eventos": "219",
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": null,
@@ -150,7 +186,7 @@
       {
         "id": "UNIDADES_PPNN",
         "nombre": "Unidades PPNN",
-        "cantidad_eventos": 1500,
+        "cantidad_eventos": 1501,
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": {

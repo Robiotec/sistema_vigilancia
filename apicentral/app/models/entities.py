@@ -141,6 +141,8 @@ class RBox(Base):
     serial: Mapped[str] = mapped_column(String(120), unique=True)
     local_ip: Mapped[str | None] = mapped_column(String(120), nullable=True)
     public_ip: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    server_ip: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    server_port: Mapped[int | None] = mapped_column(Integer, nullable=True)
     location: Mapped[str | None] = mapped_column(Text, nullable=True)
     status: Mapped[str] = mapped_column(String(40), default="activo")
     last_connection_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)

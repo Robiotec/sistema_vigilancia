@@ -41,7 +41,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86574",
@@ -82,7 +92,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86572",
@@ -123,7 +143,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      }
     },
     {
       "id": "86571",
@@ -164,7 +194,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86570",
@@ -203,7 +243,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86569",
@@ -242,7 +292,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86568",
@@ -281,7 +341,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86556",
@@ -320,7 +390,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86542",
@@ -359,7 +439,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86541",
@@ -398,7 +488,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86539",
@@ -437,7 +537,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86538",
@@ -476,7 +586,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86537",
@@ -517,7 +637,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86535",
@@ -558,7 +688,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86530",
@@ -597,7 +737,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86529",
@@ -636,7 +786,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      }
     },
     {
       "id": "86528",
@@ -675,7 +835,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86527",
@@ -714,7 +884,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86526",
@@ -753,7 +933,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86525",
@@ -792,7 +982,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86524",
@@ -831,7 +1031,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      }
     },
     {
       "id": "86523",
@@ -870,7 +1080,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86522",
@@ -909,7 +1129,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86519",
@@ -948,7 +1178,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86517",
@@ -987,7 +1227,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      }
     },
     {
       "id": "86516",
@@ -1026,7 +1276,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86515",
@@ -1065,7 +1325,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86514",
@@ -1104,7 +1374,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86513",
@@ -1143,7 +1423,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86512",
@@ -1182,7 +1472,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86511",
@@ -1221,7 +1521,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      }
     },
     {
       "id": "86510",
@@ -1260,7 +1570,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86509",
@@ -1299,7 +1619,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86508",
@@ -1338,7 +1668,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86507",
@@ -1379,7 +1719,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86503",
@@ -1418,7 +1768,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86502",
@@ -1457,7 +1817,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86498",
@@ -1496,7 +1866,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86496",
@@ -1535,7 +1915,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86493",
@@ -1574,7 +1964,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86488",
@@ -1613,7 +2013,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86487",
@@ -1652,7 +2062,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86486",
@@ -1691,7 +2111,11 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": null
     },
     {
       "id": "86484",
@@ -1732,7 +2156,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86482",
@@ -1771,7 +2205,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86481",
@@ -1810,7 +2254,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86478",
@@ -1852,7 +2306,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86477",
@@ -1894,7 +2358,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     },
     {
       "id": "86476",
@@ -1936,7 +2410,17 @@
       "operativo": null,
       "unidad_ppnn_evento": null,
       "infraestructura_evento": null,
-      "paises_relacionados_evento": null
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      }
     }
   ]
 }

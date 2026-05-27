@@ -72968,314 +72968,140 @@
         "nombre": "Aguilas",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/aguila.png",
         "color": "#AA9550",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_AGUILAS"
+        "org_id": "32"
       },
       {
         "id": 32,
         "nombre": "Chonekillers",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONE_KILLER.svg",
         "color": "#A63A3A",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_CHONE_KILLER"
+        "org_id": "30"
       },
       {
         "id": 40,
         "nombre": "Latin King",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
         "color": "#A8892D",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_LATIN_KING"
+        "org_id": "20"
       },
       {
         "id": 47,
         "nombre": "Tiguerones",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Tigueron.png",
         "color": "#B86D28",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_TIGUERONES"
+        "org_id": "14"
       },
       {
         "id": 41,
         "nombre": "Los Lobos",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
         "color": "#858585",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_LOS_LOBOS"
+        "org_id": "19"
       },
       {
         "id": 39,
         "nombre": "Lagartos",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/Lagartos.png",
         "color": "#6E845F",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_LAGARTOS"
+        "org_id": "21"
       },
       {
         "id": 33,
         "nombre": "Choneros",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CHONEROS.svg",
         "color": "#3F6294",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_CHONEROS"
-      },
-      {
-        "id": 36,
-        "nombre": "Fatales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_FATALES.svg",
-        "color": "#A89738",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_FATALES"
-      },
-      {
-        "id": 37,
-        "nombre": "Gangsters",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_GANGSTER.svg",
-        "color": "#7A5390",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_GANSTER"
-      },
-      {
-        "id": 38,
-        "nombre": "Katerpiler",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_KATERPILLER.svg",
-        "color": "#9B6348",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_KATERPILER"
-      },
-      {
-        "id": 35,
-        "nombre": "Cuartel de las Feas",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CUARTEL_DE_LAS_FEAS.svg",
-        "color": "#2F7A85",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_CUARTEL_FEAS"
-      },
-      {
-        "id": 34,
-        "nombre": "Corvicheros",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CORVICHEROS.svg",
-        "color": "#7A4632",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_CORVICHERO"
+        "org_id": "33"
       },
       {
         "id": 42,
         "nombre": "Mafia 18",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
         "color": "#8A3333",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_MAFIA_18"
-      },
-      {
-        "id": 45,
-        "nombre": "Nueva Escuela",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_NUEVA_ESCUELA.svg",
-        "color": "#B85E2F",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_NUEVA_ESCUELA"
-      },
-      {
-        "id": 46,
-        "nombre": "R7",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
-        "color": "#2F7A75",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_R7"
-      },
-      {
-        "id": 31,
-        "nombre": "AK47",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/AK47.png",
-        "color": "#8A8438",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_AK47"
-      },
-      {
-        "id": 52,
-        "nombre": "Comandos de la Frontera",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Comandos-de-la-frontera.svg",
-        "color": "#7F4866",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_COMANDOS_FRONTERA"
-      },
-      {
-        "id": 50,
-        "nombre": "Frente Iván Ríos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Ivan-Rios.svg",
-        "color": "#707F3F",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_FRENTE_IVAN_RIOS"
-      },
-      {
-        "id": 51,
-        "nombre": "Frente Oliver Sinisterra",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
-        "color": "#3F5091",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_FRENTE_OLIVER_SINISTERRA"
+        "org_id": "18"
       },
       {
         "id": 43,
         "nombre": "Mafia Duende",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/mafiaduendeTrebol.png",
         "color": "#3E7A5E",
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        },
-        "parametro_id": "DETALLE_DUENDE"
+        "org_id": "17"
       },
       {
-        "id": 48,
-        "nombre": "Incierto",
-        "url_icono": null,
-        "color": null,
-        "categoria_tipo_interes": {
-          "id": 1,
-          "nombre": "GDO",
-          "estado": true,
-          "fecha_creacion": "2026-01-31T00:30:01.177Z",
-          "fecha_modificacion": null,
-          "fecha_eliminacion": null
-        }
+        "id": 46,
+        "nombre": "R7",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
+        "color": "#2F7A75",
+        "org_id": "15"
+      },
+      {
+        "id": 36,
+        "nombre": "Fatales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_FATALES.svg",
+        "color": "#A89738",
+        "org_id": "26"
+      },
+      {
+        "id": 45,
+        "nombre": "Nueva Escuela",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_NUEVA_ESCUELA.svg",
+        "color": "#B85E2F",
+        "org_id": "16"
+      },
+      {
+        "id": 31,
+        "nombre": "AK47",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/AK47.png",
+        "color": "#8A8438",
+        "org_id": "31"
+      },
+      {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": "#3F5091",
+        "org_id": "24"
+      },
+      {
+        "id": 38,
+        "nombre": "Katerpiler",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_KATERPILLER.svg",
+        "color": "#9B6348",
+        "org_id": "22"
+      },
+      {
+        "id": 37,
+        "nombre": "Gangsters",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_GANGSTER.svg",
+        "color": "#7A5390",
+        "org_id": "23"
+      },
+      {
+        "id": 35,
+        "nombre": "Cuartel de las Feas",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CUARTEL_DE_LAS_FEAS.svg",
+        "color": "#2F7A85",
+        "org_id": "27"
+      },
+      {
+        "id": 34,
+        "nombre": "Corvicheros",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_CORVICHEROS.svg",
+        "color": "#7A4632",
+        "org_id": "28"
+      },
+      {
+        "id": 52,
+        "nombre": "Comandos de la Frontera",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Comandos-de-la-frontera.svg",
+        "color": "#7F4866",
+        "org_id": "29"
+      },
+      {
+        "id": 50,
+        "nombre": "Frente Iván Ríos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Ivan-Rios.svg",
+        "color": "#707F3F",
+        "org_id": "25"
       }
     ]
   }

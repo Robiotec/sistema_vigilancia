@@ -104,6 +104,8 @@ class RBoxCreate(BaseModel):
     serial: str | None = None
     local_ip: str | None = None
     public_ip: str | None = None
+    server_ip: str | None = None
+    server_port: int | None = None
     location: str | None = None
     status: str = "activo"
     active: bool = True

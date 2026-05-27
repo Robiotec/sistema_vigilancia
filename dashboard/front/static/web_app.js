@@ -261,6 +261,8 @@ const cameraAdminRboxCreateNameWrap = document.getElementById("camera-admin-rbox
 const cameraAdminRboxCreateName = document.getElementById("camera-admin-rbox-create-name");
 const cameraAdminRboxCreateIpWrap = document.getElementById("camera-admin-rbox-create-ip-wrap");
 const cameraAdminRboxCreateIp = document.getElementById("camera-admin-rbox-create-ip");
+const cameraAdminRboxCreatePortWrap = document.getElementById("camera-admin-rbox-create-port-wrap");
+const cameraAdminRboxCreatePort = document.getElementById("camera-admin-rbox-create-port");
 const cameraAdminBrandWrap = document.getElementById("camera-admin-brand-wrap");
 const cameraAdminBrand = document.getElementById("camera-admin-brand");
 const cameraAdminBrandHelp = document.getElementById("camera-admin-brand-help");
@@ -575,6 +577,10 @@ function bindStaticCameraSelectionFallback() {
     if (!camera) return;
     event.preventDefault();
     event.stopImmediatePropagation();
+    if (typeof window.__ROBIOTEC_OPEN_CAMERA__ === "function") {
+      window.__ROBIOTEC_OPEN_CAMERA__(camera.name);
+      return;
+    }
     renderStaticCameraSelection(camera);
   };
   switcher.addEventListener("click", handleSelection);
@@ -3258,6 +3264,25 @@ function isCameraInferenceEnabled(camera) {
   return Boolean(camera && camera.hacer_inferencia === true);
 }
 
+function cameraInferenceIconMarkup() {
+  return `
+    <span class="camera-pill-inference-icon camera-pill-inference-icon-on" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </span>
+    <span class="camera-pill-inference-icon camera-pill-inference-icon-off" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M3 3l18 18"></path>
+        <path d="M10.6 10.6A3 3 0 0 0 12 15a3 3 0 0 0 2.1-.9"></path>
+        <path d="M8.2 5.5A10.8 10.8 0 0 1 12 4.8c6 0 9.5 6 9.5 6a17.5 17.5 0 0 1-3.1 3.7"></path>
+        <path d="M5.5 7.2A17.6 17.6 0 0 0 2.5 12s3.5 6 9.5 6c1.2 0 2.3-.2 3.3-.6"></path>
+      </svg>
+    </span>
+  `;
+}
+
 function buildCameraInferenceSourceUrl(rawUrl, enabled) {
   const candidate = String(rawUrl || "").trim();
   if (!candidate || !isLikelyManagedEmbeddedViewerSource(candidate)) {
@@ -3956,7 +3981,7 @@ function renderSwitcher() {
         const inferenceButton = document.createElement("button");
         inferenceButton.type = "button";
         inferenceButton.className = "camera-pill-inference";
-        inferenceButton.innerHTML = '<span class="camera-pill-inference-label" aria-hidden="true">IA</span>';
+        inferenceButton.innerHTML = cameraInferenceIconMarkup();
         applyCameraInferenceButtonState(inferenceButton, camera);
         inferenceButton.addEventListener("click", (event) => {
           event.preventDefault();
@@ -4024,7 +4049,11 @@ function updateFocusUi() {
   const activeCameraHost = getActiveCameraHost();
   CAMERAS.forEach((camera) => {
     const isActive = camera.name === activeCamera;
-    const card = getCardByCamera(camera);
+    let card = getCardByCamera(camera);
+    if (!card && isActive) {
+      card = ensureCameraCard(camera);
+      bindCardInteraction(camera);
+    }
     if (card) {
       card.classList.toggle("is-active", isActive);
       card.classList.remove("is-rail");
@@ -5081,8 +5110,14 @@ function renderCameraAdminGeneratedResult(camera) {
   const code = String(item.codigo_unico || item.path || "").trim();
   const viewerUrl = String(item.viewer_url || item.url_stream || "").trim();
   const rtspUrl = String(item.url_rtsp || item.stream_url || "").trim();
+  const serverIp = String(item.ip_servidor || item.server_ip || "").trim();
+  const serverPort = item.puerto_servidor !== null && item.puerto_servidor !== undefined
+    ? String(item.puerto_servidor).trim()
+    : "";
+  const rboxServer = serverIp ? `${serverIp}${serverPort ? `:${serverPort}` : ""}` : "";
   const rows = [
     code ? `<div class="camera-admin-result-row"><span><strong>ID único:</strong> ${escapeHtml(code)}</span><button class="vehicle-item-copy camera-admin-copy-button" type="button" data-copy-value="${escapeHtml(code)}">Copiar</button></div>` : "",
+    rboxServer ? `<div class="camera-admin-result-row"><span><strong>Server RBox:</strong> ${escapeHtml(rboxServer)}</span><button class="vehicle-item-copy camera-admin-copy-button" type="button" data-copy-value="${escapeHtml(rboxServer)}">Copiar</button></div>` : "",
     viewerUrl ? `<div class="camera-admin-result-row"><span><strong>Visor MediaMTX:</strong> ${escapeHtml(viewerUrl)}</span><button class="vehicle-item-copy camera-admin-copy-button" type="button" data-copy-value="${escapeHtml(viewerUrl)}">Copiar</button></div>` : "",
     rtspUrl && rtspUrl.startsWith("rtsp://") ? `<div class="camera-admin-result-row"><span><strong>RTSP origen:</strong> ${escapeHtml(rtspUrl)}</span><button class="vehicle-item-copy camera-admin-copy-button" type="button" data-copy-value="${escapeHtml(rtspUrl)}">Copiar</button></div>` : "",
   ].filter(Boolean);
@@ -5529,15 +5564,18 @@ function syncCameraAdminRboxState() {
   if (cameraAdminRboxExistingWrap) cameraAdminRboxExistingWrap.hidden = !useExisting;
   if (cameraAdminRboxCreateNameWrap) cameraAdminRboxCreateNameWrap.hidden = !createNew || cameraAdminCreationMode === "rbox";
   if (cameraAdminRboxCreateIpWrap) cameraAdminRboxCreateIpWrap.hidden = !createNew;
+  if (cameraAdminRboxCreatePortWrap) cameraAdminRboxCreatePortWrap.hidden = !createNew;
   if (cameraAdminRboxSelect) cameraAdminRboxSelect.disabled = !useExisting;
   if (cameraAdminRboxCreateName) cameraAdminRboxCreateName.disabled = !createNew || cameraAdminCreationMode === "rbox";
   if (cameraAdminRboxCreateIp) cameraAdminRboxCreateIp.disabled = !createNew;
+  if (cameraAdminRboxCreatePort) cameraAdminRboxCreatePort.disabled = !createNew;
   if (!useExisting && cameraAdminRboxSelect) cameraAdminRboxSelect.value = "";
   if (!createNew || cameraAdminCreationMode === "rbox") {
     if (cameraAdminRboxCreateName) cameraAdminRboxCreateName.value = "";
   }
   if (!createNew) {
     if (cameraAdminRboxCreateIp) cameraAdminRboxCreateIp.value = "";
+    if (cameraAdminRboxCreatePort) cameraAdminRboxCreatePort.value = "";
   }
 }
 
@@ -5548,7 +5586,7 @@ function syncCameraAdminRboxOnlyControls() {
     "[data-camera-step] input, [data-camera-step] select, [data-camera-step] textarea, .camera-admin-conditional-grid input, .camera-admin-conditional-grid select, .camera-admin-conditional-grid textarea",
   );
   controls.forEach((control) => {
-    const isRboxAllowedControl = control === cameraAdminName || control === cameraAdminCode || control === cameraAdminRboxCreateIp;
+    const isRboxAllowedControl = control === cameraAdminName || control === cameraAdminCode || control === cameraAdminRboxCreateIp || control === cameraAdminRboxCreatePort;
     if (isRboxMode && !isRboxAllowedControl) {
       control.dataset.rboxOnlyDisabled = "true";
       if (control.required) {
@@ -5583,7 +5621,7 @@ function syncCameraAdminProgressiveFields() {
     const step = String(node.getAttribute("data-camera-step") || "").trim();
     let show = true;
     if (isRboxMode) {
-      show = node.contains(cameraAdminName) || step === "code" || node === cameraAdminRboxCreateIpWrap;
+      show = node.contains(cameraAdminName) || step === "code" || node === cameraAdminRboxCreateIpWrap || node === cameraAdminRboxCreatePortWrap;
     } else if (step === "type") {
       show = hasName && hasOrganization;
     } else if (step === "code" || step === "rbox") {
@@ -5595,7 +5633,7 @@ function syncCameraAdminProgressiveFields() {
     }
     if (step === "rbox" && !isRboxMode && node !== cameraAdminRboxWrap) {
       if (node === cameraAdminRboxExistingWrap) show = show && rboxMode === "existing";
-      if (node === cameraAdminRboxCreateNameWrap || node === cameraAdminRboxCreateIpWrap) show = show && rboxMode === "create";
+      if (node === cameraAdminRboxCreateNameWrap || node === cameraAdminRboxCreateIpWrap || node === cameraAdminRboxCreatePortWrap) show = show && rboxMode === "create";
     }
     node.hidden = !show;
   });
@@ -5949,7 +5987,12 @@ function syncCameraAdminFormState({ preserveDraft = true } = {}) {
     cameraAdminCode.readOnly = isEditing;
   }
     if (cameraAdminRboxCreateIp) {
-      cameraAdminRboxCreateIp.value = selectedRbox ? String(selectedRbox.ip_local || selectedRbox.ip_publica || "") : "";
+      cameraAdminRboxCreateIp.value = selectedRbox ? String(selectedRbox.ip_servidor || selectedRbox.server_ip || selectedRbox.ip_local || selectedRbox.ip_publica || "") : "";
+    }
+    if (cameraAdminRboxCreatePort) {
+      cameraAdminRboxCreatePort.value = selectedRbox && selectedRbox.puerto_servidor !== null && selectedRbox.puerto_servidor !== undefined
+        ? String(selectedRbox.puerto_servidor)
+        : "";
     }
     renderCameraAdminRboxOptions(cameraAdminOptionCatalog.rboxes);
     if (cameraAdminRboxMode) {
@@ -6053,6 +6096,7 @@ function resetCameraAdminForm({ preserveFeedback = false, creationMode = "camera
   if (cameraAdminRboxSelect) cameraAdminRboxSelect.value = "";
   if (cameraAdminRboxCreateName) cameraAdminRboxCreateName.value = "";
   if (cameraAdminRboxCreateIp) cameraAdminRboxCreateIp.value = "";
+  if (cameraAdminRboxCreatePort) cameraAdminRboxCreatePort.value = "";
   if (cameraAdminBrand) cameraAdminBrand.value = "";
   if (cameraAdminBrandCustom) cameraAdminBrandCustom.value = "";
   if (cameraAdminModel) cameraAdminModel.value = "";
@@ -6269,8 +6313,17 @@ function renderCameraAdminRboxList(rboxes) {
     const itemId = normalizeCameraAdminId(item && (item.source_id || item.id));
     const name = String(item && item.nombre || "RBox").trim() || "RBox";
     const code = String(item && (item.codigo_unico || item.serial) || "").trim();
-    const ip = String(item && (item.ip_local || item.ip_publica) || "").trim();
-    const meta = [code || "Sin código", ip || "Sin IP registrada"].join(" · ");
+    const serverIp = String(item && (item.ip_servidor || item.server_ip) || "").trim();
+    const serverPort = item && item.puerto_servidor !== null && item.puerto_servidor !== undefined
+      ? String(item.puerto_servidor).trim()
+      : "";
+    const fallbackIp = String(item && (item.ip_local || item.ip_publica) || "").trim();
+    const serverLabel = serverIp
+      ? `Server ${serverIp}${serverPort ? `:${serverPort}` : ""}`
+      : fallbackIp
+        ? `IP ${fallbackIp}`
+        : "Sin server registrado";
+    const meta = [code || "Sin código", serverLabel].join(" · ");
     return `
       <article
         class="user-admin-summary-item camera-admin-rbox-item ${itemId === selectedRboxAdminId ? "is-active" : ""}"
@@ -6863,6 +6916,7 @@ async function submitCameraAdminForm(event) {
 
   if (isStandaloneRboxMode) {
     const rboxCreateIp = cameraAdminRboxCreateIp ? cameraAdminRboxCreateIp.value.trim() : "";
+    const rboxCreatePort = cameraAdminRboxCreatePort ? cameraAdminRboxCreatePort.value.trim() : "";
     const editingRboxId = normalizeCameraAdminId(cameraAdminForm && cameraAdminForm.dataset.editingRboxId);
     if (!name) {
       setCameraAdminFeedback("Ingresa un nombre para la RBox.", "error");
@@ -6885,6 +6939,8 @@ async function submitCameraAdminForm(event) {
           nombre: name,
           codigo_unico: uniqueCode,
           ip_server: rboxCreateIp,
+          ip_servidor: rboxCreateIp,
+          puerto_servidor: rboxCreatePort,
           activa: true,
         }),
         timeoutMs: 12000,
@@ -6892,9 +6948,7 @@ async function submitCameraAdminForm(event) {
       const createdRbox = rboxPayload && rboxPayload.rbox ? rboxPayload.rbox : null;
       selectedRboxAdminId = normalizeCameraAdminId(createdRbox && (createdRbox.source_id || createdRbox.id)) || editingRboxId;
       await refreshUserAdmin({ preserveDraft: false });
-      renderCameraAdminGeneratedResult({
-        codigo_unico: createdRbox && (createdRbox.codigo_unico || createdRbox.serial) || uniqueCode,
-      });
+      renderCameraAdminGeneratedResult(createdRbox || { codigo_unico: uniqueCode });
       setCameraAdminFeedback(editingRboxId ? "RBox actualizada correctamente." : "RBox registrada correctamente. Su ID único está listo para copiar.", "success");
     } catch (error) {
       setCameraAdminFeedback(friendlyCameraAdminError(error), "error");
@@ -6936,6 +6990,7 @@ async function submitCameraAdminForm(event) {
   let rboxId = rboxMode === "existing" && cameraAdminRboxSelect ? String(cameraAdminRboxSelect.value || "").trim() : "";
   const rboxCreateName = cameraAdminRboxCreateName ? cameraAdminRboxCreateName.value.trim() : "";
   const rboxCreateIp = cameraAdminRboxCreateIp ? cameraAdminRboxCreateIp.value.trim() : "";
+  const rboxCreatePort = cameraAdminRboxCreatePort ? cameraAdminRboxCreatePort.value.trim() : "";
   const editingCameraId = normalizeCameraAdminId(
     selectedCameraAdminId || (cameraAdminForm && cameraAdminForm.dataset.editingCameraId),
   );
@@ -7014,6 +7069,8 @@ async function submitCameraAdminForm(event) {
           nombre: rboxCreateName,
           organizacion_id: Number(organizationId),
           ip_server: rboxCreateIp,
+          ip_servidor: rboxCreateIp,
+          puerto_servidor: rboxCreatePort,
           activa: true,
         }),
         timeoutMs: 12000,
@@ -10011,6 +10068,7 @@ if (organizationAdminActive) {
   cameraAdminRboxSelect,
   cameraAdminRboxCreateName,
   cameraAdminRboxCreateIp,
+  cameraAdminRboxCreatePort,
   cameraAdminBrand,
   cameraAdminModel,
   cameraAdminSerial,

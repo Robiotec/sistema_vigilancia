@@ -18000,6 +18000,22 @@
       "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_POLICIA_ON.svg",
       "pop_up": false,
       "agrupacion": "OTROS"
+    },
+    {
+      "titulo": "",
+      "id": "464089",
+      "nombre": "Unidades PPNN",
+      "latitud": 1.0144375,
+      "longitud": -78.2709375,
+      "tipo_punto_interes_id": null,
+      "tipo_interes": null,
+      "url_icono": "",
+      "pop_up": false,
+      "agrupacion": "Unidades PPNN",
+      "descripcion": "OPERATIVOS DE CONTROL FROTERIZO\r\n\r\nEn #Carchi, en el sector de #Chical, la #PolicíaEcuador, en el marco de la #EstrategiaOperacional3D, realizó un operativo de  control fronterizo, en el cual se encontraron los siguientes resultados:\r\n\r\n-04 motocicletas reportadas como robadas. \r\n\r\n-01",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7d625b4d-f825-4191-a597-484eeb6c6657.png"
+      ]
     }
   ]
 }

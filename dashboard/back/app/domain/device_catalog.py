@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from html import escape
 from typing import Any
@@ -102,9 +103,27 @@ class DeviceCatalogBuilder(BaseHelper):
                 f'<iframe class="camera-pill-frame" src="{escape(viewer_url)}" title="Vista previa {escape(label)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe>'
                 '</span>'
             )
+            inference_enabled = bool(item.get("hacer_inferencia"))
+            inference_button = (
+                f'<button class="camera-pill-inference{" is-enabled" if inference_enabled else ""}" '
+                'type="button" '
+                f'data-camera-inference-name="{escape(name)}" '
+                f'data-camera-inference-id="{escape(str(item.get("id") or item.get("source_id") or ""))}" '
+                f'aria-label="{"Desactivar" if inference_enabled else "Activar"} inferencia en {escape(label)}" '
+                f'aria-pressed="{"true" if inference_enabled else "false"}" '
+                f'title="{"Inferencia activa" if inference_enabled else "Inferencia inactiva"}">'
+                '<span class="camera-pill-inference-icon camera-pill-inference-icon-on" aria-hidden="true">'
+                '<svg viewBox="0 0 24 24" focusable="false"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="3"></circle></svg>'
+                '</span>'
+                '<span class="camera-pill-inference-icon camera-pill-inference-icon-off" aria-hidden="true">'
+                '<svg viewBox="0 0 24 24" focusable="false"><path d="M3 3l18 18"></path><path d="M10.6 10.6A3 3 0 0 0 12 15a3 3 0 0 0 2.1-.9"></path><path d="M8.2 5.5A10.8 10.8 0 0 1 12 4.8c6 0 9.5 6 9.5 6a17.5 17.5 0 0 1-3.1 3.7"></path><path d="M5.5 7.2A17.6 17.6 0 0 0 2.5 12s3.5 6 9.5 6c1.2 0 2.3-.2 3.3-.6"></path></svg>'
+                '</span>'
+                '</button>'
+            )
             rows.append(
                 '<article class="camera-pill-shell">'
-                f'<a class="camera-pill" href="/camaras?camera={quote(name)}" data-camera-name="{escape(name)}">'
+                f'<a class="camera-pill" href="/camaras?camera={quote(name)}" data-camera-name="{escape(name)}" '
+                f'onclick="return window.__ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN__ ? window.__ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN__({escape(json.dumps(name))}) : true">'
                 f'{preview}'
                 '<span class="camera-pill-main">'
                 '<span class="camera-pill-topline">'
@@ -116,6 +135,7 @@ class DeviceCatalogBuilder(BaseHelper):
                 '</span>'
                 f'<span class="camera-pill-tags"><span class="camera-pill-tag">{escape(camera_type)}</span></span>'
                 '</a>'
+                f'{inference_button}'
                 '</article>'
             )
         return "".join(rows) or '<div class="empty-state">No hay cámaras registradas.</div>'

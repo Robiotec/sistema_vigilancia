@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import re
 from typing import Any
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 from back.app.core.helpers import BaseHelper
 
 
 class CameraNormalizer(BaseHelper):
     """Normaliza cámaras desde API Central al contrato del frontend."""
+
+    inference_suffix_pattern = re.compile(r"\s*-\s*INF\s*$", re.IGNORECASE)
 
     def display_channel(self, camera: dict[str, Any]) -> int | None:
         channel = self.optional_int(camera.get("channel"))
@@ -22,6 +24,25 @@ class CameraNormalizer(BaseHelper):
             return int(f"{channel}{suffix}")
         return channel
 
+    def inference_enabled(self, camera: dict[str, Any], stream: dict[str, Any] | None = None) -> bool:
+        name = self.text(camera.get("name"))
+        path = self.text(
+            stream.get("path") or stream.get("mediamtx_path") if stream else "",
+            self.text(camera.get("unique_code") or camera.get("name")),
+        )
+        origin_url = self.text((stream or {}).get("origin_url") or camera.get("rtsp_url") or camera.get("url_stream"))
+        parsed_origin_path = ""
+        if origin_url:
+            try:
+                parsed_origin_path = self.text(urlparse(origin_url).path)
+            except Exception:
+                parsed_origin_path = origin_url
+        return (
+            bool(self.inference_suffix_pattern.search(name))
+            or path.upper().rstrip("/").endswith("/INFERENCE")
+            or parsed_origin_path.upper().rstrip("/").endswith("/INFERENCE")
+        )
+
     def item(self, camera: dict[str, Any], stream: dict[str, Any] | None = None) -> dict[str, Any]:
         path = self.text(
             stream.get("path") or stream.get("mediamtx_path") if stream else "",
@@ -32,6 +53,10 @@ class CameraNormalizer(BaseHelper):
         origin_url = self.text((stream or {}).get("origin_url") or camera.get("rtsp_url") or camera.get("url_stream"))
         active = self.active(camera.get("active"))
         channel = self.display_channel(camera)
+        inference_enabled = self.inference_enabled(camera, stream)
+        effective_path = path
+        if inference_enabled and path and not path.upper().rstrip("/").endswith("/INFERENCE"):
+            effective_path = f"{path.rstrip('/')}/INFERENCE"
         return {
             "id": self.num_id(camera.get("id")),
             "source_id": camera.get("id"),
@@ -42,8 +67,8 @@ class CameraNormalizer(BaseHelper):
             "display_name": self.text(camera.get("name"), "Camara"),
             "dom_id": re.sub(r"[^a-zA-Z0-9_-]+", "-", self.text(camera.get("name"), "camera")).strip("-").lower(),
             "url": self.text((stream or {}).get("viewer_url") or (stream or {}).get("output_webrtc_url") or camera.get("url")),
-            "viewer_url": f"/api/camera-viewer-url?camera={quote(path)}",
-            "path": path,
+            "viewer_url": f"/api/camera-viewer-url?camera={quote(effective_path)}",
+            "path": effective_path,
             "organization_name": self.text(camera.get("company_id"), "ROBIOTEC"),
             "organizacion_id": self.num_id(camera.get("company_id")),
             "organizacion_source_id": self.text(camera.get("company_id")),
@@ -59,7 +84,7 @@ class CameraNormalizer(BaseHelper):
             "drone_id": self.num_id(camera.get("drone_id")),
             "drone_source_id": self.text(camera.get("drone_id")),
             "activa": active,
-            "hacer_inferencia": False,
+            "hacer_inferencia": inference_enabled,
             "stream_url": origin_url,
             "url_stream": origin_url,
             "url_rtsp": origin_url,
