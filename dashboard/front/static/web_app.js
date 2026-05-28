@@ -46,6 +46,7 @@ const ECUADOR_MAP_CENTER = [-1.831239, -78.183406];
 const ECUADOR_MAP_ZOOM = 7;
 const VEHICLE_REGISTRY_REFRESH_MS = 4000;
 const MAP_MARKER_DETAIL_HOVER_DELAY_MS = 3000;
+const TELEMETRY_MAP_INITIAL_PREVIEW_MS = 650;
 const SINGLE_STREAM_BREAKPOINT_PX = 960;
 const THEME_STORAGE_KEY = "robiotec.theme";
 const TELEMETRY_MAP_STYLE_STORAGE_KEY = "robiotec.telemetry.map.style";
@@ -607,6 +608,8 @@ let activeTelemetryDeviceId = null;
 let lastTelemetryFilterSignature = "";
 let telemetryMapManualControl = false;
 let telemetryMapProgrammaticInteractionUntil = 0;
+let telemetryMapInitialPreviewUntil = 0;
+let telemetryMapInitialPreviewTimerId = null;
 let telemetryMapBaseLayer = null;
 let telemetryMapOverlayLayer = null;
 let miningConcessionLayer = null;
@@ -1399,6 +1402,36 @@ function markTelemetryMapProgrammaticInteraction(durationMs = 900) {
   telemetryMapProgrammaticInteractionUntil = Date.now() + durationMs;
 }
 
+function revealTelemetryMap() {
+  if (!telemetryMap) return;
+  telemetryMap.classList.remove("is-preparing-map");
+}
+
+function startTelemetryMapInitialPreview() {
+  if (telemetryMap) {
+    telemetryMap.classList.add("is-preparing-map");
+  }
+  telemetryMapInitialPreviewUntil = Date.now() + TELEMETRY_MAP_INITIAL_PREVIEW_MS;
+  if (telemetryMapInitialPreviewTimerId) {
+    clearTimeout(telemetryMapInitialPreviewTimerId);
+  }
+  telemetryMapInitialPreviewTimerId = window.setTimeout(() => {
+    telemetryMapInitialPreviewTimerId = null;
+    telemetryMapInitialPreviewUntil = 0;
+    if (mapInstance) {
+      markTelemetryMapProgrammaticInteraction();
+      mapInstance.invalidateSize();
+      setMapToEcuadorDefault(mapInstance);
+    }
+    revealTelemetryMap();
+    updateMap(lastTelemetrySnapshot);
+  }, TELEMETRY_MAP_INITIAL_PREVIEW_MS);
+}
+
+function isTelemetryMapInitialPreviewActive() {
+  return Date.now() < telemetryMapInitialPreviewUntil;
+}
+
 function setTelemetryMapManualControl(isManual) {
   telemetryMapManualControl = Boolean(isManual);
   if (telemetryMapMode) {
@@ -1409,6 +1442,12 @@ function setTelemetryMapManualControl(isManual) {
 
 function requestTelemetryMapRecenter() {
   setTelemetryMapManualControl(false);
+  telemetryMapInitialPreviewUntil = 0;
+  if (telemetryMapInitialPreviewTimerId) {
+    clearTimeout(telemetryMapInitialPreviewTimerId);
+    telemetryMapInitialPreviewTimerId = null;
+  }
+  revealTelemetryMap();
   mapAutoFitDone = false;
   lastTelemetryBoundsSignature = "";
   updateMap(lastTelemetrySnapshot);
@@ -9237,6 +9276,16 @@ function ensureMap() {
     maxZoom: TELEMETRY_MAP_MAX_ZOOM,
   }).setView(ECUADOR_MAP_CENTER, ECUADOR_MAP_ZOOM);
 
+  markTelemetryMapProgrammaticInteraction(TELEMETRY_MAP_INITIAL_PREVIEW_MS + 300);
+  startTelemetryMapInitialPreview();
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      if (!mapInstance) return;
+      markTelemetryMapProgrammaticInteraction(TELEMETRY_MAP_INITIAL_PREVIEW_MS + 300);
+      mapInstance.invalidateSize();
+      setMapToEcuadorDefault(mapInstance);
+    });
+  });
   applyTelemetryMapStyle(activeTelemetryMapStyle, { persist: false });
   setTelemetryMapManualControl(false);
   const onManualMapInteraction = () => {
@@ -9283,6 +9332,9 @@ function updateMap(items) {
   }
   const valid = Array.isArray(visibleItems)
     ? visibleItems.filter((item) => hasValidCoordinates(item))
+    : [];
+  const focusBounds = selectedItem && hasValidCoordinates(selectedItem)
+    ? [[Number(selectedItem.lat), Number(selectedItem.lon)]]
     : [];
   const nextIds = new Set();
   const bounds = [];
@@ -9358,22 +9410,28 @@ function updateMap(items) {
   }
 
   lastTelemetryCoordinates = bounds;
-  const nextSignature = mapCoordinateSignature(bounds);
+  const nextSignature = mapCoordinateSignature(focusBounds);
 
-  if (!telemetryMapManualControl && bounds.length > 0 && (!mapAutoFitDone || nextSignature !== lastTelemetryBoundsSignature)) {
+  if (
+    !telemetryMapManualControl
+    && !isTelemetryMapInitialPreviewActive()
+    && focusBounds.length > 0
+    && (!mapAutoFitDone || nextSignature !== lastTelemetryBoundsSignature)
+  ) {
     markTelemetryMapProgrammaticInteraction();
-    fitMapToCoordinates(mapInstance, bounds, {
+    fitMapToCoordinates(mapInstance, focusBounds, {
       maxZoom: 15,
       singleZoom: 14,
     });
     mapAutoFitDone = true;
     lastTelemetryBoundsSignature = nextSignature;
   }
-  if (bounds.length === 0) {
+  if (focusBounds.length === 0) {
     lastTelemetryBoundsSignature = "";
-    if (!telemetryMapManualControl) {
+    if (!telemetryMapManualControl && !isTelemetryMapInitialPreviewActive() && !mapAutoFitDone) {
       markTelemetryMapProgrammaticInteraction();
       setMapToEcuadorDefault(mapInstance);
+      mapAutoFitDone = true;
     }
   }
   scheduleMiningConcessionsViewportRefresh(120);

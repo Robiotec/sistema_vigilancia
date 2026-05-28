@@ -3994,6 +3994,90 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   min-height: min(68vh, 760px);
 }
 
+.camera-inference-toolbar {
+  display: grid;
+  grid-template-columns: minmax(190px, 260px) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(38, 38, 38, 0.9), rgba(18, 18, 18, 0.92));
+}
+
+.camera-inference-field {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.camera-inference-field span,
+.camera-inference-active {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.camera-inference-field select {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  background: #262626;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  padding: 0 34px 0 12px;
+}
+
+.camera-inference-field select option {
+  background: #262626;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.camera-inference-field select option:checked,
+.camera-inference-field select option:hover {
+  background: #334155;
+  color: #ffffff;
+}
+
+.camera-inference-load {
+  min-height: 38px;
+  border: 1px solid rgba(6, 182, 212, 0.52);
+  border-radius: 10px;
+  background: rgba(6, 182, 212, 0.13);
+  color: #67e8f9;
+  font: inherit;
+  font-weight: 900;
+  padding: 0 14px;
+  cursor: pointer;
+}
+
+.camera-inference-load:hover,
+.camera-inference-load:focus-visible {
+  border-color: rgba(6, 182, 212, 0.78);
+  background: rgba(6, 182, 212, 0.2);
+}
+
+.camera-inference-load:disabled {
+  opacity: 0.52;
+  cursor: not-allowed;
+}
+
+.camera-inference-active {
+  align-self: center;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.62);
+}
+
 .primary-view.is-empty {
   display: grid;
   place-items: center;
@@ -4067,6 +4151,13 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 .page-cameras .primary-view {
   display: grid;
   align-content: stretch;
+}
+
+.page-cameras .viewer-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  gap: 12px;
+  min-height: 0;
 }
 
 .page-cameras .cameras-page-large-card {
@@ -4914,6 +5005,11 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.map-canvas.is-preparing-map .leaflet-pane,
+.map-canvas.is-preparing-map .leaflet-control-container {
+  opacity: 0;
 }
 
 .leaflet-container {
@@ -10183,7 +10279,16 @@ body {
     order: 1;
     height: auto;
     min-height: min(60dvh, 520px);
-    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+  }
+
+  .page-cameras .camera-inference-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .page-cameras .camera-inference-active {
+    white-space: normal;
   }
 
   .page-cameras .primary-view {

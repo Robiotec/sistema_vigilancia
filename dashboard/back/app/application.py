@@ -969,12 +969,22 @@ def _video_unavailable_payload(message: str = "El video actualmente no se encuen
     }
 
 
-def _authorized_camera_viewer(request: Request, *, camera: str = "", camera_id: int = 0, camera_name: str = "") -> dict[str, Any]:
+def _authorized_camera_viewer(
+    request: Request,
+    *,
+    camera: str = "",
+    camera_id: int = 0,
+    camera_name: str = "",
+    inference: bool = False,
+    inference_type: str = "",
+) -> dict[str, Any]:
     token = _token(request)
     if not token:
         return {"error": "authentication_required", "message": "Sesion expirada", "viewer_url": "", "viewer_html": "Sesion expirada"}
     item = _camera_lookup(request, camera=camera, camera_id=camera_id, camera_name=camera_name)
     path = _camera_stream_path(item, camera or camera_name)
+    if inference and path and not path.upper().rstrip("/").endswith("/INFERENCE"):
+        path = f"{path.rstrip('/')}/INFERENCE"
     if not path:
         return _video_unavailable_payload()
     encoded_path = quote(path, safe="")
@@ -994,6 +1004,7 @@ def _authorized_camera_viewer(request: Request, *, camera: str = "", camera_id: 
     return {
         "online": True,
         "path": path,
+        "inference_type": _text(inference_type),
         "token": _text(token_payload.get("token")),
         "expires_in": token_payload.get("expires_in"),
         "viewer_url": viewer_url,
@@ -1029,13 +1040,41 @@ def _camera_preview_document(payload: dict[str, Any]) -> str:
 
 
 @app.get("/api/camera-viewer-url")
-def camera_viewer_url(request: Request, camera: str = "", camera_id: int = 0, camera_name: str = ""):
-    return _authorized_camera_viewer(request, camera=camera, camera_id=camera_id, camera_name=camera_name)
+def camera_viewer_url(
+    request: Request,
+    camera: str = "",
+    camera_id: int = 0,
+    camera_name: str = "",
+    inference: bool = False,
+    inference_type: str = "",
+):
+    return _authorized_camera_viewer(
+        request,
+        camera=camera,
+        camera_id=camera_id,
+        camera_name=camera_name,
+        inference=inference,
+        inference_type=inference_type,
+    )
 
 
 @app.get("/api/camera-preview-frame", response_class=HTMLResponse)
-def camera_preview_frame(request: Request, camera: str = "", camera_id: int = 0, camera_name: str = ""):
-    payload = _authorized_camera_viewer(request, camera=camera, camera_id=camera_id, camera_name=camera_name)
+def camera_preview_frame(
+    request: Request,
+    camera: str = "",
+    camera_id: int = 0,
+    camera_name: str = "",
+    inference: bool = False,
+    inference_type: str = "",
+):
+    payload = _authorized_camera_viewer(
+        request,
+        camera=camera,
+        camera_id=camera_id,
+        camera_name=camera_name,
+        inference=inference,
+        inference_type=inference_type,
+    )
     return HTMLResponse(_camera_preview_document(payload))
 
 

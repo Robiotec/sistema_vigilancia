@@ -67,6 +67,21 @@
               <div class="camera-switcher" id="camera-switcher" aria-label="Selector de cámaras">__CAMERA_SWITCHER_FALLBACK__</div>
             </aside>
             <section class="viewer-shell viewer-shell-flat">
+              <div class="camera-inference-toolbar" id="camera-inference-toolbar">
+                <label class="camera-inference-field" for="camera-inference-type">
+                  <span>Tipo de inferencia</span>
+                  <select id="camera-inference-type">
+                    <option value="none">SIN INFERENCIA</option>
+                    <option value="plates">DETECCIÓN DE PLACAS</option>
+                    <option value="faces">DETECCIÓN DE ROSTROS</option>
+                    <option value="access">DETECCIÓN DE ACCESO</option>
+                    <option value="ppt">DETECCIÓN DE PPT</option>
+                    <option value="hands_helmet">DETECCIÓN MANOS CASCO</option>
+                  </select>
+                </label>
+                <button class="camera-inference-load" id="camera-inference-load" type="button">Cargar inferencia</button>
+                <span class="camera-inference-active" id="camera-inference-active">Selecciona una cámara</span>
+              </div>
               <div class="primary-view" id="primary-view"></div>
               <button class="focus-close" id="focus-close" type="button" hidden aria-label="Cerrar cámara">Cerrar</button>
             </section>
