@@ -18,6 +18,70 @@
   --app-zoom-scale: 0.7;
 }
 
+/* Normaliza selects oscuros entre Chrome, Firefox y Edge. */
+:where(
+  .camera-inference-field select,
+  .camera-register-field select,
+  .telemetry-map-style,
+  .telemetry-monitor-filter select,
+  .logs-filter select,
+  .vehicle-register-camera-position
+) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: dark;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.74) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.74) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(50% - 1px),
+    calc(100% - 11px) calc(50% - 1px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+
+:where(
+  .camera-inference-field select,
+  .camera-register-field select,
+  .telemetry-map-style,
+  .telemetry-monitor-filter select,
+  .logs-filter select
+) option,
+:where(
+  .camera-inference-field select,
+  .camera-register-field select,
+  .telemetry-map-style,
+  .telemetry-monitor-filter select,
+  .logs-filter select
+) optgroup {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+:where(
+  .camera-inference-field select,
+  .camera-register-field select,
+  .telemetry-map-style,
+  .telemetry-monitor-filter select,
+  .logs-filter select
+)::-ms-expand {
+  display: none;
+}
+
+@supports (appearance: base-select) {
+  :where(
+    .camera-inference-field select,
+    .camera-register-field select,
+    .telemetry-map-style,
+    .telemetry-monitor-filter select,
+    .logs-filter select
+  ) {
+    appearance: base-select;
+  }
+}
+
 * { box-sizing: border-box; }
 
 /* Escala global para que el dashboard se adapte correctamente a la ventana del navegador.

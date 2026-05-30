@@ -124,9 +124,14 @@
 
 .home-history-field input,
 .home-history-field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: dark;
   width: 100%;
   min-height: 40px;
   padding: 0 14px;
+  padding-right: 38px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
@@ -134,6 +139,23 @@
   font: inherit;
   outline: none;
   transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.home-history-field select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.72) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(50% - 1px),
+    calc(100% - 11px) calc(50% - 1px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.home-history-field select option,
+.home-history-field select optgroup {
+  background-color: #1a1a1a;
+  color: #ffffff;
 }
 
 .home-history-field input:hover,
