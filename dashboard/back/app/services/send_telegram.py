@@ -6,6 +6,8 @@ from pathlib import Path
 
 import requests
 
+from back.app.services.notification_settings import load_notification_settings
+
 DEFAULT_BOT_TOKEN = "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts"
 DEFAULT_CHAT_IDS = ["-1003416074376"]
 DEFAULT_MESSAGE = """
@@ -26,7 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Enviar una alerta con foto por Telegram.")
     parser.add_argument(
         "--token",
-        default=os.getenv("TELEGRAM_BOT_TOKEN", DEFAULT_BOT_TOKEN).strip(),
+        default=os.getenv("TELEGRAM_BOT_TOKEN", "").strip(),
         help="Token del bot de Telegram. Tambien puede venir desde TELEGRAM_BOT_TOKEN.",
     )
     parser.add_argument(
@@ -38,12 +40,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--message",
-        default=DEFAULT_MESSAGE,
+        default="",
         help="Mensaje o caption que acompana la imagen.",
     )
     parser.add_argument(
         "--image",
-        default=str(DEFAULT_IMAGE_PATH),
+        default="",
         help="Ruta de la imagen que se enviara.",
     )
     parser.add_argument(
@@ -58,6 +60,10 @@ def build_parser() -> argparse.ArgumentParser:
 def normalized_chat_ids(raw_chat_ids: list[str]) -> list[str]:
     resolved = [str(item).strip() for item in raw_chat_ids if str(item).strip()]
     return resolved or list(DEFAULT_CHAT_IDS)
+
+
+def configured_telegram_settings() -> dict:
+    return load_notification_settings().get("telegram", {})
 
 
 def validate_token(token: str) -> str:
@@ -111,10 +117,12 @@ def send_photo(token: str, chat_id: str, message: str, image_path: Path, timeout
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+    settings = configured_telegram_settings()
 
-    token = validate_token(args.token)
-    chat_ids = normalized_chat_ids(args.chat_ids)
-    image_path = Path(args.image).expanduser().resolve()
+    token = validate_token(args.token or settings.get("bot_token") or DEFAULT_BOT_TOKEN)
+    chat_ids = normalized_chat_ids(args.chat_ids or list(settings.get("chat_ids") or []))
+    message = str(args.message or settings.get("message") or DEFAULT_MESSAGE).strip()
+    image_path = Path(args.image or settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
 
     if not image_path.is_file():
         raise SystemExit(f"No existe la imagen a enviar: {image_path}")
@@ -124,7 +132,7 @@ def main() -> int:
 
     status = 0
     for chat_id in chat_ids:
-        ok, detail = send_photo(token, chat_id, args.message, image_path, args.timeout)
+        ok, detail = send_photo(token, chat_id, message, image_path, args.timeout)
         if ok:
             print(f"[OK] Enviado a {chat_id}")
         else:

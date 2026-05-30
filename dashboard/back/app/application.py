@@ -26,6 +26,10 @@ from back.app.domain.streaming import StreamConfigMapper
 from back.app.domain.vehicles import VehicleNormalizer
 from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
+from back.app.services.notification_settings import (
+    load_notification_settings,
+    save_notification_settings,
+)
 from back.app.services.remote_detection_feed import RemoteDetectionFeedService
 from back.app.services.rendering import DashboardTemplateRenderer
 
@@ -354,6 +358,7 @@ def _build_context(request: Request) -> dict[str, str]:
             or db_camera_items_error
             or f"{len(db_camera_names)} nombres cargados desde PostgreSQL"
         ),
+        "__NOTIFICATION_SETTINGS_JSON__": _json(load_notification_settings()),
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
         "__USER_ADMIN_MODE_LABEL__": "Master",
@@ -420,6 +425,11 @@ def registro_vehiculos(request: Request):
 @app.get("/usuarios", response_class=HTMLResponse)
 def usuarios(request: Request):
     return _render(request, "usuarios.html")
+
+
+@app.get("/notificaciones", response_class=HTMLResponse)
+def notificaciones(request: Request):
+    return _render(request, "notificaciones.html")
 
 
 @app.get("/registros", response_class=HTMLResponse)
@@ -578,6 +588,24 @@ def camera_names():
     if error:
         return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
     return {"items": [{"value": name, "label": name} for name in names], "total": len(names)}
+
+
+@app.get("/api/notification-settings")
+def notification_settings(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    return load_notification_settings()
+
+
+@app.put("/api/notification-settings")
+async def notification_settings_update(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    saved = save_notification_settings(payload if isinstance(payload, dict) else {})
+    return {"ok": True, "settings": saved}
 
 
 @app.post("/api/cameras")

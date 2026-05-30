@@ -1,0 +1,23 @@
+{
+  "email": {
+    "sender_email": "robiotec@grupominerobonanza.com",
+    "sender_password": "Bonanz@2024",
+    "smtp_host": "smtp.office365.com",
+    "smtp_port": 587,
+    "recipients": [
+      "yuchuari@grupominerobonanza.com",
+      "pclemente@grupominerobonanza.com",
+      "dguevara@grupominerobonanza.com"
+    ],
+    "subject": "Correo Informativo - Prueba de Envío",
+    "message": "Estimados,\nEste es un correo de prueba enviado automáticamente mediante Python.\n\nSaludos cordiales."
+  },
+  "telegram": {
+    "bot_token": "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts",
+    "chat_ids": [
+      "-1003416074376"
+    ],
+    "message": "ALERTA\n\nSe detecto una persona en un area restringida.\n\nUbicacion: Legemesa\nHora: 14:35:22",
+    "image_path": "/home/pedro/Documentos/sistema_vigilancia/dashboard/front/static/assets/robo.png"
+  }
+}

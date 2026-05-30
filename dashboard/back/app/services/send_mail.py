@@ -1,51 +1,77 @@
+from __future__ import annotations
+
+import argparse
 import smtplib
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-# Cuenta Outlook
-correo_emisor = "robiotec@grupominerobonanza.com"
-password = "Bonanz@2024"
+from back.app.services.notification_settings import load_notification_settings
 
-# Lista de destinatarios
-destinatarios = [
-    "yuchuari@grupominerobonanza.com",
-    "pclemente@grupominerobonanza.com",
-    "dguevara@grupominerobonanza.com"
-]
 
-asunto = "Correo Informativo - Prueba de Envío"
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Enviar correo usando la configuración persistida del dashboard.")
+    parser.add_argument("--sender-email", default="", help="Sobrescribe el correo emisor configurado.")
+    parser.add_argument("--sender-password", default="", help="Sobrescribe la contraseña configurada.")
+    parser.add_argument("--smtp-host", default="", help="Sobrescribe el servidor SMTP configurado.")
+    parser.add_argument("--smtp-port", type=int, default=0, help="Sobrescribe el puerto SMTP configurado.")
+    parser.add_argument("--recipient", dest="recipients", action="append", default=[], help="Agrega destinatarios.")
+    parser.add_argument("--subject", default="", help="Sobrescribe el asunto configurado.")
+    parser.add_argument("--message", default="", help="Sobrescribe el mensaje configurado.")
+    return parser
 
-mensaje = """
-Estimados,
-Este es un correo de prueba enviado automáticamente mediante Python.
 
-Saludos cordiales.
-"""
+def merged_email_settings(args: argparse.Namespace) -> dict:
+    settings = load_notification_settings().get("email", {})
+    recipients = [str(item).strip() for item in args.recipients if str(item).strip()] or list(settings.get("recipients") or [])
+    return {
+        "sender_email": (args.sender_email or settings.get("sender_email") or "").strip(),
+        "sender_password": (args.sender_password or settings.get("sender_password") or "").strip(),
+        "smtp_host": (args.smtp_host or settings.get("smtp_host") or "").strip(),
+        "smtp_port": int(args.smtp_port or settings.get("smtp_port") or 587),
+        "recipients": recipients,
+        "subject": (args.subject or settings.get("subject") or "").strip(),
+        "message": (args.message or settings.get("message") or "").strip(),
+    }
 
-try:
-    # Servidor SMTP de Outlook
-    servidor = smtplib.SMTP("smtp.office365.com", 587)
-    servidor.starttls()
-    servidor.login(correo_emisor, password)
 
-    for destinatario in destinatarios:
-        msg = MIMEMultipart()
-        msg["From"] = correo_emisor
-        msg["To"] = destinatario
-        msg["Subject"] = asunto
+def validate_email_settings(settings: dict) -> None:
+    if not settings["sender_email"]:
+        raise SystemExit("Falta el correo emisor configurado.")
+    if not settings["sender_password"]:
+        raise SystemExit("Falta la contraseña del correo emisor configurada.")
+    if not settings["smtp_host"]:
+        raise SystemExit("Falta el servidor SMTP configurado.")
+    if not settings["recipients"]:
+        raise SystemExit("No hay destinatarios configurados.")
 
-        msg.attach(MIMEText(mensaje, "plain"))
 
-        servidor.sendmail(
-            correo_emisor,
-            destinatario,
-            msg.as_string()
-        )
+def main() -> int:
+    args = build_parser().parse_args()
+    settings = merged_email_settings(args)
+    validate_email_settings(settings)
 
-        print(f"✓ Enviado a {destinatario}")
+    server = smtplib.SMTP(settings["smtp_host"], settings["smtp_port"])
+    try:
+        server.starttls()
+        server.login(settings["sender_email"], settings["sender_password"])
 
-    servidor.quit()
-    print("\nProceso completado.")
+        for recipient in settings["recipients"]:
+            msg = MIMEMultipart()
+            msg["From"] = settings["sender_email"]
+            msg["To"] = recipient
+            msg["Subject"] = settings["subject"]
+            msg.attach(MIMEText(settings["message"], "plain"))
+            server.sendmail(settings["sender_email"], recipient, msg.as_string())
+            print(f"[OK] Enviado a {recipient}")
 
-except Exception as e:
-    print(f"Error: {e}")
+        print("[OK] Proceso completado.")
+        return 0
+    finally:
+        try:
+            server.quit()
+        except Exception:
+            pass
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
