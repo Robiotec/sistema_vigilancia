@@ -4001,6 +4001,9 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   gap: 12px;
   margin-bottom: 12px;
   padding: 10px;
+  position: relative;
+  z-index: 12;
+  overflow: visible;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background:
@@ -4011,6 +4014,8 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   display: grid;
   gap: 5px;
   min-width: 0;
+  position: relative;
+  z-index: 13;
 }
 
 .camera-inference-field span,
@@ -4151,6 +4156,8 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 .page-cameras .primary-view {
   display: grid;
   align-content: stretch;
+  position: relative;
+  z-index: 1;
 }
 
 .page-cameras .viewer-shell {
@@ -4165,6 +4172,8 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   height: 100%;
   min-height: min(68vh, 760px);
   cursor: default;
+  position: relative;
+  z-index: 1;
 }
 
 .page-cameras .cameras-page-large-card::after {
