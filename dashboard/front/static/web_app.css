@@ -3404,7 +3404,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 .camera-side-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -4468,7 +4468,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .ops-eyebrow {
-  font-size: 0.72rem;
+  font-size: 1.42rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
