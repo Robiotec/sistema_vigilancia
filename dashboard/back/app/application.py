@@ -96,8 +96,35 @@ def _text(value: Any, fallback: str = "") -> str:
     return helper.text(value, fallback)
 
 
+def _fetch_db_camera_unique_codes() -> tuple[list[str], str]:
+    try:
+        from back.app.services.conection_sql_postgrest import fetch_all
+    except Exception as exc:
+        return [], f"No se pudo importar el conector PostgreSQL: {_text(exc)}"
+
+    try:
+        rows = fetch_all("SELECT * FROM cameras")
+    except Exception as exc:
+        return [], f"No se pudieron consultar las cámaras en PostgreSQL: {_text(exc)}"
+
+    codes: list[str] = []
+    for row in rows or []:
+        value = _text((row or {}).get("unique_code")).strip()
+        if value:
+            codes.append(value)
+    return codes, ""
+
+
 def _template_source(name: str, seen: set[Path] | None = None) -> str:
     return template_renderer.source(name, seen)
+
+
+def _camera_unique_code_options_html(codes: list[str]) -> str:
+    options = ['<option value="">Todas las cámaras</option>']
+    for code in codes:
+        safe_code = escape(code)
+        options.append(f'<option value="{safe_code}">{safe_code}</option>')
+    return "".join(options)
 
 
 def _camera_item(camera: dict[str, Any], stream: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -232,6 +259,7 @@ def _build_context(request: Request) -> dict[str, str]:
     )
     username = _text(me.get("username"), "robiotec")
     role = ", ".join(me.get("roles") or ["master"])
+    db_camera_codes, db_camera_codes_error = _fetch_db_camera_unique_codes()
     return {
         "__AUTH_USERNAME__": username,
         "__DEVELOPER_MENU_LINK__": '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span><span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span><span class="sidebar-link-tooltip">Usuarios</span></a><a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span><span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span><span class="sidebar-link-tooltip">Registros</span></a>',
@@ -267,6 +295,11 @@ def _build_context(request: Request) -> dict[str, str]:
         "__PROFILE_CAMERA_TOTAL__": str(len(cameras)),
         "__PROFILE_DEVICE_TOTAL__": str(len(vehicles) + len(drones)),
         "__PROFILE_VIEWER_TOTAL__": str(len(streams)),
+        "__HOME_CAMERA_OPTION_ITEMS__": _camera_unique_code_options_html(db_camera_codes),
+        "__HOME_CAMERA_STATUS__": (
+            db_camera_codes_error
+            or f"{len(db_camera_codes)} IDs únicos cargados desde PostgreSQL"
+        ),
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
         "__USER_ADMIN_MODE_LABEL__": "Master",
@@ -474,32 +507,9 @@ def cameras_registry(request: Request):
 
 @app.get("/api/camera-unique-codes")
 def camera_unique_codes():
-    try:
-        from back.app.services.conection_sql_postgrest import fetch_all
-    except Exception as exc:
-        return JSONResponse({"error": f"No se pudo importar el conector PostgreSQL: {_text(exc)}"}, status_code=500)
-
-    try:
-        rows = fetch_all(
-            """
-            SELECT unique_code
-            FROM cameras
-            WHERE unique_code IS NOT NULL
-              AND TRIM(unique_code) <> ''
-            ORDER BY unique_code ASC
-            """
-        )
-    except Exception as exc:
-        return JSONResponse({"error": f"No se pudieron consultar las cámaras en PostgreSQL: {_text(exc)}"}, status_code=502)
-
-    codes: list[str] = []
-    seen: set[str] = set()
-    for row in rows or []:
-        value = _text((row or {}).get("unique_code")).strip()
-        if not value or value in seen:
-            continue
-        seen.add(value)
-        codes.append(value)
+    codes, error = _fetch_db_camera_unique_codes()
+    if error:
+        return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
     return {"items": [{"value": code, "label": code} for code in codes], "total": len(codes)}
 
 

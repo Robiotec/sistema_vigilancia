@@ -69,10 +69,10 @@
                     <label class="home-history-field">
                       <span>Seleccionar cámara</span>
                       <select id="home-history-camera-select" aria-label="Seleccionar ID de cámara">
-                        <option value="">Cargando IDs únicos...</option>
+                        __HOME_CAMERA_OPTION_ITEMS__
                       </select>
                     </label>
-                    <span class="home-history-field-note" id="home-history-camera-status">Sincronizando IDs únicos desde PostgreSQL…</span>
+                    <span class="home-history-field-note" id="home-history-camera-status">__HOME_CAMERA_STATUS__</span>
                   </div>
                 </section>
 
@@ -294,13 +294,13 @@
           const response = await fetch("/api/camera-unique-codes", {
             headers: { Accept: "application/json" },
           });
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-          }
           const payload = await response.json();
+          if (!response.ok || payload.error) {
+            throw new Error(String(payload.error || `HTTP ${response.status}`));
+          }
           renderOptions(payload.items || [], `${Number(payload.total || 0)} IDs únicos sincronizados con PostgreSQL`);
         } catch (error) {
-          renderOptions([], "No se pudieron cargar los IDs únicos desde PostgreSQL");
+          status.textContent = String(error && error.message ? error.message : "No se pudieron cargar los IDs únicos desde PostgreSQL");
         }
       }
 
