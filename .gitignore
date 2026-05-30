@@ -17,3 +17,6 @@ dashboard/dist/
 mediamtx/mediamtx
 mediamtx/mediamtx.exe
 
+.python-version
+pyproject.toml
+uv.lock
