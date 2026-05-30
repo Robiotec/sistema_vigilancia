@@ -5,6 +5,10 @@
 
 .home-history-shell {
   width: 100%;
+  min-height: 100%;
+  grid-column: 1 / -1;
+  display: flex;
+  height: 100%;
 }
 
 .home-history-panel {
@@ -12,7 +16,11 @@
   grid-template-columns: 320px minmax(0, 1fr);
   gap: 14px;
   align-items: stretch;
-  max-width: 1660px;
+  width: 100%;
+  max-width: none;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
 }
 
 .home-history-card {
@@ -38,7 +46,9 @@
   grid-template-rows: auto auto minmax(0, 1fr);
   gap: 10px;
   padding: 18px;
-  min-height: calc(100vh - 146px);
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
 }
 
 .home-history-filters-head,
@@ -160,7 +170,9 @@
   flex-direction: column;
   gap: 18px;
   padding: 16px;
-  min-height: calc(100vh - 146px);
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
 }
 
 .home-history-toolbar {
@@ -334,6 +346,7 @@
   justify-content: center;
   gap: 8px;
   padding-top: 8px;
+  margin-top: auto;
 }
 
 .home-history-page {
