@@ -5,7 +5,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from back.app.services.notification_settings import load_notification_settings
+from back.app.services.notification_settings import load_email_recipients_from_db, load_notification_settings
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -45,10 +45,16 @@ def validate_email_settings(settings: dict) -> None:
         raise SystemExit("No hay destinatarios configurados.")
 
 
-def main() -> int:
-    args = build_parser().parse_args()
-    settings = merged_email_settings(args)
-    validate_email_settings(settings)
+def validate_email_settings_value(settings: dict) -> None:
+    try:
+        validate_email_settings(settings)
+    except SystemExit as exc:
+        raise ValueError(str(exc)) from exc
+
+
+def send_email(settings: dict) -> list[str]:
+    validate_email_settings_value(settings)
+    sent: list[str] = []
 
     server = smtplib.SMTP(settings["smtp_host"], settings["smtp_port"])
     try:
@@ -62,15 +68,38 @@ def main() -> int:
             msg["Subject"] = settings["subject"]
             msg.attach(MIMEText(settings["message"], "plain"))
             server.sendmail(settings["sender_email"], recipient, msg.as_string())
-            print(f"[OK] Enviado a {recipient}")
-
-        print("[OK] Proceso completado.")
-        return 0
+            sent.append(recipient)
     finally:
         try:
             server.quit()
         except Exception:
             pass
+
+    return sent
+
+
+def send_configured_email() -> list[str]:
+    args = build_parser().parse_args([])
+    settings = merged_email_settings(args)
+    db_recipients = load_email_recipients_from_db()
+    if db_recipients is not None:
+        settings["recipients"] = db_recipients
+    return send_email(settings)
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+    settings = merged_email_settings(args)
+    try:
+        sent = send_email(settings)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+
+    for recipient in sent:
+        print(f"[OK] Enviado a {recipient}")
+
+    print("[OK] Proceso completado.")
+    return 0
 
 
 if __name__ == "__main__":

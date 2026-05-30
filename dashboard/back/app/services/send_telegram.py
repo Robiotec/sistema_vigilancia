@@ -19,7 +19,7 @@ Ubicacion: Legemesa
 Hora: 14:35:22
 """.strip()
 DEFAULT_IMAGE_PATH = Path(
-    "/home/pedro/Documentos/sistema_vigilancia/dashboard/front/static/assets/robo.png"
+    "/root/robiotec/dashboard/front/static/assets/robo.png"
 )
 TELEGRAM_API_BASE = "https://api.telegram.org"
 
@@ -78,6 +78,13 @@ def validate_token(token: str) -> str:
     return cleaned
 
 
+def validate_token_value(token: str) -> str:
+    try:
+        return validate_token(token)
+    except SystemExit as exc:
+        raise ValueError(str(exc)) from exc
+
+
 def api_url(token: str, method: str) -> str:
     return f"{TELEGRAM_API_BASE}/bot{token}/{method}"
 
@@ -114,30 +121,83 @@ def send_photo(token: str, chat_id: str, message: str, image_path: Path, timeout
     return False, description
 
 
+def send_telegram_alert(
+    *,
+    token: str,
+    chat_ids: list[str],
+    message: str,
+    image_path: Path,
+    timeout: float = 20.0,
+) -> dict:
+    token = validate_token_value(token)
+    resolved_chat_ids = normalized_chat_ids(chat_ids)
+
+    if not image_path.is_file():
+        raise ValueError(f"No existe la imagen a enviar: {image_path}")
+
+    bot_info = check_bot(token, timeout)
+    results = []
+    ok_count = 0
+    for chat_id in resolved_chat_ids:
+        ok, detail = send_photo(token, chat_id, message, image_path, timeout)
+        if ok:
+            ok_count += 1
+        results.append({"chat_id": chat_id, "ok": ok, "detail": detail})
+
+    return {
+        "bot": bot_info,
+        "results": results,
+        "sent": ok_count,
+        "total": len(resolved_chat_ids),
+    }
+
+
+def send_configured_telegram_alert(timeout: float = 20.0) -> dict:
+    settings = configured_telegram_settings()
+    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    chat_ids = list(settings.get("chat_ids") or [])
+    message = str(settings.get("message") or DEFAULT_MESSAGE).strip()
+    image_path = Path(settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
+    return send_telegram_alert(
+        token=token,
+        chat_ids=chat_ids,
+        message=message,
+        image_path=image_path,
+        timeout=timeout,
+    )
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
     settings = configured_telegram_settings()
 
-    token = validate_token(args.token or settings.get("bot_token") or DEFAULT_BOT_TOKEN)
+    token = args.token or settings.get("bot_token") or DEFAULT_BOT_TOKEN
     chat_ids = normalized_chat_ids(args.chat_ids or list(settings.get("chat_ids") or []))
     message = str(args.message or settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(args.image or settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
 
-    if not image_path.is_file():
-        raise SystemExit(f"No existe la imagen a enviar: {image_path}")
+    try:
+        delivery = send_telegram_alert(
+            token=token,
+            chat_ids=chat_ids,
+            message=message,
+            image_path=image_path,
+            timeout=args.timeout,
+        )
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
 
-    bot_info = check_bot(token, args.timeout)
+    bot_info = delivery["bot"]
     print(f"[OK] Bot validado: @{bot_info.get('username', 'sin_username')}")
 
     status = 0
-    for chat_id in chat_ids:
-        ok, detail = send_photo(token, chat_id, message, image_path, args.timeout)
-        if ok:
-            print(f"[OK] Enviado a {chat_id}")
+    for result in delivery["results"]:
+        if result["ok"]:
+            print(f"[OK] Enviado a {result['chat_id']}")
         else:
             status = 1
-            print(f"[ERROR] No se pudo enviar a {chat_id}: {detail}")
+            print(f"[ERROR] No se pudo enviar a {result['chat_id']}: {result['detail']}")
 
     return status
 

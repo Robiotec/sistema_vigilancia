@@ -45,7 +45,7 @@
           <div class="page-section-head">
             <div>
               <div class="ops-eyebrow">Configuración</div>
-              <p class="user-admin-detail-copy">Administra el texto, remitente y destinatarios del correo, así como el token, los chat ID y el mensaje de Telegram.</p>
+              <p class="user-admin-detail-copy">Administra los destinatarios de correo, así como el token, los chat ID y el mensaje de Telegram.</p>
             </div>
           </div>
 
@@ -54,57 +54,52 @@
               <div class="ops-head user-admin-detail-head">
                 <div>
                   <div class="ops-eyebrow">Correo</div>
-                  <h2>Configuración SMTP</h2>
-                  <p class="user-admin-detail-copy">Lo que guardes aquí será usado por <code>send_mail.py</code>.</p>
+                  <h2>Destinatarios</h2>
                 </div>
               </div>
 
-              <form class="user-admin-form" id="notification-email-form">
-                <div class="user-admin-form-grid">
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">1</span><span>Correo emisor</span></span>
-                    <input id="notification-email-sender" type="email" autocomplete="off" required />
-                  </label>
+              <div class="user-admin-form">
+                <form class="user-admin-form-grid" id="notification-email-form" action="/api/notification-email-recipients/form" method="post">
+                  <div class="camera-register-field notification-email-recipient-field">
+                    <label class="camera-register-label" for="notification-email-recipient-input">
+                      <span class="camera-register-step">1</span><span>Correo destinatario</span>
+                    </label>
+                    <div class="notification-email-entry">
+                      <input id="notification-email-recipient-input" name="email" type="text" autocomplete="off" placeholder="correo@empresa.com" />
+                      <button class="camera-register-secondary" type="button" id="notification-email-recipient-add">Agregar</button>
+                    </div>
+                  </div>
+                </form>
 
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">2</span><span>Contraseña</span></span>
-                    <input id="notification-email-password" type="password" autocomplete="new-password" required />
-                  </label>
-
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">3</span><span>Servidor SMTP</span></span>
-                    <input id="notification-email-host" type="text" autocomplete="off" required />
-                  </label>
-
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">4</span><span>Puerto SMTP</span></span>
-                    <input id="notification-email-port" type="number" min="1" step="1" required />
-                  </label>
-
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">5</span><span>Asunto</span></span>
-                    <input id="notification-email-subject" type="text" autocomplete="off" required />
-                  </label>
-
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">6</span><span>Destinatarios</span></span>
-                    <textarea id="notification-email-recipients" rows="6" placeholder="Uno por línea"></textarea>
-                    <span class="camera-register-help">Escribe un correo por línea.</span>
-                  </label>
-
-                  <label class="camera-register-field">
-                    <span class="camera-register-label"><span class="camera-register-step">7</span><span>Mensaje</span></span>
-                    <textarea id="notification-email-message" rows="10"></textarea>
-                  </label>
+                <div class="notification-email-table-wrap" aria-live="polite">
+                  <div class="notification-email-table-head">
+                    <div class="camera-register-label">Correos registrados</div>
+                    <span class="notification-email-count" id="notification-email-count">__NOTIFICATION_EMAIL_COUNT__ correos</span>
+                  </div>
+                  <div class="notification-email-table-scroll">
+                    <table class="notification-email-table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Correo</th>
+                          <th>Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody id="notification-email-table-body">__NOTIFICATION_EMAIL_ROWS__</tbody>
+                    </table>
+                  </div>
                 </div>
 
                 <div class="camera-register-actions">
                   <div class="ops-note camera-register-feedback user-admin-feedback" id="notification-email-feedback" hidden></div>
                   <div class="camera-register-action-row">
-                    <button class="camera-register-submit" type="submit">Guardar correo</button>
+                    <form action="/api/notification-settings/test-email-form" method="post">
+                      <button class="camera-register-secondary" type="submit" id="notification-email-test">Enviar prueba</button>
+                    </form>
+                    <button class="camera-register-submit" type="button" id="notification-email-save">Guardar correo</button>
                   </div>
                 </div>
-              </form>
+              </div>
             </section>
 
             <section class="ops-card page-panel notification-admin-card">
@@ -143,6 +138,7 @@
                 <div class="camera-register-actions">
                   <div class="ops-note camera-register-feedback user-admin-feedback" id="notification-telegram-feedback" hidden></div>
                   <div class="camera-register-action-row">
+                    <button class="camera-register-secondary" type="button" id="notification-telegram-test">Enviar prueba</button>
                     <button class="camera-register-submit" type="submit">Guardar Telegram</button>
                   </div>
                 </div>
@@ -177,6 +173,14 @@
       const telegramForm = document.getElementById("notification-telegram-form");
       const emailFeedback = document.getElementById("notification-email-feedback");
       const telegramFeedback = document.getElementById("notification-telegram-feedback");
+      const emailTestButton = document.getElementById("notification-email-test");
+      const emailSaveButton = document.getElementById("notification-email-save");
+      const telegramTestButton = document.getElementById("notification-telegram-test");
+      const emailRecipientInput = document.getElementById("notification-email-recipient-input");
+      const emailRecipientAdd = document.getElementById("notification-email-recipient-add");
+      const emailRecipientTableBody = document.getElementById("notification-email-table-body");
+      const emailRecipientCount = document.getElementById("notification-email-count");
+      let emailRecipients = [];
 
       if (!emailForm || !telegramForm || !emailFeedback || !telegramFeedback) return;
 
@@ -191,6 +195,20 @@
           .filter(Boolean);
       }
 
+      function normalizeEmailItems(items) {
+        const seen = new Set();
+        return items
+          .flatMap((item) => String(item || "").split(/[\s,;]+/))
+          .map((item) => item.trim())
+          .filter(Boolean)
+          .filter((item) => {
+            const key = item.toLowerCase();
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
+      }
+
       function setFeedback(node, message = "", tone = "") {
         if (!node) return;
         node.hidden = !message;
@@ -198,17 +216,121 @@
         node.dataset.tone = tone;
       }
 
+      function renderEmailRecipients() {
+        if (!emailRecipientTableBody) return;
+        emailRecipientTableBody.replaceChildren();
+        if (emailRecipientCount) {
+          emailRecipientCount.textContent = `${emailRecipients.length} correo${emailRecipients.length === 1 ? "" : "s"}`;
+        }
+
+        if (!emailRecipients.length) {
+          const row = document.createElement("tr");
+          const cell = document.createElement("td");
+          cell.colSpan = 3;
+          cell.className = "notification-email-empty";
+          cell.textContent = "No hay correos configurados.";
+          row.appendChild(cell);
+          emailRecipientTableBody.appendChild(row);
+          return;
+        }
+
+        emailRecipients.forEach((recipient, index) => {
+          const row = document.createElement("tr");
+
+          const numberCell = document.createElement("td");
+          numberCell.className = "notification-email-index";
+          numberCell.textContent = String(index + 1);
+
+          const emailCell = document.createElement("td");
+          emailCell.className = "notification-email-address";
+          emailCell.textContent = recipient;
+
+          const actionCell = document.createElement("td");
+          actionCell.className = "notification-email-action";
+          const removeButton = document.createElement("button");
+          removeButton.type = "button";
+          removeButton.className = "notification-email-remove";
+          removeButton.textContent = "Quitar";
+          removeButton.addEventListener("click", () => removeEmailRecipient(recipient, removeButton));
+          actionCell.appendChild(removeButton);
+
+          row.append(numberCell, emailCell, actionCell);
+          emailRecipientTableBody.appendChild(row);
+        });
+      }
+
+      function bindRenderedEmailActions() {
+        document.querySelectorAll(".notification-email-remove[data-email]").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.preventDefault();
+            removeEmailRecipient(button.dataset.email || "", button);
+          });
+        });
+      }
+
+      async function syncEmailRecipients(url, method, email) {
+        const response = await fetch(url, {
+          method,
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || payload.error) {
+          throw new Error(payload.error || `HTTP ${response.status}`);
+        }
+        emailRecipients = normalizeEmailItems(payload.recipients || []);
+        currentSettings = {
+          ...currentSettings,
+          email: {
+            ...(currentSettings.email || {}),
+            recipients: emailRecipients,
+          },
+        };
+        renderEmailRecipients();
+        return payload;
+      }
+
+      async function addEmailRecipient() {
+        if (!emailRecipientInput) return;
+        const nextItems = normalizeEmailItems([emailRecipientInput.value]);
+        if (!nextItems.length) {
+          setFeedback(emailFeedback, "Ingresa un correo para agregarlo.", "error");
+          return;
+        }
+        if (emailRecipientAdd) emailRecipientAdd.disabled = true;
+        setFeedback(emailFeedback, "Agregando correo...", "info");
+        try {
+          await syncEmailRecipients("/api/notification-email-recipients", "POST", nextItems[0]);
+          emailRecipientInput.value = "";
+          setFeedback(emailFeedback, "Correo agregado correctamente.", "success");
+        } catch (error) {
+          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo agregar el correo.", "error");
+        } finally {
+          if (emailRecipientAdd) emailRecipientAdd.disabled = false;
+        }
+      }
+
+      async function removeEmailRecipient(recipient, button) {
+        if (button) button.disabled = true;
+        setFeedback(emailFeedback, "Quitando correo...", "info");
+        try {
+          await syncEmailRecipients("/api/notification-email-recipients/delete", "POST", recipient);
+          setFeedback(emailFeedback, "Correo quitado correctamente.", "success");
+        } catch (error) {
+          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo quitar el correo.", "error");
+        } finally {
+          if (button) button.disabled = false;
+        }
+      }
+
       function fillForms() {
         const email = currentSettings.email || {};
         const telegram = currentSettings.telegram || {};
 
-        document.getElementById("notification-email-sender").value = email.sender_email || "";
-        document.getElementById("notification-email-password").value = email.sender_password || "";
-        document.getElementById("notification-email-host").value = email.smtp_host || "";
-        document.getElementById("notification-email-port").value = email.smtp_port || 587;
-        document.getElementById("notification-email-subject").value = email.subject || "";
-        document.getElementById("notification-email-recipients").value = linesToText(email.recipients);
-        document.getElementById("notification-email-message").value = email.message || "";
+        emailRecipients = normalizeEmailItems(email.recipients || []);
+        if (emailRecipientInput) emailRecipientInput.value = "";
+        renderEmailRecipients();
 
         document.getElementById("notification-telegram-token").value = telegram.bot_token || "";
         document.getElementById("notification-telegram-image").value = telegram.image_path || "";
@@ -233,31 +355,40 @@
         setFeedback(feedbackNode, successMessage, "success");
       }
 
-      emailForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const nextSettings = {
+      async function loadEmailRecipientsFromDb() {
+        const response = await fetch("/api/notification-email-recipients", {
+          method: "GET",
+          credentials: "same-origin",
+          headers: { Accept: "application/json" },
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || payload.error) {
+          throw new Error(payload.error || `HTTP ${response.status}`);
+        }
+        emailRecipients = normalizeEmailItems(payload.recipients || []);
+        currentSettings = {
           ...currentSettings,
           email: {
-            sender_email: document.getElementById("notification-email-sender").value.trim(),
-            sender_password: document.getElementById("notification-email-password").value.trim(),
-            smtp_host: document.getElementById("notification-email-host").value.trim(),
-            smtp_port: Number(document.getElementById("notification-email-port").value || 587),
-            subject: document.getElementById("notification-email-subject").value.trim(),
-            recipients: textToLines(document.getElementById("notification-email-recipients").value),
-            message: document.getElementById("notification-email-message").value.trim(),
+            ...(currentSettings.email || {}),
+            recipients: emailRecipients,
+          },
+        };
+        renderEmailRecipients();
+      }
+
+      function emailSettingsFromForm() {
+        return {
+          ...currentSettings,
+          email: {
+            ...(currentSettings.email || {}),
+            recipients: emailRecipients,
           },
           telegram: currentSettings.telegram || {},
         };
-        try {
-          await saveSettings(nextSettings, emailFeedback, "Configuración de correo guardada.");
-        } catch (error) {
-          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo guardar el correo.", "error");
-        }
-      });
+      }
 
-      telegramForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const nextSettings = {
+      function telegramSettingsFromForm() {
+        return {
           ...currentSettings,
           email: currentSettings.email || {},
           telegram: {
@@ -267,6 +398,63 @@
             message: document.getElementById("notification-telegram-message").value.trim(),
           },
         };
+      }
+
+      async function runTest(url, button, feedbackNode, sendingMessage, successMessage) {
+        if (button) button.disabled = true;
+        setFeedback(feedbackNode, sendingMessage, "info");
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { Accept: "application/json" },
+          });
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok || payload.error) {
+            throw new Error(payload.error || `HTTP ${response.status}`);
+          }
+          setFeedback(feedbackNode, successMessage(payload), "success");
+        } finally {
+          if (button) button.disabled = false;
+        }
+      }
+
+      emailForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (emailRecipientInput && emailRecipientInput.value.trim()) {
+          await addEmailRecipient();
+          return;
+        }
+        const nextSettings = emailSettingsFromForm();
+        try {
+          await saveSettings(nextSettings, emailFeedback, "Configuración de correo guardada.");
+        } catch (error) {
+          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo guardar el correo.", "error");
+        }
+      });
+
+      if (emailSaveButton) {
+        emailSaveButton.addEventListener("click", async () => {
+          const nextSettings = emailSettingsFromForm();
+          try {
+            await saveSettings(nextSettings, emailFeedback, "Configuración de correo guardada.");
+          } catch (error) {
+            setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo guardar el correo.", "error");
+          }
+        });
+      }
+
+      if (emailRecipientAdd) {
+        emailRecipientAdd.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          await addEmailRecipient();
+        });
+      }
+
+      telegramForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const nextSettings = telegramSettingsFromForm();
         try {
           await saveSettings(nextSettings, telegramFeedback, "Configuración de Telegram guardada.");
         } catch (error) {
@@ -274,7 +462,55 @@
         }
       });
 
+      if (emailTestButton) {
+        emailTestButton.addEventListener("click", async (event) => {
+          event.preventDefault();
+          try {
+            if (emailRecipientInput && emailRecipientInput.value.trim()) await addEmailRecipient();
+            await saveSettings(emailSettingsFromForm(), emailFeedback, "Configuración de correo guardada.");
+            await runTest(
+              "/api/notification-settings/test-email",
+              emailTestButton,
+              emailFeedback,
+              "Enviando correo de prueba...",
+              (payload) => `Correo de prueba enviado a ${payload.total || 0} destinatario(s).`
+            );
+          } catch (error) {
+            setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo enviar el correo de prueba.", "error");
+          } finally {
+            emailTestButton.disabled = false;
+          }
+        });
+      }
+
+      if (telegramTestButton) {
+        telegramTestButton.addEventListener("click", async () => {
+          try {
+            await saveSettings(telegramSettingsFromForm(), telegramFeedback, "Configuración de Telegram guardada.");
+            await runTest(
+              "/api/notification-settings/test-telegram",
+              telegramTestButton,
+              telegramFeedback,
+              "Enviando mensaje de prueba...",
+              (payload) => `Telegram de prueba enviado a ${payload.sent || 0} de ${payload.total || 0} chat(s).`
+            );
+          } catch (error) {
+            setFeedback(telegramFeedback, error && error.message ? error.message : "No se pudo enviar el Telegram de prueba.", "error");
+          } finally {
+            telegramTestButton.disabled = false;
+          }
+        });
+      }
+
       fillForms();
+      bindRenderedEmailActions();
+      loadEmailRecipientsFromDb().catch((error) => {
+        setFeedback(
+          emailFeedback,
+          error && error.message ? error.message : "No se pudieron cargar los correos desde la base de datos.",
+          "error"
+        );
+      });
     })();
   </script>
   <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>

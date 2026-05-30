@@ -11,7 +11,7 @@ from urllib.parse import quote, urljoin, urlparse
 from urllib.request import Request as UrlRequest
 from urllib.request import urlopen
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -27,11 +27,16 @@ from back.app.domain.vehicles import VehicleNormalizer
 from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
 from back.app.services.notification_settings import (
+    add_email_recipient_to_db,
+    load_email_recipients_from_db,
     load_notification_settings,
+    remove_email_recipient_from_db,
     save_notification_settings,
 )
 from back.app.services.remote_detection_feed import RemoteDetectionFeedService
 from back.app.services.rendering import DashboardTemplateRenderer
+from back.app.services.send_mail import send_configured_email
+from back.app.services.send_telegram import send_configured_telegram_alert
 
 settings = get_settings()
 SESSION_COOKIE = "robiotec_dashboard_token"
@@ -62,6 +67,27 @@ app.mount("/icons", StaticFiles(directory=STATIC / "icons"), name="icons")
 
 def _json(value: Any) -> str:
     return helper.to_json(value)
+
+
+def _notification_email_rows_html(recipients: list[str]) -> str:
+    if not recipients:
+        return '<tr><td class="notification-email-empty" colspan="3">No hay correos configurados.</td></tr>'
+    rows = []
+    for index, recipient in enumerate(recipients, start=1):
+        safe_recipient = escape(_text(recipient))
+        rows.append(
+            '<tr>'
+            f'<td class="notification-email-index">{index}</td>'
+            f'<td class="notification-email-address">{safe_recipient}</td>'
+            '<td class="notification-email-action">'
+            '<form action="/api/notification-email-recipients/delete-form" class="notification-email-remove-form" method="post">'
+            f'<input type="hidden" name="email" value="{safe_recipient}" />'
+            f'<button class="notification-email-remove" type="submit" data-email="{safe_recipient}">Quitar</button>'
+            '</form>'
+            '</td>'
+            '</tr>'
+        )
+    return "".join(rows)
 
 
 def _api(path: str, *, method: str = "GET", token: str | None = None, data: Any = None) -> Any:
@@ -309,6 +335,8 @@ def _build_context(request: Request) -> dict[str, str]:
     role = ", ".join(me.get("roles") or ["master"])
     db_camera_codes, db_camera_codes_error = _fetch_db_camera_unique_codes()
     db_camera_names, db_camera_names_error = _fetch_db_camera_names()
+    notification_settings = load_notification_settings()
+    notification_email_recipients = notification_settings.get("email", {}).get("recipients") or []
     return {
         "__AUTH_USERNAME__": username,
         "__DEVELOPER_MENU_LINK__": '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span><span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span><span class="sidebar-link-tooltip">Usuarios</span></a><a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span><span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span><span class="sidebar-link-tooltip">Registros</span></a>',
@@ -358,7 +386,9 @@ def _build_context(request: Request) -> dict[str, str]:
             or db_camera_items_error
             or f"{len(db_camera_names)} nombres cargados desde PostgreSQL"
         ),
-        "__NOTIFICATION_SETTINGS_JSON__": _json(load_notification_settings()),
+        "__NOTIFICATION_SETTINGS_JSON__": _json(notification_settings),
+        "__NOTIFICATION_EMAIL_COUNT__": str(len(notification_email_recipients)),
+        "__NOTIFICATION_EMAIL_ROWS__": _notification_email_rows_html(notification_email_recipients),
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
         "__USER_ADMIN_MODE_LABEL__": "Master",
@@ -606,6 +636,121 @@ async def notification_settings_update(request: Request):
     payload = await request.json()
     saved = save_notification_settings(payload if isinstance(payload, dict) else {})
     return {"ok": True, "settings": saved}
+
+
+@app.get("/api/notification-email-recipients")
+def notification_email_recipients(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    recipients = load_email_recipients_from_db()
+    if recipients is None:
+        return JSONResponse({"ok": False, "error": "No se pudieron leer los correos desde PostgreSQL."}, status_code=502)
+    return {"ok": True, "recipients": recipients, "total": len(recipients)}
+
+
+@app.post("/api/notification-email-recipients")
+async def notification_email_recipient_create(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    email = _text(payload.get("email") if isinstance(payload, dict) else "")
+    try:
+        recipients = add_email_recipient_to_db(email)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo agregar el correo.")}, status_code=400)
+    return {"ok": True, "recipients": recipients, "total": len(recipients)}
+
+
+@app.post("/api/notification-email-recipients/form")
+def notification_email_recipient_create_form(request: Request, email: str = Form("")):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        add_email_recipient_to_db(email)
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
+
+
+@app.delete("/api/notification-email-recipients")
+async def notification_email_recipient_delete(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    email = _text(payload.get("email") if isinstance(payload, dict) else "")
+    try:
+        recipients = remove_email_recipient_from_db(email)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo quitar el correo.")}, status_code=400)
+    return {"ok": True, "recipients": recipients, "total": len(recipients)}
+
+
+@app.post("/api/notification-email-recipients/delete")
+async def notification_email_recipient_delete_post(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    email = _text(payload.get("email") if isinstance(payload, dict) else "")
+    try:
+        recipients = remove_email_recipient_from_db(email)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo quitar el correo.")}, status_code=400)
+    return {"ok": True, "recipients": recipients, "total": len(recipients)}
+
+
+@app.post("/api/notification-email-recipients/delete-form")
+def notification_email_recipient_delete_form(request: Request, email: str = Form("")):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        remove_email_recipient_from_db(email)
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
+
+
+@app.post("/api/notification-settings/test-email")
+def notification_settings_test_email(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    try:
+        sent = send_configured_email()
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
+    return {"ok": True, "sent": sent, "total": len(sent)}
+
+
+@app.post("/api/notification-settings/test-email-form")
+def notification_settings_test_email_form(request: Request):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        send_configured_email()
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
+
+
+@app.post("/api/notification-settings/test-telegram")
+def notification_settings_test_telegram(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    try:
+        delivery = send_configured_telegram_alert()
+    except SystemExit as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
+    return {"ok": True, **delivery}
 
 
 @app.post("/api/cameras")

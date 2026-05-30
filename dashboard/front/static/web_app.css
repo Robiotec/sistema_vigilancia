@@ -1839,6 +1839,108 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   grid-column: 1 / -1;
 }
 
+.notification-email-recipient-field,
+.notification-email-table-wrap {
+  grid-column: 1 / -1;
+}
+
+.notification-email-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.notification-email-table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.notification-email-count {
+  flex: 0 0 auto;
+  color: rgba(226, 232, 240, 0.66);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.notification-email-table-scroll {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.notification-email-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.notification-email-table th,
+.notification-email-table td {
+  padding: 11px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+.notification-email-table th {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.notification-email-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.notification-email-index {
+  width: 54px;
+  color: rgba(226, 232, 240, 0.58);
+  font-weight: 900;
+}
+
+.notification-email-address {
+  overflow-wrap: anywhere;
+}
+
+.notification-email-empty {
+  color: rgba(226, 232, 240, 0.58);
+  text-align: center;
+}
+
+.notification-email-action {
+  width: 96px;
+  text-align: right;
+}
+
+.notification-email-remove {
+  border: 1px solid rgba(248, 113, 113, 0.22);
+  background: rgba(127, 29, 29, 0.18);
+  color: #fecaca;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.notification-email-remove:hover,
+.notification-email-remove:focus-visible {
+  border-color: rgba(248, 113, 113, 0.42);
+  background: rgba(127, 29, 29, 0.28);
+}
+
+.notification-email-remove:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
 .page-notification-admin textarea {
   min-height: 140px;
   resize: vertical;
@@ -5113,6 +5215,12 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.08);
+}
+
+.camera-register-secondary:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none;
 }
 
 .camera-register-feedback {
