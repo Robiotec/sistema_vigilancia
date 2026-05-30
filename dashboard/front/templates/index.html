@@ -40,88 +40,89 @@
               <div class="home-history-filters-head">
                 <h3>Filtros</h3>
               </div>
+              <div class="home-history-filters-body">
+                <section class="home-history-filter-group" aria-labelledby="history-filter-date">
+                  <span class="home-history-filter-label" id="history-filter-date">Fecha</span>
+                  <div class="home-history-field-list">
+                    <label class="home-history-field">
+                      <span>Desde</span>
+                      <input type="date" value="2026-05-24" />
+                    </label>
+                    <label class="home-history-field">
+                      <span>Hasta</span>
+                      <input type="date" value="2026-05-30" />
+                    </label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-date">
-                <span class="home-history-filter-label" id="history-filter-date">Fecha</span>
-                <div class="home-history-field-list">
-                  <label class="home-history-field">
-                    <span>Desde</span>
-                    <input type="date" value="2026-05-24" />
-                  </label>
-                  <label class="home-history-field">
-                    <span>Hasta</span>
-                    <input type="date" value="2026-05-30" />
-                  </label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-time">
+                  <span class="home-history-filter-label" id="history-filter-time">Hora</span>
+                  <div class="home-history-field-list">
+                    <label class="home-history-field">
+                      <span>Inicio</span>
+                      <input type="time" value="06:00" />
+                    </label>
+                    <label class="home-history-field">
+                      <span>Fin</span>
+                      <input type="time" value="23:00" />
+                    </label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-time">
-                <span class="home-history-filter-label" id="history-filter-time">Hora</span>
-                <div class="home-history-field-list">
-                  <label class="home-history-field">
-                    <span>Inicio</span>
-                    <input type="time" value="06:00" />
-                  </label>
-                  <label class="home-history-field">
-                    <span>Fin</span>
-                    <input type="time" value="23:00" />
-                  </label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-camera">
+                  <span class="home-history-filter-label" id="history-filter-camera">ID de cámara</span>
+                  <div class="home-history-field-list">
+                    <label class="home-history-field">
+                      <span>Buscar ID</span>
+                      <input type="text" value="PTZ-04" placeholder="Ej: CAM-102 o PTZ-04" />
+                    </label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-camera">
-                <span class="home-history-filter-label" id="history-filter-camera">ID de cámara</span>
-                <div class="home-history-field-list">
-                  <label class="home-history-field">
-                    <span>Buscar ID</span>
-                    <input type="text" value="PTZ-04" placeholder="Ej: CAM-102 o PTZ-04" />
-                  </label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-type">
+                  <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
+                  <div class="home-history-checkbox-list">
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Alertas críticas</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Eventos de acceso</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" /> <span>Reconocimiento facial</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Movimiento sospechoso</span></label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-type">
-                <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
-                <div class="home-history-checkbox-list">
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Alertas críticas</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Eventos de acceso</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" /> <span>Reconocimiento facial</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Movimiento sospechoso</span></label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-event">
+                  <span class="home-history-filter-label" id="history-filter-event">Evento</span>
+                  <div class="home-history-field-list">
+                    <label class="home-history-field">
+                      <span>Seleccionado</span>
+                      <select>
+                        <option>Todos los eventos</option>
+                        <option>Movimiento detectado</option>
+                        <option>Ingreso autorizado</option>
+                        <option>Pérdida de señal</option>
+                        <option>Coincidencia facial</option>
+                      </select>
+                    </label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-event">
-                <span class="home-history-filter-label" id="history-filter-event">Evento</span>
-                <div class="home-history-field-list">
-                  <label class="home-history-field">
-                    <span>Seleccionado</span>
-                    <select>
-                      <option>Todos los eventos</option>
-                      <option>Movimiento detectado</option>
-                      <option>Ingreso autorizado</option>
-                      <option>Pérdida de señal</option>
-                      <option>Coincidencia facial</option>
-                    </select>
-                  </label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-source">
+                  <span class="home-history-filter-label" id="history-filter-source">Origen</span>
+                  <div class="home-history-checkbox-list">
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Cámaras fijas</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Vehículos</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" /> <span>Drones</span></label>
+                  </div>
+                </section>
 
-              <section class="home-history-filter-group" aria-labelledby="history-filter-source">
-                <span class="home-history-filter-label" id="history-filter-source">Origen</span>
-                <div class="home-history-checkbox-list">
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Cámaras fijas</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Vehículos</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" /> <span>Drones</span></label>
-                </div>
-              </section>
-
-              <section class="home-history-filter-group" aria-labelledby="history-filter-status">
-                <span class="home-history-filter-label" id="history-filter-status">Estado</span>
-                <div class="home-history-checkbox-list">
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Nuevos</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" /> <span>En revisión</span></label>
-                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Resueltos</span></label>
-                </div>
-              </section>
+                <section class="home-history-filter-group" aria-labelledby="history-filter-status">
+                  <span class="home-history-filter-label" id="history-filter-status">Estado</span>
+                  <div class="home-history-checkbox-list">
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Nuevos</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" /> <span>En revisión</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Resueltos</span></label>
+                  </div>
+                </section>
+              </div>
             </aside>
 
             <section class="home-history-card home-history-main" aria-label="Listado de eventos">

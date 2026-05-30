@@ -80,34 +80,39 @@
 .home-history-filters {
   padding: 20px 16px;
   display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+}
+
+.home-history-filters-body {
+  display: grid;
   align-content: start;
   gap: 16px;
-  position: sticky;
-  top: 96px;
-  min-height: calc(100vh - 220px);
-  max-height: calc(100vh - 220px);
-  height: calc(100vh - 220px);
+  min-height: 0;
+  height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(241, 86, 32, 0.34) rgba(255, 255, 255, 0.04);
+  padding-right: 4px;
 }
 
-.home-history-filters::-webkit-scrollbar {
+.home-history-filters-body::-webkit-scrollbar {
   width: 8px;
 }
 
-.home-history-filters::-webkit-scrollbar-track {
+.home-history-filters-body::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.04);
   border-radius: 999px;
 }
 
-.home-history-filters::-webkit-scrollbar-thumb {
+.home-history-filters-body::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, rgba(241, 86, 32, 0.55), rgba(120, 43, 19, 0.68));
   border-radius: 999px;
 }
 
-.home-history-filters::-webkit-scrollbar-thumb:hover {
+.home-history-filters-body::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, rgba(255, 120, 74, 0.72), rgba(120, 43, 19, 0.8));
 }
 
@@ -232,8 +237,6 @@
   align-content: start;
   gap: 18px;
   min-width: 0;
-  min-height: calc(100vh - 220px);
-  height: calc(100vh - 220px);
 }
 
 .home-history-toolbar {
@@ -446,16 +449,14 @@
   }
 
   .home-history-filters {
-    position: static;
-    height: auto;
-    max-height: none;
-    min-height: auto;
-    overflow: visible;
+    grid-template-rows: auto auto;
   }
 
-  .home-history-main {
+  .home-history-filters-body {
     height: auto;
-    min-height: auto;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 }
 
