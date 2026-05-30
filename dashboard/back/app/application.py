@@ -108,9 +108,11 @@ def _fetch_db_camera_unique_codes() -> tuple[list[str], str]:
         return [], f"No se pudieron consultar las cámaras en PostgreSQL: {_text(exc)}"
 
     codes: list[str] = []
+    seen: set[str] = set()
     for row in rows or []:
         value = _text((row or {}).get("unique_code")).strip()
-        if value:
+        if value and value not in seen:
+            seen.add(value)
             codes.append(value)
     return codes, ""
 
@@ -296,6 +298,7 @@ def _build_context(request: Request) -> dict[str, str]:
         "__PROFILE_DEVICE_TOTAL__": str(len(vehicles) + len(drones)),
         "__PROFILE_VIEWER_TOTAL__": str(len(streams)),
         "__HOME_CAMERA_OPTION_ITEMS__": _camera_unique_code_options_html(db_camera_codes),
+        "__HOME_CAMERA_CODES_JSON__": _json(db_camera_codes),
         "__HOME_CAMERA_STATUS__": (
             db_camera_codes_error
             or f"{len(db_camera_codes)} IDs únicos cargados desde PostgreSQL"

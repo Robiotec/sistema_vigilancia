@@ -234,6 +234,7 @@
   <script>
     window.__WEB_APP_CONFIG__ = {
       cameras: __CAMERA_ITEMS_JSON__,
+      homeCameraCodes: __HOME_CAMERA_CODES_JSON__,
       devices: __DEVICE_CATALOG_JSON__,
       defaultCamera: __DEFAULT_CAMERA_JSON__,
       staticAssetVersion: "__STATIC_ASSET_VERSION__",
@@ -242,6 +243,7 @@
   </script>
   <script>
     (() => {
+      const config = window.__WEB_APP_CONFIG__ || {};
       const select = document.getElementById("home-history-camera-select");
       const status = document.getElementById("home-history-camera-status");
       const syncIntervalMs = 30000;
@@ -252,6 +254,10 @@
         const seen = new Set();
         return (Array.isArray(items) ? items : [])
           .map((camera) => {
+            if (typeof camera === "string") {
+              const value = String(camera).trim();
+              return value ? { value, label: value } : null;
+            }
             if (!camera || typeof camera !== "object") return null;
             const value = String(camera.value || camera.unique_code || camera.codigo_unico || "").trim();
             const label = String(camera.label || value).trim();
@@ -304,6 +310,7 @@
         }
       }
 
+      renderOptions(config.homeCameraCodes || [], status.textContent || "IDs únicos cargados desde PostgreSQL");
       void refreshCameraOptions();
       window.setInterval(() => {
         void refreshCameraOptions();
