@@ -12,11 +12,402 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="/static/web_app.css?v=__STATIC_ASSET_VERSION__" />
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  />
+  <style>
+    .home-history-shell {
+      display: grid;
+      gap: 24px;
+    }
+
+    .home-history-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(123, 180, 255, 0.18);
+      background:
+        radial-gradient(circle at top right, rgba(71, 154, 255, 0.24), transparent 32%),
+        linear-gradient(160deg, rgba(10, 24, 48, 0.96), rgba(7, 16, 35, 0.94));
+      box-shadow: 0 24px 60px rgba(3, 10, 24, 0.34);
+    }
+
+    .home-history-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(76, 154, 255, 0.28), transparent 70%);
+      pointer-events: none;
+    }
+
+    .home-history-hero-copy {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      max-width: 760px;
+      z-index: 1;
+    }
+
+    .home-history-kicker {
+      color: rgba(151, 196, 255, 0.88);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .home-history-hero h2 {
+      margin: 0;
+      color: #f4f9ff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+      line-height: 1.05;
+    }
+
+    .home-history-hero p {
+      margin: 0;
+      color: rgba(214, 233, 255, 0.74);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .home-history-panel {
+      display: grid;
+      grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .home-history-card {
+      border-radius: 26px;
+      border: 1px solid rgba(122, 177, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(11, 27, 54, 0.96), rgba(8, 20, 42, 0.94));
+      box-shadow: 0 20px 48px rgba(4, 11, 28, 0.28);
+      backdrop-filter: blur(18px);
+    }
+
+    .home-history-filters {
+      padding: 22px 18px;
+      display: grid;
+      gap: 18px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .home-history-filters-head,
+    .home-history-events-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .home-history-filters-head h3,
+    .home-history-events-head h3 {
+      margin: 0;
+      color: #eff7ff;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .home-history-filter-note,
+    .home-history-results-note {
+      margin: 0;
+      color: rgba(187, 215, 255, 0.66);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .home-history-filter-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .home-history-filter-label {
+      color: rgba(157, 199, 255, 0.92);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .home-history-checkbox-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .home-history-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(126, 180, 255, 0.1);
+      background: rgba(255, 255, 255, 0.025);
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .home-history-checkbox:hover {
+      border-color: rgba(122, 181, 255, 0.24);
+      background: rgba(76, 149, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .home-history-checkbox input {
+      width: 16px;
+      height: 16px;
+      accent-color: #58a6ff;
+      margin: 0;
+      flex: 0 0 auto;
+    }
+
+    .home-history-checkbox span {
+      color: rgba(230, 241, 255, 0.88);
+      font-size: 0.92rem;
+    }
+
+    .home-history-main {
+      padding: 22px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .home-history-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .home-history-search {
+      flex: 1 1 420px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(121, 176, 255, 0.16);
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .home-history-search-icon {
+      color: rgba(150, 198, 255, 0.82);
+      font-size: 1rem;
+      flex: 0 0 auto;
+    }
+
+    .home-history-search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #eef7ff;
+      font: inherit;
+    }
+
+    .home-history-search input::placeholder {
+      color: rgba(180, 211, 255, 0.48);
+    }
+
+    .home-history-filter-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(121, 176, 255, 0.16);
+      background:
+        linear-gradient(180deg, rgba(31, 86, 162, 0.52), rgba(14, 51, 106, 0.62));
+      color: #eef6ff;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .home-history-filter-button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(127, 188, 255, 0.3);
+      box-shadow: 0 16px 32px rgba(13, 52, 108, 0.28);
+    }
+
+    .home-history-events-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .home-history-event-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(123, 177, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .home-history-event-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(128, 188, 255, 0.28);
+      background:
+        linear-gradient(180deg, rgba(69, 144, 255, 0.12), rgba(255, 255, 255, 0.03));
+    }
+
+    .home-history-event-copy {
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .home-history-event-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .home-history-event-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(78, 152, 255, 0.16);
+      color: #8fccff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .home-history-event-time {
+      color: rgba(182, 214, 255, 0.62);
+      font-size: 0.8rem;
+    }
+
+    .home-history-event-title {
+      margin: 0;
+      color: #f5f9ff;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .home-history-event-summary {
+      margin: 0;
+      color: rgba(200, 223, 255, 0.68);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .home-history-event-dismiss {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(125, 180, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(214, 232, 255, 0.8);
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .home-history-event-dismiss:hover {
+      transform: scale(1.05);
+      border-color: rgba(134, 192, 255, 0.34);
+      background: rgba(83, 156, 255, 0.14);
+    }
+
+    .home-history-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 6px;
+    }
+
+    .home-history-page {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(123, 177, 255, 0.14);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(225, 238, 255, 0.78);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+    }
+
+    .home-history-page:hover,
+    .home-history-page.is-active {
+      transform: translateY(-1px);
+      border-color: rgba(129, 188, 255, 0.32);
+      background: linear-gradient(180deg, rgba(62, 136, 255, 0.24), rgba(28, 86, 173, 0.22));
+      color: #f5faff;
+    }
+
+    @media (max-width: 1080px) {
+      .home-history-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .home-history-filters {
+        position: static;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .home-history-hero,
+      .home-history-main,
+      .home-history-filters {
+        padding: 18px;
+      }
+
+      .home-history-toolbar {
+        align-items: stretch;
+      }
+
+      .home-history-search,
+      .home-history-filter-button {
+        width: 100%;
+      }
+
+      .home-history-event-card {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .home-history-event-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .home-history-event-dismiss {
+        width: 100%;
+        border-radius: 14px;
+      }
+    }
+  </style>
 </head>
 <body class="page-dashboard">
   <div class="app-shell is-sidebar-collapsed">
@@ -31,77 +422,161 @@
       </header>
 
       <div class="wrap">
-        <section class="dashboard-block dashboard-block-video">
-          <div class="dashboard-mobile-panel-switcher" id="dashboard-mobile-panel-switcher" aria-label="Cambiar vista del dashboard">
-            <button
-              class="dashboard-mobile-panel-button is-active"
-              id="dashboard-mobile-panel-map"
-              type="button"
-              data-dashboard-mobile-view="map"
-            >
-              Mapa
-            </button>
-            <button
-              class="dashboard-mobile-panel-button"
-              id="dashboard-mobile-panel-cameras"
-              type="button"
-              data-dashboard-mobile-view="cameras"
-            >
-              Camaras
-            </button>
-          </div>
+        <section class="home-history-shell">
+          <section class="home-history-hero">
+            <div class="home-history-hero-copy">
+              <span class="home-history-kicker">Dashboard Home</span>
+              <h2>Historial de Eventos</h2>
+              <p>
+                Visualiza incidencias, alertas y actividades recientes en un panel centralizado con filtros,
+                búsqueda y paginación para navegación rápida.
+              </p>
+            </div>
+          </section>
 
-          <section class="camera-stage" id="camera-stage" aria-label="Vista principal de cámaras">
-            <aside class="camera-selector-panel" aria-label="Selector lateral de cámaras">
-              <section class="dashboard-camera-preview" id="dashboard-camera-preview" aria-label="Vista rápida de cámara fijada desde el mapa">
-                <div class="dashboard-camera-preview-head">
-                  <div>
-                    <span class="dashboard-camera-preview-kicker">Vista rápida</span>
-                    <strong class="dashboard-camera-preview-name" id="dashboard-camera-preview-name">Sin cámara fijada</strong>
-                  </div>
-                  <button class="dashboard-camera-preview-close" id="dashboard-camera-preview-close" type="button" hidden>
-                    Cerrar
-                  </button>
+          <section class="home-history-panel">
+            <aside class="home-history-card home-history-filters" aria-label="Filtros de historial">
+              <div class="home-history-filters-head">
+                <h3>Filtros</h3>
+              </div>
+              <p class="home-history-filter-note">Ajusta visualmente la lista por tipo de evento y prioridad.</p>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-type">
+                <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
+                <div class="home-history-checkbox-list">
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Alertas críticas</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Eventos de acceso</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" /> <span>Reconocimiento facial</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Movimiento sospechoso</span></label>
                 </div>
-                <div class="dashboard-camera-preview-empty" id="dashboard-camera-preview-empty">
-                  El panel queda vacío hasta que selecciones una cámara en el mapa.
+              </section>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-source">
+                <span class="home-history-filter-label" id="history-filter-source">Origen</span>
+                <div class="home-history-checkbox-list">
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Cámaras fijas</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Vehículos</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" /> <span>Drones</span></label>
                 </div>
-                <div class="dashboard-camera-preview-stage" id="dashboard-camera-preview-stage" hidden></div>
+              </section>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-status">
+                <span class="home-history-filter-label" id="history-filter-status">Estado</span>
+                <div class="home-history-checkbox-list">
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Nuevos</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" /> <span>En revisión</span></label>
+                  <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Resueltos</span></label>
+                </div>
               </section>
             </aside>
-          <section class="ops-grid dashboard-ops-grid">
-            <section class="page-section-shell dashboard-locations-shell telemetry-sync-shell">
-              <!--
-              <div class="page-section-head">
-                
-                <div> 
-                  <div class="ops-eyebrow">Situación de Campo</div>
-                  <h2>Mapa y Telemetría</h2>
-                </div>
-                
-                <div class="page-section-badge">Sincronizado</div>
-                
+
+            <section class="home-history-card home-history-main" aria-label="Listado de eventos">
+              <div class="home-history-toolbar">
+                <label class="home-history-search" aria-label="Buscar eventos">
+                  <span class="home-history-search-icon">⌕</span>
+                  <input type="search" placeholder="Buscar por cámara, etiqueta o descripción..." />
+                </label>
+                <button class="home-history-filter-button" type="button" aria-label="Abrir filtros">
+                  <span>≣</span>
+                  <span>Filtros</span>
+                </button>
               </div>
-              -->
-  
-              __INCLUDE:partials/telemetry_map_workbench.html__
+
+              <div class="home-history-events-head">
+                <h3>Eventos recientes</h3>
+                <p class="home-history-results-note">Mostrando 8 resultados de un historial operativo.</p>
+              </div>
+
+              <div class="home-history-events-list">
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Alerta</span>
+                      <span class="home-history-event-time">Hoy · 08:14</span>
+                    </div>
+                    <h4 class="home-history-event-title">Movimiento detectado en perímetro norte</h4>
+                    <p class="home-history-event-summary">La cámara PTZ-04 registró actividad fuera del horario habitual en el acceso norte del complejo.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Acceso</span>
+                      <span class="home-history-event-time">Hoy · 07:53</span>
+                    </div>
+                    <h4 class="home-history-event-title">Ingreso autorizado en puerta principal</h4>
+                    <p class="home-history-event-summary">Validación correcta de personal operativo en el acceso principal con coincidencia de credencial.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Vehículo</span>
+                      <span class="home-history-event-time">Ayer · 22:41</span>
+                    </div>
+                    <h4 class="home-history-event-title">Unidad móvil perdió señal temporal</h4>
+                    <p class="home-history-event-summary">El vehículo VIG-12 reportó interrupción breve de transmisión y restableció conexión automáticamente.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Reconocimiento</span>
+                      <span class="home-history-event-time">Ayer · 19:06</span>
+                    </div>
+                    <h4 class="home-history-event-title">Coincidencia facial en zona de monitoreo</h4>
+                    <p class="home-history-event-summary">Se registró una coincidencia parcial en la cámara interior del bloque administrativo para revisión manual.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Drone</span>
+                      <span class="home-history-event-time">Ayer · 17:32</span>
+                    </div>
+                    <h4 class="home-history-event-title">Patrullaje aéreo completado</h4>
+                    <p class="home-history-event-summary">El dron RB-Patrol finalizó el recorrido programado y dejó evidencia visual en el corredor occidental.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+
+                <article class="home-history-event-card">
+                  <div class="home-history-event-copy">
+                    <div class="home-history-event-meta">
+                      <span class="home-history-event-tag">Sistema</span>
+                      <span class="home-history-event-time">Ayer · 15:18</span>
+                    </div>
+                    <h4 class="home-history-event-title">Sincronización de registros completada</h4>
+                    <p class="home-history-event-summary">El sistema consolidó eventos de cámaras, drones y telemetría en el histórico central sin incidencias.</p>
+                  </div>
+                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
+                </article>
+              </div>
+
+              <nav class="home-history-pagination" aria-label="Paginación del historial">
+                <a class="home-history-page is-active" href="#">1</a>
+                <a class="home-history-page" href="#">2</a>
+                <a class="home-history-page" href="#">3</a>
+                <a class="home-history-page" href="#">4</a>
+                <a class="home-history-page" href="#">5</a>
+              </nav>
             </section>
           </section>
-          </section>
         </section>
-
-        <div class="camera-pool" id="camera-pool" hidden>
-          __CAMERA_STREAMS__
-        </div>
-
 
         <div class="errors">__ERROR_BLOCK__</div>
       </div>
     </main>
   </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     window.__WEB_APP_CONFIG__ = {
       cameras: __CAMERA_ITEMS_JSON__,
@@ -109,8 +584,6 @@
       defaultCamera: __DEFAULT_CAMERA_JSON__,
       staticAssetVersion: "__STATIC_ASSET_VERSION__",
       telemetryRefreshMs: __TELEMETRY_REFRESH_MS__,
-      startWithoutCamera: true,
-      emptyCameraMessage: "No ha seleccionado ninguna cámara.",
     };
   </script>
   <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
