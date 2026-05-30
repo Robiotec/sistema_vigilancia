@@ -83,6 +83,29 @@
   gap: 16px;
   position: sticky;
   top: 96px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(241, 86, 32, 0.34) rgba(255, 255, 255, 0.04);
+}
+
+.home-history-filters::-webkit-scrollbar {
+  width: 8px;
+}
+
+.home-history-filters::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 999px;
+}
+
+.home-history-filters::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(241, 86, 32, 0.55), rgba(120, 43, 19, 0.68));
+  border-radius: 999px;
+}
+
+.home-history-filters::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(255, 120, 74, 0.72), rgba(120, 43, 19, 0.8));
 }
 
 .home-history-filters-head,
@@ -418,6 +441,8 @@
 
   .home-history-filters {
     position: static;
+    max-height: none;
+    overflow: visible;
   }
 }
 
