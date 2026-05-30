@@ -96,16 +96,30 @@ def _text(value: Any, fallback: str = "") -> str:
     return helper.text(value, fallback)
 
 
-def _fetch_db_camera_unique_codes() -> tuple[list[str], str]:
+def _fetch_db_camera_rows() -> tuple[list[dict[str, Any]], str]:
     try:
         from back.app.services.conection_sql_postgrest import fetch_all
     except Exception as exc:
         return [], f"No se pudo importar el conector PostgreSQL: {_text(exc)}"
 
     try:
-        rows = fetch_all("SELECT * FROM cameras")
+        rows = fetch_all(
+            """
+            SELECT *
+            FROM cameras
+            ORDER BY created_at NULLS LAST, name
+            """
+        )
     except Exception as exc:
         return [], f"No se pudieron consultar las cámaras en PostgreSQL: {_text(exc)}"
+
+    return [dict(row) for row in (rows or [])], ""
+
+
+def _fetch_db_camera_unique_codes() -> tuple[list[str], str]:
+    rows, error = _fetch_db_camera_rows()
+    if error:
+        return [], error
 
     codes: list[str] = []
     seen: set[str] = set()
@@ -137,6 +151,13 @@ def _camera_item(camera: dict[str, Any], stream: dict[str, Any] | None = None) -
     if path:
         item["url"] = f"{settings.mediamtx_webrtc_base_url.rstrip('/')}/{quote(path)}"
     return item
+
+
+def _db_camera_items() -> tuple[list[dict[str, Any]], str]:
+    rows, error = _fetch_db_camera_rows()
+    if error:
+        return [], error
+    return [_camera_item(row, {"path": row.get("unique_code")}) for row in rows], ""
 
 
 def _display_maps(token: str) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
@@ -227,6 +248,10 @@ def _build_context(request: Request) -> dict[str, str]:
             drones = _api("/drones", token=token) or []
         except RuntimeError:
             pass
+    db_camera_items_error = ""
+    db_cameras, db_camera_items_error = _fetch_db_camera_rows()
+    if db_cameras:
+        cameras = db_cameras
     stream_by_resource = {str(item.get("resource_id")): item for item in streams}
     try:
         stream_configs = _api("/stream-configs", token=token) if token else []
@@ -303,6 +328,7 @@ def _build_context(request: Request) -> dict[str, str]:
         "__HOME_CAMERA_CODES_JSON__": _json(db_camera_codes),
         "__HOME_CAMERA_STATUS__": (
             db_camera_codes_error
+            or db_camera_items_error
             or f"{len(db_camera_codes)} IDs únicos cargados desde PostgreSQL"
         ),
         "__USER_ADMIN_ACCESS_NOTE__": "",
@@ -506,6 +532,11 @@ def cameras_registry(request: Request):
         if _is_auth_error(exc):
             return _auth_json_response()
         raise
+    db_camera_items, error = _db_camera_items()
+    if db_camera_items:
+        return db_camera_items
+    if not cams and error:
+        return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
     stream_by_camera = {str(item.get("camera_id")): item for item in stream_configs if item.get("camera_id")}
     return [_camera_item(cam, stream_by_camera.get(str(cam.get("id")))) for cam in cams]
 
