@@ -122,6 +122,12 @@
   font-weight: 600;
 }
 
+.home-history-field-note {
+  color: rgba(255, 218, 197, 0.42);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
 .home-history-field input,
 .home-history-field select {
   -webkit-appearance: none;
