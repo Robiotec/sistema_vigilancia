@@ -276,10 +276,15 @@
         const previousValue = select.value;
         select.innerHTML = "";
 
-        const placeholder = document.createElement("option");
-        placeholder.value = "";
-        placeholder.textContent = normalized.length ? "Todas las cámaras" : "No hay cámaras disponibles";
-        select.appendChild(placeholder);
+        if (!normalized.length) {
+          const emptyOption = document.createElement("option");
+          emptyOption.value = "";
+          emptyOption.textContent = "No hay cámaras disponibles";
+          emptyOption.selected = true;
+          select.appendChild(emptyOption);
+          status.textContent = message || "No hay cámaras disponibles";
+          return;
+        }
 
         normalized.forEach((item) => {
           const option = document.createElement("option");
@@ -290,6 +295,8 @@
 
         if (previousValue && normalized.some((item) => item.value === previousValue)) {
           select.value = previousValue;
+        } else if (select.options.length) {
+          select.selectedIndex = 0;
         }
 
         status.textContent = message || `${normalized.length} cámaras sincronizadas`;

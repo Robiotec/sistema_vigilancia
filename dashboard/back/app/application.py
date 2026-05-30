@@ -122,7 +122,9 @@ def _template_source(name: str, seen: set[Path] | None = None) -> str:
 
 
 def _camera_unique_code_options_html(codes: list[str]) -> str:
-    options = ['<option value="">Todas las cámaras</option>']
+    if not codes:
+        return '<option value="" selected>No hay cámaras disponibles</option>'
+    options: list[str] = []
     for code in codes:
         safe_code = escape(code)
         options.append(f'<option value="{safe_code}">{safe_code}</option>')
