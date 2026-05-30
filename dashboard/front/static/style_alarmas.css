@@ -114,6 +114,49 @@
   gap: 12px;
 }
 
+.home-history-field-list {
+  display: grid;
+  gap: 10px;
+}
+
+.home-history-field {
+  display: grid;
+  gap: 8px;
+}
+
+.home-history-field span {
+  color: rgba(255, 228, 213, 0.68);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.home-history-field input,
+.home-history-field select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff6ef;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.home-history-field input:hover,
+.home-history-field select:hover,
+.home-history-field input:focus,
+.home-history-field select:focus {
+  border-color: rgba(241, 86, 32, 0.24);
+  background: rgba(241, 86, 32, 0.06);
+  box-shadow: 0 0 0 3px rgba(241, 86, 32, 0.08);
+}
+
+.home-history-field input::placeholder {
+  color: rgba(255, 212, 187, 0.34);
+}
+
 .home-history-filter-label {
   color: rgba(255, 146, 103, 0.88);
   font-size: 0.75rem;
@@ -350,6 +393,12 @@
   border-color: rgba(241, 86, 32, 0.3);
   background: linear-gradient(180deg, rgba(241, 86, 32, 0.26), rgba(94, 38, 22, 0.24));
   color: #fff7ef;
+}
+
+.home-history-page-arrow {
+  font-size: 1.15rem;
+  font-weight: 800;
+  padding-bottom: 2px;
 }
 
 .page-dashboard .wrap {

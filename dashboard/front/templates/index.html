@@ -32,10 +32,6 @@
             <div class="home-history-hero-copy">
               <span class="home-history-kicker">Dashboard Home</span>
               <h2>Historial de Eventos</h2>
-              <p>
-                Visualiza incidencias, alertas y actividades recientes en un panel centralizado con filtros,
-                búsqueda y paginación para navegación rápida.
-              </p>
             </div>
           </section>
 
@@ -46,6 +42,44 @@
               </div>
               <p class="home-history-filter-note">Ajusta visualmente la lista por tipo de evento y prioridad.</p>
 
+              <section class="home-history-filter-group" aria-labelledby="history-filter-date">
+                <span class="home-history-filter-label" id="history-filter-date">Fecha</span>
+                <div class="home-history-field-list">
+                  <label class="home-history-field">
+                    <span>Desde</span>
+                    <input type="date" value="2026-05-24" />
+                  </label>
+                  <label class="home-history-field">
+                    <span>Hasta</span>
+                    <input type="date" value="2026-05-30" />
+                  </label>
+                </div>
+              </section>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-time">
+                <span class="home-history-filter-label" id="history-filter-time">Hora</span>
+                <div class="home-history-field-list">
+                  <label class="home-history-field">
+                    <span>Inicio</span>
+                    <input type="time" value="06:00" />
+                  </label>
+                  <label class="home-history-field">
+                    <span>Fin</span>
+                    <input type="time" value="23:00" />
+                  </label>
+                </div>
+              </section>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-camera">
+                <span class="home-history-filter-label" id="history-filter-camera">ID de cámara</span>
+                <div class="home-history-field-list">
+                  <label class="home-history-field">
+                    <span>Buscar ID</span>
+                    <input type="text" value="PTZ-04" placeholder="Ej: CAM-102 o PTZ-04" />
+                  </label>
+                </div>
+              </section>
+
               <section class="home-history-filter-group" aria-labelledby="history-filter-type">
                 <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
                 <div class="home-history-checkbox-list">
@@ -53,6 +87,22 @@
                   <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Eventos de acceso</span></label>
                   <label class="home-history-checkbox"><input type="checkbox" /> <span>Reconocimiento facial</span></label>
                   <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Movimiento sospechoso</span></label>
+                </div>
+              </section>
+
+              <section class="home-history-filter-group" aria-labelledby="history-filter-event">
+                <span class="home-history-filter-label" id="history-filter-event">Evento</span>
+                <div class="home-history-field-list">
+                  <label class="home-history-field">
+                    <span>Seleccionado</span>
+                    <select>
+                      <option>Todos los eventos</option>
+                      <option>Movimiento detectado</option>
+                      <option>Ingreso autorizado</option>
+                      <option>Pérdida de señal</option>
+                      <option>Coincidencia facial</option>
+                    </select>
+                  </label>
                 </div>
               </section>
 
@@ -167,11 +217,13 @@
               </div>
 
               <nav class="home-history-pagination" aria-label="Paginación del historial">
+                <a class="home-history-page home-history-page-arrow" href="#" aria-label="Página anterior">‹</a>
                 <a class="home-history-page is-active" href="#">1</a>
                 <a class="home-history-page" href="#">2</a>
                 <a class="home-history-page" href="#">3</a>
                 <a class="home-history-page" href="#">4</a>
                 <a class="home-history-page" href="#">5</a>
+                <a class="home-history-page home-history-page-arrow" href="#" aria-label="Página siguiente">›</a>
               </nav>
             </section>
           </section>
