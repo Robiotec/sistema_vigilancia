@@ -76,6 +76,19 @@
                   </div>
                 </section>
 
+                <section class="home-history-filter-group" aria-labelledby="history-filter-camera-name">
+                  <span class="home-history-filter-label" id="history-filter-camera-name">Nombre de cámara</span>
+                  <div class="home-history-field-list">
+                    <label class="home-history-field">
+                      <span>Seleccionar nombre</span>
+                      <select id="home-history-camera-name-select" aria-label="Seleccionar nombre de cámara">
+                        __HOME_CAMERA_NAME_OPTION_ITEMS__
+                      </select>
+                    </label>
+                    <span class="home-history-field-note" id="home-history-camera-name-status">__HOME_CAMERA_NAME_STATUS__</span>
+                  </div>
+                </section>
+
                 <section class="home-history-filter-group" aria-labelledby="history-filter-type">
                   <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
                   <div class="home-history-checkbox-list">
@@ -235,6 +248,7 @@
     window.__WEB_APP_CONFIG__ = {
       cameras: __CAMERA_ITEMS_JSON__,
       homeCameraCodes: __HOME_CAMERA_CODES_JSON__,
+      homeCameraNames: __HOME_CAMERA_NAMES_JSON__,
       devices: __DEVICE_CATALOG_JSON__,
       defaultCamera: __DEFAULT_CAMERA_JSON__,
       staticAssetVersion: "__STATIC_ASSET_VERSION__",
@@ -246,9 +260,11 @@
       const config = window.__WEB_APP_CONFIG__ || {};
       const select = document.getElementById("home-history-camera-select");
       const status = document.getElementById("home-history-camera-status");
+      const nameSelect = document.getElementById("home-history-camera-name-select");
+      const nameStatus = document.getElementById("home-history-camera-name-status");
       const syncIntervalMs = 30000;
 
-      if (!select || !status) return;
+      if (!select || !status || !nameSelect || !nameStatus) return;
 
       function normalizeCameras(items) {
         const seen = new Set();
@@ -271,18 +287,18 @@
           .sort((left, right) => left.label.localeCompare(right.label, "es", { sensitivity: "base" }));
       }
 
-      function renderOptions(items, message = "") {
+      function renderOptions(targetSelect, targetStatus, items, message = "") {
         const normalized = normalizeCameras(items);
-        const previousValue = select.value;
-        select.innerHTML = "";
+        const previousValue = targetSelect.value;
+        targetSelect.innerHTML = "";
 
         if (!normalized.length) {
           const emptyOption = document.createElement("option");
           emptyOption.value = "";
           emptyOption.textContent = "No hay cámaras disponibles";
           emptyOption.selected = true;
-          select.appendChild(emptyOption);
-          status.textContent = message || "No hay cámaras disponibles";
+          targetSelect.appendChild(emptyOption);
+          targetStatus.textContent = message || "No hay cámaras disponibles";
           return;
         }
 
@@ -290,37 +306,73 @@
           const option = document.createElement("option");
           option.value = item.value;
           option.textContent = item.label;
-          select.appendChild(option);
+          targetSelect.appendChild(option);
         });
 
         if (previousValue && normalized.some((item) => item.value === previousValue)) {
-          select.value = previousValue;
-        } else if (select.options.length) {
-          select.selectedIndex = 0;
+          targetSelect.value = previousValue;
+        } else if (targetSelect.options.length) {
+          targetSelect.selectedIndex = 0;
         }
 
-        status.textContent = message || `${normalized.length} cámaras sincronizadas`;
+        targetStatus.textContent = message || `${normalized.length} cámaras sincronizadas`;
       }
 
-      async function refreshCameraOptions() {
+      async function refreshSelector(url, targetSelect, targetStatus, fallbackItems, successMessage, failureMessage) {
         try {
-          const response = await fetch("/api/camera-unique-codes", {
+          const response = await fetch(url, {
             headers: { Accept: "application/json" },
           });
           const payload = await response.json();
           if (!response.ok || payload.error) {
             throw new Error(String(payload.error || `HTTP ${response.status}`));
           }
-          renderOptions(payload.items || [], `${Number(payload.total || 0)} IDs únicos sincronizados con PostgreSQL`);
+          renderOptions(targetSelect, targetStatus, payload.items || [], `${Number(payload.total || 0)} ${successMessage}`);
         } catch (error) {
-          status.textContent = String(error && error.message ? error.message : "No se pudieron cargar los IDs únicos desde PostgreSQL");
+          renderOptions(
+            targetSelect,
+            targetStatus,
+            fallbackItems || [],
+            String(error && error.message ? error.message : failureMessage)
+          );
         }
       }
 
-      renderOptions(config.homeCameraCodes || [], status.textContent || "IDs únicos cargados desde PostgreSQL");
-      void refreshCameraOptions();
+      renderOptions(select, status, config.homeCameraCodes || [], status.textContent || "IDs únicos cargados desde PostgreSQL");
+      renderOptions(nameSelect, nameStatus, config.homeCameraNames || [], nameStatus.textContent || "Nombres cargados desde PostgreSQL");
+      void refreshSelector(
+        "/api/camera-unique-codes",
+        select,
+        status,
+        config.homeCameraCodes || [],
+        "IDs únicos sincronizados con PostgreSQL",
+        "No se pudieron cargar los IDs únicos desde PostgreSQL"
+      );
+      void refreshSelector(
+        "/api/camera-names",
+        nameSelect,
+        nameStatus,
+        config.homeCameraNames || [],
+        "nombres sincronizados con PostgreSQL",
+        "No se pudieron cargar los nombres desde PostgreSQL"
+      );
       window.setInterval(() => {
-        void refreshCameraOptions();
+        void refreshSelector(
+          "/api/camera-unique-codes",
+          select,
+          status,
+          config.homeCameraCodes || [],
+          "IDs únicos sincronizados con PostgreSQL",
+          "No se pudieron cargar los IDs únicos desde PostgreSQL"
+        );
+        void refreshSelector(
+          "/api/camera-names",
+          nameSelect,
+          nameStatus,
+          config.homeCameraNames || [],
+          "nombres sincronizados con PostgreSQL",
+          "No se pudieron cargar los nombres desde PostgreSQL"
+        );
       }, syncIntervalMs);
     })();
   </script>

@@ -131,6 +131,21 @@ def _fetch_db_camera_unique_codes() -> tuple[list[str], str]:
     return codes, ""
 
 
+def _fetch_db_camera_names() -> tuple[list[str], str]:
+    rows, error = _fetch_db_camera_rows()
+    if error:
+        return [], error
+
+    names: list[str] = []
+    seen: set[str] = set()
+    for row in rows or []:
+        value = _text((row or {}).get("name")).strip()
+        if value and value not in seen:
+            seen.add(value)
+            names.append(value)
+    return names, ""
+
+
 def _template_source(name: str, seen: set[Path] | None = None) -> str:
     return template_renderer.source(name, seen)
 
@@ -289,6 +304,7 @@ def _build_context(request: Request) -> dict[str, str]:
     username = _text(me.get("username"), "robiotec")
     role = ", ".join(me.get("roles") or ["master"])
     db_camera_codes, db_camera_codes_error = _fetch_db_camera_unique_codes()
+    db_camera_names, db_camera_names_error = _fetch_db_camera_names()
     return {
         "__AUTH_USERNAME__": username,
         "__DEVELOPER_MENU_LINK__": '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span><span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span><span class="sidebar-link-tooltip">Usuarios</span></a><a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span><span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span><span class="sidebar-link-tooltip">Registros</span></a>',
@@ -326,10 +342,17 @@ def _build_context(request: Request) -> dict[str, str]:
         "__PROFILE_VIEWER_TOTAL__": str(len(streams)),
         "__HOME_CAMERA_OPTION_ITEMS__": _camera_unique_code_options_html(db_camera_codes),
         "__HOME_CAMERA_CODES_JSON__": _json(db_camera_codes),
+        "__HOME_CAMERA_NAME_OPTION_ITEMS__": _camera_unique_code_options_html(db_camera_names),
+        "__HOME_CAMERA_NAMES_JSON__": _json(db_camera_names),
         "__HOME_CAMERA_STATUS__": (
             db_camera_codes_error
             or db_camera_items_error
             or f"{len(db_camera_codes)} IDs únicos cargados desde PostgreSQL"
+        ),
+        "__HOME_CAMERA_NAME_STATUS__": (
+            db_camera_names_error
+            or db_camera_items_error
+            or f"{len(db_camera_names)} nombres cargados desde PostgreSQL"
         ),
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
@@ -547,6 +570,14 @@ def camera_unique_codes():
     if error:
         return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
     return {"items": [{"value": code, "label": code} for code in codes], "total": len(codes)}
+
+
+@app.get("/api/camera-names")
+def camera_names():
+    names, error = _fetch_db_camera_names()
+    if error:
+        return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
+    return {"items": [{"value": name, "label": name} for name in names], "total": len(names)}
 
 
 @app.post("/api/cameras")
