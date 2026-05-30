@@ -1,4 +1,16 @@
+from __future__ import annotations
+
+import shlex
+
 import paramiko
+
+DEFAULT_REMOTE_HOST = "100.93.62.24"
+DEFAULT_REMOTE_USER = "robiotec"
+DEFAULT_REMOTE_PASSWORD = "123456"
+DEFAULT_REMOTE_PORT = 22
+DEFAULT_REMOTE_MANIFEST_PATH = (
+    "/home/robiotec/Documents/VICTOR/Object_Recognition/src/unified/results_presentacion/manifest.jsonl"
+)
 
 
 class SSHClientManager:
@@ -47,26 +59,44 @@ class SSHClientManager:
         if self.client:
             self.client.close()
             print("[OK] Conexión cerrada")
-            
-if __name__ == "__main__":
-    
+
+
+def fetch_remote_manifest_text(
+    *,
+    host: str = DEFAULT_REMOTE_HOST,
+    user: str = DEFAULT_REMOTE_USER,
+    password: str | None = DEFAULT_REMOTE_PASSWORD,
+    port: int = DEFAULT_REMOTE_PORT,
+    key_path: str | None = None,
+    manifest_path: str = DEFAULT_REMOTE_MANIFEST_PATH,
+) -> str:
     ssh_manager = SSHClientManager(
-        host="100.93.62.24",
-        user="robiotec",
-        password="123456",
-        port=22
+        host=host,
+        user=user,
+        password=password,
+        port=port,
+        key_path=key_path,
     )
     try:
         ssh_manager.connect()
-        output, error = ssh_manager.execute(
-            "cd Documents/VICTOR/Object_Recognition/src/unified/results_presentacion && cat manifest.jsonl"
-        )
-        print("Output:", output)
-        
-        
-        print("Error:", error)
-    except Exception as e:
-        print(f"Error: {e}")
+        output, error = ssh_manager.execute(f"cat {shlex.quote(manifest_path)}")
+        output = output.strip()
+        error = error.strip()
+        if error:
+            raise RuntimeError(error)
+        return output
     finally:
         ssh_manager.close()
-        
+
+
+def fetch_remote_manifest_lines(**kwargs) -> list[str]:
+    output = fetch_remote_manifest_text(**kwargs)
+    return [line for line in output.splitlines() if line.strip()]
+
+
+if __name__ == "__main__":
+    try:
+        output = fetch_remote_manifest_text()
+        print("Output:", output)
+    except Exception as e:
+        print(f"Error: {e}")

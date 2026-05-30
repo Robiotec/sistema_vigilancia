@@ -12,7 +12,7 @@ from urllib.request import Request as UrlRequest
 from urllib.request import urlopen
 
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from back.app.config import get_settings
@@ -26,6 +26,7 @@ from back.app.domain.streaming import StreamConfigMapper
 from back.app.domain.vehicles import VehicleNormalizer
 from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
+from back.app.services.module_conect_ssh import fetch_remote_manifest_lines
 from back.app.services.rendering import DashboardTemplateRenderer
 
 settings = get_settings()
@@ -957,6 +958,48 @@ def _camera_stream_path(item: dict[str, Any] | None, fallback: str = "") -> str:
         or item.get("name")
         or fallback
     ).strip("/")
+
+
+@app.get("/api/camera-events-raw", response_class=PlainTextResponse)
+def camera_events_raw(request: Request, camera_name: str = "", cam_id: str = "", limit: int = 50):
+    selected_cam_id = _text(cam_id).strip()
+    if not selected_cam_id:
+        item = _camera_lookup(request, camera_name=camera_name)
+        selected_cam_id = _text(
+            (item or {}).get("codigo_unico")
+            or (item or {}).get("path")
+            or (item or {}).get("name")
+        ).strip()
+    if not selected_cam_id:
+        return PlainTextResponse("Selecciona una cámara para ver eventos.")
+
+    try:
+        lines = fetch_remote_manifest_lines()
+    except Exception as exc:
+        return PlainTextResponse(
+            f"No se pudieron cargar los eventos remotos.\n{_text(exc)}",
+            status_code=502,
+        )
+
+    max_lines = max(1, min(int(limit or 50), 200))
+    filtered: list[str] = []
+    for raw_line in lines:
+        line = raw_line.strip()
+        if not line:
+            continue
+        try:
+            payload = json.loads(line)
+        except Exception:
+            if selected_cam_id in line:
+                filtered.append(line)
+            continue
+        if _text(payload.get("cam_id")).strip() == selected_cam_id:
+            filtered.append(line)
+
+    if not filtered:
+        return PlainTextResponse(f"Sin eventos para {selected_cam_id}.")
+
+    return PlainTextResponse("\n".join(filtered[-max_lines:]))
 
 
 def _video_unavailable_payload(message: str = "El video actualmente no se encuentra disponible.") -> dict[str, Any]:

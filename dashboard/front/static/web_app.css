@@ -3517,6 +3517,35 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   gap: 10px;
 }
 
+.face-preview-grid-raw {
+  display: block;
+}
+
+.face-preview-raw {
+  margin: 0;
+  min-height: 240px;
+  max-height: min(52vh, 520px);
+  overflow: auto;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.74rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.face-preview-raw[data-state="loading"] {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.face-preview-raw[data-state="error"] {
+  color: rgba(255, 181, 152, 0.9);
+}
+
 .face-preview-item {
   display: flex;
   align-items: center;

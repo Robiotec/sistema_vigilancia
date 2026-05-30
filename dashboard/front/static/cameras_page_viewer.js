@@ -12,6 +12,7 @@
     hands_helmet: "DETECCIÓN MANOS CASCO",
   };
   let activeCameraName = "";
+  let eventsRequestToken = 0;
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -194,6 +195,48 @@
     } catch (error) {}
   }
 
+  function setCameraEventsText(message, state = "idle") {
+    const output = document.getElementById("camera-events-output");
+    if (!output) return;
+    output.dataset.state = state;
+    output.textContent = String(message || "");
+  }
+
+  async function loadCameraEvents(cameraName) {
+    const normalizedName = String(cameraName || "").trim();
+    if (!normalizedName) {
+      setCameraEventsText("Selecciona una cámara para ver los JSON del manifest.", "idle");
+      return;
+    }
+
+    const camera = cameraByName(normalizedName);
+    const resolvedCamId = String(
+      (camera && (camera.codigo_unico || camera.path || camera.display_name || camera.name)) || normalizedName
+    ).trim();
+    const requestToken = ++eventsRequestToken;
+    setCameraEventsText(`Cargando eventos de ${String(camera.display_name || normalizedName)}...`, "loading");
+
+    try {
+      const target = new URL("/api/camera-events-raw", window.location.origin);
+      target.searchParams.set("camera_name", normalizedName);
+      target.searchParams.set("cam_id", resolvedCamId);
+      const response = await fetch(target.toString(), {
+        credentials: "same-origin",
+        headers: { Accept: "text/plain" },
+      });
+      const body = await response.text();
+      if (requestToken !== eventsRequestToken) return;
+      if (!response.ok) {
+        setCameraEventsText(body || "No se pudieron cargar los eventos.", "error");
+        return;
+      }
+      setCameraEventsText(body || `Sin eventos para ${resolvedCamId}.`, "ready");
+    } catch (error) {
+      if (requestToken !== eventsRequestToken) return;
+      setCameraEventsText("No se pudieron cargar los eventos remotos.", "error");
+    }
+  }
+
   function renderCamera(cameraName, { persistUrl = true, inferenceType = null } = {}) {
     const switcher = document.getElementById("camera-switcher");
     const primaryView = document.getElementById("primary-view");
@@ -222,6 +265,7 @@
     primaryView.replaceChildren(shell);
     primaryView.classList.remove("is-empty");
     activeCameraName = normalizedName;
+    void loadCameraEvents(normalizedName);
     syncInferenceToolbar(normalizedName, resolvedInferenceType);
     switcher.querySelectorAll("[data-camera-name], .camera-pill[href]").forEach((item) => {
       item.classList.toggle("is-active", cameraNameFromTrigger(item) === normalizedName);
@@ -280,6 +324,7 @@
       });
     }
     syncInferenceToolbar("", "none");
+    setCameraEventsText("Selecciona una cámara para ver los JSON del manifest.", "idle");
 
     switcher.addEventListener("click", (event) => {
       const inferenceButton = event.target instanceof Element
