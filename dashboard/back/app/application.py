@@ -26,11 +26,13 @@ from back.app.domain.streaming import StreamConfigMapper
 from back.app.domain.vehicles import VehicleNormalizer
 from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
+from back.app.services.remote_detection_feed import RemoteDetectionFeedService
 from back.app.services.rendering import DashboardTemplateRenderer
 
 settings = get_settings()
 SESSION_COOKIE = "robiotec_dashboard_token"
 api_client = DashboardApiClient(settings)
+remote_detection_feed = RemoteDetectionFeedService(settings)
 helper = DashboardHelper(SESSION_COOKIE)
 camera_normalizer = CameraNormalizer()
 vehicle_normalizer = VehicleNormalizer()
@@ -861,6 +863,29 @@ def events():
 @app.get("/api/evidence")
 def evidence():
     return []
+
+
+@app.get("/api/camera-events")
+def camera_events(request: Request, camera: str = "", camera_name: str = "", limit: int = 8):
+    item = _camera_lookup(request, camera=camera, camera_name=camera_name)
+    cam_id = _text(item.get("codigo_unico") or item.get("path") or item.get("name")) if item else _text(camera_name or camera)
+    if not cam_id:
+        return JSONResponse([], status_code=200)
+    try:
+        return JSONResponse(remote_detection_feed.fetch_camera_events(cam_id, limit=limit))
+    except Exception as exc:
+        return JSONResponse({"error": str(exc), "items": []}, status_code=503)
+
+
+@app.get("/api/camera-event-crop")
+def camera_event_crop(path: str):
+    try:
+        content, media_type = remote_detection_feed.read_remote_file(path)
+    except FileNotFoundError:
+        return Response(status_code=404)
+    except Exception as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
+    return Response(content=content, media_type=media_type)
 
 
 @app.get("/api/telemetry")

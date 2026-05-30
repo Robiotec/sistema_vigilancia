@@ -3527,6 +3527,25 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   background: rgba(255, 255, 255, 0.03);
 }
 
+.face-preview-item[data-camera-event-type="plate"] {
+  align-items: flex-start;
+}
+
+.face-preview-image {
+  width: 84px;
+  height: 84px;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.face-preview-empty {
+  justify-content: center;
+  min-height: 120px;
+}
+
 .face-preview-avatar {
   width: 42px;
   height: 42px;
@@ -3548,6 +3567,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 .face-preview-copy {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
 .face-preview-copy strong {

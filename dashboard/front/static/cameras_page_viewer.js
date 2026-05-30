@@ -12,6 +12,8 @@
     hands_helmet: "DETECCIÓN MANOS CASCO",
   };
   let activeCameraName = "";
+  let cameraEventsRequestToken = 0;
+  let cameraEventsRefreshTimer = 0;
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -36,6 +38,114 @@
   function cameraByName(cameraName) {
     const normalizedName = String(cameraName || "").trim();
     return cameras.find((camera) => camera && camera.name === normalizedName) || { name: normalizedName };
+  }
+
+  function formatTimestamp(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || numeric <= 0) return "Sin fecha";
+    try {
+      return new Date(numeric * 1000).toLocaleString("es-EC", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch (error) {
+      return String(value);
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+  }
+
+  function renderCameraEvents(items, { emptyMessage = "No hay eventos recientes para esta cámara." } = {}) {
+    const feed = document.getElementById("camera-events-feed");
+    if (!feed) return;
+    const events = Array.isArray(items) ? items : [];
+    if (!events.length) {
+      feed.innerHTML = `
+        <article class="face-preview-item face-preview-empty">
+          <div class="face-preview-copy">
+            <strong>Sin eventos</strong>
+            <span>${escapeHtml(emptyMessage)}</span>
+          </div>
+        </article>
+      `;
+      return;
+    }
+
+    feed.innerHTML = events.map((item) => {
+      const cropPath = String(item.crop_path || "").trim();
+      const imageUrl = cropPath ? `/api/camera-event-crop?path=${encodeURIComponent(cropPath)}` : "";
+      const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
+      const rows = Array.isArray(item.rows) ? item.rows : [];
+      const rowsHtml = rows.map((row) => `
+        <strong>${escapeHtml(row.label)}:</strong>
+        <span>${escapeHtml(row.value)}</span>
+      `).join("");
+      return `
+        <article class="face-preview-item" data-camera-event-type="${escapeHtml(item.event_type || "")}">
+          ${imageUrl
+            ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
+            : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`}
+          <div class="face-preview-copy">
+            <strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>
+            <span>${escapeHtml(formatTimestamp(item.timestamp))}</span>
+            ${rowsHtml}
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function loadCameraEvents(cameraName) {
+    const normalizedName = String(cameraName || "").trim();
+    const feed = document.getElementById("camera-events-feed");
+    if (!feed) return;
+    if (!normalizedName) {
+      renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas y placas." });
+      return;
+    }
+
+    const requestToken = ++cameraEventsRequestToken;
+    renderCameraEvents([], { emptyMessage: "Cargando eventos..." });
+    try {
+      const response = await fetch(`/api/camera-events?camera_name=${encodeURIComponent(normalizedName)}&limit=8`, {
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+      });
+      const payload = await response.json();
+      if (requestToken !== cameraEventsRequestToken) return;
+      const items = Array.isArray(payload) ? payload : Array.isArray(payload.items) ? payload.items : [];
+      renderCameraEvents(items);
+    } catch (error) {
+      if (requestToken !== cameraEventsRequestToken) return;
+      renderCameraEvents([], { emptyMessage: "No se pudieron cargar los eventos de esta cámara." });
+    }
+  }
+
+  function scheduleCameraEventsRefresh(cameraName) {
+    if (cameraEventsRefreshTimer) {
+      window.clearTimeout(cameraEventsRefreshTimer);
+      cameraEventsRefreshTimer = 0;
+    }
+    const normalizedName = String(cameraName || "").trim();
+    if (!normalizedName) return;
+    cameraEventsRefreshTimer = window.setTimeout(() => {
+      cameraEventsRefreshTimer = 0;
+      void loadCameraEvents(normalizedName).finally(() => {
+        if (activeCameraName === normalizedName) {
+          scheduleCameraEventsRefresh(normalizedName);
+        }
+      });
+    }, 3000);
   }
 
   function loadInferenceState() {
@@ -223,6 +333,8 @@
     primaryView.classList.remove("is-empty");
     activeCameraName = normalizedName;
     syncInferenceToolbar(normalizedName, resolvedInferenceType);
+    void loadCameraEvents(normalizedName);
+    scheduleCameraEventsRefresh(normalizedName);
     switcher.querySelectorAll("[data-camera-name], .camera-pill[href]").forEach((item) => {
       item.classList.toggle("is-active", cameraNameFromTrigger(item) === normalizedName);
     });
@@ -280,6 +392,7 @@
       });
     }
     syncInferenceToolbar("", "none");
+    renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas y placas." });
 
     switcher.addEventListener("click", (event) => {
       const inferenceButton = event.target instanceof Element

@@ -38,10 +38,11 @@ class SSHClientManager:
 
         stdin, stdout, stderr = self.client.exec_command(command)
 
-        output = stdout.read().decode()
-        error = stderr.read().decode()
+        output = stdout.read().decode().strip()
+        error = stderr.read().decode().strip()
+        exit_status = stdout.channel.recv_exit_status()
 
-        return output, error
+        return output, error, exit_status
 
     def close(self):
         if self.client:
@@ -58,13 +59,20 @@ if __name__ == "__main__":
     )
     try:
         ssh_manager.connect()
-        output, error = ssh_manager.execute(
+        output, error, exit_status = ssh_manager.execute(
             "cd Documents/VICTOR/Object_Recognition/src/unified/results_presentacion && cat manifest.jsonl"
         )
-        print("Output:", output)
-        
-        
-        print("Error:", error)
+
+        if output:
+            print("Output:", output)
+
+        if error:
+            print("Error:", error)
+
+        if exit_status == 0 and not error:
+            print("[OK] Comando ejecutado sin errores")
+        elif exit_status != 0:
+            print(f"[WARN] El comando terminó con código {exit_status}")
     except Exception as e:
         print(f"Error: {e}")
     finally:

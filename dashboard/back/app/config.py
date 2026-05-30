@@ -16,6 +16,15 @@ class Settings(BaseSettings):
     mediamtx_rtmp_port: int = Field(default=1935, alias="MEDIAMTX_RTMP_PORT")
     dashboard_host: str = Field(default="0.0.0.0", alias="DASHBOARD_HOST")
     dashboard_port: int = Field(default=8010, alias="DASHBOARD_PORT")
+    preview_mode: bool = Field(default=False, alias="PREVIEW_MODE")
+    ssh_events_host: str = Field(default="100.93.62.24", alias="SSH_EVENTS_HOST")
+    ssh_events_user: str = Field(default="robiotec", alias="SSH_EVENTS_USER")
+    ssh_events_password: str = Field(default="123456", alias="SSH_EVENTS_PASSWORD")
+    ssh_events_port: int = Field(default=22, alias="SSH_EVENTS_PORT")
+    ssh_events_base_path: str = Field(
+        default="/home/robiotec/Documents/VICTOR/Object_Recognition/src/unified/results_presentacion",
+        alias="SSH_EVENTS_BASE_PATH",
+    )
 
 
 @lru_cache
