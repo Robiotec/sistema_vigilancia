@@ -472,6 +472,37 @@ def cameras_registry(request: Request):
     return [_camera_item(cam, stream_by_camera.get(str(cam.get("id")))) for cam in cams]
 
 
+@app.get("/api/camera-unique-codes")
+def camera_unique_codes():
+    try:
+        from back.app.services.conection_sql_postgrest import fetch_all
+    except Exception as exc:
+        return JSONResponse({"error": f"No se pudo importar el conector PostgreSQL: {_text(exc)}"}, status_code=500)
+
+    try:
+        rows = fetch_all(
+            """
+            SELECT unique_code
+            FROM cameras
+            WHERE unique_code IS NOT NULL
+              AND TRIM(unique_code) <> ''
+            ORDER BY unique_code ASC
+            """
+        )
+    except Exception as exc:
+        return JSONResponse({"error": f"No se pudieron consultar las cámaras en PostgreSQL: {_text(exc)}"}, status_code=502)
+
+    codes: list[str] = []
+    seen: set[str] = set()
+    for row in rows or []:
+        value = _text((row or {}).get("unique_code")).strip()
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        codes.append(value)
+    return {"items": [{"value": code, "label": code} for code in codes], "total": len(codes)}
+
+
 @app.post("/api/cameras")
 async def camera_create(request: Request):
     token = _token(request)

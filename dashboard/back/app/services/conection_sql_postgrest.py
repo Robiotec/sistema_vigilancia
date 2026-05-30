@@ -41,8 +41,9 @@ if __name__ == "__main__":
         print("Conexión exitosa a PostgreSQL")
         
         # consulta de Cameras
-        cameras = fetch_all("SELECT * FROM areas")
-        print("Cameras:", cameras)
+        cameras = fetch_all("SELECT * FROM cameras")
+        for cam in cameras:
+            print(cam["unique_code"])
         
     except Exception as e:
         print(f"Error al conectar a PostgreSQL: {e}")

@@ -69,10 +69,10 @@
                     <label class="home-history-field">
                       <span>Seleccionar cámara</span>
                       <select id="home-history-camera-select" aria-label="Seleccionar ID de cámara">
-                        <option value="">Cargando cámaras...</option>
+                        <option value="">Cargando IDs únicos...</option>
                       </select>
                     </label>
-                    <span class="home-history-field-note" id="home-history-camera-status">Sincronizando catálogo de cámaras…</span>
+                    <span class="home-history-field-note" id="home-history-camera-status">Sincronizando IDs únicos desde PostgreSQL…</span>
                   </div>
                 </section>
 
@@ -242,41 +242,20 @@
   </script>
   <script>
     (() => {
-      const config = window.__WEB_APP_CONFIG__ || {};
       const select = document.getElementById("home-history-camera-select");
       const status = document.getElementById("home-history-camera-status");
       const syncIntervalMs = 30000;
 
       if (!select || !status) return;
 
-      function cameraUniqueId(camera) {
-        if (!camera || typeof camera !== "object") return "";
-        return String(
-          camera.codigo_unico ||
-          camera.path ||
-          camera.name ||
-          camera.display_name ||
-          camera.id ||
-          ""
-        ).trim();
-      }
-
-      function cameraLabel(camera) {
-        const uniqueId = cameraUniqueId(camera);
-        const displayName = String(camera.display_name || camera.name || uniqueId).trim();
-        if (!uniqueId) return displayName;
-        if (displayName && displayName !== uniqueId) {
-          return `${uniqueId} · ${displayName}`;
-        }
-        return uniqueId;
-      }
-
       function normalizeCameras(items) {
         const seen = new Set();
         return (Array.isArray(items) ? items : [])
           .map((camera) => {
-            const uniqueId = cameraUniqueId(camera);
-            return uniqueId ? { value: uniqueId, label: cameraLabel(camera) } : null;
+            if (!camera || typeof camera !== "object") return null;
+            const value = String(camera.value || camera.unique_code || camera.codigo_unico || "").trim();
+            const label = String(camera.label || value).trim();
+            return value ? { value, label: label || value } : null;
           })
           .filter((item) => {
             if (!item || seen.has(item.value)) return false;
@@ -312,25 +291,19 @@
 
       async function refreshCameraOptions() {
         try {
-          const response = await fetch("/api/cameras", {
-            credentials: "same-origin",
+          const response = await fetch("/api/camera-unique-codes", {
             headers: { Accept: "application/json" },
           });
           if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
           }
           const payload = await response.json();
-          renderOptions(payload, `${Array.isArray(payload) ? payload.length : 0} cámaras sincronizadas con la base de datos`);
+          renderOptions(payload.items || [], `${Number(payload.total || 0)} IDs únicos sincronizados con PostgreSQL`);
         } catch (error) {
-          if (!select.options.length || select.options[0].textContent === "Cargando cámaras...") {
-            renderOptions(config.cameras || [], "Mostrando cámaras cargadas al abrir la página");
-          } else {
-            status.textContent = "No se pudo refrescar el catálogo en este momento";
-          }
+          renderOptions([], "No se pudieron cargar los IDs únicos desde PostgreSQL");
         }
       }
 
-      renderOptions(config.cameras || [], "Mostrando cámaras cargadas al abrir la página");
       void refreshCameraOptions();
       window.setInterval(() => {
         void refreshCameraOptions();
