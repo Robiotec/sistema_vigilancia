@@ -34,14 +34,25 @@
     const s = document.createElement("style");
     s.id = "camera-infer-view-styles";
     s.textContent = `
-.camera-infer-view-btn{position:absolute;top:8px;left:8px;z-index:2;display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);background:rgba(6,8,16,.72);color:rgba(255,255,255,.85);font:700 10px/1 system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;pointer-events:auto;transition:background .15s,border-color .15s}
-.camera-infer-view-btn:hover{background:rgba(6,8,16,.9);border-color:rgba(255,255,255,.26)}
-.camera-infer-view-btn.is-active{background: #eb8525d1;border-color: #eb8525d1;color:#fff}
+.camera-infer-view-btn{position:absolute;top:8px;left:8px;z-index:2;display:inline-flex;align-items:center;gap:0;max-width:41px;overflow:hidden;white-space:nowrap;padding:3px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);background:rgba(6,8,16,.72);color:rgba(255,255,255,.85);font:700 10px/1 system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;pointer-events:auto;transition:max-width .24s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease}
+.camera-infer-view-btn:hover,.camera-infer-view-btn:focus-visible{max-width:190px;gap:7px;background:linear-gradient(135deg,rgba(235,133,37,.96),rgba(255,184,74,.9));border-color:rgba(255,205,120,.75);color:#fff;box-shadow:0 12px 28px rgba(235,133,37,.28),0 4px 14px rgba(0,0,0,.3)}
+.camera-infer-view-btn.is-active{background:linear-gradient(135deg,rgba(235,133,37,.92),rgba(255,174,55,.78));border-color:rgba(255,196,92,.62);color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 8px 18px rgba(235,133,37,.24)}
+.camera-infer-view-btn.is-active:hover,.camera-infer-view-btn.is-active:focus-visible{background:linear-gradient(135deg,rgba(235,133,37,1),rgba(255,210,94,.94));border-color:rgba(255,221,145,.86)}
 .camera-infer-view-btn.is-unavailable{background:rgba(140,20,20,.78);border-color:rgba(220,80,80,.4);color:#fff}
 .camera-infer-view-btn.is-loading{opacity:.55;cursor:wait}
-.camera-infer-view-btn svg{flex-shrink:0; width:25px; height:25px;}
+.camera-infer-view-icon{position:relative;flex:0 0 25px;width:25px;height:25px}
+.camera-infer-view-icon svg{position:absolute;inset:0;width:25px;height:25px;transition:opacity .18s ease,transform .24s ease}
+.camera-infer-eye-open{opacity:0;transform:scale(.82) translateY(1px)}
+.camera-infer-eye-closed{opacity:1;transform:scale(1)}
+.camera-infer-view-btn.is-active .camera-infer-eye-open{opacity:1;transform:scale(1) translateY(0)}
+.camera-infer-view-btn.is-active .camera-infer-eye-closed{opacity:0;transform:scaleY(.35) translateY(2px)}
+.camera-infer-view-btn:hover .camera-infer-eye-open,.camera-infer-view-btn:focus-visible .camera-infer-eye-open{opacity:1;transform:scale(1) translateY(0)}
+.camera-infer-view-btn:hover .camera-infer-eye-closed,.camera-infer-view-btn:focus-visible .camera-infer-eye-closed{opacity:0;transform:scaleY(.35) translateY(2px)}
+.camera-infer-view-label{display:inline-block;max-width:0;opacity:0;transform:translateX(-8px);overflow:hidden;transition:max-width .24s ease,opacity .18s ease,transform .24s ease}
+.camera-infer-view-btn:hover .camera-infer-view-label,.camera-infer-view-btn:focus-visible .camera-infer-view-label{max-width:132px;opacity:1;transform:translateX(0)}
 .cameras-page-large-card{position:relative}
-.cameras-page-large-card .camera-infer-view-btn{top:14px;left:14px;padding:6px 12px;font-size:11px;border-radius:8px}
+.cameras-page-large-card .camera-infer-view-btn{top:14px;left:14px;max-width:49px;padding:6px 12px;font-size:11px;border-radius:8px}
+.cameras-page-large-card .camera-infer-view-btn:hover,.cameras-page-large-card .camera-infer-view-btn:focus-visible{max-width:216px}
 .page-cameras .camera-pill-shell .camera-infer-view-btn{top:20px;left:20px}`;
     document.head.appendChild(s);
   })();
@@ -84,20 +95,27 @@
   }
 
   function syncInferenceViewBtn(btn, state) {
+    const label = btn.querySelector(".camera-infer-view-label");
     if (state === "active") {
       btn.classList.add("is-active");
       btn.classList.remove("is-unavailable", "is-loading");
       btn.setAttribute("aria-pressed", "true");
+      btn.setAttribute("aria-label", "Volver a vista normal");
       btn.title = "Volver a vista normal";
+      if (label) label.textContent = "Vista normal";
     } else if (state === "unavailable") {
       btn.classList.add("is-active", "is-unavailable");
       btn.classList.remove("is-loading");
       btn.setAttribute("aria-pressed", "true");
-      btn.title = "Inferencia no disponible — clic para volver a vista normal";
+      btn.setAttribute("aria-label", "Inferencia no disponible, volver a vista normal");
+      btn.title = "Inferencia no disponible, clic para volver a vista normal";
+      if (label) label.textContent = "No disponible";
     } else {
       btn.classList.remove("is-active", "is-unavailable", "is-loading");
       btn.setAttribute("aria-pressed", "false");
-      btn.title = "Ver stream de inferencia";
+      btn.setAttribute("aria-label", "Activar la inferencia");
+      btn.title = "Activar la inferencia";
+      if (label) label.textContent = "Activar inferencia";
     }
   }
 
@@ -127,18 +145,27 @@
   }
 
   const INFER_BTN_SVG =
-    '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true">' +
+    '<span class="camera-infer-view-icon" aria-hidden="true">' +
+    '<svg class="camera-infer-eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" focusable="false">' +
+    '<path d="M4 14.5c2.2-2.1 4.8-3.1 8-3.1s5.8 1 8 3.1"/>' +
+    '<path d="M7 17l1.4-2.1"/>' +
+    '<path d="M12 18v-2.6"/>' +
+    '<path d="M17 17l-1.4-2.1"/>' +
+    "</svg>" +
+    '<svg class="camera-infer-eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">' +
     '<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/>' +
     '<circle cx="12" cy="12" r="3"/>' +
-    "</svg>";
+    "</svg>" +
+    "</span>";
 
   function createInferenceViewBtn(cameraName, frame) {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "camera-infer-view-btn";
     btn.setAttribute("aria-pressed", "false");
-    btn.title = "Ver stream de inferencia";
-    btn.innerHTML = `${INFER_BTN_SVG}`;
+    btn.setAttribute("aria-label", "Activar la inferencia");
+    btn.title = "Activar la inferencia";
+    btn.innerHTML = `${INFER_BTN_SVG}<span class="camera-infer-view-label">Activar inferencia</span>`;
     btn.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopImmediatePropagation();
