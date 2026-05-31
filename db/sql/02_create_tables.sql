@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS cameras (
     unique_code varchar(120) UNIQUE,
     camera_type varchar(40) NOT NULL DEFAULT 'fixed',
     inference_type varchar(40) NOT NULL DEFAULT 'inactiva'
-        CHECK (inference_type IN ('rostros', 'placas', 'zonas', 'movimientos', 'inactiva')),
+        CHECK (inference_type IN ('rostro', 'placa', 'zona', 'movimiento', 'inactiva')),
     protocol varchar(40) NOT NULL DEFAULT 'rtsp',
     ip varchar(120),
     port integer,

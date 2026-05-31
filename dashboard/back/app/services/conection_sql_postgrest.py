@@ -33,6 +33,18 @@ def execute(query, params=None):
             conn.commit()
     finally:
         conn.close()
+
+
+def execute_returning(query, params=None):
+    conn = get_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, params)
+            rows = cur.fetchall()
+            conn.commit()
+            return rows
+    finally:
+        conn.close()
         
 if __name__ == "__main__":
     # Conexión de prueba

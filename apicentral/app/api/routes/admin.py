@@ -38,7 +38,7 @@ from app.schemas.stream import StreamPathCreate
 from app.services.auth_service import get_user_roles
 
 router = APIRouter(tags=["admin"])
-CAMERA_INFERENCE_TYPES = {"rostros", "placas", "zonas", "movimientos", "inactiva"}
+CAMERA_INFERENCE_TYPES = {"rostro", "placa", "zona", "movimiento", "inactiva"}
 
 
 class CompanyCreate(BaseModel):

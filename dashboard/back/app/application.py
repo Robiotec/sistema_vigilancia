@@ -58,10 +58,10 @@ vehicle_telemetry_mapper = VehicleTelemetryMapper()
 
 CAMERA_INFERENCE_TYPE_BY_UI = {
     "none": "inactiva",
-    "plates": "placas",
-    "faces": "rostros",
-    "access": "zonas",
-    "hands_helmet": "movimientos",
+    "plates": "placa",
+    "faces": "rostro",
+    "access": "zona",
+    "hands_helmet": "movimiento",
 }
 CAMERA_DB_INFERENCE_TYPES = set(CAMERA_INFERENCE_TYPE_BY_UI.values())
 
@@ -591,6 +591,40 @@ def _camera_db_inference_type(value: Any, enabled: bool | None = None, fallback:
     return fallback_value if fallback_value in CAMERA_DB_INFERENCE_TYPES else "inactiva"
 
 
+def _update_camera_inference_by_name(camera_name: Any, inference_type: Any) -> tuple[dict[str, Any] | None, str]:
+    normalized_name = _text(camera_name).strip()
+    normalized_inference_type = _camera_db_inference_type(inference_type)
+    if not normalized_name:
+        return None, "camera_not_found"
+    try:
+        from back.app.services.conection_sql_postgrest import execute_returning
+
+        rows = execute_returning(
+            """
+            UPDATE cameras
+            SET inference_type = %s
+            WHERE lower(trim(name)) = lower(trim(%s))
+            RETURNING id, name, inference_type
+            """,
+            (normalized_inference_type, normalized_name),
+        )
+    except Exception as exc:
+        return None, f"camera_inference_update_failed: {_text(exc)}"
+    if not rows:
+        return None, "camera_not_found"
+    row = dict(rows[0])
+    return {
+        "id": _text(row.get("id")),
+        "source_id": _text(row.get("id")),
+        "name": row.get("name"),
+        "nombre": row.get("name"),
+        "display_name": row.get("name"),
+        "inference_type": row.get("inference_type"),
+        "tipo_inferencia": row.get("inference_type"),
+        "hacer_inferencia": _text(row.get("inference_type")) != "inactiva",
+    }, ""
+
+
 @app.get("/api/camera-form-options")
 def camera_form_options(request: Request):
     token = _token(request)
@@ -1022,54 +1056,46 @@ async def camera_inference_update(camera_id: str, request: Request):
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
     p = await request.json()
-    cameras = _api("/cameras", token=token) or []
-    source_id = _resolve_source_id(cameras, camera_id)
-    if not source_id:
-        return JSONResponse({"error": "camera_not_found"}, status_code=404)
-    existing = next((item for item in cameras if str(item.get("id")) == str(source_id)), None) or {}
     inference_enabled = bool(p.get("hacer_inferencia"))
+    raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
+    if raw_inference_type is None:
+        return JSONResponse({"error": "missing_inference_type"}, status_code=400)
     requested_inference_type = _camera_db_inference_type(
-        p.get("inference_type") or p.get("tipo_inferencia"),
+        raw_inference_type,
         inference_enabled,
-        existing.get("inference_type"),
     )
     if requested_inference_type == "inactiva":
         inference_enabled = False
-    data = _camera_payload_from_form(
-        {
-            "nombre": existing.get("name"),
-            "organizacion_id": existing.get("company_id"),
-            "tipo_camara_codigo": existing.get("camera_type") or "fixed",
-            "protocolo_codigo": existing.get("protocol") or "rtsp",
-            "url_rtsp": existing.get("rtsp_url"),
-            "codigo_unico": existing.get("unique_code"),
-            "marca": existing.get("brand") or "custom",
-            "modelo": existing.get("model"),
-            "ip_camaras_fijas": existing.get("ip"),
-            "puerto": existing.get("port"),
-            "canal": existing.get("channel"),
-            "calidad": existing.get("quality"),
-            "substream": existing.get("stream") == 1 or existing.get("quality") == "substream",
-            "usuario_stream": existing.get("username"),
-            "usa_rbox": existing.get("uses_rbox"),
-            "rbox_id": existing.get("rbox_id"),
-            "vehiculo_id": existing.get("vehicle_id") or existing.get("drone_id"),
-            "vehiculo_posicion": existing.get("vehicle_position"),
-            "activa": existing.get("active", True),
-            "hacer_inferencia": inference_enabled,
-            "inference_type": requested_inference_type,
-        },
-        token,
-        existing,
-    )
-    try:
-        camera = _api(f"/cameras/{source_id}", method="PUT", token=token, data=data)
-    except RuntimeError as exc:
-        return _api_error_response(exc)
-    item = _camera_item(camera, {"path": camera.get("unique_code")})
-    item["hacer_inferencia"] = inference_enabled
-    item["inference_type"] = requested_inference_type
-    item["tipo_inferencia"] = requested_inference_type
+
+    camera_name = _text(p.get("camera_name") or p.get("name")).strip()
+    if not camera_name:
+        cameras = _api("/cameras", token=token) or []
+        source_id = _resolve_source_id(cameras, camera_id)
+        existing = next((item for item in cameras if str(item.get("id")) == str(source_id)), None) if source_id else None
+        camera_name = _text((existing or {}).get("name")).strip()
+    if not camera_name:
+        return JSONResponse({"error": "camera_not_found"}, status_code=404)
+
+    item, error = _update_camera_inference_by_name(camera_name, requested_inference_type)
+    if error:
+        status_code = 404 if error == "camera_not_found" else 500
+        return JSONResponse({"error": error, "name": camera_name}, status_code=status_code)
+    return JSONResponse({"camera": item})
+
+
+@app.post("/api/camera-inference-by-name")
+async def camera_inference_update_by_name(request: Request):
+    token = _token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    p = await request.json()
+    raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
+    if raw_inference_type is None:
+        return JSONResponse({"error": "missing_inference_type"}, status_code=400)
+    item, error = _update_camera_inference_by_name(p.get("camera_name") or p.get("name"), raw_inference_type)
+    if error:
+        status_code = 404 if error == "camera_not_found" else 500
+        return JSONResponse({"error": error, "name": _text(p.get("camera_name") or p.get("name"))}, status_code=status_code)
     return JSONResponse({"camera": item})
 
 

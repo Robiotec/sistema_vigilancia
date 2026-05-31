@@ -12,10 +12,10 @@
   };
   const inferenceTypeToDb = {
     none: "inactiva",
-    plates: "placas",
-    faces: "rostros",
-    access: "zonas",
-    hands_helmet: "movimientos",
+    plates: "placa",
+    faces: "rostro",
+    access: "zona",
+    hands_helmet: "movimiento",
   };
   const inferenceTypeFromDb = {
     inactiva: "none",
@@ -331,6 +331,7 @@
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           hacer_inferencia: nextEnabled,
+          camera_name: cameraName,
           inference_type: nextEnabled ? dbInferenceTypeForUi(inferenceTypeForCamera(cameraName)) : "inactiva",
         }),
       });
@@ -349,22 +350,24 @@
   async function persistCameraInference(cameraName, inferenceType) {
     const normalizedName = String(cameraName || "").trim();
     const camera = cameraByName(normalizedName);
-    const cameraId = String((camera && (camera.camera_id || camera.id || camera.source_id)) || "").trim();
     const normalizedType = normalizeInferenceType(inferenceType);
     const enabled = normalizedType !== "none";
     setInferenceState(normalizedName, enabled);
-    if (!cameraId) return;
     try {
-      const response = await fetch(`/api/cameras/${encodeURIComponent(cameraId)}/inference`, {
-        method: "PATCH",
+      const response = await fetch("/api/camera-inference-by-name", {
+        method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           hacer_inferencia: Boolean(enabled),
+          camera_name: normalizedName,
           inference_type: dbInferenceTypeForUi(normalizedType),
         }),
       });
       const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        throw new Error((payload && (payload.detail || payload.error)) || "camera_inference_update_failed");
+      }
       const updatedCamera = payload && typeof payload.camera === "object" ? payload.camera : null;
       if (camera) {
         camera.hacer_inferencia = updatedCamera ? Boolean(updatedCamera.hacer_inferencia) : Boolean(enabled);
@@ -373,7 +376,13 @@
           : dbInferenceTypeForUi(normalizedType);
         camera.tipo_inferencia = camera.inference_type;
       }
-    } catch (error) {}
+    } catch (error) {
+      const activeLabel = document.getElementById("camera-inference-active");
+      if (activeLabel) {
+        activeLabel.textContent = `${normalizedName.toUpperCase()} · NO SE PUDO GUARDAR`;
+      }
+      throw error;
+    }
   }
 
   function largeViewerUrl(cameraName, inferenceType = "none") {
@@ -428,7 +437,7 @@
     const resolvedInferenceType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(normalizedName));
     const frame = document.createElement("iframe");
     frame.className = "camera-web-frame cameras-page-large-frame";
-    frame.src = largeViewerUrl(normalizedName, resolvedInferenceType);
+    frame.src = largeViewerUrl(normalizedName, "none");
     frame.title = `Visor ${label}`;
     frame.loading = "eager";
     frame.allow = "autoplay; fullscreen; picture-in-picture";
@@ -464,8 +473,12 @@
     if (!select || !activeCameraName) return;
     const nextType = normalizeInferenceType(select.value);
     saveInferenceTypeForCamera(activeCameraName, nextType);
-    renderCamera(activeCameraName, { inferenceType: nextType });
-    await persistCameraInference(activeCameraName, nextType);
+    try {
+      await persistCameraInference(activeCameraName, nextType);
+      syncInferenceToolbar(activeCameraName, nextType);
+    } catch (error) {
+      saveInferenceTypeForCamera(activeCameraName, inferenceTypeForCamera(activeCameraName));
+    }
   }
 
   function requestedCameraName() {

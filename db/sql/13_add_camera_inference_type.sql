@@ -9,16 +9,16 @@ ALTER TABLE cameras
 
 UPDATE cameras
 SET inference_type = CASE
-  WHEN inference_type = 'rostro' THEN 'rostros'
-  WHEN inference_type = 'placa' THEN 'placas'
-  WHEN inference_type = 'zona' THEN 'zonas'
-  WHEN inference_type = 'movimiento' THEN 'movimientos'
-  WHEN inference_type IN ('rostros', 'placas', 'zonas', 'movimientos', 'inactiva') THEN inference_type
+  WHEN inference_type = 'rostros' THEN 'rostro'
+  WHEN inference_type = 'placas' THEN 'placa'
+  WHEN inference_type = 'zonas' THEN 'zona'
+  WHEN inference_type = 'movimientos' THEN 'movimiento'
+  WHEN inference_type IN ('rostro', 'placa', 'zona', 'movimiento', 'inactiva') THEN inference_type
   ELSE 'inactiva'
 END
 WHERE inference_type IS NULL
-   OR inference_type NOT IN ('rostros', 'placas', 'zonas', 'movimientos', 'inactiva');
+   OR inference_type NOT IN ('rostro', 'placa', 'zona', 'movimiento', 'inactiva');
 
 ALTER TABLE cameras
   ADD CONSTRAINT ck_cameras_inference_type
-  CHECK (inference_type IN ('rostros', 'placas', 'zonas', 'movimientos', 'inactiva'));
+  CHECK (inference_type IN ('rostro', 'placa', 'zona', 'movimiento', 'inactiva'));
