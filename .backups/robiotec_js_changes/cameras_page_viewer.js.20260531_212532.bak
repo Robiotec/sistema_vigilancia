@@ -28,125 +28,6 @@
     movimientos: "hands_helmet",
     movimiento: "hands_helmet",
   };
-  // === Inference view toggle styles ===
-  (function () {
-    if (document.getElementById("camera-infer-view-styles")) return;
-    const s = document.createElement("style");
-    s.id = "camera-infer-view-styles";
-    s.textContent = `
-.camera-infer-view-btn{position:absolute;top:8px;left:8px;z-index:2;display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:5px;border:1px solid rgba(255,255,255,.14);background:rgba(6,8,16,.72);color:rgba(255,255,255,.85);font:700 10px/1 system-ui,sans-serif;letter-spacing:.06em;cursor:pointer;pointer-events:auto;transition:background .15s,border-color .15s}
-.camera-infer-view-btn:hover{background:rgba(6,8,16,.9);border-color:rgba(255,255,255,.26)}
-.camera-infer-view-btn.is-active{background: #eb8525d1;border-color: #eb8525d1;color:#fff}
-.camera-infer-view-btn.is-unavailable{background:rgba(140,20,20,.78);border-color:rgba(220,80,80,.4);color:#fff}
-.camera-infer-view-btn.is-loading{opacity:.55;cursor:wait}
-.camera-infer-view-btn svg{flex-shrink:0; width:25px; height:25px;}
-.cameras-page-large-card{position:relative}
-.cameras-page-large-card .camera-infer-view-btn{top:14px;left:14px;padding:6px 12px;font-size:11px;border-radius:8px}
-.page-cameras .camera-pill-shell .camera-infer-view-btn{top:20px;left:20px}`;
-    document.head.appendChild(s);
-  })();
-
-  // Per-camera inference VIEW state (local only, no DB update)
-  const inferenceViewState = new Map();
-
-  function inferenceViewPreviewUrl(cameraName) {
-    const t = new URL("/api/camera-preview-frame", window.location.origin);
-    t.searchParams.set("camera_name", cameraName);
-    t.searchParams.set("inference", "1");
-    return `${t.pathname}${t.search}`;
-  }
-
-  function normalViewPreviewUrl(cameraName) {
-    const t = new URL("/api/camera-preview-frame", window.location.origin);
-    t.searchParams.set("camera_name", cameraName);
-    return `${t.pathname}${t.search}`;
-  }
-
-  const INFERENCE_UNAVAILABLE_SRCDOC = [
-    "<!doctype html><html><head><meta charset='utf-8'>",
-    "<style>html,body{height:100%;margin:0;background:#050709;color:#d7dee8;",
-    "font:700 13px/1.5 system-ui,sans-serif;display:grid;place-items:center;",
-    "text-align:center;padding:16px;box-sizing:border-box}</style></head>",
-    "<body>El video de Inferencia no está habilitado para está cámara</body></html>",
-  ].join("");
-
-  async function checkInferenceStreamAvailable(cameraName) {
-    try {
-      const resp = await fetch(
-        `/api/camera-viewer-url?camera_name=${encodeURIComponent(cameraName)}&inference=1`,
-        { credentials: "same-origin", headers: { Accept: "application/json" } },
-      );
-      const data = await resp.json();
-      return Boolean(data && data.online === true && !data.error);
-    } catch {
-      return false;
-    }
-  }
-
-  function syncInferenceViewBtn(btn, state) {
-    if (state === "active") {
-      btn.classList.add("is-active");
-      btn.classList.remove("is-unavailable", "is-loading");
-      btn.setAttribute("aria-pressed", "true");
-      btn.title = "Volver a vista normal";
-    } else if (state === "unavailable") {
-      btn.classList.add("is-active", "is-unavailable");
-      btn.classList.remove("is-loading");
-      btn.setAttribute("aria-pressed", "true");
-      btn.title = "Inferencia no disponible — clic para volver a vista normal";
-    } else {
-      btn.classList.remove("is-active", "is-unavailable", "is-loading");
-      btn.setAttribute("aria-pressed", "false");
-      btn.title = "Ver stream de inferencia";
-    }
-  }
-
-  async function handleInferenceViewToggle(btn, frame, cameraName) {
-    const currentlyActive = Boolean(inferenceViewState.get(cameraName));
-    if (currentlyActive) {
-      inferenceViewState.set(cameraName, false);
-      syncInferenceViewBtn(btn, "normal");
-      frame.removeAttribute("srcdoc");
-      frame.src = normalViewPreviewUrl(cameraName);
-      return;
-    }
-    btn.classList.add("is-loading");
-    btn.disabled = true;
-    const available = await checkInferenceStreamAvailable(cameraName);
-    btn.disabled = false;
-    btn.classList.remove("is-loading");
-    inferenceViewState.set(cameraName, true);
-    if (!available) {
-      frame.srcdoc = INFERENCE_UNAVAILABLE_SRCDOC;
-      syncInferenceViewBtn(btn, "unavailable");
-    } else {
-      frame.removeAttribute("srcdoc");
-      frame.src = inferenceViewPreviewUrl(cameraName);
-      syncInferenceViewBtn(btn, "active");
-    }
-  }
-
-  const INFER_BTN_SVG =
-    '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true">' +
-    '<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/>' +
-    '<circle cx="12" cy="12" r="3"/>' +
-    "</svg>";
-
-  function createInferenceViewBtn(cameraName, frame) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "camera-infer-view-btn";
-    btn.setAttribute("aria-pressed", "false");
-    btn.title = "Ver stream de inferencia";
-    btn.innerHTML = `${INFER_BTN_SVG}`;
-    btn.addEventListener("click", (event) => {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      void handleInferenceViewToggle(btn, frame, cameraName);
-    });
-    return btn;
-  }
-
   let activeCameraName = "";
   let cameraEventsRequestToken = 0;
   let cameraEventsRefreshTimer = 0;
@@ -442,28 +323,6 @@
     saveInferenceState(state);
     syncInferenceButtons(cameraName, nextEnabled);
 
-    // Switch the pill preview iframe between normal and inference stream
-    const pillFrame = button.closest(".camera-pill-shell")
-      ? button.closest(".camera-pill-shell").querySelector(".camera-pill-frame")
-      : null;
-    if (pillFrame) {
-      if (nextEnabled) {
-        checkInferenceStreamAvailable(cameraName).then((available) => {
-          inferenceViewState.set(cameraName, true);
-          if (!available) {
-            pillFrame.srcdoc = INFERENCE_UNAVAILABLE_SRCDOC;
-          } else {
-            pillFrame.removeAttribute("srcdoc");
-            pillFrame.src = inferenceViewPreviewUrl(cameraName);
-          }
-        });
-      } else {
-        inferenceViewState.set(cameraName, false);
-        pillFrame.removeAttribute("srcdoc");
-        pillFrame.src = normalViewPreviewUrl(cameraName);
-      }
-    }
-
     if (!cameraId) return;
     try {
       await fetch(`/api/cameras/${encodeURIComponent(cameraId)}/inference`, {
@@ -530,13 +389,15 @@
     }
   }
 
-  function largeViewerUrl(cameraName, inferenceType = "none") {
+  function largeViewerUrl(cameraName, inferenceEnabled = false, inferenceType = "none") {
     const target = new URL("/api/camera-preview-frame", window.location.origin);
     target.searchParams.set("camera_name", cameraName);
-    const normalizedType = normalizeInferenceType(inferenceType);
-    if (normalizedType !== "none") {
+    if (inferenceEnabled) {
       target.searchParams.set("inference", "1");
-      target.searchParams.set("inference_type", normalizedType);
+      const normalizedType = normalizeInferenceType(inferenceType);
+      if (normalizedType !== "none") {
+        target.searchParams.set("inference_type", normalizedType);
+      }
     }
     return `${target.pathname}${target.search}`;
   }
@@ -579,10 +440,11 @@
 
     const camera = cameraByName(normalizedName);
     const label = String(camera.display_name || camera.name || normalizedName).trim();
+    const inferenceEnabled = isInferenceEnabled(normalizedName);
     const resolvedInferenceType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(normalizedName));
     const frame = document.createElement("iframe");
     frame.className = "camera-web-frame cameras-page-large-frame";
-    frame.src = largeViewerUrl(normalizedName, "none");
+    frame.src = largeViewerUrl(normalizedName, inferenceEnabled, resolvedInferenceType);
     frame.title = `Visor ${label}`;
     frame.loading = "eager";
     frame.allow = "autoplay; fullscreen; picture-in-picture";
@@ -593,8 +455,6 @@
     shell.className = "camera-card cameras-page-large-card is-active is-web-viewer";
     shell.setAttribute("aria-label", `Vista ampliada ${label}`);
     shell.appendChild(frame);
-    inferenceViewState.delete(normalizedName);
-    shell.appendChild(createInferenceViewBtn(normalizedName, frame));
 
     primaryView.replaceChildren(shell);
     primaryView.classList.remove("is-empty");
@@ -623,6 +483,7 @@
     try {
       await persistCameraInference(activeCameraName, nextType);
       syncInferenceToolbar(activeCameraName, nextType);
+      renderCamera(activeCameraName, { persistUrl: false, inferenceType: nextType });
     } catch (error) {
       saveInferenceTypeForCamera(activeCameraName, inferenceTypeForCamera(activeCameraName));
     }

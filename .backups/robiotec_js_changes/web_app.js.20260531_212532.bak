@@ -528,7 +528,8 @@ function renderStaticCameraSelection(camera) {
 
   const frame = document.createElement("iframe");
   frame.className = "camera-web-frame static-camera-frame";
-  frame.src = `/api/camera-preview-frame?camera_name=${encodeURIComponent(cameraName)}`;
+  const staticSource = `/api/camera-preview-frame?camera_name=${encodeURIComponent(cameraName)}`;
+  frame.src = buildCameraInferenceSourceUrl(staticSource, Boolean(camera.hacer_inferencia === true));
   frame.title = `Visor ${String(camera.display_name || cameraName).trim()}`;
   frame.loading = "eager";
   frame.allow = "autoplay; fullscreen; picture-in-picture";
@@ -1608,7 +1609,8 @@ async function renderTelemetryVehicleVideo(cameraName, label = "") {
     frame.referrerPolicy = "strict-origin-when-cross-origin";
     frame.setAttribute("allowfullscreen", "");
     frame.setAttribute("title", `Video ${label || resolvedCameraName || cameraId}`);
-    frame.src = `/api/camera-preview-frame?${query}`;
+    const telemetrySource = `/api/camera-preview-frame?${query}`;
+    frame.src = buildCameraInferenceSourceUrl(telemetrySource, Boolean(camera && camera.hacer_inferencia === true));
     telemetryVideoStage.appendChild(frame);
     if (telemetryVideoState) telemetryVideoState.textContent = "Video";
   } catch (error) {
@@ -3324,12 +3326,27 @@ function cameraInferenceIconMarkup() {
 
 function buildCameraInferenceSourceUrl(rawUrl, enabled) {
   const candidate = String(rawUrl || "").trim();
-  if (!candidate || !isLikelyManagedEmbeddedViewerSource(candidate)) {
+  if (!candidate) {
     return candidate;
   }
 
   try {
     const target = new URL(candidate, window.location.href);
+    const normalizedPath = String(target.pathname || "").replace(/\/+$/, "");
+    const isDashboardPreview = normalizedPath.endsWith("/camera-preview-frame")
+      || normalizedPath.endsWith("/camera-viewer-url");
+    if (isDashboardPreview) {
+      if (enabled) {
+        target.searchParams.set("inference", "1");
+      } else {
+        target.searchParams.delete("inference");
+      }
+      return target.toString();
+    }
+    if (!isLikelyManagedEmbeddedViewerSource(candidate)) {
+      return candidate;
+    }
+
     let pathname = String(target.pathname || "").replace(/\/+INFERENCE\/?$/i, "").replace(/\/+$/, "");
     if (enabled) {
       pathname = pathname ? `${pathname}/INFERENCE` : "/INFERENCE";
@@ -3982,12 +3999,15 @@ function renderSwitcher() {
           ? `camera_id=${encodeURIComponent(String(camera.id))}`
           : "";
       const source = previewQuery ? `/api/camera-preview-frame?${previewQuery}` : "";
+      const previewSource = source
+        ? buildCameraInferenceSourceUrl(source, Boolean(camera.hacer_inferencia === true))
+        : "";
       const preview = document.createElement("span");
       preview.className = "camera-pill-preview";
       if (source) {
         const frame = document.createElement("iframe");
         frame.className = "camera-pill-frame";
-        frame.src = source;
+        frame.src = previewSource;
         frame.title = `Vista previa ${getCameraDisplayName(camera)}`;
         frame.loading = "lazy";
         frame.allow = "autoplay; fullscreen; picture-in-picture";
@@ -4015,6 +4035,21 @@ function renderSwitcher() {
       button.addEventListener("click", () => openCamera(camera.name));
       button.addEventListener("dblclick", () => openCamera(camera.name));
       shell.appendChild(button);
+
+      if (canToggleCameraInference(camera)) {
+        const inferenceButton = document.createElement("button");
+        inferenceButton.type = "button";
+        inferenceButton.className = "camera-pill-inference";
+        inferenceButton.innerHTML = cameraInferenceIconMarkup();
+        applyCameraInferenceButtonState(inferenceButton, camera);
+        inferenceButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          void toggleCameraInference(camera.name);
+        });
+        shell.appendChild(inferenceButton);
+        nextInferenceButtons.set(camera.name, inferenceButton);
+      }
 
       fragment.appendChild(shell);
       nextSwitchButtons.set(camera.name, button);

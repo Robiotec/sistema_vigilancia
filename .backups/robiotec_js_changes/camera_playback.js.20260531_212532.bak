@@ -214,8 +214,12 @@ export function createCameraPlaybackModule(deps) {
         : `camera_name=${encodeURIComponent(cameraName)}`;
       const inferenceEnabled = Boolean(camera && camera.hacer_inferencia === true);
       const inferenceParam = inferenceEnabled ? `&inference=1` : "";
+      const viewerRequestUrl = `/api/camera-viewer-url?${query}${inferenceParam}&muted=${muted ? "1" : "0"}&controls=${controls ? "1" : "0"}`;
+      try {
+        console.debug && console.debug("fetchAuthorizedViewerAccess: requesting", viewerRequestUrl);
+      } catch (err) {}
       const payload = await fetchJson(
-        `/api/camera-viewer-url?${query}${inferenceParam}&muted=${muted ? "1" : "0"}&controls=${controls ? "1" : "0"}`,
+        viewerRequestUrl,
         {
           credentials: "same-origin",
           headers: {

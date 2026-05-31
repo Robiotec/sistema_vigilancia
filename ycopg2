@@ -1,0 +1,22 @@
+                            Table "public.stream_paths"
+    Column     |          Type          | Collation | Nullable |      Default      
+---------------+------------------------+-----------+----------+-------------------
+ id            | uuid                   |           | not null | gen_random_uuid()
+ company_id    | uuid                   |           | not null | 
+ area_id       | uuid                   |           |          | 
+ path          | character varying(180) |           | not null | 
+ resource_type | resource_type          |           | not null | 
+ resource_id   | uuid                   |           | not null | 
+ active        | boolean                |           | not null | true
+ can_publish   | boolean                |           | not null | true
+Indexes:
+    "stream_paths_pkey" PRIMARY KEY, btree (id)
+    "idx_stream_paths_path" btree (path)
+    "stream_paths_path_key" UNIQUE CONSTRAINT, btree (path)
+Foreign-key constraints:
+    "stream_paths_area_id_fkey" FOREIGN KEY (area_id) REFERENCES areas(id)
+    "stream_paths_company_id_fkey" FOREIGN KEY (company_id) REFERENCES companies(id)
+Referenced by:
+    TABLE "device_publish_tokens" CONSTRAINT "device_publish_tokens_stream_path_id_fkey" FOREIGN KEY (stream_path_id) REFERENCES stream_paths(id) ON DELETE CASCADE
+    TABLE "stream_access_tokens" CONSTRAINT "stream_access_tokens_stream_path_id_fkey" FOREIGN KEY (stream_path_id) REFERENCES stream_paths(id) ON DELETE CASCADE
+
