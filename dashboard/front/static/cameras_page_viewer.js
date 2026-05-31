@@ -8,8 +8,25 @@
     plates: "DETECCIÓN DE PLACAS",
     faces: "DETECCIÓN DE ROSTROS",
     access: "DETECCIÓN DE ACCESO",
-    ppt: "DETECCIÓN DE PPT",
     hands_helmet: "DETECCIÓN MANOS CASCO",
+  };
+  const inferenceTypeToDb = {
+    none: "inactiva",
+    plates: "placas",
+    faces: "rostros",
+    access: "zonas",
+    hands_helmet: "movimientos",
+  };
+  const inferenceTypeFromDb = {
+    inactiva: "none",
+    placas: "plates",
+    placa: "plates",
+    rostros: "faces",
+    rostro: "faces",
+    zonas: "access",
+    zona: "access",
+    movimientos: "hands_helmet",
+    movimiento: "hands_helmet",
   };
   let activeCameraName = "";
   let cameraEventsRequestToken = 0;
@@ -246,8 +263,22 @@
     return Object.prototype.hasOwnProperty.call(inferenceTypes, normalized) ? normalized : "none";
   }
 
+  function dbInferenceTypeForUi(value) {
+    return inferenceTypeToDb[normalizeInferenceType(value)] || "inactiva";
+  }
+
+  function uiInferenceTypeFromDb(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    return inferenceTypeFromDb[normalized] || "none";
+  }
+
   function inferenceTypeForCamera(cameraName) {
-    return "none";
+    const camera = cameraByName(cameraName);
+    if (camera && (camera.inference_type || camera.tipo_inferencia)) {
+      return uiInferenceTypeFromDb(camera.inference_type || camera.tipo_inferencia);
+    }
+    const state = loadInferenceTypes();
+    return normalizeInferenceType(state[String(cameraName || "").trim()]);
   }
 
   function saveInferenceTypeForCamera(cameraName, inferenceType) {
@@ -298,7 +329,10 @@
         method: "PATCH",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ hacer_inferencia: nextEnabled }),
+        body: JSON.stringify({
+          hacer_inferencia: nextEnabled,
+          inference_type: nextEnabled ? dbInferenceTypeForUi(inferenceTypeForCamera(cameraName)) : "inactiva",
+        }),
       });
     } catch (error) {}
   }
@@ -312,19 +346,33 @@
     syncInferenceButtons(normalizedName, Boolean(enabled));
   }
 
-  async function persistCameraInference(cameraName, enabled) {
+  async function persistCameraInference(cameraName, inferenceType) {
     const normalizedName = String(cameraName || "").trim();
     const camera = cameraByName(normalizedName);
     const cameraId = String((camera && (camera.camera_id || camera.id || camera.source_id)) || "").trim();
+    const normalizedType = normalizeInferenceType(inferenceType);
+    const enabled = normalizedType !== "none";
     setInferenceState(normalizedName, enabled);
     if (!cameraId) return;
     try {
-      await fetch(`/api/cameras/${encodeURIComponent(cameraId)}/inference`, {
+      const response = await fetch(`/api/cameras/${encodeURIComponent(cameraId)}/inference`, {
         method: "PATCH",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ hacer_inferencia: Boolean(enabled) }),
+        body: JSON.stringify({
+          hacer_inferencia: Boolean(enabled),
+          inference_type: dbInferenceTypeForUi(normalizedType),
+        }),
       });
+      const payload = await response.json().catch(() => null);
+      const updatedCamera = payload && typeof payload.camera === "object" ? payload.camera : null;
+      if (camera) {
+        camera.hacer_inferencia = updatedCamera ? Boolean(updatedCamera.hacer_inferencia) : Boolean(enabled);
+        camera.inference_type = updatedCamera && updatedCamera.inference_type
+          ? updatedCamera.inference_type
+          : dbInferenceTypeForUi(normalizedType);
+        camera.tipo_inferencia = camera.inference_type;
+      }
     } catch (error) {}
   }
 
@@ -417,7 +465,7 @@
     const nextType = normalizeInferenceType(select.value);
     saveInferenceTypeForCamera(activeCameraName, nextType);
     renderCamera(activeCameraName, { inferenceType: nextType });
-    await persistCameraInference(activeCameraName, nextType !== "none");
+    await persistCameraInference(activeCameraName, nextType);
   }
 
   function requestedCameraName() {

@@ -49,6 +49,7 @@ class CameraNormalizer(BaseHelper):
             self.text(camera.get("unique_code") or camera.get("name"), "camera"),
         )
         camera_type = self.text(camera.get("camera_type") or camera.get("kind") or camera.get("type") or "fixed")
+        inference_type = self.text(camera.get("inference_type") or camera.get("tipo_inferencia"), "inactiva")
         unique_code = self.text(camera.get("unique_code"), path)
         origin_url = self.text((stream or {}).get("origin_url") or camera.get("rtsp_url") or camera.get("url_stream"))
         active = self.active(camera.get("active"))
@@ -74,6 +75,8 @@ class CameraNormalizer(BaseHelper):
             "organizacion_source_id": self.text(camera.get("company_id")),
             "tipo_camara_codigo": camera_type,
             "tipo_camara_nombre": camera_type,
+            "tipo_inferencia": inference_type,
+            "inference_type": inference_type,
             "marca": self.text(camera.get("brand"), "generic"),
             "modelo": self.text(camera.get("model")),
             "rbox_id": self.num_id(camera.get("rbox_id")),

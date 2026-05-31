@@ -38,6 +38,7 @@ from app.schemas.stream import StreamPathCreate
 from app.services.auth_service import get_user_roles
 
 router = APIRouter(tags=["admin"])
+CAMERA_INFERENCE_TYPES = {"rostros", "placas", "zonas", "movimientos", "inactiva"}
 
 
 class CompanyCreate(BaseModel):
@@ -82,6 +83,7 @@ class CameraCreate(BaseModel):
     rtsp_url: str | None = None
     unique_code: str | None = None
     camera_type: str = "fixed"
+    inference_type: str = "inactiva"
     protocol: str = "rtsp"
     ip: str | None = None
     port: int | None = None
@@ -305,6 +307,9 @@ def _prepare_camera_data(data: dict[str, Any], existing: Camera | None = None) -
         data["unique_code"] = existing.unique_code if existing and existing.unique_code else _generated_code("CAM")
     data["brand"] = data.get("brand") or "custom"
     data["protocol"] = data.get("protocol") or "rtsp"
+    data["inference_type"] = data.get("inference_type") or "inactiva"
+    if data["inference_type"] not in CAMERA_INFERENCE_TYPES:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Tipo de inferencia invalido")
     raw_password = data.get("password_encrypted")
     if raw_password and str(raw_password).startswith("fernet:"):
         raw_password = decrypt_secret(raw_password)

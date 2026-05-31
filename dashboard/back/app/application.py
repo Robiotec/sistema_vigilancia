@@ -56,6 +56,15 @@ rbox_mapper = RBoxMapper()
 stream_config_mapper = StreamConfigMapper()
 vehicle_telemetry_mapper = VehicleTelemetryMapper()
 
+CAMERA_INFERENCE_TYPE_BY_UI = {
+    "none": "inactiva",
+    "plates": "placas",
+    "faces": "rostros",
+    "access": "zonas",
+    "hands_helmet": "movimientos",
+}
+CAMERA_DB_INFERENCE_TYPES = set(CAMERA_INFERENCE_TYPE_BY_UI.values())
+
 ROOT = Path(__file__).resolve().parents[2]
 FRONT = ROOT / "front"
 TEMPLATES = FRONT / "templates"
@@ -570,6 +579,18 @@ def _camera_name_with_inference(value: Any, enabled: bool) -> str:
     return f"{base_name} - INF" if enabled else base_name
 
 
+def _camera_db_inference_type(value: Any, enabled: bool | None = None, fallback: Any = "inactiva") -> str:
+    normalized = _text(value).strip().lower()
+    if normalized in CAMERA_INFERENCE_TYPE_BY_UI:
+        return CAMERA_INFERENCE_TYPE_BY_UI[normalized]
+    if normalized in CAMERA_DB_INFERENCE_TYPES:
+        return normalized
+    if enabled is False:
+        return "inactiva"
+    fallback_value = _text(fallback).strip().lower()
+    return fallback_value if fallback_value in CAMERA_DB_INFERENCE_TYPES else "inactiva"
+
+
 @app.get("/api/camera-form-options")
 def camera_form_options(request: Request):
     token = _token(request)
@@ -1007,9 +1028,16 @@ async def camera_inference_update(camera_id: str, request: Request):
         return JSONResponse({"error": "camera_not_found"}, status_code=404)
     existing = next((item for item in cameras if str(item.get("id")) == str(source_id)), None) or {}
     inference_enabled = bool(p.get("hacer_inferencia"))
+    requested_inference_type = _camera_db_inference_type(
+        p.get("inference_type") or p.get("tipo_inferencia"),
+        inference_enabled,
+        existing.get("inference_type"),
+    )
+    if requested_inference_type == "inactiva":
+        inference_enabled = False
     data = _camera_payload_from_form(
         {
-            "nombre": _camera_name_with_inference(existing.get("name"), inference_enabled),
+            "nombre": existing.get("name"),
             "organizacion_id": existing.get("company_id"),
             "tipo_camara_codigo": existing.get("camera_type") or "fixed",
             "protocolo_codigo": existing.get("protocol") or "rtsp",
@@ -1029,6 +1057,7 @@ async def camera_inference_update(camera_id: str, request: Request):
             "vehiculo_posicion": existing.get("vehicle_position"),
             "activa": existing.get("active", True),
             "hacer_inferencia": inference_enabled,
+            "inference_type": requested_inference_type,
         },
         token,
         existing,
@@ -1039,6 +1068,8 @@ async def camera_inference_update(camera_id: str, request: Request):
         return _api_error_response(exc)
     item = _camera_item(camera, {"path": camera.get("unique_code")})
     item["hacer_inferencia"] = inference_enabled
+    item["inference_type"] = requested_inference_type
+    item["tipo_inferencia"] = requested_inference_type
     return JSONResponse({"camera": item})
 
 

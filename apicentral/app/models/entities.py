@@ -113,6 +113,7 @@ class Camera(Base):
     drone_id: Mapped[UUID | None] = mapped_column(ForeignKey("drones.id"), nullable=True)
     unique_code: Mapped[str | None] = mapped_column(String(120), nullable=True)
     camera_type: Mapped[str] = mapped_column(String(40), default="fixed")
+    inference_type: Mapped[str] = mapped_column(String(40), default="inactiva")
     protocol: Mapped[str] = mapped_column(String(40), default="rtsp")
     ip: Mapped[str | None] = mapped_column(String(120), nullable=True)
     port: Mapped[int | None] = mapped_column(Integer, nullable=True)

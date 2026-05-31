@@ -92,6 +92,7 @@ class CameraFormMapper:
             "rtsp_url": self.helper.text(payload.get("url_rtsp") or payload.get("rtsp_url")) or None,
             "unique_code": code,
             "camera_type": kind,
+            "inference_type": self.helper.text(payload.get("tipo_inferencia") or payload.get("inference_type"), "inactiva"),
             "protocol": self.helper.text(payload.get("protocolo_codigo") or payload.get("protocolo"), "rtsp"),
             "ip": self.helper.text(payload.get("ip_camaras_fijas") or payload.get("ip") or payload.get("rtsp_host")) or None,
             "port": self.helper.optional_int(payload.get("puerto") or payload.get("rtsp_port")),
