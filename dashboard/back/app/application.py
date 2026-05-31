@@ -28,9 +28,12 @@ from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
 from back.app.services.notification_settings import (
     add_email_recipient_to_db,
+    add_telegram_chat_id_to_db,
     load_email_recipients_from_db,
     load_notification_settings,
+    load_telegram_chat_ids_from_db,
     remove_email_recipient_from_db,
+    remove_telegram_chat_id_from_db,
     save_notification_settings,
 )
 from back.app.services.remote_detection_feed import RemoteDetectionFeedService
@@ -83,6 +86,27 @@ def _notification_email_rows_html(recipients: list[str]) -> str:
             '<form action="/api/notification-email-recipients/delete-form" class="notification-email-remove-form" method="post">'
             f'<input type="hidden" name="email" value="{safe_recipient}" />'
             f'<button class="notification-email-remove" type="submit" data-email="{safe_recipient}">Quitar</button>'
+            '</form>'
+            '</td>'
+            '</tr>'
+        )
+    return "".join(rows)
+
+
+def _notification_telegram_rows_html(chat_ids: list[str]) -> str:
+    if not chat_ids:
+        return '<tr><td class="notification-email-empty" colspan="3">No hay IDs configurados.</td></tr>'
+    rows = []
+    for index, chat_id in enumerate(chat_ids, start=1):
+        safe_chat_id = escape(_text(chat_id))
+        rows.append(
+            '<tr>'
+            f'<td class="notification-email-index">{index}</td>'
+            f'<td class="notification-email-address">{safe_chat_id}</td>'
+            '<td class="notification-email-action">'
+            '<form action="/api/notification-telegram-chat-ids/delete-form" class="notification-telegram-remove-form" method="post">'
+            f'<input type="hidden" name="chat_id" value="{safe_chat_id}" />'
+            f'<button class="notification-email-remove" type="submit" data-chat-id="{safe_chat_id}">Quitar</button>'
             '</form>'
             '</td>'
             '</tr>'
@@ -337,6 +361,7 @@ def _build_context(request: Request) -> dict[str, str]:
     db_camera_names, db_camera_names_error = _fetch_db_camera_names()
     notification_settings = load_notification_settings()
     notification_email_recipients = notification_settings.get("email", {}).get("recipients") or []
+    notification_telegram_chat_ids = notification_settings.get("telegram", {}).get("chat_ids") or []
     return {
         "__AUTH_USERNAME__": username,
         "__DEVELOPER_MENU_LINK__": '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span><span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span><span class="sidebar-link-tooltip">Usuarios</span></a><a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span><span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span><span class="sidebar-link-tooltip">Registros</span></a>',
@@ -389,6 +414,12 @@ def _build_context(request: Request) -> dict[str, str]:
         "__NOTIFICATION_SETTINGS_JSON__": _json(notification_settings),
         "__NOTIFICATION_EMAIL_COUNT__": str(len(notification_email_recipients)),
         "__NOTIFICATION_EMAIL_ROWS__": _notification_email_rows_html(notification_email_recipients),
+        "__NOTIFICATION_TELEGRAM_CHAT_ID_COUNT__": str(len(notification_telegram_chat_ids)),
+        "__NOTIFICATION_TELEGRAM_CHAT_ID_ROWS__": _notification_telegram_rows_html(notification_telegram_chat_ids),
+        "__NOTIFICATION_TELEGRAM_TOKEN__": escape(
+            _text(notification_settings.get("telegram", {}).get("bot_token")),
+            quote=True,
+        ),
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
         "__USER_ADMIN_MODE_LABEL__": "Master",
@@ -715,6 +746,83 @@ def notification_email_recipient_delete_form(request: Request, email: str = Form
     return RedirectResponse("/notificaciones", status_code=303)
 
 
+@app.get("/api/notification-telegram-chat-ids")
+def notification_telegram_chat_ids(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    chat_ids = load_telegram_chat_ids_from_db()
+    if chat_ids is None:
+        return JSONResponse({"ok": False, "error": "No se pudieron leer los IDs de Telegram desde PostgreSQL."}, status_code=502)
+    return {"ok": True, "chat_ids": chat_ids, "total": len(chat_ids)}
+
+
+@app.post("/api/notification-telegram-chat-ids")
+async def notification_telegram_chat_id_create(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
+    try:
+        chat_ids = add_telegram_chat_id_to_db(chat_id)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo agregar el ID de Telegram.")}, status_code=400)
+    return {"ok": True, "chat_ids": chat_ids, "total": len(chat_ids)}
+
+
+@app.post("/api/notification-telegram-chat-ids/form")
+def notification_telegram_chat_id_create_form(request: Request, chat_id: str = Form("")):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        add_telegram_chat_id_to_db(chat_id)
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
+
+
+@app.delete("/api/notification-telegram-chat-ids")
+async def notification_telegram_chat_id_delete(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
+    try:
+        chat_ids = remove_telegram_chat_id_from_db(chat_id)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo quitar el ID de Telegram.")}, status_code=400)
+    return {"ok": True, "chat_ids": chat_ids, "total": len(chat_ids)}
+
+
+@app.post("/api/notification-telegram-chat-ids/delete")
+async def notification_telegram_chat_id_delete_post(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    payload = await request.json()
+    chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
+    try:
+        chat_ids = remove_telegram_chat_id_from_db(chat_id)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo quitar el ID de Telegram.")}, status_code=400)
+    return {"ok": True, "chat_ids": chat_ids, "total": len(chat_ids)}
+
+
+@app.post("/api/notification-telegram-chat-ids/delete-form")
+def notification_telegram_chat_id_delete_form(request: Request, chat_id: str = Form("")):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        remove_telegram_chat_id_from_db(chat_id)
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
+
+
 @app.post("/api/notification-settings/test-email")
 def notification_settings_test_email(request: Request):
     token = _token(request)
@@ -751,6 +859,18 @@ def notification_settings_test_telegram(request: Request):
     except Exception as exc:
         return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
     return {"ok": True, **delivery}
+
+
+@app.post("/api/notification-settings/test-telegram-form")
+def notification_settings_test_telegram_form(request: Request):
+    token = _token(request)
+    if not token:
+        return RedirectResponse("/login", status_code=303)
+    try:
+        send_configured_telegram_alert()
+    except Exception:
+        pass
+    return RedirectResponse("/notificaciones", status_code=303)
 
 
 @app.post("/api/cameras")

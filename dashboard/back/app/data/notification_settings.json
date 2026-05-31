@@ -18,6 +18,6 @@
       "-1003416074376"
     ],
     "message": "ALERTA\n\nSe detecto una persona en un area restringida.\n\nUbicacion: Legemesa\nHora: 14:35:22",
-    "image_path": "/home/pedro/Documentos/sistema_vigilancia/dashboard/front/static/assets/robo.png"
+    "image_path": "/root/robiotec/dashboard/front/static/assets/robo.png"
   }
 }

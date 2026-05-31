@@ -21,6 +21,20 @@ CREATE INDEX IF NOT EXISTS idx_notification_email_recipients_active
     ON notification_email_recipients (active);
 """
 
+TELEGRAM_CHAT_IDS_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS notification_telegram_chat_ids (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    chat_id varchar(80) NOT NULL,
+    active boolean NOT NULL DEFAULT true,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_notification_telegram_chat_ids_chat_id
+    ON notification_telegram_chat_ids (chat_id);
+CREATE INDEX IF NOT EXISTS idx_notification_telegram_chat_ids_active
+    ON notification_telegram_chat_ids (active);
+"""
+
 DEFAULT_NOTIFICATION_SETTINGS: dict[str, Any] = {
     "email": {
         "sender_email": "robiotec@grupominerobonanza.com",
@@ -48,7 +62,7 @@ DEFAULT_NOTIFICATION_SETTINGS: dict[str, Any] = {
             "Ubicacion: Legemesa\n"
             "Hora: 14:35:22"
         ),
-        "image_path": "/home/pedro/Documentos/sistema_vigilancia/dashboard/front/static/assets/robo.png",
+        "image_path": "/root/robiotec/dashboard/front/static/assets/robo.png",
     },
 }
 
@@ -109,8 +123,35 @@ def _db_fetch_email_recipients() -> list[str]:
     return _normalized_lines([row.get("email") for row in rows])
 
 
+def _db_fetch_telegram_chat_ids() -> list[str]:
+    from back.app.services.conection_sql_postgrest import fetch_all
+
+    try:
+        rows = fetch_all(
+            """
+            SELECT chat_id
+            FROM notification_telegram_chat_ids
+            WHERE active = true
+            ORDER BY chat_id
+            """
+        )
+    except Exception:
+        rows = fetch_all(
+            """
+            SELECT chat_id
+            FROM notification_telegram_chat_ids
+            ORDER BY chat_id
+            """
+        )
+    return _normalized_lines([row.get("chat_id") for row in rows])
+
+
 def ensure_email_recipients_table() -> None:
     _db_execute(EMAIL_RECIPIENTS_TABLE_SQL)
+
+
+def ensure_telegram_chat_ids_table() -> None:
+    _db_execute(TELEGRAM_CHAT_IDS_TABLE_SQL)
 
 
 def load_email_recipients_from_db(seed_recipients: list[str] | None = None) -> list[str] | None:
@@ -125,6 +166,22 @@ def load_email_recipients_from_db(seed_recipients: list[str] | None = None) -> l
             save_email_recipients_to_db(seed)
             return _db_fetch_email_recipients()
         return recipients
+    except Exception:
+        return None
+
+
+def load_telegram_chat_ids_from_db(seed_chat_ids: list[str] | None = None) -> list[str] | None:
+    try:
+        try:
+            chat_ids = _db_fetch_telegram_chat_ids()
+        except Exception:
+            ensure_telegram_chat_ids_table()
+            chat_ids = _db_fetch_telegram_chat_ids()
+        seed = _normalized_lines(seed_chat_ids or [])
+        if not chat_ids and seed:
+            save_telegram_chat_ids_to_db(seed)
+            return _db_fetch_telegram_chat_ids()
+        return chat_ids
     except Exception:
         return None
 
@@ -148,6 +205,28 @@ def save_email_recipients_to_db(recipients: list[str]) -> None:
             DO UPDATE SET active = true, updated_at = now()
             """,
             (recipient,),
+        )
+
+
+def save_telegram_chat_ids_to_db(chat_ids: list[str]) -> None:
+    normalized = _normalized_lines(chat_ids)
+    ensure_telegram_chat_ids_table()
+    try:
+        _db_execute("UPDATE notification_telegram_chat_ids SET active = false, updated_at = now()")
+    except Exception:
+        _db_execute("DELETE FROM notification_telegram_chat_ids")
+        for chat_id in normalized:
+            _db_execute("INSERT INTO notification_telegram_chat_ids (chat_id) VALUES (%s)", (chat_id,))
+        return
+    for chat_id in normalized:
+        _db_execute(
+            """
+            INSERT INTO notification_telegram_chat_ids (chat_id, active)
+            VALUES (%s, true)
+            ON CONFLICT (chat_id)
+            DO UPDATE SET active = true, updated_at = now()
+            """,
+            (chat_id,),
         )
 
 
@@ -183,6 +262,38 @@ def add_email_recipient_to_db(email: str) -> list[str]:
     return _db_fetch_email_recipients()
 
 
+def add_telegram_chat_id_to_db(chat_id: str) -> list[str]:
+    normalized = _normalized_lines([chat_id])
+    if not normalized:
+        raise ValueError("Ingresa un ID de Telegram valido.")
+    next_chat_id = normalized[0]
+    ensure_telegram_chat_ids_table()
+    try:
+        _db_execute(
+            """
+            INSERT INTO notification_telegram_chat_ids (chat_id, active)
+            VALUES (%s, true)
+            ON CONFLICT (chat_id)
+            DO UPDATE SET active = true, updated_at = now()
+            """,
+            (next_chat_id,),
+        )
+    except Exception:
+        _db_execute(
+            """
+            INSERT INTO notification_telegram_chat_ids (chat_id)
+            SELECT %s
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM notification_telegram_chat_ids
+                WHERE chat_id = %s
+            )
+            """,
+            (next_chat_id, next_chat_id),
+        )
+    return _db_fetch_telegram_chat_ids()
+
+
 def remove_email_recipient_from_db(email: str) -> list[str]:
     normalized = _normalized_lines([email])
     if not normalized:
@@ -194,6 +305,19 @@ def remove_email_recipient_from_db(email: str) -> list[str]:
         (recipient,),
     )
     return _db_fetch_email_recipients()
+
+
+def remove_telegram_chat_id_from_db(chat_id: str) -> list[str]:
+    normalized = _normalized_lines([chat_id])
+    if not normalized:
+        raise ValueError("Ingresa un ID de Telegram valido.")
+    next_chat_id = normalized[0]
+    ensure_telegram_chat_ids_table()
+    _db_execute(
+        "DELETE FROM notification_telegram_chat_ids WHERE chat_id = %s",
+        (next_chat_id,),
+    )
+    return _db_fetch_telegram_chat_ids()
 
 
 def normalize_notification_settings(payload: dict[str, Any] | None) -> dict[str, Any]:
@@ -244,6 +368,9 @@ def load_notification_settings() -> dict[str, Any]:
         db_recipients = load_email_recipients_from_db(settings["email"]["recipients"])
         if db_recipients is not None:
             settings["email"]["recipients"] = db_recipients
+        db_chat_ids = load_telegram_chat_ids_from_db(settings["telegram"]["chat_ids"])
+        if db_chat_ids is not None:
+            settings["telegram"]["chat_ids"] = db_chat_ids
         return settings
     try:
         payload = json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
@@ -254,6 +381,9 @@ def load_notification_settings() -> dict[str, Any]:
     db_recipients = load_email_recipients_from_db(settings["email"]["recipients"])
     if db_recipients is not None:
         settings["email"]["recipients"] = db_recipients
+    db_chat_ids = load_telegram_chat_ids_from_db(settings["telegram"]["chat_ids"])
+    if db_chat_ids is not None:
+        settings["telegram"]["chat_ids"] = db_chat_ids
     return settings
 
 
@@ -261,6 +391,10 @@ def save_notification_settings(payload: dict[str, Any] | None) -> dict[str, Any]
     normalized = normalize_notification_settings(payload)
     try:
         save_email_recipients_to_db(normalized["email"]["recipients"])
+    except Exception:
+        pass
+    try:
+        save_telegram_chat_ids_to_db(normalized["telegram"]["chat_ids"])
     except Exception:
         pass
     SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)

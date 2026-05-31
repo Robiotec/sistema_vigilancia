@@ -158,6 +158,8 @@ def send_configured_telegram_alert(timeout: float = 20.0) -> dict:
     chat_ids = list(settings.get("chat_ids") or [])
     message = str(settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
+    if not image_path.is_file():
+        image_path = DEFAULT_IMAGE_PATH
     return send_telegram_alert(
         token=token,
         chat_ids=chat_ids,
