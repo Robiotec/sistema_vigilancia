@@ -66,7 +66,7 @@
                     </label>
                     <div class="notification-email-entry">
                       <input id="notification-email-recipient-input" name="email" type="text" autocomplete="off" placeholder="correo@empresa.com" />
-                      <button class="camera-register-secondary" type="button" id="notification-email-recipient-add">Agregar</button>
+                      <button class="camera-register-submit" type="button" id="notification-email-recipient-save">Guardar correo</button>
                     </div>
                   </div>
                 </form>
@@ -96,7 +96,6 @@
                     <form action="/api/notification-settings/test-email-form" method="post">
                       <button class="camera-register-secondary" type="submit" id="notification-email-test">Enviar prueba</button>
                     </form>
-                    <button class="camera-register-submit" type="button" id="notification-email-save">Guardar correo</button>
                   </div>
                 </div>
               </div>
@@ -174,10 +173,9 @@
       const emailFeedback = document.getElementById("notification-email-feedback");
       const telegramFeedback = document.getElementById("notification-telegram-feedback");
       const emailTestButton = document.getElementById("notification-email-test");
-      const emailSaveButton = document.getElementById("notification-email-save");
       const telegramTestButton = document.getElementById("notification-telegram-test");
       const emailRecipientInput = document.getElementById("notification-email-recipient-input");
-      const emailRecipientAdd = document.getElementById("notification-email-recipient-add");
+      const emailRecipientSave = document.getElementById("notification-email-recipient-save");
       const emailRecipientTableBody = document.getElementById("notification-email-table-body");
       const emailRecipientCount = document.getElementById("notification-email-count");
       let emailRecipients = [];
@@ -298,16 +296,16 @@
           setFeedback(emailFeedback, "Ingresa un correo para agregarlo.", "error");
           return;
         }
-        if (emailRecipientAdd) emailRecipientAdd.disabled = true;
-        setFeedback(emailFeedback, "Agregando correo...", "info");
+        if (emailRecipientSave) emailRecipientSave.disabled = true;
+        setFeedback(emailFeedback, "Guardando correo...", "info");
         try {
           await syncEmailRecipients("/api/notification-email-recipients", "POST", nextItems[0]);
+          await saveSettings(emailSettingsFromForm(), emailFeedback, "Correo guardado correctamente.");
           emailRecipientInput.value = "";
-          setFeedback(emailFeedback, "Correo agregado correctamente.", "success");
         } catch (error) {
-          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo agregar el correo.", "error");
+          setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo guardar el correo.", "error");
         } finally {
-          if (emailRecipientAdd) emailRecipientAdd.disabled = false;
+          if (emailRecipientSave) emailRecipientSave.disabled = false;
         }
       }
 
@@ -433,21 +431,26 @@
         }
       });
 
-      if (emailSaveButton) {
-        emailSaveButton.addEventListener("click", async () => {
-          const nextSettings = emailSettingsFromForm();
+      if (emailRecipientSave) {
+        emailRecipientSave.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (emailRecipientInput && emailRecipientInput.value.trim()) {
+            await addEmailRecipient();
+            return;
+          }
           try {
-            await saveSettings(nextSettings, emailFeedback, "Configuración de correo guardada.");
+            await saveSettings(emailSettingsFromForm(), emailFeedback, "Configuración de correo guardada.");
           } catch (error) {
             setFeedback(emailFeedback, error && error.message ? error.message : "No se pudo guardar el correo.", "error");
           }
         });
       }
 
-      if (emailRecipientAdd) {
-        emailRecipientAdd.addEventListener("click", async (event) => {
+      if (emailRecipientInput) {
+        emailRecipientInput.addEventListener("keydown", async (event) => {
+          if (event.key !== "Enter") return;
           event.preventDefault();
-          event.stopPropagation();
           await addEmailRecipient();
         });
       }

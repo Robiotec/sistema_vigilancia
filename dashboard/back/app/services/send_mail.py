@@ -7,7 +7,6 @@ from email.mime.text import MIMEText
 
 from back.app.services.notification_settings import load_email_recipients_from_db, load_notification_settings
 
-
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Enviar correo usando la configuración persistida del dashboard.")
     parser.add_argument("--sender-email", default="", help="Sobrescribe el correo emisor configurado.")
@@ -18,7 +17,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--subject", default="", help="Sobrescribe el asunto configurado.")
     parser.add_argument("--message", default="", help="Sobrescribe el mensaje configurado.")
     return parser
-
 
 def merged_email_settings(args: argparse.Namespace) -> dict:
     settings = load_notification_settings().get("email", {})
@@ -33,7 +31,6 @@ def merged_email_settings(args: argparse.Namespace) -> dict:
         "message": (args.message or settings.get("message") or "").strip(),
     }
 
-
 def validate_email_settings(settings: dict) -> None:
     if not settings["sender_email"]:
         raise SystemExit("Falta el correo emisor configurado.")
@@ -44,13 +41,11 @@ def validate_email_settings(settings: dict) -> None:
     if not settings["recipients"]:
         raise SystemExit("No hay destinatarios configurados.")
 
-
 def validate_email_settings_value(settings: dict) -> None:
     try:
         validate_email_settings(settings)
     except SystemExit as exc:
         raise ValueError(str(exc)) from exc
-
 
 def send_email(settings: dict) -> list[str]:
     validate_email_settings_value(settings)
@@ -77,7 +72,6 @@ def send_email(settings: dict) -> list[str]:
 
     return sent
 
-
 def send_configured_email() -> list[str]:
     args = build_parser().parse_args([])
     settings = merged_email_settings(args)
@@ -85,7 +79,6 @@ def send_configured_email() -> list[str]:
     if db_recipients is not None:
         settings["recipients"] = db_recipients
     return send_email(settings)
-
 
 def main() -> int:
     args = build_parser().parse_args()
