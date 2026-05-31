@@ -14,6 +14,7 @@
   let activeCameraName = "";
   let cameraEventsRequestToken = 0;
   let cameraEventsRefreshTimer = 0;
+  const cameraEventsRefreshMs = 2000;
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -65,6 +66,46 @@
       .replaceAll("'", "&#39;");
   }
 
+  function cameraEventKey(item) {
+    return [
+      item.source_file,
+      item.crop_path,
+      item.timestamp,
+      item.event_type,
+      item.plate,
+      item.person_id,
+    ].map((value) => String(value || "").trim()).join("|");
+  }
+
+  function cameraEventHtml(item, key) {
+    const cropPath = String(item.crop_path || "").trim();
+    const imageUrl = cropPath ? `/api/camera-event-crop?path=${encodeURIComponent(cropPath)}` : "";
+    const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
+    const rows = Array.isArray(item.rows) ? item.rows : [];
+    const rowsHtml = rows.map((row) => `
+      <strong>${escapeHtml(row.label)}:</strong>
+      <span>${escapeHtml(row.value)}</span>
+    `).join("");
+    return `
+      <article class="face-preview-item" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="${escapeHtml(item.event_type || "")}">
+        ${imageUrl
+          ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
+          : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`}
+        <div class="face-preview-copy">
+          <strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>
+          <span>${escapeHtml(formatTimestamp(item.timestamp))}</span>
+          ${rowsHtml}
+        </div>
+      </article>
+    `;
+  }
+
+  function createCameraEventNode(item, key) {
+    const template = document.createElement("template");
+    template.innerHTML = cameraEventHtml(item, key).trim();
+    return template.content.firstElementChild;
+  }
+
   function renderCameraEvents(items, { emptyMessage = "No hay eventos recientes para esta cámara." } = {}) {
     const feed = document.getElementById("camera-events-feed");
     if (!feed) return;
@@ -81,31 +122,49 @@
       return;
     }
 
-    feed.innerHTML = events.map((item) => {
-      const cropPath = String(item.crop_path || "").trim();
-      const imageUrl = cropPath ? `/api/camera-event-crop?path=${encodeURIComponent(cropPath)}` : "";
-      const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
-      const rows = Array.isArray(item.rows) ? item.rows : [];
-      const rowsHtml = rows.map((row) => `
-        <strong>${escapeHtml(row.label)}:</strong>
-        <span>${escapeHtml(row.value)}</span>
-      `).join("");
-      return `
-        <article class="face-preview-item" data-camera-event-type="${escapeHtml(item.event_type || "")}">
-          ${imageUrl
-            ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
-            : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`}
-          <div class="face-preview-copy">
-            <strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>
-            <span>${escapeHtml(formatTimestamp(item.timestamp))}</span>
-            ${rowsHtml}
-          </div>
-        </article>
-      `;
-    }).join("");
+    feed.innerHTML = events.map((item) => cameraEventHtml(item, cameraEventKey(item))).join("");
   }
 
-  async function loadCameraEvents(cameraName) {
+  function syncCameraEvents(items) {
+    const feed = document.getElementById("camera-events-feed");
+    if (!feed) return;
+    const events = Array.isArray(items) ? items : [];
+    if (!events.length) {
+      if (!feed.querySelector("[data-camera-event-key]")) {
+        renderCameraEvents([]);
+      }
+      return;
+    }
+
+    feed.querySelectorAll(".face-preview-empty").forEach((item) => item.remove());
+    const existingByKey = new Map();
+    feed.querySelectorAll("[data-camera-event-key]").forEach((item) => {
+      existingByKey.set(item.getAttribute("data-camera-event-key") || "", item);
+    });
+
+    const activeKeys = new Set();
+    events.forEach((item, index) => {
+      const key = cameraEventKey(item);
+      activeKeys.add(key);
+      let node = existingByKey.get(key);
+      if (!node) {
+        node = createCameraEventNode(item, key);
+      }
+      if (!node) return;
+      const currentAtIndex = feed.children[index] || null;
+      if (currentAtIndex !== node) {
+        feed.insertBefore(node, currentAtIndex);
+      }
+    });
+
+    feed.querySelectorAll("[data-camera-event-key]").forEach((item) => {
+      if (!activeKeys.has(item.getAttribute("data-camera-event-key") || "")) {
+        item.remove();
+      }
+    });
+  }
+
+  async function loadCameraEvents(cameraName, { reset = false } = {}) {
     const normalizedName = String(cameraName || "").trim();
     const feed = document.getElementById("camera-events-feed");
     if (!feed) return;
@@ -115,7 +174,9 @@
     }
 
     const requestToken = ++cameraEventsRequestToken;
-    renderCameraEvents([], { emptyMessage: "Cargando eventos..." });
+    if (reset || !feed.querySelector("[data-camera-event-key]")) {
+      renderCameraEvents([], { emptyMessage: "Cargando eventos..." });
+    }
     try {
       const response = await fetch(`/api/camera-events?camera_name=${encodeURIComponent(normalizedName)}&limit=8`, {
         credentials: "same-origin",
@@ -124,10 +185,12 @@
       const payload = await response.json();
       if (requestToken !== cameraEventsRequestToken) return;
       const items = Array.isArray(payload) ? payload : Array.isArray(payload.items) ? payload.items : [];
-      renderCameraEvents(items);
+      syncCameraEvents(items);
     } catch (error) {
       if (requestToken !== cameraEventsRequestToken) return;
-      renderCameraEvents([], { emptyMessage: "No se pudieron cargar los eventos de esta cámara." });
+      if (reset || !feed.querySelector("[data-camera-event-key]")) {
+        renderCameraEvents([], { emptyMessage: "No se pudieron cargar los eventos de esta cámara." });
+      }
     }
   }
 
@@ -145,7 +208,7 @@
           scheduleCameraEventsRefresh(normalizedName);
         }
       });
-    }, 3000);
+    }, cameraEventsRefreshMs);
   }
 
   function loadInferenceState() {
@@ -333,7 +396,7 @@
     primaryView.classList.remove("is-empty");
     activeCameraName = normalizedName;
     syncInferenceToolbar(normalizedName, resolvedInferenceType);
-    void loadCameraEvents(normalizedName);
+    void loadCameraEvents(normalizedName, { reset: true });
     scheduleCameraEventsRefresh(normalizedName);
     switcher.querySelectorAll("[data-camera-name], .camera-pill[href]").forEach((item) => {
       item.classList.toggle("is-active", cameraNameFromTrigger(item) === normalizedName);

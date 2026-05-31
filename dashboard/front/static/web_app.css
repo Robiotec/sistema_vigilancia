@@ -3654,11 +3654,20 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 
 .face-preview-shell {
   gap: 14px;
+  grid-template-rows: auto minmax(0, 1fr);
+  max-height: min(74vh, 820px);
+  overflow: hidden;
 }
 
 .face-preview-grid {
   display: grid;
   gap: 10px;
+  min-height: 0;
+  max-height: min(62vh, 700px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px;
 }
 
 .face-preview-item {
@@ -10501,6 +10510,14 @@ body {
 
   .page-cameras .camera-side-panel {
     order: 3;
+  }
+
+  .page-cameras .face-preview-shell {
+    max-height: none;
+  }
+
+  .page-cameras .face-preview-grid {
+    max-height: min(42dvh, 360px);
   }
 
   .page-cameras .camera-switcher {
