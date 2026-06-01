@@ -40,11 +40,11 @@
                   <div class="home-history-field-list">
                     <label class="home-history-field">
                       <span>Desde</span>
-                      <input type="date" value="2026-05-24" />
+                      <input id="home-history-date-from" type="date" />
                     </label>
                     <label class="home-history-field">
                       <span>Hasta</span>
-                      <input type="date" value="2026-05-30" />
+                      <input id="home-history-date-to" type="date" />
                     </label>
                   </div>
                 </section>
@@ -54,11 +54,11 @@
                   <div class="home-history-field-list">
                     <label class="home-history-field">
                       <span>Inicio</span>
-                      <input type="time" value="06:00" />
+	                      <input id="home-history-time-from" type="time" />
                     </label>
                     <label class="home-history-field">
                       <span>Fin</span>
-                      <input type="time" value="23:00" />
+	                      <input id="home-history-time-to" type="time" />
                     </label>
                   </div>
                 </section>
@@ -92,10 +92,10 @@
                 <section class="home-history-filter-group" aria-labelledby="history-filter-type">
                   <span class="home-history-filter-label" id="history-filter-type">Tipo de evento</span>
                   <div class="home-history-checkbox-list">
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Alertas críticas</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Eventos de acceso</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" /> <span>Reconocimiento facial</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Movimiento sospechoso</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-category="alerta" checked /> <span>Alertas críticas</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-category="acceso" checked /> <span>Eventos de acceso</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-category="reconocimiento_facial" checked /> <span>Reconocimiento facial</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-category="movimiento" checked /> <span>Movimiento sospechoso</span></label>
                   </div>
                 </section>
 
@@ -104,12 +104,12 @@
                   <div class="home-history-field-list">
                     <label class="home-history-field">
                       <span>Seleccionado</span>
-                      <select>
-                        <option>Todos los eventos</option>
-                        <option>Movimiento detectado</option>
-                        <option>Ingreso autorizado</option>
-                        <option>Pérdida de señal</option>
-                        <option>Coincidencia facial</option>
+                      <select id="home-history-event-select">
+                        <option value="">Todos los eventos</option>
+                        <option value="clip">Movimiento detectado</option>
+                        <option value="click">Click detectado</option>
+                        <option value="person">Coincidencia facial</option>
+                        <option value="plate">Vehículo detectado</option>
                       </select>
                     </label>
                   </div>
@@ -118,28 +118,20 @@
                 <section class="home-history-filter-group" aria-labelledby="history-filter-source">
                   <span class="home-history-filter-label" id="history-filter-source">Origen</span>
                   <div class="home-history-checkbox-list">
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Cámaras fijas</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Vehículos</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" /> <span>Drones</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-origin="fixed_camera" checked /> <span>Cámaras fijas</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-origin="vehicle" checked /> <span>Vehículos</span></label>
+                    <label class="home-history-checkbox"><input type="checkbox" data-history-origin="drone" /> <span>Drones</span></label>
                   </div>
                 </section>
 
-                <section class="home-history-filter-group" aria-labelledby="history-filter-status">
-                  <span class="home-history-filter-label" id="history-filter-status">Estado</span>
-                  <div class="home-history-checkbox-list">
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Nuevos</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" /> <span>En revisión</span></label>
-                    <label class="home-history-checkbox"><input type="checkbox" checked /> <span>Resueltos</span></label>
-                  </div>
-                </section>
-              </div>
+	              </div>
             </aside>
 
             <section class="home-history-card home-history-main" aria-label="Listado de eventos">
               <div class="home-history-toolbar">
                 <label class="home-history-search" aria-label="Buscar eventos">
                   <span class="home-history-search-icon">⌕</span>
-                  <input type="search" placeholder="Buscar por cámara, etiqueta o descripción..." />
+                  <input id="home-history-search" type="search" placeholder="Buscar por cámara, etiqueta o descripción..." />
                 </label>
                 <button class="home-history-filter-button" type="button" aria-label="Abrir filtros">
                   <span>≣</span>
@@ -149,10 +141,10 @@
 
               <div class="home-history-events-head">
                 <h3>Eventos recientes</h3>
-                <p class="home-history-results-note">Mostrando 8 resultados de un historial operativo.</p>
+                <p class="home-history-results-note" id="home-history-results-note">Cargando historial operativo...</p>
               </div>
 
-              <div class="home-history-events-list">
+              <div class="home-history-events-list" id="home-history-events-list">
                 <article class="home-history-event-card">
                   <div class="home-history-event-copy">
                     <div class="home-history-event-meta">
@@ -226,7 +218,7 @@
                 </article>
               </div>
 
-              <nav class="home-history-pagination" aria-label="Paginación del historial">
+              <nav class="home-history-pagination" id="home-history-pagination" aria-label="Paginación del historial">
                 <a class="home-history-page home-history-page-arrow" href="#" aria-label="Página anterior">‹</a>
                 <a class="home-history-page is-active" href="#">1</a>
                 <a class="home-history-page" href="#">2</a>
@@ -242,9 +234,27 @@
         <div class="errors">__ERROR_BLOCK__</div>
       </div>
     </main>
-  </div>
+	  </div>
 
-  <script>
+	  <div class="home-event-modal" id="home-event-modal" hidden>
+	    <div class="home-event-modal-backdrop" data-home-event-close></div>
+	    <section class="home-event-dialog" role="dialog" aria-modal="true" aria-labelledby="home-event-modal-title">
+	      <button class="home-event-close" type="button" data-home-event-close aria-label="Cerrar detalle">x</button>
+	      <div class="home-event-modal-head">
+	        <span class="home-event-modal-kicker" id="home-event-modal-kicker">Evento</span>
+	        <h3 id="home-event-modal-title">Detalle del evento</h3>
+	        <p id="home-event-modal-subtitle"></p>
+	      </div>
+	      <div class="home-event-media" id="home-event-media"></div>
+	      <div class="home-event-detail-grid" id="home-event-detail-grid"></div>
+	      <details class="home-event-payload">
+	        <summary>Datos completos</summary>
+	        <pre id="home-event-payload"></pre>
+	      </details>
+	    </section>
+	  </div>
+	
+	  <script>
     window.__WEB_APP_CONFIG__ = {
       cameras: __CAMERA_ITEMS_JSON__,
       homeCameraCodes: __HOME_CAMERA_CODES_JSON__,
@@ -276,8 +286,10 @@
             }
             if (!camera || typeof camera !== "object") return null;
             const value = String(camera.value || camera.unique_code || camera.codigo_unico || "").trim();
-            const label = String(camera.label || value).trim();
-            return value ? { value, label: label || value } : null;
+	            const count = Number(camera.count || 0);
+	            const baseLabel = String(camera.label || value).trim();
+	            const label = count > 0 ? `${baseLabel} (${count})` : baseLabel;
+	            return value ? { value, label: label || value } : null;
           })
           .filter((item) => {
             if (!item || seen.has(item.value)) return false;
@@ -288,35 +300,36 @@
       }
 
       function renderOptions(targetSelect, targetStatus, items, message = "") {
-        const normalized = normalizeCameras(items);
-        const previousValue = targetSelect.value;
-        targetSelect.innerHTML = "";
+	        const normalized = normalizeCameras(items);
+	        const previousValue = targetSelect.dataset.historyTouched === "1" ? targetSelect.value : "";
+	        targetSelect.innerHTML = "";
+	
+	        const allOption = document.createElement("option");
+	        allOption.value = "";
+	        allOption.textContent = "Todas las cámaras";
+	        targetSelect.appendChild(allOption);
 
-        if (!normalized.length) {
-          const emptyOption = document.createElement("option");
-          emptyOption.value = "";
-          emptyOption.textContent = "No hay cámaras disponibles";
-          emptyOption.selected = true;
-          targetSelect.appendChild(emptyOption);
-          targetStatus.textContent = message || "No hay cámaras disponibles";
-          return;
-        }
-
-        normalized.forEach((item) => {
-          const option = document.createElement("option");
-          option.value = item.value;
-          option.textContent = item.label;
+	        if (!normalized.length) {
+	          targetSelect.value = "";
+	          targetStatus.textContent = message || "No hay cámaras con historial";
+	          return;
+	        }
+	
+	        normalized.forEach((item) => {
+	          const option = document.createElement("option");
+	          option.value = item.value;
+	          option.textContent = item.label;
           targetSelect.appendChild(option);
         });
 
         if (previousValue && normalized.some((item) => item.value === previousValue)) {
           targetSelect.value = previousValue;
-        } else if (targetSelect.options.length) {
-          targetSelect.selectedIndex = 0;
-        }
-
-        targetStatus.textContent = message || `${normalized.length} cámaras sincronizadas`;
-      }
+	        } else {
+	          targetSelect.value = "";
+	        }
+	
+	        targetStatus.textContent = message || `${normalized.length} cámaras sincronizadas`;
+	      }
 
       async function refreshSelector(url, targetSelect, targetStatus, fallbackItems, successMessage, failureMessage) {
         try {
@@ -338,44 +351,335 @@
         }
       }
 
-      renderOptions(select, status, config.homeCameraCodes || [], status.textContent || "IDs únicos cargados desde PostgreSQL");
-      renderOptions(nameSelect, nameStatus, config.homeCameraNames || [], nameStatus.textContent || "Nombres cargados desde PostgreSQL");
-      void refreshSelector(
-        "/api/camera-unique-codes",
-        select,
-        status,
-        config.homeCameraCodes || [],
-        "IDs únicos sincronizados con PostgreSQL",
-        "No se pudieron cargar los IDs únicos desde PostgreSQL"
-      );
-      void refreshSelector(
-        "/api/camera-names",
-        nameSelect,
-        nameStatus,
-        config.homeCameraNames || [],
-        "nombres sincronizados con PostgreSQL",
-        "No se pudieron cargar los nombres desde PostgreSQL"
-      );
+		      renderOptions(select, status, [], "Cargando cámaras con historial...");
+		      renderOptions(nameSelect, nameStatus, [], "Cargando nombres con historial...");
+	      select.addEventListener("change", () => {
+	        select.dataset.historyTouched = "1";
+	      });
+	      nameSelect.addEventListener("change", () => {
+	        nameSelect.dataset.historyTouched = "1";
+	      });
+	      void refreshSelector(
+	        "/api/event-history-filter-options?field=camera_id",
+	        select,
+	        status,
+	        [],
+	        "cámaras con eventos guardados",
+	        "No se pudieron cargar las cámaras del historial"
+	      );
+	      void refreshSelector(
+	        "/api/event-history-filter-options?field=camera_name",
+	        nameSelect,
+	        nameStatus,
+	        [],
+	        "nombres con eventos guardados",
+	        "No se pudieron cargar los nombres del historial"
+	      );
       window.setInterval(() => {
         void refreshSelector(
-          "/api/camera-unique-codes",
-          select,
-          status,
-          config.homeCameraCodes || [],
-          "IDs únicos sincronizados con PostgreSQL",
-          "No se pudieron cargar los IDs únicos desde PostgreSQL"
-        );
-        void refreshSelector(
-          "/api/camera-names",
-          nameSelect,
-          nameStatus,
-          config.homeCameraNames || [],
-          "nombres sincronizados con PostgreSQL",
-          "No se pudieron cargar los nombres desde PostgreSQL"
-        );
-      }, syncIntervalMs);
-    })();
-  </script>
-  <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
+	          "/api/event-history-filter-options?field=camera_id",
+	          select,
+	          status,
+	          [],
+	          "cámaras con eventos guardados",
+	          "No se pudieron cargar las cámaras del historial"
+	        );
+	        void refreshSelector(
+	          "/api/event-history-filter-options?field=camera_name",
+	          nameSelect,
+	          nameStatus,
+	          [],
+	          "nombres con eventos guardados",
+	          "No se pudieron cargar los nombres del historial"
+	        );
+	      }, syncIntervalMs);
+	    })();
+	  </script>
+	  <script>
+	    (() => {
+	      const list = document.getElementById("home-history-events-list");
+	      const note = document.getElementById("home-history-results-note");
+	      const pagination = document.getElementById("home-history-pagination");
+	      if (!list || !note || !pagination) return;
+
+		      const modal = document.getElementById("home-event-modal");
+		      const modalKicker = document.getElementById("home-event-modal-kicker");
+		      const modalTitle = document.getElementById("home-event-modal-title");
+		      const modalSubtitle = document.getElementById("home-event-modal-subtitle");
+		      const modalMedia = document.getElementById("home-event-media");
+		      const modalGrid = document.getElementById("home-event-detail-grid");
+		      const modalPayload = document.getElementById("home-event-payload");
+		      const state = { page: 1, pageSize: 8, loading: false, timer: 0, items: new Map() };
+	      const $ = (id) => document.getElementById(id);
+	      const categoryLabels = {
+	        alerta: "Alerta",
+	        acceso: "Acceso",
+	        reconocimiento_facial: "Reconocimiento",
+	        movimiento: "Movimiento",
+	        vehiculo: "Vehículo",
+	        sistema: "Sistema",
+	      };
+	      const originLabels = {
+	        fixed_camera: "Cámara fija",
+	        vehicle: "Vehículo",
+	        drone: "Drone",
+	        system: "Sistema",
+	      };
+
+	      function checkedValues(selector) {
+	        const inputs = [...document.querySelectorAll(selector)];
+	        if (!inputs.some((input) => input.dataset.historyTouched === "1")) return "";
+	        const values = inputs
+	          .filter((input) => input.checked)
+	          .map((input) => input.dataset.historyCategory || input.dataset.historyOrigin || input.dataset.historyStatus)
+	          .filter(Boolean)
+	        return values.length ? values.join(",") : "__none__";
+	      }
+
+	      function touchedSelectValue(id) {
+	        const control = $(id);
+	        if (!control || control.dataset.historyTouched !== "1") return "";
+	        return control.value;
+	      }
+	
+	      function buildParams() {
+	        const params = new URLSearchParams({
+	          page: String(state.page),
+	          page_size: String(state.pageSize),
+	        });
+	        const fields = {
+	          q: $("home-history-search")?.value,
+	          date_from: $("home-history-date-from")?.value,
+	          date_to: $("home-history-date-to")?.value,
+	          time_from: $("home-history-time-from")?.value,
+	          time_to: $("home-history-time-to")?.value,
+	          camera_id: touchedSelectValue("home-history-camera-select"),
+	          camera_name: touchedSelectValue("home-history-camera-name-select"),
+	          event_types: $("home-history-event-select")?.value,
+	          categories: checkedValues("[data-history-category]"),
+	          origins: checkedValues("[data-history-origin]"),
+	        };
+	        Object.entries(fields).forEach(([key, value]) => {
+	          const normalized = String(value || "").trim();
+	          if (normalized) params.set(key, normalized);
+	        });
+	        return params;
+	      }
+
+	      function escapeHtml(value) {
+	        return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+	          "&": "&amp;",
+	          "<": "&lt;",
+	          ">": "&gt;",
+	          '"': "&quot;",
+	          "'": "&#039;",
+	        }[char]));
+	      }
+
+	      function mediaUrl(endpoint, path) {
+	        return path ? `${endpoint}?path=${encodeURIComponent(path)}` : "";
+	      }
+
+	      function formatDate(value) {
+	        if (!value) return "Sin fecha";
+	        const date = new Date(value);
+	        if (Number.isNaN(date.getTime())) return String(value);
+	        return date.toLocaleString("es-EC", {
+	          timeZone: "America/Guayaquil",
+	          day: "2-digit",
+	          month: "2-digit",
+	          year: "numeric",
+	          hour: "2-digit",
+	          minute: "2-digit",
+	        });
+	      }
+
+	      function itemSummary(item) {
+	        const parts = [];
+	        if (item.camera_name) parts.push(item.camera_name);
+	        if (item.camera_id) parts.push(item.camera_id);
+	        if (item.track_id !== null && item.track_id !== undefined) parts.push(`track ${item.track_id}`);
+	        if (item.person_name) parts.push(item.person_name);
+	        if (item.person_id) parts.push(`cedula ${item.person_id}`);
+	        if (item.plate) parts.push(`placa ${item.plate}`);
+	        if (item.description) parts.push(item.description);
+	        return parts.join(" · ") || "Evento registrado en el historial.";
+	      }
+
+	      function renderItems(items) {
+	        state.items = new Map(items.map((item) => [String(item.id || ""), item]));
+	        if (!items.length) {
+	          list.innerHTML = '<article class="home-history-event-card home-history-event-empty">No hay eventos para los filtros seleccionados.</article>';
+	          return;
+	        }
+	        list.innerHTML = items.map((item) => {
+	          const label = categoryLabels[item.event_category] || item.event_type || "Evento";
+	          const origin = originLabels[item.origin] || item.origin || "";
+	          return `
+	            <article class="home-history-event-card" data-event-id="${escapeHtml(item.id)}">
+	              <div class="home-history-event-copy">
+	                <div class="home-history-event-meta">
+	                  <span class="home-history-event-tag">${escapeHtml(label)}</span>
+	                  <span class="home-history-event-time">${escapeHtml(formatDate(item.detected_at))}</span>
+	                  ${origin ? `<span class="home-history-event-time">${escapeHtml(origin)}</span>` : ""}
+	                </div>
+	                <h4 class="home-history-event-title">${escapeHtml(item.title || "Evento detectado")}</h4>
+	                <p class="home-history-event-summary">${escapeHtml(itemSummary(item))}</p>
+	              </div>
+	              <button class="home-history-event-dismiss" type="button" data-dismiss-event="${escapeHtml(item.id)}" aria-label="Archivar evento">x</button>
+	            </article>
+	          `;
+	        }).join("");
+	      }
+
+	      function detailRows(item) {
+	        const payload = item.detail_payload && typeof item.detail_payload === "object" ? item.detail_payload : {};
+	        const rows = [
+	          ["Tipo", item.event_type],
+	          ["Categoría", categoryLabels[item.event_category] || item.event_category],
+	          ["Origen", originLabels[item.origin] || item.origin],
+	          ["Cámara", item.camera_name],
+	          ["ID de cámara", item.camera_id],
+	          ["Fecha", formatDate(item.detected_at)],
+	          ["Track", item.track_id],
+	          ["Persona", item.person_name],
+	          ["Cédula", item.person_id],
+	          ["Placa", item.plate],
+	          ["Estado", item.status],
+	          ["Severidad", item.severity],
+	          ["Duración", payload.duration !== undefined ? `${payload.duration} s` : ""],
+	        ];
+	        return rows.filter(([, value]) => value !== null && value !== undefined && String(value).trim() !== "");
+	      }
+
+	      function renderModalMedia(item) {
+	        const media = [];
+	        if (item.video_file_path) {
+	          media.push(`
+	            <video class="home-event-video" controls preload="metadata">
+	              <source src="${escapeHtml(mediaUrl("/api/camera-event-video", item.video_file_path))}" type="video/mp4" />
+	            </video>
+	          `);
+	        }
+	        const imagePath = item.image_file_path || item.crop_path || "";
+	        if (imagePath) {
+	          media.push(`<img class="home-event-image" src="${escapeHtml(mediaUrl("/api/camera-event-crop", imagePath))}" alt="Evidencia del evento" loading="lazy" />`);
+	        }
+	        modalMedia.innerHTML = media.length ? media.join("") : '<div class="home-event-empty-media">Sin video o imagen asociada.</div>';
+	      }
+
+	      function openEventModal(eventId) {
+	        const item = state.items.get(String(eventId || ""));
+	        if (!item || !modal) return;
+	        const label = categoryLabels[item.event_category] || item.event_type || "Evento";
+	        modalKicker.textContent = label;
+	        modalTitle.textContent = item.title || "Evento detectado";
+	        modalSubtitle.textContent = itemSummary(item);
+	        renderModalMedia(item);
+	        modalGrid.innerHTML = detailRows(item).map(([labelText, value]) => `
+	          <div class="home-event-detail-row">
+	            <strong>${escapeHtml(labelText)}</strong>
+	            <span>${escapeHtml(value)}</span>
+	          </div>
+	        `).join("");
+	        modalPayload.textContent = JSON.stringify(item.detail_payload || item, null, 2);
+	        modal.hidden = false;
+	        document.body.classList.add("is-modal-open");
+	      }
+
+	      function closeEventModal() {
+	        if (!modal) return;
+	        modal.hidden = true;
+	        modalMedia.innerHTML = "";
+	        document.body.classList.remove("is-modal-open");
+	      }
+
+	      function renderPagination(payload) {
+	        const totalPages = Math.max(1, Number(payload.total_pages || 1));
+	        const current = Math.min(Math.max(1, Number(payload.page || 1)), totalPages);
+	        const start = Math.max(1, Math.min(current - 2, totalPages - 4));
+	        const end = Math.min(totalPages, start + 4);
+	        const buttons = [
+	          `<button class="home-history-page home-history-page-arrow" type="button" data-page="${Math.max(1, current - 1)}" ${current <= 1 ? "disabled" : ""}>‹</button>`,
+	        ];
+	        for (let page = start; page <= end; page += 1) {
+	          buttons.push(`<button class="home-history-page ${page === current ? "is-active" : ""}" type="button" data-page="${page}">${page}</button>`);
+	        }
+	        buttons.push(`<button class="home-history-page home-history-page-arrow" type="button" data-page="${Math.min(totalPages, current + 1)}" ${current >= totalPages ? "disabled" : ""}>›</button>`);
+	        pagination.innerHTML = buttons.join("");
+	      }
+
+	      async function loadHistory({ keepPage = true } = {}) {
+	        if (state.loading) return;
+	        state.loading = true;
+	        if (!keepPage) state.page = 1;
+	        try {
+	          const response = await fetch(`/api/event-history?${buildParams().toString()}`, {
+	            headers: { Accept: "application/json" },
+	          });
+	          const payload = await response.json();
+	          if (!response.ok || payload.error) throw new Error(payload.error || `HTTP ${response.status}`);
+	          const items = Array.isArray(payload.items) ? payload.items : [];
+	          renderItems(items);
+	          renderPagination(payload);
+	          const total = Number(payload.total || 0);
+	          const shown = items.length;
+	          note.textContent = `Mostrando ${shown} de ${total} eventos guardados.`;
+	        } catch (error) {
+	          note.textContent = `No se pudo cargar el historial: ${error.message || error}`;
+	        } finally {
+	          state.loading = false;
+	        }
+	      }
+
+	      async function dismissEvent(eventId) {
+	        if (!eventId) return;
+	        await fetch(`/api/event-history/${encodeURIComponent(eventId)}/status`, {
+	          method: "PATCH",
+	          headers: { "Content-Type": "application/json", Accept: "application/json" },
+	          body: JSON.stringify({ status: "dismissed" }),
+	        });
+	        await loadHistory();
+	      }
+
+	      function scheduleFilterReload() {
+	        window.clearTimeout(state.timer);
+	        state.timer = window.setTimeout(() => loadHistory({ keepPage: false }), 250);
+	      }
+
+	      document.querySelectorAll("#home-history-date-from, #home-history-date-to, #home-history-time-from, #home-history-time-to, #home-history-camera-select, #home-history-camera-name-select, #home-history-event-select, [data-history-category], [data-history-origin]")
+	        .forEach((control) => control.addEventListener("change", () => {
+	          control.dataset.historyTouched = "1";
+	          scheduleFilterReload();
+	        }));
+	      $("home-history-search")?.addEventListener("input", scheduleFilterReload);
+	      pagination.addEventListener("click", (event) => {
+	        const button = event.target.closest("[data-page]");
+	        if (!button || button.disabled) return;
+	        state.page = Number(button.dataset.page || 1);
+	        void loadHistory();
+	      });
+	      list.addEventListener("click", (event) => {
+	        const button = event.target.closest("[data-dismiss-event]");
+	        if (button) {
+	          event.stopPropagation();
+	          void dismissEvent(button.dataset.dismissEvent);
+	          return;
+	        }
+	        const card = event.target.closest("[data-event-id]");
+	        if (card) openEventModal(card.dataset.eventId);
+	      });
+	      document.querySelectorAll("[data-home-event-close]").forEach((control) => {
+	        control.addEventListener("click", closeEventModal);
+	      });
+	      document.addEventListener("keydown", (event) => {
+	        if (event.key === "Escape" && modal && !modal.hidden) closeEventModal();
+	      });
+
+	      void loadHistory({ keepPage: false });
+	      window.setInterval(() => void loadHistory(), 5000);
+	    })();
+	  </script>
+	  <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
 </body>
 </html>

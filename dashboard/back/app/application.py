@@ -214,9 +214,9 @@ def _template_source(name: str, seen: set[Path] | None = None) -> str:
 
 
 def _camera_unique_code_options_html(codes: list[str]) -> str:
+    options: list[str] = ['<option value="" selected>Todas las cámaras</option>']
     if not codes:
-        return '<option value="" selected>No hay cámaras disponibles</option>'
-    options: list[str] = []
+        return "".join(options)
     for code in codes:
         safe_code = escape(code)
         options.append(f'<option value="{safe_code}">{safe_code}</option>')
@@ -1333,6 +1333,66 @@ def camera_events(request: Request, camera: str = "", camera_name: str = "", lim
         return JSONResponse(remote_detection_feed.fetch_camera_events(cam_id, limit=limit))
     except Exception as exc:
         return JSONResponse({"error": str(exc), "items": []}, status_code=503)
+
+
+@app.get("/api/event-history")
+def event_history(
+    page: int = 1,
+    page_size: int = 8,
+    q: str = "",
+    date_from: str = "",
+    date_to: str = "",
+    time_from: str = "",
+    time_to: str = "",
+    camera_id: str = "",
+    camera_name: str = "",
+    categories: str = "",
+    event_types: str = "",
+    origins: str = "",
+    statuses: str = "",
+):
+    try:
+        return JSONResponse(
+            remote_detection_feed.fetch_event_history(
+                page=page,
+                page_size=page_size,
+                query=q,
+                date_from=date_from,
+                date_to=date_to,
+                time_from=time_from,
+                time_to=time_to,
+                camera_id=camera_id,
+                camera_name=camera_name,
+                categories=categories,
+                event_types=event_types,
+                origins=origins,
+                statuses=statuses,
+            )
+        )
+    except Exception as exc:
+        return JSONResponse({"error": str(exc), "items": [], "total": 0}, status_code=503)
+
+
+@app.get("/api/event-history-filter-options")
+def event_history_filter_options(field: str = ""):
+    try:
+        return JSONResponse(remote_detection_feed.fetch_event_history_filter_options(field))
+    except Exception as exc:
+        return JSONResponse({"error": str(exc), "items": [], "total": 0}, status_code=400)
+
+
+@app.patch("/api/event-history/{event_id}/status")
+async def event_history_status(event_id: str, request: Request):
+    try:
+        payload = await request.json()
+    except Exception:
+        payload = {}
+    try:
+        return JSONResponse(remote_detection_feed.update_event_history_status(event_id, _text(payload.get("status"))))
+    except FileNotFoundError:
+        return JSONResponse({"error": "Evento no encontrado"}, status_code=404)
+    except Exception as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
 
 
 @app.get("/api/camera-event-crop")

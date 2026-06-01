@@ -14,7 +14,7 @@ from urllib.parse import urlparse, urlunparse
 
 import paramiko
 import psycopg2
-from psycopg2.extras import Json, execute_values
+from psycopg2.extras import Json, RealDictCursor, execute_values
 
 from back.app.config import Settings
 
@@ -244,6 +244,152 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         self._warm_recent_videos(rendered_events)
         return rendered_events
 
+    def fetch_event_history(
+        self,
+        *,
+        page: int = 1,
+        page_size: int = 8,
+        query: str = "",
+        date_from: str = "",
+        date_to: str = "",
+        time_from: str = "",
+        time_to: str = "",
+        camera_id: str = "",
+        camera_name: str = "",
+        categories: str = "",
+        event_types: str = "",
+        origins: str = "",
+        statuses: str = "",
+    ) -> dict[str, Any]:
+        page = max(1, int(page or 1))
+        page_size = max(1, min(int(page_size or 8), 50))
+        where_sql, params = self._history_filters(
+            query=query,
+            date_from=date_from,
+            date_to=date_to,
+            time_from=time_from,
+            time_to=time_to,
+            camera_id=camera_id,
+            camera_name=camera_name,
+            categories=categories,
+            event_types=event_types,
+            origins=origins,
+            statuses=statuses,
+        )
+        offset = (page - 1) * page_size
+
+        count_sql = f"SELECT count(*) AS total FROM camera_event_history {where_sql}"
+        list_sql = f"""
+            SELECT
+                id,
+                event_type,
+                event_category,
+                origin,
+                camera_id,
+                camera_name,
+                camera_location,
+                event_timestamp,
+                detected_at,
+                detected_date,
+                title,
+                description,
+                person_id,
+                person_name,
+                plate,
+                track_id,
+                status,
+                severity,
+                json_file_path,
+                video_file_path,
+                image_file_path,
+                crop_path,
+                detail_payload
+            FROM camera_event_history
+            {where_sql}
+            ORDER BY detected_at DESC, created_at DESC
+            LIMIT %s OFFSET %s
+        """
+
+        with self._db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(count_sql, params)
+                total = int((cur.fetchone() or {}).get("total") or 0)
+                cur.execute(list_sql, [*params, page_size, offset])
+                rows = [self._history_item(row) for row in cur.fetchall()]
+
+        total_pages = max(1, (total + page_size - 1) // page_size)
+        return {
+            "items": rows,
+            "total": total,
+            "page": page,
+            "page_size": page_size,
+            "total_pages": total_pages,
+        }
+
+    def update_event_history_status(self, event_id: str, status: str) -> dict[str, Any]:
+        normalized_status = str(status or "").strip().lower()
+        if normalized_status not in {"new", "reviewed", "archived", "dismissed"}:
+            raise ValueError("Estado no permitido")
+        with self._db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(
+                    """
+                    UPDATE camera_event_history
+                    SET status = %s, updated_at = now()
+                    WHERE id = %s
+                    RETURNING id, status
+                    """,
+                    (normalized_status, event_id),
+                )
+                row = cur.fetchone()
+            conn.commit()
+        if not row:
+            raise FileNotFoundError("Evento no encontrado")
+        return {"id": str(row["id"]), "status": row["status"]}
+
+    def fetch_event_history_filter_options(self, field: str) -> dict[str, Any]:
+        normalized_field = str(field or "").strip().lower()
+        if normalized_field == "camera_id":
+            query = """
+                SELECT
+                    camera_id AS value,
+                    camera_id AS label,
+                    count(*) AS total
+                FROM camera_event_history
+                WHERE camera_id IS NOT NULL AND camera_id <> ''
+                GROUP BY camera_id
+                ORDER BY camera_id
+            """
+        elif normalized_field == "camera_name":
+            query = """
+                SELECT
+                    camera_name AS value,
+                    camera_name AS label,
+                    count(*) AS total
+                FROM camera_event_history
+                WHERE camera_name IS NOT NULL AND camera_name <> ''
+                GROUP BY camera_name
+                ORDER BY camera_name
+            """
+        else:
+            raise ValueError("Filtro no permitido")
+
+        with self._db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(query)
+                rows = cur.fetchall()
+
+        items = [
+            {
+                "value": str(row.get("value") or ""),
+                "label": str(row.get("label") or ""),
+                "count": int(row.get("total") or 0),
+            }
+            for row in rows
+            if str(row.get("value") or "").strip()
+        ]
+        return {"items": items, "total": len(items)}
+
     def read_remote_file(self, remote_path: str) -> tuple[bytes, str]:
         normalized_path = str(PurePosixPath(remote_path or "")).strip()
         if not normalized_path:
@@ -438,6 +584,113 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
 
     def _db_connection(self):
         return psycopg2.connect(self._psycopg_dsn(self.settings.database_url))
+
+    @classmethod
+    def _history_filters(cls, **filters: str) -> tuple[str, list[Any]]:
+        clauses: list[str] = []
+        params: list[Any] = []
+
+        query = str(filters.get("query") or "").strip()
+        if query:
+            pattern = f"%{query}%"
+            clauses.append(
+                """(
+                    camera_id ILIKE %s OR
+                    camera_name ILIKE %s OR
+                    title ILIKE %s OR
+                    description ILIKE %s OR
+                    person_name ILIKE %s OR
+                    person_id ILIKE %s OR
+                    plate ILIKE %s OR
+                    detail_payload::text ILIKE %s
+                )"""
+            )
+            params.extend([pattern] * 8)
+
+        for field, column in (("date_from", "detected_date"), ("date_to", "detected_date")):
+            value = str(filters.get(field) or "").strip()
+            if not value:
+                continue
+            operator = ">=" if field.endswith("from") else "<="
+            clauses.append(f"{column} {operator} %s::date")
+            params.append(value)
+
+        time_from = str(filters.get("time_from") or "").strip()
+        if time_from:
+            clauses.append("(detected_at AT TIME ZONE 'America/Guayaquil')::time >= %s::time")
+            params.append(time_from)
+
+        time_to = str(filters.get("time_to") or "").strip()
+        if time_to:
+            clauses.append("(detected_at AT TIME ZONE 'America/Guayaquil')::time <= %s::time")
+            params.append(time_to)
+
+        camera_id = str(filters.get("camera_id") or "").strip()
+        if camera_id:
+            clauses.append("camera_id = %s")
+            params.append(camera_id)
+
+        camera_name = str(filters.get("camera_name") or "").strip()
+        if camera_name:
+            clauses.append("camera_name = %s")
+            params.append(camera_name)
+
+        for field, column, allowed in (
+            ("categories", "event_category", {"alerta", "acceso", "reconocimiento_facial", "movimiento", "vehiculo", "sistema"}),
+            ("event_types", "event_type", {"person", "plate", "clip", "click"}),
+            ("origins", "origin", {"fixed_camera", "vehicle", "drone", "system"}),
+            ("statuses", "status", {"new", "reviewed", "archived", "dismissed"}),
+        ):
+            raw_value = filters.get(field)
+            values = cls._csv_values(raw_value, allowed)
+            if values:
+                placeholders = ", ".join(["%s"] * len(values))
+                clauses.append(f"{column} IN ({placeholders})")
+                params.extend(values)
+            elif str(raw_value or "").strip():
+                clauses.append("false")
+
+        return ("WHERE " + " AND ".join(clauses)) if clauses else "", params
+
+    @staticmethod
+    def _csv_values(raw: Any, allowed: set[str]) -> list[str]:
+        values = []
+        for value in str(raw or "").split(","):
+            normalized = value.strip().lower()
+            if normalized in allowed and normalized not in values:
+                values.append(normalized)
+        return values
+
+    @staticmethod
+    def _history_item(row: dict[str, Any]) -> dict[str, Any]:
+        detected_at = row.get("detected_at")
+        detected_date = row.get("detected_date")
+        payload = row.get("detail_payload") if isinstance(row.get("detail_payload"), dict) else {}
+        return {
+            "id": str(row.get("id") or ""),
+            "event_type": row.get("event_type"),
+            "event_category": row.get("event_category"),
+            "origin": row.get("origin"),
+            "camera_id": row.get("camera_id"),
+            "camera_name": row.get("camera_name"),
+            "camera_location": row.get("camera_location"),
+            "event_timestamp": row.get("event_timestamp"),
+            "detected_at": detected_at.isoformat() if hasattr(detected_at, "isoformat") else detected_at,
+            "detected_date": detected_date.isoformat() if hasattr(detected_date, "isoformat") else detected_date,
+            "title": row.get("title"),
+            "description": row.get("description"),
+            "person_id": row.get("person_id"),
+            "person_name": row.get("person_name"),
+            "plate": row.get("plate"),
+            "track_id": row.get("track_id"),
+            "status": row.get("status"),
+            "severity": row.get("severity"),
+            "json_file_path": row.get("json_file_path"),
+            "video_file_path": row.get("video_file_path"),
+            "image_file_path": row.get("image_file_path"),
+            "crop_path": row.get("crop_path"),
+            "detail_payload": payload,
+        }
 
     @staticmethod
     def _psycopg_dsn(database_url: str) -> str:

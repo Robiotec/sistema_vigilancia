@@ -1,8 +1,8 @@
 {
   "layer_url": "https://geovisorm.controlrecursosyenergia.gob.ec/arcgis/rest/services/Concesiones/CatastroMineroNacional_PSAD56/MapServer/0",
-  "expected_count_server": 6339,
-  "ids_received": 6339,
-  "downloaded_unique_features": 6339,
+  "expected_count_server": 6337,
+  "ids_received": 6337,
+  "downloaded_unique_features": 6337,
   "missing_count": 0,
   "fields": [
     "objectid",
