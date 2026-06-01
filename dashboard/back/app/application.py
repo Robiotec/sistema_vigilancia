@@ -12,7 +12,7 @@ from urllib.request import Request as UrlRequest
 from urllib.request import urlopen
 
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from back.app.config import get_settings
@@ -1344,6 +1344,17 @@ def camera_event_crop(path: str):
     except Exception as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
     return Response(content=content, media_type=media_type)
+
+
+@app.get("/api/camera-event-video")
+def camera_event_video(path: str):
+    try:
+        local_path, media_type = remote_detection_feed.cache_remote_video(path)
+    except FileNotFoundError:
+        return Response(status_code=404)
+    except Exception as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
+    return FileResponse(local_path, media_type=media_type)
 
 
 @app.get("/api/telemetry")

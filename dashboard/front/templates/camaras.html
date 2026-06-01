@@ -96,7 +96,7 @@
                   <article class="face-preview-item face-preview-empty">
                     <div class="face-preview-copy">
                       <strong>Sin eventos</strong>
-                      <span>Selecciona una cámara para cargar resultados recientes de personas y placas.</span>
+                      <span>Selecciona una cámara para cargar resultados recientes de personas, placas y videos.</span>
                     </div>
                   </article>
                 </div>
@@ -148,6 +148,16 @@
       <h3 id="plate-file-modal-title">Detalle de placa</h3>
       <strong id="plate-file-plate">__PLATE_PREVIEW_SELECTED__</strong>
       <div class="plate-file-content" id="plate-file-content"></div>
+    </section>
+  </div>
+  <div class="event-video-modal" id="event-video-modal" hidden>
+    <button class="event-video-modal-backdrop" id="event-video-modal-backdrop" type="button" aria-label="Cerrar video detectado"></button>
+    <section class="event-video-dialog" role="dialog" aria-modal="true" aria-labelledby="event-video-modal-title">
+      <button class="event-video-close" id="event-video-close" type="button" aria-label="Cerrar video detectado">×</button>
+      <span class="event-video-eyebrow">Evento</span>
+      <h3 id="event-video-modal-title">Video detectado</h3>
+      <video class="event-video-player" id="event-video-player" controls preload="metadata" playsinline></video>
+      <div class="event-video-meta" id="event-video-meta"></div>
     </section>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>

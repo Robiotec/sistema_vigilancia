@@ -233,34 +233,113 @@
     return [
       item.source_file,
       item.crop_path,
+      item.video_path,
       item.timestamp,
       item.event_type,
       item.plate,
       item.person_id,
+      item.track_id,
     ].map((value) => String(value || "").trim()).join("|");
   }
 
   function cameraEventHtml(item, key) {
     const cropPath = String(item.crop_path || "").trim();
+    const videoPath = String(item.video_path || "").trim();
     const imageUrl = cropPath ? `/api/camera-event-crop?path=${encodeURIComponent(cropPath)}` : "";
+    const videoUrl = videoPath ? `/api/camera-event-video?path=${encodeURIComponent(videoPath)}` : "";
     const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
     const rows = Array.isArray(item.rows) ? item.rows : [];
     const rowsHtml = rows.map((row) => `
       <strong>${escapeHtml(row.label)}:</strong>
       <span>${escapeHtml(row.value)}</span>
     `).join("");
+    const modalRowsHtml = rows.map((row) => `
+      <strong>${escapeHtml(row.label)}:</strong>
+      <span>${escapeHtml(row.value)}</span>
+    `).join("");
+    const mediaHtml = videoUrl
+      ? `<video class="face-preview-video" muted preload="metadata" playsinline><source src="${videoUrl}" type="video/mp4" /></video>`
+      : imageUrl
+        ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
+        : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`;
     return `
-      <article class="face-preview-item" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="${escapeHtml(item.event_type || "")}">
-        ${imageUrl
-          ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
-          : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`}
+      <article
+        class="face-preview-item"
+        data-camera-event-key="${escapeHtml(key)}"
+        data-camera-event-type="${escapeHtml(item.event_type || "")}"
+        ${videoUrl ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(item.display_title || "Video detectado")}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"` : ""}
+      >
+        ${mediaHtml}
         <div class="face-preview-copy">
-          <strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>
-          <span>${escapeHtml(formatTimestamp(item.timestamp))}</span>
+          ${videoUrl ? "" : `<strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>`}
+          ${videoUrl ? "" : `<span>${escapeHtml(formatTimestamp(item.timestamp))}</span>`}
           ${rowsHtml}
         </div>
       </article>
     `;
+  }
+
+  function closeEventVideoModal() {
+    const modal = document.getElementById("event-video-modal");
+    const player = document.getElementById("event-video-player");
+    const meta = document.getElementById("event-video-meta");
+    if (!modal || !(player instanceof HTMLVideoElement)) return;
+    player.pause();
+    player.removeAttribute("src");
+    player.innerHTML = "";
+    player.load();
+    if (meta) meta.innerHTML = "";
+    modal.hidden = true;
+    document.body.classList.remove("is-modal-open");
+  }
+
+  function openEventVideoModal(card) {
+    const modal = document.getElementById("event-video-modal");
+    const player = document.getElementById("event-video-player");
+    const title = document.getElementById("event-video-modal-title");
+    const meta = document.getElementById("event-video-meta");
+    if (!modal || !(player instanceof HTMLVideoElement)) return;
+    const videoUrl = String(card.getAttribute("data-camera-event-video-url") || "").trim();
+    if (!videoUrl) return;
+    const label = String(card.getAttribute("data-camera-event-title") || "Video detectado").trim();
+    if (title) title.textContent = label;
+    if (meta) meta.innerHTML = card.getAttribute("data-camera-event-meta") || "";
+    player.innerHTML = `<source src="${escapeHtml(videoUrl)}" type="video/mp4" />`;
+    modal.hidden = false;
+    document.body.classList.add("is-modal-open");
+    player.load();
+    void player.play().catch(() => {});
+  }
+
+  function bindEventVideoModal() {
+    const feed = document.getElementById("camera-events-feed");
+    const modal = document.getElementById("event-video-modal");
+    if (!feed || !modal) return;
+    feed.addEventListener("click", (event) => {
+      const card = event.target instanceof Element
+        ? event.target.closest("[data-camera-event-video-url]")
+        : null;
+      if (!card) return;
+      openEventVideoModal(card);
+    });
+    feed.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target instanceof Element
+        ? event.target.closest("[data-camera-event-video-url]")
+        : null;
+      if (!card) return;
+      event.preventDefault();
+      openEventVideoModal(card);
+    });
+    ["event-video-modal-backdrop", "event-video-close"].forEach((id) => {
+      const button = document.getElementById(id);
+      if (button) button.addEventListener("click", closeEventVideoModal);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) {
+        closeEventVideoModal();
+      }
+    });
   }
 
   function createCameraEventNode(item, key) {
@@ -332,7 +411,7 @@
     const feed = document.getElementById("camera-events-feed");
     if (!feed) return;
     if (!normalizedName) {
-      renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas y placas." });
+      renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas, placas y videos." });
       return;
     }
 
@@ -690,7 +769,8 @@
       });
     }
     syncInferenceToolbar("", "none");
-    renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas y placas." });
+    renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas, placas y videos." });
+    bindEventVideoModal();
 
     switcher.addEventListener("click", (event) => {
       const inferenceButton = event.target instanceof Element

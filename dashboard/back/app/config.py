@@ -17,6 +17,10 @@ class Settings(BaseSettings):
     dashboard_host: str = Field(default="0.0.0.0", alias="DASHBOARD_HOST")
     dashboard_port: int = Field(default=8010, alias="DASHBOARD_PORT")
     preview_mode: bool = Field(default=False, alias="PREVIEW_MODE")
+    database_url: str = Field(
+        default="postgresql://robiotec_app:Robiotec%402026@127.0.0.1:5432/robiotec_vms",
+        alias="DATABASE_URL",
+    )
     ssh_events_host: str = Field(default="100.93.62.24", alias="SSH_EVENTS_HOST")
     ssh_events_user: str = Field(default="robiotec", alias="SSH_EVENTS_USER")
     ssh_events_password: str = Field(default="123456", alias="SSH_EVENTS_PASSWORD")
