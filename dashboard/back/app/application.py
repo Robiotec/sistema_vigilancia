@@ -37,6 +37,7 @@ from back.app.services.notification_settings import (
     save_notification_settings,
 )
 from back.app.services.remote_detection_feed import RemoteDetectionFeedService
+from back.app.services.remote_clip_telegram_notifier import RemoteClipTelegramNotifier
 from back.app.services.rendering import DashboardTemplateRenderer
 from back.app.services.send_mail import send_configured_email
 from back.app.services.send_telegram import send_configured_telegram_alert
@@ -45,6 +46,7 @@ settings = get_settings()
 SESSION_COOKIE = "robiotec_dashboard_token"
 api_client = DashboardApiClient(settings)
 remote_detection_feed = RemoteDetectionFeedService(settings)
+remote_clip_telegram_notifier = RemoteClipTelegramNotifier(settings)
 helper = DashboardHelper(SESSION_COOKIE)
 camera_normalizer = CameraNormalizer()
 vehicle_normalizer = VehicleNormalizer()
@@ -75,6 +77,16 @@ app = FastAPI(title="Robiotec Dashboard", version="0.2.0")
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
 app.mount("/assets", StaticFiles(directory=STATIC / "assets"), name="assets")
 app.mount("/icons", StaticFiles(directory=STATIC / "icons"), name="icons")
+
+
+@app.on_event("startup")
+def start_remote_clip_telegram_notifier() -> None:
+    remote_clip_telegram_notifier.start()
+
+
+@app.on_event("shutdown")
+def stop_remote_clip_telegram_notifier() -> None:
+    remote_clip_telegram_notifier.stop()
 
 
 def _json(value: Any) -> str:
@@ -926,6 +938,26 @@ def notification_settings_test_telegram_form(request: Request):
     except Exception:
         pass
     return RedirectResponse("/notificaciones", status_code=303)
+
+
+@app.get("/api/notification-settings/clip-notifier-status")
+def notification_settings_clip_notifier_status(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    return {"ok": True, **remote_clip_telegram_notifier.status()}
+
+
+@app.post("/api/notification-settings/clip-notifier-check")
+def notification_settings_clip_notifier_check(request: Request):
+    token = _token(request)
+    if not token:
+        return _auth_json_response()
+    try:
+        result = remote_clip_telegram_notifier.check_once()
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
+    return {"ok": True, **result, "status": remote_clip_telegram_notifier.status()}
 
 
 @app.post("/api/cameras")

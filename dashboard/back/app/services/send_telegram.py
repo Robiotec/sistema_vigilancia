@@ -6,7 +6,7 @@ from pathlib import Path
 
 import requests
 
-from back.app.services.notification_settings import load_notification_settings
+from back.app.services.notification_settings import load_notification_settings, load_telegram_chat_ids_from_db
 
 DEFAULT_BOT_TOKEN = "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts"
 DEFAULT_CHAT_IDS = ["-1003416074376"]
@@ -121,6 +121,44 @@ def send_photo(token: str, chat_id: str, message: str, image_path: Path, timeout
     return False, description
 
 
+def send_video(token: str, chat_id: str, message: str, video_path: Path, timeout: float) -> tuple[bool, str]:
+    with video_path.open("rb") as video:
+        response = requests.post(
+            api_url(token, "sendVideo"),
+            data={"chat_id": chat_id, "caption": message, "supports_streaming": "true"},
+            files={"video": video},
+            timeout=timeout,
+        )
+    try:
+        payload = response.json()
+    except ValueError:
+        return False, f"HTTP {response.status_code}: {response.text}"
+
+    if response.status_code == 200 and payload.get("ok"):
+        return True, "Enviado correctamente"
+
+    description = payload.get("description") or response.text or "Error desconocido"
+    return False, description
+
+
+def send_message(token: str, chat_id: str, message: str, timeout: float) -> tuple[bool, str]:
+    response = requests.post(
+        api_url(token, "sendMessage"),
+        data={"chat_id": chat_id, "text": message},
+        timeout=timeout,
+    )
+    try:
+        payload = response.json()
+    except ValueError:
+        return False, f"HTTP {response.status_code}: {response.text}"
+
+    if response.status_code == 200 and payload.get("ok"):
+        return True, "Enviado correctamente"
+
+    description = payload.get("description") or response.text or "Error desconocido"
+    return False, description
+
+
 def send_telegram_alert(
     *,
     token: str,
@@ -152,10 +190,67 @@ def send_telegram_alert(
     }
 
 
+def send_telegram_video_alert(
+    *,
+    token: str,
+    chat_ids: list[str],
+    message: str,
+    video_path: Path,
+    timeout: float = 90.0,
+) -> dict:
+    token = validate_token_value(token)
+    resolved_chat_ids = normalized_chat_ids(chat_ids)
+
+    if not video_path.is_file():
+        raise ValueError(f"No existe el video a enviar: {video_path}")
+
+    bot_info = check_bot(token, timeout)
+    results = []
+    ok_count = 0
+    for chat_id in resolved_chat_ids:
+        ok, detail = send_video(token, chat_id, message, video_path, timeout)
+        if ok:
+            ok_count += 1
+        results.append({"chat_id": chat_id, "ok": ok, "detail": detail})
+
+    return {
+        "bot": bot_info,
+        "results": results,
+        "sent": ok_count,
+        "total": len(resolved_chat_ids),
+    }
+
+
+def send_telegram_text(
+    *,
+    token: str,
+    chat_ids: list[str],
+    message: str,
+    timeout: float = 20.0,
+) -> dict:
+    token = validate_token_value(token)
+    resolved_chat_ids = normalized_chat_ids(chat_ids)
+    bot_info = check_bot(token, timeout)
+    results = []
+    ok_count = 0
+    for chat_id in resolved_chat_ids:
+        ok, detail = send_message(token, chat_id, message, timeout)
+        if ok:
+            ok_count += 1
+        results.append({"chat_id": chat_id, "ok": ok, "detail": detail})
+
+    return {
+        "bot": bot_info,
+        "results": results,
+        "sent": ok_count,
+        "total": len(resolved_chat_ids),
+    }
+
+
 def send_configured_telegram_alert(timeout: float = 20.0) -> dict:
     settings = configured_telegram_settings()
     token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
-    chat_ids = list(settings.get("chat_ids") or [])
+    chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
     message = str(settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
     if not image_path.is_file():
@@ -165,6 +260,58 @@ def send_configured_telegram_alert(timeout: float = 20.0) -> dict:
         chat_ids=chat_ids,
         message=message,
         image_path=image_path,
+        timeout=timeout,
+    )
+
+
+def send_configured_telegram_photo(
+    *,
+    message: str,
+    image_path: Path,
+    timeout: float = 20.0,
+) -> dict:
+    settings = configured_telegram_settings()
+    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
+    return send_telegram_alert(
+        token=token,
+        chat_ids=chat_ids,
+        message=message,
+        image_path=image_path,
+        timeout=timeout,
+    )
+
+
+def send_configured_telegram_video(
+    *,
+    message: str,
+    video_path: Path,
+    timeout: float = 90.0,
+) -> dict:
+    settings = configured_telegram_settings()
+    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
+    return send_telegram_video_alert(
+        token=token,
+        chat_ids=chat_ids,
+        message=message,
+        video_path=video_path,
+        timeout=timeout,
+    )
+
+
+def send_configured_telegram_text(
+    *,
+    message: str,
+    timeout: float = 20.0,
+) -> dict:
+    settings = configured_telegram_settings()
+    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
+    return send_telegram_text(
+        token=token,
+        chat_ids=chat_ids,
+        message=message,
         timeout=timeout,
     )
 
