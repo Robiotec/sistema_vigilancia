@@ -8371,9 +8371,9 @@ body {
 
 .page-cameras .camera-stage,
 .page-cameras .camera-stage.has-multiple {
-  grid-template-columns: minmax(300px, 340px) minmax(0, 1.7fr) minmax(220px, 300px);
+  grid-template-columns: minmax(300px, 340px) minmax(0, 1.7fr) minmax(300px, 340px);
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .page-cameras .page-section-shell {
@@ -8383,6 +8383,47 @@ body {
 .page-cameras .camera-switcher {
   gap: 14px;
   padding-right: 8px;
+}
+
+.page-cameras .camera-side-panel,
+.page-cameras .face-preview-shell {
+  height: 100%;
+  min-height: 0;
+}
+
+.page-cameras .camera-side-panel {
+  align-content: stretch;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.page-cameras .face-preview-shell {
+  max-height: none;
+}
+
+.page-cameras .face-preview-grid {
+  height: 100%;
+  max-height: none;
+  scrollbar-color: rgba(241, 56, 17, 0.72) rgba(255, 255, 255, 0.06);
+  scrollbar-width: thin;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(241, 56, 17, 0.92), rgba(255, 122, 45, 0.72));
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(255, 92, 38, 0.98), rgba(255, 151, 64, 0.86));
 }
 
 .page-cameras .camera-pill-shell {
