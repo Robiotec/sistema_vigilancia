@@ -85,16 +85,16 @@
               <button class="focus-close" id="focus-close" type="button" hidden aria-label="Cerrar cámara">Cerrar</button>
             </section>
             <aside class="camera-side-panel" aria-label="Panel auxiliar de cámara">
-              <section class="camera-side-card face-preview-shell" aria-label="Vista previa de rostros">
-                <div class="camera-side-head">
+              <section class="camera-side-card face-preview-shell events-panel" aria-label="Eventos de cámara">
+                <div class="camera-side-head events-panel__header">
                   <div class="plate-preview-copy-wrap">
-                    <div class="ops-eyebrow">Eventos</div>
+                    <div class="ops-eyebrow events-panel__title">Eventos</div>
                     <!-- <span class="camera-side-kicker">Mock visual</span>-->
                   </div>
                 </div>
-                <div class="face-preview-grid" id="camera-events-feed">
-                  <article class="face-preview-item face-preview-empty">
-                    <div class="face-preview-copy">
+                <div class="face-preview-grid events-panel__list" id="camera-events-feed">
+                  <article class="face-preview-item face-preview-empty event-card event-card--empty">
+                    <div class="face-preview-copy event-card__content">
                       <strong>Sin eventos</strong>
                       <span>Selecciona una cámara para cargar resultados recientes de personas, placas y videos.</span>
                     </div>

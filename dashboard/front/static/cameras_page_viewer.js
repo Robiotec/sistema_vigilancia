@@ -242,6 +242,23 @@
     ].map((value) => String(value || "").trim()).join("|");
   }
 
+  function cameraEventRowValue(rows, labels) {
+    const wanted = labels.map((label) => String(label).trim().toLowerCase());
+    const match = rows.find((row) => wanted.includes(String(row && row.label || "").trim().toLowerCase()));
+    return match ? String(match.value ?? "").trim() : "";
+  }
+
+  function formatDuration(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || numeric < 0) {
+      return String(value || "Sin duración");
+    }
+    const totalSeconds = Math.round(numeric);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
   function cameraEventHtml(item, key) {
     const cropPath = String(item.crop_path || "").trim();
     const videoPath = String(item.video_path || "").trim();
@@ -249,31 +266,35 @@
     const videoUrl = videoPath ? `/api/camera-event-video?path=${encodeURIComponent(videoPath)}` : "";
     const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
     const rows = Array.isArray(item.rows) ? item.rows : [];
-    const rowsHtml = rows.map((row) => `
-      <strong>${escapeHtml(row.label)}:</strong>
-      <span>${escapeHtml(row.value)}</span>
-    `).join("");
     const modalRowsHtml = rows.map((row) => `
       <strong>${escapeHtml(row.label)}:</strong>
       <span>${escapeHtml(row.value)}</span>
     `).join("");
+    const rowDuration = cameraEventRowValue(rows, ["duration", "duración", "duracion"]);
+    const timestampLabel = cameraEventRowValue(rows, ["timestamp", "fecha", "hora"]) || formatTimestamp(item.timestamp);
+    const durationLabel = rowDuration ? formatDuration(rowDuration.replace(/\s*s\.?$/i, "")) : "Sin duración";
+    const timestampNumber = Number(item.timestamp);
+    const timestampDatetime = Number.isFinite(timestampNumber) && timestampNumber > 0
+      ? new Date(timestampNumber * 1000).toISOString()
+      : "";
     const mediaHtml = videoUrl
-      ? `<video class="face-preview-video" muted preload="metadata" playsinline><source src="${videoUrl}" type="video/mp4" /></video>`
+      ? `<video class="face-preview-video event-card__thumb" muted preload="metadata" playsinline><source src="${videoUrl}" type="video/mp4" /></video>`
       : imageUrl
-        ? `<img class="face-preview-image" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
-        : `<span class="face-preview-avatar">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`;
+        ? `<img class="face-preview-image event-card__thumb" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
+        : `<span class="face-preview-avatar event-card__thumb">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`;
     return `
       <article
-        class="face-preview-item"
+        class="face-preview-item event-card"
         data-camera-event-key="${escapeHtml(key)}"
         data-camera-event-type="${escapeHtml(item.event_type || "")}"
         ${videoUrl ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(item.display_title || "Video detectado")}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"` : ""}
       >
         ${mediaHtml}
-        <div class="face-preview-copy">
-          ${videoUrl ? "" : `<strong>${escapeHtml(item.display_title || "Evento detectado")}</strong>`}
-          ${videoUrl ? "" : `<span>${escapeHtml(formatTimestamp(item.timestamp))}</span>`}
-          ${rowsHtml}
+        <div class="face-preview-copy event-card__content">
+          <time class="event-card__time" datetime="${escapeHtml(timestampDatetime)}">
+            ${escapeHtml(timestampLabel)}
+          </time>
+          <span class="event-card__duration">Duración: ${escapeHtml(durationLabel)}</span>
         </div>
       </article>
     `;
@@ -354,8 +375,8 @@
     const events = Array.isArray(items) ? items : [];
     if (!events.length) {
       feed.innerHTML = `
-        <article class="face-preview-item face-preview-empty">
-          <div class="face-preview-copy">
+        <article class="face-preview-item face-preview-empty event-card event-card--empty">
+          <div class="face-preview-copy event-card__content">
             <strong>Sin eventos</strong>
             <span>${escapeHtml(emptyMessage)}</span>
           </div>
