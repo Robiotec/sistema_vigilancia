@@ -1,6 +1,7 @@
 (async () => {
 const config = window.__WEB_APP_CONFIG__ || {};
 window.__ROBIOTEC_CAMERA_ADMIN_MAIN__ = true;
+const IS_DEDICATED_CAMERAS_PAGE = Boolean(document.body?.classList.contains("page-cameras"));
 const CAMERAS = Array.isArray(config.cameras) ? config.cameras : [];
 const DEVICES = Array.isArray(config.devices) ? config.devices : [];
 const DEVICE_BY_CAMERA = new Map(DEVICES.map((device) => [device.camera_name, device]));
@@ -522,6 +523,7 @@ function syncCameraSelectionUrl(cameraName) {
 }
 
 function renderStaticCameraSelection(camera) {
+  if (IS_DEDICATED_CAMERAS_PAGE) return;
   if (!camera || !primaryView) return;
   const cameraName = String(camera.name || "").trim();
   if (!cameraName) return;
@@ -770,7 +772,9 @@ let viewportSyncFrame = 0;
 let viewportSyncTimeout = 0;
 let layoutResizeObserver = null;
 const CAMERA_BY_DOM_ID = new Map(CAMERAS.map((camera) => [camera.dom_id, camera]));
-bindStaticCameraSelectionFallback();
+if (!IS_DEDICATED_CAMERAS_PAGE) {
+  bindStaticCameraSelectionFallback();
+}
 
 // Keep the public entrypoint stable while moving heavy feature areas into dedicated modules.
 const MODULE_ASSET_SUFFIX = STATIC_ASSET_VERSION
@@ -792,6 +796,9 @@ try {
 } catch (error) {
   document.body?.setAttribute("data-web-app-init-error", "module_load_failed");
   window.console.error("No se pudieron cargar los modulos de web_app.", error);
+  if (IS_DEDICATED_CAMERAS_PAGE) {
+    return;
+  }
   const initialCamera = getInitialCameraName({ allowFallback: false });
   if (initialCamera) {
     const camera = CAMERAS.find((item) => item.name === initialCamera);
@@ -1695,6 +1702,7 @@ function ensurePrimaryViewPlaceholder() {
 }
 
 function updatePrimaryViewPlaceholder() {
+  if (IS_DEDICATED_CAMERAS_PAGE) return;
   if (!primaryView) return;
   const placeholder = ensurePrimaryViewPlaceholder();
   const showPlaceholder = !activeCamera;
@@ -4037,7 +4045,7 @@ function renderSwitcher() {
 
 }
 
-if (switcher && switcher.dataset.cameraDelegationBound !== "1") {
+if (!IS_DEDICATED_CAMERAS_PAGE && switcher && switcher.dataset.cameraDelegationBound !== "1") {
   switcher.dataset.cameraDelegationBound = "1";
   switcher.addEventListener("click", (event) => {
     const button = event.target instanceof Element ? event.target.closest("[data-camera-name], .camera-pill[href]") : null;
@@ -4442,6 +4450,7 @@ function applyAudioState() {
 }
 
 function syncStreaming() {
+  if (IS_DEDICATED_CAMERAS_PAGE) return;
   if (document.visibilityState === "hidden") return;
   if (!pageSupportsStreaming()) return;
 
@@ -10881,14 +10890,16 @@ updateTelemetryMapOverlayCopy();
 updateVehicleRegisterTypeCopy();
 syncMiningToggleUi();
 syncOsintLayerSelectUi();
-renderSwitcher();
-applyCapabilityBadges();
-bindCardInteractions();
-if (!pageSupportsStreaming()) {
-  activeCamera = null;
+if (!IS_DEDICATED_CAMERAS_PAGE) {
+  renderSwitcher();
+  applyCapabilityBadges();
+  bindCardInteractions();
+  if (!pageSupportsStreaming()) {
+    activeCamera = null;
+  }
+  updateFocusUi();
+  syncStreaming();
 }
-updateFocusUi();
-syncStreaming();
 startPolling();
 refreshStatus();
 refreshTelemetry();
