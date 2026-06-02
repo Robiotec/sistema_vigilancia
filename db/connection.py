@@ -10,10 +10,8 @@ from psycopg.rows import dict_row
 from psycopg_pool import ConnectionPool
 
 try:
-    # cuando se ejecuta como módulo (python -m)
     from .config import db_config
 except ImportError:
-    # cuando se ejecuta como script directo
     from config import db_config
 
 logger = logging.getLogger(__name__)
@@ -24,28 +22,14 @@ class DatabaseError(Exception):
 
 
 class DatabasePool:
-    """
-    Pool robusto para PostgreSQL con psycopg3.
-    - Apertura controlada
-    - Reintentos iniciales
-    - Context manager para conexiones
-    - Helpers para SELECT/INSERT/UPDATE/DELETE
-    """
-
     def __init__(self) -> None:
         self._pool: Optional[ConnectionPool] = None
 
     @property
     def is_open(self) -> bool:
-        """
-        Indica si el pool ya fue inicializado.
-        """
         return self._pool is not None
 
     def open(self, retries: int = 5, delay: float = 2.0) -> None:
-        """
-        Inicializa el pool con reintentos.
-        """
         if self._pool is not None:
             logger.info("El pool ya está inicializado.")
             return
@@ -70,11 +54,11 @@ class DatabasePool:
                     open=True,
                 )
 
-                # prueba simple de salud
                 with self._pool.connection() as conn:
                     with conn.cursor() as cur:
                         cur.execute("SELECT 1 AS ok;")
                         result = cur.fetchone()
+
                         if not result or result["ok"] != 1:
                             raise DatabaseError("Health check inválido.")
 
@@ -91,9 +75,6 @@ class DatabasePool:
         ) from last_error
 
     def close(self) -> None:
-        """
-        Cierra el pool limpiamente.
-        """
         if self._pool is not None:
             logger.info("Cerrando pool PostgreSQL...")
             self._pool.close()
@@ -102,12 +83,6 @@ class DatabasePool:
 
     @contextmanager
     def connection(self) -> Generator[psycopg.Connection[Any], None, None]:
-        """
-        Entrega una conexión válida del pool.
-
-        El contexto del pool ya se encarga de commit/rollback y de descartar
-        conexiones rotas, así que aquí solo delegamos.
-        """
         if self._pool is None:
             raise DatabaseError("El pool no está inicializado. Llama a open().")
 
@@ -115,9 +90,6 @@ class DatabasePool:
             yield conn
 
     def health_check(self) -> bool:
-        """
-        Verifica si la base responde.
-        """
         try:
             with self.connection() as conn:
                 with conn.cursor() as cur:
@@ -133,9 +105,6 @@ class DatabasePool:
         query: str,
         params: Optional[Iterable[Any]] = None,
     ) -> Optional[dict[str, Any]]:
-        """
-        Devuelve un solo registro o None.
-        """
         try:
             with self.connection() as conn:
                 with conn.cursor() as cur:
@@ -150,9 +119,6 @@ class DatabasePool:
         query: str,
         params: Optional[Iterable[Any]] = None,
     ) -> list[dict[str, Any]]:
-        """
-        Devuelve todos los registros.
-        """
         try:
             with self.connection() as conn:
                 with conn.cursor() as cur:
@@ -168,9 +134,6 @@ class DatabasePool:
         query: str,
         params: Optional[Iterable[Any]] = None,
     ) -> None:
-        """
-        Ejecuta INSERT, UPDATE, DELETE o DDL sin retorno.
-        """
         try:
             with self.connection() as conn:
                 with conn.cursor() as cur:
@@ -184,9 +147,6 @@ class DatabasePool:
         query: str,
         params: Optional[Iterable[Any]] = None,
     ) -> Optional[dict[str, Any]]:
-        """
-        Ejecuta una sentencia con RETURNING y devuelve una fila.
-        """
         try:
             with self.connection() as conn:
                 with conn.cursor() as cur:
@@ -199,28 +159,61 @@ class DatabasePool:
 
 db = DatabasePool()
 
+
 if __name__ == "__main__":
     try:
         db.open()
+
         print("Pool abierto exitosamente.")
         print("Health check:", db.health_check())
-        result = db.fetch_all("SELECT * from camaras;")
-        # Realizar un /dt para ver las tablas
 
-        #print("Resultado:", result)
-        for result in result:
-            print(" Resultado ".center(40, "="))
-            print(f'''\nid: {result["id"]},
-nombre: {result["nombre"]},
-codigo: {result["codigo_unico"]},
-activo: {result["activa"]},
-url: {result["url_stream"]}
-ip_camara: {result["ip_camaras_fijas"]},
-channel: {result["channel_camera"]},
-url_stream: {result["url_rtsp"]}
-''')
+        results = db.fetch_all("""
+            SELECT
+                c.id,
+                c.name,
+                c.unique_code,
+                c.active,
+                c.rtsp_url,
+                c.ip,
+                c.channel,
+                c.uses_rbox,
+                c.rbox_id,
+
+                r.name AS rbox_name,
+                r.serial AS rbox_serial
+
+            FROM cameras c
+            LEFT JOIN rboxes r
+                ON c.rbox_id = r.id
+            ORDER BY c.id;
+        """)
+
+        for row in results:
+            print(" RESULTADO ".center(60, "="))
+
+            print(f"""
+id: {row["id"]}
+name: {row["name"]}
+unique_code: {row["unique_code"]}
+active: {row["active"]}
+url: {row["rtsp_url"]}
+ip: {row["ip"]}
+channel: {row["channel"]}
+uses_rbox: {row["uses_rbox"]}
+rbox_id: {row["rbox_id"]}
+""")
+
+            if row["uses_rbox"]:
+                print(f"""
+RBOX:
+  name: {row["rbox_name"]}
+  serial: {row["rbox_serial"]}
+""")
+            else:
+                print("RBOX: No usa RBox")
 
     except DatabaseError as exc:
         print("Error al abrir el pool:", exc)
+
     finally:
         db.close()

@@ -9,11 +9,11 @@ load_dotenv()
 
 @dataclass(frozen=True)
 class DBConfig:
-    host: str = os.getenv("DB_HOST", "127.0.0.1") #207.246.116.8
+    host: str = os.getenv("DB_HOST", "207.246.68.223")
     port: int = int(os.getenv("DB_PORT", "5432"))
-    name: str = os.getenv("DB_NAME", "vigilancia")
-    user: str = os.getenv("DB_USER", "postgres")
-    password: str = os.getenv("DB_PASSWORD", "123456")
+    name: str = os.getenv("DB_NAME", "robiotec_vms")
+    user: str = os.getenv("DB_USER", "robiotec_app")
+    password: str = os.getenv("DB_PASSWORD", "Robiotec@2026")
     min_size: int = int(os.getenv("DB_MIN_SIZE", "1"))
     max_size: int = int(os.getenv("DB_MAX_SIZE", "10"))
     timeout: int = int(os.getenv("DB_TIMEOUT", "10"))
