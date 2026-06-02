@@ -1,0 +1,15 @@
+[Unit]
+Description=Servicio Push Camaras RBox
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=robiocam
+WorkingDirectory=/home/robiocam/Documents/sistema_empuje
+ExecStart=/home/robiocam/Documents/sistema_empuje/push_rbox_cameras.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

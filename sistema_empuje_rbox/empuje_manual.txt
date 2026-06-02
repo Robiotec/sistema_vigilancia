@@ -1,0 +1,91 @@
+EMPUJE MANUAL DE CAMARAS SIN AUDIO
+----------------------------------
+215/CHANEL 101
+***************************************************************************
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.215:554/Streaming/Channels/101" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPCU71OU-0787AE"; sleep 3; done
+*****************************************************************************
+215/CHANEL 201
+*****************************************************************************
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.215:554/Streaming/Channels/201" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPCU9IMM-E7DC89"; sleep 3; done
+****************************************************************************
+64/CHANEL 101
+****************************************************************************
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/101" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD18XLZ-E1B651"; sleep 3; done
+*****************************************************************************
+64/ CHANEL 201
+*****************************************************************************
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/201" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD1FJMZ-7A56AC"; sleep 3; done
+------------------------------------------------------------------------------------
+ENVIO DE VIDEO CON AUDIO
+**********************************************************************************
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/201" \
+  -c:v copy \
+  -c:a copy \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD1FJMZ-7A56AC"; sleep 3; done
