@@ -1,14 +1,9 @@
 # HOJA DE FUNCIONALIDAD DEL SISTEMA DE EMPUJE DE CÁMARAS ASOCIADAS A RBOX
-
-## 1. Objetivo
-
-Garantizar que cada dispositivo RBox publique únicamente las cámaras que le han sido asignadas dentro de la plataforma de gestión, enviando el flujo de video en tiempo real hacia el servidor MediaMTX para su posterior visualización, grabación o procesamiento mediante inteligencia artificial.
-
 ---
 
-## 2. Descripción General
+## 1. Descripción General
 
-El sistema realiza una consulta periódica a la base de datos para identificar las cámaras activas que se encuentran asociadas a una RBox específica.
+El sistema realiza una consulta continua a la base de datos para identificar las cámaras activas que se encuentran asociadas a una RBox específica.
 
 Por cada cámara encontrada, el sistema inicia automáticamente un proceso FFmpeg que toma el video desde la fuente RTSP original y lo publica en el servidor central MediaMTX utilizando el identificador único de la cámara.
 
@@ -16,21 +11,19 @@ El sistema monitorea continuamente el estado de las cámaras y de los procesos F
 
 ---
 
-## 3. Arquitectura de Funcionamiento
+## 2. Arquitectura de Funcionamiento
 
 ### Componentes
 
-* Base de Datos PostgreSQL.
-* Servicio Python de monitoreo.
-* Servicio Linux Systemd.
+* servicio PostgreSQL.
+* Servicio de monitoreo.
 * FFmpeg.
 * Servidor MediaMTX.
-* Cámaras IP.
+* consulta de Cámaras IP.
 * Dispositivos RBox.
 
 ### Flujo General
 
-```text
 Base de Datos
       │
       ▼
@@ -46,12 +39,11 @@ Generación de procesos FFmpeg
 MediaMTX
       │
       ▼
-Visualización Web / IA / Grabación
-```
+Visualización Web 
 
 ---
 
-## 4. Criterios para Empuje de Cámaras
+## 3. Criterios para Empuje de Cámaras
 
 Una cámara será procesada únicamente cuando cumpla las siguientes condiciones:
 
@@ -86,7 +78,7 @@ WHERE
 
 ---
 
-## 5. Construcción del Flujo RTSP
+## 4. Construcción del Flujo RTSP
 
 ### Flujo de Entrada
 
@@ -109,7 +101,7 @@ rtsp://207.246.68.223:8554/CAM-MPVML1D8-00687B
 
 ---
 
-## 6. Administración de Procesos
+## 5. Administración de Procesos
 
 El sistema mantiene una lista de procesos FFmpeg activos.
 
@@ -150,7 +142,7 @@ El sistema finaliza automáticamente el proceso FFmpeg correspondiente.
 
 ---
 
-## 7. Servicio Linux
+## 6. Servicio Linux
 
 Nombre del servicio:
 
@@ -166,6 +158,6 @@ Responsabilidades:
 
 ---
 
-## 8. Resultado Esperado
+## 7. Resultado Esperado
 
 Cada RBox publicará únicamente las cámaras que le hayan sido asignadas dentro de la plataforma, permitiendo que los flujos de video estén disponibles en el servidor central MediaMTX mediante un identificador único para su consumo por aplicaciones web, módulos de inteligencia artificial, grabadores de video o sistemas de monitoreo remoto.
