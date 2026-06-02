@@ -6,9 +6,13 @@ rtmpAddress: :1935
 hlsAddress: :8888
 webrtcAddress: :8889
 
-# Sin autenticación - publicación y reproducción libre
-# Se usa internal con usuarios vacíos para deshabilitar auth
 authMethod: internal
+
+logLevel: warn
+
+webrtcICEServers2:
+  - url: stun:stun.l.google.com:19302
+  - url: stun:stun1.l.google.com:19302
 
 paths:
   all:

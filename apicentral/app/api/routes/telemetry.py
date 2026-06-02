@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -135,25 +135,39 @@ def vehicle_telemetry(payload: VehicleTelemetryIn, db: Session = Depends(get_db)
 
 @router.get("/latest")
 def latest_telemetry(db: Session = Depends(get_db)) -> list[dict]:
-    items = []
-    for drone in db.scalars(select(Drone).where(Drone.active.is_(True))).all():
-        telemetry = db.scalar(
-            select(DroneTelemetry)
-            .where(DroneTelemetry.drone_id == drone.id)
-            .order_by(DroneTelemetry.received_at.desc())
-            .limit(1)
-        )
-        items.append(_latest_drone_item(drone, telemetry))
+    drones = db.scalars(select(Drone).where(Drone.active.is_(True))).all()
+    vehicles = db.scalars(select(Vehicle).where(Vehicle.active.is_(True))).all()
 
-    for vehicle in db.scalars(select(Vehicle).where(Vehicle.active.is_(True))).all():
-        telemetry = db.scalar(
-            select(VehicleTelemetry)
-            .where(VehicleTelemetry.vehicle_id == vehicle.id)
-            .order_by(VehicleTelemetry.received_at.desc())
-            .limit(1)
-        )
-        items.append(_latest_vehicle_item(vehicle, telemetry))
+    drone_telemetry_map: dict = {}
+    if drones:
+        drone_ids = [d.id for d in drones]
+        rows = db.scalars(
+            select(DroneTelemetry).from_statement(
+                text(
+                    "SELECT DISTINCT ON (drone_id) * FROM drone_telemetry"
+                    " WHERE drone_id = ANY(:ids)"
+                    " ORDER BY drone_id, received_at DESC"
+                )
+            ).params(ids=drone_ids)
+        ).all()
+        drone_telemetry_map = {t.drone_id: t for t in rows}
 
+    vehicle_telemetry_map: dict = {}
+    if vehicles:
+        vehicle_ids = [v.id for v in vehicles]
+        rows = db.scalars(
+            select(VehicleTelemetry).from_statement(
+                text(
+                    "SELECT DISTINCT ON (vehicle_id) * FROM vehicle_telemetry"
+                    " WHERE vehicle_id = ANY(:ids)"
+                    " ORDER BY vehicle_id, received_at DESC"
+                )
+            ).params(ids=vehicle_ids)
+        ).all()
+        vehicle_telemetry_map = {t.vehicle_id: t for t in rows}
+
+    items = [_latest_drone_item(d, drone_telemetry_map.get(d.id)) for d in drones]
+    items += [_latest_vehicle_item(v, vehicle_telemetry_map.get(v.id)) for v in vehicles]
     return items
 
 

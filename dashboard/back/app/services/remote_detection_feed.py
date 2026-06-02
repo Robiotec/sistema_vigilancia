@@ -19,6 +19,7 @@ from psycopg2.extras import Json, RealDictCursor, execute_values
 from back.app.config import Settings
 
 ECUADOR_TZ = timezone(timedelta(hours=-5))
+VIDEO_EVENT_TYPES = {"clip", "click", "clips_movimiento"}
 
 
 @dataclass(slots=True)
@@ -33,7 +34,7 @@ class RemoteCameraEvent:
 
     def to_dict(self) -> dict[str, Any]:
         payload = dict(self.payload)
-        if self.event_type in {"clip", "click"}:
+        if self.event_type in VIDEO_EVENT_TYPES:
             return {
                 "event_type": self.event_type,
                 "cam_id": self.cam_id,
@@ -42,7 +43,7 @@ class RemoteCameraEvent:
                 "crop_path": self.crop_path,
                 "video_path": self.video_path,
                 "track_id": str(payload.get("track_id") or "").strip(),
-                "display_title": "Video detectado",
+                "display_title": self._video_display_title(self.event_type),
                 "rows": self._clip_rows(payload),
             }
 
@@ -105,6 +106,13 @@ class RemoteCameraEvent:
             rows.append({"label": "duration", "value": f"{payload.get('duration')} s"})
         return rows or [{"label": "datos", "value": "Sin dato"}]
 
+    @staticmethod
+    def _video_display_title(event_type: str) -> str:
+        return {
+            "clip": "Video de zona detectado",
+            "clips_movimiento": "Movimiento detectado",
+        }.get(event_type, "Video detectado")
+
 
 class RemoteDetectionFeedService:
     def __init__(self, settings: Settings) -> None:
@@ -162,7 +170,7 @@ if manifest.exists():
             if str(row.get("cam_id") or "").strip() != cam_id:
                 continue
             event_type = str(row.get("type") or "").strip()
-            if event_type in {{"clip", "click"}}:
+            if event_type in {tuple(VIDEO_EVENT_TYPES)!r}:
                 video_file = resolve_path(row.get("clip_file") or row.get("file"))
                 json_file = resolve_path(row.get("json_file"))
                 if not video_file or not video_file.exists():
@@ -637,7 +645,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
 
         for field, column, allowed in (
             ("categories", "event_category", {"alerta", "acceso", "reconocimiento_facial", "movimiento", "vehiculo", "sistema"}),
-            ("event_types", "event_type", {"person", "plate", "clip", "click"}),
+            ("event_types", "event_type", {"person", "plate", "clip", "click", "clips_movimiento"}),
             ("origins", "origin", {"fixed_camera", "vehicle", "drone", "system"}),
             ("statuses", "status", {"new", "reviewed", "archived", "dismissed"}),
         ):
@@ -721,6 +729,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             "plate": "vehiculo",
             "clip": "movimiento",
             "click": "movimiento",
+            "clips_movimiento": "movimiento",
         }.get(event_type, event_type)
 
     @staticmethod
@@ -728,19 +737,20 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         return {
             "person": "Persona detectada",
             "plate": "Vehiculo detectado",
-            "clip": "Video detectado",
+            "clip": "Video de zona detectado",
             "click": "Video detectado",
+            "clips_movimiento": "Movimiento detectado",
         }.get(event_type, "Evento detectado")
 
     @staticmethod
     def _event_description(event_type: str, payload: dict[str, Any]) -> str | None:
-        if event_type in {"clip", "click"} and payload.get("duration") is not None:
+        if event_type in VIDEO_EVENT_TYPES and payload.get("duration") is not None:
             return f"Clip de video generado con duracion {payload.get('duration')} s."
         return None
 
     @staticmethod
     def _event_severity(event_type: str) -> str:
-        return "info" if event_type in {"person", "plate", "clip", "click"} else "warning"
+        return "info" if event_type in {"person", "plate", *VIDEO_EVENT_TYPES} else "warning"
 
     def _camera_name(self, camera_id: str) -> str | None:
         if camera_id in self._camera_name_cache:

@@ -829,5 +829,33 @@
     if (initialCameraName) {
       renderCamera(initialCameraName, { persistUrl: false });
     }
+
+    startSnapshotRefresh();
   });
+
+  const SNAPSHOT_REFRESH_MS = 30000;
+
+  function refreshSnapshots() {
+    document.querySelectorAll(".camera-pill-snapshot[data-snapshot-url]").forEach((img) => {
+      const base = img.getAttribute("data-snapshot-url");
+      if (!base) return;
+      const fresh = new Image();
+      fresh.onload = () => {
+        img.src = fresh.src;
+        img.classList.remove("is-error");
+      };
+      fresh.onerror = () => {
+        img.classList.add("is-error");
+      };
+      fresh.src = `${base}&_t=${Date.now()}`;
+    });
+  }
+
+  function startSnapshotRefresh() {
+    document.querySelectorAll(".camera-pill-snapshot[data-snapshot-url]").forEach((img) => {
+      img.addEventListener("error", () => img.classList.add("is-error"), { once: false });
+      img.addEventListener("load", () => img.classList.remove("is-error", "is-loading"), { once: false });
+    });
+    setInterval(refreshSnapshots, SNAPSHOT_REFRESH_MS);
+  }
 })();

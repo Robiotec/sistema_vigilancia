@@ -39,6 +39,35 @@
     .camera-pill-inference {
       z-index: 30;
     }
+
+    .camera-pill-preview--snapshot {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 86px;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: radial-gradient(circle at 50% 20%, rgba(241, 56, 17, 0.14), transparent 48%), #050709;
+      position: relative;
+    }
+
+    .camera-pill-snapshot {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      transition: opacity 0.3s ease;
+    }
+
+    .camera-pill-snapshot.is-loading {
+      opacity: 0.4;
+    }
+
+    .camera-pill-snapshot.is-error {
+      opacity: 0.15;
+    }
   </style>
 </head>
 <body class="page-cameras">

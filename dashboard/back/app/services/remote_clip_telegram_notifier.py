@@ -1,31 +1,66 @@
+"""Notificador 24/7 de clips por Telegram — implementación robusta de producción.
+
+Cambios internos respecto a la versión anterior:
+  - Lee el manifest por SFTP incremental (ManifestSFTPReader) en lugar de
+    ejecutar Python remoto cada ciclo.
+  - Persiste eventos en camera_event_history (PostgreSQL) con ON CONFLICT.
+  - Usa camera_alert_outbox (TelegramAlertWorker) como outbox transaccional:
+    SELECT FOR UPDATE SKIP LOCKED, backoff exponencial, dead_letter.
+  - No marca un evento como notificado hasta que Telegram confirma el envío.
+  - En reinicios reanuda desde el cursor DB (no pierde eventos intermedios).
+  - En primer arranque (sin cursor previo) avanza a EOF para no inundar Telegram.
+  - Política SSH configurable: known_hosts + RejectPolicy si SSH_KNOWN_HOSTS_PATH
+    existe; AutoAddPolicy como fallback (comportamiento anterior).
+
+API pública sin cambios:
+  start() / stop() / status() / check_once() / is_running
+"""
 from __future__ import annotations
 
-from datetime import datetime, timezone, timedelta
 import hashlib
 import json
+import logging
 import mimetypes
 import subprocess
 import threading
 import time
+from contextlib import contextmanager
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import urlunparse, urlparse
 
 import paramiko
+import psycopg2
+import psycopg2.extras
+from psycopg2.extras import Json, execute_values
 
 from back.app.config import Settings
+from back.app.services.manifest_sftp_reader import ManifestSFTPReader
 from back.app.services.send_telegram import (
     send_configured_telegram_photo,
     send_configured_telegram_text,
     send_configured_telegram_video,
 )
+from back.app.services.telegram_alert_worker import TelegramAlertWorker
 
+_log = logging.getLogger(__name__)
 ECUADOR_TZ = timezone(timedelta(hours=-5))
+VIDEO_EVENT_TYPES = {"clip", "clips_movimiento"}
+TELEGRAM_EVENT_LABELS = {
+    "clip": "zona",
+    "clips_movimiento": "movimiento",
+}
+RECOVERY_EVENT_TYPES = {"clips_movimiento"}
+RECOVERY_TAIL_BYTES = 256 * 1024
+RECOVERY_LIMIT = 50
 
 
 @dataclass(frozen=True, slots=True)
 class ClipAlert:
-    uid: str
+    uid: str           # SHA-256 del uid_source (para compatibilidad interna)
+    event_type: str
     cam_id: str
     timestamp: int
     crop_path: str
@@ -37,14 +72,29 @@ class ClipAlert:
 
 
 class RemoteClipTelegramNotifier:
-    """Vigila el manifest remoto y envia por Telegram nuevos eventos type=clip con crop."""
+    """Vigila el manifest remoto y envía por Telegram nuevos eventos de video."""
 
     def __init__(self, settings: Settings, *, poll_interval: float = 3.0) -> None:
         self.settings = settings
         self.poll_interval = max(1.0, float(poll_interval))
+
         self.data_dir = Path(__file__).resolve().parents[1] / "data"
         self.crop_cache_dir = self.data_dir / "telegram_clip_crops"
-        self.state_path = self.data_dir / "clip_telegram_notifier_state.json"
+
+        # Lector incremental del manifest
+        manifest_path = str(PurePosixPath(settings.ssh_events_base_path) / "manifest.jsonl")
+        self._manifest_reader = ManifestSFTPReader(settings, "main", manifest_path)
+
+        # Worker de outbox
+        self._worker = TelegramAlertWorker(
+            db_dsn=self._psycopg_dsn(settings.database_url),
+            send_video_fn=lambda msg, path: send_configured_telegram_video(message=msg, video_path=path),
+            send_photo_fn=lambda msg, path: send_configured_telegram_photo(message=msg, image_path=path),
+            send_text_fn=lambda msg: send_configured_telegram_text(message=msg),
+            cache_remote_file_fn=self._cache_remote_file,
+            render_video_fn=self._render_telegram_video,
+        )
+
         self._thread: threading.Thread | None = None
         self._stop_event = threading.Event()
         self._lock = threading.Lock()
@@ -58,7 +108,10 @@ class RemoteClipTelegramNotifier:
             "last_delivery_detail": "",
             "last_video_path": "",
             "last_rendered_video_path": "",
+            "outbox_pending": 0,
         }
+
+    # ------------------------------------------------------------------ public
 
     @property
     def is_running(self) -> bool:
@@ -68,7 +121,11 @@ class RemoteClipTelegramNotifier:
         if self.is_running:
             return
         self._stop_event.clear()
-        self._thread = threading.Thread(target=self._run_loop, name="remote-clip-telegram-notifier", daemon=True)
+        self._thread = threading.Thread(
+            target=self._run_loop,
+            name="remote-clip-telegram-notifier",
+            daemon=True,
+        )
         self._thread.start()
         self._set_status(running=True)
 
@@ -84,69 +141,67 @@ class RemoteClipTelegramNotifier:
             return dict(self._status)
 
     def check_once(self, *, seed_existing: bool = False) -> dict[str, Any]:
-        state = self._load_state()
-        clips = self._read_latest_clips(limit=10)
-        now = self._iso_now()
-        self._set_status(last_checked_at=now, last_error="")
+        """Un ciclo completo: leer manifest → persistir → outbox → Telegram.
 
-        if seed_existing and not state.get("seen_uids"):
-            for clip in clips:
-                state["seen_uids"].append(clip.uid)
-            self._save_state(state)
-            return {"checked": len(clips), "sent": 0, "seeded": len(clips)}
+        seed_existing=True solo tiene efecto cuando no existe cursor previo en DB:
+        en ese caso avanza el cursor a EOF sin enviar alertas (evita flood inicial).
+        Con cursor ya existente, seed_existing se ignora y se procesan los eventos
+        pendientes desde el último offset guardado (recupera eventos entre reinicios).
+        """
+        now_iso = self._iso_now()
+        self._set_status(last_checked_at=now_iso, last_error="")
 
-        sent = 0
-        skipped = 0
-        seen_uids = set(state.get("seen_uids", []))
-        unseen_clips = [clip for clip in clips if clip.uid not in seen_uids]
-        latest_clip = max(unseen_clips, key=lambda item: item.timestamp, default=None)
+        # --- 1. Leer nuevas líneas del manifest via SFTP ---
+        try:
+            with self._sftp_connection() as (_, sftp):
+                if seed_existing and self._manifest_reader.current_offset() == 0:
+                    seeded = self._manifest_reader.seed_to_end(sftp)
+                    return {"checked": seeded, "sent": 0, "seeded": seeded}
+                new_rows, new_cursor = self._manifest_reader.read_new_lines(sftp)
+        except Exception as exc:
+            self._set_status(last_error=str(exc))
+            raise
 
-        for clip in unseen_clips:
-            if clip is not latest_clip:
-                state["seen_uids"].append(clip.uid)
-                skipped += 1
+        if not new_rows:
+            clips = []
+            try:
+                with self._sftp_connection() as (_, sftp):
+                    clips = self._recover_recent_clip_rows(sftp)
+            except Exception as exc:
+                _log.warning("[notifier] no se pudo recuperar tail del manifest: %s", exc)
+            if clips:
+                self._persist_and_enqueue_clips(clips)
 
-        if latest_clip is not None:
-            if latest_clip.video_path:
-                local_video = self._cache_remote_file(latest_clip.video_path)
-                rendered_video = self._render_telegram_video(local_video)
-                delivery = send_configured_telegram_video(
-                    message=self._message_for_clip(latest_clip),
-                    video_path=rendered_video,
-                )
-                self._set_status(
-                    last_video_path=str(local_video),
-                    last_rendered_video_path=str(rendered_video),
-                )
-            elif latest_clip.crop_path:
-                local_crop = self._cache_remote_file(latest_clip.crop_path)
-                delivery = send_configured_telegram_photo(
-                    message=self._message_for_clip(latest_clip),
-                    image_path=local_crop,
-                )
-            else:
-                delivery = send_configured_telegram_text(message=self._message_for_clip(latest_clip))
+            # Drenar outbox con alertas pendientes de ciclos anteriores
+            sent = self._worker.drain()
+            if sent:
+                self._set_status(last_sent_total=sent)
+            self._set_status(outbox_pending=self._worker.pending_count())
+            return {"checked": len(clips), "sent": sent, "skipped": 0, "recovered": len(clips)}
 
-            if delivery is not None:
-                sent = int(delivery.get("sent") or 0)
-                detail = self._delivery_detail(delivery)
-                self._set_status(last_delivery_detail=detail)
-                if sent <= 0:
-                    raise RuntimeError(detail or "Telegram no confirmo el envio")
-                state["seen_uids"].append(latest_clip.uid)
-                state["notified_uids"].append(latest_clip.uid)
-                state["last_notified_uid"] = latest_clip.uid
-                state["last_notified_at"] = self._iso_now()
-                self._set_status(
-                    last_notified_uid=latest_clip.uid,
-                    last_notified_at=state["last_notified_at"],
-                    last_sent_total=sent,
-                )
+        # --- 2. Filtrar eventos de video ---
+        clips = self._parse_clip_rows(new_rows)
 
-        state["seen_uids"] = state.get("seen_uids", [])[-1000:]
-        state["notified_uids"] = state.get("notified_uids", [])[-1000:]
-        self._save_state(state)
-        return {"checked": len(clips), "sent": sent, "skipped": skipped}
+        # --- 3. Persistir en camera_event_history (idempotente) ---
+        self._persist_and_enqueue_clips(clips)
+
+        # --- 5. Avanzar cursor SOLO tras éxito de persistencia ---
+        if new_cursor:
+            self._manifest_reader.save_cursor(new_cursor)
+
+        # --- 6. Drenar outbox ---
+        sent = self._worker.drain()
+
+        if sent > 0:
+            self._set_status(
+                last_sent_total=sent,
+                last_notified_at=self._iso_now(),
+            )
+        self._set_status(outbox_pending=self._worker.pending_count())
+
+        return {"checked": len(clips), "sent": sent, "skipped": len(new_rows) - len(clips)}
+
+    # ----------------------------------------------------------------- loop
 
     def _run_loop(self) -> None:
         seeded = False
@@ -160,138 +215,260 @@ class RemoteClipTelegramNotifier:
                 self._stop_event.wait(self.poll_interval)
         self._set_status(running=False)
 
-    def _read_latest_clips(self, *, limit: int) -> list[ClipAlert]:
-        remote_python = f"""
-import json
-from pathlib import Path
+    # ---------------------------------------------------------------- parsing
 
-base = Path({self.settings.ssh_events_base_path!r})
-manifest = base / "manifest.jsonl"
-limit = {max(1, min(int(limit), 50))}
-items = []
-
-def resolve_path(value, cam_id=""):
-    raw = str(value or "").strip()
-    if not raw:
-        return ""
-    path = Path(raw)
-    candidates = [path]
-    if not path.is_absolute():
-        candidates = [
-            base / cam_id / raw,
-            base / raw,
-            path,
-        ]
-    for candidate in candidates:
-        if candidate.exists():
-            return str(candidate)
-    return str(candidates[0])
-
-def first_text(source, keys):
-    if not isinstance(source, dict):
-        return ""
-    for key in keys:
-        value = str(source.get(key) or "").strip()
-        if value:
-            return value
-    return ""
-
-if manifest.exists():
-    with manifest.open("r", encoding="utf-8", errors="replace") as fh:
-        for line in fh:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                row = json.loads(line)
-            except Exception:
-                continue
-            if str(row.get("type") or "").strip() != "clip":
+    def _parse_clip_rows(self, rows: list[dict[str, Any]]) -> list[ClipAlert]:
+        clips: list[ClipAlert] = []
+        base = self.settings.ssh_events_base_path
+        for row in rows:
+            event_type = str(row.get("type") or "").strip()
+            if event_type not in VIDEO_EVENT_TYPES:
                 continue
             cam_id = str(row.get("cam_id") or "").strip()
-            payload = dict(row)
-            json_path = resolve_path(row.get("json_file"), cam_id)
-            if json_path and Path(json_path).exists():
-                try:
-                    loaded = json.loads(Path(json_path).read_text(encoding="utf-8", errors="replace"))
-                    if isinstance(loaded, dict):
-                        payload.update(loaded)
-                except Exception:
-                    pass
-            crop_path = (
-                first_text(payload, ("crop_path", "crop_file", "crop", "image_path", "image_file", "source_image", "frame_path", "thumbnail_path"))
-                or first_text(row, ("crop_path", "crop_file", "crop", "image_path", "image_file", "source_image", "frame_path", "thumbnail_path"))
-            )
-            video_path = first_text(row, ("clip_file", "file")) or first_text(payload, ("clip_file", "video_path", "clip_path"))
-            timestamp = int(float(payload.get("timestamp") or row.get("ts") or row.get("timestamp") or 0))
-            resolved_crop = resolve_path(crop_path, cam_id) if crop_path else ""
-            if resolved_crop and not Path(resolved_crop).exists():
-                resolved_crop = ""
-            resolved_video = resolve_path(video_path, cam_id) if video_path else ""
-            uid_source = "|".join([
-                cam_id,
-                "clip",
-                str(timestamp),
-                str(payload.get("track_id") or row.get("track_id") or ""),
-                resolved_crop,
-                resolved_video,
-                json_path,
-            ])
-            items.append({{
-                "uid_source": uid_source,
-                "cam_id": cam_id,
-                "timestamp": timestamp,
-                "crop_path": resolved_crop,
-                "video_path": resolved_video,
-                "json_path": json_path,
-                "track_id": str(payload.get("track_id") or row.get("track_id") or "").strip(),
-                "payload": payload,
-                "manifest_payload": row,
-            }})
+            if not cam_id:
+                continue
 
-print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
-"""
-        output = self._run_remote_python(remote_python)
-        parsed = json.loads(output) if output else {}
-        items = parsed.get("items") if isinstance(parsed, dict) else []
-        clips: list[ClipAlert] = []
-        for item in items if isinstance(items, list) else []:
-            uid_source = str(item.get("uid_source") or "")
+            timestamp = self._int_value(row.get("ts") or row.get("timestamp"))
+            video_path = str(row.get("clip_file") or row.get("file") or "").strip()
+            crop_path = str(
+                row.get("crop_path") or row.get("crop_file") or row.get("crop") or ""
+            ).strip()
+            json_path = str(row.get("json_file") or "").strip()
+            track_id = str(row.get("track_id") or "").strip()
+
+            video_path = self._resolve_remote_path(base, cam_id, video_path)
+            crop_path = self._resolve_remote_path(base, cam_id, crop_path)
+            if json_path:
+                json_path = self._resolve_remote_path(base, cam_id, json_path)
+
+            uid_source = "|".join([cam_id, event_type, str(timestamp), track_id, crop_path, video_path, json_path])
             uid = hashlib.sha256(uid_source.encode("utf-8")).hexdigest()
-            clips.append(
-                ClipAlert(
-                    uid=uid,
-                    cam_id=str(item.get("cam_id") or "").strip(),
-                    timestamp=self._int_value(item.get("timestamp")),
-                    crop_path=str(item.get("crop_path") or "").strip(),
-                    video_path=str(item.get("video_path") or "").strip(),
-                    json_path=str(item.get("json_path") or "").strip(),
-                    track_id=str(item.get("track_id") or "").strip(),
-                    payload=item.get("payload") if isinstance(item.get("payload"), dict) else {},
-                    manifest_payload=item.get("manifest_payload") if isinstance(item.get("manifest_payload"), dict) else {},
-                )
-            )
+
+            clips.append(ClipAlert(
+                uid=uid,
+                event_type=event_type,
+                cam_id=cam_id,
+                timestamp=timestamp,
+                crop_path=crop_path,
+                video_path=video_path,
+                json_path=json_path,
+                track_id=track_id,
+                payload={},
+                manifest_payload=row,
+            ))
         return clips
 
-    def _run_remote_python(self, script: str) -> str:
-        command = "python3 - <<'PY'\n" + script.strip() + "\nPY"
-        with self._client() as client:
-            stdin, stdout, stderr = client.exec_command(command)
-            output = stdout.read().decode("utf-8", errors="replace").strip()
-            error = stderr.read().decode("utf-8", errors="replace").strip()
-            exit_status = stdout.channel.recv_exit_status()
-        if exit_status != 0:
-            raise RuntimeError(error or f"Comando remoto fallo con codigo {exit_status}")
-        return output
+    def _recover_recent_clip_rows(self, sftp: paramiko.SFTPClient) -> list[ClipAlert]:
+        """Reprocesa eventos recientes que pudieron quedar saltados por un cursor viejo."""
+        path = self._manifest_reader.remote_path
+        try:
+            stat = sftp.stat(path)
+            size = int(getattr(stat, "st_size", 0) or 0)
+            offset = max(0, size - RECOVERY_TAIL_BYTES)
+            with sftp.open(path, "rb") as fh:
+                fh.seek(offset)
+                raw = fh.read(size - offset)
+        except Exception as exc:
+            _log.warning("[notifier] no se pudo leer tail de manifest para recovery: %s", exc)
+            return []
+
+        text = raw.decode("utf-8", errors="replace")
+        if offset > 0:
+            first_newline = text.find("\n")
+            text = text[first_newline + 1 :] if first_newline >= 0 else ""
+
+        rows: list[dict[str, Any]] = []
+        for line in text.splitlines():
+            try:
+                row = json.loads(line.strip())
+            except Exception:
+                continue
+            if isinstance(row, dict) and str(row.get("type") or "").strip() in RECOVERY_EVENT_TYPES:
+                rows.append(row)
+        return self._parse_clip_rows(rows[-RECOVERY_LIMIT:])
+
+    @staticmethod
+    def _resolve_remote_path(base: str, cam_id: str, raw: str) -> str:
+        if not raw:
+            return ""
+        p = PurePosixPath(raw)
+        if p.is_absolute():
+            return raw
+        # Intentar relativo a base/cam_id, luego a base
+        return str(PurePosixPath(base) / cam_id / raw)
+
+    # ---------------------------------------------------------- DB persistence
+
+    def _persist_clip_events(self, clips: list[ClipAlert]) -> list[str | None]:
+        """Inserta clips en camera_event_history. Devuelve lista de event_uid en orden."""
+        if not clips:
+            return []
+        uids: list[str | None] = []
+        try:
+            with self._db_connection() as conn:
+                with conn.cursor() as cur:
+                    for clip in clips:
+                        row = self._clip_to_history_row(clip)
+                        if row is None:
+                            uids.append(None)
+                            continue
+                        cur.execute(
+                            """
+                            INSERT INTO camera_event_history (
+                                event_type, event_category, origin,
+                                camera_id, camera_name,
+                                event_timestamp, detected_at, detected_date,
+                                title, description,
+                                person_id, person_name, plate, track_id,
+                                status, severity,
+                                manifest_file_path, json_file_path, video_file_path,
+                                image_file_path, crop_path,
+                                manifest_payload, detail_payload
+                            )
+                            VALUES (
+                                %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+                                %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+                                %s,%s,%s
+                            )
+                            ON CONFLICT ON CONSTRAINT uq_camera_event_history_event_uid
+                            DO UPDATE SET updated_at = now()
+                            RETURNING event_uid
+                            """,
+                            row,
+                        )
+                        result = cur.fetchone()
+                        uids.append(result[0] if result else None)
+                conn.commit()
+        except Exception as exc:
+            _log.error("[notifier] error persistiendo clips: %s", exc)
+            return [None] * len(clips)
+        return uids
+
+    def _persist_and_enqueue_clips(self, clips: list[ClipAlert]) -> int:
+        if not clips:
+            return 0
+        event_uids = self._persist_clip_events(clips)
+        if len(event_uids) != len(clips) or any(uid is None for uid in event_uids):
+            raise RuntimeError("No se pudieron persistir todos los eventos del manifest")
+
+        inserted_count = 0
+        for clip, uid in zip(clips, event_uids):
+            if not uid:
+                continue
+            payload = self._build_outbox_payload(clip)
+            if self._worker.insert_pending(uid, clip.cam_id, clip.event_type, payload):
+                inserted_count += 1
+        return inserted_count
+
+    def _clip_to_history_row(self, clip: ClipAlert) -> tuple[Any, ...] | None:
+        if not clip.cam_id:
+            return None
+        timestamp = clip.timestamp or 0
+        detected_at = (
+            datetime.fromtimestamp(timestamp, tz=ECUADOR_TZ)
+            if timestamp > 0
+            else datetime.now(ECUADOR_TZ)
+        )
+        track_id_int = self._int_value(clip.track_id) if clip.track_id else 0
+        video_path = clip.video_path or None
+        crop_path = clip.crop_path or None
+        json_path = clip.json_path if clip.json_path and clip.json_path.endswith(".json") else None
+
+        return (
+            clip.event_type,           # event_type
+            "movimiento",              # event_category
+            "fixed_camera",            # origin
+            clip.cam_id,               # camera_id
+            None,                      # camera_name (no disponible desde manifest)
+            timestamp if timestamp > 0 else None,   # event_timestamp
+            detected_at,               # detected_at
+            detected_at.date(),        # detected_date
+            self._event_title(clip.event_type),  # title
+            None,                      # description
+            None,                      # person_id
+            None,                      # person_name
+            None,                      # plate
+            track_id_int,              # track_id
+            "new",                     # status
+            "info",                    # severity
+            None,                      # manifest_file_path
+            json_path,                 # json_file_path
+            video_path,                # video_file_path
+            None,                      # image_file_path
+            crop_path,                 # crop_path
+            Json(clip.manifest_payload),   # manifest_payload
+            Json(clip.payload),            # detail_payload
+        )
+
+    def _build_outbox_payload(self, clip: ClipAlert) -> dict[str, Any]:
+        return {
+            "message": self._message_for_clip(clip),
+            "remote_video": clip.video_path or "",
+            "remote_crop": clip.crop_path or "",
+        }
+
+    # --------------------------------------------------------- SSH / SFTP
+
+    @contextmanager
+    def _sftp_connection(self):
+        client = self._make_ssh_client()
+        sftp = client.open_sftp()
+        try:
+            yield client, sftp
+        finally:
+            try:
+                sftp.close()
+            except Exception:
+                pass
+            try:
+                client.close()
+            except Exception:
+                pass
+
+    def _make_ssh_client(self) -> paramiko.SSHClient:
+        client = paramiko.SSHClient()
+        known_hosts = str(self.settings.ssh_known_hosts_path or "").strip()
+        key_path = str(self.settings.ssh_key_path or "").strip()
+
+        if known_hosts and Path(known_hosts).exists():
+            client.load_host_keys(known_hosts)
+            client.set_missing_host_key_policy(paramiko.RejectPolicy())
+        else:
+            if known_hosts:
+                _log.warning(
+                    "[ssh] SSH_KNOWN_HOSTS_PATH '%s' no existe — usando AutoAddPolicy",
+                    known_hosts,
+                )
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        connect_kwargs: dict[str, Any] = {
+            "hostname": self.settings.ssh_events_host,
+            "username": self.settings.ssh_events_user,
+            "port": self.settings.ssh_events_port,
+            "timeout": 10,
+        }
+        if key_path and Path(key_path).exists():
+            connect_kwargs["pkey"] = paramiko.RSAKey.from_private_key_file(key_path)
+        else:
+            connect_kwargs["password"] = self.settings.ssh_events_password
+
+        client.connect(**connect_kwargs)
+        return client
+
+    # Mantener _client() para compatibilidad interna con _cache_remote_file
+    def _client(self) -> "_SSHClientContext":
+        return _SSHClientContext(self._make_ssh_client())
+
+    # --------------------------------------------------------- file cache
 
     def _cache_remote_file(self, remote_path: str) -> Path:
         normalized_path = str(PurePosixPath(remote_path or "")).strip()
         if not normalized_path:
-            raise FileNotFoundError("Ruta remota vacia")
+            raise FileNotFoundError("Ruta remota vacía")
 
-        suffix = PurePosixPath(normalized_path).suffix or mimetypes.guess_extension(
-            mimetypes.guess_type(normalized_path)[0] or ""
-        ) or ".jpg"
+        suffix = PurePosixPath(normalized_path).suffix or (
+            mimetypes.guess_extension(mimetypes.guess_type(normalized_path)[0] or "") or ".jpg"
+        )
         cache_key = hashlib.sha256(normalized_path.encode("utf-8")).hexdigest()
         local_path = self.crop_cache_dir / f"{cache_key}{suffix}"
         partial_path = local_path.with_suffix(f"{local_path.suffix}.part")
@@ -329,6 +506,8 @@ print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
             previous_size = size
             time.sleep(0.75)
 
+    # --------------------------------------------------------- video render
+
     def _render_telegram_video(self, source_path: Path) -> Path:
         rendered_path = source_path.with_suffix(".telegram.mp4")
         if rendered_path.exists() and rendered_path.stat().st_size > 0:
@@ -336,27 +515,12 @@ print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
 
         partial_path = rendered_path.with_suffix(f"{rendered_path.suffix}.part")
         command = [
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(source_path),
-            "-map",
-            "0:v:0",
-            "-an",
-            "-vf",
-            "scale='min(1280,iw)':-2",
-            "-c:v",
-            "libx264",
-            "-preset",
-            "veryfast",
-            "-crf",
-            "26",
-            "-pix_fmt",
-            "yuv420p",
-            "-movflags",
-            "+faststart",
-            "-f",
-            "mp4",
+            "ffmpeg", "-y", "-i", str(source_path),
+            "-map", "0:v:0", "-an",
+            "-vf", "scale='min(1280,iw)':-2",
+            "-c:v", "libx264", "-preset", "veryfast",
+            "-crf", "26", "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart", "-f", "mp4",
             str(partial_path),
         ]
         completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
@@ -375,27 +539,12 @@ print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
 
         partial_path = small_path.with_suffix(f"{small_path.suffix}.part")
         command = [
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(source_path),
-            "-map",
-            "0:v:0",
-            "-an",
-            "-vf",
-            "scale='min(854,iw)':-2",
-            "-c:v",
-            "libx264",
-            "-preset",
-            "veryfast",
-            "-crf",
-            "32",
-            "-pix_fmt",
-            "yuv420p",
-            "-movflags",
-            "+faststart",
-            "-f",
-            "mp4",
+            "ffmpeg", "-y", "-i", str(source_path),
+            "-map", "0:v:0", "-an",
+            "-vf", "scale='min(854,iw)':-2",
+            "-c:v", "libx264", "-preset", "veryfast",
+            "-crf", "32", "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart", "-f", "mp4",
             str(partial_path),
         ]
         completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
@@ -408,6 +557,34 @@ print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
             pass
         return small_path
 
+    # --------------------------------------------------------- helpers
+
+    def _message_for_clip(self, clip: ClipAlert) -> str:
+        detected_at = "Sin dato"
+        if clip.timestamp:
+            detected_at = datetime.fromtimestamp(clip.timestamp, tz=ECUADOR_TZ).strftime("%d/%m/%Y %H:%M:%S")
+        event_label = TELEGRAM_EVENT_LABELS.get(clip.event_type, clip.event_type or "Sin dato")
+        rows = [
+            "ALERTA",
+            "",
+            "",
+            f"Tipo de evento: {event_label}",
+            f"Camara: {clip.cam_id or 'Sin dato'}",
+            f"Hora: {detected_at}",
+        ]
+        if clip.track_id:
+            rows.append(f"Track ID: {clip.track_id}")
+        if clip.video_path:
+            rows.append(f"Video: {PurePosixPath(clip.video_path).name}")
+        return "\n".join(rows)
+
+    @staticmethod
+    def _event_title(event_type: str) -> str:
+        return {
+            "clip": "Video de zona detectado",
+            "clips_movimiento": "Movimiento detectado",
+        }.get(event_type, "Video detectado")
+
     @staticmethod
     def _delivery_detail(delivery: dict[str, Any]) -> str:
         results = delivery.get("results") if isinstance(delivery.get("results"), list) else []
@@ -419,73 +596,18 @@ print(json.dumps({{"items": items[-limit:]}}, ensure_ascii=False))
             if isinstance(item, dict)
         )
 
-    def _client(self) -> paramiko.SSHClient:
-        client = paramiko.SSHClient()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(
-            hostname=self.settings.ssh_events_host,
-            username=self.settings.ssh_events_user,
-            password=self.settings.ssh_events_password,
-            port=self.settings.ssh_events_port,
-            timeout=10,
-        )
-        return _SSHClientContext(client)
-
-    def _message_for_clip(self, clip: ClipAlert) -> str:
-        detected_at = "Sin dato"
-        if clip.timestamp:
-            detected_at = datetime.fromtimestamp(clip.timestamp, tz=ECUADOR_TZ).strftime("%d/%m/%Y %H:%M:%S")
-        rows = [
-            "ALERTA",
-            "",
-            "Nuevo clip detectado.",
-            "",
-            f"Camara: {clip.cam_id or 'Sin dato'}",
-            f"Hora: {detected_at}",
-        ]
-        if clip.track_id:
-            rows.append(f"Track ID: {clip.track_id}")
-        if clip.video_path:
-            rows.append(f"Video: {PurePosixPath(clip.video_path).name}")
-        return "\n".join(rows)
-
-    def _load_state(self) -> dict[str, Any]:
-        default = {"seen_uids": [], "notified_uids": [], "last_notified_uid": "", "last_notified_at": ""}
-        if not self.state_path.is_file():
-            return default
-        try:
-            payload = json.loads(self.state_path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            return default
-        if not isinstance(payload, dict):
-            return default
-        return {
-            "seen_uids": self._normalized_list(payload.get("seen_uids")),
-            "notified_uids": self._normalized_list(payload.get("notified_uids")),
-            "last_notified_uid": str(payload.get("last_notified_uid") or ""),
-            "last_notified_at": str(payload.get("last_notified_at") or ""),
-        }
-
-    def _save_state(self, state: dict[str, Any]) -> None:
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-        self.state_path.write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8")
-
     def _set_status(self, **updates: Any) -> None:
         with self._lock:
             self._status.update(updates)
 
+    def _db_connection(self):
+        return psycopg2.connect(self._psycopg_dsn(self.settings.database_url))
+
     @staticmethod
-    def _normalized_list(value: Any) -> list[str]:
-        if not isinstance(value, list):
-            return []
-        normalized: list[str] = []
-        seen: set[str] = set()
-        for item in value:
-            cleaned = str(item or "").strip()
-            if cleaned and cleaned not in seen:
-                seen.add(cleaned)
-                normalized.append(cleaned)
-        return normalized
+    def _psycopg_dsn(database_url: str) -> str:
+        if database_url.startswith("postgresql+psycopg://"):
+            return database_url.replace("postgresql+psycopg://", "postgresql://", 1)
+        return database_url
 
     @staticmethod
     def _int_value(value: Any) -> int:

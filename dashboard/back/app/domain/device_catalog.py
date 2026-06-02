@@ -96,11 +96,12 @@ class DeviceCatalogBuilder(BaseHelper):
                 continue
             label = re.sub(r"\s*[·-]\s*video\s*$", "", self.text(item.get("display_name") or name), flags=re.I).upper()
             camera_type = self.text(item.get("tipo_camara_nombre") or item.get("tipo_camara_codigo") or "Camara")
-            preview_query = urlencode({"camera_name": name})
-            viewer_url = f"/api/camera-preview-frame?{preview_query}"
+            snapshot_url = f"/api/camera-snapshot?camera_name={quote(name)}"
             preview = (
-                '<span class="camera-pill-preview">'
-                f'<iframe class="camera-pill-frame" src="{escape(viewer_url)}" title="Vista previa {escape(label)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture"></iframe>'
+                '<span class="camera-pill-preview camera-pill-preview--snapshot">'
+                f'<img class="camera-pill-snapshot" src="{snapshot_url}" '
+                f'data-snapshot-url="{snapshot_url}" '
+                f'alt="{escape(label)}" loading="lazy" decoding="async" />'
                 '</span>'
             )
             rows.append(

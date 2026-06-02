@@ -1,8 +1,13 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import subprocess
+import tempfile
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -12,6 +17,7 @@ from urllib.request import Request as UrlRequest
 from urllib.request import urlopen
 
 from fastapi import FastAPI, Form, Request
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
@@ -78,10 +84,24 @@ app.mount("/static", StaticFiles(directory=STATIC), name="static")
 app.mount("/assets", StaticFiles(directory=STATIC / "assets"), name="assets")
 app.mount("/icons", StaticFiles(directory=STATIC / "icons"), name="icons")
 
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
+
+@app.middleware("http")
+async def invalidate_context_on_write(request: Request, call_next):
+    response = await call_next(request)
+    if request.method in {"POST", "PUT", "PATCH", "DELETE"} and request.url.path.startswith("/api/"):
+        with _CONTEXT_LOCK:
+            _CONTEXT_CACHE.clear()
+        if "/cameras" in request.url.path or "/rboxes" in request.url.path:
+            threading.Thread(target=_reload_cam_path_map, daemon=True).start()
+    return response
+
 
 @app.on_event("startup")
 def start_remote_clip_telegram_notifier() -> None:
     remote_clip_telegram_notifier.start()
+    threading.Thread(target=_cam_path_map_refresh_loop, daemon=True, name="cam-path-loader").start()
 
 
 @app.on_event("shutdown")
@@ -320,7 +340,35 @@ def _merge_live_telemetry(base_items: list[dict[str, Any]], live_items: list[dic
     return list(merged.values())
 
 
+_CONTEXT_CACHE: dict[str, tuple[dict, float]] = {}
+_CONTEXT_TTL = 30.0
+_CONTEXT_LOCK = threading.Lock()
+
+
 def _build_context(request: Request) -> dict[str, str]:
+    token = _token(request)
+    if token:
+        now = time.monotonic()
+        with _CONTEXT_LOCK:
+            cached = _CONTEXT_CACHE.get(token)
+            if cached and (now - cached[1]) < _CONTEXT_TTL:
+                return cached[0]
+
+    result = _build_context_uncached(request)
+
+    if token:
+        with _CONTEXT_LOCK:
+            _CONTEXT_CACHE[token] = (result, time.monotonic())
+            # Evict tokens older than 5 minutes to avoid memory growth
+            cutoff = time.monotonic() - 300
+            stale = [k for k, v in _CONTEXT_CACHE.items() if v[1] < cutoff]
+            for k in stale:
+                del _CONTEXT_CACHE[k]
+
+    return result
+
+
+def _build_context_uncached(request: Request) -> dict[str, str]:
     token = _token(request)
     me = {}
     companies: list[dict[str, Any]] = []
@@ -1641,6 +1689,151 @@ def camera_viewer_url(
         camera_name=camera_name,
         inference=inference,
         inference_type=inference_type,
+    )
+
+
+_SNAPSHOT_STORE: dict[str, tuple[bytes, float]] = {}
+_SNAPSHOT_LOCK = threading.Lock()
+_SNAPSHOT_REFRESHING: set[str] = set()
+_SNAPSHOT_TTL = 60.0
+_SNAPSHOT_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="cam-snap")
+
+# {camera_name: mediamtx_path}  — populated at startup, refreshed periodically
+_CAM_PATH_MAP: dict[str, str] = {}
+_CAM_PATH_LOCK = threading.Lock()
+
+
+def _reload_cam_path_map() -> None:
+    try:
+        from back.app.services.conection_sql_postgrest import fetch_all as _db
+        rows = _db(
+            "SELECT c.name, c.unique_code, sp.path AS mediamtx_path "
+            "FROM cameras c "
+            "LEFT JOIN stream_paths sp ON sp.resource_id = c.id "
+            "  AND sp.resource_type = 'camera' AND sp.active = true "
+            "WHERE c.active = true AND c.deleted_at IS NULL",
+        )
+        mapping: dict[str, str] = {}
+        for row in rows:
+            name = row.get("name") or ""
+            unique_code = row.get("unique_code") or ""
+            mediamtx_path = row.get("mediamtx_path") or unique_code or name
+            if name:
+                mapping[name] = mediamtx_path
+            if unique_code:
+                mapping[unique_code] = mediamtx_path
+        with _CAM_PATH_LOCK:
+            _CAM_PATH_MAP.clear()
+            _CAM_PATH_MAP.update(mapping)
+    except Exception:
+        pass
+
+
+def _cam_path_map_refresh_loop() -> None:
+    _reload_cam_path_map()
+    while True:
+        time.sleep(120)
+        _reload_cam_path_map()
+
+_SNAPSHOT_PLACEHOLDER_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 90">'
+    '<rect width="160" height="90" fill="#0a0c14"/>'
+    '<rect x="1" y="1" width="158" height="88" rx="6" fill="none" stroke="rgba(255,255,255,.08)"/>'
+    '<g transform="translate(80,38)" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.5">'
+    '<rect x="-14" y="-10" width="28" height="20" rx="3"/>'
+    '<rect x="14" y="-4" width="6" height="8" rx="2"/>'
+    '<circle cx="0" cy="0" r="5"/>'
+    '</g>'
+    '<text x="80" y="65" text-anchor="middle" font-family="system-ui,sans-serif" '
+    'font-size="7" fill="rgba(255,255,255,.32)" font-weight="700" letter-spacing="1">SIN SEÑAL</text>'
+    '</svg>'
+).encode()
+
+
+def _ffmpeg_jpeg(rtsp_url: str) -> bytes | None:
+    with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as f:
+        tmp = f.name
+    try:
+        subprocess.run(
+            [
+                "ffmpeg", "-y",
+                "-fflags", "nobuffer",
+                "-flags", "low_delay",
+                "-analyzeduration", "500000",
+                "-probesize", "500000",
+                "-rtsp_transport", "tcp",
+                "-i", rtsp_url,
+                "-vframes", "1",
+                "-vf", "scale=320:180",
+                "-q:v", "7",
+                "-update", "1",
+                "-f", "image2",
+                tmp,
+            ],
+            capture_output=True,
+            timeout=10,
+        )
+        if os.path.exists(tmp) and os.path.getsize(tmp) > 100:
+            with open(tmp, "rb") as fh:
+                return fh.read()
+    except Exception:
+        pass
+    finally:
+        try:
+            os.unlink(tmp)
+        except Exception:
+            pass
+    return None
+
+
+def _refresh_snapshot(key: str, rtsp_url: str) -> None:
+    try:
+        jpeg = _ffmpeg_jpeg(rtsp_url)
+        if jpeg:
+            with _SNAPSHOT_LOCK:
+                _SNAPSHOT_STORE[key] = (jpeg, time.monotonic())
+    finally:
+        with _SNAPSHOT_LOCK:
+            _SNAPSHOT_REFRESHING.discard(key)
+
+
+@app.get("/api/camera-snapshot")
+def camera_snapshot(request: Request, camera_name: str = "") -> Response:
+    if not _token(request):
+        return Response(status_code=401)
+
+    key = camera_name.strip()
+    now = time.monotonic()
+
+    with _SNAPSHOT_LOCK:
+        cached = _SNAPSHOT_STORE.get(key)
+        needs_refresh = cached is None or (now - cached[1]) > _SNAPSHOT_TTL
+        is_refreshing = key in _SNAPSHOT_REFRESHING
+
+    if needs_refresh and not is_refreshing:
+        with _CAM_PATH_LOCK:
+            mediamtx_path = _CAM_PATH_MAP.get(key) or key
+        rtsp_url = f"rtsp://127.0.0.1:8554/{mediamtx_path}" if mediamtx_path else None
+
+        if rtsp_url and mediamtx_path:
+            with _SNAPSHOT_LOCK:
+                _SNAPSHOT_REFRESHING.add(key)
+            _SNAPSHOT_POOL.submit(_refresh_snapshot, key, rtsp_url)
+
+    with _SNAPSHOT_LOCK:
+        cached = _SNAPSHOT_STORE.get(key)
+
+    if cached:
+        return Response(
+            content=cached[0],
+            media_type="image/jpeg",
+            headers={"Cache-Control": "max-age=25"},
+        )
+
+    return Response(
+        content=_SNAPSHOT_PLACEHOLDER_SVG,
+        media_type="image/svg+xml",
+        headers={"Cache-Control": "max-age=5"},
     )
 
 

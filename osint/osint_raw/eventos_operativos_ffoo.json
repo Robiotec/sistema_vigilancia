@@ -3,6 +3,1089 @@
   "message": "OK",
   "data": [
     {
+      "id": "475669",
+      "codigo_alfanumerico": "OPEFO-20260531-475669",
+      "latitud": -2.2533314033937737,
+      "longitud": -79.88444190314299,
+      "circunstancias_hecho": "Tras denunciar haber sido víctima de secuestro, un ciudadano condujo a la Policía hasta una vivienda en Floresta 1, sur de Guayaquil, donde fueron aprehendidos tres sospechosos. Durante el operativo se incautaron un arma de fuego, municiones, droga y un vehículo. Las autoridades investigan una posible relación de los detenidos con la organización criminal Mafia 18.",
+      "fecha_infraccion": "2026-05-31T22:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://www.extra.ec/noticia/guayaquil/denuncio-secuestro-guayaquil-policia-capturo-tres-sospechosos-asi-ocurrio-154905.html"
+      ],
+      "fecha_creacion": "2026-06-01T21:47:12.636Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/b98171df-9cc9-4301-932e-7c04b1e9a841.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475667",
+      "codigo_alfanumerico": "OPEFO-20260601-475667",
+      "latitud": 6.561578015216135,
+      "longitud": -75.82414416539461,
+      "circunstancias_hecho": "En Santa Fe de Antioquia, las autoridades capturaron en flagrancia a un hombre por el presunto delito de porte ilegal de armas y municiones. Durante actividades de registro y control, se le incautaron 15 cartuchos calibre 5.56.",
+      "fecha_infraccion": "2026-06-01T17:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/Policiantioquia/status/2061544383527235858?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T21:18:45.540Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/5c64417d-6b9e-4cb9-a311-9a460dfa2c0b.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ANTIOQUIA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475629",
+      "codigo_alfanumerico": "OPEFO-20260601-475629",
+      "latitud": 7.086872199999999,
+      "longitud": -70.74603549999999,
+      "circunstancias_hecho": "Mayerly Zulay Arévalo Carrascal, alias “Mayerly”, fue extraditada desde Argentina y es señalada como presunta integrante de una red de testaferros vinculada al Frente de Guerra Oriental del ELN. Según las investigaciones, habría participado en operaciones de lavado de activos por más de 885.000 millones de pesos, utilizando actividades comerciales como fachada para financiar a la organización armada.",
+      "fecha_infraccion": "2026-06-01T15:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/ELTIEMPO/status/2061539487172211152",
+        "https://www.eltiempo.com/justicia/conflicto-y-narcotrafico/extraditan-desde-argentina-a-alias-mayerly-presunta-testaferra-del-eln-en-arauca-senalada-de-lavar-mas-de-885-000-millones-3561227?utm_campaign=mrf-twitter-ELTIEMPO&utm_source=twitter&utm_medium=social&mrfcid=202606016a1ca7d23a505218dd0b87d6"
+      ],
+      "fecha_creacion": "2026-06-01T20:16:05.653Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/945ae2de-2ea5-4667-9f24-d39d0022d5fb.webp"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475590",
+      "codigo_alfanumerico": "OPEFO-20260601-475590",
+      "latitud": -3.4763823,
+      "longitud": -80.2225448,
+      "circunstancias_hecho": "En Huaquillas #ElOro, decomisamos 22 cilindros de GLP durante un operativo de control ejecutado en la zona fronteriza, orientado a prevenir actividades ilícitas.\r\n\r\n",
+      "fecha_infraccion": "2026-06-01T14:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona7/status/2061523177117819374"
+      ],
+      "fecha_creacion": "2026-06-01T19:20:00.958Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/4d5c63ea-61e0-41a0-889f-d29c27aa3d61.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "HUAQUILLAS"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475576",
+      "codigo_alfanumerico": "OPEFO-20260601-475576",
+      "latitud": 4.5649239,
+      "longitud": -76.5209058,
+      "circunstancias_hecho": "Unidades del Ejército Nacional de Colombia sostuvieron enfrentamientos contra integrantes del Clan del Golfo en el municipio de Sipí, departamento de Chocó. Como resultado preliminar de la operación fueron capturados cinco presuntos integrantes, dos fueron neutralizados y se decomisó armamento, municiones, explosivos y material logístico utilizado por la estructura criminal.",
+      "fecha_infraccion": "2026-06-01T14:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/COL_EJERCITO/status/2061506037870375073"
+      ],
+      "fecha_creacion": "2026-06-01T18:24:49.181Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/183269be-4af5-4a81-bc10-c2b7f390689a.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CHOCÓ"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475547",
+      "codigo_alfanumerico": "OPEFO-20260601-475547",
+      "latitud": 5.7451779,
+      "longitud": -75.9768362,
+      "circunstancias_hecho": "En Betania, las autoridades capturaron a una persona requerida por la justicia por los delitos de fuga de presos y tenencia, porte o tráfico ilegal de armas de fuego, accesorios y municiones. La detención se realizó en cumplimiento de una orden judicial vigente.",
+      "fecha_infraccion": "2026-06-01T09:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/Policiantioquia/status/2061472966488011163"
+      ],
+      "fecha_creacion": "2026-06-01T16:41:23.051Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6876ac78-46f2-40ca-8085-76a6001aee74.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "ANTIOQUIA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475524",
+      "codigo_alfanumerico": "OPEFO-20260601-475524",
+      "latitud": -3.2432674006190485,
+      "longitud": -79.83496875847469,
+      "circunstancias_hecho": "Jean I., fue aprehendido por la Policía Nacional tras ser señalado como presunto responsable de realizar disparos en el interior de un local de apuestas. Según información preliminar, el sujeto habría ingresado al establecimiento para intimidar a los presentes, asegurando pertenecer a “Los Lobos”, y durante el incidente una persona resultó herida por impacto de arma de fuego.",
+      "fecha_infraccion": "2026-06-01T01:20:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://diariocorreo.com.ec/133640/sucesos/%E2%80%98cachorro%E2%80%99-integrante-de-%E2%80%98los-lobos%E2%80%99-detenido-tras-disparar-en-un-billar",
+        "https://www.facebook.com/share/p/1DuVE9mAW9/",
+        "https://www.facebook.com/share/p/1EKyegJVDY/"
+      ],
+      "fecha_creacion": "2026-06-01T16:19:22.500Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e4d3671e-3f25-4ead-875b-6ef7682c9886.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "EL GUABO"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475523",
+      "codigo_alfanumerico": "OPEFO-20260531-475523",
+      "latitud": 0.6407789611185329,
+      "longitud": -78.36249667995325,
+      "circunstancias_hecho": "El Ejército Ecuatoriano ejecutó una operación militar en los sectores El Cristal, Santa Rosa del Valle y San Pedro, donde identificó y neutralizó infraestructura vinculada a minería ilegal. Durante la intervención fueron destruidos equipos e insumos utilizados para la extracción ilícita de minerales, incluyendo molinos, bombas de agua, generadores eléctricos, cocinas artesanales para fundir oro, piscinas de sedimentación y 21 campamentos clandestinos.",
+      "fecha_infraccion": "2026-05-31T21:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2061249400333348908?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T15:54:02.520Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e446612f-4c6e-4392-970f-b37b7758b9e9.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN MIGUEL DE URCUQUI"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475522",
+      "codigo_alfanumerico": "OPEFO-20260531-475522",
+      "latitud": 0.6451078935971565,
+      "longitud": -78.34396720765241,
+      "circunstancias_hecho": "El Ejército Ecuatoriano ejecutó una operación militar en los sectores El Cristal, Santa Rosa del Valle y San Pedro, donde identificó y neutralizó infraestructura vinculada a minería ilegal. Durante la intervención fueron destruidos equipos e insumos utilizados para la extracción ilícita de minerales, incluyendo molinos, bombas de agua, generadores eléctricos, cocinas artesanales para fundir oro, piscinas de sedimentación y 21 campamentos clandestinos.",
+      "fecha_infraccion": "2026-05-31T21:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2061249400333348908?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T15:48:40.932Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/63988b63-28b4-4746-ae7f-c9f8ff8444f1.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN MIGUEL DE URCUQUI"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475481",
+      "codigo_alfanumerico": "OPEFO-20260531-475481",
+      "latitud": 0.6432715538088231,
+      "longitud": -78.38144809275951,
+      "circunstancias_hecho": "El Ejército Ecuatoriano ejecutó una operación militar en los sectores El Cristal, Santa Rosa del Valle y San Pedro, donde identificó y neutralizó infraestructura vinculada a minería ilegal. Durante la intervención fueron destruidos equipos e insumos utilizados para la extracción ilícita de minerales, incluyendo molinos, bombas de agua, generadores eléctricos, cocinas artesanales para fundir oro, piscinas de sedimentación y 21 campamentos clandestinos.",
+      "fecha_infraccion": "2026-05-31T21:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2061249400333348908?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T15:42:01.686Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/051f10c9-e532-4408-a403-8ed8e55835ff.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN MIGUEL DE URCUQUI"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475480",
+      "codigo_alfanumerico": "OPEFO-20260530-475480",
+      "latitud": -1.5545465229003939,
+      "longitud": -79.75889880753105,
+      "circunstancias_hecho": "En una operación militar ejecutada en el cantón Vinces, Los Ríos, fueron aprehendidos alias “Orejón” y alias “Gordo”, presuntos integrantes de “Los Fatales”, estructura vinculada a “Los Choneros”. Según información militar, el inmueble intervenido era utilizado como centro clandestino de almacenamiento de armamento para actividades delictivas. Durante la operación se decomisaron armas de fuego, municiones, teléfonos móviles y un chaleco con distintivos policiales.",
+      "fecha_infraccion": "2026-05-30T06:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2060792226850939326?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T15:31:51.384Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f2daad21-24b4-4f96-a5bc-954063787d99.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "VINCES"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 7,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475479",
+      "codigo_alfanumerico": "OPEFO-20260530-475479",
+      "latitud": -1.5520821,
+      "longitud": -79.4028639,
+      "circunstancias_hecho": "El Ejército Ecuatoriano ejecutó una operación militar en el cantón Urdaneta, Los Ríos, donde fue aprehendido Darwin C., presunto integrante de “Los Lobos”. Según información oficial, el sujeto estaría vinculado a actividades delictivas como sicariato, extorsión, robo y tráfico de sustancias sujetas a fiscalización. Durante la intervención se decomisaron armas y droga.",
+      "fecha_infraccion": "2026-05-30T06:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2060790401007509706?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T15:19:59.176Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c8aea86a-ea76-49e8-b649-9150954b1527.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "URDANETA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 3,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475477",
+      "codigo_alfanumerico": "OPEFO-20260531-475477",
+      "latitud": -3.8290942,
+      "longitud": -78.76178929999999,
+      "circunstancias_hecho": "El Ejército Ecuatoriano, en coordinación con la Policía Nacional y la ARCOM, ejecutó una operación en Yantzaza, provincia de Zamora Chinchipe, que permitió afectar a una presunta estructura vinculada a “Los Lobos”. Durante la intervención fueron aprehendidas cuatro personas y se decomisaron armas, municiones, una camioneta, equipos utilizados para minería ilegal y material aurífero procesado.",
+      "fecha_infraccion": "2026-05-31T15:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2061191123859542479?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T14:55:05.446Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/3af829aa-1e30-4eec-9b45-cae8a1bbce21.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "YANTZAZA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475462",
+      "codigo_alfanumerico": "OPEFO-20260531-475462",
+      "latitud": -1.0669701,
+      "longitud": -79.4776812,
+      "circunstancias_hecho": " Elkin Fernando Loor Huacón, señalado por las autoridades como presunto responsable de múltiples hechos violentos, incluidos asesinatos y descuartizamientos en Quevedo, fue capturado junto a un adolescente de 17 años durante un operativo policial. Según el reporte, intentó huir y atentó contra los uniformados. En el procedimiento se incautó una motocicleta sin placas y una pistola. Posteriormente fue trasladado a la cárcel de máxima seguridad El Encuentro.",
+      "fecha_infraccion": "2026-05-31T19:10:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PrimeraPlanaECU/status/2061449080002281655",
+        "https://www.elcomercio.com/actualidad/seguridad/descuartizador-quevedo-capturado-enviado-carcel-encuentro/",
+        "https://www.ecuavisa.com/seguridad/adolescente-descuartizador-quevedo-detenido-20260531-0030.html"
+      ],
+      "fecha_creacion": "2026-06-01T14:45:13.238Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f243c0ea-baea-4603-b71c-486db033f63d.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUEVEDO"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475453",
+      "codigo_alfanumerico": "OPEFO-20260530-475453",
+      "latitud": -0.18415124561242238,
+      "longitud": -78.47894263736798,
+      "circunstancias_hecho": "Un delincuente armado murió durante un enfrentamiento con la Policía tras intentar asaltar una farmacia ubicada en la avenida 6 de Diciembre e Irlanda, en Quito. El sujeto amenazó a empleados y clientes, efectuó disparos e hirió levemente a una trabajadora. Al huir en motocicleta abrió fuego contra uniformados que realizaban patrullaje preventivo, quienes respondieron al ataque. El sospechoso fue abatido y dos policías resultaron heridos, encontrándose estables.",
+      "fecha_infraccion": "2026-05-30T05:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/TiempoRealEC/status/2061442960403677501",
+        "https://www.facebook.com/share/p/17oc8AJTe5/"
+      ],
+      "fecha_creacion": "2026-06-01T14:45:13.238Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ed078d8f-b00e-4301-b312-93706e84fce4.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 12,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475454",
+      "codigo_alfanumerico": "OPEFO-20260531-475454",
+      "latitud": -2.1464007,
+      "longitud": -79.83583,
+      "circunstancias_hecho": "La Policía Nacional aprehendió a cuatro menores de edad y varios adultos tras dos ataques armados registrados en Durán que dejaron tres fallecidos. En el sector El Arbolito fueron capturados tres adolescentes de 13, 15 y 16 años, quienes habrían participado en un sicariato y manifestaron pertenecer al GDO Los Chone Killers.",
+      "fecha_infraccion": "2026-05-31T17:30:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/CorteInforma/status/2061448962112925771",
+        "https://www.ecuavisa.com/seguridad/tres-menores-edad-sicariato-duran-detenidos-20260531-0034.html",
+        "https://www.extra.ec/noticia/ecuador/cuatro-menores-aislados-duran-dos-ataques-armados-dejaron-tres-muertos-154861.html"
+      ],
+      "fecha_creacion": "2026-06-01T14:45:13.238Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/ea76899a-86c8-47b3-8527-3e227c4cdcb2.webp"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "DURAN"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475447",
+      "codigo_alfanumerico": "OPEFO-20260530-475447",
+      "latitud": -2.0844835,
+      "longitud": -79.9309719,
+      "circunstancias_hecho": "Alias “38”, presunto integrante de la organización criminal “Los Anclas” y señalado como sicario de dicha estructura, fue aprehendido durante una operación militar ejecutada en Guayaquil. Según información oficial, el detenido mantenía una boleta de captura vigente y antecedentes por tenencia y porte de armas. Durante la intervención también se decomisó clorhidrato de cocaína.",
+      "fecha_infraccion": "2026-05-30T07:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DefensaEc/status/2061442821639278665?s=20",
+        "https://ecuadorcomunicacion.com/capturado-alias-38-gatillero-de-los-anclas-en-guayaquil",
+        "https://x.com/FFAAECUADOR/status/2060707491193712664?s=20"
+      ],
+      "fecha_creacion": "2026-06-01T14:39:30.851Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/85e76502-46f5-4f42-95da-0117e6303875.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "475084",
+      "codigo_alfanumerico": "OPEFO-20260529-475084",
+      "latitud": -2.3048325601955044,
+      "longitud": -79.73124491367334,
+      "circunstancias_hecho": "La Policía Nacional aprehendió a Ronald Manuel Cedeño R., Marcelo David González R., Luis Diego González R., Raúl David Cedeño R., Cristian Juan Vargas L., Arturo Livingston Canchiña E., Joan Andrés Girón R. y Florencio Johao Granda P. durante un operativo en Taura (Naranjal) contra presuntas actividades aéreas clandestinas vinculadas al narcotráfico. En el lugar se hallaron combustible de aviación, vehículos, radios de comunicación, celulares y más.",
+      "fecha_infraccion": "2026-05-29T19:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/ecuadorprensaec/status/2061100387919450185",
+        "https://x.com/JohnReimberg/status/2060513473964982521?s=20",
+        "https://www.eluniverso.com/noticias/seguridad/operativo-en-taura-deja-ocho-capturados-en-pista-ilegal-avioneta-fugo-del-sitio-nota/?outputType=amp"
+      ],
+      "fecha_creacion": "2026-05-31T15:58:05.464Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/fe59a4aa-a1ac-423a-914b-588c217df590.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SAN JACINTO DE YAGUACHI"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "474862",
+      "codigo_alfanumerico": "OPEFO-20260530-474862",
+      "latitud": -1.5717839,
+      "longitud": -79.4724576,
+      "circunstancias_hecho": "LA POLICIA APRENDE A DOS PRESUNTOS IMPLICADOS EN EL DELITO DE EXTORSIÓN EN LOS RÍOS\r\n\r\nMediante operativos investigativos en Catarama y Ventanas, en #LosRíos, fueron aprehendidos en flagrancia dos presuntos vinculados al delito de extorsión.\r\n",
+      "fecha_infraccion": "2026-05-30T18:31:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcuador/status/2060866780915020070"
+      ],
+      "fecha_creacion": "2026-05-30T23:54:24.460Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/778aed47-5087-4d90-b30c-6eaf63be1aed.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "URDANETA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "474765",
+      "codigo_alfanumerico": "OPEFO-20260530-474765",
+      "latitud": -12.218047247256592,
+      "longitud": -69.8591563164204,
+      "circunstancias_hecho": "Comando Operacional del Sur y la \r\n@PoliciaPeru\r\n destruyeron 1 campamento, 4 máquinas pesadas y otros enseres empleados por la minería ilegal, valorizados en casi S/3 millones. La intervención se efectuó en la Reserva Nacional de Tambopata.",
+      "fecha_infraccion": "2026-05-30T12:43:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/CCFFAA_PERU/status/2060779176823505322"
+      ],
+      "fecha_creacion": "2026-05-30T18:11:57.078Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/2f99c9ea-5a12-446b-9500-10799271f0c0.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MADRE DE DIOS"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 134,
+        "pais": "Perú",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+        "codigoISO2": "PE",
+        "gentilicio": "Peruano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "474450",
+      "codigo_alfanumerico": "OPEFO-20260529-474450",
+      "latitud": 5.7897437,
+      "longitud": -75.4280185,
+      "circunstancias_hecho": "#Abejorral | En desarrollo de actividades de registro, control y patrullaje, fue capturada en flagrancia una persona por los delitos de homicidio culposo y lesiones personales culposas, en hechos ocurridos en la vereda La Esperanza. ",
+      "fecha_infraccion": "2026-05-29T17:49:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/Policiantioquia/status/2060493776217374929"
+      ],
+      "fecha_creacion": "2026-05-29T23:15:13.770Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/aec0b00e-40d2-4044-b1c7-c962360335ef.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "Colombia"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 0,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "474435",
       "codigo_alfanumerico": "OPEFO-20260529-474435",
       "latitud": -4.031672973988003,
@@ -31,7 +1114,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 5,
+      "total_clicks": 7,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -186,7 +1269,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 5,
+      "total_clicks": 9,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -239,7 +1322,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 2,
+      "total_clicks": 7,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -396,7 +1479,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -449,7 +1532,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -501,7 +1584,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -552,7 +1635,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1,
+      "total_clicks": 8,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -654,7 +1737,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 4,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -706,7 +1789,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 6,
+      "total_clicks": 10,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -758,7 +1841,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 5,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -863,7 +1946,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 17,
+      "total_clicks": 30,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -967,7 +2050,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 4,
+      "total_clicks": 5,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1122,7 +2205,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1225,7 +2308,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 2,
+      "total_clicks": 11,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1276,7 +2359,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 0,
+      "total_clicks": 1,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1430,7 +2513,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 8,
+      "total_clicks": 10,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1584,7 +2667,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 25,
+      "total_clicks": 29,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1637,7 +2720,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 7,
+      "total_clicks": 8,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1739,7 +2822,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 4,
+      "total_clicks": 5,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1844,7 +2927,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 2,
+      "total_clicks": 3,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2000,7 +3083,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 12,
+      "total_clicks": 13,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2052,7 +3135,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2104,7 +3187,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 6,
+      "total_clicks": 7,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2310,7 +3393,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 14,
+      "total_clicks": 24,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2363,7 +3446,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 4,
+      "total_clicks": 7,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2438,6 +3521,57 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "472834",
+      "codigo_alfanumerico": "OPEFO-20260526-472834",
+      "latitud": 3.2034091,
+      "longitud": -76.4930857,
+      "circunstancias_hecho": "Nuestros soldados continúan desplegados sobre la vía Panamericana, fortaleciendo la seguridad y acompañando a las comunidades en este importante corredor del país.\r\n\r\nCon presencia permanente, capacidades diferenciales que incluyen el despliegue de vehículos blindados, patrullas",
+      "fecha_infraccion": "2026-05-26T22:01:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/COL_EJERCITO/status/2059469893695660532"
+      ],
+      "fecha_creacion": "2026-05-27T03:45:20.437Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d1f22d4c-f909-4abc-b1ca-85edbce7a06f.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "Colombia"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 4,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "472832",
       "codigo_alfanumerico": "OPEFO-20260525-472832",
       "latitud": -3.2592239846084294,
@@ -2486,57 +3620,6 @@
         "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
         "codigoISO2": "EC",
         "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "472834",
-      "codigo_alfanumerico": "OPEFO-20260526-472834",
-      "latitud": 3.2034091,
-      "longitud": -76.4930857,
-      "circunstancias_hecho": "Nuestros soldados continúan desplegados sobre la vía Panamericana, fortaleciendo la seguridad y acompañando a las comunidades en este importante corredor del país.\r\n\r\nCon presencia permanente, capacidades diferenciales que incluyen el despliegue de vehículos blindados, patrullas",
-      "fecha_infraccion": "2026-05-26T22:01:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/COL_EJERCITO/status/2059469893695660532"
-      ],
-      "fecha_creacion": "2026-05-27T03:45:20.437Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d1f22d4c-f909-4abc-b1ca-85edbce7a06f.jpeg"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "Colombia"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 4,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 40,
-        "pais": "Colombia",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
-        "codigoISO2": "CO",
-        "gentilicio": "Colombiano/a"
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
@@ -2623,7 +3706,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 2,
+      "total_clicks": 6,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2676,7 +3759,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 20,
+      "total_clicks": 26,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2858,58 +3941,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "472475",
-      "codigo_alfanumerico": "OPEFO-20260526-472475",
-      "latitud": 6.2683125,
-      "longitud": -75.5739375,
-      "circunstancias_hecho": "Un juez envió a prisión a alias “Daniel”, presunto integrante de los Comandos de Frontera, por su supuesta participación en varios homicidios ocurridos en Caquetá entre 2023 y 2025. Según la investigación, estaría vinculado a ataques armados relacionados con el control territorial y economías ilícitas de la estructura criminal.",
-      "fecha_infraccion": "2026-05-26T00:00:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/BluRadioCo/status/2059320138810237180",
-        "https://www.bluradio.com/nacion/envian-a-prision-a-alias-daniel-por-homicidios-atribuidos-a-disidencias-de-las-farc-en-caqueta-rg10"
-      ],
-      "fecha_creacion": "2026-05-26T17:14:29.333Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f6718527-0d21-4e83-bf88-94ac52c5ff0c.webp"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "Colombia"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 14,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 40,
-        "pais": "Colombia",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
-        "codigoISO2": "CO",
-        "gentilicio": "Colombiano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "472453",
       "codigo_alfanumerico": "OPEFO-20260525-472453",
       "latitud": -2.0721549,
@@ -2958,6 +3989,58 @@
         "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
         "codigoISO2": "EC",
         "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "472475",
+      "codigo_alfanumerico": "OPEFO-20260526-472475",
+      "latitud": 6.2683125,
+      "longitud": -75.5739375,
+      "circunstancias_hecho": "Un juez envió a prisión a alias “Daniel”, presunto integrante de los Comandos de Frontera, por su supuesta participación en varios homicidios ocurridos en Caquetá entre 2023 y 2025. Según la investigación, estaría vinculado a ataques armados relacionados con el control territorial y economías ilícitas de la estructura criminal.",
+      "fecha_infraccion": "2026-05-26T00:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/BluRadioCo/status/2059320138810237180",
+        "https://www.bluradio.com/nacion/envian-a-prision-a-alias-daniel-por-homicidios-atribuidos-a-disidencias-de-las-farc-en-caqueta-rg10"
+      ],
+      "fecha_creacion": "2026-05-26T17:14:29.333Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f6718527-0d21-4e83-bf88-94ac52c5ff0c.webp"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "Colombia"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 14,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
@@ -3045,7 +4128,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 15,
+      "total_clicks": 22,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3150,7 +4233,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 9,
+      "total_clicks": 12,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3362,7 +4445,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 6,
+      "total_clicks": 10,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3413,7 +4496,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 11,
+      "total_clicks": 12,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3636,6 +4719,160 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "471894",
+      "codigo_alfanumerico": "OPEFO-20260523-471894",
+      "latitud": -2.2068333,
+      "longitud": -79.13310369999999,
+      "circunstancias_hecho": " #CHIMBORAZO | PRESENCIA POLICIAL EN ENTIDADES BANCARIAS \r\n\r\nEn el Distrito #Pallatanga-Cumandá, realizamos presencia policial en las entidades Bancarias  con el objetivo de fortalecer el patrullaje preventivo y la presencia policial.\r\n\r\n#PolicíaEcuador \r\n#ServirYProtegerConFirmeza",
+      "fecha_infraccion": "2026-05-23T11:13:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona3/status/2058219696667685239"
+      ],
+      "fecha_creacion": "2026-05-23T16:49:30.401Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e46e0383-740d-413f-86c6-f6eb3ecba507.jpeg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/012dace4-48fb-4cc9-a830-37ae565c0fd6.jpeg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "CUMANDA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 20,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "471904",
+      "codigo_alfanumerico": "OPEFO-20260523-471904",
+      "latitud": 11.2403547,
+      "longitud": -74.2110227,
+      "circunstancias_hecho": "En Santa Marta, Ciénaga y Apartadó, la \r\nPolicia Colombia\r\n, en coordinación con la \r\nFiscalia y la agencia HSI_HQ\r\n de Estados Unidos, capturó a siete integrantes de la estructura criminal Planner",
+      "fecha_infraccion": "2026-05-23T07:32:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DirectorPolicia/status/2058164080087593426"
+      ],
+      "fecha_creacion": "2026-05-23T16:49:30.401Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a298f615-e2d6-4e05-836a-df57b5ca908b.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "Colombia"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 6,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "471901",
+      "codigo_alfanumerico": "OPEFO-20260523-471901",
+      "latitud": 13.9405625,
+      "longitud": -74.95643749999999,
+      "circunstancias_hecho": "La @PoliciaColombia, en coordinación con la \r\n@ArmadaColombia, la @FiscaliaCol y la \r\n@DEAHQ, incautó 1.9 toneladas de cocaína y capturó a cuatro personas que transportaban el cargamento en una embarcación.",
+      "fecha_infraccion": "2026-05-23T11:09:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DirectorPolicia/status/2058218670548033575"
+      ],
+      "fecha_creacion": "2026-05-23T16:49:30.401Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/31854696-7b71-4ef8-b75c-f0b2dc0f2c03.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": ""
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 19,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "471903",
       "codigo_alfanumerico": "OPEFO-20260523-471903",
       "latitud": 2.4422295,
@@ -3738,160 +4975,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "471901",
-      "codigo_alfanumerico": "OPEFO-20260523-471901",
-      "latitud": 13.9405625,
-      "longitud": -74.95643749999999,
-      "circunstancias_hecho": "La @PoliciaColombia, en coordinación con la \r\n@ArmadaColombia, la @FiscaliaCol y la \r\n@DEAHQ, incautó 1.9 toneladas de cocaína y capturó a cuatro personas que transportaban el cargamento en una embarcación.",
-      "fecha_infraccion": "2026-05-23T11:09:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/DirectorPolicia/status/2058218670548033575"
-      ],
-      "fecha_creacion": "2026-05-23T16:49:30.401Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/31854696-7b71-4ef8-b75c-f0b2dc0f2c03.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": ""
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 16,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 40,
-        "pais": "Colombia",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
-        "codigoISO2": "CO",
-        "gentilicio": "Colombiano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "471904",
-      "codigo_alfanumerico": "OPEFO-20260523-471904",
-      "latitud": 11.2403547,
-      "longitud": -74.2110227,
-      "circunstancias_hecho": "En Santa Marta, Ciénaga y Apartadó, la \r\nPolicia Colombia\r\n, en coordinación con la \r\nFiscalia y la agencia HSI_HQ\r\n de Estados Unidos, capturó a siete integrantes de la estructura criminal Planner",
-      "fecha_infraccion": "2026-05-23T07:32:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/DirectorPolicia/status/2058164080087593426"
-      ],
-      "fecha_creacion": "2026-05-23T16:49:30.401Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a298f615-e2d6-4e05-836a-df57b5ca908b.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "Colombia"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 6,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 40,
-        "pais": "Colombia",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
-        "codigoISO2": "CO",
-        "gentilicio": "Colombiano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "471894",
-      "codigo_alfanumerico": "OPEFO-20260523-471894",
-      "latitud": -2.2068333,
-      "longitud": -79.13310369999999,
-      "circunstancias_hecho": " #CHIMBORAZO | PRESENCIA POLICIAL EN ENTIDADES BANCARIAS \r\n\r\nEn el Distrito #Pallatanga-Cumandá, realizamos presencia policial en las entidades Bancarias  con el objetivo de fortalecer el patrullaje preventivo y la presencia policial.\r\n\r\n#PolicíaEcuador \r\n#ServirYProtegerConFirmeza",
-      "fecha_infraccion": "2026-05-23T11:13:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/PoliciaEcZona3/status/2058219696667685239"
-      ],
-      "fecha_creacion": "2026-05-23T16:49:30.401Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e46e0383-740d-413f-86c6-f6eb3ecba507.jpeg",
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/012dace4-48fb-4cc9-a830-37ae565c0fd6.jpeg"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "CUMANDA"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 20,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "471564",
       "codigo_alfanumerico": "OPEFO-20260522-471564",
       "latitud": -1.556934441469138,
@@ -3921,7 +5004,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 64,
+      "total_clicks": 66,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4025,7 +5108,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 6,
+      "total_clicks": 17,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4076,7 +5159,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 44,
+      "total_clicks": 61,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4180,7 +5263,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 23,
+      "total_clicks": 24,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4233,7 +5316,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 25,
+      "total_clicks": 30,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4285,7 +5368,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 14,
+      "total_clicks": 15,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4388,7 +5471,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 11,
+      "total_clicks": 13,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4439,7 +5522,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 16,
+      "total_clicks": 17,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4490,7 +5573,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 37,
+      "total_clicks": 38,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4541,7 +5624,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 10,
+      "total_clicks": 15,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4643,7 +5726,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 27,
+      "total_clicks": 28,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4745,7 +5828,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 11,
+      "total_clicks": 12,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4847,7 +5930,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 16,
+      "total_clicks": 17,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5160,7 +6243,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 96,
+      "total_clicks": 111,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5211,7 +6294,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 17,
+      "total_clicks": 18,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5419,7 +6502,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 55,
+      "total_clicks": 60,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5572,7 +6655,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 100,
+      "total_clicks": 104,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5624,7 +6707,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 97,
+      "total_clicks": 101,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5726,58 +6809,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 11,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "469746",
-      "codigo_alfanumerico": "OPEFO-20260519-469746",
-      "latitud": -1.9582985486132338,
-      "longitud": -79.9185356916728,
-      "circunstancias_hecho": "𝑬𝒋𝒆́𝒓𝒄𝒊𝒕𝒐 𝑬𝒄𝒖𝒂𝒕𝒐𝒓𝒊𝒂𝒏𝒐 𝒂𝒑𝒓𝒆𝒉𝒆𝒏𝒅𝒆 𝒕𝒂𝒏𝒒𝒖𝒆𝒓𝒐 𝒄𝒐𝒏 𝒄𝒐𝒎𝒃𝒖𝒔𝒕𝒊𝒃𝒍𝒆 𝒔𝒖𝒔𝒕𝒓𝒂𝒊́𝒅𝒐 𝒅𝒆𝒍 𝒑𝒐𝒍𝒊𝒅𝒖𝒄𝒕𝒐\r\n\r\nUN ECUATORIANO APRENDIDO",
-      "fecha_infraccion": "2026-05-19T14:12:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/EjercitoECU/status/2056815301623513219"
-      ],
-      "fecha_creacion": "2026-05-19T19:37:34.290Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0a4b8eb9-3723-4fea-bdfc-4689d3594223.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "DAULE"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 20,
+      "total_clicks": 14,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -5851,6 +6883,57 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "469746",
+      "codigo_alfanumerico": "OPEFO-20260519-469746",
+      "latitud": -1.9582985486132338,
+      "longitud": -79.9185356916728,
+      "circunstancias_hecho": "𝑬𝒋𝒆́𝒓𝒄𝒊𝒕𝒐 𝑬𝒄𝒖𝒂𝒕𝒐𝒓𝒊𝒂𝒏𝒐 𝒂𝒑𝒓𝒆𝒉𝒆𝒏𝒅𝒆 𝒕𝒂𝒏𝒒𝒖𝒆𝒓𝒐 𝒄𝒐𝒏 𝒄𝒐𝒎𝒃𝒖𝒔𝒕𝒊𝒃𝒍𝒆 𝒔𝒖𝒔𝒕𝒓𝒂𝒊́𝒅𝒐 𝒅𝒆𝒍 𝒑𝒐𝒍𝒊𝒅𝒖𝒄𝒕𝒐\r\n\r\nUN ECUATORIANO APRENDIDO",
+      "fecha_infraccion": "2026-05-19T14:12:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/EjercitoECU/status/2056815301623513219"
+      ],
+      "fecha_creacion": "2026-05-19T19:37:34.290Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0a4b8eb9-3723-4fea-bdfc-4689d3594223.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "DAULE"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 21,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "469722",
       "codigo_alfanumerico": "OPEFO-20260519-469722",
       "latitud": -1.6716698,
@@ -5903,55 +6986,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "469709",
-      "codigo_alfanumerico": "OPEFO-20260519-469709",
-      "latitud": 7.720542399999998,
-      "longitud": -74.64004320000001,
-      "circunstancias_hecho": "Policía captura en flagrancia a tres presuntos integrantes del componente sicarial de una estructura criminal que delinque en el Bajo Cauca antioqueño. Durante los allanamientos fueron incautadas armas de fuego, munición y equipos móviles.",
-      "fecha_infraccion": "2026-05-19T12:45:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/Policiantioquia/status/2056793432757322159"
-      ],
-      "fecha_creacion": "2026-05-19T17:51:02.754Z",
-      "url_foto": null,
-      "archivos": [],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "Colombia"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 5,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 40,
-        "pais": "Colombia",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
-        "codigoISO2": "CO",
-        "gentilicio": "Colombiano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "469708",
       "codigo_alfanumerico": "OPEFO-20260519-469708",
       "latitud": 6.2476598,
@@ -5981,6 +7015,55 @@
         "tipo_evento_padre": null
       },
       "total_clicks": 15,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 40,
+        "pais": "Colombia",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+        "codigoISO2": "CO",
+        "gentilicio": "Colombiano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "469709",
+      "codigo_alfanumerico": "OPEFO-20260519-469709",
+      "latitud": 7.720542399999998,
+      "longitud": -74.64004320000001,
+      "circunstancias_hecho": "Policía captura en flagrancia a tres presuntos integrantes del componente sicarial de una estructura criminal que delinque en el Bajo Cauca antioqueño. Durante los allanamientos fueron incautadas armas de fuego, munición y equipos móviles.",
+      "fecha_infraccion": "2026-05-19T12:45:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/Policiantioquia/status/2056793432757322159"
+      ],
+      "fecha_creacion": "2026-05-19T17:51:02.754Z",
+      "url_foto": null,
+      "archivos": [],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "Colombia"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 5,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6241,58 +7324,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "469496",
-      "codigo_alfanumerico": "OPEFO-20260518-469496",
-      "latitud": -0.0587708,
-      "longitud": -78.3455041,
-      "circunstancias_hecho": " ¡”LOS LOBOS” PIERDEN UN MILLÓN DE DÓLARES Y A UNO DE SUS CABECILLAS!\r\n\r\n Alias “Negro Omar”, considerado objetivo criminal priorizado y presunto abastecedor logístico de “Los Lobos”, fue aprehendido durante una operación militar ejecutada en Guayllabamba, al norte de Quito,",
-      "fecha_infraccion": "2026-05-18T17:45:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/DefensaEc/status/2056506580238049746"
-      ],
-      "fecha_creacion": "2026-05-18T23:04:34.203Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a2de6e22-048a-4d75-8853-c4619669c2db.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 0,
+      "total_clicks": 2,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6343,7 +7375,58 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 17,
+      "total_clicks": 23,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "469496",
+      "codigo_alfanumerico": "OPEFO-20260518-469496",
+      "latitud": -0.0587708,
+      "longitud": -78.3455041,
+      "circunstancias_hecho": " ¡”LOS LOBOS” PIERDEN UN MILLÓN DE DÓLARES Y A UNO DE SUS CABECILLAS!\r\n\r\n Alias “Negro Omar”, considerado objetivo criminal priorizado y presunto abastecedor logístico de “Los Lobos”, fue aprehendido durante una operación militar ejecutada en Guayllabamba, al norte de Quito,",
+      "fecha_infraccion": "2026-05-18T17:45:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DefensaEc/status/2056506580238049746"
+      ],
+      "fecha_creacion": "2026-05-18T23:04:34.203Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a2de6e22-048a-4d75-8853-c4619669c2db.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 1,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6447,7 +7530,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 53,
+      "total_clicks": 62,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6552,7 +7635,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 14,
+      "total_clicks": 23,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6604,7 +7687,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 21,
+      "total_clicks": 25,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -6815,7 +7898,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 105,
+      "total_clicks": 112,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7126,7 +8209,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 41,
+      "total_clicks": 42,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7178,58 +8261,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 33,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "469311",
-      "codigo_alfanumerico": "OPEFO-20260518-469311",
-      "latitud": -2.188244156244094,
-      "longitud": -79.89074785393018,
-      "circunstancias_hecho": "#URGENTE \r\n\r\n¡CAE ALIAS “DC”, MIEMBRO DE LOS CHONEROS EN GUAYAS!\r\n\r\nEste peligroso delincuente registra 12 antecedentes penales por delitos como homicidio.\r\n\r\n Una operación militar permitió la captura de alias “DC”, presunto integrante del grupo armado organizado “Los Choneros”,",
-      "fecha_infraccion": "2026-05-18T09:49:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/DefensaEc/status/2056386767759032411"
-      ],
-      "fecha_creacion": "2026-05-18T15:06:43.935Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/89b5cebb-de64-4522-8d6b-9dbff1d67ce4.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "GUAYAQUIL"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 11,
+      "total_clicks": 42,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7303,6 +8335,57 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "469311",
+      "codigo_alfanumerico": "OPEFO-20260518-469311",
+      "latitud": -2.188244156244094,
+      "longitud": -79.89074785393018,
+      "circunstancias_hecho": "#URGENTE \r\n\r\n¡CAE ALIAS “DC”, MIEMBRO DE LOS CHONEROS EN GUAYAS!\r\n\r\nEste peligroso delincuente registra 12 antecedentes penales por delitos como homicidio.\r\n\r\n Una operación militar permitió la captura de alias “DC”, presunto integrante del grupo armado organizado “Los Choneros”,",
+      "fecha_infraccion": "2026-05-18T09:49:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/DefensaEc/status/2056386767759032411"
+      ],
+      "fecha_creacion": "2026-05-18T15:06:43.935Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/89b5cebb-de64-4522-8d6b-9dbff1d67ce4.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 16,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "469297",
       "codigo_alfanumerico": "OPEFO-20260517-469297",
       "latitud": -1.9745946028183676,
@@ -7333,58 +8416,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 30,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "469291",
-      "codigo_alfanumerico": "OPEFO-20260515-469291",
-      "latitud": -3.258153,
-      "longitud": -79.959615,
-      "circunstancias_hecho": "POLICIA RECUPERA MOTO QUE  SE HABIAN ROBADO\r\n\r\nLa #PolicíaEcuador recuperó una motocicleta reportada como robada en el barrio Los Pinos, Machala, #ElOro, tras una oportuna alerta coordinada a través del ECU 911.\r\n\r\n",
-      "fecha_infraccion": "2026-05-15T17:00:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/PoliciaEcZona7/status/2055407881168814206"
-      ],
-      "fecha_creacion": "2026-05-15T22:09:14.200Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e007ab86-19e2-4e23-9941-1aafaaf44045.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "MACHALA"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 92,
+      "total_clicks": 37,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7458,6 +8490,57 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "469291",
+      "codigo_alfanumerico": "OPEFO-20260515-469291",
+      "latitud": -3.258153,
+      "longitud": -79.959615,
+      "circunstancias_hecho": "POLICIA RECUPERA MOTO QUE  SE HABIAN ROBADO\r\n\r\nLa #PolicíaEcuador recuperó una motocicleta reportada como robada en el barrio Los Pinos, Machala, #ElOro, tras una oportuna alerta coordinada a través del ECU 911.\r\n\r\n",
+      "fecha_infraccion": "2026-05-15T17:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona7/status/2055407881168814206"
+      ],
+      "fecha_creacion": "2026-05-15T22:09:14.200Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e007ab86-19e2-4e23-9941-1aafaaf44045.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "MACHALA"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 92,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "469262",
       "codigo_alfanumerico": "OPEFO-20260515-469262",
       "latitud": -2.691231854877533,
@@ -7487,6 +8570,59 @@
         "tipo_evento_padre": null
       },
       "total_clicks": 62,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "469259",
+      "codigo_alfanumerico": "OPEFO-20260515-469259",
+      "latitud": -0.6130214,
+      "longitud": -78.8818616,
+      "circunstancias_hecho": "🚨 Operativos de seguridad en Sigchos, Cotopaxi\r\nLa Policía Nacional Zona 3 ejecutó operativos en diferentes sectores del Distrito #Sigchos (#Cotopaxi), con registros a vehículos y personas para fortalecer la seguridad ciudadana.\r\n✅ Resultado: Recuperaron 2 motocicletas reportadas como robadas.\r\n#PolicíaEcuador #ServirYProtegerConFirmeza",
+      "fecha_infraccion": "2026-05-15T20:35:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona3/status/2055386896851730627"
+      ],
+      "fecha_creacion": "2026-05-15T20:54:12.702Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c758c64a-29b5-4e71-96b3-1a09b648517b.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/54691464-5f34-48a0-9ebb-182b334600c3.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c7aa5c93-aae1-458c-8b2e-181fc9da4c98.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "SIGCHOS"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 16,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7562,59 +8698,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "469259",
-      "codigo_alfanumerico": "OPEFO-20260515-469259",
-      "latitud": -0.6130214,
-      "longitud": -78.8818616,
-      "circunstancias_hecho": "🚨 Operativos de seguridad en Sigchos, Cotopaxi\r\nLa Policía Nacional Zona 3 ejecutó operativos en diferentes sectores del Distrito #Sigchos (#Cotopaxi), con registros a vehículos y personas para fortalecer la seguridad ciudadana.\r\n✅ Resultado: Recuperaron 2 motocicletas reportadas como robadas.\r\n#PolicíaEcuador #ServirYProtegerConFirmeza",
-      "fecha_infraccion": "2026-05-15T20:35:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/PoliciaEcZona3/status/2055386896851730627"
-      ],
-      "fecha_creacion": "2026-05-15T20:54:12.702Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c758c64a-29b5-4e71-96b3-1a09b648517b.jpg",
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/54691464-5f34-48a0-9ebb-182b334600c3.jpg",
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/c7aa5c93-aae1-458c-8b2e-181fc9da4c98.jpg"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "SIGCHOS"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 15,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "469252",
       "codigo_alfanumerico": "OPEFO-20260515-469252",
       "latitud": -2.2438272250041105,
@@ -7645,7 +8728,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 69,
+      "total_clicks": 70,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7698,7 +8781,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 23,
+      "total_clicks": 24,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7752,7 +8835,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 25,
+      "total_clicks": 29,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7803,7 +8886,62 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 47,
+      "total_clicks": 48,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "469240",
+      "codigo_alfanumerico": "OPEFO-20260515-469240",
+      "latitud": -1.5667993023462183,
+      "longitud": -80.0835082386955,
+      "circunstancias_hecho": "Operativo militar en Colimes permitió el rescate de dos adultos mayores de 79 años que permanecían secuestrados. \r\ngoo.su/zrbz5 \r\n\r\nDurante la intervención en el sector La Jota del Guabuyo, el Ejército Ecuatoriano capturó a dos presuntos implicados y decomisó armas,",
+      "fecha_infraccion": "2026-05-15T07:00:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/ecuadorprensaec/status/2055361695132860691",
+        "https://www.elcomercio.com/actualidad/seguridad/militares-rescatan-dos-adultos-mayores-secuestrados-guayas/",
+        "https://kchcomunicacion.com/2026/05/16/adultos-mayores-de-79-anos-fueron-liberados-tras-permanecer-secuestrados-en-el-canton-colimes/"
+      ],
+      "fecha_creacion": "2026-05-15T19:39:36.574Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d8896ff9-c3e0-4d91-902e-8e21a66b74a3.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f6668f0f-3aa8-4d76-a626-b11ef7e6a01d.jpg",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/94818b0f-29f2-41df-beb1-3a21c7c4af32.jpg"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "COLIMES"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 10,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -7880,61 +9018,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "469240",
-      "codigo_alfanumerico": "OPEFO-20260515-469240",
-      "latitud": -1.5667993023462183,
-      "longitud": -80.0835082386955,
-      "circunstancias_hecho": "Operativo militar en Colimes permitió el rescate de dos adultos mayores de 79 años que permanecían secuestrados. \r\ngoo.su/zrbz5 \r\n\r\nDurante la intervención en el sector La Jota del Guabuyo, el Ejército Ecuatoriano capturó a dos presuntos implicados y decomisó armas,",
-      "fecha_infraccion": "2026-05-15T07:00:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/ecuadorprensaec/status/2055361695132860691",
-        "https://www.elcomercio.com/actualidad/seguridad/militares-rescatan-dos-adultos-mayores-secuestrados-guayas/",
-        "https://kchcomunicacion.com/2026/05/16/adultos-mayores-de-79-anos-fueron-liberados-tras-permanecer-secuestrados-en-el-canton-colimes/"
-      ],
-      "fecha_creacion": "2026-05-15T19:39:36.574Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/d8896ff9-c3e0-4d91-902e-8e21a66b74a3.jpg",
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/f6668f0f-3aa8-4d76-a626-b11ef7e6a01d.jpg",
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/94818b0f-29f2-41df-beb1-3a21c7c4af32.jpg"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "COLIMES"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 8,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "469212",
       "codigo_alfanumerico": "OPEFO-20260515-469212",
       "latitud": -0.0805104,
@@ -7963,7 +9046,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 27,
+      "total_clicks": 29,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8119,7 +9202,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 64,
+      "total_clicks": 70,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8173,7 +9256,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 2,
+      "total_clicks": 6,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8276,7 +9359,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 38,
+      "total_clicks": 39,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8329,7 +9412,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 133,
+      "total_clicks": 141,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8380,7 +9463,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 38,
+      "total_clicks": 41,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8433,7 +9516,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 61,
+      "total_clicks": 63,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8536,7 +9619,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 77,
+      "total_clicks": 79,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8690,7 +9773,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 84,
+      "total_clicks": 90,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -8848,7 +9931,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 46,
+      "total_clicks": 50,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9059,7 +10142,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 40,
+      "total_clicks": 41,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9268,7 +10351,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 37,
+      "total_clicks": 44,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9373,7 +10456,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 7,
+      "total_clicks": 8,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9427,7 +10510,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 42,
+      "total_clicks": 46,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9585,7 +10668,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 56,
+      "total_clicks": 57,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9637,7 +10720,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 40,
+      "total_clicks": 45,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -9899,7 +10982,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 9,
+      "total_clicks": 17,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10003,7 +11086,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 26,
+      "total_clicks": 27,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10108,109 +11191,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 75,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "464078",
-      "codigo_alfanumerico": "OPEFO-20260512-464078",
-      "latitud": -2.1891341,
-      "longitud": -79.8899031,
-      "circunstancias_hecho": "Operativo en el sur de Guayaquil tras intento de asesinato.\r\nLa Policía Nacional y Segura EP ejecutaron un allanamiento en el sector de las calles 26 y la F, donde se incautaron sustancias sujetas a fiscalización y motocicletas reportadas como robadas.",
-      "fecha_infraccion": "2026-05-12T15:42:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/ecuadorprensaec/status/2054301205665366187"
-      ],
-      "fecha_creacion": "2026-05-12T21:08:39.859Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/90e20d25-d798-42ca-aec4-0b6ab047eded.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "GUAYAQUIL"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 61,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "464088",
-      "codigo_alfanumerico": "OPEFO-20260512-464088",
-      "latitud": 0.30318911655387737,
-      "longitud": -79.3461009822998,
-      "circunstancias_hecho": "OPERATIVOS DEJAN IMPORTANTES RESULTADOS EN #ESMERALDAS\r\n\r\nEn el marco de la #EstrategiaOperacional3D, la #PolicíaEcuador, ejecutó operativos preventivos en Atacames y #Esmeraldas, obteniendo resultados que afectan actividades delictivas y fortalecen la seguridad ciudadana.",
-      "fecha_infraccion": "2026-05-12T15:20:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/PoliciaEcZona1/status/2054295623587770439"
-      ],
-      "fecha_creacion": "2026-05-12T21:08:39.859Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f5a8013-67d5-4356-90cd-2ca5969f42ba.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "QUININDE"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 27,
+      "total_clicks": 76,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10284,6 +11265,108 @@
       "peso_prod_narcotico": null
     },
     {
+      "id": "464088",
+      "codigo_alfanumerico": "OPEFO-20260512-464088",
+      "latitud": 0.30318911655387737,
+      "longitud": -79.3461009822998,
+      "circunstancias_hecho": "OPERATIVOS DEJAN IMPORTANTES RESULTADOS EN #ESMERALDAS\r\n\r\nEn el marco de la #EstrategiaOperacional3D, la #PolicíaEcuador, ejecutó operativos preventivos en Atacames y #Esmeraldas, obteniendo resultados que afectan actividades delictivas y fortalecen la seguridad ciudadana.",
+      "fecha_infraccion": "2026-05-12T15:20:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona1/status/2054295623587770439"
+      ],
+      "fecha_creacion": "2026-05-12T21:08:39.859Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/0f5a8013-67d5-4356-90cd-2ca5969f42ba.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "QUININDE"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 27,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "464078",
+      "codigo_alfanumerico": "OPEFO-20260512-464078",
+      "latitud": -2.1891341,
+      "longitud": -79.8899031,
+      "circunstancias_hecho": "Operativo en el sur de Guayaquil tras intento de asesinato.\r\nLa Policía Nacional y Segura EP ejecutaron un allanamiento en el sector de las calles 26 y la F, donde se incautaron sustancias sujetas a fiscalización y motocicletas reportadas como robadas.",
+      "fecha_infraccion": "2026-05-12T15:42:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/ecuadorprensaec/status/2054301205665366187"
+      ],
+      "fecha_creacion": "2026-05-12T21:08:39.859Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/90e20d25-d798-42ca-aec4-0b6ab047eded.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "GUAYAQUIL"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 61,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
       "id": "464069",
       "codigo_alfanumerico": "OPEFO-20260512-464069",
       "latitud": -2.5214378,
@@ -10312,7 +11395,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 58,
+      "total_clicks": 62,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10418,7 +11501,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 90,
+      "total_clicks": 94,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10471,7 +11554,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 86,
+      "total_clicks": 89,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10627,7 +11710,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 85,
+      "total_clicks": 91,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10678,7 +11761,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 38,
+      "total_clicks": 39,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10836,7 +11919,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 74,
+      "total_clicks": 75,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10889,7 +11972,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 35,
+      "total_clicks": 36,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -10942,7 +12025,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 263,
+      "total_clicks": 270,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -11260,7 +12343,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 91,
+      "total_clicks": 96,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -11419,7 +12502,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 50,
+      "total_clicks": 51,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -11471,7 +12554,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 35,
+      "total_clicks": 43,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -11524,7 +12607,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 84,
+      "total_clicks": 86,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -11598,57 +12681,6 @@
       "peso_prod_narcotico": null
     },
     {
-      "id": "463116",
-      "codigo_alfanumerico": "OPEFO-20260508-463116",
-      "latitud": 0.0575251,
-      "longitud": -76.8065466,
-      "circunstancias_hecho": "APREHENDIMOS A DOS CIUDADANOS POR DELITO DE TRÁFICO DE SUSTANCIAS SUJETAS A FISCALIZACIÓN \r\n\r\nEn Lago Agrio, #Sucumbíos la #PolicíaEcuador, mediante estrategías investigativas, se logró la aprehensión de dos ciudadano, por el presunto delito de tráfico ilícito de sustancias sujetas",
-      "fecha_infraccion": "2026-05-08T12:18:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": [
-        "https://x.com/PoliciaEcZona1/status/2052800366572704097"
-      ],
-      "fecha_creacion": "2026-05-08T22:09:36.735Z",
-      "url_foto": null,
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a3e7186a-70c9-4934-b395-52d6023f2162.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": null,
-      "canton": {
-        "nombre": "LAGO AGRIO"
-      },
-      "tipo_evento": {
-        "id": "OPERATIVOS_FFOO",
-        "nombre": "Operativos FFOO",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 50,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
       "id": "463117",
       "codigo_alfanumerico": "OPEFO-20260508-463117",
       "latitud": 0.3471469,
@@ -11678,6 +12710,57 @@
         "tipo_evento_padre": null
       },
       "total_clicks": 64,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null
+    },
+    {
+      "id": "463116",
+      "codigo_alfanumerico": "OPEFO-20260508-463116",
+      "latitud": 0.0575251,
+      "longitud": -76.8065466,
+      "circunstancias_hecho": "APREHENDIMOS A DOS CIUDADANOS POR DELITO DE TRÁFICO DE SUSTANCIAS SUJETAS A FISCALIZACIÓN \r\n\r\nEn Lago Agrio, #Sucumbíos la #PolicíaEcuador, mediante estrategías investigativas, se logró la aprehensión de dos ciudadano, por el presunto delito de tráfico ilícito de sustancias sujetas",
+      "fecha_infraccion": "2026-05-08T12:18:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": [
+        "https://x.com/PoliciaEcZona1/status/2052800366572704097"
+      ],
+      "fecha_creacion": "2026-05-08T22:09:36.735Z",
+      "url_foto": null,
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/a3e7186a-70c9-4934-b395-52d6023f2162.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": null,
+      "canton": {
+        "nombre": "LAGO AGRIO"
+      },
+      "tipo_evento": {
+        "id": "OPERATIVOS_FFOO",
+        "nombre": "Operativos FFOO",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_FFAA_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 50,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,

@@ -29,6 +29,10 @@ class Settings(BaseSettings):
         default="/home/robiotec/Documents/VICTOR/Object_Recognition/src/unified/results_presentacion",
         alias="SSH_EVENTS_BASE_PATH",
     )
+    # Ruta a clave privada SSH. Si se define, se usa en lugar de contraseña.
+    ssh_key_path: str = Field(default="", alias="SSH_KEY_PATH")
+    # Ruta a fichero known_hosts. Si existe, se activa RejectPolicy en lugar de AutoAddPolicy.
+    ssh_known_hosts_path: str = Field(default="", alias="SSH_KNOWN_HOSTS_PATH")
 
 
 @lru_cache

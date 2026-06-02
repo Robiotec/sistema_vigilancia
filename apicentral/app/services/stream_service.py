@@ -16,6 +16,18 @@ from app.models.entities import (
 )
 from app.services.permission_service import resource_is_active, user_can_access_stream
 
+_mediamtx_client: httpx.AsyncClient | None = None
+
+
+def _get_mediamtx_client() -> httpx.AsyncClient:
+    global _mediamtx_client
+    if _mediamtx_client is None or _mediamtx_client.is_closed:
+        _mediamtx_client = httpx.AsyncClient(
+            timeout=3.0,
+            limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
+        )
+    return _mediamtx_client
+
 
 def get_stream_by_path(db: Session, path: str) -> StreamPath | None:
     return db.scalar(select(StreamPath).where(StreamPath.path == path))
@@ -23,7 +35,7 @@ def get_stream_by_path(db: Session, path: str) -> StreamPath | None:
 
 def build_viewer_url(path: str, token: str | None = None) -> str:
     base_url = get_settings().mediamtx_webrtc_base_url.rstrip("/")
-    url = f"{base_url}/{path}"
+    url = f"{base_url}/{path.strip('/')}/"
     if token:
         return f"{url}?token={token}"
     return url
@@ -32,8 +44,10 @@ def build_viewer_url(path: str, token: str | None = None) -> str:
 async def mediamtx_path_is_online(path: str) -> bool:
     api_url = get_settings().mediamtx_api_url.rstrip("/")
     encoded_path = path.replace("/", "%2F")
-    async with httpx.AsyncClient(timeout=3.0) as client:
-        response = await client.get(f"{api_url}/v3/paths/get/{encoded_path}")
+    try:
+        response = await _get_mediamtx_client().get(f"{api_url}/v3/paths/get/{encoded_path}")
+    except httpx.RequestError:
+        return False
     if response.status_code != 200:
         return False
     payload = response.json()
