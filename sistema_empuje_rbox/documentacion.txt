@@ -1,0 +1,197 @@
+# Documentación: Empuje Manual de Cámaras por Terminal
+
+
+## 1. Requisitos previos
+
+Antes de ejecutar los comandos, verificar lo siguiente:
+
+* Tener acceso a la terminal del equipo desde donde se realizará el empuje.
+* Tener instalado FFmpeg.
+* La cámara debe estar encendida y accesible en la red local.
+* El servidor MediaMTX debe estar activo.
+
+bash
+rtsp://207.246.68.223:8554
+
+## 2. Estructura general del comando
+
+El empuje manual se realiza con el siguiente formato:
+
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "URL_RTSP_DE_LA_CAMARA" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "URL_RTSP_DEL_SERVIDOR/CODIGO_UNICO"; sleep 3; done
+
+
+Este comando mantiene el empuje activo de forma continua. Si FFmpeg se detiene por pérdida de conexión o caída 
+temporal de la cámara, el ciclo `while true` espera 3 segundos y vuelve a intentar la conexión automáticamente.
+
+# 3. Empuje manual de cámaras sin audio
+
+## Cámara IP 192.168.1.215 - Canal 101
+
+Código de publicación:
+bash
+CAM-MPCU71OU-0787AE
+
+Comando:
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.215:554/Streaming/Channels/101" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPCU71OU-0787AE"; sleep 3; done
+
+## Cámara IP 192.168.1.215 - Canal 201
+Código de publicación:
+CAM-MPCU9IMM-E7DC89
+
+Comando:
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.215:554/Streaming/Channels/201" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPCU9IMM-E7DC89"; sleep 3; done
+
+
+## Cámara IP 192.168.1.64 - Canal 101
+
+Código de publicación:
+CAM-MPD18XLZ-E1B651
+
+Comando:
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/101" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD18XLZ-E1B651"; sleep 3; done
+
+
+## Cámara IP 192.168.1.64 - Canal 201
+
+Código de publicación:
+CAM-MPD1FJMZ-7A56AC
+
+Comando:
+
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/201" \
+  -c:v copy \
+  -an \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD1FJMZ-7A56AC"; sleep 3; done
+
+
+# 5. Empuje manual de video con audio
+Para enviar video con audio, se debe reemplazar el parámetro:
+
+-an
+por:
+
+-c:a copy
+
+Esto permite copiar el audio original de la cámara y enviarlo junto con el video.
+## Cámara IP 192.168.1.64 - Canal 201 con audio
+
+Código de publicación:
+CAM-MPD1FJMZ-7A56AC
+
+Comando:
+while true; do ffmpeg \
+  -rtsp_transport tcp \
+  -timeout 10000000 \
+  -fflags nobuffer \
+  -flags low_delay \
+  -analyzeduration 500000 \
+  -probesize 500000 \
+  -i "rtsp://visor:R0B10T3C2025@192.168.1.64:554/Streaming/Channels/201" \
+  -c:v copy \
+  -c:a copy \
+  -f rtsp \
+  -rtsp_transport tcp \
+  -muxdelay 0 \
+  -muxpreload 0 \
+  "rtsp://207.246.68.223:8554/CAM-MPD1FJMZ-7A56AC"; sleep 3; done
+
+## 6. Explicación de parámetros principales
+
+| Parámetro                 | Descripción                                                       |
+| ------------------------- | ----------------------------------------------------------------- |
+| `while true`              | Mantiene el comando ejecutándose de forma continua.               |
+| `ffmpeg`                  | Herramienta utilizada para capturar y reenviar el flujo de video. |
+| `-rtsp_transport tcp`     | Fuerza el uso de TCP para una transmisión más estable.            |
+| `-timeout 10000000`       | Define el tiempo de espera para la conexión RTSP.                 |
+| `-fflags nobuffer`        | Reduce el almacenamiento en buffer para disminuir la latencia.    |
+| `-flags low_delay`        | Activa modo de baja latencia.                                     |
+| `-analyzeduration 500000` | Reduce el tiempo de análisis inicial del flujo.                   |
+| `-probesize 500000`       | Limita el tamaño de datos analizados al iniciar.                  |
+| `-i`                      | Indica la URL RTSP de entrada de la cámara.                       |
+| `-c:v copy`               | Copia el video sin recodificar.                                   |
+| `-an`                     | Desactiva el audio.                                               |
+| `-c:a copy`               | Copia el audio original de la cámara.                             |
+| `-f rtsp`                 | Define el formato de salida como RTSP.                            |
+| `-muxdelay 0`             | Reduce el retardo de multiplexación.                              |
+| `-muxpreload 0`           | Evita precarga adicional antes del envío.                         |
+| `sleep 3`                 | Espera 3 segundos antes de reconectar si FFmpeg se cae.           |
+
+
+
+## 7. Recomendaciones operativas
+
+* Ejecutar cada cámara en una terminal independiente.
+* Verificar que no exista otro proceso empujando al mismo código único.
+* Si la cámara no carga, probar primero la URL local RTSP en VLC.
+* Si se requiere menor latencia, utilizar el canal secundario cuando esté disponible.
+* Para empuje sin audio usar siempre `-an`.
+* Para empuje con audio usar `-c:a copy`, siempre que la cámara tenga audio habilitado.
+* Si el empuje se traba, revisar la estabilidad de red, ancho de banda y consumo de CPU del equipo.
+* Evitar publicar dos cámaras diferentes con el mismo código único en MediaMTX.
