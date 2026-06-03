@@ -10899,13 +10899,16 @@ if (!IS_DEDICATED_CAMERAS_PAGE) {
   }
   updateFocusUi();
   syncStreaming();
+  startPolling();
+  refreshStatus();
+  refreshTelemetry();
+  refreshEvents();
+  refreshVehicleRegistry();
+  refreshVehicleRegistryFormOptions();
+  refreshUserAdmin({ preserveDraft: true });
+} else {
+  refreshVehicleRegistryFormOptions();
+  refreshUserAdmin({ preserveDraft: true });
 }
-startPolling();
-refreshStatus();
-refreshTelemetry();
-refreshEvents();
-refreshVehicleRegistry();
-refreshVehicleRegistryFormOptions();
-refreshUserAdmin({ preserveDraft: true });
 window.__ROBIOTEC_CAMERA_APP_READY__ = true;
 })();

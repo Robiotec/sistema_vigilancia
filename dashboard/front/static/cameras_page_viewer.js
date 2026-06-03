@@ -682,9 +682,26 @@
     loadButton.disabled = !normalizedName;
     toolbar.dataset.inferenceType = normalizedType;
     document.body.dataset.cameraInferenceType = normalizedType;
-    activeLabel.textContent = normalizedName
-      ? `${String(cameraByName(normalizedName).display_name || normalizedName).toUpperCase()} · ${inferenceTypes[normalizedType]}`
-      : "Selecciona una cámara";
+    if (!normalizedName) {
+      activeLabel.textContent = "Selecciona una cámara";
+      return;
+    }
+    const cameraLabel = String(cameraByName(normalizedName).display_name || normalizedName).toUpperCase();
+    if (normalizedType !== "none") {
+      activeLabel.textContent = "";
+      activeLabel.append(document.createTextNode(`${cameraLabel} · `));
+      const inferenceLabel = document.createElement("span");
+      inferenceLabel.className = "camera-inference-selected";
+      inferenceLabel.textContent = inferenceTypes[normalizedType];
+      activeLabel.append(inferenceLabel);
+      return;
+    }
+    activeLabel.textContent = "";
+    activeLabel.append(document.createTextNode(`${cameraLabel} · `));
+    const noInferenceLabel = document.createElement("span");
+    noInferenceLabel.className = "camera-inference-no-inference";
+    noInferenceLabel.textContent = inferenceTypes[normalizedType];
+    activeLabel.append(noInferenceLabel);
   }
 
   function setUrlCamera(cameraName) {
@@ -707,6 +724,17 @@
     const camera = cameraByName(normalizedName);
     const label = String(camera.display_name || camera.name || normalizedName).trim();
     const resolvedInferenceType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(normalizedName));
+    const currentFrame = primaryView.querySelector(".cameras-page-large-frame");
+    if (activeCameraName === normalizedName && currentFrame && !inferenceViewState.get(normalizedName)) {
+      syncInferenceToolbar(normalizedName, resolvedInferenceType);
+      switcher.querySelectorAll("[data-camera-name], .camera-pill[href]").forEach((item) => {
+        item.classList.toggle("is-active", cameraNameFromTrigger(item) === normalizedName);
+      });
+      if (persistUrl) {
+        setUrlCamera(normalizedName);
+      }
+      return;
+    }
     const frame = document.createElement("iframe");
     frame.className = "camera-web-frame cameras-page-large-frame";
     frame.src = largeViewerUrl(normalizedName, "none");
@@ -833,12 +861,15 @@
     startSnapshotRefresh();
   });
 
-  const SNAPSHOT_REFRESH_MS = 30000;
+  const SNAPSHOT_REFRESH_MS = 60000;
+  const visibleSnapshotImages = new WeakSet();
 
   function refreshSnapshots() {
     document.querySelectorAll(".camera-pill-snapshot[data-snapshot-url]").forEach((img) => {
       const base = img.getAttribute("data-snapshot-url");
       if (!base) return;
+      if (document.visibilityState === "hidden") return;
+      if (!visibleSnapshotImages.has(img)) return;
       const fresh = new Image();
       fresh.onload = () => {
         img.src = fresh.src;
@@ -852,9 +883,26 @@
   }
 
   function startSnapshotRefresh() {
-    document.querySelectorAll(".camera-pill-snapshot[data-snapshot-url]").forEach((img) => {
+    const snapshotImages = document.querySelectorAll(".camera-pill-snapshot[data-snapshot-url]");
+    const observer = "IntersectionObserver" in window
+      ? new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSnapshotImages.add(entry.target);
+          } else {
+            visibleSnapshotImages.delete(entry.target);
+          }
+        });
+      }, { root: document.querySelector(".camera-switcher") || null, threshold: 0.08 })
+      : null;
+    snapshotImages.forEach((img) => {
       img.addEventListener("error", () => img.classList.add("is-error"), { once: false });
       img.addEventListener("load", () => img.classList.remove("is-error", "is-loading"), { once: false });
+      if (observer) {
+        observer.observe(img);
+      } else {
+        visibleSnapshotImages.add(img);
+      }
     });
     setInterval(refreshSnapshots, SNAPSHOT_REFRESH_MS);
   }

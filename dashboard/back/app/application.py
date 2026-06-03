@@ -390,7 +390,18 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
     db_cameras, db_camera_items_error = _fetch_db_camera_rows()
     if db_cameras:
         cameras = db_cameras
-    stream_by_resource = {str(item.get("resource_id")): item for item in streams}
+    stream_by_resource: dict[str, dict[str, Any]] = {}
+    for item in streams:
+        resource_id = str(item.get("resource_id") or "")
+        if not resource_id:
+            continue
+        path = _text(item.get("path") or item.get("mediamtx_path"))
+        is_inference_path = path.upper().rstrip("/").endswith("/INFERENCE")
+        current = stream_by_resource.get(resource_id)
+        current_path = _text((current or {}).get("path") or (current or {}).get("mediamtx_path"))
+        current_is_inference_path = current_path.upper().rstrip("/").endswith("/INFERENCE")
+        if current is None or (current_is_inference_path and not is_inference_path):
+            stream_by_resource[resource_id] = item
     try:
         stream_configs = _api("/stream-configs", token=token) if token else []
     except RuntimeError:
@@ -1695,8 +1706,8 @@ def camera_viewer_url(
 _SNAPSHOT_STORE: dict[str, tuple[bytes, float]] = {}
 _SNAPSHOT_LOCK = threading.Lock()
 _SNAPSHOT_REFRESHING: set[str] = set()
-_SNAPSHOT_TTL = 60.0
-_SNAPSHOT_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="cam-snap")
+_SNAPSHOT_TTL = 180.0
+_SNAPSHOT_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="cam-snap")
 
 # {camera_name: mediamtx_path}  — populated at startup, refreshed periodically
 _CAM_PATH_MAP: dict[str, str] = {}
@@ -1711,6 +1722,7 @@ def _reload_cam_path_map() -> None:
             "FROM cameras c "
             "LEFT JOIN stream_paths sp ON sp.resource_id = c.id "
             "  AND sp.resource_type = 'camera' AND sp.active = true "
+            "  AND upper(sp.path) NOT LIKE '%/INFERENCE' "
             "WHERE c.active = true AND c.deleted_at IS NULL",
         )
         mapping: dict[str, str] = {}
@@ -1764,14 +1776,14 @@ def _ffmpeg_jpeg(rtsp_url: str) -> bytes | None:
                 "-rtsp_transport", "tcp",
                 "-i", rtsp_url,
                 "-vframes", "1",
-                "-vf", "scale=320:180",
-                "-q:v", "7",
+                "-vf", "scale=240:135",
+                "-q:v", "9",
                 "-update", "1",
                 "-f", "image2",
                 tmp,
             ],
             capture_output=True,
-            timeout=10,
+            timeout=5,
         )
         if os.path.exists(tmp) and os.path.getsize(tmp) > 100:
             with open(tmp, "rb") as fh:
@@ -1827,7 +1839,7 @@ def camera_snapshot(request: Request, camera_name: str = "") -> Response:
         return Response(
             content=cached[0],
             media_type="image/jpeg",
-            headers={"Cache-Control": "max-age=25"},
+            headers={"Cache-Control": "max-age=120"},
         )
 
     return Response(
@@ -1854,7 +1866,10 @@ def camera_preview_frame(
         inference=inference,
         inference_type=inference_type,
     )
-    return HTMLResponse(_camera_preview_document(payload))
+    return HTMLResponse(
+        _camera_preview_document(payload),
+        headers={"Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"},
+    )
 
 
 @app.api_route("/api/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])

@@ -4462,12 +4462,12 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .camera-inference-toolbar {
-  display: grid;
-  grid-template-columns: minmax(190px, 260px) auto minmax(0, 1fr);
-  align-items: end;
+  display: flex;
+  align-items: center;
   gap: 12px;
   margin-bottom: 12px;
-  padding: 10px;
+  font-size: 1.14rem;
+  padding: 23px 14px;
   position: relative;
   z-index: 12;
   overflow: visible;
@@ -4478,8 +4478,9 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .camera-inference-field {
-  display: grid;
-  gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
   position: relative;
   z-index: 13;
@@ -4494,8 +4495,12 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   color: rgba(255, 255, 255, 0.72);
 }
 
+.camera-inference-field span {
+  font-size: 1.3rem;
+}
+
 .camera-inference-field select {
-  width: 100%;
+  width: 190px;
   min-height: 38px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 10px;
@@ -4519,21 +4524,22 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .camera-inference-load {
+  
   min-height: 38px;
-  border: 1px solid rgba(6, 182, 212, 0.52);
+  border: 1px solid rgba(255, 110, 0, 0.72);
   border-radius: 10px;
-  background: rgba(6, 182, 212, 0.13);
-  color: #67e8f9;
+  background: rgba(255, 110, 0, 0.13);
+  color: #FF6E00;
   font: inherit;
   font-weight: 900;
-  padding: 0 14px;
+  padding: 3px 14px;
   cursor: pointer;
 }
 
 .camera-inference-load:hover,
 .camera-inference-load:focus-visible {
-  border-color: rgba(6, 182, 212, 0.78);
-  background: rgba(6, 182, 212, 0.2);
+  border-color: rgba(255, 110, 0, 0.78);
+  background: rgba(255, 110, 0, 0.2);
 }
 
 .camera-inference-load:disabled {
@@ -4543,11 +4549,44 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 
 .camera-inference-active {
   align-self: center;
+  margin-left: auto;
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 1.4em;
   white-space: nowrap;
+  text-align: right;
   color: rgba(255, 255, 255, 0.62);
+}
+
+.camera-inference-no-inference {
+  color: #fb5a2d;
+}
+
+.camera-inference-selected {
+  color: #ffffff;
+  font-weight: 950;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.76),
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.28);
+  animation: camera-inference-neon 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes camera-inference-neon {
+  from {
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.58),
+      0 0 4px rgba(255, 255, 255, 0.34),
+      0 0 8px rgba(255, 255, 255, 0.18);
+  }
+  to {
+    text-shadow:
+      0 0 2px rgba(255, 255, 255, 0.78),
+      0 0 6px rgba(255, 255, 255, 0.48),
+      0 0 12px rgba(255, 255, 255, 0.26);
+  }
 }
 
 .primary-view.is-empty {
@@ -10817,12 +10856,23 @@ body {
   }
 
   .page-cameras .camera-inference-toolbar {
-    grid-template-columns: minmax(0, 1fr);
+    flex-direction: column;
     align-items: stretch;
   }
 
+  .page-cameras .camera-inference-field {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-cameras .camera-inference-field select {
+    width: 100%;
+  }
+
   .page-cameras .camera-inference-active {
+    margin-left: 0;
     white-space: normal;
+    text-align: left;
   }
 
   .page-cameras .primary-view {
