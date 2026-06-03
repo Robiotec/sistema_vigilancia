@@ -59,6 +59,8 @@
 
   // Per-camera inference VIEW state (local only, no DB update)
   const inferenceViewState = new Map();
+  const inferencePollingTimers = new Map();
+  const INFERENCE_POLL_INTERVAL_MS = 2000;
 
   function inferenceViewPreviewUrl(cameraName) {
     const t = new URL("/api/camera-preview-frame", window.location.origin);
@@ -133,6 +135,22 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
   "</html>",
 ].join("");
 
+const INFERENCE_LOADING_SRCDOC = [
+  "<!doctype html>",
+  "<html><head><meta charset='utf-8'>",
+  "<style>",
+  "html,body{height:100%;margin:0;background:#0b0f14;display:flex;align-items:center;justify-content:center}",
+  ".wrap{display:flex;flex-direction:column;align-items:center;gap:14px}",
+  ".ring{width:38px;height:38px;border-radius:50%;border:3px solid rgba(235,133,37,.18);border-top-color:rgba(235,133,37,.9);animation:spin .75s linear infinite}",
+  "@keyframes spin{to{transform:rotate(360deg)}}",
+  ".lbl{font:700 11px/1 system-ui,sans-serif;letter-spacing:.08em;color:rgba(255,255,255,.38);text-transform:uppercase}",
+  "</style></head>",
+  "<body><div class='wrap'>",
+  "<div class='ring'></div>",
+  "<span class='lbl'>Iniciando inferencia…</span>",
+  "</div></body></html>",
+].join("");
+
   async function checkInferenceStreamAvailable(cameraName) {
     try {
       const resp = await fetch(
@@ -162,6 +180,13 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
       btn.setAttribute("aria-label", "Inferencia no disponible, volver a vista normal");
       btn.title = "Inferencia no disponible, clic para volver a vista normal";
       if (label) label.textContent = "No disponible";
+    } else if (state === "loading") {
+      btn.classList.add("is-active", "is-loading");
+      btn.classList.remove("is-unavailable");
+      btn.setAttribute("aria-pressed", "true");
+      btn.setAttribute("aria-label", "Iniciando inferencia");
+      btn.title = "Iniciando inferencia";
+      if (label) label.textContent = "Cargando…";
     } else {
       btn.classList.remove("is-active", "is-unavailable", "is-loading");
       btn.setAttribute("aria-pressed", "false");
@@ -171,10 +196,43 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
     }
   }
 
+  function stopInferencePolling(cameraName) {
+    const timerId = inferencePollingTimers.get(cameraName);
+    if (timerId != null) {
+      clearInterval(timerId);
+      inferencePollingTimers.delete(cameraName);
+    }
+  }
+
+  function startInferencePolling(cameraName, btn, frame) {
+    stopInferencePolling(cameraName);
+    const timerId = setInterval(async () => {
+      if (!inferenceViewState.get(cameraName)) {
+        stopInferencePolling(cameraName);
+        return;
+      }
+      const available = await checkInferenceStreamAvailable(cameraName);
+      if (!inferenceViewState.get(cameraName)) {
+        stopInferencePolling(cameraName);
+        return;
+      }
+      if (available && frame.srcdoc) {
+        frame.removeAttribute("srcdoc");
+        frame.src = inferenceViewPreviewUrl(cameraName);
+        syncInferenceViewBtn(btn, "active");
+      } else if (!available && !frame.srcdoc) {
+        frame.srcdoc = INFERENCE_LOADING_SRCDOC;
+        syncInferenceViewBtn(btn, "loading");
+      }
+    }, INFERENCE_POLL_INTERVAL_MS);
+    inferencePollingTimers.set(cameraName, timerId);
+  }
+
   async function handleInferenceViewToggle(btn, frame, cameraName) {
     const currentlyActive = Boolean(inferenceViewState.get(cameraName));
     if (currentlyActive) {
       inferenceViewState.set(cameraName, false);
+      stopInferencePolling(cameraName);
       syncInferenceViewBtn(btn, "normal");
       frame.removeAttribute("srcdoc");
       frame.src = normalViewPreviewUrl(cameraName);
@@ -187,13 +245,14 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
     btn.classList.remove("is-loading");
     inferenceViewState.set(cameraName, true);
     if (!available) {
-      frame.srcdoc = INFERENCE_UNAVAILABLE_SRCDOC;
-      syncInferenceViewBtn(btn, "unavailable");
+      frame.srcdoc = INFERENCE_LOADING_SRCDOC;
+      syncInferenceViewBtn(btn, "loading");
     } else {
       frame.removeAttribute("srcdoc");
       frame.src = inferenceViewPreviewUrl(cameraName);
       syncInferenceViewBtn(btn, "active");
     }
+    startInferencePolling(cameraName, btn, frame);
   }
 
   const INFER_BTN_SVG =
@@ -787,6 +846,11 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
       }
       return;
     }
+    if (activeCameraName && activeCameraName !== normalizedName) {
+      stopInferencePolling(activeCameraName);
+      inferenceViewState.delete(activeCameraName);
+    }
+
     const frame = document.createElement("iframe");
     frame.className = "camera-web-frame cameras-page-large-frame";
     frame.src = largeViewerUrl(normalizedName, "none");
@@ -830,6 +894,17 @@ const INFERENCE_UNAVAILABLE_SRCDOC = [
     try {
       await persistCameraInference(activeCameraName, nextType);
       syncInferenceToolbar(activeCameraName, nextType);
+      const primaryView = document.getElementById("primary-view");
+      const btn = primaryView && primaryView.querySelector(".camera-infer-view-btn");
+      const frame = primaryView && primaryView.querySelector(".cameras-page-large-frame");
+      if (btn && frame) {
+        const currentlyActive = Boolean(inferenceViewState.get(activeCameraName));
+        if (nextType !== "none" && !currentlyActive) {
+          void handleInferenceViewToggle(btn, frame, activeCameraName);
+        } else if (nextType === "none" && currentlyActive) {
+          void handleInferenceViewToggle(btn, frame, activeCameraName);
+        }
+      }
     } catch (error) {
       saveInferenceTypeForCamera(activeCameraName, inferenceTypeForCamera(activeCameraName));
     }
