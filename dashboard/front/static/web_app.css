@@ -4500,7 +4500,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .camera-inference-field select {
-  width: 190px;
+  width: 295px;
   min-height: 38px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 10px;
