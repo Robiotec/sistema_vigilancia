@@ -1494,7 +1494,11 @@ def camera_event_crop(path: str):
         return Response(status_code=404)
     except Exception as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
-    return Response(content=content, media_type=media_type)
+    return Response(
+        content=content,
+        media_type=media_type,
+        headers={"Cache-Control": "public, max-age=300"},
+    )
 
 
 @app.get("/api/camera-event-video")

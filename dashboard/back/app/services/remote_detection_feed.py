@@ -19,7 +19,7 @@ from psycopg2.extras import Json, RealDictCursor, execute_values
 from back.app.config import Settings
 
 ECUADOR_TZ = timezone(timedelta(hours=-5))
-VIDEO_EVENT_TYPES = {"clip", "click", "clips_movimiento"}
+VIDEO_EVENT_TYPES = {"clip", "click", "clips_movimiento", "clips_zona"}
 
 
 @dataclass(slots=True)
@@ -111,6 +111,7 @@ class RemoteCameraEvent:
         return {
             "clip": "Video de zona detectado",
             "clips_movimiento": "Movimiento detectado",
+            "clips_zona": "Alerta de zona detectada",
         }.get(event_type, "Video detectado")
 
 
@@ -131,13 +132,15 @@ class RemoteDetectionFeedService:
             return []
 
         remote_python = f"""
-import json
+import json, os
 from pathlib import Path
 
 base = Path({self.settings.ssh_events_base_path!r})
 manifest = base / "manifest.jsonl"
 cam_id = {normalized_cam_id!r}
 limit = {max(1, min(int(limit), 24))}
+VIDEO_TYPES = {tuple(VIDEO_EVENT_TYPES)!r}
+TAIL_BYTES = 2 * 1024 * 1024  # leer solo los ultimos 2 MB
 items = []
 
 def resolve_path(value):
@@ -145,73 +148,85 @@ def resolve_path(value):
     if not raw:
         return None
     path = Path(raw)
-    candidates = [path]
-    if not path.is_absolute():
-        candidates = [
-            base / cam_id / raw,
-            base / raw,
-            path,
-        ]
-    for candidate in candidates:
+    if path.is_absolute():
+        return path
+    # Strip leading segment if it duplicates base.name (manifest stores paths
+    # relative to base's parent, e.g. "results_presentacion/CAM-X/clip.mp4")
+    parts = path.parts
+    if parts and parts[0] == base.name:
+        path = Path(*parts[1:]) if len(parts) > 1 else Path(".")
+    for candidate in [base / cam_id / path, base / path]:
         if candidate.exists():
             return candidate
-    return candidates[0]
+    return base / path
+
+def read_tail_lines(path, tail_bytes):
+    size = path.stat().st_size
+    offset = max(0, size - tail_bytes)
+    with path.open("rb") as fh:
+        fh.seek(offset)
+        raw = fh.read()
+    text = raw.decode("utf-8", errors="replace")
+    if offset > 0:
+        nl = text.find("\\n")
+        text = text[nl + 1:] if nl >= 0 else ""
+    return text.splitlines()
 
 if manifest.exists():
-    with manifest.open("r", encoding="utf-8", errors="replace") as fh:
-        for line in fh:
-            line = line.strip()
-            if not line:
+    lines = read_tail_lines(manifest, TAIL_BYTES)
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            row = json.loads(line)
+        except Exception:
+            continue
+        if str(row.get("cam_id") or "").strip() != cam_id:
+            continue
+        event_type = str(row.get("type") or "").strip()
+        if event_type in VIDEO_TYPES:
+            video_file = resolve_path(row.get("clip_file") or row.get("file"))
+            json_file = resolve_path(row.get("json_file"))
+            if not video_file:
                 continue
-            try:
-                row = json.loads(line)
-            except Exception:
-                continue
-            if str(row.get("cam_id") or "").strip() != cam_id:
-                continue
-            event_type = str(row.get("type") or "").strip()
-            if event_type in {tuple(VIDEO_EVENT_TYPES)!r}:
-                video_file = resolve_path(row.get("clip_file") or row.get("file"))
-                json_file = resolve_path(row.get("json_file"))
-                if not video_file or not video_file.exists():
-                    continue
-                payload = dict(row)
-                if json_file and json_file.exists():
-                    try:
-                        loaded_payload = json.loads(json_file.read_text(encoding="utf-8", errors="replace"))
-                        if isinstance(loaded_payload, dict):
-                            payload.update(loaded_payload)
-                    except Exception:
-                        pass
-                payload["track_id"] = payload.get("track_id") or row.get("track_id")
-                items.append({{
-                    "event_type": event_type,
-                    "cam_id": cam_id,
-                    "timestamp": int(payload.get("timestamp") or row.get("ts") or 0),
-                    "source_file": str(json_file or video_file),
-                    "crop_path": "",
-                    "video_path": str(video_file),
-                    "manifest_payload": row,
-                    "payload": payload,
-                }})
-                continue
-            source_file = resolve_path(row.get("file"))
-            if not source_file or not source_file.exists():
-                continue
-            try:
-                payload = json.loads(source_file.read_text(encoding="utf-8", errors="replace"))
-            except Exception:
-                continue
+            payload = dict(row)
+            if json_file and json_file.exists():
+                try:
+                    loaded_payload = json.loads(json_file.read_text(encoding="utf-8", errors="replace"))
+                    if isinstance(loaded_payload, dict):
+                        payload.update(loaded_payload)
+                except Exception:
+                    pass
+            payload["track_id"] = payload.get("track_id") or row.get("track_id")
             items.append({{
-                "event_type": str(row.get("type") or "").strip(),
+                "event_type": event_type,
                 "cam_id": cam_id,
-                "timestamp": int(row.get("ts") or payload.get("timestamp") or 0),
-                "source_file": str(source_file),
+                "timestamp": int(payload.get("timestamp") or row.get("ts") or 0),
+                "source_file": str(json_file or video_file),
                 "crop_path": str(payload.get("crop_path") or ""),
-                "video_path": "",
+                "video_path": str(video_file),
                 "manifest_payload": row,
                 "payload": payload,
             }})
+            continue
+        source_file = resolve_path(row.get("file"))
+        if not source_file or not source_file.exists():
+            continue
+        try:
+            payload = json.loads(source_file.read_text(encoding="utf-8", errors="replace"))
+        except Exception:
+            continue
+        items.append({{
+            "event_type": event_type,
+            "cam_id": cam_id,
+            "timestamp": int(row.get("ts") or payload.get("timestamp") or 0),
+            "source_file": str(source_file),
+            "crop_path": str(payload.get("crop_path") or ""),
+            "video_path": "",
+            "manifest_payload": row,
+            "payload": payload,
+        }})
 
 print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_ascii=False))
 """
@@ -405,9 +420,10 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
 
         with self._client() as client:
             with client.open_sftp() as sftp:
-                with sftp.open(normalized_path, "rb") as remote_file:
+                resolved_path = self._resolve_sftp_file(sftp, normalized_path)
+                with sftp.open(resolved_path, "rb") as remote_file:
                     content = remote_file.read()
-        media_type, _ = mimetypes.guess_type(normalized_path)
+        media_type, _ = mimetypes.guess_type(resolved_path)
         return content, media_type or "application/octet-stream"
 
     def cache_remote_video(self, remote_path: str) -> tuple[Path, str]:
@@ -429,8 +445,8 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         if not source_path.exists() or source_path.stat().st_size == 0:
             with self._client() as client:
                 with client.open_sftp() as sftp:
-                    sftp.stat(normalized_path)
-                    with sftp.open(normalized_path, "rb") as remote_file:
+                    resolved_path = self._resolve_sftp_file(sftp, normalized_path)
+                    with sftp.open(resolved_path, "rb") as remote_file:
                         with partial_path.open("wb") as local_file:
                             while True:
                                 chunk = remote_file.read(1024 * 1024)
@@ -444,6 +460,36 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
 
         self._ensure_browser_video(source_path, browser_path)
         return browser_path, "video/mp4"
+
+    def _resolve_sftp_file(self, sftp: Any, remote_path: str) -> str:
+        base = PurePosixPath(self.settings.ssh_events_base_path)
+        raw_path = PurePosixPath(remote_path)
+        candidates: list[PurePosixPath] = []
+
+        if raw_path.is_absolute():
+            candidates.append(raw_path)
+        else:
+            candidates.append(base / raw_path)
+            parts = raw_path.parts
+            if parts and parts[0] == base.name:
+                stripped = PurePosixPath(*parts[1:]) if len(parts) > 1 else PurePosixPath(".")
+                candidates.append(base / stripped)
+            candidates.append(raw_path)
+
+        seen: set[str] = set()
+        for candidate in candidates:
+            normalized = str(candidate)
+            if normalized in seen:
+                continue
+            seen.add(normalized)
+            try:
+                sftp.stat(normalized)
+                return normalized
+            except FileNotFoundError:
+                continue
+            except OSError:
+                continue
+        raise FileNotFoundError(remote_path)
 
     def _cache_lock(self, normalized_path: str) -> threading.Lock:
         with self._video_cache_locks_lock:
@@ -645,7 +691,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
 
         for field, column, allowed in (
             ("categories", "event_category", {"alerta", "acceso", "reconocimiento_facial", "movimiento", "vehiculo", "sistema"}),
-            ("event_types", "event_type", {"person", "plate", "clip", "click", "clips_movimiento"}),
+            ("event_types", "event_type", {"person", "plate", "clip", "click", "clips_movimiento", "clips_zona"}),
             ("origins", "origin", {"fixed_camera", "vehicle", "drone", "system"}),
             ("statuses", "status", {"new", "reviewed", "archived", "dismissed"}),
         ):
@@ -730,6 +776,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             "clip": "movimiento",
             "click": "movimiento",
             "clips_movimiento": "movimiento",
+            "clips_zona": "alerta",
         }.get(event_type, event_type)
 
     @staticmethod
@@ -740,6 +787,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             "clip": "Video de zona detectado",
             "click": "Video detectado",
             "clips_movimiento": "Movimiento detectado",
+            "clips_zona": "Alerta de zona detectada",
         }.get(event_type, "Evento detectado")
 
     @staticmethod

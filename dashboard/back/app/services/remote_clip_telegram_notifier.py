@@ -47,12 +47,13 @@ from back.app.services.telegram_alert_worker import TelegramAlertWorker
 
 _log = logging.getLogger(__name__)
 ECUADOR_TZ = timezone(timedelta(hours=-5))
-VIDEO_EVENT_TYPES = {"clip", "clips_movimiento"}
+VIDEO_EVENT_TYPES = {"clip", "clips_movimiento", "clips_zona"}
 TELEGRAM_EVENT_LABELS = {
     "clip": "zona",
     "clips_movimiento": "movimiento",
+    "clips_zona": "zona",
 }
-RECOVERY_EVENT_TYPES = {"clips_movimiento"}
+RECOVERY_EVENT_TYPES = {"clip", "clips_movimiento", "clips_zona"}
 RECOVERY_TAIL_BYTES = 256 * 1024
 RECOVERY_LIMIT = 50
 
@@ -170,9 +171,13 @@ class RemoteClipTelegramNotifier:
             except Exception as exc:
                 _log.warning("[notifier] no se pudo recuperar tail del manifest: %s", exc)
             if clips:
-                self._persist_and_enqueue_clips(clips)
+                try:
+                    self._persist_and_enqueue_clips(clips)
+                except Exception as exc:
+                    _log.error("[notifier] error persistiendo clips recuperados: %s", exc)
+                    self._set_status(last_error=str(exc))
 
-            # Drenar outbox con alertas pendientes de ciclos anteriores
+            # Drenar outbox siempre, aunque la persistencia haya fallado
             sent = self._worker.drain()
             if sent:
                 self._set_status(last_sent_total=sent)
@@ -183,13 +188,19 @@ class RemoteClipTelegramNotifier:
         clips = self._parse_clip_rows(new_rows)
 
         # --- 3. Persistir en camera_event_history (idempotente) ---
-        self._persist_and_enqueue_clips(clips)
+        persist_ok = True
+        try:
+            self._persist_and_enqueue_clips(clips)
+        except Exception as exc:
+            _log.error("[notifier] error persistiendo clips nuevos: %s", exc)
+            self._set_status(last_error=str(exc))
+            persist_ok = False
 
-        # --- 5. Avanzar cursor SOLO tras éxito de persistencia ---
-        if new_cursor:
+        # --- 5. Avanzar cursor SOLO si la persistencia fue exitosa ---
+        if persist_ok and new_cursor:
             self._manifest_reader.save_cursor(new_cursor)
 
-        # --- 6. Drenar outbox ---
+        # --- 6. Drenar outbox siempre ---
         sent = self._worker.drain()
 
         if sent > 0:
@@ -348,8 +359,6 @@ class RemoteClipTelegramNotifier:
         if not clips:
             return 0
         event_uids = self._persist_clip_events(clips)
-        if len(event_uids) != len(clips) or any(uid is None for uid in event_uids):
-            raise RuntimeError("No se pudieron persistir todos los eventos del manifest")
 
         inserted_count = 0
         for clip, uid in zip(clips, event_uids):
@@ -583,6 +592,7 @@ class RemoteClipTelegramNotifier:
         return {
             "clip": "Video de zona detectado",
             "clips_movimiento": "Movimiento detectado",
+            "clips_zona": "Alerta de zona detectada",
         }.get(event_type, "Video detectado")
 
     @staticmethod
