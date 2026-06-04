@@ -61,11 +61,17 @@
   const inferenceViewState = new Map();
   const inferencePollingTimers = new Map();
   const INFERENCE_POLL_INTERVAL_MS = 2000;
+  const INFERENCE_POLL_MAX_ATTEMPTS = 12;
 
-  function inferenceViewPreviewUrl(cameraName) {
+  function inferenceViewPreviewUrl(cameraName, inferenceType = null) {
     const t = new URL("/api/camera-preview-frame", window.location.origin);
     t.searchParams.set("camera_name", cameraName);
     t.searchParams.set("inference", "1");
+    const normalizedType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(cameraName));
+    if (normalizedType !== "none") {
+      t.searchParams.set("inference_type", normalizedType);
+    }
+    t.searchParams.set("_", String(Date.now()));
     return `${t.pathname}${t.search}`;
   }
 
@@ -151,11 +157,19 @@ const INFERENCE_LOADING_SRCDOC = [
   "</div></body></html>",
 ].join("");
 
-  async function checkInferenceStreamAvailable(cameraName) {
+  async function checkInferenceStreamAvailable(cameraName, inferenceType = null) {
     try {
+      const target = new URL("/api/camera-viewer-url", window.location.origin);
+      target.searchParams.set("camera_name", cameraName);
+      target.searchParams.set("inference", "1");
+      const normalizedType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(cameraName));
+      if (normalizedType !== "none") {
+        target.searchParams.set("inference_type", normalizedType);
+      }
+      target.searchParams.set("_", String(Date.now()));
       const resp = await fetch(
-        `/api/camera-viewer-url?camera_name=${encodeURIComponent(cameraName)}&inference=1`,
-        { credentials: "same-origin", headers: { Accept: "application/json" } },
+        `${target.pathname}${target.search}`,
+        { cache: "no-store", credentials: "same-origin", headers: { Accept: "application/json" } },
       );
       const data = await resp.json();
       return Boolean(data && data.online === true && !data.error);
@@ -206,26 +220,55 @@ const INFERENCE_LOADING_SRCDOC = [
 
   function startInferencePolling(cameraName, btn, frame) {
     stopInferencePolling(cameraName);
+    let attempts = 0;
     const timerId = setInterval(async () => {
       if (!inferenceViewState.get(cameraName)) {
         stopInferencePolling(cameraName);
         return;
       }
-      const available = await checkInferenceStreamAvailable(cameraName);
+      attempts += 1;
+      const inferenceType = inferenceTypeForCamera(cameraName);
+      const available = await checkInferenceStreamAvailable(cameraName, inferenceType);
       if (!inferenceViewState.get(cameraName)) {
         stopInferencePolling(cameraName);
         return;
       }
       if (available && frame.srcdoc) {
         frame.removeAttribute("srcdoc");
-        frame.src = inferenceViewPreviewUrl(cameraName);
+        frame.src = inferenceViewPreviewUrl(cameraName, inferenceType);
         syncInferenceViewBtn(btn, "active");
       } else if (!available && !frame.srcdoc) {
         frame.srcdoc = INFERENCE_LOADING_SRCDOC;
         syncInferenceViewBtn(btn, "loading");
       }
+      if (!available && attempts >= INFERENCE_POLL_MAX_ATTEMPTS) {
+        inferenceViewState.set(cameraName, false);
+        stopInferencePolling(cameraName);
+        syncInferenceViewBtn(btn, "normal");
+        frame.removeAttribute("srcdoc");
+        frame.src = normalViewPreviewUrl(cameraName);
+      }
     }, INFERENCE_POLL_INTERVAL_MS);
     inferencePollingTimers.set(cameraName, timerId);
+  }
+
+  async function activateInferenceView(btn, frame, cameraName, inferenceType = null) {
+    const resolvedInferenceType = normalizeInferenceType(inferenceType || inferenceTypeForCamera(cameraName));
+    btn.classList.add("is-loading");
+    btn.disabled = true;
+    const available = await checkInferenceStreamAvailable(cameraName, resolvedInferenceType);
+    btn.disabled = false;
+    btn.classList.remove("is-loading");
+    inferenceViewState.set(cameraName, true);
+    if (!available) {
+      frame.srcdoc = INFERENCE_LOADING_SRCDOC;
+      syncInferenceViewBtn(btn, "loading");
+    } else {
+      frame.removeAttribute("srcdoc");
+      frame.src = inferenceViewPreviewUrl(cameraName, resolvedInferenceType);
+      syncInferenceViewBtn(btn, "active");
+    }
+    startInferencePolling(cameraName, btn, frame);
   }
 
   async function handleInferenceViewToggle(btn, frame, cameraName) {
@@ -238,21 +281,7 @@ const INFERENCE_LOADING_SRCDOC = [
       frame.src = normalViewPreviewUrl(cameraName);
       return;
     }
-    btn.classList.add("is-loading");
-    btn.disabled = true;
-    const available = await checkInferenceStreamAvailable(cameraName);
-    btn.disabled = false;
-    btn.classList.remove("is-loading");
-    inferenceViewState.set(cameraName, true);
-    if (!available) {
-      frame.srcdoc = INFERENCE_LOADING_SRCDOC;
-      syncInferenceViewBtn(btn, "loading");
-    } else {
-      frame.removeAttribute("srcdoc");
-      frame.src = inferenceViewPreviewUrl(cameraName);
-      syncInferenceViewBtn(btn, "active");
-    }
-    startInferencePolling(cameraName, btn, frame);
+    await activateInferenceView(btn, frame, cameraName);
   }
 
   const INFER_BTN_SVG =
@@ -679,12 +708,16 @@ const INFERENCE_LOADING_SRCDOC = [
   }
 
   function inferenceTypeForCamera(cameraName) {
+    const normalizedName = String(cameraName || "").trim();
+    const state = loadInferenceTypes();
+    if (Object.prototype.hasOwnProperty.call(state, normalizedName)) {
+      return normalizeInferenceType(state[normalizedName]);
+    }
     const camera = cameraByName(cameraName);
     if (camera && (camera.inference_type || camera.tipo_inferencia)) {
       return uiInferenceTypeFromDb(camera.inference_type || camera.tipo_inferencia);
     }
-    const state = loadInferenceTypes();
-    return normalizeInferenceType(state[String(cameraName || "").trim()]);
+    return "none";
   }
 
   function saveInferenceTypeForCamera(cameraName, inferenceType) {
@@ -949,7 +982,12 @@ const INFERENCE_LOADING_SRCDOC = [
       if (btn && frame) {
         const currentlyActive = Boolean(inferenceViewState.get(activeCameraName));
         if (nextType !== "none" && !currentlyActive) {
-          void handleInferenceViewToggle(btn, frame, activeCameraName);
+          void activateInferenceView(btn, frame, activeCameraName, nextType);
+        } else if (nextType !== "none" && currentlyActive) {
+          stopInferencePolling(activeCameraName);
+          frame.srcdoc = INFERENCE_LOADING_SRCDOC;
+          syncInferenceViewBtn(btn, "loading");
+          void activateInferenceView(btn, frame, activeCameraName, nextType);
         } else if (nextType === "none" && currentlyActive) {
           void handleInferenceViewToggle(btn, frame, activeCameraName);
         }

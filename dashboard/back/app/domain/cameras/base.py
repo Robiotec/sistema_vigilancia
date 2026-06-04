@@ -65,7 +65,7 @@ class CameraNormalizer(BaseHelper):
             "drone_id": self.num_id(camera.get("drone_id")),
             "drone_source_id": self.text(camera.get("drone_id")),
             "activa": active,
-            "hacer_inferencia": False,
+            "hacer_inferencia": inference_type != "inactiva",
             "stream_url": origin_url,
             "url_stream": origin_url,
             "url_rtsp": origin_url,
