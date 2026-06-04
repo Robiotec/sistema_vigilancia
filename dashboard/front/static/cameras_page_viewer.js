@@ -67,22 +67,22 @@
 .event-card__badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font:800 10.5px/1.4 system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;width:fit-content}
 .event-card__badge svg{width:10px;height:10px;flex:0 0 auto}
 /* ── plate – layout vertical ── */
-.event-card--plate{flex-direction:column;align-items:stretch;gap:8px;border-color:rgba(59,130,246,.28);box-shadow:0 0 0 1px rgba(59,130,246,.08) inset,0 8px 22px rgba(0,0,0,.14)}
-.event-card--plate:hover,.event-card--plate:focus-visible{border-color:rgba(59,130,246,.55);background:linear-gradient(180deg,rgba(59,130,246,.1),rgba(37,99,235,.04)),rgba(255,255,255,.02);box-shadow:0 0 0 1px rgba(59,130,246,.1) inset,0 0 22px rgba(59,130,246,.15),0 14px 30px rgba(0,0,0,.24)}
-.event-card--plate .event-card__badge{background:rgba(59,130,246,.18);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.event-card--plate{flex-direction:column;align-items:stretch;gap:8px;border-color:rgba(246, 118, 59, 0.52);box-shadow:0 0 0 1px rgba(246, 143, 59, 0.08) inset,0 8px 22px rgba(0,0,0,.14)}
+.event-card--plate:hover,.event-card--plate:focus-visible{border-color:rgba(246, 149, 59, 0.75);background:linear-gradient(180deg,rgba(246, 128, 59, 0.1),rgba(235, 110, 37, 0.04)),rgba(255,255,255,.02);box-shadow:0 0 0 1px rgba(246, 112, 59, 0.1) inset,0 0 22px rgba(246, 134, 59, 0.15),0 14px 30px rgba(0,0,0,.24)}
+.event-card--plate .event-card__badge{background:rgba(246, 134, 59, 0.18);color:#93c5fd;border:1px solid rgba(246, 143, 59, 0.66)}
 .event-card--plate__top{display:flex;gap:10px;align-items:flex-start}
-.event-card--plate__img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#111827}
-.event-card--plate__img-placeholder{width:72px;height:72px;flex:0 0 72px;border-radius:8px;border:1px solid rgba(59,130,246,.18);background:rgba(59,130,246,.08);display:flex;align-items:center;justify-content:center;font:700 10px/1 system-ui,sans-serif;color:rgba(147,197,253,.5);letter-spacing:.05em}
+.event-card--plate__img{width:108px!important;height:108px!important;flex:0 0 104px!important;object-fit:cover;border-radius:9px;border:1px solid rgba(255,255,255,.08);background:#111827}
+.event-card--plate__img-placeholder{width:96px;height:96px;flex:0 0 72px;border-radius:8px;border:1px solid rgba(246, 112, 59, 0.18);background:rgba(246, 118, 59, 0.08);display:flex;align-items:center;justify-content:center;font:700 10px/1 system-ui,sans-serif;color:rgba(253, 186, 147, 0.5);letter-spacing:.05em}
 .event-card--plate__main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
 .event-card--plate__num{font:800 16px/1.2 monospace,system-ui;color:#bfdbfe;letter-spacing:.07em}
-.event-card--plate__vehicle{font:500 10px/1.5 system-ui,sans-serif;color:rgba(148,163,184,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.event-card--plate__time{font:400 9px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.45);margin-top:2px}
+.event-card--plate__vehicle{font:500 10px/1.5 system-ui,sans-serif;color:rgba(184, 165, 148, 0.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.event-card--plate__time{font:400 9px/1.4 system-ui,sans-serif;color:rgba(184, 167, 148, 0.45);margin-top:2px}
 /* alert flags */
 .event-card--plate__flags{display:flex;flex-wrap:wrap;gap:4px}
 .ec-flag{display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:5px;font:800 9.5px/1.4 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase}
 .ec-flag--danger{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
 .ec-flag--warn{background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
-.ec-flag--ok{background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.ec-flag--ok{background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(185, 98, 16, 0.25)}
 .ec-flag--neutral{background:rgba(148,163,184,.1);color:rgba(148,163,184,.7);border:1px solid rgba(148,163,184,.18)}
 /* detail grid */
 .event-card--plate__grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;border-top:1px solid rgba(59,130,246,.1);padding-top:6px}
@@ -112,9 +112,9 @@
 .event-card--zone{border-color:rgba(139,92,246,.25);box-shadow:0 0 0 1px rgba(139,92,246,.07) inset,0 8px 22px rgba(0,0,0,.14)}
 .event-card--zone:hover,.event-card--zone:focus-visible{border-color:rgba(139,92,246,.5);background:linear-gradient(180deg,rgba(139,92,246,.1),rgba(109,40,217,.04)),rgba(255,255,255,.03);box-shadow:0 0 0 1px rgba(139,92,246,.1) inset,0 0 22px rgba(139,92,246,.16),0 14px 30px rgba(0,0,0,.24)}
 .event-card--zone .event-card__badge{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.3)}
-.event-card--zone .event-card__title{font:700 12px/1.3 system-ui,sans-serif;color:#ede9fe;margin-bottom:2px}
-.event-card--zone .event-card__sub{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.7)}
-.event-card--zone .event-card__time{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.55);margin-top:4px}`;
+.event-card--zone .event-card__title{font:800 15.5px/1.34 system-ui,sans-serif;color:#f5f3ff;margin-bottom:3px}
+.event-card--zone .event-card__sub{font:800 14.5px/1.45 system-ui,sans-serif;color:rgba(237,233,254,.96)}
+.event-card--zone .event-card__time{font:800 15px/1.45 system-ui,sans-serif;color:rgba(248,250,252,.94);margin-top:5px}`;
     document.head.appendChild(s);
   })();
 
@@ -553,8 +553,8 @@ const INFERENCE_LOADING_SRCDOC = [
       ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml("Placa " + plate)}" data-camera-event-primary="${escapeHtml(plate)}" data-camera-event-meta="${escapeHtml(modalMeta)}" data-camera-event-meta-layout="plate-grid" role="button" tabindex="0"`
       : "";
     const thumbHtml = imageUrl
-      ? `<img class="face-preview-image event-card__thumb" src="${escapeHtml(imageUrl)}" alt="Placa ${escapeHtml(plate)}" loading="lazy" />`
-      : `<span class="face-preview-avatar event-card__thumb" style="font-size:10px;color:rgba(147,197,253,.6)">PLC</span>`;
+      ? `<img class="face-preview-image event-card__thumb event-card--plate__img" src="${escapeHtml(imageUrl)}" alt="Placa ${escapeHtml(plate)}" loading="lazy" />`
+      : `<span class="face-preview-avatar event-card__thumb event-card--plate__img-placeholder" style="font-size:10px;color:rgba(147,197,253,.6)">PLC</span>`;
     const vehicleLine = [marca, modelo].filter(Boolean).join("\n");
     return `
       <article class="face-preview-item event-card event-card--plate" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="plate" ${interactiveAttrs}>
@@ -589,10 +589,10 @@ const INFERENCE_LOADING_SRCDOC = [
       <article class="face-preview-item event-card event-card--person" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="person" ${interactiveAttrs}>
         ${thumbHtml}
         <div class="face-preview-copy event-card__content">
-          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><circle cx="5" cy="3.5" r="2" stroke="currentColor" stroke-width="1"/><path d="M1.5 9c0-1.93 1.567-3.5 3.5-3.5S8.5 7.07 8.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>PERSONA</span>
-          <strong style="font:700 14px/1.3 system-ui;color:#d1fae5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(name)}</strong>
-          ${cedula ? `<span style="font:500 11px/1.4 system-ui;color:rgba(148,163,184,.8)">ID: ${escapeHtml(cedula)}</span>` : ""}
-          <time style="font:400 10px/1.4 system-ui;color:rgba(148,163,184,.5);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+          <span class="event-card__badge" style="font:800 12px/1.4 system-ui,sans-serif">PERSONA</span>
+          <strong style="font:900 19px/1.34 system-ui;color:#ecfdf5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(name)}</strong>
+          ${cedula ? `<span style="font:800 16px/1.45 system-ui;color:rgba(209,250,229,.94)">ID: ${escapeHtml(cedula)}</span>` : ""}
+          <time style="font:800 16px/1.45 system-ui;color:rgba(248,250,252,.92);margin-top:4px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
         </div>
       </article>`;
   }
@@ -615,7 +615,7 @@ const INFERENCE_LOADING_SRCDOC = [
       <article class="face-preview-item event-card event-card--motion" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="clips_movimiento" ${interactiveAttrs}>
         ${thumbHtml}
         <div class="face-preview-copy event-card__content" style="gap:0;overflow:hidden">
-          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>MOVIMIENTO</span>
+          <span class="event-card__badge">MOVIMIENTO</span>
           <span class="event-card__title">Movimiento detectado</span>
           <span class="event-card__sub">Duración: ${escapeHtml(durationLabel)}</span>
           <time class="event-card__time" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
@@ -641,10 +641,10 @@ const INFERENCE_LOADING_SRCDOC = [
       <article class="face-preview-item event-card event-card--zone" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="clips_zona" ${interactiveAttrs}>
         ${thumbHtml}
         <div class="face-preview-copy event-card__content" style="gap:0;overflow:hidden">
-          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><polygon points="5,1 9,9 1,9" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="5" cy="7.8" r=".5" fill="currentColor"/></svg>ZONA</span>
-          <span class="event-card__title">Alerta de zona</span>
-          <span class="event-card__sub">Duración: ${escapeHtml(durationLabel)}</span>
-          <time class="event-card__time" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
+          <span class="event-card__badge">ZONA</span>
+          <span class="event-card__title" style="font:800 15.5px/1.34 system-ui,sans-serif;color:#f5f3ff;margin-bottom:3px">Alerta de zona</span>
+          <span class="event-card__sub" style="font:800 14.5px/1.45 system-ui,sans-serif;color:rgba(237,233,254,.96)">Duración: ${escapeHtml(durationLabel)}</span>
+          <time class="event-card__time" style="font:800 15px/1.45 system-ui,sans-serif;color:rgba(248,250,252,.94);margin-top:5px" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
         </div>
       </article>`;
   }
