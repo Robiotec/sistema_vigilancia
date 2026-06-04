@@ -505,9 +505,9 @@ const INFERENCE_LOADING_SRCDOC = [
         : isEmpty
           ? "color:rgba(148,163,184,.35)"
           : "color:rgba(248,250,252,.92)";
-      return `<div style="padding:7px 9px;border-radius:7px;${cardStyle}">` +
-        `<div style="font:700 8px/1 system-ui,sans-serif;color:rgba(148,163,184,.55);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(lbl)}</div>` +
-        `<div style="font:600 11.5px/1.4 system-ui,sans-serif;${valColor};overflow-wrap:anywhere">${escapeHtml(val || "—")}</div>` +
+      return `<div style="padding:9px 11px;border-radius:8px;${cardStyle}">` +
+        `<div style="font:900 10px/1.18 system-ui,sans-serif;color:rgba(148,163,184,.68);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(lbl)}</div>` +
+        `<div style="font:800 15.5px/1.50 system-ui,sans-serif;${valColor};overflow-wrap:anywhere">${escapeHtml(val || "—")}</div>` +
         `</div>`;
     }).join("");
   }
@@ -687,7 +687,7 @@ const INFERENCE_LOADING_SRCDOC = [
     if (title) title.textContent = label;
     if (primary) primary.textContent = primaryValue;
     const metaSection = metaLayout === "plate-grid"
-      ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${metaHtml || ""}</div>`
+      ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:1.25rem">${metaHtml || ""}</div>`
       : `<div class="event-detail-meta">${metaHtml || "<span>Sin información adicional.</span>"}</div>`;
     content.innerHTML = `
       <section class="plate-file-section">

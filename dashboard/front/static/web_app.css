@@ -3304,7 +3304,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   z-index: 1;
   display: grid;
   gap: 10px;
-  width: min(420px, 92vw);
+  width: min(520px, 132vw);
   padding: 20px;
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -3315,8 +3315,8 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 }
 
 .plate-file-modal.is-event-detail .plate-file-dialog {
-  width: min(720px, 94vw);
-  max-height: min(88dvh, 760px);
+  width: min(980px, calc(100vw - 32px));
+  max-height: min(92dvh, 1020px);
   overflow: hidden;
 }
 
@@ -3339,6 +3339,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
   color: rgba(255, 248, 243, 0.98);
   font: 800 1.1rem/1 "Space Grotesk", "Manrope", monospace;
   letter-spacing: 0.08em;
+  font-size: 1.1rem;
 }
 
 .plate-file-content {
@@ -3362,7 +3363,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 
 .plate-file-section-title {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3421,7 +3422,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 
 .event-detail-meta strong {
   color: rgba(255, 255, 255, 0.52);
-  font-size: 0.72rem;
+  font-size: 0.86rem;
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3429,7 +3430,7 @@ body[data-theme="light"] .telemetry-map-overlay-organization {
 
 .event-detail-meta span {
   color: rgba(248, 250, 252, 0.9);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.38;
   overflow-wrap: anywhere;
