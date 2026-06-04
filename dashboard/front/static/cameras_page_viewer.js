@@ -382,6 +382,17 @@ const INFERENCE_LOADING_SRCDOC = [
     ].map((value) => String(value || "").trim()).join("|");
   }
 
+  function deduplicatePlateEvents(items) {
+    const seenPlates = new Set();
+    return items.filter((item) => {
+      if (String(item.event_type || "").trim() !== "plate") return true;
+      const plate = String(item.plate || "").trim();
+      if (!plate || seenPlates.has(plate)) return false;
+      seenPlates.add(plate);
+      return true;
+    });
+  }
+
   function cameraEventRowValue(rows, labels) {
     const wanted = labels.map((label) => String(label).trim().toLowerCase());
     const match = rows.find((row) => wanted.includes(String(row && row.label || "").trim().toLowerCase()));
@@ -637,7 +648,7 @@ const INFERENCE_LOADING_SRCDOC = [
       const payload = await response.json();
       if (requestToken !== cameraEventsRequestToken) return;
       const items = Array.isArray(payload) ? payload : Array.isArray(payload.items) ? payload.items : [];
-      syncCameraEvents(items);
+      syncCameraEvents(deduplicatePlateEvents(items));
     } catch (error) {
       if (requestToken !== cameraEventsRequestToken) return;
       if (reset || !feed.querySelector("[data-camera-event-key]")) {
