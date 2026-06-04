@@ -53,6 +53,21 @@ class RemoteCameraEvent:
             first_name = parts[0] if parts else ""
             last_name = " ".join(parts[1:]) if len(parts) > 1 else ""
             extra_info = payload.get("person_info") if isinstance(payload.get("person_info"), dict) else {}
+            confidence_raw = payload.get("confidence")
+            try:
+                confidence_pct = f"{float(confidence_raw) * 100:.1f}%"
+            except (TypeError, ValueError):
+                confidence_pct = None
+            rows: list[dict[str, str]] = [
+                {"label": "nombre", "value": extra_info.get("nombre") or first_name or raw_name or "Sin dato"},
+                {"label": "apellido", "value": extra_info.get("apellido") or last_name or "Sin dato"},
+                {"label": "cédula", "value": str(payload.get("person_id") or extra_info.get("cedula") or "Sin dato")},
+            ]
+            if confidence_pct:
+                rows.append({"label": "confianza", "value": confidence_pct})
+            for k, v in extra_info.items():
+                if k.lower() not in {"nombre", "apellido", "cedula"}:
+                    rows.append({"label": k, "value": str(v) if v is not None else "Sin dato"})
             return {
                 "event_type": self.event_type,
                 "cam_id": self.cam_id,
@@ -63,14 +78,39 @@ class RemoteCameraEvent:
                 "person_id": str(payload.get("person_id") or "").strip(),
                 "person_name": raw_name,
                 "display_title": "Persona detectada",
-                "rows": [
-                    {"label": "nombre", "value": extra_info.get("nombre") or first_name or raw_name or "Sin dato"},
-                    {"label": "apellido", "value": extra_info.get("apellido") or last_name or "Sin dato"},
-                    {"label": "Cedula", "value": str(payload.get("person_id") or extra_info.get("cedula") or "Sin dato")},
-                ],
+                "rows": rows,
             }
 
         vehicle_info = payload.get("vehicle_info") if isinstance(payload.get("vehicle_info"), dict) else {}
+        _v = vehicle_info
+        plate_rows: list[dict[str, str]] = [
+            {"label": "placa",                   "value": str(payload.get("plate") or _v.get("Placa") or "Sin dato")},
+            {"label": "marca",                   "value": str(_v.get("Marca") or "Sin dato")},
+            {"label": "modelo",                  "value": str(_v.get("Modelo") or "Sin dato")},
+            {"label": "color",                   "value": str(_v.get("Color") or "Sin dato")},
+            {"label": "año",                     "value": str(_v.get("Año Vehículo") or "Sin dato")},
+            {"label": "tipo servicio",           "value": str(_v.get("Tipo Servicio") or "Sin dato")},
+            {"label": "capacidad",               "value": str(_v.get("Capacidad") or "Sin dato")},
+            {"label": "cilindraje",              "value": str(_v.get("Cilindraje") or "Sin dato")},
+            {"label": "tonelaje",                "value": str(_v.get("Tonelaje") or "Sin dato")},
+            {"label": "caducidad matrícula",     "value": str(_v.get("Caducidad Matrícula") or "Sin dato")},
+            {"label": "último trámite",          "value": str(_v.get("Último Trámite") or "Sin dato")},
+            {"label": "GAD trámite",             "value": str(_v.get("GAD Último Trámite") or "Sin dato")},
+            {"label": "traspasos",               "value": str(_v.get("Numero de Traspasos") or "Sin dato")},
+            {"label": "reportado robado",        "value": str(_v.get("Reportado Robado") or "Sin dato")},
+            {"label": "prenda comercial",        "value": str(_v.get("Prenda Comercial") or "Sin dato")},
+            {"label": "prenda industrial",       "value": str(_v.get("Prenda Industrial") or "Sin dato")},
+            {"label": "prohibición enajenar",    "value": str(_v.get("Prohibición Enajenar") or "Sin dato")},
+            {"label": "remarcado motor",         "value": str(_v.get("Remarcado Motor") or "Sin dato")},
+            {"label": "remarcado chasis",        "value": str(_v.get("Remarcado Chasis") or "Sin dato")},
+            {"label": "reserva dominio",         "value": str(_v.get("Reserva Dominio") or "Sin dato")},
+            {"label": "pagado SRI",              "value": str(_v.get("PAGADO SRI") or "Sin dato")},
+            {"label": "multas pendientes",       "value": str(_v.get("Multas Pendientes De Pago") or "Sin dato")},
+            {"label": "rodaje provincial 2026",  "value": str(_v.get("Pago Rodaje Provincial 2026") or "Sin dato")},
+            {"label": "revisión vigente 2026",   "value": str(_v.get("Revisión Vigente 2026") or "Sin dato")},
+            {"label": "condición",               "value": str(_v.get("Condición") or "Sin dato")},
+            {"label": "fecha",                   "value": str(_v.get("Fecha") or "Sin dato")},
+        ]
         return {
             "event_type": self.event_type,
             "cam_id": self.cam_id,
@@ -80,11 +120,7 @@ class RemoteCameraEvent:
             "video_path": self.video_path,
             "plate": str(payload.get("plate") or "").strip(),
             "display_title": "Vehículo detectado",
-            "rows": [
-                {"label": "placa", "value": str(payload.get("plate") or vehicle_info.get("Placa") or "Sin dato")},
-                {"label": "marca", "value": str(vehicle_info.get("Marca") or "Sin dato")},
-                {"label": "modelo", "value": str(vehicle_info.get("Modelo") or "Sin dato")},
-            ],
+            "rows": plate_rows,
         }
 
     @staticmethod

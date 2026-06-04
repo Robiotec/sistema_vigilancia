@@ -57,6 +57,67 @@
     document.head.appendChild(s);
   })();
 
+  // === Event card type styles ===
+  (function () {
+    if (document.getElementById("camera-event-card-styles")) return;
+    const s = document.createElement("style");
+    s.id = "camera-event-card-styles";
+    s.textContent = `
+/* ── base badge ── */
+.event-card__badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;font:700 9px/1.4 system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;width:fit-content}
+.event-card__badge svg{width:10px;height:10px;flex:0 0 auto}
+/* ── plate – layout vertical ── */
+.event-card--plate{flex-direction:column;align-items:stretch;gap:8px;border-color:rgba(59,130,246,.28);box-shadow:0 0 0 1px rgba(59,130,246,.08) inset,0 8px 22px rgba(0,0,0,.14)}
+.event-card--plate:hover,.event-card--plate:focus-visible{border-color:rgba(59,130,246,.55);background:linear-gradient(180deg,rgba(59,130,246,.1),rgba(37,99,235,.04)),rgba(255,255,255,.02);box-shadow:0 0 0 1px rgba(59,130,246,.1) inset,0 0 22px rgba(59,130,246,.15),0 14px 30px rgba(0,0,0,.24)}
+.event-card--plate .event-card__badge{background:rgba(59,130,246,.18);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
+.event-card--plate__top{display:flex;gap:10px;align-items:flex-start}
+.event-card--plate__img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#111827}
+.event-card--plate__img-placeholder{width:72px;height:72px;flex:0 0 72px;border-radius:8px;border:1px solid rgba(59,130,246,.18);background:rgba(59,130,246,.08);display:flex;align-items:center;justify-content:center;font:700 10px/1 system-ui,sans-serif;color:rgba(147,197,253,.5);letter-spacing:.05em}
+.event-card--plate__main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.event-card--plate__num{font:800 16px/1.2 monospace,system-ui;color:#bfdbfe;letter-spacing:.07em}
+.event-card--plate__vehicle{font:500 10px/1.5 system-ui,sans-serif;color:rgba(148,163,184,.75);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.event-card--plate__time{font:400 9px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.45);margin-top:2px}
+/* alert flags */
+.event-card--plate__flags{display:flex;flex-wrap:wrap;gap:4px}
+.ec-flag{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:4px;font:700 8px/1.4 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase}
+.ec-flag--danger{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
+.ec-flag--warn{background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+.ec-flag--ok{background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.ec-flag--neutral{background:rgba(148,163,184,.1);color:rgba(148,163,184,.7);border:1px solid rgba(148,163,184,.18)}
+/* detail grid */
+.event-card--plate__grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;border-top:1px solid rgba(59,130,246,.1);padding-top:6px}
+.event-card--plate__grid dt{font:600 8.5px/1.5 system-ui,sans-serif;color:rgba(148,163,184,.5);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.event-card--plate__grid dd{font:500 9.5px/1.5 system-ui,sans-serif;color:rgba(203,213,225,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0}
+/* ── person – layout vertical ── */
+.event-card--person{flex-direction:column;align-items:stretch;gap:8px;border-color:rgba(16,185,129,.25);box-shadow:0 0 0 1px rgba(16,185,129,.07) inset,0 8px 22px rgba(0,0,0,.14)}
+.event-card--person:hover,.event-card--person:focus-visible{border-color:rgba(16,185,129,.5);background:linear-gradient(180deg,rgba(16,185,129,.1),rgba(5,150,105,.04)),rgba(255,255,255,.03);box-shadow:0 0 0 1px rgba(16,185,129,.1) inset,0 0 22px rgba(16,185,129,.16),0 14px 30px rgba(0,0,0,.24)}
+.event-card--person .event-card__badge{background:rgba(16,185,129,.18);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
+.event-card--person__top{display:flex;gap:10px;align-items:flex-start}
+.event-card--person__img{width:72px;height:72px;flex:0 0 72px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:#111827}
+.event-card--person__img-placeholder{width:72px;height:72px;flex:0 0 72px;border-radius:8px;border:1px solid rgba(16,185,129,.18);background:rgba(16,185,129,.07);display:flex;align-items:center;justify-content:center;font:700 10px/1 system-ui,sans-serif;color:rgba(110,231,183,.5);letter-spacing:.05em}
+.event-card--person__main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.event-card--person__name{font:700 13px/1.3 system-ui,sans-serif;color:#d1fae5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.event-card--person__time{font:400 9px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.45);margin-top:2px}
+.event-card--person__grid{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;border-top:1px solid rgba(16,185,129,.1);padding-top:6px}
+.event-card--person__grid dt{font:600 8.5px/1.5 system-ui,sans-serif;color:rgba(148,163,184,.5);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.event-card--person__grid dd{font:500 9.5px/1.5 system-ui,sans-serif;color:rgba(203,213,225,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0}
+/* ── motion ── */
+.event-card--motion{border-color:rgba(245,158,11,.25);box-shadow:0 0 0 1px rgba(245,158,11,.07) inset,0 8px 22px rgba(0,0,0,.14)}
+.event-card--motion:hover,.event-card--motion:focus-visible{border-color:rgba(245,158,11,.5);background:linear-gradient(180deg,rgba(245,158,11,.1),rgba(217,119,6,.04)),rgba(255,255,255,.03);box-shadow:0 0 0 1px rgba(245,158,11,.1) inset,0 0 22px rgba(245,158,11,.16),0 14px 30px rgba(0,0,0,.24)}
+.event-card--motion .event-card__badge{background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
+.event-card--motion .event-card__title{font:700 12px/1.3 system-ui,sans-serif;color:#fef3c7;margin-bottom:2px}
+.event-card--motion .event-card__sub{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.7)}
+.event-card--motion .event-card__time{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.55);margin-top:4px}
+/* ── zone ── */
+.event-card--zone{border-color:rgba(139,92,246,.25);box-shadow:0 0 0 1px rgba(139,92,246,.07) inset,0 8px 22px rgba(0,0,0,.14)}
+.event-card--zone:hover,.event-card--zone:focus-visible{border-color:rgba(139,92,246,.5);background:linear-gradient(180deg,rgba(139,92,246,.1),rgba(109,40,217,.04)),rgba(255,255,255,.03);box-shadow:0 0 0 1px rgba(139,92,246,.1) inset,0 0 22px rgba(139,92,246,.16),0 14px 30px rgba(0,0,0,.24)}
+.event-card--zone .event-card__badge{background:rgba(139,92,246,.18);color:#c4b5fd;border:1px solid rgba(139,92,246,.3)}
+.event-card--zone .event-card__title{font:700 12px/1.3 system-ui,sans-serif;color:#ede9fe;margin-bottom:2px}
+.event-card--zone .event-card__sub{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.7)}
+.event-card--zone .event-card__time{font:500 10px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.55);margin-top:4px}`;
+    document.head.appendChild(s);
+  })();
+
   // Per-camera inference VIEW state (local only, no DB update)
   const inferenceViewState = new Map();
   const inferencePollingTimers = new Map();
@@ -410,52 +471,205 @@ const INFERENCE_LOADING_SRCDOC = [
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
+  function _eventTimestampDatetime(item) {
+    const n = Number(item.timestamp);
+    return Number.isFinite(n) && n > 0 ? new Date(n * 1000).toISOString() : "";
+  }
+
+  function _eventModalRows(rows) {
+    return rows.map((row) => {
+      const v = String(row.value || "").trim().toUpperCase();
+      const isAlert = (v === "SI") && ["reportado robado", "multas pendientes", "prenda comercial", "prenda industrial",
+        "prohibición enajenar", "remarcado motor", "remarcado chasis", "reserva dominio"].includes(String(row.label || "").toLowerCase().trim());
+      const valStyle = isAlert ? ' style="color:#fca5a5;font-weight:800"' : "";
+      return `<strong>${escapeHtml(row.label)}:</strong><span${valStyle}>${escapeHtml(row.value)}</span>`;
+    }).join("");
+  }
+
+  const _PLATE_ALERT_FIELDS = new Set([
+    "reportado robado", "multas pendientes", "prenda comercial", "prenda industrial",
+    "prohibición enajenar", "remarcado motor", "remarcado chasis", "reserva dominio",
+  ]);
+
+  function _plateModalHtml(rows) {
+    return rows.map((row) => {
+      const lbl = String(row.label || "").trim();
+      const val = String(row.value || "").trim();
+      const isEmpty = !val || val === "Sin dato";
+      const isAlert = !isEmpty && val.toUpperCase() === "SI" && _PLATE_ALERT_FIELDS.has(lbl.toLowerCase());
+      const cardStyle = isAlert
+        ? "background:rgba(239,68,68,.13);border:1px solid rgba(239,68,68,.3)"
+        : "background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)";
+      const valColor = isAlert
+        ? "color:#fca5a5;font-weight:800"
+        : isEmpty
+          ? "color:rgba(148,163,184,.35)"
+          : "color:rgba(248,250,252,.92)";
+      return `<div style="padding:7px 9px;border-radius:7px;${cardStyle}">` +
+        `<div style="font:700 8px/1 system-ui,sans-serif;color:rgba(148,163,184,.55);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(lbl)}</div>` +
+        `<div style="font:600 11.5px/1.4 system-ui,sans-serif;${valColor};overflow-wrap:anywhere">${escapeHtml(val || "—")}</div>` +
+        `</div>`;
+    }).join("");
+  }
+
+  function _flagHtml(label, value) {
+    const v = String(value || "").trim().toUpperCase();
+    const cls = v === "SI" ? "ec-flag--danger" : v === "NO" ? "ec-flag--ok" : "ec-flag--neutral";
+    return `<span class="ec-flag ${cls}">${escapeHtml(label)}: ${escapeHtml(v || "—")}</span>`;
+  }
+
+  function cameraEventHtmlPlate(item, key) {
+    const rows      = Array.isArray(item.rows) ? item.rows : [];
+    const rv        = (lbl) => cameraEventRowValue(rows, Array.isArray(lbl) ? lbl : [lbl]);
+    const imageUrl  = item.crop_path ? `/api/camera-event-crop?path=${encodeURIComponent(String(item.crop_path))}` : "";
+    const plate     = String(item.plate || rv(["placa"]) || "—").trim();
+    const marca     = rv(["marca"]) || "";
+    const modelo    = rv(["modelo"]) || "";
+    const robado    = rv(["reportado robado"]) || "";
+    const multas    = rv(["multas pendientes"]) || "";
+    const datetime  = _eventTimestampDatetime(item);
+    const tsLabel   = formatTimestamp(item.timestamp);
+    const modalMeta = _plateModalHtml(rows);
+    const interactiveAttrs = imageUrl
+      ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml("Placa " + plate)}" data-camera-event-primary="${escapeHtml(plate)}" data-camera-event-meta="${escapeHtml(modalMeta)}" data-camera-event-meta-layout="plate-grid" role="button" tabindex="0"`
+      : "";
+    const thumbHtml = imageUrl
+      ? `<img class="face-preview-image event-card__thumb" src="${escapeHtml(imageUrl)}" alt="Placa ${escapeHtml(plate)}" loading="lazy" />`
+      : `<span class="face-preview-avatar event-card__thumb" style="font-size:10px;color:rgba(147,197,253,.6)">PLC</span>`;
+    const vehicleLine = [marca, modelo].filter(Boolean).join("\n");
+    return `
+      <article class="face-preview-item event-card event-card--plate" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="plate" ${interactiveAttrs}>
+        ${thumbHtml}
+        <div class="face-preview-copy event-card__content">
+          <span class="event-card__badge">PLACA</span>
+          <strong style="font:800 15px/1.2 monospace,system-ui;color:#fff;letter-spacing:.05em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(plate)}</strong>
+          ${marca  ? `<span style="font:600 12px/1.3 system-ui;color:rgba(203,213,225,.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(marca)}</span>` : ""}
+          ${modelo ? `<span style="font:500 11px/1.3 system-ui;color:rgba(148,163,184,.8);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(modelo)}</span>` : ""}
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px">
+            ${_flagHtml("Multas", multas)}
+            ${_flagHtml("Reportado", robado)}
+          </div>
+          <time style="font:400 10px/1.4 system-ui;color:rgba(148,163,184,.5);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+        </div>
+      </article>`;
+  }
+
+  function cameraEventHtmlPerson(item, key) {
+    const rows      = Array.isArray(item.rows) ? item.rows : [];
+    const rv        = (lbl) => cameraEventRowValue(rows, Array.isArray(lbl) ? lbl : [lbl]);
+    const imageUrl  = item.crop_path ? `/api/camera-event-crop?path=${encodeURIComponent(String(item.crop_path))}` : "";
+    const name      = String(item.person_name || rv(["nombre"]) || "Visitante").trim();
+    const cedula    = String(item.person_id || rv(["cédula", "cedula", "Cedula"]) || "").trim();
+    const datetime  = _eventTimestampDatetime(item);
+    const tsLabel   = formatTimestamp(item.timestamp);
+    const modalRows = _eventModalRows(rows);
+    const interactiveAttrs = imageUrl
+      ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml(name)}" data-camera-event-primary="${escapeHtml(name)}" data-camera-event-meta="${escapeHtml(modalRows)}" role="button" tabindex="0"`
+      : "";
+    const thumbHtml = imageUrl
+      ? `<img class="face-preview-image event-card__thumb" src="${escapeHtml(imageUrl)}" alt="Foto de ${escapeHtml(name)}" loading="lazy" />`
+      : `<span class="face-preview-avatar event-card__thumb" style="font-size:10px;color:rgba(110,231,183,.6)">PRS</span>`;
+    return `
+      <article class="face-preview-item event-card event-card--person" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="person" ${interactiveAttrs}>
+        ${thumbHtml}
+        <div class="face-preview-copy event-card__content">
+          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><circle cx="5" cy="3.5" r="2" stroke="currentColor" stroke-width="1"/><path d="M1.5 9c0-1.93 1.567-3.5 3.5-3.5S8.5 7.07 8.5 9" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>PERSONA</span>
+          <strong style="font:700 14px/1.3 system-ui;color:#d1fae5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(name)}</strong>
+          ${cedula ? `<span style="font:500 11px/1.4 system-ui;color:rgba(148,163,184,.8)">ID: ${escapeHtml(cedula)}</span>` : ""}
+          <time style="font:400 10px/1.4 system-ui;color:rgba(148,163,184,.5);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+        </div>
+      </article>`;
+  }
+
+  function cameraEventHtmlMotion(item, key) {
+    const rows = Array.isArray(item.rows) ? item.rows : [];
+    const videoUrl = item.video_path ? `/api/camera-event-video?path=${encodeURIComponent(String(item.video_path))}` : "";
+    const rowDuration = cameraEventRowValue(rows, ["duration", "duración", "duracion"]);
+    const durationLabel = rowDuration ? formatDuration(rowDuration.replace(/\s*s\.?$/i, "")) : "Sin duración";
+    const timestampLabel = cameraEventRowValue(rows, ["timestamp", "fecha", "hora"]) || formatTimestamp(item.timestamp);
+    const datetime = _eventTimestampDatetime(item);
+    const modalRows = _eventModalRows(rows);
+    const interactiveAttrs = videoUrl
+      ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="Movimiento detectado" data-camera-event-meta="${escapeHtml(modalRows)}" role="button" tabindex="0"`
+      : "";
+    const thumbHtml = videoUrl
+      ? `<video class="face-preview-video event-card__thumb" muted preload="metadata" playsinline><source src="${escapeHtml(videoUrl)}" type="video/mp4" /></video>`
+      : `<span class="face-preview-avatar event-card__thumb" style="font-size:9px">MOV</span>`;
+    return `
+      <article class="face-preview-item event-card event-card--motion" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="clips_movimiento" ${interactiveAttrs}>
+        ${thumbHtml}
+        <div class="face-preview-copy event-card__content" style="gap:0;overflow:hidden">
+          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>MOVIMIENTO</span>
+          <span class="event-card__title">Movimiento detectado</span>
+          <span class="event-card__sub">Duración: ${escapeHtml(durationLabel)}</span>
+          <time class="event-card__time" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
+        </div>
+      </article>`;
+  }
+
+  function cameraEventHtmlZone(item, key) {
+    const rows = Array.isArray(item.rows) ? item.rows : [];
+    const videoUrl = item.video_path ? `/api/camera-event-video?path=${encodeURIComponent(String(item.video_path))}` : "";
+    const rowDuration = cameraEventRowValue(rows, ["duration", "duración", "duracion"]);
+    const durationLabel = rowDuration ? formatDuration(rowDuration.replace(/\s*s\.?$/i, "")) : "Sin duración";
+    const timestampLabel = cameraEventRowValue(rows, ["timestamp", "fecha", "hora"]) || formatTimestamp(item.timestamp);
+    const datetime = _eventTimestampDatetime(item);
+    const modalRows = _eventModalRows(rows);
+    const interactiveAttrs = videoUrl
+      ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="Alerta de zona" data-camera-event-meta="${escapeHtml(modalRows)}" role="button" tabindex="0"`
+      : "";
+    const thumbHtml = videoUrl
+      ? `<video class="face-preview-video event-card__thumb" muted preload="metadata" playsinline><source src="${escapeHtml(videoUrl)}" type="video/mp4" /></video>`
+      : `<span class="face-preview-avatar event-card__thumb" style="font-size:9px">ZNA</span>`;
+    return `
+      <article class="face-preview-item event-card event-card--zone" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="clips_zona" ${interactiveAttrs}>
+        ${thumbHtml}
+        <div class="face-preview-copy event-card__content" style="gap:0;overflow:hidden">
+          <span class="event-card__badge"><svg viewBox="0 0 10 10" fill="none"><polygon points="5,1 9,9 1,9" stroke="currentColor" stroke-width="1" fill="none" stroke-linejoin="round"/><line x1="5" y1="4" x2="5" y2="6.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><circle cx="5" cy="7.8" r=".5" fill="currentColor"/></svg>ZONA</span>
+          <span class="event-card__title">Alerta de zona</span>
+          <span class="event-card__sub">Duración: ${escapeHtml(durationLabel)}</span>
+          <time class="event-card__time" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
+        </div>
+      </article>`;
+  }
+
   function cameraEventHtml(item, key) {
+    const type = String(item.event_type || "").trim();
+    if (type === "plate") return cameraEventHtmlPlate(item, key);
+    if (type === "person") return cameraEventHtmlPerson(item, key);
+    if (type === "clips_movimiento") return cameraEventHtmlMotion(item, key);
+    if (type === "clips_zona") return cameraEventHtmlZone(item, key);
+    // fallback genérico para tipos desconocidos
+    const rows = Array.isArray(item.rows) ? item.rows : [];
     const cropPath = String(item.crop_path || "").trim();
     const videoPath = String(item.video_path || "").trim();
     const imageUrl = cropPath ? `/api/camera-event-crop?path=${encodeURIComponent(cropPath)}` : "";
     const videoUrl = videoPath ? `/api/camera-event-video?path=${encodeURIComponent(videoPath)}` : "";
-    const imageAlt = item.event_type === "person" ? "Foto de rostro de visitante" : "Foto de placa detectada";
-    const rows = Array.isArray(item.rows) ? item.rows : [];
-    const modalRowsHtml = rows.map((row) => `
-      <strong>${escapeHtml(row.label)}:</strong>
-      <span>${escapeHtml(row.value)}</span>
-    `).join("");
     const eventTitle = String(item.display_title || (videoUrl ? "Video detectado" : "Evento detectado")).trim();
     const eventPrimary = String(item.plate || item.person_name || item.person_id || item.cam_id || eventTitle).trim();
+    const modalRows = _eventModalRows(rows);
     const interactiveAttrs = videoUrl
-      ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"`
+      ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-meta="${escapeHtml(modalRows)}" role="button" tabindex="0"`
       : imageUrl
-        ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-primary="${escapeHtml(eventPrimary)}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"`
+        ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-primary="${escapeHtml(eventPrimary)}" data-camera-event-meta="${escapeHtml(modalRows)}" role="button" tabindex="0"`
         : "";
     const rowDuration = cameraEventRowValue(rows, ["duration", "duración", "duracion"]);
     const timestampLabel = cameraEventRowValue(rows, ["timestamp", "fecha", "hora"]) || formatTimestamp(item.timestamp);
     const durationLabel = rowDuration ? formatDuration(rowDuration.replace(/\s*s\.?$/i, "")) : "Sin duración";
-    const timestampNumber = Number(item.timestamp);
-    const timestampDatetime = Number.isFinite(timestampNumber) && timestampNumber > 0
-      ? new Date(timestampNumber * 1000).toISOString()
-      : "";
+    const timestampDatetime = _eventTimestampDatetime(item);
     const mediaHtml = videoUrl
       ? `<video class="face-preview-video event-card__thumb" muted preload="metadata" playsinline><source src="${videoUrl}" type="video/mp4" /></video>`
       : imageUrl
-        ? `<img class="face-preview-image event-card__thumb" src="${imageUrl}" alt="${escapeHtml(imageAlt)}" loading="lazy" />`
-        : `<span class="face-preview-avatar event-card__thumb">${escapeHtml(String(item.event_type || "?").slice(0, 2).toUpperCase())}</span>`;
+        ? `<img class="face-preview-image event-card__thumb" src="${imageUrl}" alt="Evento detectado" loading="lazy" />`
+        : `<span class="face-preview-avatar event-card__thumb">${escapeHtml(String(type || "?").slice(0, 2).toUpperCase())}</span>`;
     return `
-      <article
-        class="face-preview-item event-card"
-        data-camera-event-key="${escapeHtml(key)}"
-        data-camera-event-type="${escapeHtml(item.event_type || "")}"
-        ${interactiveAttrs}
-      >
+      <article class="face-preview-item event-card" data-camera-event-key="${escapeHtml(key)}" data-camera-event-type="${escapeHtml(type)}" ${interactiveAttrs}>
         ${mediaHtml}
         <div class="face-preview-copy event-card__content">
-          <time class="event-card__time" datetime="${escapeHtml(timestampDatetime)}">
-            ${escapeHtml(timestampLabel)}
-          </time>
+          <time class="event-card__time" datetime="${escapeHtml(timestampDatetime)}">${escapeHtml(timestampLabel)}</time>
           <span class="event-card__duration">Duración: ${escapeHtml(durationLabel)}</span>
         </div>
-      </article>
-    `;
+      </article>`;
   }
 
   function openEventImageModal(card) {
@@ -469,8 +683,12 @@ const INFERENCE_LOADING_SRCDOC = [
     const label = String(card.getAttribute("data-camera-event-title") || "Evento detectado").trim();
     const primaryValue = String(card.getAttribute("data-camera-event-primary") || label).trim();
     const metaHtml = card.getAttribute("data-camera-event-meta") || "";
+    const metaLayout = card.getAttribute("data-camera-event-meta-layout") || "";
     if (title) title.textContent = label;
     if (primary) primary.textContent = primaryValue;
+    const metaSection = metaLayout === "plate-grid"
+      ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${metaHtml || ""}</div>`
+      : `<div class="event-detail-meta">${metaHtml || "<span>Sin información adicional.</span>"}</div>`;
     content.innerHTML = `
       <section class="plate-file-section">
         <span class="plate-file-section-title">Imagen</span>
@@ -478,7 +696,7 @@ const INFERENCE_LOADING_SRCDOC = [
       </section>
       <section class="plate-file-section">
         <span class="plate-file-section-title">Información</span>
-        <div class="event-detail-meta">${metaHtml || "<span>Sin información adicional.</span>"}</div>
+        ${metaSection}
       </section>
     `;
     modal.classList.add("is-event-detail");
