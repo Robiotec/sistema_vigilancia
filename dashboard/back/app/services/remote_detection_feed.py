@@ -439,9 +439,13 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         cache_key = hashlib.sha256(normalized_path.encode("utf-8")).hexdigest()
         source_path = self.video_cache_dir / f"{cache_key}{suffix}"
         browser_path = self.video_cache_dir / f"{cache_key}.browser.mp4"
+        browser_ok_path = self.video_cache_dir / f"{cache_key}.browser-ok"
         partial_path = source_path.with_suffix(f"{source_path.suffix}.part")
 
         self.video_cache_dir.mkdir(parents=True, exist_ok=True)
+        if browser_path.exists() and browser_path.stat().st_size > 0:
+            return browser_path, "video/mp4"
+
         if not source_path.exists() or source_path.stat().st_size == 0:
             with self._client() as client:
                 with client.open_sftp() as sftp:
@@ -455,7 +459,10 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
                                 local_file.write(chunk)
                     partial_path.replace(source_path)
 
+        if browser_ok_path.exists():
+            return source_path, "video/mp4"
         if self._is_browser_video(source_path):
+            browser_ok_path.touch(exist_ok=True)
             return source_path, "video/mp4"
 
         self._ensure_browser_video(source_path, browser_path)
@@ -856,6 +863,12 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             "libx264",
             "-preset",
             "veryfast",
+            "-threads",
+            "1",
+            "-filter_threads",
+            "1",
+            "-filter_complex_threads",
+            "1",
             "-crf",
             "24",
             "-pix_fmt",

@@ -9,7 +9,7 @@
       "longitud": -79.81759792993674,
       "circunstancias_hecho": "Grafiti criminal asociado con los Chone Killers en una puerta.",
       "fecha_infraccion": "2026-05-14T16:45:00.000Z",
-      "verificado": null,
+      "verificado": true,
       "visible": true,
       "url_noticia": null,
       "fecha_creacion": "2026-05-14T16:57:20.804Z",
@@ -30,11 +30,11 @@
       "tipo_evento": {
         "id": "MARCADORES_CRIMINALES",
         "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_TERRITORIO_GRAFITI_OFF_OP.svg",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 47,
+      "total_clicks": 56,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -63,7 +63,7 @@
       "longitud": -79.84134851029333,
       "circunstancias_hecho": "Grafiti Latín Kings alado de canchas de vóley.",
       "fecha_infraccion": "2026-05-14T16:45:00.000Z",
-      "verificado": null,
+      "verificado": true,
       "visible": true,
       "url_noticia": null,
       "fecha_creacion": "2026-05-14T16:53:02.914Z",
@@ -84,11 +84,11 @@
       "tipo_evento": {
         "id": "MARCADORES_CRIMINALES",
         "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_TERRITORIO_GRAFITI_OFF_OP.svg",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 76,
+      "total_clicks": 87,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -117,7 +117,7 @@
       "longitud": -79.82071007944745,
       "circunstancias_hecho": "Grafiti Latín Kings en poste eléctrico alado de cancha multiuso.",
       "fecha_infraccion": "2026-05-14T16:45:00.000Z",
-      "verificado": null,
+      "verificado": true,
       "visible": true,
       "url_noticia": null,
       "fecha_creacion": "2026-05-14T16:50:36.637Z",
@@ -138,11 +138,11 @@
       "tipo_evento": {
         "id": "MARCADORES_CRIMINALES",
         "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/secundarios/ICONOS+OSINT_TERRITORIO_GRAFITI_OFF_OP.svg",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 24,
+      "total_clicks": 29,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -246,7 +246,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 136,
+      "total_clicks": 140,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -300,7 +300,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 517,
+      "total_clicks": 525,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -354,7 +354,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 926,
+      "total_clicks": 939,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -408,7 +408,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1154,
+      "total_clicks": 1160,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -462,7 +462,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 434,
+      "total_clicks": 440,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -516,7 +516,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1087,
+      "total_clicks": 1096,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -570,7 +570,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1008,
+      "total_clicks": 1015,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -624,7 +624,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1036,
+      "total_clicks": 1045,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -786,7 +786,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 557,
+      "total_clicks": 562,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -840,7 +840,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 301,
+      "total_clicks": 303,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1002,7 +1002,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 761,
+      "total_clicks": 766,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1056,7 +1056,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 646,
+      "total_clicks": 652,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1110,7 +1110,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 562,
+      "total_clicks": 565,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1164,7 +1164,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 702,
+      "total_clicks": 710,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1218,7 +1218,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1917,
+      "total_clicks": 1931,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1326,7 +1326,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 319,
+      "total_clicks": 322,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1434,7 +1434,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 282,
+      "total_clicks": 284,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1758,7 +1758,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 358,
+      "total_clicks": 359,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1812,7 +1812,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 524,
+      "total_clicks": 528,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1866,7 +1866,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 569,
+      "total_clicks": 575,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1920,7 +1920,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 639,
+      "total_clicks": 642,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1974,7 +1974,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 308,
+      "total_clicks": 310,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2028,7 +2028,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 385,
+      "total_clicks": 387,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2082,7 +2082,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 390,
+      "total_clicks": 393,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2136,7 +2136,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 320,
+      "total_clicks": 324,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2190,7 +2190,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 325,
+      "total_clicks": 333,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2244,7 +2244,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 379,
+      "total_clicks": 386,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2298,7 +2298,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 413,
+      "total_clicks": 419,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2352,7 +2352,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 408,
+      "total_clicks": 415,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2406,7 +2406,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 221,
+      "total_clicks": 222,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2460,7 +2460,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 395,
+      "total_clicks": 399,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2514,7 +2514,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 458,
+      "total_clicks": 465,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2568,7 +2568,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 348,
+      "total_clicks": 353,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2622,7 +2622,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 304,
+      "total_clicks": 308,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2676,7 +2676,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 314,
+      "total_clicks": 318,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2730,7 +2730,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 283,
+      "total_clicks": 286,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2784,7 +2784,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 446,
+      "total_clicks": 452,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2838,7 +2838,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 398,
+      "total_clicks": 402,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2892,7 +2892,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1392,
+      "total_clicks": 1409,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2946,7 +2946,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 575,
+      "total_clicks": 582,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3000,7 +3000,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 393,
+      "total_clicks": 398,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3054,7 +3054,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 628,
+      "total_clicks": 631,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3216,7 +3216,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 983,
+      "total_clicks": 992,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3270,7 +3270,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 431,
+      "total_clicks": 433,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3324,7 +3324,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 392,
+      "total_clicks": 394,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3378,7 +3378,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 297,
+      "total_clicks": 299,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3432,7 +3432,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 364,
+      "total_clicks": 367,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3486,7 +3486,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 332,
+      "total_clicks": 335,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3540,7 +3540,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 524,
+      "total_clicks": 528,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3594,7 +3594,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 489,
+      "total_clicks": 493,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3648,7 +3648,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 458,
+      "total_clicks": 460,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3702,7 +3702,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 549,
+      "total_clicks": 551,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3756,7 +3756,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 582,
+      "total_clicks": 587,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3810,7 +3810,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1211,
+      "total_clicks": 1226,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3864,7 +3864,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 457,
+      "total_clicks": 461,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3918,7 +3918,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 639,
+      "total_clicks": 657,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3972,7 +3972,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 391,
+      "total_clicks": 395,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4026,7 +4026,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 646,
+      "total_clicks": 650,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4080,7 +4080,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 754,
+      "total_clicks": 766,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4134,7 +4134,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 770,
+      "total_clicks": 772,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4188,7 +4188,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 658,
+      "total_clicks": 665,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4242,7 +4242,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 714,
+      "total_clicks": 730,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4296,7 +4296,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 709,
+      "total_clicks": 722,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4404,7 +4404,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 619,
+      "total_clicks": 623,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4512,7 +4512,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 665,
+      "total_clicks": 670,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4566,7 +4566,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 541,
+      "total_clicks": 545,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4620,7 +4620,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 599,
+      "total_clicks": 604,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4674,7 +4674,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 929,
+      "total_clicks": 934,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4728,7 +4728,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 960,
+      "total_clicks": 966,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4782,7 +4782,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 396,
+      "total_clicks": 399,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4890,7 +4890,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 555,
+      "total_clicks": 560,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4944,7 +4944,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 917,
+      "total_clicks": 928,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,

@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
-from app.api.routes import admin, arcom, auth, mediamtx, osint, streams, telemetry
+from app.api.routes import admin, arcom, auth, mediamtx, osint, server, streams, telemetry
 from app.core.config import get_settings
 from app.db.session import Base, SessionLocal, engine
 from app.models import entities  # noqa: F401
@@ -26,7 +26,14 @@ async def lifespan(app: FastAPI):
         await stream_service._mediamtx_client.aclose()
 
 
-app = FastAPI(title="Robiotec API Central", version="0.1.0", lifespan=lifespan)
+app = FastAPI(
+    title="Robiotec API Central",
+    version="0.1.0",
+    lifespan=lifespan,
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
+)
 
 settings = get_settings()
 app.add_middleware(GZipMiddleware, minimum_size=1000)
@@ -45,6 +52,7 @@ app.include_router(telemetry.router)
 app.include_router(arcom.router)
 app.include_router(osint.router)
 app.include_router(admin.router)
+app.include_router(server.router)
 
 
 @app.get("/health")

@@ -6,7 +6,7 @@
       {
         "id": "ATAQUE_ARMADO",
         "nombre": "Ataque Armado",
-        "cantidad_eventos": "18",
+        "cantidad_eventos": "19",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -15,7 +15,7 @@
       {
         "id": "EXPLOSION",
         "nombre": "Explosión",
-        "cantidad_eventos": "12",
+        "cantidad_eventos": "11",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -24,7 +24,7 @@
       {
         "id": "EXTORSION_VACUNA",
         "nombre": "Extorsión",
-        "cantidad_eventos": "6",
+        "cantidad_eventos": "7",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -42,7 +42,7 @@
       {
         "id": "HOMICIDO_SICARIATO",
         "nombre": "Homicidios/Sicariatos",
-        "cantidad_eventos": "102",
+        "cantidad_eventos": "108",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -51,7 +51,7 @@
       {
         "id": "MICROTRAFICO_DROGAS",
         "nombre": "Microtráfico",
-        "cantidad_eventos": "11",
+        "cantidad_eventos": "12",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -78,7 +78,7 @@
       {
         "id": "ROBO_ASALTO",
         "nombre": "Robos/Asaltos",
-        "cantidad_eventos": "19",
+        "cantidad_eventos": "20",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -105,7 +105,7 @@
       {
         "id": "AMENAZAS",
         "nombre": "Amenazas",
-        "cantidad_eventos": "9",
+        "cantidad_eventos": "11",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -141,7 +141,7 @@
       {
         "id": "NOTICIAS",
         "nombre": "Noticias",
-        "cantidad_eventos": "54",
+        "cantidad_eventos": "64",
         "grupo": "Intervención",
         "color": "#27a044",
         "tipo_zona": null,
@@ -150,7 +150,7 @@
       {
         "id": "OPERATIVOS_FFOO",
         "nombre": "Operativos FFOO",
-        "cantidad_eventos": "230",
+        "cantidad_eventos": "236",
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": null,
