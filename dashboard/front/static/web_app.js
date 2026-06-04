@@ -2081,6 +2081,7 @@ async function fetchPlateFileDetail(nextFile) {
 
 function openPlateFileModal(plate) {
   if (!plateFileModal) return;
+  plateFileModal.classList.remove("is-event-detail");
   const plateValue = String(plate || "").trim();
   if (plateFilePlate) {
     plateFilePlate.textContent = plateValue || "Sin placa";
@@ -2096,7 +2097,9 @@ function openPlateFileModal(plate) {
 function closePlateFileModal() {
   if (!plateFileModal) return;
   plateFileModal.hidden = true;
+  plateFileModal.classList.remove("is-event-detail");
   document.body.classList.remove("is-plate-file-modal-open");
+  document.body.classList.remove("is-modal-open");
 }
 
 async function setPlatePreviewSelection(nextPlate, nextFile = "") {

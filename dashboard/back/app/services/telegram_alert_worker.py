@@ -25,6 +25,7 @@ from psycopg2.extras import Json, RealDictCursor
 _log = logging.getLogger(__name__)
 
 _MAX_ATTEMPTS = 5
+_PROCESSING_STALE_AFTER = timedelta(minutes=10)
 # Backoff en segundos por índice de intento (0-based)
 _BACKOFF_SECONDS = (30, 60, 120, 300, 600)
 
@@ -130,6 +131,7 @@ class TelegramAlertWorker:
     def drain(self, *, batch_size: int = 5) -> int:
         """Procesa hasta batch_size alertas pendientes. Devuelve cuántas se enviaron."""
         self.ensure_schema()
+        self._recover_stale_processing()
         rows = self._claim_pending(batch_size)
         sent = 0
         for row in rows:
@@ -156,6 +158,32 @@ class TelegramAlertWorker:
             return -1
 
     # ----------------------------------------------------------------- private
+
+    def _recover_stale_processing(self) -> int:
+        """Devuelve a retry filas que quedaron processing por una caída del proceso."""
+        try:
+            with psycopg2.connect(self._db_dsn) as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        UPDATE camera_alert_outbox
+                        SET status = 'failed',
+                            next_retry_at = now(),
+                            last_error = 'processing timeout; retrying',
+                            updated_at = now()
+                        WHERE status = 'processing'
+                          AND updated_at < now() - %s
+                        """,
+                        (_PROCESSING_STALE_AFTER,),
+                    )
+                    recovered = cur.rowcount
+                conn.commit()
+            if recovered:
+                _log.warning("[outbox] alertas processing recuperadas: %d", recovered)
+            return recovered
+        except Exception as exc:
+            _log.error("[outbox] error recuperando filas processing: %s", exc)
+            return 0
 
     def _claim_pending(self, batch_size: int) -> list[dict[str, Any]]:
         """SELECT FOR UPDATE SKIP LOCKED → marca como 'processing' atómicamente."""

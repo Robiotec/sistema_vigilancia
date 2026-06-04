@@ -54,7 +54,7 @@ DEFAULT_NOTIFICATION_SETTINGS: dict[str, Any] = {
         ),
     },
     "telegram": {
-        "bot_token": "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts",
+        "bot_token": "",
         "chat_ids": ["-1003416074376"],
         "message": (
             "ALERTA\n\n"
@@ -346,9 +346,15 @@ def normalize_notification_settings(payload: dict[str, Any] | None) -> dict[str,
     normalized["email"]["subject"] = str(email_source.get("subject", normalized["email"]["subject"])).strip()
     normalized["email"]["message"] = str(email_source.get("message", normalized["email"]["message"])).strip()
 
-    normalized["telegram"]["bot_token"] = str(
-        telegram_source.get("bot_token", normalized["telegram"]["bot_token"])
-    ).strip()
+    configured_token = str(telegram_source.get("bot_token", normalized["telegram"]["bot_token"])).strip()
+    if not configured_token:
+        try:
+            from back.app.config import get_settings
+
+            configured_token = get_settings().telegram_bot_token.strip()
+        except Exception:
+            configured_token = ""
+    normalized["telegram"]["bot_token"] = configured_token
     normalized["telegram"]["chat_ids"] = _normalized_lines(
         telegram_source.get("chat_ids", normalized["telegram"]["chat_ids"])
     )
@@ -389,6 +395,8 @@ def load_notification_settings() -> dict[str, Any]:
 
 def save_notification_settings(payload: dict[str, Any] | None) -> dict[str, Any]:
     normalized = normalize_notification_settings(payload)
+    token_for_runtime = normalized["telegram"]["bot_token"]
+    normalized["telegram"]["bot_token"] = ""
     try:
         save_email_recipients_to_db(normalized["email"]["recipients"])
     except Exception:
@@ -399,4 +407,5 @@ def save_notification_settings(payload: dict[str, Any] | None) -> dict[str, Any]
         pass
     SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
     SETTINGS_PATH.write_text(json.dumps(normalized, ensure_ascii=False, indent=2), encoding="utf-8")
+    normalized["telegram"]["bot_token"] = token_for_runtime
     return normalized

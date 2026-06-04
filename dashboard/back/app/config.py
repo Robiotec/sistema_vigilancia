@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     ssh_key_path: str = Field(default="", alias="SSH_KEY_PATH")
     # Ruta a fichero known_hosts. Si existe, se activa RejectPolicy en lugar de AutoAddPolicy.
     ssh_known_hosts_path: str = Field(default="", alias="SSH_KNOWN_HOSTS_PATH")
+    telegram_bot_token: str = Field(default="", alias="TELEGRAM_BOT_TOKEN")
+    telegram_bot_cache_ttl_seconds: int = Field(default=300, alias="TELEGRAM_BOT_CACHE_TTL_SECONDS")
+    telegram_ffmpeg_threads: int = Field(default=1, alias="TELEGRAM_FFMPEG_THREADS")
 
 
 @lru_cache

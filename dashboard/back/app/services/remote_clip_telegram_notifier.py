@@ -56,6 +56,7 @@ TELEGRAM_EVENT_LABELS = {
 RECOVERY_EVENT_TYPES = {"clip", "clips_movimiento", "clips_zona"}
 RECOVERY_TAIL_BYTES = 256 * 1024
 RECOVERY_LIMIT = 50
+_FFMPEG_RENDER_LOCK = threading.Lock()
 
 
 @dataclass(frozen=True, slots=True)
@@ -302,11 +303,19 @@ class RemoteClipTelegramNotifier:
     def _resolve_remote_path(base: str, cam_id: str, raw: str) -> str:
         if not raw:
             return ""
-        p = PurePosixPath(raw)
-        if p.is_absolute():
+        path = PurePosixPath(raw)
+        if path.is_absolute():
             return raw
-        # Intentar relativo a base/cam_id, luego a base
-        return str(PurePosixPath(base) / cam_id / raw)
+
+        base_path = PurePosixPath(base)
+        parts = path.parts
+        if parts and parts[0] == base_path.name:
+            path = PurePosixPath(*parts[1:]) if len(parts) > 1 else PurePosixPath(".")
+            parts = path.parts
+
+        if parts and parts[0] == cam_id:
+            return str(base_path / path)
+        return str(base_path / cam_id / path)
 
     # ---------------------------------------------------------- DB persistence
 
@@ -385,7 +394,7 @@ class RemoteClipTelegramNotifier:
 
         return (
             clip.event_type,           # event_type
-            "movimiento",              # event_category
+            self._event_category(clip.event_type),  # event_category
             "fixed_camera",            # origin
             clip.cam_id,               # camera_id
             None,                      # camera_name (no disponible desde manifest)
@@ -522,17 +531,22 @@ class RemoteClipTelegramNotifier:
         if rendered_path.exists() and rendered_path.stat().st_size > 0:
             return rendered_path
 
+        threads = self._ffmpeg_threads()
         partial_path = rendered_path.with_suffix(f"{rendered_path.suffix}.part")
         command = [
             "ffmpeg", "-y", "-i", str(source_path),
             "-map", "0:v:0", "-an",
             "-vf", "scale='min(1280,iw)':-2",
             "-c:v", "libx264", "-preset", "veryfast",
+            "-threads", str(threads),
+            "-filter_threads", str(threads),
+            "-filter_complex_threads", str(threads),
             "-crf", "26", "-pix_fmt", "yuv420p",
             "-movflags", "+faststart", "-f", "mp4",
             str(partial_path),
         ]
-        completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
+        with _FFMPEG_RENDER_LOCK:
+            completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
         if completed.returncode != 0:
             raise RuntimeError(completed.stderr.strip() or "No se pudo renderizar el video para Telegram")
         partial_path.replace(rendered_path)
@@ -540,23 +554,27 @@ class RemoteClipTelegramNotifier:
             return self._render_small_telegram_video(source_path, rendered_path)
         return rendered_path
 
-    @staticmethod
-    def _render_small_telegram_video(source_path: Path, rendered_path: Path) -> Path:
+    def _render_small_telegram_video(self, source_path: Path, rendered_path: Path) -> Path:
         small_path = source_path.with_suffix(".telegram-small.mp4")
         if small_path.exists() and small_path.stat().st_size > 0:
             return small_path
 
+        threads = self._ffmpeg_threads()
         partial_path = small_path.with_suffix(f"{small_path.suffix}.part")
         command = [
             "ffmpeg", "-y", "-i", str(source_path),
             "-map", "0:v:0", "-an",
             "-vf", "scale='min(854,iw)':-2",
             "-c:v", "libx264", "-preset", "veryfast",
+            "-threads", str(threads),
+            "-filter_threads", str(threads),
+            "-filter_complex_threads", str(threads),
             "-crf", "32", "-pix_fmt", "yuv420p",
             "-movflags", "+faststart", "-f", "mp4",
             str(partial_path),
         ]
-        completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
+        with _FFMPEG_RENDER_LOCK:
+            completed = subprocess.run(command, capture_output=True, text=True, timeout=180, check=False)
         if completed.returncode != 0:
             raise RuntimeError(completed.stderr.strip() or "No se pudo reducir el video para Telegram")
         partial_path.replace(small_path)
@@ -567,6 +585,12 @@ class RemoteClipTelegramNotifier:
         return small_path
 
     # --------------------------------------------------------- helpers
+
+    def _ffmpeg_threads(self) -> int:
+        try:
+            return max(1, min(2, int(self.settings.telegram_ffmpeg_threads or 1)))
+        except (TypeError, ValueError):
+            return 1
 
     def _message_for_clip(self, clip: ClipAlert) -> str:
         detected_at = "Sin dato"
@@ -594,6 +618,12 @@ class RemoteClipTelegramNotifier:
             "clips_movimiento": "Movimiento detectado",
             "clips_zona": "Alerta de zona detectada",
         }.get(event_type, "Video detectado")
+
+    @staticmethod
+    def _event_category(event_type: str) -> str:
+        return {
+            "clips_zona": "alerta",
+        }.get(event_type, "movimiento")
 
     @staticmethod
     def _delivery_detail(delivery: dict[str, Any]) -> str:

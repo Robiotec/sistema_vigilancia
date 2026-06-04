@@ -442,6 +442,9 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
     notification_settings = load_notification_settings()
     notification_email_recipients = notification_settings.get("email", {}).get("recipients") or []
     notification_telegram_chat_ids = notification_settings.get("telegram", {}).get("chat_ids") or []
+    public_notification_settings = json.loads(_json(notification_settings))
+    if isinstance(public_notification_settings.get("telegram"), dict):
+        public_notification_settings["telegram"]["bot_token"] = ""
     return {
         "__AUTH_USERNAME__": username,
         "__DEVELOPER_MENU_LINK__": '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span><span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span><span class="sidebar-link-tooltip">Usuarios</span></a><a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span><span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span><span class="sidebar-link-tooltip">Registros</span></a>',
@@ -491,15 +494,12 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
             or db_camera_items_error
             or f"{len(db_camera_names)} nombres cargados desde PostgreSQL"
         ),
-        "__NOTIFICATION_SETTINGS_JSON__": _json(notification_settings),
+        "__NOTIFICATION_SETTINGS_JSON__": _json(public_notification_settings),
         "__NOTIFICATION_EMAIL_COUNT__": str(len(notification_email_recipients)),
         "__NOTIFICATION_EMAIL_ROWS__": _notification_email_rows_html(notification_email_recipients),
         "__NOTIFICATION_TELEGRAM_CHAT_ID_COUNT__": str(len(notification_telegram_chat_ids)),
         "__NOTIFICATION_TELEGRAM_CHAT_ID_ROWS__": _notification_telegram_rows_html(notification_telegram_chat_ids),
-        "__NOTIFICATION_TELEGRAM_TOKEN__": escape(
-            _text(notification_settings.get("telegram", {}).get("bot_token")),
-            quote=True,
-        ),
+        "__NOTIFICATION_TELEGRAM_TOKEN__": "",
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
         "__USER_ADMIN_MODE_LABEL__": "Master",
@@ -782,7 +782,10 @@ def notification_settings(request: Request):
     token = _token(request)
     if not token:
         return _auth_json_response()
-    return load_notification_settings()
+    settings_payload = load_notification_settings()
+    if isinstance(settings_payload.get("telegram"), dict):
+        settings_payload["telegram"]["bot_token"] = ""
+    return settings_payload
 
 
 @app.put("/api/notification-settings")
@@ -792,6 +795,8 @@ async def notification_settings_update(request: Request):
         return _auth_json_response()
     payload = await request.json()
     saved = save_notification_settings(payload if isinstance(payload, dict) else {})
+    if isinstance(saved.get("telegram"), dict):
+        saved["telegram"]["bot_token"] = ""
     return {"ok": True, "settings": saved}
 
 

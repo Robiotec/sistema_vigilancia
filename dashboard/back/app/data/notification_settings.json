@@ -13,7 +13,7 @@
     "message": "Estimados,\nEste es un correo de prueba enviado automáticamente mediante Python.\n\nSaludos cordiales."
   },
   "telegram": {
-    "bot_token": "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts",
+    "bot_token": "",
     "chat_ids": [
       "-1003416074376"
     ],

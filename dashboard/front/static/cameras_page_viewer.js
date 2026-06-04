@@ -381,6 +381,13 @@ const INFERENCE_LOADING_SRCDOC = [
       <strong>${escapeHtml(row.label)}:</strong>
       <span>${escapeHtml(row.value)}</span>
     `).join("");
+    const eventTitle = String(item.display_title || (videoUrl ? "Video detectado" : "Evento detectado")).trim();
+    const eventPrimary = String(item.plate || item.person_name || item.person_id || item.cam_id || eventTitle).trim();
+    const interactiveAttrs = videoUrl
+      ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"`
+      : imageUrl
+        ? `data-camera-event-image-url="${escapeHtml(imageUrl)}" data-camera-event-title="${escapeHtml(eventTitle)}" data-camera-event-primary="${escapeHtml(eventPrimary)}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"`
+        : "";
     const rowDuration = cameraEventRowValue(rows, ["duration", "duración", "duracion"]);
     const timestampLabel = cameraEventRowValue(rows, ["timestamp", "fecha", "hora"]) || formatTimestamp(item.timestamp);
     const durationLabel = rowDuration ? formatDuration(rowDuration.replace(/\s*s\.?$/i, "")) : "Sin duración";
@@ -398,7 +405,7 @@ const INFERENCE_LOADING_SRCDOC = [
         class="face-preview-item event-card"
         data-camera-event-key="${escapeHtml(key)}"
         data-camera-event-type="${escapeHtml(item.event_type || "")}"
-        ${videoUrl ? `data-camera-event-video-url="${escapeHtml(videoUrl)}" data-camera-event-title="${escapeHtml(item.display_title || "Video detectado")}" data-camera-event-meta="${escapeHtml(modalRowsHtml)}" role="button" tabindex="0"` : ""}
+        ${interactiveAttrs}
       >
         ${mediaHtml}
         <div class="face-preview-copy event-card__content">
@@ -409,6 +416,34 @@ const INFERENCE_LOADING_SRCDOC = [
         </div>
       </article>
     `;
+  }
+
+  function openEventImageModal(card) {
+    const modal = document.getElementById("plate-file-modal");
+    const title = document.getElementById("plate-file-modal-title");
+    const primary = document.getElementById("plate-file-plate");
+    const content = document.getElementById("plate-file-content");
+    if (!modal || !content) return;
+    const imageUrl = String(card.getAttribute("data-camera-event-image-url") || "").trim();
+    if (!imageUrl) return;
+    const label = String(card.getAttribute("data-camera-event-title") || "Evento detectado").trim();
+    const primaryValue = String(card.getAttribute("data-camera-event-primary") || label).trim();
+    const metaHtml = card.getAttribute("data-camera-event-meta") || "";
+    if (title) title.textContent = label;
+    if (primary) primary.textContent = primaryValue;
+    content.innerHTML = `
+      <section class="plate-file-section">
+        <span class="plate-file-section-title">Imagen</span>
+        <img class="event-detail-image" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(label)}" />
+      </section>
+      <section class="plate-file-section">
+        <span class="plate-file-section-title">Información</span>
+        <div class="event-detail-meta">${metaHtml || "<span>Sin información adicional.</span>"}</div>
+      </section>
+    `;
+    modal.classList.add("is-event-detail");
+    modal.hidden = false;
+    document.body.classList.add("is-modal-open");
   }
 
   function closeEventVideoModal() {
@@ -443,32 +478,46 @@ const INFERENCE_LOADING_SRCDOC = [
     void player.play().catch(() => {});
   }
 
-  function bindEventVideoModal() {
+  function bindEventModals() {
     const feed = document.getElementById("camera-events-feed");
-    const modal = document.getElementById("event-video-modal");
-    if (!feed || !modal) return;
+    const videoModal = document.getElementById("event-video-modal");
+    if (!feed) return;
     feed.addEventListener("click", (event) => {
-      const card = event.target instanceof Element
-        ? event.target.closest("[data-camera-event-video-url]")
+      const target = event.target instanceof Element ? event.target : null;
+      const videoCard = target ? target.closest("[data-camera-event-video-url]") : null;
+      if (videoCard) {
+        openEventVideoModal(videoCard);
+        return;
+      }
+      const imageCard = target
+        ? target.closest("[data-camera-event-image-url]")
         : null;
-      if (!card) return;
-      openEventVideoModal(card);
+      if (!imageCard) return;
+      openEventImageModal(imageCard);
     });
     feed.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
-      const card = event.target instanceof Element
-        ? event.target.closest("[data-camera-event-video-url]")
+      const target = event.target instanceof Element ? event.target : null;
+      const videoCard = target ? target.closest("[data-camera-event-video-url]") : null;
+      if (videoCard) {
+        event.preventDefault();
+        openEventVideoModal(videoCard);
+        return;
+      }
+      const imageCard = target
+        ? target.closest("[data-camera-event-image-url]")
         : null;
-      if (!card) return;
+      if (!imageCard) return;
       event.preventDefault();
-      openEventVideoModal(card);
+      openEventImageModal(imageCard);
     });
     ["event-video-modal-backdrop", "event-video-close"].forEach((id) => {
       const button = document.getElementById(id);
       if (button) button.addEventListener("click", closeEventVideoModal);
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && !modal.hidden) {
+      if (event.key !== "Escape") return;
+      if (videoModal && !videoModal.hidden) {
         closeEventVideoModal();
       }
     });
@@ -946,7 +995,7 @@ const INFERENCE_LOADING_SRCDOC = [
     }
     syncInferenceToolbar("", "none");
     renderCameraEvents([], { emptyMessage: "Selecciona una cámara para cargar resultados recientes de personas, placas y videos." });
-    bindEventVideoModal();
+    bindEventModals();
 
     switcher.addEventListener("click", (event) => {
       const inferenceButton = event.target instanceof Element

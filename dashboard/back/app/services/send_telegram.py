@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 from pathlib import Path
+import time
 
 import requests
 
+from back.app.config import get_settings
 from back.app.services.notification_settings import load_notification_settings, load_telegram_chat_ids_from_db
 
-DEFAULT_BOT_TOKEN = "8593701119:AAHJ0kb86mizOYxuyEInl9Xy4ylNTgk1Qts"
+DEFAULT_BOT_TOKEN = ""
 DEFAULT_CHAT_IDS = ["-1003416074376"]
 DEFAULT_MESSAGE = """
 ALERTA
@@ -22,6 +25,19 @@ DEFAULT_IMAGE_PATH = Path(
     "/root/robiotec/dashboard/front/static/assets/robo.png"
 )
 TELEGRAM_API_BASE = "https://api.telegram.org"
+_BOT_INFO_CACHE: dict[str, tuple[dict, float]] = {}
+
+
+def _settings_token() -> str:
+    try:
+        return get_settings().telegram_bot_token.strip()
+    except Exception:
+        return ""
+
+
+def configured_bot_token(settings: dict | None = None) -> str:
+    payload = settings if isinstance(settings, dict) else configured_telegram_settings()
+    return str(payload.get("bot_token") or _settings_token() or os.getenv("TELEGRAM_BOT_TOKEN", "")).strip()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -90,6 +106,13 @@ def api_url(token: str, method: str) -> str:
 
 
 def check_bot(token: str, timeout: float) -> dict:
+    cache_key = hashlib.sha256(token.encode("utf-8")).hexdigest()
+    now = time.monotonic()
+    cached = _BOT_INFO_CACHE.get(cache_key)
+    ttl = max(0, int(get_settings().telegram_bot_cache_ttl_seconds or 0))
+    if cached and ttl and now - cached[1] <= ttl:
+        return dict(cached[0])
+
     response = requests.get(api_url(token, "getMe"), timeout=timeout)
     try:
       payload = response.json()
@@ -98,7 +121,10 @@ def check_bot(token: str, timeout: float) -> dict:
     if response.status_code != 200 or not payload.get("ok"):
         description = payload.get("description") or response.text or "Error desconocido"
         raise SystemExit(f"Token de Telegram invalido o bot no accesible: {description}")
-    return payload.get("result") or {}
+    bot_info = payload.get("result") or {}
+    if ttl:
+        _BOT_INFO_CACHE[cache_key] = (dict(bot_info), now)
+    return bot_info
 
 
 def send_photo(token: str, chat_id: str, message: str, image_path: Path, timeout: float) -> tuple[bool, str]:
@@ -249,7 +275,7 @@ def send_telegram_text(
 
 def send_configured_telegram_alert(timeout: float = 20.0) -> dict:
     settings = configured_telegram_settings()
-    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    token = configured_bot_token(settings)
     chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
     message = str(settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
@@ -271,7 +297,7 @@ def send_configured_telegram_photo(
     timeout: float = 20.0,
 ) -> dict:
     settings = configured_telegram_settings()
-    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    token = configured_bot_token(settings)
     chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
     return send_telegram_alert(
         token=token,
@@ -289,7 +315,7 @@ def send_configured_telegram_video(
     timeout: float = 90.0,
 ) -> dict:
     settings = configured_telegram_settings()
-    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    token = configured_bot_token(settings)
     chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
     return send_telegram_video_alert(
         token=token,
@@ -306,7 +332,7 @@ def send_configured_telegram_text(
     timeout: float = 20.0,
 ) -> dict:
     settings = configured_telegram_settings()
-    token = settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    token = configured_bot_token(settings)
     chat_ids = load_telegram_chat_ids_from_db() or list(settings.get("chat_ids") or [])
     return send_telegram_text(
         token=token,
@@ -321,7 +347,7 @@ def main() -> int:
     args = parser.parse_args()
     settings = configured_telegram_settings()
 
-    token = args.token or settings.get("bot_token") or DEFAULT_BOT_TOKEN
+    token = args.token or configured_bot_token(settings)
     chat_ids = normalized_chat_ids(args.chat_ids or list(settings.get("chat_ids") or []))
     message = str(args.message or settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(args.image or settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
