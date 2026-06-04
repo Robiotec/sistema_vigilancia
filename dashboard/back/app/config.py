@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     telegram_bot_token: str = Field(default="", alias="TELEGRAM_BOT_TOKEN")
     telegram_bot_cache_ttl_seconds: int = Field(default=300, alias="TELEGRAM_BOT_CACHE_TTL_SECONDS")
     telegram_ffmpeg_threads: int = Field(default=1, alias="TELEGRAM_FFMPEG_THREADS")
+    telegram_max_event_age_seconds: int = Field(default=3600, alias="TELEGRAM_MAX_EVENT_AGE_SECONDS")
 
 
 @lru_cache

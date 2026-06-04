@@ -18,7 +18,6 @@ API pública sin cambios:
 from __future__ import annotations
 
 import hashlib
-import json
 import logging
 import mimetypes
 import subprocess
@@ -53,9 +52,6 @@ TELEGRAM_EVENT_LABELS = {
     "clips_movimiento": "movimiento",
     "clips_zona": "zona",
 }
-RECOVERY_EVENT_TYPES = {"clip", "clips_movimiento", "clips_zona"}
-RECOVERY_TAIL_BYTES = 256 * 1024
-RECOVERY_LIMIT = 50
 _FFMPEG_RENDER_LOCK = threading.Lock()
 
 
@@ -165,25 +161,13 @@ class RemoteClipTelegramNotifier:
             raise
 
         if not new_rows:
-            clips = []
-            try:
-                with self._sftp_connection() as (_, sftp):
-                    clips = self._recover_recent_clip_rows(sftp)
-            except Exception as exc:
-                _log.warning("[notifier] no se pudo recuperar tail del manifest: %s", exc)
-            if clips:
-                try:
-                    self._persist_and_enqueue_clips(clips)
-                except Exception as exc:
-                    _log.error("[notifier] error persistiendo clips recuperados: %s", exc)
-                    self._set_status(last_error=str(exc))
-
-            # Drenar outbox siempre, aunque la persistencia haya fallado
+            # Drenar outbox siempre para reintentar fallos reales. No se relee
+            # el tail del manifest: eso puede volver a tomar eventos historicos.
             sent = self._worker.drain()
             if sent:
                 self._set_status(last_sent_total=sent)
             self._set_status(outbox_pending=self._worker.pending_count())
-            return {"checked": len(clips), "sent": sent, "skipped": 0, "recovered": len(clips)}
+            return {"checked": 0, "sent": sent, "skipped": 0, "recovered": 0}
 
         # --- 2. Filtrar eventos de video ---
         clips = self._parse_clip_rows(new_rows)
@@ -270,35 +254,6 @@ class RemoteClipTelegramNotifier:
             ))
         return clips
 
-    def _recover_recent_clip_rows(self, sftp: paramiko.SFTPClient) -> list[ClipAlert]:
-        """Reprocesa eventos recientes que pudieron quedar saltados por un cursor viejo."""
-        path = self._manifest_reader.remote_path
-        try:
-            stat = sftp.stat(path)
-            size = int(getattr(stat, "st_size", 0) or 0)
-            offset = max(0, size - RECOVERY_TAIL_BYTES)
-            with sftp.open(path, "rb") as fh:
-                fh.seek(offset)
-                raw = fh.read(size - offset)
-        except Exception as exc:
-            _log.warning("[notifier] no se pudo leer tail de manifest para recovery: %s", exc)
-            return []
-
-        text = raw.decode("utf-8", errors="replace")
-        if offset > 0:
-            first_newline = text.find("\n")
-            text = text[first_newline + 1 :] if first_newline >= 0 else ""
-
-        rows: list[dict[str, Any]] = []
-        for line in text.splitlines():
-            try:
-                row = json.loads(line.strip())
-            except Exception:
-                continue
-            if isinstance(row, dict) and str(row.get("type") or "").strip() in RECOVERY_EVENT_TYPES:
-                rows.append(row)
-        return self._parse_clip_rows(rows[-RECOVERY_LIMIT:])
-
     @staticmethod
     def _resolve_remote_path(base: str, cam_id: str, raw: str) -> str:
         if not raw:
@@ -373,10 +328,30 @@ class RemoteClipTelegramNotifier:
         for clip, uid in zip(clips, event_uids):
             if not uid:
                 continue
+            if not self._should_enqueue_clip(clip):
+                continue
             payload = self._build_outbox_payload(clip)
             if self._worker.insert_pending(uid, clip.cam_id, clip.event_type, payload):
                 inserted_count += 1
         return inserted_count
+
+    def _should_enqueue_clip(self, clip: ClipAlert) -> bool:
+        max_age = self._telegram_max_event_age_seconds()
+        if max_age <= 0 or clip.timestamp <= 0:
+            return True
+        event_at = datetime.fromtimestamp(clip.timestamp, tz=timezone.utc)
+        age = datetime.now(timezone.utc) - event_at
+        if age.total_seconds() <= max_age:
+            return True
+        _log.info(
+            "[notifier] evento omitido para Telegram por antiguedad: cam=%s type=%s ts=%s age=%ss max=%ss",
+            clip.cam_id,
+            clip.event_type,
+            clip.timestamp,
+            int(age.total_seconds()),
+            max_age,
+        )
+        return False
 
     def _clip_to_history_row(self, clip: ClipAlert) -> tuple[Any, ...] | None:
         if not clip.cam_id:
@@ -591,6 +566,12 @@ class RemoteClipTelegramNotifier:
             return max(1, min(2, int(self.settings.telegram_ffmpeg_threads or 1)))
         except (TypeError, ValueError):
             return 1
+
+    def _telegram_max_event_age_seconds(self) -> int:
+        try:
+            return max(0, int(self.settings.telegram_max_event_age_seconds or 0))
+        except (TypeError, ValueError):
+            return 3600
 
     def _message_for_clip(self, clip: ClipAlert) -> str:
         detected_at = "Sin dato"

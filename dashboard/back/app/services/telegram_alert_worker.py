@@ -105,13 +105,33 @@ class TelegramAlertWorker:
         event_type: str,
         payload: dict[str, Any],
     ) -> bool:
-        """Inserta una alerta pendiente. ON CONFLICT DO NOTHING → idempotente.
+        """Inserta una alerta pendiente de forma idempotente.
 
-        Devuelve True si se insertó, False si ya existía.
+        El event_uid puede cambiar si el manifest trae otro timestamp para el
+        mismo archivo. Por eso se deduplica tambien por remote_video/remote_crop:
+        un mismo medio no debe enviarse dos veces.
         """
+        remote_video = str(payload.get("remote_video") or "").strip()
+        remote_crop = str(payload.get("remote_crop") or "").strip()
+        dedupe_key = remote_video or remote_crop or event_uid
         try:
             with psycopg2.connect(self._db_dsn) as conn:
                 with conn.cursor() as cur:
+                    cur.execute("SELECT pg_advisory_xact_lock(hashtext(%s))", (dedupe_key,))
+                    cur.execute(
+                        """
+                        SELECT 1
+                        FROM camera_alert_outbox
+                        WHERE event_uid = %s
+                           OR (%s <> '' AND telegram_payload->>'remote_video' = %s)
+                           OR (%s <> '' AND telegram_payload->>'remote_crop' = %s)
+                        LIMIT 1
+                        """,
+                        (event_uid, remote_video, remote_video, remote_crop, remote_crop),
+                    )
+                    if cur.fetchone():
+                        conn.commit()
+                        return False
                     cur.execute(
                         """
                         INSERT INTO camera_alert_outbox
