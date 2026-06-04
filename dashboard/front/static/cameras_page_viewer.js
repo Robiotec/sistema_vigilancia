@@ -64,7 +64,7 @@
     s.id = "camera-event-card-styles";
     s.textContent = `
 /* ── base badge ── */
-.event-card__badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:20px;font:700 9px/1.4 system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;width:fit-content}
+.event-card__badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:20px;font:800 10.5px/1.4 system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;width:fit-content}
 .event-card__badge svg{width:10px;height:10px;flex:0 0 auto}
 /* ── plate – layout vertical ── */
 .event-card--plate{flex-direction:column;align-items:stretch;gap:8px;border-color:rgba(59,130,246,.28);box-shadow:0 0 0 1px rgba(59,130,246,.08) inset,0 8px 22px rgba(0,0,0,.14)}
@@ -79,7 +79,7 @@
 .event-card--plate__time{font:400 9px/1.4 system-ui,sans-serif;color:rgba(148,163,184,.45);margin-top:2px}
 /* alert flags */
 .event-card--plate__flags{display:flex;flex-wrap:wrap;gap:4px}
-.ec-flag{display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:4px;font:700 8px/1.4 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase}
+.ec-flag{display:inline-flex;align-items:center;gap:3px;padding:3px 7px;border-radius:5px;font:800 9.5px/1.4 system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase}
 .ec-flag--danger{background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
 .ec-flag--warn{background:rgba(245,158,11,.18);color:#fcd34d;border:1px solid rgba(245,158,11,.3)}
 .ec-flag--ok{background:rgba(16,185,129,.14);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
@@ -518,13 +518,32 @@ const INFERENCE_LOADING_SRCDOC = [
     return `<span class="ec-flag ${cls}">${escapeHtml(label)}: ${escapeHtml(v || "—")}</span>`;
   }
 
+  function obtenerNombreCortoVehiculo(nombre) {
+    if (!nombre) return "";
+    const palabrasInvalidas = new Set([
+      "AC", "A/C", "4P", "5P", "2P", "3P",
+      "4X2", "4X4", "TM", "AT", "MT", "CVT",
+    ]);
+    return String(nombre)
+      .toUpperCase()
+      .split(/\s+/)
+      .map((palabra) => palabra.trim())
+      .filter(Boolean)
+      .filter((palabra) => /^[A-Z0-9/.-]+$/.test(palabra))
+      .filter((palabra) => !/^\d/.test(palabra))
+      .filter((palabra) => !palabrasInvalidas.has(palabra))
+      .slice(0, 2)
+      .join(" ");
+  }
+
   function cameraEventHtmlPlate(item, key) {
     const rows      = Array.isArray(item.rows) ? item.rows : [];
     const rv        = (lbl) => cameraEventRowValue(rows, Array.isArray(lbl) ? lbl : [lbl]);
     const imageUrl  = item.crop_path ? `/api/camera-event-crop?path=${encodeURIComponent(String(item.crop_path))}` : "";
     const plate     = String(item.plate || rv(["placa"]) || "—").trim();
     const marca     = rv(["marca"]) || "";
-    const modelo    = rv(["modelo"]) || "";
+    const modeloCompleto = rv(["modelo"]) || "";
+    const modelo    = obtenerNombreCortoVehiculo(modeloCompleto) || modeloCompleto;
     const robado    = rv(["reportado robado"]) || "";
     const multas    = rv(["multas pendientes"]) || "";
     const datetime  = _eventTimestampDatetime(item);
@@ -542,14 +561,11 @@ const INFERENCE_LOADING_SRCDOC = [
         ${thumbHtml}
         <div class="face-preview-copy event-card__content">
           <span class="event-card__badge">PLACA</span>
-          <strong style="font:800 15px/1.2 monospace,system-ui;color:#fff;letter-spacing:.05em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(plate)}</strong>
-          ${marca  ? `<span style="font:600 12px/1.3 system-ui;color:rgba(203,213,225,.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(marca)}</span>` : ""}
-          ${modelo ? `<span style="font:500 11px/1.3 system-ui;color:rgba(148,163,184,.8);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(modelo)}</span>` : ""}
-          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px">
-            ${_flagHtml("Multas", multas)}
-            ${_flagHtml("Reportado", robado)}
-          </div>
-          <time style="font:400 10px/1.4 system-ui;color:rgba(148,163,184,.5);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+          <strong style="font:900 17px/1.22 monospace,system-ui;color:#fff;letter-spacing:.05em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(plate)}</strong>
+          ${marca  ? `<span style="font:700 13px/1.35 system-ui;color:rgba(226,232,240,.94);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(marca)}</span>` : ""}
+          ${modelo ? `<span style="font:800 14.5px/1.35 system-ui;color:rgba(248,250,252,.98);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(modelo)}</span>` : ""}
+          
+          <time style="font:600 11.5px/1.45 system-ui;color:rgba(203,213,225,.72);margin-top:3px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
         </div>
       </article>`;
   }
