@@ -11,13 +11,15 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from back.app.context import clear_context_cache
-from back.app.state import remote_clip_telegram_notifier
 from back.app.routers import auth, cameras, data, events, notifications, org, pages, proxy, vehicles
 from back.app.routers.cameras import _reload_cam_path_map, start_cam_path_map_refresher
+from back.app.services.db_telegram_feeder import DBTelegramFeeder
 
 ROOT = Path(__file__).resolve().parents[2]
 STATIC = ROOT / "front" / "static"
 _DASHBOARD_DIR = ROOT  # /root/robiotec/dashboard
+
+_telegram_feeder: DBTelegramFeeder | None = None
 
 app = FastAPI(title="Robiotec Dashboard", version="0.2.0")
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
@@ -55,15 +57,8 @@ async def invalidate_context_on_write(request: Request, call_next):
 
 @app.on_event("startup")
 def on_startup() -> None:
-    remote_clip_telegram_notifier.start()
+    global _telegram_feeder
     start_cam_path_map_refresher()
-    # Ingest events from remote AI server (10.0.0.2) every 5 minutes
-    threading.Thread(
-        target=_worker_loop,
-        args=("back.app.services.remote_event_ingest_worker", 30, 300, ["--limit", "15", "--tail-mb", "8"]),
-        daemon=True,
-        name="event-ingest",
-    ).start()
     # Sync plate vehicle info from 10.0.0.3 every 2 minutes
     threading.Thread(
         target=_worker_loop,
@@ -71,11 +66,17 @@ def on_startup() -> None:
         daemon=True,
         name="plate-lookup-sync",
     ).start()
+    # Telegram feeder: lee camera_event_history (DB local) → outbox → Telegram
+    from back.app.config import get_settings
+    _telegram_feeder = DBTelegramFeeder(get_settings())
+    _telegram_feeder.start()
 
 
 @app.on_event("shutdown")
 def on_shutdown() -> None:
-    remote_clip_telegram_notifier.stop()
+    global _telegram_feeder
+    if _telegram_feeder:
+        _telegram_feeder.stop()
 
 
 app.include_router(pages.router)

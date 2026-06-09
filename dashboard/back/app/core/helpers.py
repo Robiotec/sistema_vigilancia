@@ -59,7 +59,7 @@ class DashboardHelper(BaseHelper):
 
     def is_auth_error(self, error: Exception | str) -> bool:
         text = str(error).strip().lower()
-        return any(part in text for part in ("token invalido", "unauthorized", "no autorizado", "401"))
+        return any(part in text for part in ("token invalido", "usuario invalido", "unauthorized", "401"))
 
     def auth_json_response(self) -> JSONResponse:
         response = JSONResponse({"error": "authentication_required", "message": "Sesion expirada"}, status_code=401)

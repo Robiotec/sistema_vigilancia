@@ -186,7 +186,7 @@ class StreamConfigCreate(BaseModel):
 
 def require_admin(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
     roles = set(get_user_roles(db, current_user))
-    if not roles.intersection({"master", "admin", "company_admin"}):
+    if not roles.intersection({"master", "admin"}):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
     return current_user
 
@@ -372,24 +372,26 @@ def _create_camera_with_stream(db: Session, data: dict[str, Any]) -> Camera:
     return item
 
 
-def crud_routes(prefix: str, model, create_schema):
-    local_router = APIRouter(prefix=prefix, dependencies=[Depends(require_admin)])
+def crud_routes(prefix: str, model, create_schema, allow_read: bool = False):
+    read_deps = [Depends(get_current_user)] if allow_read else [Depends(require_admin)]
+    write_deps = [Depends(require_admin)]
+    local_router = APIRouter(prefix=prefix)
 
-    @local_router.get("")
+    @local_router.get("", dependencies=read_deps)
     def list_items(db: Session = Depends(get_db)):
         query = select(model)
         if hasattr(model, "deleted_at"):
             query = query.where(model.deleted_at.is_(None))
         return db.scalars(query).all()
 
-    @local_router.get("/{item_id}")
+    @local_router.get("/{item_id}", dependencies=read_deps)
     def get_item(item_id: UUID, db: Session = Depends(get_db)):
         item = db.get(model, item_id)
         if not item or (hasattr(item, "deleted_at") and item.deleted_at is not None):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recurso no encontrado")
         return item
 
-    @local_router.put("/{item_id}")
+    @local_router.put("/{item_id}", dependencies=write_deps)
     def update_item(item_id: UUID, payload: dict[str, Any], db: Session = Depends(get_db)):
         item = db.get(model, item_id)
         if not item:
@@ -463,7 +465,7 @@ def crud_routes(prefix: str, model, create_schema):
         db.refresh(item)
         return item
 
-    @local_router.post("")
+    @local_router.post("", dependencies=write_deps)
     def create_item(payload: create_schema, db: Session = Depends(get_db)):  # type: ignore[valid-type]
         data = payload.model_dump()
         if model is User:
@@ -563,7 +565,7 @@ def crud_routes(prefix: str, model, create_schema):
         db.refresh(item)
         return item
 
-    @local_router.delete("/{item_id}", response_model=MessageResponse)
+    @local_router.delete("/{item_id}", response_model=MessageResponse, dependencies=write_deps)
     def delete_item(item_id: UUID, db: Session = Depends(get_db)) -> MessageResponse:
         item = db.get(model, item_id)
         if not item:
@@ -681,7 +683,7 @@ router.include_router(crud_routes("/companies", Company, CompanyCreate))
 router.include_router(crud_routes("/roles", Role, RoleCreate))
 router.include_router(crud_routes("/users", User, UserCreate))
 router.include_router(crud_routes("/areas", Area, AreaCreate))
-router.include_router(crud_routes("/cameras", Camera, CameraCreate))
+router.include_router(crud_routes("/cameras", Camera, CameraCreate, allow_read=True))
 router.include_router(crud_routes("/rboxes", RBox, RBoxCreate))
 router.include_router(crud_routes("/vehicles", Vehicle, VehicleCreate))
 router.include_router(crud_routes("/drones", Drone, DroneCreate))

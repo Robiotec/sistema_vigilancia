@@ -11,10 +11,10 @@ def user_can_access_stream(db: Session, user: User, stream_path: StreamPath) -> 
         return True
     if user.company_id != stream_path.company_id:
         return False
-    if "company_admin" in roles:
+    if "admin" in roles:
         return True
     if stream_path.area_id is None:
-        return "operator" in roles or "viewer" in roles
+        return "viewer" in roles
     return db.scalar(
         select(
             exists().where(

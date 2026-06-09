@@ -17,7 +17,7 @@ from back.app.services.notification_settings import (
 )
 from back.app.services.send_mail import send_configured_email
 from back.app.services.send_telegram import send_configured_telegram_alert
-from back.app.state import remote_clip_telegram_notifier
+from back.app import application as _app_module
 
 router = APIRouter(prefix="/api", tags=["notifications"])
 
@@ -241,15 +241,19 @@ def notification_settings_test_telegram_form(request: Request):
 def notification_settings_clip_notifier_status(request: Request):
     if not get_token(request):
         return auth_json_response()
-    return {"ok": True, **remote_clip_telegram_notifier.status()}
+    feeder = _app_module._telegram_feeder
+    return {"ok": True, **(feeder.status() if feeder else {"running": False})}
 
 
 @router.post("/notification-settings/clip-notifier-check")
 def notification_settings_clip_notifier_check(request: Request):
     if not get_token(request):
         return auth_json_response()
+    feeder = _app_module._telegram_feeder
+    if not feeder:
+        return JSONResponse({"ok": False, "error": "Feeder no iniciado"}, status_code=503)
     try:
-        result = remote_clip_telegram_notifier.check_once()
+        result = feeder.check_once()
     except Exception as exc:
         return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
-    return {"ok": True, **result, "status": remote_clip_telegram_notifier.status()}
+    return {"ok": True, **result, "status": feeder.status()}

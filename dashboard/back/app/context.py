@@ -6,6 +6,7 @@ auth, normalización, llamadas API, caché de contexto y renderizado.
 """
 from __future__ import annotations
 
+import base64
 import json
 import threading
 import time
@@ -69,6 +70,22 @@ def _num_id(value: Any) -> int:
 
 def get_token(request: Request) -> str | None:
     return helper.token(request)
+
+
+def get_token_roles(token: str) -> list[str]:
+    try:
+        payload_b64 = token.split(".")[1]
+        padding = 4 - len(payload_b64) % 4
+        payload = json.loads(base64.urlsafe_b64decode(payload_b64 + "=" * padding))
+        return payload.get("roles") or []
+    except Exception:
+        return []
+
+
+def require_admin_role(token: str | None) -> bool:
+    if not token:
+        return False
+    return bool({"master", "admin"}.intersection(get_token_roles(token)))
 
 
 def is_auth_error(error: Exception | str) -> bool:
@@ -348,15 +365,21 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
     drones: list[dict[str, Any]] = []
 
     if token:
+        def _try_api(path: str) -> Any:
+            try:
+                return call_api(path, token=token) or []
+            except RuntimeError:
+                return []
+
         try:
             me = call_api("/auth/me", token=token) or {}
-            companies = call_api("/companies", token=token) or []
-            cameras = call_api("/cameras", token=token) or []
-            streams = call_api("/stream-paths", token=token) or []
-            vehicles = call_api("/vehicles", token=token) or []
-            drones = call_api("/drones", token=token) or []
         except RuntimeError:
             pass
+        companies = _try_api("/companies")
+        cameras = _try_api("/cameras")
+        streams = _try_api("/stream-paths")
+        vehicles = _try_api("/vehicles")
+        drones = _try_api("/drones")
 
     db_cameras, db_camera_items_error = fetch_db_camera_rows()
     if db_cameras:
@@ -416,7 +439,9 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
     )
 
     username = _text(me.get("username"), "robiotec")
-    role = ", ".join(me.get("roles") or ["master"])
+    user_roles = set(me.get("roles") or ["master"])
+    role = ", ".join(user_roles)
+    is_admin = bool(user_roles.intersection({"master", "admin"}))
     db_codes, db_codes_error = fetch_db_camera_unique_codes()
     db_names, db_names_error = fetch_db_camera_names()
     notif = load_notification_settings()
@@ -444,6 +469,8 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__ERROR_BLOCK__": "",
         "__CAMERA_STREAMS__": "",
         "__CAMERA_SWITCHER_FALLBACK__": camera_switcher_fallback(camera_items),
+        "__INFERENCE_TOOLBAR_HIDDEN__": "" if is_admin else "hidden",
+        "__USER_IS_ADMIN__": "true" if is_admin else "false",
         "__CAMERA_PAGE_ACTION__": '<button class="camera-register-open" id="camera-register-open" type="button">Registrar cámara</button>',
         "__CAMERA_ADMIN_MODAL__": template_source("partials/camera_admin_modal.html"),
         "__CAMERA_ADMIN_ACCESS_NOTE__": "",
@@ -489,8 +516,8 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__USER_ADMIN_MODE_LABEL__": "Master",
         "__USER_ADMIN_SCOPE_LABEL__": "Global",
         "__USER_ADMIN_SCOPE_ROLE__": role,
-        "__ROLE_ADMIN_HERO_CARD__": template_source("partials/user_admin_role_hero_card.html"),
-        "__ROLE_ADMIN_SECTION__": template_source("partials/user_admin_role_section.html"),
+        "__ROLE_ADMIN_HERO_CARD__": template_source("partials/user_admin_role_hero_card.html") if is_admin else "",
+        "__ROLE_ADMIN_SECTION__": template_source("partials/user_admin_role_section.html") if is_admin else "",
     }
 
 

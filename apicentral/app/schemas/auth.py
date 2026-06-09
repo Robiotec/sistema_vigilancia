@@ -16,7 +16,10 @@ class TokenResponse(BaseModel):
 class UserMe(BaseModel):
     id: UUID
     username: str
+    name: str | None = None
+    email: str | None = None
     company_id: UUID | None
+    active: bool = True
     roles: list[str]
 
 

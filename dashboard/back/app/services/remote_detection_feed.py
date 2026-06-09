@@ -12,9 +12,9 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 from urllib.parse import urlparse, urlunparse
 
-import paramiko
+import urllib.request
 import psycopg2
-from psycopg2.extras import Json, RealDictCursor, execute_values
+from psycopg2.extras import Json, RealDictCursor
 
 from back.app.config import Settings
 
@@ -168,139 +168,34 @@ class RemoteDetectionFeedService:
         if not normalized_cam_id:
             return []
 
-        remote_python = f"""
-import json, os
-from pathlib import Path
-
-base = Path({self.settings.ssh_events_base_path!r})
-manifest = base / "manifest.jsonl"
-cam_id = {normalized_cam_id!r}
-limit = {max(1, min(int(limit), 24))}
-VIDEO_TYPES = {tuple(VIDEO_EVENT_TYPES)!r}
-TAIL_BYTES = 2 * 1024 * 1024  # leer solo los ultimos 2 MB
-items = []
-
-def resolve_path(value):
-    raw = str(value or "").strip()
-    if not raw:
-        return None
-    path = Path(raw)
-    if path.is_absolute():
-        return path
-    # Strip leading segment if it duplicates base.name (manifest stores paths
-    # relative to base's parent, e.g. "results_presentacion/CAM-X/clip.mp4")
-    parts = path.parts
-    if parts and parts[0] == base.name:
-        path = Path(*parts[1:]) if len(parts) > 1 else Path(".")
-    for candidate in [base / cam_id / path, base / path]:
-        if candidate.exists():
-            return candidate
-    return base / path
-
-def read_tail_lines(path, tail_bytes):
-    size = path.stat().st_size
-    offset = max(0, size - tail_bytes)
-    with path.open("rb") as fh:
-        fh.seek(offset)
-        raw = fh.read()
-    text = raw.decode("utf-8", errors="replace")
-    if offset > 0:
-        nl = text.find("\\n")
-        text = text[nl + 1:] if nl >= 0 else ""
-    return text.splitlines()
-
-if manifest.exists():
-    lines = read_tail_lines(manifest, TAIL_BYTES)
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-        try:
-            row = json.loads(line)
-        except Exception:
-            continue
-        if str(row.get("cam_id") or "").strip() != cam_id:
-            continue
-        event_type = str(row.get("type") or "").strip()
-        if event_type in VIDEO_TYPES:
-            video_file = resolve_path(row.get("clip_file") or row.get("file"))
-            json_file = resolve_path(row.get("json_file"))
-            if not video_file:
-                continue
-            payload = dict(row)
-            if json_file and json_file.exists():
-                try:
-                    loaded_payload = json.loads(json_file.read_text(encoding="utf-8", errors="replace"))
-                    if isinstance(loaded_payload, dict):
-                        payload.update(loaded_payload)
-                except Exception:
-                    pass
-            payload["track_id"] = payload.get("track_id") or row.get("track_id")
-            items.append({{
-                "event_type": event_type,
-                "cam_id": cam_id,
-                "timestamp": int(payload.get("timestamp") or row.get("ts") or 0),
-                "source_file": str(json_file or video_file),
-                "crop_path": str(payload.get("crop_path") or ""),
-                "video_path": str(video_file),
-                "manifest_payload": row,
-                "payload": payload,
-            }})
-            continue
-        source_file = resolve_path(row.get("file"))
-        if not source_file or not source_file.exists():
-            continue
-        try:
-            payload = json.loads(source_file.read_text(encoding="utf-8", errors="replace"))
-        except Exception:
-            continue
-        items.append({{
-            "event_type": event_type,
-            "cam_id": cam_id,
-            "timestamp": int(row.get("ts") or payload.get("timestamp") or 0),
-            "source_file": str(source_file),
-            "crop_path": str(payload.get("crop_path") or ""),
-            "video_path": "",
-            "manifest_payload": row,
-            "payload": payload,
-        }})
-
-print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_ascii=False))
-"""
-        output = self._run_python(remote_python)
-        if not output:
-            return []
-
-        try:
-            parsed = json.loads(output)
-        except json.JSONDecodeError:
-            return []
-
-        if isinstance(parsed, dict):
-            items = parsed.get("items") if isinstance(parsed.get("items"), list) else []
-            history_items = parsed.get("history_items") if isinstance(parsed.get("history_items"), list) else items
-        else:
-            items = parsed if isinstance(parsed, list) else []
-            history_items = items
+        sql = """
+            SELECT
+                event_type, camera_id, event_timestamp,
+                json_file_path, crop_path, video_file_path, detail_payload
+            FROM camera_event_history
+            WHERE camera_id = %s
+            ORDER BY detected_at DESC, created_at DESC
+            LIMIT %s
+        """
+        with self._db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(sql, (normalized_cam_id, max(1, min(int(limit), 24))))
+                rows = cur.fetchall()
 
         events = [
             RemoteCameraEvent(
-                event_type=str(item.get("event_type") or "").strip(),
-                cam_id=str(item.get("cam_id") or "").strip(),
-                timestamp=int(item.get("timestamp") or 0),
-                source_file=str(item.get("source_file") or "").strip(),
-                crop_path=str(item.get("crop_path") or "").strip(),
-                video_path=str(item.get("video_path") or "").strip(),
-                payload=item.get("payload") if isinstance(item.get("payload"), dict) else {},
+                event_type=str(row.get("event_type") or "").strip(),
+                cam_id=str(row.get("camera_id") or "").strip(),
+                timestamp=int(row.get("event_timestamp") or 0),
+                source_file=str(row.get("json_file_path") or "").strip(),
+                crop_path=str(row.get("crop_path") or "").strip(),
+                video_path=str(row.get("video_file_path") or "").strip(),
+                payload=row.get("detail_payload") if isinstance(row.get("detail_payload"), dict) else {},
             )
-            for item in items
+            for row in rows
         ]
-        events.sort(key=lambda event: event.timestamp, reverse=True)
         rendered_events = [event.to_dict() for event in events]
         try:
-            # La ingesta/persistencia de eventos ahora es responsabilidad exclusiva
-            # del worker robiotec-remote-event-ingest.service.
-            # Abrir una cámara en el dashboard NO debe insertar eventos en la DB.
             self._enrich_plate_events_from_db(rendered_events)
         except Exception:
             pass
@@ -545,29 +440,34 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         return {"items": items, "total": len(items)}
 
     def read_remote_file(self, remote_path: str) -> tuple[bytes, str]:
-        normalized_path = str(PurePosixPath(remote_path or "")).strip()
-        if not normalized_path:
-            raise FileNotFoundError("Ruta remota vacía")
-
-        with self._client() as client:
-            with client.open_sftp() as sftp:
-                resolved_path = self._resolve_sftp_file(sftp, normalized_path)
-                with sftp.open(resolved_path, "rb") as remote_file:
-                    content = remote_file.read()
-        media_type, _ = mimetypes.guess_type(resolved_path)
+        url = str(remote_path or "").strip()
+        if not url:
+            raise FileNotFoundError("Ruta vacía")
+        if not url.startswith(("http://", "https://")):
+            raise FileNotFoundError(f"Ruta no es URL MinIO: {url}")
+        req = urllib.request.Request(url, headers={"User-Agent": "RobiotecDashboard/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                content = resp.read()
+        except Exception as exc:
+            raise FileNotFoundError(f"No se pudo descargar {url}: {exc}") from exc
+        media_type, _ = mimetypes.guess_type(url)
         return content, media_type or "application/octet-stream"
 
     def cache_remote_video(self, remote_path: str) -> tuple[Path, str]:
-        normalized_path = str(PurePosixPath(remote_path or "")).strip()
-        if not normalized_path:
-            raise FileNotFoundError("Ruta remota vacía")
+        url = str(remote_path or "").strip()
+        if not url:
+            raise FileNotFoundError("Ruta vacía")
+        if not url.startswith(("http://", "https://")):
+            raise FileNotFoundError(f"Ruta no es URL MinIO: {url}")
+        with self._cache_lock(url):
+            return self._cache_remote_video_locked(url)
 
-        with self._cache_lock(normalized_path):
-            return self._cache_remote_video_locked(normalized_path)
-
-    def _cache_remote_video_locked(self, normalized_path: str) -> tuple[Path, str]:
-        suffix = PurePosixPath(normalized_path).suffix or ".mp4"
-        cache_key = hashlib.sha256(normalized_path.encode("utf-8")).hexdigest()
+    def _cache_remote_video_locked(self, url: str) -> tuple[Path, str]:
+        from urllib.parse import urlparse
+        parsed = urlparse(url)
+        suffix = PurePosixPath(parsed.path).suffix or ".mp4"
+        cache_key = hashlib.sha256(url.encode("utf-8")).hexdigest()
         source_path = self.video_cache_dir / f"{cache_key}{suffix}"
         browser_path = self.video_cache_dir / f"{cache_key}.browser.mp4"
         browser_ok_path = self.video_cache_dir / f"{cache_key}.browser-ok"
@@ -578,17 +478,18 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             return browser_path, "video/mp4"
 
         if not source_path.exists() or source_path.stat().st_size == 0:
-            with self._client() as client:
-                with client.open_sftp() as sftp:
-                    resolved_path = self._resolve_sftp_file(sftp, normalized_path)
-                    with sftp.open(resolved_path, "rb") as remote_file:
-                        with partial_path.open("wb") as local_file:
-                            while True:
-                                chunk = remote_file.read(1024 * 1024)
-                                if not chunk:
-                                    break
-                                local_file.write(chunk)
-                    partial_path.replace(source_path)
+            req = urllib.request.Request(url, headers={"User-Agent": "RobiotecDashboard/1.0"})
+            try:
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    with partial_path.open("wb") as fh:
+                        while True:
+                            chunk = resp.read(1024 * 1024)
+                            if not chunk:
+                                break
+                            fh.write(chunk)
+            except Exception as exc:
+                raise FileNotFoundError(f"No se pudo descargar {url}: {exc}") from exc
+            partial_path.replace(source_path)
 
         if browser_ok_path.exists():
             return source_path, "video/mp4"
@@ -599,31 +500,13 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         self._ensure_browser_video(source_path, browser_path)
         return browser_path, "video/mp4"
 
-    def _resolve_sftp_file(self, sftp: Any, remote_path: str) -> str:
-        base = PurePosixPath(self.settings.ssh_events_base_path)
-        raw_path = PurePosixPath(remote_path)
-        candidates: list[PurePosixPath] = []
-
-        if raw_path.is_absolute():
-            candidates.append(raw_path)
-        else:
-            candidates.append(base / raw_path)
-            parts = raw_path.parts
-            if parts and parts[0] == base.name:
-                stripped = PurePosixPath(*parts[1:]) if len(parts) > 1 else PurePosixPath(".")
-                candidates.append(base / stripped)
-            candidates.append(raw_path)
-
-        seen: set[str] = set()
+    def _resolve_sftp_file(self, sftp: Any, remote_path: str) -> str:  # noqa: unused — kept for compat
+        candidates: list[str] = [remote_path]
         for candidate in candidates:
-            normalized = str(candidate)
-            if normalized in seen:
-                continue
-            seen.add(normalized)
             try:
-                sftp.stat(normalized)
-                return normalized
-            except FileNotFoundError:
+                sftp.stat(candidate)
+                return candidate
+            except Exception:
                 continue
             except OSError:
                 continue
@@ -664,145 +547,6 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         finally:
             with self._video_warm_lock:
                 self._video_warming.discard(remote_path)
-
-    def _persist_events(self, items: list[dict[str, Any]]) -> None:
-        rows = [self._history_row(item) for item in items]
-        rows = [row for row in rows if row is not None]
-        rows = list({self._history_event_uid_key(row): row for row in rows}.values())
-        if not rows:
-            return
-
-        query = """
-            INSERT INTO camera_event_history (
-                event_type,
-                event_category,
-                origin,
-                camera_id,
-                camera_name,
-                event_timestamp,
-                detected_at,
-                detected_date,
-                title,
-                description,
-                person_id,
-                person_name,
-                plate,
-                track_id,
-                status,
-                severity,
-                manifest_file_path,
-                json_file_path,
-                video_file_path,
-                image_file_path,
-                crop_path,
-                manifest_payload,
-                detail_payload
-            )
-            VALUES %s
-            ON CONFLICT ON CONSTRAINT uq_camera_event_history_event_uid DO UPDATE SET
-                event_category = EXCLUDED.event_category,
-                origin = EXCLUDED.origin,
-                camera_name = EXCLUDED.camera_name,
-                detected_at = EXCLUDED.detected_at,
-                detected_date = EXCLUDED.detected_date,
-                title = EXCLUDED.title,
-                description = EXCLUDED.description,
-                person_id = EXCLUDED.person_id,
-                person_name = EXCLUDED.person_name,
-                plate = EXCLUDED.plate,
-                track_id = EXCLUDED.track_id,
-                severity = EXCLUDED.severity,
-                manifest_file_path = EXCLUDED.manifest_file_path,
-                json_file_path = EXCLUDED.json_file_path,
-                video_file_path = EXCLUDED.video_file_path,
-                image_file_path = EXCLUDED.image_file_path,
-                crop_path = EXCLUDED.crop_path,
-                manifest_payload = EXCLUDED.manifest_payload,
-                detail_payload = CASE
-                    WHEN camera_event_history.event_type = 'plate'
-                     AND camera_event_history.detail_payload ? 'vehicle_info_record'
-                    THEN EXCLUDED.detail_payload
-                        || jsonb_build_object(
-                            'vehicle_info', camera_event_history.detail_payload->'vehicle_info',
-                            'vehicle_info_status', camera_event_history.detail_payload->'vehicle_info_status',
-                            'vehicle_info_source', camera_event_history.detail_payload->'vehicle_info_source',
-                            'vehicle_info_record', camera_event_history.detail_payload->'vehicle_info_record'
-                        )
-                    ELSE EXCLUDED.detail_payload
-                END,
-                updated_at = now()
-        """
-        with self._db_connection() as conn:
-            with conn.cursor() as cur:
-                execute_values(cur, query, rows)
-            conn.commit()
-
-    @staticmethod
-    def _history_event_uid_key(row: tuple[Any, ...]) -> str:
-        values = (
-            row[3],   # camera_id
-            row[0],   # event_type
-            row[5],   # event_timestamp
-            row[13],  # track_id
-            row[10],  # person_id
-            row[12],  # plate
-            row[17],  # json_file_path
-            row[18],  # video_file_path
-            row[19],  # image_file_path
-            row[20],  # crop_path
-            row[16],  # manifest_file_path
-        )
-        raw = "|".join("" if value is None else str(value) for value in values)
-        return hashlib.md5(raw.encode("utf-8")).hexdigest()
-
-    def _history_row(self, item: dict[str, Any]) -> tuple[Any, ...] | None:
-        event_type = str(item.get("event_type") or "").strip()
-        camera_id = str(item.get("cam_id") or "").strip()
-        if not event_type or not camera_id:
-            return None
-
-        payload = item.get("payload") if isinstance(item.get("payload"), dict) else {}
-        manifest_payload = (
-            item.get("manifest_payload") if isinstance(item.get("manifest_payload"), dict) else {}
-        )
-        timestamp = self._int_value(item.get("timestamp") or payload.get("timestamp") or manifest_payload.get("ts"))
-        detected_at = datetime.fromtimestamp(timestamp, tz=ECUADOR_TZ) if timestamp else datetime.now(ECUADOR_TZ)
-
-        video_path = str(item.get("video_path") or payload.get("clip_path") or "").strip() or None
-        source_file = str(item.get("source_file") or "").strip() or None
-        crop_path = str(item.get("crop_path") or payload.get("crop_path") or "").strip() or None
-        image_file_path = self._first_text(payload, ("image_path", "source_image", "image_file", "frame_path"))
-
-        person_id = self._first_text(payload, ("person_id",)) or self._first_text(manifest_payload, ("person_id",))
-        person_name = self._first_text(payload, ("person_name", "name"))
-        plate = self._first_text(payload, ("plate", "placa"))
-        track_id = self._int_value(payload.get("track_id") or manifest_payload.get("track_id"))
-
-        return (
-            event_type,
-            self._event_category(event_type),
-            "fixed_camera",
-            camera_id,
-            self._camera_name(camera_id),
-            timestamp,
-            detected_at,
-            detected_at.date(),
-            self._event_title(event_type),
-            self._event_description(event_type, payload),
-            person_id,
-            person_name,
-            plate,
-            track_id,
-            "new",
-            self._event_severity(event_type),
-            None,
-            source_file if source_file and source_file.endswith(".json") else None,
-            video_path,
-            image_file_path,
-            crop_path,
-            Json(manifest_payload),
-            Json(payload),
-        )
 
     def _db_connection(self):
         return psycopg2.connect(self._psycopg_dsn(self.settings.database_url))
@@ -1045,36 +789,3 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
             raise RuntimeError(completed.stderr.strip() or "No se pudo convertir el video a H.264")
         partial_path.replace(browser_path)
 
-    def _run_python(self, script: str) -> str:
-        command = "python3 - <<'PY'\n" + script.strip() + "\nPY"
-        with self._client() as client:
-            stdin, stdout, stderr = client.exec_command(command)
-            output = stdout.read().decode("utf-8", errors="replace").strip()
-            error = stderr.read().decode("utf-8", errors="replace").strip()
-            exit_status = stdout.channel.recv_exit_status()
-        if exit_status != 0:
-            raise RuntimeError(error or f"Comando remoto falló con código {exit_status}")
-        return output
-
-    def _client(self) -> paramiko.SSHClient:
-        client = paramiko.SSHClient()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(
-            hostname=self.settings.ssh_events_host,
-            username=self.settings.ssh_events_user,
-            password=self.settings.ssh_events_password,
-            port=self.settings.ssh_events_port,
-            timeout=10,
-        )
-        return _SSHClientContext(client)
-
-
-class _SSHClientContext:
-    def __init__(self, client: paramiko.SSHClient) -> None:
-        self.client = client
-
-    def __enter__(self) -> paramiko.SSHClient:
-        return self.client
-
-    def __exit__(self, exc_type, exc, tb) -> None:
-        self.client.close()

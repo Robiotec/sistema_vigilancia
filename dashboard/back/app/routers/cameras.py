@@ -37,6 +37,7 @@ from back.app.context import (
     fetch_db_camera_rows,
     fetch_db_camera_unique_codes,
     get_token,
+    require_admin_role,
     normalize_camera_item,
     normalize_drone_item,
     normalize_vehicle_item,
@@ -49,7 +50,6 @@ from back.app.state import (
     device_catalog,
     drone_normalizer,
     empresa_mapper,
-    remote_detection_feed,
     rbox_mapper,
     settings,
     stream_config_mapper,
@@ -263,6 +263,18 @@ def _ensure_camera_notification_columns() -> None:
     with _CAMERA_NOTIF_SCHEMA_LOCK:
         if _CAMERA_NOTIF_SCHEMA_READY:
             return
+        from back.app.services.db_pool import execute_returning
+        rows = execute_returning(
+            """SELECT column_name FROM information_schema.columns
+               WHERE table_name='cameras'
+                 AND column_name IN ('notification_telegram','notification_email')""",
+            (),
+        )
+        existing = {r["column_name"] for r in rows}
+        if "notification_telegram" in existing and "notification_email" in existing:
+            _CAMERA_NOTIF_SCHEMA_READY = True
+            return
+        # Columnas ausentes: requiere ejecutar migración como postgres
         from back.app.services.db_pool import execute
         execute("ALTER TABLE cameras ADD COLUMN IF NOT EXISTS notification_telegram boolean NOT NULL DEFAULT true")
         execute("ALTER TABLE cameras ADD COLUMN IF NOT EXISTS notification_email boolean NOT NULL DEFAULT true")
@@ -705,12 +717,15 @@ def cameras_registry(request: Request):
         return JSONResponse({"error": "authentication_required"}, status_code=401)
     try:
         cams = call_api("/cameras", token=token) or []
-        stream_configs = call_api("/stream-configs", token=token) or []
     except RuntimeError as exc:
         from back.app.context import is_auth_error, auth_json_response
         if is_auth_error(exc):
             return auth_json_response()
         raise
+    try:
+        stream_configs = call_api("/stream-configs", token=token) or []
+    except RuntimeError:
+        stream_configs = []
     db_items, error = db_camera_items()
     if db_items:
         return db_items
@@ -796,6 +811,8 @@ async def camera_inference_update(camera_id: str, request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
+    if not require_admin_role(token):
+        return JSONResponse({"error": "forbidden"}, status_code=403)
     p = await request.json()
     inference_enabled = bool(p.get("hacer_inferencia"))
     raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
@@ -855,6 +872,8 @@ async def camera_inference_update_by_name(request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
+    if not require_admin_role(token):
+        return JSONResponse({"error": "forbidden"}, status_code=403)
     p = await request.json()
     raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
     if raw_inference_type is None:
@@ -926,6 +945,8 @@ async def camera_inference_view_state(request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
+    if not require_admin_role(token):
+        return JSONResponse({"error": "forbidden"}, status_code=403)
     payload = await request.json()
     camera_key = payload.get("camera") or payload.get("camera_name") or payload.get("path")
     active = bool(payload.get("active"))

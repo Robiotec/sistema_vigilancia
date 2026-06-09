@@ -19,7 +19,6 @@ from back.app.domain.streaming import StreamConfigMapper
 from back.app.domain.vehicles import VehicleNormalizer
 from back.app.domain.vehicles.telemetry import VehicleTelemetryMapper
 from back.app.services.api_client import DashboardApiClient
-from back.app.services.remote_clip_telegram_notifier import RemoteClipTelegramNotifier
 from back.app.services.remote_detection_feed import RemoteDetectionFeedService
 from back.app.services.rendering import DashboardTemplateRenderer
 
@@ -33,7 +32,6 @@ STATIC = FRONT / "static"
 settings = get_settings()
 api_client = DashboardApiClient(settings)
 remote_detection_feed = RemoteDetectionFeedService(settings)
-remote_clip_telegram_notifier = RemoteClipTelegramNotifier(settings)
 helper = DashboardHelper(SESSION_COOKIE)
 camera_normalizer = CameraNormalizer()
 vehicle_normalizer = VehicleNormalizer()

@@ -215,6 +215,8 @@ const userAdminPassword = document.getElementById("user-admin-password");
 const userAdminPasswordHelp = document.getElementById("user-admin-password-help");
 const userAdminRole = document.getElementById("user-admin-role");
 const userAdminActive = document.getElementById("user-admin-active");
+const userAdminOrganization = document.getElementById("user-admin-organization");
+const userAdminOrganizationHelp = document.getElementById("user-admin-organization-help");
 const userAdminFeedback = document.getElementById("user-admin-feedback");
 const userAdminSubmit = document.getElementById("user-admin-submit");
 const userAdminReset = document.getElementById("user-admin-reset");
@@ -3771,6 +3773,10 @@ function friendlyOrganizationAdminError(error) {
       return "La organización seleccionada ya no existe.";
     case "organization_scope_forbidden":
       return "Solo puedes gestionar organizaciones cuyo propietario este dentro de tu jerarquia.";
+    case "nombre_requerido":
+      return "Ingresa un nombre para la organización.";
+    case "nombre_duplicado":
+      return "Ya existe una organización con ese nombre.";
     default:
       return code || "No se pudo completar la operación sobre la organización.";
   }
@@ -4852,6 +4858,22 @@ function renderUserAdminRoleOptions(roles) {
   userAdminRole.innerHTML = options.join("");
 }
 
+function renderUserAdminOrganizationOptions(organizations) {
+  if (!userAdminOrganization) return;
+  const source = Array.isArray(organizations) ? organizations : [];
+  const currentValue = String(userAdminOrganization.value || "").trim();
+  const options = [
+    '<option value="">Sin organización asignada</option>',
+    ...source.map((item) => {
+      const sourceId = String(item && item.source_id || "").trim();
+      const name = String(item && item.nombre || "").trim();
+      if (!sourceId || !name) return "";
+      return `<option value="${escapeHtml(sourceId)}" ${sourceId === currentValue ? "selected" : ""}>${escapeHtml(name)}</option>`;
+    }),
+  ].filter(Boolean);
+  userAdminOrganization.innerHTML = options.join("");
+}
+
 function findSelectedRoleAdminItem(roles) {
   const source = Array.isArray(roles) ? roles : [];
   if (selectedRoleAdminId === null) return null;
@@ -5883,6 +5905,24 @@ function syncUserAdminFormState({ preserveDraft = true } = {}) {
     if (userAdminActive) {
       userAdminActive.value = isEditing && selectedUser.active === false ? "false" : "true";
     }
+    if (userAdminOrganization) {
+      userAdminOrganization.value = isEditing ? String(selectedUser.company_id || "") : "";
+    }
+    if (userAdminOrganizationHelp) {
+      if (isEditing) {
+        const selectedOption = userAdminOrganization
+          ? userAdminOrganization.options[userAdminOrganization.selectedIndex]
+          : null;
+        const orgName = selectedOption && selectedOption.value
+          ? selectedOption.text
+          : null;
+        userAdminOrganizationHelp.textContent = orgName
+          ? `Organización actual: ${orgName}. Puedes cambiarla o dejarla vacía para quitar la asignación.`
+          : "Este usuario no tiene organización asignada. Selecciona una para darle acceso restringido.";
+      } else {
+        userAdminOrganizationHelp.textContent = "Asigna este usuario a una organización para que solo acceda a sus cámaras y recursos.";
+      }
+    }
   }
 }
 
@@ -5896,6 +5936,8 @@ function resetUserAdminForm({ preserveFeedback = false } = {}) {
   if (userAdminPassword) userAdminPassword.value = "";
   if (userAdminRole) userAdminRole.value = "";
   if (userAdminActive) userAdminActive.value = "true";
+  if (userAdminOrganization) userAdminOrganization.value = "";
+  if (userAdminOrganizationHelp) userAdminOrganizationHelp.textContent = "Asigna este usuario a una organización para que solo acceda a sus cámaras y recursos.";
   if (!preserveFeedback) {
     setUserAdminFeedback("");
   }
@@ -6269,6 +6311,11 @@ function renderUserAdminList(users) {
     return;
   }
 
+  const orgById = {};
+  (Array.isArray(lastOrganizationAdminSnapshot) ? lastOrganizationAdminSnapshot : []).forEach((org) => {
+    if (org && org.source_id) orgById[String(org.source_id)] = String(org.nombre || "").trim();
+  });
+
   userAdminRailList.innerHTML = source.map((item) => {
     const itemId = normalizeUserAdminId(item && item.id);
     const username = String(item && item.username || "usuario").trim() || "usuario";
@@ -6276,7 +6323,8 @@ function renderUserAdminList(users) {
     const displayName = String(item && item.name || "").trim();
     const email = String(item && item.email || "").trim();
     const activeLabel = item && item.active === false ? "Inactiva" : "Activa";
-    const meta = [displayName, email, activeLabel].filter(Boolean).join(" · ") || `ID ${String(itemId || "--")}`;
+    const orgName = item && item.company_id ? (orgById[String(item.company_id)] || "Org desconocida") : "";
+    const meta = [displayName, email, orgName || activeLabel].filter(Boolean).join(" · ") || `ID ${String(itemId || "--")}`;
     return `
       <button
         class="user-admin-summary-item ${itemId === selectedUserAdminId ? "is-active" : ""}"
@@ -6456,12 +6504,13 @@ function renderCameraAdmin(cameras, options, { preserveDraft = true } = {}) {
   renderCameraAdminRboxList(cameraAdminOptionCatalog.rboxes);
 }
 
-function renderUserAdmin(users, roles, { preserveDraft = true, roleOptions = roles } = {}) {
+function renderUserAdmin(users, roles, { preserveDraft = true, roleOptions = roles, organizations = [] } = {}) {
   lastUserAdminSnapshot = Array.isArray(users) ? [...users] : [];
   lastRoleAdminSnapshot = Array.isArray(roles) ? [...roles] : [];
   userAdminRoles = Array.isArray(roleOptions) ? [...roleOptions] : [];
 
   renderUserAdminRoleOptions(userAdminRoles);
+  renderUserAdminOrganizationOptions(Array.isArray(organizations) ? organizations : lastOrganizationAdminSnapshot);
   renderUserAdminSummary(lastUserAdminSnapshot);
 
   if (selectedRoleAdminId !== null && !findSelectedRoleAdminItem(lastRoleAdminSnapshot)) {
@@ -6525,8 +6574,8 @@ async function refreshUserAdmin({ preserveDraft = true } = {}) {
       shouldLoadRoleDirectory
         ? fetchJson("/api/user-roles", { timeoutMs: 4000 })
         : Promise.resolve([]),
-      (shouldLoadOrganizationPanel || shouldLoadCameraPanel)
-        ? fetchJson("/api/organizations", { timeoutMs: 4000 })
+      (shouldLoadOrganizationPanel || shouldLoadCameraPanel || shouldLoadUserPanel)
+        ? fetchJson("/api/organizations", { timeoutMs: 4000 }).catch(() => [])
         : Promise.resolve([]),
       shouldLoadCameraPanel
         ? fetchJson("/api/camera-form-options", { timeoutMs: 4000 })
@@ -6538,7 +6587,7 @@ async function refreshUserAdmin({ preserveDraft = true } = {}) {
     lastUserAdminUpdatedAt = Math.floor(Date.now() / 1000);
 
     if (shouldLoadUserPanel) {
-      renderUserAdmin(users, roles, { preserveDraft, roleOptions });
+      renderUserAdmin(users, roles, { preserveDraft, roleOptions, organizations });
     } else {
       lastUserAdminSnapshot = Array.isArray(users) ? [...users] : [];
     }
@@ -6683,6 +6732,7 @@ async function submitUserAdminForm(event) {
   const password = userAdminPassword ? userAdminPassword.value : "";
   const role = String(userAdminRole.value || "").trim();
   const active = String(userAdminActive && userAdminActive.value || "true").trim() !== "false";
+  const companyId = String(userAdminOrganization && userAdminOrganization.value || "").trim() || null;
   const isEditing = selectedUserAdminId !== null;
 
   if (!username) {
@@ -6729,6 +6779,7 @@ async function submitUserAdminForm(event) {
           password,
           role_names: role ? [role] : [],
           active,
+          company_id: companyId,
         }),
         timeoutMs: 10000,
       },
@@ -10121,6 +10172,10 @@ if (userAdminRole) {
 
 if (userAdminActive) {
   userAdminActive.addEventListener("change", () => setUserAdminFeedback(""));
+}
+
+if (userAdminOrganization) {
+  userAdminOrganization.addEventListener("change", () => setUserAdminFeedback(""));
 }
 
 if (organizationAdminName) {

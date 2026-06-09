@@ -83,6 +83,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 /* Escala global para que el dashboard se adapte correctamente a la ventana del navegador.
    Sin esto, el layout requería zoom manual al 60% en Chrome para verse bien. */
