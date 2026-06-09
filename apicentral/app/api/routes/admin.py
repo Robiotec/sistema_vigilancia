@@ -629,6 +629,54 @@ def list_rbox_cameras(rbox_id: UUID, db: Session = Depends(get_db), current_user
     ]
 
 
+@router.get("/users", dependencies=[Depends(require_admin)])
+def list_users(db: Session = Depends(get_db)):
+    users = db.scalars(select(User).where(User.deleted_at.is_(None))).all()
+    result = []
+    for u in users:
+        role_names = list(db.scalars(
+            select(Role.name)
+            .join(UserRole, UserRole.role_id == Role.id)
+            .where(UserRole.user_id == u.id, UserRole.active.is_(True))
+        ).all())
+        result.append({
+            "id": str(u.id),
+            "username": u.username,
+            "name": u.name,
+            "email": u.email,
+            "active": u.active,
+            "company_id": str(u.company_id) if u.company_id else None,
+            "role_names": role_names,
+        })
+    return result
+
+
+@router.put("/users/{item_id}", dependencies=[Depends(require_admin)])
+def update_user(item_id: UUID, payload: dict[str, Any], db: Session = Depends(get_db)):
+    user = db.get(User, item_id)
+    if not user or user.deleted_at is not None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
+    role_names = payload.pop("role_names", None)
+    raw_password = payload.pop("password", None)
+    for key, value in payload.items():
+        if key == "id" or not hasattr(user, key):
+            continue
+        setattr(user, key, value)
+    if raw_password:
+        user.password_hash = hash_password(raw_password)
+    if role_names is not None:
+        roles = db.scalars(select(Role).where(Role.name.in_(role_names))).all()
+        if len(roles) != len(set(role_names)):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Rol invalido")
+        db.query(UserRole).filter(UserRole.user_id == user.id).delete()
+        for role in roles:
+            db.add(UserRole(user_id=user.id, role_id=role.id))
+    db.commit()
+    db.refresh(user)
+    return {"id": str(user.id), "username": user.username, "name": user.name,
+            "email": user.email, "active": user.active}
+
+
 router.include_router(crud_routes("/companies", Company, CompanyCreate))
 router.include_router(crud_routes("/roles", Role, RoleCreate))
 router.include_router(crud_routes("/users", User, UserCreate))

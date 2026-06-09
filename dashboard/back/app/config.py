@@ -43,6 +43,12 @@ class Settings(BaseSettings):
     plate_lookup_api_token: str = Field(default="", alias="PLATE_LOOKUP_API_TOKEN")
     plate_lookup_timeout_seconds: float = Field(default=2.5, alias="PLATE_LOOKUP_TIMEOUT_SECONDS")
     plate_lookup_cache_ttl_seconds: int = Field(default=300, alias="PLATE_LOOKUP_CACHE_TTL_SECONDS")
+    minio_endpoint: str = Field(default="127.0.0.1:9000", alias="MINIO_ENDPOINT")
+    minio_access_key: str = Field(default="robiotec_minio", alias="MINIO_ACCESS_KEY")
+    minio_secret_key: str = Field(default="", alias="MINIO_SECRET_KEY")
+    minio_bucket: str = Field(default="eventos", alias="MINIO_BUCKET")
+    minio_secure: bool = Field(default=False, alias="MINIO_SECURE")
+    minio_public_endpoint: str = Field(default="207.246.68.223:9000", alias="MINIO_PUBLIC_ENDPOINT")
 
 
 @lru_cache

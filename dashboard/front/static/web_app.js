@@ -4813,18 +4813,18 @@ async function deleteVehicleRegistryEntry(registrationId, { closeModal = false }
 }
 
 function normalizeUserAdminId(value) {
-  const numeric = Number(value);
-  return Number.isInteger(numeric) && numeric > 0 ? numeric : null;
+  const text = String(value || "").trim();
+  return text || null;
 }
 
 function normalizeRoleAdminId(value) {
-  const numeric = Number(value);
-  return Number.isInteger(numeric) && numeric > 0 ? numeric : null;
+  const text = String(value || "").trim();
+  return text || null;
 }
 
 function normalizeOrganizationAdminId(value) {
-  const numeric = Number(value);
-  return Number.isInteger(numeric) && numeric > 0 ? numeric : null;
+  const text = String(value || "").trim();
+  return text || null;
 }
 
 function normalizeCameraAdminId(value) {
@@ -5779,7 +5779,7 @@ function syncRoleAdminFormState({ preserveDraft = true } = {}) {
 
   if (roleAdminDetailTitle) {
     roleAdminDetailTitle.textContent = isEditing
-      ? `Editar ${String(selectedRole.nombre || selectedRole.codigo || "rol").trim() || "rol"}`
+      ? `Editar ${String(selectedRole.codigo || selectedRole.nombre || selectedRole.name || "rol").trim() || "rol"}`
       : "Registrar nuevo rol";
   }
 
@@ -5800,10 +5800,10 @@ function syncRoleAdminFormState({ preserveDraft = true } = {}) {
 
   if (!preserveDraft || isEditing) {
     if (roleAdminCode) {
-      roleAdminCode.value = isEditing ? String(selectedRole.codigo || selectedRole.rol || "") : "";
+      roleAdminCode.value = isEditing ? String(selectedRole.codigo || selectedRole.name || "") : "";
     }
     if (roleAdminName) {
-      roleAdminName.value = isEditing ? String(selectedRole.nombre || selectedRole.label || "") : "";
+      roleAdminName.value = isEditing ? String(selectedRole.nombre || selectedRole.description || "") : "";
     }
     if (roleAdminOrder) {
       roleAdminOrder.value = isEditing ? String(selectedRole.nivel_orden ?? "") : "";
@@ -5833,7 +5833,7 @@ function syncUserAdminFormState({ preserveDraft = true } = {}) {
 
   if (userAdminDetailTitle) {
     userAdminDetailTitle.textContent = isEditing
-      ? `Editar ${String(selectedUser.usuario || "usuario").trim() || "usuario"}`
+      ? `Editar ${String(selectedUser.username || "usuario").trim() || "usuario"}`
       : "Registrar nuevo usuario";
   }
 
@@ -5860,28 +5860,28 @@ function syncUserAdminFormState({ preserveDraft = true } = {}) {
 
   if (!preserveDraft || isEditing) {
     if (userAdminUsername) {
-      userAdminUsername.value = isEditing ? String(selectedUser.usuario || "") : "";
+      userAdminUsername.value = isEditing ? String(selectedUser.username || "") : "";
     }
     if (userAdminEmail) {
       userAdminEmail.value = isEditing ? String(selectedUser.email || "") : "";
     }
     if (userAdminName) {
-      userAdminName.value = isEditing ? String(selectedUser.nombre || "") : "";
+      userAdminName.value = isEditing ? String(selectedUser.name || "") : "";
     }
     if (userAdminLastName) {
-      userAdminLastName.value = isEditing ? String(selectedUser.apellido || "") : "";
+      userAdminLastName.value = "";
     }
     if (userAdminPhone) {
-      userAdminPhone.value = isEditing ? String(selectedUser.telefono || "") : "";
+      userAdminPhone.value = "";
     }
     if (userAdminPassword) {
       userAdminPassword.value = "";
     }
     if (userAdminRole) {
-      userAdminRole.value = isEditing ? String(selectedUser.rol || selectedUser.rol_codigo || "") : "";
+      userAdminRole.value = isEditing ? String(selectedUser.role_names && selectedUser.role_names[0] || "") : "";
     }
     if (userAdminActive) {
-      userAdminActive.value = isEditing && selectedUser.activo === false ? "false" : "true";
+      userAdminActive.value = isEditing && selectedUser.active === false ? "false" : "true";
     }
   }
 }
@@ -6200,7 +6200,7 @@ function prepareCameraAdminRboxPreset() {
 function renderUserAdminSummary(users) {
   const source = Array.isArray(users) ? users : [];
   const scopedRoleCount = source.filter((item) => {
-    const roleValue = item && (item.rol_normalizado || item.rol || item.rol_codigo);
+    const roleValue = item && item.role_names && item.role_names[0];
     return normalizeAccessRoleValue(roleValue) === userAdminScopeRole;
   }).length;
 
@@ -6271,11 +6271,11 @@ function renderUserAdminList(users) {
 
   userAdminRailList.innerHTML = source.map((item) => {
     const itemId = normalizeUserAdminId(item && item.id);
-    const username = String(item && item.usuario || "usuario").trim() || "usuario";
-    const roleLabel = String(item && (item.rol_label || item.rol_nombre || item.rol) || "sin rol").trim() || "sin rol";
-    const displayName = String(item && item.display_name || "").trim();
+    const username = String(item && item.username || "usuario").trim() || "usuario";
+    const roleLabel = String(item && item.role_names && item.role_names[0] || "sin rol").trim() || "sin rol";
+    const displayName = String(item && item.name || "").trim();
     const email = String(item && item.email || "").trim();
-    const activeLabel = item && item.activo === false ? "Inactiva" : "Activa";
+    const activeLabel = item && item.active === false ? "Inactiva" : "Activa";
     const meta = [displayName, email, activeLabel].filter(Boolean).join(" · ") || `ID ${String(itemId || "--")}`;
     return `
       <button
@@ -6608,15 +6608,14 @@ async function submitRoleAdminForm(event) {
 
   try {
     const payload = await fetchJson(
-      isEditing ? `/api/user-roles/${selectedRoleAdminId}` : "/api/user-roles",
+      isEditing ? `/api/roles/${selectedRoleAdminId}` : "/api/roles",
       {
         method: isEditing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          codigo: code,
-          nombre: name,
-          nivel_orden: Number(level),
-          es_sistema: isSystem,
+          name: code,
+          description: name !== code ? name : null,
+          active: true,
         }),
         timeoutMs: 10000,
       },
@@ -6642,7 +6641,7 @@ async function submitRoleAdminForm(event) {
 async function deleteSelectedRoleAdmin() {
   if (selectedRoleAdminId === null || !roleAdminDelete) return;
   const selectedRole = findSelectedRoleAdminItem(lastRoleAdminSnapshot);
-  const label = String(selectedRole && (selectedRole.nombre || selectedRole.codigo) || "este rol").trim() || "este rol";
+  const label = String(selectedRole && (selectedRole.codigo || selectedRole.name || selectedRole.nombre) || "este rol").trim() || "este rol";
   if (!window.confirm(`¿Eliminar el rol ${label}? Esta acción no se puede deshacer.`)) {
     return;
   }
@@ -6655,7 +6654,7 @@ async function deleteSelectedRoleAdmin() {
   setRoleAdminFeedback(`Eliminando ${label} del catálogo...`, "info");
 
   try {
-    await fetchJson(`/api/user-roles/${selectedRoleAdminId}`, {
+    await fetchJson(`/api/roles/${selectedRoleAdminId}`, {
       method: "DELETE",
       timeoutMs: 10000,
     });
@@ -6724,14 +6723,12 @@ async function submitUserAdminForm(event) {
         method: isEditing ? "PUT" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          usuario: username,
+          username,
           email,
-          nombre: name,
-          apellido: lastName,
-          telefono: phone,
+          name: lastName ? `${name} ${lastName}`.trim() : name,
           password,
-          rol: role,
-          activo: active,
+          role_names: role ? [role] : [],
+          active,
         }),
         timeoutMs: 10000,
       },
@@ -6757,7 +6754,7 @@ async function submitUserAdminForm(event) {
 async function deleteSelectedUserAdmin() {
   if (selectedUserAdminId === null || !userAdminDelete) return;
   const selectedUser = findSelectedUserAdminItem(lastUserAdminSnapshot);
-  const label = String(selectedUser && selectedUser.usuario || "este usuario").trim() || "este usuario";
+  const label = String(selectedUser && selectedUser.username || "este usuario").trim() || "este usuario";
   if (!window.confirm(`¿Eliminar al usuario ${label}? Esta acción no se puede deshacer.`)) {
     return;
   }

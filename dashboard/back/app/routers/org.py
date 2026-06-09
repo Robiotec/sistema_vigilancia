@@ -30,21 +30,31 @@ def organizations(request: Request):
 def users(request: Request):
     token = get_token(request)
     return [
-        {"id": _num_id(u.get("id")), "source_id": u.get("id"), "nombre_usuario": u.get("username"),
-         "email": u.get("email"), "activo": u.get("active")}
+        {
+            "id": u.get("id"),
+            "username": u.get("username"),
+            "name": u.get("name"),
+            "email": u.get("email"),
+            "active": u.get("active"),
+            "role_names": u.get("role_names") or [],
+        }
         for u in (call_api("/users", token=token) or [])
     ]
 
 
 @router.get("/user-role-options")
-def user_role_options():
-    roles = ["master", "company_admin", "area_admin", "operator", "viewer"]
-    return {"roles": [{"id": i + 1, "codigo": role, "nombre": role} for i, role in enumerate(roles)]}
+def user_role_options(request: Request):
+    token = get_token(request)
+    raw = call_api("/roles", token=token) or []
+    return [
+        {"id": r.get("id"), "codigo": r.get("name"), "nombre": r.get("name")}
+        for r in raw if r.get("active") and not r.get("deleted_at")
+    ]
 
 
 @router.get("/user-roles")
-def user_roles():
-    return user_role_options()["roles"]
+def user_roles(request: Request):
+    return user_role_options(request)
 
 
 @router.get("/devices")
