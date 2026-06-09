@@ -64,6 +64,7 @@ class RemoteCameraEvent:
                 {"label": "cédula", "value": str(payload.get("person_id") or extra_info.get("cedula") or "Sin dato")},
             ]
             if confidence_pct:
+                print("Confidence:", confidence_pct)
                 rows.append({"label": "confianza", "value": confidence_pct})
             for k, v in extra_info.items():
                 if k.lower() not in {"nombre", "apellido", "cedula"}:
@@ -297,11 +298,105 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
         events.sort(key=lambda event: event.timestamp, reverse=True)
         rendered_events = [event.to_dict() for event in events]
         try:
-            self._persist_events(history_items)
+            # La ingesta/persistencia de eventos ahora es responsabilidad exclusiva
+            # del worker robiotec-remote-event-ingest.service.
+            # Abrir una cámara en el dashboard NO debe insertar eventos en la DB.
+            self._enrich_plate_events_from_db(rendered_events)
         except Exception:
             pass
         self._warm_recent_videos(rendered_events)
         return rendered_events
+
+    def _enrich_plate_events_from_db(self, events: list[dict[str, Any]]) -> None:
+        """Lee el vehicle_info ya enriquecido por plate_lookup_sync_worker desde la DB.
+
+        No llama a 10.0.0.3 directamente — eso es responsabilidad exclusiva del worker.
+        """
+        plates = list({
+            str(e.get("plate") or "").strip()
+            for e in events
+            if str(e.get("event_type") or "") == "plate" and str(e.get("plate") or "").strip()
+        })
+        if not plates:
+            return
+        with self._db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute(
+                    """
+                    SELECT DISTINCT ON (plate)
+                        plate,
+                        detail_payload
+                    FROM camera_event_history
+                    WHERE event_type = 'plate'
+                      AND plate = ANY(%s)
+                    ORDER BY plate, detected_at DESC
+                    """,
+                    (plates,),
+                )
+                rows = cur.fetchall()
+
+        by_plate: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            plate = str(row.get("plate") or "").strip()
+            dp = row.get("detail_payload") if isinstance(row.get("detail_payload"), dict) else {}
+            if plate:
+                by_plate[plate] = dp
+
+        for event in events:
+            if str(event.get("event_type") or "") != "plate":
+                continue
+            plate = str(event.get("plate") or "").strip()
+            if not plate or plate not in by_plate:
+                continue
+            dp = by_plate[plate]
+            record = dp.get("vehicle_info_record") if isinstance(dp.get("vehicle_info_record"), dict) else {}
+            if not record:
+                continue
+            enriched_rows = self._plate_lookup_rows(record)
+            if enriched_rows:
+                event["rows"] = enriched_rows
+            event["plate_lookup"] = {
+                "status": record.get("status"),
+                "ready": bool(record.get("ready")),
+                "pending": bool(record.get("pending")),
+                "updated_at": dp.get("vehicle_info_checked_at"),
+                "source_errors": record.get("source_errors") if isinstance(record.get("source_errors"), dict) else {},
+            }
+
+    @staticmethod
+    def _plate_lookup_rows(lookup: dict[str, Any]) -> list[dict[str, str]]:
+        def value(*keys: str) -> str:
+            for key in keys:
+                raw = lookup.get(key)
+                if raw not in (None, ""):
+                    return str(raw)
+            return "Sin dato"
+
+        rows = [
+            {"label": "placa", "value": value("placa")},
+            {"label": "estado consulta", "value": value("status")},
+            {"label": "propietario", "value": value("propietario")},
+            {"label": "marca", "value": value("marca")},
+            {"label": "modelo", "value": value("modelo")},
+            {"label": "año", "value": value("anio")},
+            {"label": "país fabricación", "value": value("pais_fabricacion")},
+            {"label": "clase", "value": value("clase")},
+            {"label": "tipo", "value": value("tipo")},
+            {"label": "servicio", "value": value("servicio")},
+            {"label": "uso", "value": value("uso")},
+            {"label": "color", "value": " / ".join(v for v in [value("color_1"), value("color_2")] if v != "Sin dato") or "Sin dato"},
+            {"label": "vin", "value": value("vin")},
+            {"label": "motor", "value": value("motor")},
+            {"label": "cantón matrícula", "value": value("canton_matricula")},
+            {"label": "fecha matrícula", "value": value("fecha_matricula")},
+            {"label": "vence matrícula", "value": value("vencimiento_matricula")},
+            {"label": "fecha inspección", "value": value("fecha_inspeccion")},
+            {"label": "último pago", "value": value("ultimo_pago")},
+            {"label": "cilindraje", "value": value("cilindraje")},
+            {"label": "estado", "value": value("estado")},
+            {"label": "información", "value": value("informacion")},
+        ]
+        return rows
 
     def fetch_event_history(
         self,
@@ -573,6 +668,7 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
     def _persist_events(self, items: list[dict[str, Any]]) -> None:
         rows = [self._history_row(item) for item in items]
         rows = [row for row in rows if row is not None]
+        rows = list({self._history_event_uid_key(row): row for row in rows}.values())
         if not rows:
             return
 
@@ -622,13 +718,42 @@ print(json.dumps({{"items": items[-limit:], "history_items": items}}, ensure_asc
                 image_file_path = EXCLUDED.image_file_path,
                 crop_path = EXCLUDED.crop_path,
                 manifest_payload = EXCLUDED.manifest_payload,
-                detail_payload = EXCLUDED.detail_payload,
+                detail_payload = CASE
+                    WHEN camera_event_history.event_type = 'plate'
+                     AND camera_event_history.detail_payload ? 'vehicle_info_record'
+                    THEN EXCLUDED.detail_payload
+                        || jsonb_build_object(
+                            'vehicle_info', camera_event_history.detail_payload->'vehicle_info',
+                            'vehicle_info_status', camera_event_history.detail_payload->'vehicle_info_status',
+                            'vehicle_info_source', camera_event_history.detail_payload->'vehicle_info_source',
+                            'vehicle_info_record', camera_event_history.detail_payload->'vehicle_info_record'
+                        )
+                    ELSE EXCLUDED.detail_payload
+                END,
                 updated_at = now()
         """
         with self._db_connection() as conn:
             with conn.cursor() as cur:
                 execute_values(cur, query, rows)
             conn.commit()
+
+    @staticmethod
+    def _history_event_uid_key(row: tuple[Any, ...]) -> str:
+        values = (
+            row[3],   # camera_id
+            row[0],   # event_type
+            row[5],   # event_timestamp
+            row[13],  # track_id
+            row[10],  # person_id
+            row[12],  # plate
+            row[17],  # json_file_path
+            row[18],  # video_file_path
+            row[19],  # image_file_path
+            row[20],  # crop_path
+            row[16],  # manifest_file_path
+        )
+        raw = "|".join("" if value is None else str(value) for value in values)
+        return hashlib.md5(raw.encode("utf-8")).hexdigest()
 
     def _history_row(self, item: dict[str, Any]) -> tuple[Any, ...] | None:
         event_type = str(item.get("event_type") or "").strip()

@@ -5,10 +5,15 @@ rtspAddress: :8554
 rtmpAddress: :1935
 hlsAddress: :8888
 webrtcAddress: :8889
+webrtcLocalTCPAddress: :8890
 
 authMethod: internal
 
 logLevel: warn
+
+webrtcAdditionalHosts:
+  - 207.246.68.223
+  - 10.0.0.1
 
 webrtcICEServers2:
   - url: stun:stun.l.google.com:19302
@@ -17,3 +22,4 @@ webrtcICEServers2:
 paths:
   all:
     source: publisher
+    overridePublisher: false

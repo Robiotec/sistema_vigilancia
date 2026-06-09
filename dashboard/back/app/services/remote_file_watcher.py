@@ -268,35 +268,3 @@ class RemoteFileWatcher:
     def _emit_error(self, error: Exception) -> None:
         if self._on_error is not None:
             self._on_error(error)
-
-
-if __name__ == "__main__":
-    config = SSHConnectionConfig(
-        host="100.93.62.24",
-        user="robiotec",
-        password="123456",
-        port=22,
-    )
-    watcher = RemoteFileWatcher(
-        config,
-        "/home/robiotec/Documents/VICTOR/Object_Recognition/src/unified/results_presentacion/manifest.jsonl",
-        poll_interval=0.05,
-    )
-
-    def on_change(event: RemoteFileChangeEvent) -> None:
-        print(f"[WATCH] {event.event_type} -> {event.path}")
-        for item in event.jsonl_items():
-            print(item)
-
-    def on_error(error: Exception) -> None:
-        print(f"[WATCH][ERROR] {error}")
-
-    try:
-        watcher.start(on_change, on_error=on_error, emit_initial=False)
-        print("[WATCH] Monitoreando cambios. Ctrl+C para salir.")
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print("\n[WATCH] Detenido por usuario.")
-    finally:
-        watcher.stop()

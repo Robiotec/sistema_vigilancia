@@ -1,0 +1,1749 @@
+NOTAS PARA FUTUROS AGENTES - ROBIOTEC
+Fecha: 2026-06-05
+VM central: 10.0.0.1 / IP publica 207.246.68.223
+Workspace: /root/robiotec
+
+Actualizacion 2026-06-06 13:43 UTC
+----------------------------------
+Se hizo una segunda pasada de perfilado y optimizacion sobre la maquina de IA
+10.0.0.2 enfocada en CPU/GPU/threads del orquestador.
+
+Cambios aplicados en 10.0.0.2
+-----------------------------
+Archivos tocados:
+- src/unified/stream_pipeline.py
+- src/unified/processors/plate_processor.py
+- src/unified/processors/face_processor.py
+- src/unified/processors/monitoreo_processor.py
+- src/unified/processors/movimiento_processor.py
+- src/unified/shared/base_writer.py
+- src/unified/shared/plate_writer.py
+- src/unified/shared/person_writer.py
+- src/unified/shared/clip_writer.py
+- src/unified/shared/API/consultar_placas_api_general.py
+- .env
+
+Optimizaciones efectivas:
+- Publicacion de /INFERENCE por SRT usando NVENC:
+  - encoder=h264_nvenc
+  - salida 1280x720@15 FPS
+- Se desacoplo la anotacion visual del loop de eventos:
+  - eventos siguen a 15 FPS
+  - la deteccion para cajas de overlay ya no se recalcula en cada frame visual
+  - se cachean detecciones de anotacion a FPS menor:
+    - AI_VIEW_ANNOTATION_FPS=7
+    - AI_PLATE_VIEW_ANNOTATION_FPS=8
+- Se bajaron hilos de OpenCV/Torch/BLAS/ORT en .env a 1 para evitar oversubscription.
+- Los writers ya no crean un thread nuevo por cada evento:
+  - BaseWriter ahora usa cola interna + workers fijos.
+  - PlateWriter / PersonWriter / ClipWriter usan esa cola.
+  - Se quitaron prints sobrantes en ClipWriter.
+- La consulta externa de informacion de placas ya no usa timeout de 10s:
+  - consultar_placas_api_general.py ahora usa timeout configurable
+    AI_PLATE_LOOKUP_TIMEOUT, default 3s
+  - agrega cache local por placa con TTL:
+    AI_PLATE_LOOKUP_CACHE_TTL, default 300s
+
+Estado medido despues de cambios
+--------------------------------
+- onnxruntime en 10.0.0.2 SI tiene:
+  - TensorrtExecutionProvider
+  - CUDAExecutionProvider
+  - CPUExecutionProvider
+- Logs del orquestador confirmaron:
+  - "Publicando hacia ... encoder=h264_nvenc"
+  - "Resolución entrada/eventos: 2560×1440  salida inferencia: 1280×720@15.0"
+- GPU observada despues del restart:
+  - alrededor de 20% util
+  - alrededor de 7.1 GB usados
+- RAM del proceso Python despues del restart:
+  - aprox. 4.8 GB RES con 4 workers activos
+- FPS efectivos observados:
+  - CAM-MPD18XLZ-E1B651 (zona): ~13.8-13.9 FPS
+  - CAM-MPCU9IMM-E7DC89 (placa): ~11.3 FPS
+  - CAM-MPCU71OU-0787AE (placa): ~10.8 FPS
+  - CAM-MPD1FJMZ-7A56AC (rostro): mas lento por carga de face pipeline
+
+Hallazgo importante
+-------------------
+- El problema de "muchos hilos" no venia solo de los writers.
+- Aunque se elimino el spawn de threads por evento, el proceso Python sigue
+  mostrando alrededor de 500+ threads nativos cuando todos los modelos ya
+  cargaron.
+- Eso apunta a pools internos de librerias nativas (Torch / ONNX Runtime /
+  FFmpeg / FAISS / InsightFace / OpenCV) mas que a threads de logica propia.
+- Aun asi, la maquina sigue con CPU global mayormente ocioso; el cuello real
+  ahora esta en throughput por pipeline/modelo, no en un CPU host saturado.
+
+Backups remotos creados
+-----------------------
+- /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.codex_backups/20260606_083532
+- /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.codex_backups/20260606_084135
+
+Siguiente paso recomendado si se quiere llegar mas cerca de 15 FPS reales en
+placas/rostros con 4-20 camaras:
+- perfilar internamente VehicleDetector / OCR / InsightFace por etapa
+- mover mas inferencia pesada a batch o shared models por proceso
+- revisar si conviene multiproceso por camara en vez de 1 proceso con muchos
+  pools nativos mezclados
+- si se toca eso, medir siempre con:
+  top -H -p $(pgrep -f run_stream_inference.py | head -1)
+  tail -f /var/log/robiotec-ai-orchestrator/orchestrator.log
+  nvidia-smi dmon -s u
+
+Actualizacion 2026-06-06 13:52 UTC - Orquestador multiproceso
+--------------------------------------------------------------
+Se rediseño el orquestador para soportar backend por entorno y se dejo activo
+el modo multiproceso por camara.
+
+Cambios funcionales:
+- run_stream_inference.py ya no depende solo de threads internos.
+- Nuevo backend configurable por .env:
+  - AI_ORCHESTRATOR_WORKER_BACKEND=process|thread
+- Quedo activo:
+  - AI_ORCHESTRATOR_WORKER_BACKEND=process
+- En modo process:
+  - el padre run_stream_inference.py solo orquesta DB/polling
+  - cada camara levanta su propio proceso hijo stream_pipeline.py
+  - cada hijo carga sus propios modelos/runtimes
+  - al detener worker se envia SIGTERM al process group y luego SIGKILL si no sale
+
+Variables nuevas dejadas en .env:
+- AI_SAVE_RESULTS=1
+- AI_AUTHORIZED_DIR=../../data/monitoreo_system/authorized/
+- AI_ORCHESTRATOR_WORKER_BACKEND=process
+- AI_WORKER_STOP_TIMEOUT=25
+- AI_WORKER_KILL_TIMEOUT=8
+- AI_WORKER_START_STAGGER_S=1.5
+- AI_WORKER_PYTHON_BIN=/home/robiotec/Documents/VICTOR/.venv/bin/python
+- AI_WORKER_SCRIPT_PATH=/home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py
+- AI_PLATE_LOOKUP_TIMEOUT=3
+- AI_PLATE_LOOKUP_CACHE_TTL=300
+
+Tambien se ajusto stream_pipeline.py:
+- ahora AI_SAVE_RESULTS sale de .env, ya no queda hardcoded
+- ahora AI_AUTHORIZED_DIR sale de .env
+- maneja SIGTERM/SIGINT para cerrar limpio reader/publisher
+- movimiento tambien crea ClipWriter cuando SAVE_RESULTS=1
+
+Verificacion real despues del cambio:
+- systemctl status mostro:
+  - padre: run_stream_inference.py
+  - 4 hijos stream_pipeline.py, uno por camara activa
+- pgrep -af mostro hijos separados por camara:
+  - CAM-MPCU71OU-0787AE placa
+  - CAM-MPD1FJMZ-7A56AC rostro
+  - CAM-MPCU9IMM-E7DC89 placa
+  - CAM-MPD18XLZ-E1B651 zona
+- CPU por proceso observada aprox:
+  - rostro: ~337%
+  - placa: ~127% y ~105%
+  - zona: ~124%
+- hilos por hijo observados aprox:
+  - 101 a 122 por proceso hijo
+- padre del orquestador mucho mas liviano:
+  - ~6 hilos
+- GPU observada en muestra:
+  - ~7.5 GB usada
+- logs confirmaron:
+  - "Backend de workers: process"
+  - "Worker proceso iniciado ..."
+  - "Publicando hacia ... encoder=h264_nvenc"
+  - lookup de placas ya con timeout de 3.0s
+
+Backups remotos extra:
+- /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.codex_backups/20260606_085038
+
+Actualizacion 2026-06-06 14:22 UTC - Sync inicial de rostros desde MinIO
+-----------------------------------------------------------------------
+Objetivo pedido:
+- preparar en 10.0.0.2 la sincronizacion inicial/incremental de fotos del
+  personal desde MinIO en 10.0.0.3 hacia una carpeta unica en Documents.
+- guardar referencia por cedula y nombre para el paso futuro de embeddings.
+
+Lo que SI quedo hecho en 10.0.0.2
+---------------------------------
+- Carpeta destino creada:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/fotos
+- Se creo venv dedicada para no tocar la de inferencia:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/.venv
+- Se instalo boto3 en esa venv.
+- Se desplego script:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/sync_faces_minio.py
+- Se agregaron variables al .env de AI:
+  - AI_FACE_SYNC_S3_ENDPOINT=http://10.0.0.3:9000
+  - AI_FACE_SYNC_S3_ACCESS_KEY=
+  - AI_FACE_SYNC_S3_SECRET_KEY=
+  - AI_FACE_SYNC_S3_BUCKET=dashboard-personal
+  - AI_FACE_SYNC_PREFIXES=personas/activos,personas/pasivos
+  - AI_FACE_SYNC_S3_REGION=us-east-1
+  - AI_FACE_SYNC_VERIFY_SSL=0
+  - AI_FACE_SYNC_DEST_DIR=/home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/fotos
+  - AI_FACE_SYNC_STATE_FILE=/home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/state.json
+  - AI_FACE_SYNC_INDEX_FILE=/home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/index.jsonl
+  - AI_FACE_SYNC_LOG_LEVEL=INFO
+- Se instalaron units systemd:
+  - /etc/systemd/system/robiotec-face-sync.service
+  - /etc/systemd/system/robiotec-face-sync.timer
+- Timer habilitado:
+  - robiotec-face-sync.timer
+  - frecuencia: 2 min despues de boot y luego cada 5 min
+
+Comportamiento del script
+-------------------------
+- Lee del mismo .env del proyecto AI.
+- Sincroniza dos prefijos:
+  - personas/activos/
+  - personas/pasivos/
+- Baja todo a una sola carpeta local:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/fotos
+- Genera nombre local como:
+  - CEDULA__NOMBRE.ext
+- Genera estado local:
+  - state.json
+- Genera indice local lineal:
+  - index.jsonl
+- Cada entrada guarda:
+  - source_key
+  - bucket
+  - etag
+  - size
+  - last_modified
+  - cedula
+  - full_name
+  - local_filename
+  - local_path
+  - synced_at
+
+Estado real al terminar
+-----------------------
+- El servicio ya corre OK y no falla.
+- Por ahora se auto-omite con warning porque faltan credenciales:
+  - AI_FACE_SYNC_S3_ACCESS_KEY
+  - AI_FACE_SYNC_S3_SECRET_KEY
+- Eso fue intencional para no dejar un servicio en rojo cada 5 minutos.
+
+Bloqueo actual
+--------------
+- No se pudo acceder por SSH a 10.0.0.3:
+  - root@10.0.0.3 -> Permission denied (publickey)
+  - robiotec@10.0.0.3 -> Permission denied (publickey)
+- Tampoco respondieron desde aqui los puertos 9000/9001 de MinIO con curl.
+- Conclusion:
+  - la sincronizacion ya esta lista en 10.0.0.2
+  - faltan conectividad real y/o credenciales del MinIO en 10.0.0.3
+
+Siguiente paso exacto
+---------------------
+- conseguir access key y secret key reales del MinIO de 10.0.0.3
+- llenar en:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- luego probar manual:
+  sudo systemctl start robiotec-face-sync.service
+  sudo systemctl status robiotec-face-sync.service
+  ls -la /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/fotos
+
+Actualizacion 2026-06-06 14:33 UTC - Sync de rostros ya operativo con metadata
+-----------------------------------------------------------------------------
+Se completo el acceso real a 10.0.0.3 y ya no queda bloqueado el enrichment.
+
+Lo que se confirmo
+------------------
+- SSH a 10.0.0.3 funciona con:
+  - usuario: yandriuchuari
+  - password: BfAMHlgAUw7HBkagXfBMX5
+- MinIO en 10.0.0.3 ya expuesto en:
+  - http://10.0.0.3:9000
+- Credenciales MinIO confirmadas:
+  - AI_FACE_SYNC_S3_ACCESS_KEY=robiotec
+  - AI_FACE_SYNC_S3_SECRET_KEY=Robiotec@2026
+- El bucket real usado es:
+  - dashboard-personal
+- Prefijos encontrados:
+  - personas/activos/  -> con objetos
+  - personas/pasivos/  -> sin objetos al momento de la prueba
+
+Problema real encontrado
+------------------------
+- La descarga de fotos ya funcionaba, pero el script en 10.0.0.2 no podia
+  consultar nombres por SSH porque 10.0.0.3 aceptaba solo publickey para ese
+  acceso desde el servicio.
+- El error observado fue:
+  - Bad authentication type; allowed types: ['publickey']
+
+Solucion aplicada
+-----------------
+- Se genero llave dedicada en 10.0.0.2:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/id_ed25519
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/id_ed25519.pub
+- Se agrego esa public key a:
+  - /home/yandriuchuari/.ssh/authorized_keys
+- Se modifico el script local de sync para soportar:
+  - AI_FACE_SYNC_SSH_KEY_PATH
+  - llave primero, password solo como respaldo
+- Variable agregada al .env de AI:
+  - AI_FACE_SYNC_SSH_KEY_PATH=/home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/id_ed25519
+
+Estado final verificado
+-----------------------
+- Servicio probado manualmente:
+  - robiotec-face-sync.service -> SUCCESS
+- Log verificado:
+  - Authentication (publickey) successful!
+  - Metadata de personas cargada por SSH: 72 registros
+  - Sincronizacion completada: scanned=68 downloaded=0 errors=0
+- Resultado local:
+  - index.jsonl con 68 entradas
+  - full_name ya poblado
+  - nombres locales ahora quedan tipo:
+    - 0105192975__MATEO_NICOLAS_GRANADO_SOLANO.png
+    - 0202491007__Klever_Adan_Ullua_Ullua.png
+
+Archivos clave
+--------------
+- Script desplegado en 10.0.0.2:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/sync_faces_minio.py
+- Env de AI en 10.0.0.2:
+  - /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- Indices generados:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/state.json
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/index.jsonl
+
+Siguiente paso recomendado
+--------------------------
+- Ya se puede construir el generador de embeddings leyendo directamente:
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/fotos
+  - /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/index.jsonl
+- Luego empujar embeddings/metadata a 10.0.0.1 para la BD central y el indice
+  FAISS compartido.
+
+Resumen corto
+-------------
+Se reviso y ajusto el stack de camaras/dashboard para usar WebRTC en navegador,
+se corrigio la asociacion de camara -> path estable de MediaMTX, se agrego
+manejo de sesiones viejas WebRTC, se retiro HLS del dashboard/nginx, y luego se
+hizo una optimizacion conservadora de CPU/RAM/disco en la VM central.
+
+No se debe asumir que el problema de video cruzado esta en el dashboard: las
+capturas directas demostraron que la publicacion equivocada viene desde el
+publisher/origen que envia streams a MediaMTX.
+
+
+Servicios principales
+---------------------
+Estos servicios quedaron activos y verificados:
+- nginx
+- robiotec-mediamtx
+- robiotec-dashboard
+- robiotec-apicentral
+- postgresql@16-main
+- ssh
+
+Health checks verificados:
+- http://127.0.0.1:8003/health -> {"status":"ok"}
+- http://127.0.0.1:8010/health -> {"status":"ok"}
+- MediaMTX API local: http://127.0.0.1:9997/v3/paths/list
+
+
+MediaMTX / video
+----------------
+Archivo modificado:
+- /root/robiotec/mediamtx/mediamtx.yml
+
+Estado importante:
+- El navegador debe usar WebRTC, no HLS.
+- Se configuro WebRTC TCP en :8890.
+- webrtcAdditionalHosts incluye:
+  - 207.246.68.223
+  - 10.0.0.1
+- paths.all.source = publisher
+- paths.all.overridePublisher = false
+
+Rutas/camaras observadas en MediaMTX:
+- CAM-MPCU71OU-0787AE -> PORTON DERECHA
+- CAM-MPCU9IMM-E7DC89 -> PORTON IZQUIERDA
+- CAM-MPD18XLZ-E1B651 -> LAB CAM HIK 1
+- CAM-MPD1FJMZ-7A56AC -> CAM LAB HIK 2
+
+Hallazgo importante sobre video cruzado:
+- MediaMTX recibia contenido incorrecto en algunas rutas.
+- Se capturaron frames directos desde MediaMTX y desde RTSP origen.
+- Los RTSP origen estaban correctos.
+- El cruce viene del publicador que envia a MediaMTX, no del dashboard.
+
+Maquina que el usuario indico como publicadora:
+- 192.168.1.200
+- usuario: robiotec
+- No documentar claves en texto plano.
+
+Conectividad a 192.168.1.200:
+- Desde central no respondio ping.
+- Desde 10.0.0.2 no respondio ping ni SSH 22.
+- ARP desde 10.0.0.2 mostro FAILED.
+- Puertos probados sin respuesta: 22, 80, 443, 8000, 8554, 1935, 8889, 9997.
+- Conclusion: no se pudo acceder a 192.168.1.200 para corregir el mapeo upstream.
+
+
+WireGuard / eventos remotos
+---------------------------
+Servidor central WireGuard:
+- 10.0.0.1
+
+Maquina remota esperada para eventos/manifest:
+- 10.0.0.2:22
+
+Estado observado:
+- SSH a 10.0.0.2 funciono en su momento usando la configuracion del dashboard.
+- 10.0.0.2 tiene LAN 192.168.1.34/24 y WireGuard 10.0.0.2.
+- 10.0.0.2 podia alcanzar los RTSP origen 192.168.1.64 y 192.168.1.215.
+- 10.0.0.2 no tenia procesos de publicacion de video activos.
+- Si 10.0.0.2 esta apagada o sin servicio, pueden no cargar eventos, pero eso no
+  debe romper el video WebRTC.
+
+
+Dashboard / backend
+-------------------
+Archivos modificados:
+- /root/robiotec/dashboard/back/app/config.py
+- /root/robiotec/dashboard/back/app/application.py
+- /root/robiotec/dashboard/back/app/services/remote_detection_feed.py
+
+Cambios clave:
+- config.py:
+  - Se agregaron settings para MediaMTX API:
+    - mediamtx_api_url
+    - mediamtx_api_port
+
+- application.py:
+  - _camera_lookup ahora prioriza path/codigo/source_id estable antes de camera_name.
+  - Se agregaron helpers para consultar MediaMTX API.
+  - Se agrego cierre de sesiones WebRTC viejas por path base e INFERENCE.
+  - /api/camera-viewer-url acepta exclusive.
+  - /api/camera-preview-frame acepta exclusive.
+  - Cuando exclusive=1, se cierran readers WebRTC antiguos para la camara/path.
+
+- remote_detection_feed.py:
+  - Se agrego deduplicacion local antes del INSERT masivo a camera_event_history.
+  - Motivo: PostgreSQL estaba lanzando:
+    ON CONFLICT DO UPDATE command cannot affect row a second time
+  - El error generaba logs gigantes y consumo innecesario de I/O/CPU.
+  - La deduplicacion usa una clave equivalente al event_uid generado por DB.
+
+
+Dashboard / frontend
+--------------------
+Archivos modificados:
+- /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+- /root/robiotec/dashboard/front/static/web_app.js
+- /root/robiotec/dashboard/front/templates/camaras.html
+
+Cambios clave:
+- El video grande usa path estable de camara, no camera_name.
+- Las URLs del viewer grande usan exclusive=1 para cerrar sesiones anteriores.
+- Los previews usan path estable pero no exclusive.
+- Se elimino dependencia de HLS.js del template camaras.html.
+- El dashboard debe cargar WebRTC via iframe / MediaMTX WebRTC.
+
+
+Nginx
+-----
+Archivo revisado/modificado:
+- /etc/nginx/sites-available/camaras
+
+Estado:
+- Se retiro la logica/location /hls/ porque el navegador debe usar WebRTC.
+- /mediamtx/ queda proxyeando hacia MediaMTX WebRTC en 127.0.0.1:8889.
+- nginx -t fue validado correctamente.
+
+
+Optimizacion CPU/RAM/disco aplicada
+-----------------------------------
+Servicios auxiliares apagados/deshabilitados porque no aportan en esta VM:
+- ModemManager.service
+- udisks2.service
+- upower.service
+- fwupd.service
+- fwupd-refresh.timer
+
+Servicios que NO se tocaron:
+- nginx
+- MediaMTX
+- dashboard
+- apicentral
+- PostgreSQL
+- SSH
+- VSCode/Codex actual
+- multipathd
+- watchdog
+- unattended-upgrades
+
+Motivo:
+- Evitar romper infraestructura base o la sesion activa.
+- El mayor consumo de memoria visible era VSCode/Codex, pero matarlo cortaria
+  el trabajo remoto actual.
+
+APT/cache:
+- Se ejecuto apt-get clean.
+- apt autoremove en simulacion mostro 0 paquetes para remover.
+
+Journald:
+- Archivo creado:
+  - /etc/systemd/journald.conf.d/robiotec-limits.conf
+- Limites:
+  - SystemMaxUse=200M
+  - RuntimeMaxUse=100M
+  - MaxRetentionSec=14day
+- Journals bajaron aprox. de 640 MB a 160 MB.
+
+PostgreSQL logging:
+- Archivo creado:
+  - /etc/postgresql/16/main/conf.d/99-logging-lean.conf
+- Config:
+  - log_min_error_statement = fatal
+  - log_error_verbosity = terse
+- Motivo:
+  - Evitar que errores con INSERTs enormes escriban sentencias completas en log.
+
+Logrotate PostgreSQL:
+- Archivo modificado:
+  - /etc/logrotate.d/postgresql-common
+- Cambios:
+  - daily
+  - rotate 7
+  - maxsize 100M
+  - su postgres postgres
+- Motivo:
+  - /var/log/postgresql/postgresql-16-main.log estaba en aprox. 1.9 GB.
+  - Se trunco como usuario postgres por protecciones del directorio sticky.
+  - Despues quedo aprox. 348 KB y luego 0 bytes tras verificacion.
+
+Arranque directo de apps Python:
+- Archivos modificados:
+  - /root/robiotec/servicios/apicentral/scripts/start.sh
+  - /root/robiotec/servicios/dashboard/scripts/start.sh
+- Antes:
+  - exec /root/.local/bin/uv run uvicorn ...
+- Ahora:
+  - exec $APP_DIR/.venv/bin/uvicorn ...
+- Motivo:
+  - Quitar procesos padre "uv" extra.
+  - Mantener el mismo uvicorn y misma app, sin cambiar logica.
+
+
+Verificaciones finales hechas
+-----------------------------
+Estado final observado:
+- RAM usada aprox.: 1.8 GiB de 7.7 GiB.
+- RAM disponible aprox.: 6.0 GiB.
+- Swap usado aprox.: 18 MiB de 4.8 GiB.
+- Load average aprox.: bajo, alrededor de 0.3 - 0.4.
+- Disco / bajo aprox. a 58% usado.
+- /var/log/postgresql bajo de 1.9 GB a menos de 1 MB.
+- No se observaron procesos zombie.
+- MediaMTX seguia con 4 rutas listas.
+- API y dashboard respondian /health.
+
+Comandos utiles para futuro diagnostico:
+- systemctl is-active nginx robiotec-mediamtx robiotec-dashboard robiotec-apicentral postgresql@16-main ssh
+- curl -fsS http://127.0.0.1:8003/health
+- curl -fsS http://127.0.0.1:8010/health
+- curl -fsS http://127.0.0.1:9997/v3/paths/list | jq
+- journalctl --disk-usage
+- du -sh /var/log/postgresql /var/log/nginx /root/robiotec/servicios/*/logs 2>/dev/null
+- ps -eo pid,ppid,stat,comm,%cpu,%mem,rss,args --sort=-rss | head -25
+- ps -eo pid,ppid,stat,comm,args | awk '$3 ~ /Z/ {print}'
+
+
+Git / archivos sucios
+---------------------
+Cambios hechos por este agente en repo:
+- dashboard/back/app/application.py
+- dashboard/back/app/config.py
+- dashboard/back/app/services/remote_detection_feed.py
+- dashboard/front/static/cameras_page_viewer.js
+- dashboard/front/static/web_app.js
+- dashboard/front/templates/camaras.html
+- mediamtx/mediamtx.yml
+- servicios/apicentral/scripts/start.sh
+- servicios/dashboard/scripts/start.sh
+- NOTAS_PARA_AGENTES_2026-06-05.txt
+
+Cambios fuera del repo o de sistema:
+- /etc/nginx/sites-available/camaras
+- /etc/systemd/journald.conf.d/robiotec-limits.conf
+- /etc/postgresql/16/main/conf.d/99-logging-lean.conf
+- /etc/logrotate.d/postgresql-common
+- systemctl disable/stop de servicios auxiliares listados arriba
+
+Archivos sucios que NO se tocaron y parecen generados por OSINT/timers:
+- osint/osint_descarga_reporte.json
+- osint/osint_layers.geojson
+- osint/osint_raw/eventos_homicido_sicariato.json
+- osint/osint_raw/eventos_marcadores_criminales.json
+- osint/osint_raw/eventos_operativos_ffoo.json
+- osint/osint_raw/eventos_residencias_criminales.json
+- osint/osint_raw/eventos_tipos_eventos.json
+
+Regla importante:
+- No revertir cambios ajenos ni archivos OSINT sin orden explicita del usuario.
+
+
+Pendientes / riesgos conocidos
+------------------------------
+1. Video cruzado:
+   - El dashboard ya usa paths estables y cierra sesiones viejas.
+   - Si una camara sigue mostrando otro video, revisar el publisher upstream.
+   - La maquina indicada 192.168.1.200 no fue alcanzable desde central ni desde
+     10.0.0.2 al momento de la revision.
+
+2. Eventos:
+   - Si 10.0.0.2 no esta conectado por SSH/WireGuard o no tiene manifest activo,
+     los eventos del dashboard pueden aparecer vacios.
+   - Esto no debe afectar el video.
+
+3. PostgreSQL:
+   - Se corrigio el error que llenaba logs en remote_detection_feed.py.
+   - Si vuelve a crecer /var/log/postgresql, revisar nuevos errores reales, no
+     solo truncar logs.
+
+4. VSCode/Codex:
+   - Es el mayor consumidor de RAM durante trabajo remoto.
+   - No matar procesos de VSCode/Codex si un agente esta conectado.
+
+
+Nota final
+----------
+El objetivo fue mejorar rendimiento y robustez sin romper el stack. Se hicieron
+cambios focalizados y verificados. Para nuevas intervenciones, revisar primero
+estado de servicios, MediaMTX API y git status antes de modificar.
+
+
+Actualizacion 2026-06-06 - publicador en 10.0.0.2
+--------------------------------------------------
+Se creo un servicio en la maquina remota 10.0.0.2 para tomar RTSP de las camaras
+LAN y publicar los streams normales hacia MediaMTX central.
+
+Servicio remoto:
+- Nombre systemd: robiotec-camera-publisher.service
+- Binario: /opt/robiotec-camera-publisher/bin/mediamtx
+- Config: /etc/robiotec-camera-publisher/mediamtx.yml
+- README: /etc/robiotec-camera-publisher/README.txt
+- Logs: /var/log/robiotec-camera-publisher/mediamtx.log
+
+Arquitectura:
+- MediaMTX local en 10.0.0.2 escucha solo RTSP TCP en 127.0.0.1:8554.
+- HLS, RTMP, WebRTC y SRT quedaron desactivados en 10.0.0.2.
+- Cada path local usa source RTSP directo de la camara.
+- runOnReady lanza ffmpeg y publica por SRT UDP a:
+  srt://10.0.0.1:8890?streamid=publish:<PATH>&pkt_size=1316
+- En la central se abrio UFW 8890/udp para SRT.
+- El puerto 8890 tambien se usa como WebRTC TCP en la central; no hay conflicto
+  porque WebRTC usa TCP/8890 y SRT usa UDP/8890.
+
+Paths activos publicados desde 10.0.0.2:
+- CAM-MPD1FJMZ-7A56AC
+- CAM-MPCU9IMM-E7DC89
+- CAM-MPD18XLZ-E1B651
+- CAM-MPCU71OU-0787AE
+
+Paths omitidos temporalmente:
+- CAM-MOVJ170I-E41F43
+- CAM-MPVML1D8-00687B
+
+Motivo de omitidos:
+- Desde 10.0.0.2 no habia ruta al puerto RTSP 554 de:
+  - 192.168.1.67
+  - 192.168.1.66
+- Se omitieron para evitar reintentos constantes, logs y consumo innecesario.
+- Para activarlos, corregir red/RTSP y regenerar /etc/robiotec-camera-publisher/mediamtx.yml.
+
+Verificacion final:
+- systemctl en 10.0.0.2 reporto robiotec-camera-publisher.service activo.
+- Central MediaMTX reporto 4 conexiones SRT publish desde 10.0.0.2.
+- ffprobe desde la central pudo leer los 4 paths como H264 2560x1440.
+
+Comandos utiles:
+- En 10.0.0.2:
+  sudo systemctl status robiotec-camera-publisher.service
+  sudo journalctl -u robiotec-camera-publisher -f
+  sudo tail -f /var/log/robiotec-camera-publisher/mediamtx.log
+- En central 10.0.0.1:
+  curl -fsS http://127.0.0.1:9997/v3/srtconns/list | jq
+  curl -fsS http://127.0.0.1:9997/v3/rtspsessions/list | jq
+  curl -fsS http://127.0.0.1:9997/v3/paths/list | jq
+
+
+Actualizacion 2026-06-06 - orquestador IA por SRT
+--------------------------------------------------
+Se automatizo el orquestador de IA en la maquina 10.0.0.2 para que funcione
+desde el dashboard usando la tabla cameras.inference_type.
+
+Servicio remoto:
+- Nombre systemd: robiotec-ai-orchestrator.service
+- Archivo: /etc/systemd/system/robiotec-ai-orchestrator.service
+- WorkingDirectory:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified
+- Comando:
+  /home/robiotec/Documents/VICTOR/.venv/bin/python run_stream_inference.py
+- Env:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- Logs:
+  /var/log/robiotec-ai-orchestrator/orchestrator.log
+
+Cambios de arquitectura:
+- El orquestador ya no lee el video normal desde MediaMTX central con token.
+- Ahora lee localmente en 10.0.0.2:
+  rtsp://127.0.0.1:8554/{cam_id}
+- El video con inferencia se publica por SRT hacia MediaMTX central:
+  srt://10.0.0.1:8890?streamid=publish:{cam_id}/INFERENCE&pkt_size=1316
+- El dashboard sigue controlando todo desde DB:
+  cameras.inference_type = placa | rostro | zona | movimiento | inactiva
+- Si el tipo cambia, run_stream_inference.py detiene/reinicia el worker.
+- Si queda inactiva, detiene el worker de esa camara.
+
+Archivos remotos modificados:
+- src/unified/run_stream_inference.py
+  - Agrega AI_INPUT_PATTERN, AI_OUTPUT_PATTERN, AI_RESULTS_DIR por env.
+  - Usa RESULTS_DIR absoluto para writers.
+  - Pasa input_url local a run_inference().
+- src/unified/stream_pipeline.py
+  - Agrega FFmpegPublisher compatible con RTSP o SRT segun esquema de URL.
+  - Agrega input_url directo; si existe, no usa token/API central para leer.
+  - Agrega AI_MAX_FPS para limitar CPU; valor actual: 12.
+
+Backups remotos creados antes de modificar:
+- run_stream_inference.py.bak-20260606023439
+- stream_pipeline.py.bak-20260606023439
+- stream_pipeline.py.bak-20260606023747
+
+Dashboard central:
+- /root/robiotec/dashboard/.env cambio SSH_EVENTS_BASE_PATH a:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/results_presentacion
+- Se reinicio robiotec-dashboard.service para recargar esa ruta.
+
+Verificacion final:
+- robiotec-ai-orchestrator.service activo y enabled en 10.0.0.2.
+- MediaMTX central mostro paths normales y /INFERENCE con source=srtConn.
+- ffprobe desde central leyo correctamente:
+  rtsp://127.0.0.1:8554/CAM-MPCU71OU-0787AE/INFERENCE
+  rtsp://127.0.0.1:8554/CAM-MPD18XLZ-E1B651/INFERENCE
+- Ambos paths se reportaron como H264 2560x1440.
+
+Comandos utiles:
+- En 10.0.0.2:
+  sudo systemctl status robiotec-ai-orchestrator.service
+  sudo tail -f /var/log/robiotec-ai-orchestrator/orchestrator.log
+  pgrep -af 'run_stream_inference|ffmpeg.*INFERENCE'
+- En central:
+  curl -fsS http://127.0.0.1:9997/v3/paths/list | jq '.items[] | select(.name|contains("INFERENCE"))'
+  ffprobe -v error -rtsp_transport tcp -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 rtsp://127.0.0.1:8554/<CAM_ID>/INFERENCE
+
+
+Actualizacion 2026-06-06 - proteccion CPU pipeline IA
+------------------------------------------------------
+Se detecto que el pipeline de IA saturaba la CPU en 10.0.0.2:
+- Python run_stream_inference.py llego a usar mas de 3000% CPU.
+- Los modelos se ejecutaban CPU-only; ONNX/InsightFace reportaban que CUDA no
+  estaba disponible y caian a CPUExecutionProvider.
+- Dos inferencias simultaneas a 2560x1440 no son sostenibles en esta VM.
+
+Cambios aplicados:
+- stream_pipeline.py ahora puede reducir la resolucion de salida/inferencia con
+  AI_OUTPUT_WIDTH.
+- Se configuraron valores conservadores en:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+  AI_MAX_FPS=3
+  AI_OUTPUT_WIDTH=960
+  AI_MAX_ACTIVE_WORKERS=1
+  AI_CV2_THREADS=1
+  AI_TORCH_THREADS=1
+  AI_TORCH_INTEROP_THREADS=1
+  OMP_NUM_THREADS=1
+  OPENBLAS_NUM_THREADS=1
+  MKL_NUM_THREADS=1
+  NUMEXPR_NUM_THREADS=1
+  ORT_NUM_THREADS=1
+- run_stream_inference.py ahora respeta AI_MAX_ACTIVE_WORKERS. Si hay mas
+  camaras activadas en DB, solo levanta la primera y no crea workers extra.
+- Se agrego drop-in systemd:
+  /etc/systemd/system/robiotec-ai-orchestrator.service.d/10-cpu-safety.conf
+  CPUQuota=350%
+  Nice=10
+  IOSchedulingClass=best-effort
+  IOSchedulingPriority=7
+
+Resultado observado:
+- Load bajo aproximadamente de 90 a 2-3 tras estabilizar.
+- El proceso Python quedo limitado alrededor de 335% CPU.
+- FFmpeg de inferencia bajo a ~1-2% por stream a 960x540/3fps.
+- Queda publicado un solo path /INFERENCE simultaneo para proteger la VM.
+
+Nota operativa:
+- Para multiples inferencias simultaneas con fluidez aceptable, primero corregir
+  GPU/CUDA/ONNXRuntime-GPU en 10.0.0.2 o usar modelos mucho mas livianos.
+- No subir AI_MAX_ACTIVE_WORKERS, AI_MAX_FPS o AI_OUTPUT_WIDTH sin medir CPU.
+
+
+Actualizacion 2026-06-06 - eventos siempre, video INFERENCE bajo demanda
+-----------------------------------------------------------------------
+Se ajusto la arquitectura para evitar publicar todos los videos con inferencia
+todo el tiempo.
+
+Nuevo comportamiento:
+- Las camaras con cameras.inference_type activo siguen corriendo inferencia para
+  generar eventos/manifest.
+- El worker NO publica CAM_ID/INFERENCE por defecto.
+- El dashboard crea/renueva una solicitud temporal cuando el usuario activa la
+  vista grande con inferencia.
+- El worker publica CAM_ID/INFERENCE por SRT solo mientras exista esa solicitud
+  activa.
+- Al volver a vista normal o expirar el TTL, el worker detiene FFmpeg y deja de
+  publicar /INFERENCE.
+
+Tabla nueva en PostgreSQL central:
+- camera_inference_view_requests
+  camera_unique_code text primary key
+  inference_type text
+  active boolean
+  requested_until timestamptz
+  updated_at timestamptz
+
+Dashboard central:
+- application.py ahora asegura/escribe camera_inference_view_requests.
+- /api/camera-viewer-url y /api/camera-preview-frame renuevan TTL si se piden
+  con inference=1.
+- Nuevo endpoint:
+  POST /api/camera-inference-view-state
+  para activar/desactivar la solicitud desde el frontend.
+- cameras_page_viewer.js desactiva la solicitud al volver a vista normal.
+
+Orquestador remoto 10.0.0.2:
+- run_stream_inference.py lee camera_inference_view_requests y pasa un callback
+  should_publish_fn al pipeline.
+- AI_MAX_ACTIVE_WORKERS ahora queda en 4 para permitir eventos de varias camaras
+  sin publicar todos los videos con overlay.
+- stream_pipeline.py procesa eventos en frame nativo y publica solo si
+  should_publish_fn() es true.
+- Los processors aceptan process(frame, annotate=True, enqueue=True). Para
+  eventos se usa annotate=False; esto evita la pasada extra de dibujo/overlay si
+  nadie esta viendo el video.
+
+Resolucion/FPS actuales:
+- AI_DEVICE=cuda:0
+- AI_EVENT_FPS=2
+- AI_PLATE_EVENT_FPS=3
+- AI_VIEW_FPS=8
+- AI_VIEW_WIDTH=1280
+- AI_PLATE_VIEW_WIDTH=2560
+- Para placas, la vista /INFERENCE se publica a 2560x1440 cuando se solicita.
+
+Verificacion:
+- Sin solicitud activa, MediaMTX central no muestra paths /INFERENCE.
+- Al insertar solicitud temporal para CAM-MPCU71OU-0787AE, aparecio:
+  CAM-MPCU71OU-0787AE/INFERENCE source=srtConn 2560x1440.
+- Al expirar el TTL, el path /INFERENCE desaparecio.
+- YOLO fue movido a cuda:0 segun logs.
+
+Pendiente importante para escalar:
+- onnxruntime en la venv remota solo tiene AzureExecutionProvider y
+  CPUExecutionProvider. InsightFace/ONNX siguen cayendo a CPU.
+- La venv /home/robiotec/Documents/VICTOR/.venv no tiene pip interno; antes de
+  instalar onnxruntime-gpu, probar en entorno controlado o preparar rollback.
+- Para 20 camaras con muchas inferencias en tiempo real, corregir
+  onnxruntime-gpu/CUDA es obligatorio; esta arquitectura reduce publicacion de
+  video, pero no convierte los modelos ONNX CPU a GPU.
+
+
+Actualizacion 2026-06-06 - visualizacion INFERENCE a 1080p
+------------------------------------------------------------
+Se ajusto la resolucion de publicacion al dashboard:
+- La IA sigue leyendo/procesando el frame nativo de la camara para eventos y OCR.
+- El video /INFERENCE que se publica al dashboard se redujo a 1080p para no
+  enviar 2560x1440 al navegador innecesariamente.
+
+Valores actuales en 10.0.0.2:
+- AI_VIEW_WIDTH=1920
+- AI_PLATE_VIEW_WIDTH=1920
+- AI_VIEW_FPS=8
+- AI_EVENT_FPS=2
+- AI_PLATE_EVENT_FPS=3
+
+Verificacion:
+- Solicitud temporal para CAM-MPCU71OU-0787AE/INFERENCE publico por SRT en
+  MediaMTX central con codec H264 y resolucion 1920x1080.
+
+
+Actualizacion 2026-06-06 - ONNX Runtime GPU en 10.0.0.2
+--------------------------------------------------------
+Se corrigio de forma controlada el problema donde InsightFace/parte ONNX seguia
+en CPU aunque la GPU estuviera disponible.
+
+Estado antes:
+- La maquina 10.0.0.2 veia la GPU con nvidia-smi:
+  NVIDIA GeForce RTX 5090, driver 595.71.05, CUDA 13.2.
+- Torch ya veia CUDA y estaba construido con CUDA 12.8.
+- La venv /home/robiotec/Documents/VICTOR/.venv tenia metadata mezclada de
+  onnxruntime y onnxruntime-gpu 1.26.0.
+- onnxruntime.get_available_providers() solo devolvia:
+  ['AzureExecutionProvider', 'CPUExecutionProvider']
+- libonnxruntime_providers_cuda.so existia, pero sin LD_LIBRARY_PATH no
+  encontraba las librerias CUDA de los paquetes nvidia instalados en la venv.
+
+Pasos aplicados:
+- Se detuvo robiotec-ai-orchestrator.service antes de tocar paquetes.
+- Se creo backup de ONNX Runtime:
+  /home/robiotec/Documents/VICTOR/onnxruntime-backup-20260606030434.tgz
+- Se habilito pip dentro de la venv con:
+  /home/robiotec/Documents/VICTOR/.venv/bin/python -m ensurepip --upgrade
+- Se desinstalo la mezcla previa de onnxruntime y onnxruntime-gpu.
+- Se eliminaron restos antiguos de site-packages/onnxruntime*.
+- Se instalo solamente:
+  onnxruntime-gpu==1.26.0 --no-deps
+- Se agrego drop-in systemd:
+  /etc/systemd/system/robiotec-ai-orchestrator.service.d/20-gpu-libs.conf
+- Ese drop-in define LD_LIBRARY_PATH con:
+  - site-packages/onnxruntime/capi
+  - todos los site-packages/nvidia/*/lib necesarios para CUDA/cuDNN/cuBLAS/etc.
+- Se ejecuto systemctl daemon-reload y se arranco otra vez
+  robiotec-ai-orchestrator.service.
+
+Estado despues:
+- Validacion directa con la venv y el mismo LD_LIBRARY_PATH:
+  onnxruntime 1.26.0
+  ['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider']
+  GPU
+- El servicio esta activo con drop-ins:
+  10-cpu-safety.conf, 20-gpu-libs.conf
+- Logs nuevos del orquestador muestran:
+  - Modelo YOLO movido a dispositivo: cuda:0
+  - Using ONNX Runtime with ['CUDAExecutionProvider', 'CPUExecutionProvider']
+  - FaceAnalysis providers=['CUDAExecutionProvider', 'CPUExecutionProvider']
+  - Applied providers: ['CUDAExecutionProvider', 'CPUExecutionProvider']
+- nvidia-smi mostro memoria GPU usada por el proceso despues del arranque.
+
+Notas de seguridad:
+- No se instalaron dependencias a ciegas; se uso --no-deps para no cambiar numpy,
+  torch, insightface u otras librerias sensibles.
+- Se elimino el wheel CPU para evitar que sus archivos oculten al wheel GPU.
+- Si hay que revertir, detener primero robiotec-ai-orchestrator.service,
+  quitar/reinstalar ONNX Runtime desde el backup o desde pip, y revisar/remover
+  el drop-in 20-gpu-libs.conf si ya no aplica.
+
+Comandos utiles:
+- En 10.0.0.2:
+  systemctl status robiotec-ai-orchestrator.service
+  systemctl cat robiotec-ai-orchestrator.service
+  tail -f /var/log/robiotec-ai-orchestrator/orchestrator.log
+  nvidia-smi
+- Validacion ONNX:
+  LD_LIBRARY_PATH="<rutas del drop-in 20-gpu-libs.conf>" \
+  /home/robiotec/Documents/VICTOR/.venv/bin/python -c \
+  "import onnxruntime as ort; print(ort.__version__); print(ort.get_available_providers()); print(ort.get_device())"
+
+
+Actualizacion 2026-06-06 - sshpass para acceso a 10.0.0.2
+----------------------------------------------------------
+Se instalo sshpass en la VM central 10.0.0.1:
+- Paquete: sshpass
+- Version repo Ubuntu noble: 1.09-1
+- Instalacion usada:
+  apt-get update && apt-get install -y sshpass
+
+Conexion verificada:
+- Host: 10.0.0.2
+- Usuario: robiotec
+- SSH puerto: 22
+- Prueba ejecutada desde 10.0.0.1:
+  SSHPASS="<password>" sshpass -e ssh \
+    -o StrictHostKeyChecking=no \
+    -o UserKnownHostsFile=/root/.ssh/known_hosts \
+    -o ConnectTimeout=8 \
+    robiotec@10.0.0.2 'hostname; whoami; date; echo OK_SSH_10_0_0_2'
+- Resultado observado:
+  hostname: robiotec
+  whoami: robiotec
+  OK_SSH_10_0_0_2
+
+Nota de seguridad:
+- No dejar claves en texto plano dentro de scripts, notas o repo.
+- Para comandos puntuales, preferir SSHPASS en variable de entorno temporal:
+  SSHPASS="<password>" sshpass -e ssh robiotec@10.0.0.2 '<comando>'
+- La clave actual fue indicada por el usuario en la conversacion, pero no se
+  documenta aqui en texto plano.
+
+
+Actualizacion 2026-06-06 - INFERENCE preview continuo + 720p bajo demanda
+-------------------------------------------------------------------------
+Se cambio la publicacion de video con inferencia para que el dashboard siempre
+pueda encontrar un path /INFERENCE cuando la camara tiene inference_type activo.
+
+Problema encontrado:
+- MediaMTX central solo tenia los 4 videos normales.
+- /INFERENCE no se publicaba hasta que el dashboard creaba una solicitud TTL.
+- El toggle podia fallar por carrera: primero consultaba estado, pero el stream
+  todavia no existia.
+- Tambien se encontro que camera_inference_view_requests tenia filas con
+  camera_unique_code tipo CAM-.../INFERENCE. El worker remoto busca CAM-...,
+  por eso esas solicitudes no activaban el modo de vista.
+
+Cambios aplicados en 10.0.0.2:
+- Archivo remoto:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py
+- Backup remoto:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py.bak-20260606031940
+- Ahora cada worker con inferencia activa publica siempre su path:
+  CAM_ID/INFERENCE
+- Si no hay solicitud activa del dashboard, publica preview bajo:
+  480x270, 1 fps, maxrate 300k.
+- Si camera_inference_view_requests tiene solicitud activa para esa camara,
+  cambia temporalmente a vista:
+  1280x720, 8 fps, maxrate 1200k.
+- Al expirar el TTL vuelve automaticamente a preview.
+
+Cambios en .env remoto:
+- Archivo:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- Backup:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env.bak-20260606031940
+- Valores actuales:
+  AI_VIEW_WIDTH=1280
+  AI_PLATE_VIEW_WIDTH=1280
+  AI_PREVIEW_WIDTH=480
+  AI_PREVIEW_FPS=1
+
+Cambios en dashboard central:
+- Archivo:
+  /root/robiotec/dashboard/back/app/application.py
+- _strip_camera_inference_suffix ahora tambien elimina el sufijo tecnico
+  /INFERENCE, no solo el sufijo visual " - INF".
+- Se reinicio robiotec-dashboard.service y /health respondio ok.
+
+Limpieza DB:
+- Se migraron filas antiguas de camera_inference_view_requests desde
+  CAM-.../INFERENCE a CAM-...
+- Quedaron solo IDs base en camera_unique_code.
+
+Verificacion:
+- MediaMTX central mostro 4 paths listos:
+  CAM-MPCU71OU-0787AE/INFERENCE
+  CAM-MPCU9IMM-E7DC89/INFERENCE
+  CAM-MPD18XLZ-E1B651/INFERENCE
+  CAM-MPD1FJMZ-7A56AC/INFERENCE
+- ffprobe en estado preview:
+  rtsp://127.0.0.1:8554/CAM-MPCU71OU-0787AE/INFERENCE -> h264,480,270
+- Se inserto una solicitud temporal para CAM-MPCU71OU-0787AE.
+- Logs remotos mostraron:
+  Cambiando publicador /INFERENCE a modo view
+  Publicando ... (1280x720@8.0, maxrate=1200k)
+- ffprobe durante solicitud activa:
+  h264,1280,720
+- Al expirar el TTL, logs mostraron:
+  Cambiando publicador /INFERENCE a modo preview
+  Publicando ... (480x270@1.0, maxrate=300k)
+- GPU observada durante prueba:
+  aprox. 4.8 GiB VRAM, 12% util en muestra puntual.
+- Proceso Python de IA observado alrededor de 329% CPU con 4 workers activos.
+
+Nota operativa:
+- Esta solucion evita que el boton dependa de que el stream nazca justo en ese
+  momento. /INFERENCE queda vivo en baja resolucion y se eleva solo cuando
+  alguien lo mira.
+- Si se sube AI_PREVIEW_WIDTH o AI_PREVIEW_FPS, medir CPU/GPU antes de dejarlo
+  permanente.
+
+Actualizacion 2026-06-06 - boton grande de inferencia en dashboard
+------------------------------------------------------------------
+Se corrigio el flujo del boton grande "Activar inferencia" en la central de
+camaras.
+
+Problema:
+- El frontend seguia usando la logica vieja de "esperar varios polls" para que
+  /INFERENCE apareciera antes de cargar el iframe.
+- Esa logica tenia sentido cuando /INFERENCE nacia bajo demanda.
+- Ahora que /INFERENCE queda siempre publicado en preview bajo, el boton podia
+  quedarse mostrando "Cargando inferencia" aunque el stream ya existiera.
+
+Cambio aplicado:
+- Archivo:
+  /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+- activateInferenceView() ahora:
+  - marca la solicitud de vista activa en DB
+  - cambia el iframe inmediatamente a inferenceViewPreviewUrl(...)
+  - deja un keepalive cada 8 segundos para renovar camera_inference_view_requests
+- startInferencePolling() ya no espera confirmaciones de disponibilidad; ahora
+  funciona como heartbeat liviano para mantener el modo 720p mientras la vista
+  esta abierta.
+
+Verificacion:
+- node --check sobre cameras_page_viewer.js sin errores.
+- robiotec-dashboard.service reiniciado y /health ok.
+
+Actualizacion 2026-06-06 - reintento diferido del iframe INFERENCE
+------------------------------------------------------------------
+Persistia un fallo donde el usuario hacia clic en "Activar inferencia" y el
+visor grande podia terminar en "conexion fallida" o quedarse en carga.
+
+Hallazgo:
+- El worker remoto cambia el publicador de preview a view cuando se activa la
+  solicitud TTL.
+- Ese cambio reinicia el proceso ffmpeg/SRT del mismo path /INFERENCE.
+- Si el iframe WebRTC se abre exactamente en ese momento, la sesion puede
+  quedar pegada al corte y mostrar error aunque luego el stream ya este listo.
+
+Cambio adicional:
+- Archivo:
+  /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+- Se agregaron temporizadores por camara:
+  - primer intento de carga del iframe a los 2500 ms
+  - segundo intento a los 6500 ms
+- Mientras tanto se muestra INFERENCE_LOADING_SRCDOC.
+- El keepalive sigue renovando camera_inference_view_requests cada 8 segundos.
+
+Objetivo:
+- Evitar abrir la sesion WebRTC justo en medio del cambio preview -> view.
+
+Actualizacion 2026-06-06 - paths separados para preview y vista grande
+----------------------------------------------------------------------
+El problema del video con inferencia en el visor grande seguia ocurriendo aun
+con reintentos, porque preview y vista grande compartian el mismo path:
+CAM_ID/INFERENCE.
+
+Hallazgo:
+- El worker cambiaba el mismo publicador entre:
+  - preview bajo
+  - vista 720p
+- Ese cambio reiniciaba ffmpeg/SRT del mismo path y podia romper la sesion
+  WebRTC del iframe justo al abrir la inferencia.
+
+Solucion aplicada:
+- Se separaron los paths:
+  - preview estable: CAM_ID/INFERENCE
+  - vista grande: CAM_ID/INFERENCE_VIEW
+
+Dashboard central:
+- Archivo:
+  /root/robiotec/dashboard/back/app/application.py
+- application.py ahora entiende ambos sufijos:
+  /INFERENCE y /INFERENCE_VIEW
+- Cuando el dashboard pide inferencia con hq=1, resuelve el path
+  CAM_ID/INFERENCE_VIEW.
+- _related_webrtc_paths y el stripping de sufijos incluyen ambos paths.
+
+Frontend dashboard:
+- Archivo:
+  /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+- El preview inferencia de pills sigue usando /INFERENCE.
+- El visor grande y el boton "Activar inferencia" ahora piden hq=1, por lo que
+  cargan /INFERENCE_VIEW.
+- El keepalive sigue renovando camera_inference_view_requests mientras la vista
+  grande esta activa.
+
+Orquestador remoto 10.0.0.2:
+- Archivos:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/run_stream_inference.py
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- Nuevo env:
+  AI_VIEW_OUTPUT_PATTERN=srt://10.0.0.1:8890?streamid=publish:{cam_id}/INFERENCE_VIEW&pkt_size=1316
+- Comportamiento nuevo:
+  - /INFERENCE siempre publica preview 480x270@1fps
+  - /INFERENCE_VIEW solo se publica cuando la solicitud TTL esta activa
+  - ya no se reutiliza el mismo path para dos calidades distintas
+
+Backups remotos antes del cambio:
+- run_stream_inference.py.bak-20260606130353
+- stream_pipeline.py.bak-20260606130353
+- .env.bak-20260606130353
+
+Verificacion:
+- Orquestador remoto reiniciado y activo.
+- Dashboard reiniciado y /health ok.
+- MediaMTX central mostro para prueba:
+  CAM-MPCU71OU-0787AE/INFERENCE
+  CAM-MPCU71OU-0787AE/INFERENCE_VIEW
+- ffprobe:
+  - /INFERENCE -> h264,480,270
+  - /INFERENCE_VIEW -> h264,1280,720
+- Logs remotos mostraron:
+  Iniciando publicador /INFERENCE_VIEW
+
+Actualizacion 2026-06-06 - simplificacion final sin INFERENCE_VIEW
+------------------------------------------------------------------
+El usuario pidio simplificar la arquitectura y eliminar el path extra
+/INFERENCE_VIEW. Quedo descartada la logica de preview/live por paths distintos.
+
+Objetivo final:
+- El orquestador SIEMPRE publica el video con inferencia en:
+  CAM_ID/INFERENCE
+- Ese stream sale a 1280x720.
+- El dashboard grande solo hace switch entre:
+  - video normal
+  - video con inferencia
+- Las camaras pequenas siguen mostrando snapshots.
+
+Dashboard central:
+- Archivos:
+  /root/robiotec/dashboard/back/app/application.py
+  /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+- Se removio el uso activo de:
+  - hq=1
+  - /INFERENCE_VIEW
+  - keepalives/polling/timers de vista grande
+- El boton grande vuelve a una logica simple:
+  si el stream /INFERENCE esta online, cambia el iframe a ese stream; si no,
+  muestra estado no disponible.
+
+Orquestador remoto 10.0.0.2:
+- Archivos:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/run_stream_inference.py
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+- Se elimino del flujo:
+  AI_VIEW_OUTPUT_PATTERN
+  /INFERENCE_VIEW
+  preview a 480x270
+  publish-on-demand
+- Ahora hay un solo publicador constante por camara activa:
+  /INFERENCE -> 1280x720 @ 8fps
+
+Backups remotos de esta simplificacion:
+- run_stream_inference.py.bak-20260606131349
+- stream_pipeline.py.bak-20260606131349
+- .env.bak-20260606131349
+
+Verificacion:
+- robiotec-ai-orchestrator.service activo.
+- robiotec-dashboard.service activo.
+- MediaMTX central mostro solo:
+  CAM-MPCU71OU-0787AE/INFERENCE
+- ffprobe:
+  rtsp://127.0.0.1:8554/CAM-MPCU71OU-0787AE/INFERENCE -> h264,1280,720,8/1
+- Logs nuevos del orquestador:
+  Resolucion entrada/eventos ... salida inferencia: 1280x720@8.0
+  Publicando hacia ... /INFERENCE ... (1280x720@8.0)
+
+
+Actualizacion 2026-06-06 - fix "Activar inferencia" se queda cargando
+----------------------------------------------------------------------
+Se diagnostico y corrigio el bug donde hacer clic en "Activar inferencia" en el
+dashboard deja el video cargando indefinidamente sin mostrar el stream con IA.
+
+Causa raiz (dos capas):
+1. API central no tiene los paths /INFERENCE registrados en stream_paths DB.
+   Al consultar /streams/CAM-ID%2FINFERENCE/status, API central devuelvia 403.
+   El dashboard interpretaba el 403 como "stream no disponible" y devolvio
+   online=false al frontend, que mostraba INFERENCE_LOADING_SRCDOC sin fin.
+
+2. La URL del player de INFERENCE generada por el bypass no tenia trailing slash.
+   Esto causaba que MediaMTX devolviera un redirect 301 al cargar el player.
+   Durante ese redirect, la primera sesion WebRTC (WHEP POST->201) tenia el
+   PATCH de ICE rechazado con 404, rompiendo la negociacion WebRTC.
+   La segunda sesion funcionaba (PATCH->204) porque el frame se recargaba,
+   pero eso agrego un retardo de ~4 segundos y dependia de un segundo intento.
+
+Archivo modificado:
+- /root/robiotec/dashboard/back/app/application.py
+
+Cambio 1 - bypass INFERENCE en _authorized_camera_viewer:
+   Se agrego un bloque antes del flujo normal de API central. Si el path termina
+   en /INFERENCE (case-insensitive), se consulta MediaMTX API directamente:
+     GET /v3/paths/get/{path_encoded}
+   Si source.type existe (stream publicando), se devuelve online=true con una
+   viewer_url construida desde settings.mediamtx_webrtc_base_url.
+   Esto evita completamente la consulta a API central para paths de inferencia.
+
+Cambio 2 - trailing slash en viewer_url del bypass INFERENCE:
+   La viewer_url generada para INFERENCE ahora incluye trailing slash:
+     /mediamtx/CAM-MPCU71OU-0787AE/INFERENCE/
+   Antes era:
+     /mediamtx/CAM-MPCU71OU-0787AE/INFERENCE  (sin slash final)
+   El slash final es necesario porque MediaMTX sirve el player HTML en /{path}/
+   (con trailing slash) y envia un 301 si se pide sin el slash. Ese 301 creaba
+   una condicion de carrera donde la sesion WHEP recien creada era invalidada
+   antes de que el browser enviara el PATCH de ICE trickle, dando 404.
+   Con el slash, el player carga directo y WHEP funciona de forma consistente.
+
+Patron correcto de logs nginx cuando INFERENCE funciona:
+   GET /mediamtx/CAM-.../INFERENCE/         -> 200 (player HTML)
+   GET /mediamtx/CAM-.../INFERENCE/reader.js -> 200
+   OPTIONS /mediamtx/CAM-.../INFERENCE/whep  -> 204
+   POST /mediamtx/CAM-.../INFERENCE/whep     -> 201 (sesion creada)
+   PATCH /mediamtx/CAM-.../INFERENCE/whep/{id} -> 204 (ICE trickle OK)
+
+Patron defectuoso previo:
+   GET /mediamtx/CAM-.../INFERENCE           -> 301 (redirect sin slash)
+   GET /mediamtx/CAM-.../INFERENCE/          -> 200 (player HTML)
+   POST /mediamtx/CAM-.../INFERENCE/whep     -> 201
+   PATCH /mediamtx/CAM-.../INFERENCE/whep/{id} -> 404 (FALLA por race condition)
+
+Verificaciones realizadas:
+- MediaMTX API confirma source=srtConn para todos los paths /INFERENCE activos.
+- Con trailing slash, el player HTML carga sin redirect.
+- El bypass retorna online=true con viewer_url correcta cuando el stream existe.
+- Se reinicio robiotec-dashboard.service tras cada cambio; /health respondio ok.
+
+Nota sobre el flujo de video bajo demanda:
+- El orchestrador en 10.0.0.2 siempre publica CAM_ID/INFERENCE en modo preview
+  (480x270@1fps) cuando la camara tiene inference_type activo.
+- Al activar inferencia en el dashboard, _authorized_camera_viewer escribe en
+  camera_inference_view_requests via _set_camera_inference_view_request.
+- El orchestrador lee esa tabla cada pocos segundos y sube el stream a modo
+  view (1280x720@8fps) mientras haya solicitud activa (TTL=20s).
+- El frontend renueva el TTL cada 2s via el polling de camera-viewer-url.
+
+Comandos de diagnostico para INFERENCE:
+   # Ver estado de todos los paths INFERENCE en MediaMTX:
+   curl -s http://127.0.0.1:9997/v3/paths/list | python3 -c "
+   import sys,json; d=json.load(sys.stdin)
+   for p in d.get('items',[]):
+     if 'INFERENCE' in p['name']:
+       src=p.get('source',{}); print(p['name'], src.get('type','NO-SOURCE'), len(p.get('readers',[])), 'readers')
+   "
+
+   # Ver sesiones WebRTC activas:
+   curl -s http://127.0.0.1:9997/v3/webrtcsessions/list | python3 -m json.tool
+
+   # Ver logs de nginx para verificar flujo de INFERENCE:
+   grep "INFERENCE" /var/log/nginx/access.log | tail -20
+
+===========================================================================
+Actualizacion 2026-06-06 - Causa raiz definitiva del "cargando infinito" INFERENCE
+===========================================================================
+
+PROBLEMA RAIZ CONFIRMADO (con prueba directa):
+MediaMTX v1.17.1 ELIMINA todas las sesiones WebRTC/WHEP de un path cuando
+el SRT source se desconecta. Esto es el comportamiento por defecto de MediaMTX
+con paths de tipo "publisher".
+
+Secuencia de fallo:
+1. Usuario activa inferencia -> se llama camera-preview-frame?exclusive=1&inference=1
+2. Esto llama _authorized_camera_viewer(inference=True) que escribe en
+   camera_inference_view_requests via _set_camera_inference_view_request
+3. El orchestrador en 10.0.0.2 detecta el view request, mata el ffmpeg preview
+   (480x270@1fps) y arranca ffmpeg view (1280x720@8fps) -> SRT SE CAE ~1-2 SEGUNDOS
+4. MediaMTX ve que el SRT source desaparecio -> MATA la sesion WHEP que estaba
+   negociando ICE (aunque pce=False, la sesion desaparece del todo)
+5. El browser tiene ICE en estado "checking" -> como ya no recibe respuesta STUN
+   de MediaMTX -> ICE timeout a los ~18s -> reader.js DELETE->404 (ya no existe)
+6. ADEMAS: durante la caida SRT, camera-viewer-url?inference=1 retorna online=false
+   -> startInferencePolling() pone frame.srcdoc=INFERENCE_LOADING_SRCDOC
+7. Siguiente poll con online=true -> llama camera-preview-frame?exclusive=1 (KICK!)
+   -> mata la sesion del browser que estaba retrying -> crea nueva sesion
+8. Vuelve al paso 3 -> loop infinito
+
+PRUEBA DIRECTA (ejecutada):
+   python3 << 'EOF'
+   # crear sesion WHEP -> activar view request -> monitorear
+   # Resultado: src=NONE en t=2 -> sesion DESAPARECE inmediatamente
+   EOF
+   t=1: src=1c8edf68 sessions=1  <- source cambia (orchestrador matando preview)
+   t=2: src=NONE sessions=0      <- SRT cae -> MediaMTX mata sesion WHEP!
+   t=3: src=NONE sessions=0
+   t=4: src=c10e3e76 sessions=0  <- SRT reconecta (view mode activo)
+
+FIX APLICADO (2026-06-06):
+Archivo: /root/robiotec/dashboard/front/static/cameras_page_viewer.js
+
+Cambio en startInferencePolling():
+- ANTES: cargaba el player inmediatamente cuando online=true Y habia srcdoc
+         (esto causaba el kick cycle porque durante la caida SRT hay online=false
+          que luego dispara online=true -> reload con exclusive=1 -> kick)
+- DESPUES: espera 3 polls CONSECUTIVOS online=true (6 segundos) antes de cargar
+           el player. Esto da tiempo al modo switch (SRT reconnect ~1-2s) para
+           completarse. Tambien espera 3 polls CONSECUTIVOS offline antes de
+           mostrar loading screen (evita el srcdoc flip por fallo aislado).
+
+Cambio en activateInferenceView():
+- ANTES: si online=true, cargaba el player inmediatamente (antes de que el
+         orchestrador haya hecho el mode switch)
+- DESPUES: siempre muestra loading screen primero, deja que el polling cargue
+           el player cuando el stream sea estable. Esto evita que el player
+           se cree justo antes de la caida SRT.
+
+Flujo correcto DESPUES del fix:
+   t=0:  usuario activa -> loading screen -> primera poll escribe view request
+   t=0-2: online=true -> consecutiveSuccess=1 (aun no llega a 3)
+   t=2-3: mode switch SRT -> online=false -> consecutiveSuccess=0, consecutiveFailures=1
+           (NO resetea srcdoc porque solo 1 fallo)
+   t=4-8: online=true de nuevo -> consecutiveSuccess sube a 3
+   t=8:   player se carga (exclusive=true) -> WHEP session creada en SRT estable
+   t=13:  ICE establece (~5s) -> pce=True -> video playing!
+
+ARQUITECTURA 10.0.0.2:
+- root user: ffmpeg re-publica las camaras de RTSP local (:8554) a SRT central
+  srt://10.0.0.1:8890?streamid=publish:CAM-ID (sin /INFERENCE)
+- robiotec user (orchestrador): ffmpeg publica el video con inferencia
+  srt://10.0.0.1:8890?streamid=publish:CAM-ID/INFERENCE
+  En preview mode: 480x270@1fps usando pipe rawvideo con libx264
+  En view mode: 1280x720@8fps (cambia ffmpeg args y reconecta SRT)
+- SSH: usuario robiotec en 10.0.0.2 (usar SSHPASS env var, no dejar clave en texto plano)
+
+COMANDO PARA MONITOREAR MODO SWITCH:
+   # Ver source ID de path INFERENCE cambiar durante mode switch
+   watch -n1 "curl -s http://127.0.0.1:9997/v3/paths/get/CAM-MPD1FJMZ-7A56AC%2FINFERENCE | python3 -c \"import sys,json; d=json.load(sys.stdin); src=d.get('source',{}); print(src.get('type','NONE'), src.get('id','')[:8])\""
+
+
+===========================================================================
+Actualizacion 2026-06-06 - Generador de embeddings de rostros
+===========================================================================
+
+Objetivo:
+- Generar embeddings 512-dim de las fotos de personal sincronizadas desde MinIO.
+- Guardar indice FAISS + metadata en galeria local y central.
+- Actualizacion incremental: solo procesa fotos cuyo etag cambio.
+
+Arquitectura del flujo completo:
+  MinIO (10.0.0.3) -> sync_faces_minio.py -> fotos en 10.0.0.2
+  generate_embeddings.py (10.0.0.2, GPU) -> FAISS + embeddings -> rsync -> 10.0.0.1:/root/robiotec/faces_gallery/
+
+Archivos creados en 10.0.0.2:
+- Script principal:
+  /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/generate_embeddings.py
+- Servicios systemd:
+  /etc/systemd/system/robiotec-face-embeddings.service
+  /etc/systemd/system/robiotec-face-embeddings.timer
+
+Timer:
+- Arranca 3 min despues del boot.
+- Se repite cada 10 min.
+- Enabled: robiotec-face-embeddings.timer
+
+Galeria generada en 10.0.0.2:
+- /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/gallery/
+  - embeddings.npz   -> {cedula: np.array(512)} normalizado L2
+  - metadata.json    -> {cedula: nombre_completo}
+  - idx_to_cedula.json -> {idx_str: cedula} mapa FAISS->cedula
+  - gallery.faiss    -> IndexFlatIP 512-dim (similitud coseno)
+  - state.json       -> {cedula: {etag, nombre, processed_at}}
+  - version          -> timestamp float para deteccion de cambios
+
+Galeria sincronizada en 10.0.0.1:
+- /root/robiotec/faces_gallery/
+- rsync via SSH (llave robiotec@10.0.0.2 ya en /root/.ssh/authorized_keys de 10.0.0.1)
+
+Modelo usado:
+- InsightFace buffalo_l
+- CUDA a traves de la misma venv del orquestador IA
+- LD_LIBRARY_PATH identical al drop-in 20-gpu-libs.conf del orquestador
+- ctx_id=0, det_size=640x640, det_thresh=0.25
+
+Variables de entorno del servicio:
+- Lee el mismo .env del proyecto AI (EnvironmentFile)
+- AI_CENTRAL_HOST (default: 10.0.0.1)
+- AI_CENTRAL_USER (default: root)
+- AI_CENTRAL_GALLERY_PATH (default: /root/robiotec/faces_gallery)
+- AI_CENTRAL_GALLERY_SYNC (default: 1, poner 0 para desactivar rsync)
+- AI_EMBED_LOG_LEVEL (default: INFO)
+
+Estado verificado:
+- Primera corrida: 67 de 68 personas procesadas.
+- 1 falla: cedula 070564643643 - foto existe pero sin rostro detectable.
+- FAISS index: 67 vectores, 512-dim, IndexFlatIP.
+- Test busqueda: self-match = 1.0000, proximo = 0.0917 (embeddings discriminativos).
+- faiss-cpu instalado en /root/robiotec/dashboard/.venv para uso en 10.0.0.1.
+
+Hallazgo: discrepancia de nombres de archivo
+- index.jsonl registra: cedula__NOMBRE.png
+- archivos en disco: cedula__cedula.png
+- El script genera_embeddings.py resuelve esto buscando cedula__*.ext si
+  el local_path del index no existe.
+- Causa probable: el sync_faces_minio.py bajo las fotos antes de tener
+  metadata SSH completa, usando cedula como nombre de archivo.
+
+Comandos utiles:
+- Ejecutar manualmente (sin --force reusa embeddings existentes):
+  sudo systemctl start robiotec-face-embeddings.service
+- Forzar reprocesar todas las fotos:
+  /home/robiotec/Documents/VICTOR/.venv/bin/python \
+    /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/generate_embeddings.py --force
+- Ver logs:
+  sudo journalctl -u robiotec-face-embeddings --no-pager -n 30
+- Ver estado timer:
+  systemctl status robiotec-face-embeddings.timer
+- Verificar galeria en central:
+  ls -lh /root/robiotec/faces_gallery/
+- Buscar en FAISS desde 10.0.0.1:
+  /root/robiotec/dashboard/.venv/bin/python -c "
+  import faiss, numpy as np, json
+  idx  = faiss.read_index('/root/robiotec/faces_gallery/gallery.faiss')
+  meta = json.load(open('/root/robiotec/faces_gallery/metadata.json'))
+  print(idx.ntotal, 'personas', idx.d, 'dim')
+  "
+
+Siguiente paso sugerido:
+- Conectar la galeria central (faces_gallery/) con el API central o
+  un nuevo endpoint que reciba un embedding y devuelva cedula+nombre.
+- El pipeline de inferencia de rostros en 10.0.0.2 ya tiene su propia
+  galeria local (data/face_system/identidad/identidad.json con ~15 personas).
+  Para ampliarla con las 67 nuevas, generar un identidad.json que apunte
+  a las fotos de ROSTROS_PERSONAL_SYNC/fotos/ o cargar directamente desde
+  embeddings precomputados (requiere modificar gallery.py, NO tocado aqui).
+
+
+===========================================================================
+Actualizacion 2026-06-06 - Correcciones sync y estructura faces_gallery
+===========================================================================
+
+Correcciones a sync_faces_minio.py en 10.0.0.2:
+- Naming cambiado: antes cedula__NOMBRE.ext, ahora solo cedula.ext
+  (ej: 0105192975.png en vez de 0105192975__MATEO_NICOLAS_GRANADO_SOLANO.png)
+- Se agrega filtro: si self.people_by_id esta disponible (SSH a 10.0.0.3 OK),
+  se omiten fotos cuya cedula no existe en la BD Django.
+  Log de ejemplo: WARNING Cedula no encontrada en BD, omitiendo: 070564643643
+- Backup creado: sync_faces_minio.py.bak-20260606
+
+Acciones de limpieza:
+- Se borraron las 68 fotos con formato cedula__cedula.png
+- Se reseto state.json del sync (fuerza re-descarga con nuevo naming)
+- Se volvio a correr sync: 67 archivos descargados (070564643643 filtrado)
+- Se volvio a generar embeddings: 67/67 OK, 0 errores
+
+Estado del cedula fantasma 070564643643:
+- Existe en MinIO (bucket dashboard-personal, personas/activos/)
+- NO existe en la BD Django de 10.0.0.3
+- Desde la correccion queda automaticamente filtrado en cada sync
+
+Estructura /root/robiotec/faces_gallery/ en 10.0.0.1:
+  /root/robiotec/faces_gallery/
+  ├── data/               <- galeria sincronizada desde 10.0.0.2
+  │   ├── gallery.faiss
+  │   ├── embeddings.npz
+  │   ├── metadata.json
+  │   ├── idx_to_cedula.json
+  │   ├── state.json
+  │   └── version
+  ├── scripts/            <- scripts de gestion
+  │   ├── trigger_sync.sh        <- dispara robiotec-face-sync en 10.0.0.2
+  │   ├── trigger_embeddings.sh  <- dispara robiotec-face-embeddings en 10.0.0.2
+  │   ├── pull_logs.sh           <- descarga logs de ambos servicios
+  │   └── status.sh              <- muestra estado remoto y galeria central
+  └── logs/               <- logs descargados de 10.0.0.2
+      ├── robiotec-face-sync.log
+      └── robiotec-face-embeddings.log
+
+Uso de los scripts (requieren export SSHPASS=<password_robiotec>):
+  export SSHPASS=123456
+  bash /root/robiotec/faces_gallery/scripts/status.sh
+  bash /root/robiotec/faces_gallery/scripts/pull_logs.sh --lines 200
+  bash /root/robiotec/faces_gallery/scripts/trigger_sync.sh
+  bash /root/robiotec/faces_gallery/scripts/trigger_embeddings.sh --force
+
+Nota sobre SSH entre 10.0.0.1 y 10.0.0.2:
+- Los scripts usan sshpass con SSHPASS env var (no clave SSH).
+- La clave publica de robiotec@10.0.0.2 SI esta en /root/.ssh/authorized_keys
+  de 10.0.0.1 (para rsync desde 10.0.0.2 hacia 10.0.0.1).
+- La clave publica de root@10.0.0.1 NO esta en 10.0.0.2 por politica de
+  seguridad del sistema; los scripts usan sshpass para autenticacion.
+
+Variable de entorno actualizada en .env de 10.0.0.2:
+- AI_CENTRAL_GALLERY_PATH=/root/robiotec/faces_gallery/data
+
+Timers activos en 10.0.0.2:
+- robiotec-face-sync.timer        -> cada 5 min (sync fotos desde MinIO)
+- robiotec-face-embeddings.timer  -> cada 10 min (genera embeddings y sincroniza)
+
+Servicio de embeddings en 10.0.0.2:
+- /etc/systemd/system/robiotec-face-embeddings.service
+- /etc/systemd/system/robiotec-face-embeddings.timer
+- Script: /home/robiotec/Documents/ROSTROS_PERSONAL_SYNC/generate_embeddings.py
+
+Para consultar la galeria central desde Python en 10.0.0.1:
+  /root/robiotec/dashboard/.venv/bin/python -c "
+  import faiss, numpy as np, json
+  DATA = '/root/robiotec/faces_gallery/data'
+  idx  = faiss.read_index(DATA + '/gallery.faiss')
+  meta = json.load(open(DATA + '/metadata.json'))
+  imap = json.load(open(DATA + '/idx_to_cedula.json'))
+  # Buscar: D=scores, I=indices (pasar embedding 512-dim float32)
+  # D, I = idx.search(query.reshape(1,-1), k=3)
+  print(idx.ntotal, 'personas en galeria')
+  "
+
+
+===========================================================================
+Actualizacion 2026-06-06 - Optimizacion orquestador AI /INFERENCE continuo
+===========================================================================
+
+Contexto requerido por cliente:
+- La 10.0.0.2 debe seguir publicando SIEMPRE el video normal y el video con
+  inferencia hacia MediaMTX central 10.0.0.1.
+- NO volver a la logica on-demand/inference_view. El dashboard solo debe
+  alternar entre CAM_ID y CAM_ID/INFERENCE.
+
+Backup/rollback principal:
+- Backup completo remoto en 10.0.0.2:
+  /home/robiotec/robiotec_backups/rollback_20260606_193258
+- Backup puntual antes de cambios activos:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.codex_backups/
+
+Archivos activos modificados en 10.0.0.2:
+- /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/stream_pipeline.py
+- /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+
+Cambios aplicados:
+- FFmpegPublisher ahora escribe a FFmpeg desde un hilo dedicado con cola
+  maxsize=1. Si FFmpeg/MediaMTX se atrasa, se descarta el frame viejo en vez
+  de bloquear el hilo principal de inferencia/eventos.
+- OpenCV RTSP queda con decoder de baja latencia:
+  rtsp_transport=tcp, nobuffer, low_delay.
+  Nota: se probo agregar threads=1 en OpenCV, pero no redujo los threads reales
+  del decoder y una camara quedo ready sin avanzar bytes en /INFERENCE; se retiro.
+- FFmpeg de salida usa -threads 1 y h264_nvenc.
+- Logs de FPS se redujeron con AI_FPS_LOG_INTERVAL_S=60.
+- La inferencia visual se recalcula menos veces, pero la salida sigue a 15 FPS:
+  AI_VIEW_ANNOTATION_FPS=3
+  AI_PLATE_VIEW_ANNOTATION_FPS=5
+
+Variables relevantes en .env:
+- AI_EVENT_FPS=15
+- AI_PLATE_EVENT_FPS=15
+- AI_VIEW_FPS=15
+- AI_VIEW_WIDTH=1280
+- AI_PLATE_VIEW_WIDTH=1280
+- AI_FFMPEG_THREADS=1
+- AI_FFMPEG_ENCODER=h264_nvenc
+- AI_CV2_THREADS=1
+- AI_TORCH_THREADS=1
+- AI_TORCH_INTEROP_THREADS=1
+
+Verificacion luego del cambio:
+- Servicio: robiotec-ai-orchestrator.service activo.
+- MediaMTX central tiene 4 rutas /INFERENCE listas por SRT:
+  CAM-MPCU71OU-0787AE/INFERENCE  1280x720
+  CAM-MPCU9IMM-E7DC89/INFERENCE  1280x720
+  CAM-MPD18XLZ-E1B651/INFERENCE  1280x720
+  CAM-MPD1FJMZ-7A56AC/INFERENCE  1280x720
+- FFmpeg publica con h264_nvenc, 1280x720, 15 FPS, maxrate 1200k.
+
+Observaciones pendientes:
+- El consumo mayor sigue en workers Python de rostro/zona/placa, no en FFmpeg.
+- Los workers mantienen muchos threads por librerias internas CUDA/ONNX/OpenCV;
+  ya se limitaron variables basicas, pero un redisenio real para 20 camaras
+  requiere workers compartidos por tipo/modelo o servicio de inferencia por GPU.
+- Hay timeouts contra servicios.epmtsd.gob.ec durante consulta de placas. Esa
+  consulta corre desde writer async y no debe romper video, pero puede ensuciar
+  logs o atrasar enriquecimiento de eventos cuando el servicio externo esta lento.
+
+Actualizacion puntual 2026-06-06 15:17:
+- Problema observado en CAM-MPCU9IMM-E7DC89/INFERENCE: MediaMTX central quedaba
+  ready=True pero inboundBytes no aumentaba; dashboard se quedaba cargando.
+- Causa probable: OpenCV/FFmpeg lector RTSP recibio error H264/NAL y el hilo de
+  lectura dejo de entregar frames, pero el worker y FFmpeg hijo seguian vivos.
+- Cambio aplicado en stream_pipeline.py: LatestFrameReader reconecta el RTSP si
+  no recibe frames durante AI_RTSP_RECONNECT_AFTER_S.
+- Variables agregadas en .env:
+  AI_RTSP_RECONNECT_AFTER_S=5
+  AI_RTSP_RECONNECT_SLEEP_S=1
+- Verificacion: CAM-MPCU9IMM-E7DC89/INFERENCE volvio a aumentar bytes en
+  MediaMTX central, ready=True, errors=0.
+
+
+===========================================================================
+Actualizacion 2026-06-06 - Consulta de informacion de placas diferida
+===========================================================================
+
+Problema anterior:
+- PlateWriter en 10.0.0.2 consultaba servicios.epmtsd.gob.ec antes de guardar
+  el JSON del evento de placa.
+- Cuando esa API externa hacia timeout, no bloqueaba video directamente porque
+  corria en writer async, pero si atrasaba la escritura del evento y ensuciaba
+  logs.
+
+Nuevo flujo:
+- 10.0.0.2 guarda inmediatamente el evento local de placa:
+  crop, JSON y manifest.
+- El JSON queda con:
+  vehicle_info: null
+  vehicle_info_status: pending_remote_lookup
+  vehicle_info_source: 10.0.0.3 PlateLookupRecord
+- Despues de guardar, 10.0.0.2 dispara por SSH una consulta remota en 10.0.0.3:
+  cd /home/yandriuchuari/server/DashboardBZA/inventario_bonanza
+  /home/yandriuchuari/server/DashboardBZA/venv/bin/python manage.py lookup_plate PLACA
+- La consulta remota usa la logica existente de 10.0.0.3:
+  gestion_personal/plate_lookup.py
+  consulta_plates/consulta_ecuador.py
+  consulta_plates/consulta_atm.py
+  consulta_plates/consulta_vehiculo.py
+- Los resultados quedan en la BD SQLite de 10.0.0.3 en:
+  gestion_personal.PlateLookupRecord
+
+Archivos modificados:
+- 10.0.0.2:
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/src/unified/shared/plate_writer.py
+  /home/robiotec/Documents/VICTOR/Object_Recognition_v5/Object_Recognition/.env
+
+Variables agregadas en .env de 10.0.0.2:
+- AI_PLATE_REMOTE_LOOKUP_ENABLED=1
+- AI_PLATE_REMOTE_LOOKUP_HOST=10.0.0.3
+- AI_PLATE_REMOTE_LOOKUP_USER=yandriuchuari
+- AI_PLATE_REMOTE_LOOKUP_PYTHON=/home/yandriuchuari/server/DashboardBZA/venv/bin/python
+- AI_PLATE_REMOTE_LOOKUP_PROJECT=/home/yandriuchuari/server/DashboardBZA/inventario_bonanza
+- AI_PLATE_REMOTE_LOOKUP_COOLDOWN_S=3600
+
+SSH:
+- Se autorizo la llave publica de robiotec@10.0.0.2 en
+  yandriuchuari@10.0.0.3:~/.ssh/authorized_keys.
+- Verificado: desde 10.0.0.2 se puede ejecutar SSH BatchMode hacia 10.0.0.3
+  sin password.
+
+Notas operativas:
+- El disparo remoto usa subprocess.Popen y no espera resultado.
+- Usa flock /tmp/robiotec_plate_lookup.lock para serializar consultas iniciadas
+  desde 10.0.0.2.
+- Ya no se debe usar servicios.epmtsd.gob.ec desde el worker de inferencia.
+
+Correccion de arquitectura final 2026-06-06:
+- Se movio la responsabilidad de enriquecer placas al dashboard/backend central,
+  no a la maquina AI.
+- En 10.0.0.2 se dejo:
+  AI_PLATE_REMOTE_LOOKUP_ENABLED=0
+- La AI solo genera evento/crop/manifest con la placa detectada.
+- Limpieza final en 10.0.0.2:
+  el PlateWriter ya NO contiene codigo de SSH, lookup remoto, consulta web,
+  servicios.epmtsd.gob.ec, lookup_plate ni variables AI_PLATE_*_LOOKUP.
+  Solo guarda crop, JSON y manifest. El JSON marca:
+  vehicle_info_status=pending_dashboard_lookup
+  vehicle_info_source=dashboard_plate_lookup_service
+- El dashboard central, al servir /api/camera-events, consulta un microservicio
+  HTTP interno en 10.0.0.3.
+
+Microservicio HTTP en 10.0.0.3:
+- Endpoint:
+  GET https://10.0.0.3/api/plate-lookup/<PLACA>/
+- Header requerido:
+  X-Plate-Lookup-Token: valor de PLATE_LOOKUP_API_TOKEN
+- Archivos:
+  /home/yandriuchuari/server/DashboardBZA/inventario_bonanza/gestion_personal/views.py
+  /home/yandriuchuari/server/DashboardBZA/inventario_bonanza/gestion_personal/urls.py
+  /home/yandriuchuari/server/DashboardBZA/inventario_bonanza/inventario_bonanza/settings.py
+  /home/yandriuchuari/server/DashboardBZA/.env
+- Backup Django:
+  /home/yandriuchuari/server/DashboardBZA/.codex_backups/20260606_204636
+- Servicio:
+  inventario_bonanza.service
+- Comportamiento:
+  1. Normaliza placa.
+  2. Busca PlateLookupRecord en SQLite local de 10.0.0.3.
+  3. Si esta completed/completed_with_errors/running/pending, responde estado
+     y datos actuales.
+  4. Si no existe o fallo antes, crea pending y lanza manage.py lookup_plate
+     en background.
+
+Dashboard central 10.0.0.1:
+- Archivos:
+  /root/robiotec/dashboard/back/app/config.py
+  /root/robiotec/dashboard/back/app/services/plate_lookup_client.py
+  /root/robiotec/dashboard/back/app/services/remote_detection_feed.py
+  /root/robiotec/dashboard/.env
+- Variables:
+  PLATE_LOOKUP_API_URL=https://10.0.0.3/api/plate-lookup
+  PLATE_LOOKUP_API_TOKEN=<mismo token de 10.0.0.3>
+  PLATE_LOOKUP_TIMEOUT_SECONDS=2.5
+  PLATE_LOOKUP_CACHE_TTL_SECONDS=300
+- Servicio:
+  robiotec-dashboard.service
+- Verificacion:
+  /api/camera-events ya enriquece rows de placas con propietario, marca,
+  modelo, etc. Ejemplo verificado: GSK3376 ahora responde CHEVROLET SAIL y
+  propietario PALADINES NAREA WIMPER GUILLERMO.

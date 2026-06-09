@@ -413,6 +413,25 @@ function normalizeCameraSelectionName(cameraName) {
   return loose ? loose.name : null;
 }
 
+function cameraViewerPath(camera) {
+  return String(
+    (camera && (camera.path || camera.mediamtx_path || camera.codigo_unico || camera.codigo || camera.video_path))
+    || (camera && camera.name)
+    || "",
+  ).trim();
+}
+
+function buildCameraPreviewFrameUrl(camera, { exclusive = false } = {}) {
+  const target = new URL("/api/camera-preview-frame", window.location.origin);
+  const path = cameraViewerPath(camera);
+  target.searchParams.set("camera", path || String(camera && camera.name || ""));
+  if (exclusive) {
+    target.searchParams.set("exclusive", "1");
+  }
+  target.searchParams.set("_", String(Date.now()));
+  return `${target.pathname}${target.search}`;
+}
+
 function getStoredActiveCameraName() {
   try {
     const stored = normalizeCameraSelectionName(window.localStorage.getItem(ACTIVE_CAMERA_STORAGE_KEY));
@@ -530,7 +549,7 @@ function renderStaticCameraSelection(camera) {
 
   const frame = document.createElement("iframe");
   frame.className = "camera-web-frame static-camera-frame";
-  frame.src = `/api/camera-preview-frame?camera_name=${encodeURIComponent(cameraName)}`;
+  frame.src = buildCameraPreviewFrameUrl(camera, { exclusive: true });
   frame.title = `Visor ${String(camera.display_name || cameraName).trim()}`;
   frame.loading = "eager";
   frame.allow = "autoplay; fullscreen; picture-in-picture";
@@ -1605,9 +1624,6 @@ async function renderTelemetryVehicleVideo(cameraName, label = "") {
       destroyTelemetryVideoPanelPlayer();
       return;
     }
-    const query = hasCameraId
-      ? `camera_id=${encodeURIComponent(String(cameraId))}`
-      : `camera_name=${encodeURIComponent(resolvedCameraName)}`;
     const frame = document.createElement("iframe");
     frame.className = "telemetry-video-frame";
     frame.loading = "eager";
@@ -1615,7 +1631,19 @@ async function renderTelemetryVehicleVideo(cameraName, label = "") {
     frame.referrerPolicy = "strict-origin-when-cross-origin";
     frame.setAttribute("allowfullscreen", "");
     frame.setAttribute("title", `Video ${label || resolvedCameraName || cameraId}`);
-    frame.src = `/api/camera-preview-frame?${query}`;
+    if (camera) {
+      frame.src = buildCameraPreviewFrameUrl(camera, { exclusive: true });
+    } else {
+      const target = new URL("/api/camera-preview-frame", window.location.origin);
+      if (hasCameraId) {
+        target.searchParams.set("camera_id", String(cameraId));
+      } else {
+        target.searchParams.set("camera", resolvedCameraName);
+      }
+      target.searchParams.set("exclusive", "1");
+      target.searchParams.set("_", String(Date.now()));
+      frame.src = `${target.pathname}${target.search}`;
+    }
     telemetryVideoStage.appendChild(frame);
     if (telemetryVideoState) telemetryVideoState.textContent = "Video";
   } catch (error) {
@@ -3987,12 +4015,11 @@ function renderSwitcher() {
       main.append(topline, association);
       button.appendChild(main);
 
-      const previewQuery = camera.name
-        ? `camera_name=${encodeURIComponent(camera.name)}`
+      const source = cameraViewerPath(camera)
+        ? buildCameraPreviewFrameUrl(camera)
         : camera.id
-          ? `camera_id=${encodeURIComponent(String(camera.id))}`
+          ? `/api/camera-preview-frame?camera_id=${encodeURIComponent(String(camera.id))}&_=${Date.now()}`
           : "";
-      const source = previewQuery ? `/api/camera-preview-frame?${previewQuery}` : "";
       const preview = document.createElement("span");
       preview.className = "camera-pill-preview";
       if (source) {

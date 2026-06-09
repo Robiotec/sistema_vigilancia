@@ -89,7 +89,7 @@ def _deep_defaults() -> dict[str, Any]:
 
 
 def _db_execute(query: str, params: tuple[Any, ...] | None = None) -> None:
-    from back.app.services.conection_sql_postgrest import get_connection
+    from back.app.services.db_pool import get_connection
 
     conn = get_connection()
     try:
@@ -101,7 +101,7 @@ def _db_execute(query: str, params: tuple[Any, ...] | None = None) -> None:
 
 
 def _db_fetch_email_recipients() -> list[str]:
-    from back.app.services.conection_sql_postgrest import fetch_all
+    from back.app.services.db_pool import fetch_all
 
     try:
         rows = fetch_all(
@@ -124,7 +124,7 @@ def _db_fetch_email_recipients() -> list[str]:
 
 
 def _db_fetch_telegram_chat_ids() -> list[str]:
-    from back.app.services.conection_sql_postgrest import fetch_all
+    from back.app.services.db_pool import fetch_all
 
     try:
         rows = fetch_all(

@@ -319,14 +319,60 @@ class RemoteClipTelegramNotifier:
             return [None] * len(clips)
         return uids
 
+    def _camera_notif_flags(self, cam_ids: set[str]) -> dict[str, dict[str, bool]]:
+        """Query notification_telegram and notification_email for a batch of camera IDs.
+
+        Returns {cam_id: {telegram: bool, email: bool}}. Unknown cameras default to True.
+        """
+        if not cam_ids:
+            return {}
+        try:
+            with psycopg2.connect(self._psycopg_dsn(self.settings.database_url)) as conn:
+                with conn.cursor() as cur:
+                    placeholders = ",".join(["%s"] * len(cam_ids))
+                    ids = list(cam_ids)
+                    cur.execute(
+                        f"""
+                        SELECT unique_code, name,
+                               COALESCE(notification_telegram, true) AS notif_tg,
+                               COALESCE(notification_email, true)    AS notif_em
+                        FROM cameras
+                        WHERE (unique_code = ANY(%s) OR name = ANY(%s))
+                          AND deleted_at IS NULL
+                        """,
+                        (ids, ids),
+                    )
+                    rows = cur.fetchall()
+            result: dict[str, dict[str, bool]] = {}
+            for unique_code, name, notif_tg, notif_em in rows:
+                flags = {"telegram": bool(notif_tg), "email": bool(notif_em)}
+                if unique_code:
+                    result[unique_code] = flags
+                if name:
+                    result[name] = flags
+            return result
+        except Exception as exc:
+            _log.warning("[notifier] no se pudo leer flags de notificacion: %s", exc)
+            return {}
+
     def _persist_and_enqueue_clips(self, clips: list[ClipAlert]) -> int:
         if not clips:
             return 0
         event_uids = self._persist_clip_events(clips)
 
+        # Fetch per-camera notification flags once for the whole batch
+        cam_ids = {c.cam_id for c in clips if c.cam_id}
+        notif_flags = self._camera_notif_flags(cam_ids)
+
         inserted_count = 0
         for clip, uid in zip(clips, event_uids):
             if not uid:
+                continue
+            flags = notif_flags.get(clip.cam_id, {"telegram": True, "email": True})
+            if not flags.get("telegram", True):
+                _log.info(
+                    "[notifier] Telegram desactivado para cam=%s — evento omitido", clip.cam_id
+                )
                 continue
             if not self._should_enqueue_clip(clip):
                 continue

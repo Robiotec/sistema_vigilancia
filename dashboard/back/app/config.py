@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     mediamtx_webrtc_base_url: str = Field(
         default="http://207.246.68.223:8889", alias="MEDIAMTX_WEBRTC_BASE_URL"
     )
+    mediamtx_api_url: str = Field(default="http://127.0.0.1:9997", alias="MEDIAMTX_API_URL")
+    mediamtx_api_port: int = Field(default=9997, alias="MEDIAMTX_API_PORT")
     public_host: str = Field(default="207.246.68.223", alias="PUBLIC_HOST")
     mediamtx_rtmp_port: int = Field(default=1935, alias="MEDIAMTX_RTMP_PORT")
     dashboard_host: str = Field(default="0.0.0.0", alias="DASHBOARD_HOST")
@@ -37,6 +39,10 @@ class Settings(BaseSettings):
     telegram_bot_cache_ttl_seconds: int = Field(default=300, alias="TELEGRAM_BOT_CACHE_TTL_SECONDS")
     telegram_ffmpeg_threads: int = Field(default=1, alias="TELEGRAM_FFMPEG_THREADS")
     telegram_max_event_age_seconds: int = Field(default=3600, alias="TELEGRAM_MAX_EVENT_AGE_SECONDS")
+    plate_lookup_api_url: str = Field(default="", alias="PLATE_LOOKUP_API_URL")
+    plate_lookup_api_token: str = Field(default="", alias="PLATE_LOOKUP_API_TOKEN")
+    plate_lookup_timeout_seconds: float = Field(default=2.5, alias="PLATE_LOOKUP_TIMEOUT_SECONDS")
+    plate_lookup_cache_ttl_seconds: int = Field(default=300, alias="PLATE_LOOKUP_CACHE_TTL_SECONDS")
 
 
 @lru_cache

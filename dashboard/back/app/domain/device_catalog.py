@@ -107,7 +107,7 @@ class DeviceCatalogBuilder(BaseHelper):
             rows.append(
                 '<article class="camera-pill-shell">'
                 f'<a class="camera-pill" href="/camaras?camera={quote(name)}" data-camera-name="{escape(name)}" '
-                f'onclick="return window.__ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN__ ? window.__ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN__({escape(json.dumps(name))}) : true">'
+                f'onclick="const openCamera=window[&quot;_&quot;+&quot;_ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN_&quot;+&quot;_&quot;]; return openCamera ? openCamera({escape(json.dumps(name))}) : true">'
                 f'{preview}'
                 '<span class="camera-pill-main">'
                 '<span class="camera-pill-topline">'

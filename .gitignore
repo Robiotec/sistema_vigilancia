@@ -26,3 +26,13 @@ uv.lock
 
 # data
 dashboard/back/app/data/event_videos/
+dashboard/back/app/data/*.lock
+dashboard/back/app/data/*.json
+
+# faces gallery (datos binarios generados)
+faces_gallery/data/
+faces_gallery/logs/
+
+# archivos temporales
+tmp_*/
+*.bak-*
