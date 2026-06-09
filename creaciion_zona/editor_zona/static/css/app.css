@@ -1,0 +1,270 @@
+:root {
+  --bg: #09121c;
+  --panel: rgba(11, 25, 39, 0.92);
+  --panel-border: rgba(120, 171, 210, 0.22);
+  --text: #ecf6ff;
+  --muted: #9ab0c3;
+  --accent: #ff9f43;
+  --accent-2: #2ec4b6;
+  --danger: #ff6b6b;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(46, 196, 182, 0.15), transparent 22rem),
+    radial-gradient(circle at top right, rgba(255, 159, 67, 0.14), transparent 24rem),
+    linear-gradient(180deg, #061019 0%, #09121c 55%, #060d14 100%);
+}
+
+.page {
+  width: min(1400px, calc(100vw - 32px));
+  margin: 24px auto 40px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.viewer,
+.sidebar {
+  padding: 20px;
+}
+
+.sidebar {
+  display: grid;
+  gap: 18px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.heading {
+  display: grid;
+  gap: 4px;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: var(--accent-2);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.9rem);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.badge {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(46, 196, 182, 0.12);
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  color: #c5fff9;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.stage-shell {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(154, 176, 195, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 35%),
+    #02060b;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  line-height: 0;
+}
+
+video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  position: relative;
+  z-index: 1;
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button,
+select {
+  border: 1px solid rgba(154, 176, 195, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+button:hover,
+select:hover {
+  border-color: rgba(255, 159, 67, 0.55);
+  background: rgba(255, 159, 67, 0.12);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.btn-accent {
+  background: rgba(255, 159, 67, 0.16);
+  border-color: rgba(255, 159, 67, 0.45);
+}
+
+.btn-danger {
+  background: rgba(255, 107, 107, 0.12);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.card {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(154, 176, 195, 0.12);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.checklist {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.checklist li {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 0.94rem;
+}
+
+.help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(46, 196, 182, 0.11);
+  border: 1px solid rgba(46, 196, 182, 0.22);
+  color: #c5fff9;
+  font-size: 0.82rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 280px;
+  resize: vertical;
+  border-radius: 14px;
+  border: 1px solid rgba(154, 176, 195, 0.18);
+  background: rgba(2, 8, 14, 0.8);
+  color: var(--text);
+  padding: 14px;
+  font: 0.92rem/1.45 "Fira Code", "Cascadia Code", Consolas, monospace;
+}
+
+.footer-note {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+@media (max-width: 1080px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: min(100vw - 20px, 100%);
+    margin-top: 10px;
+  }
+
+  .viewer,
+  .sidebar {
+    padding: 16px;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  button,
+  select {
+    width: 100%;
+  }
+}

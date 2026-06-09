@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Visor de Video y Poligonos</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body data-video-name="$video_name">
+  <main class="page">
+    <section class="panel viewer">
+      <header class="header">
+        <div class="heading">
+          <p class="eyebrow">Editor de zonas</p>
+          <h1 class="title">Dibuja el poligono sobre el video</h1>
+          <p class="subtitle">Archivo cargado: $video_name</p>
+        </div>
+        <div id="state-badge" class="badge">Esperando puntos</div>
+      </header>
+
+      <div class="stage-shell">
+        <div id="stage" class="stage">
+          <video id="video" preload="metadata" playsinline>
+            <source src="/video" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <svg id="overlay" preserveAspectRatio="none" aria-label="Capa para dibujar poligonos"></svg>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="play-pause" class="btn-accent" type="button">Reproducir</button>
+        <button id="backward" type="button">-5 s</button>
+        <button id="forward" type="button">+5 s</button>
+        <button id="close-polygon" class="btn-accent" type="button">Cerrar poligono</button>
+        <button id="undo-point" type="button">Deshacer punto</button>
+        <button id="clear-polygon" class="btn-danger" type="button">Limpiar</button>
+        <button id="copy-json" type="button">Copiar JSON</button>
+        <select id="speed" aria-label="Velocidad de reproduccion">
+          <option value="0.5">0.5x</option>
+          <option value="1" selected>1.0x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2.0x</option>
+        </select>
+      </div>
+
+      <div class="status-row">
+        <span id="time-readout">Tiempo: 00:00 / 00:00</span>
+        <span id="point-count">Puntos: 0</span>
+        <span id="video-size">Resolucion: pendiente</span>
+      </div>
+    </section>
+
+    <aside class="panel sidebar">
+      <!--
+      <section class="card">
+        <h2>Como usarlo</h2>
+        <ul class="checklist">
+          <li>Haz clic sobre el video para agregar vertices.</li>
+          <li>Cierra el poligono cuando tengas al menos 3 puntos.</li>
+          <li>El doble clic agrega el ultimo punto y cierra la figura mas rapido.</li>
+          <li>El JSON se actualiza en tiempo real con coordenadas normalizadas y en pixeles.</li>
+        </ul>
+        <div class="help">
+          <span class="pill">Normalized X/Y</span>
+          <span class="pill">Pixel X/Y</span>
+          <span class="pill">Copiar JSON</span>
+        </div>
+      </section>
+      -->
+
+      <section class="card">
+        <h2>Poligono actual</h2>
+        <textarea id="output" spellcheck="false" readonly></textarea>
+        <div id="copy-feedback" class="footer-note">Listo para copiar o reutilizar.</div>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>
