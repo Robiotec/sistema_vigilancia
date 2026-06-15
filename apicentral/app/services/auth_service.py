@@ -1,17 +1,60 @@
-from sqlalchemy import delete, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.security import create_access_token, hash_password, verify_password
 from app.models.entities import Role, User, UserRole
 
-DEFAULT_ROLES = ["master", "admin", "viewer"]
+DEFAULT_ROLES = {
+    "master": "Superusuario global de ROBIOTEC",
+    "admin": "Administrador de una organizacion",
+    "operator_cameras": "Operador con acceso solo a camaras",
+    "operator_map": "Operador con acceso al mapa vehicular y kilometraje",
+    "viewer": "Visor de lectura para la operacion de su organizacion",
+}
+
+ADMIN_ASSIGNABLE_ROLES = {"operator_cameras", "operator_map", "viewer"}
+
+ROLE_PERMISSIONS = {
+    "master": {"admin:global", "admin:orgs", "admin:users", "edit:all", "view:all"},
+    "admin": {"admin:users", "edit:org", "view:all"},
+    "viewer": {"view:dashboard", "view:cameras", "view:map", "view:events", "view:vehicles", "view:reports"},
+    "operator_cameras": {"view:cameras"},
+    "operator_map": {"view:map", "view:vehicles"},
+}
 
 
 def get_user_roles(db: Session, user: User) -> list[str]:
     rows = db.execute(
-        select(Role.name).join(UserRole, UserRole.role_id == Role.id).where(UserRole.user_id == user.id)
+        select(Role.name)
+        .join(UserRole, UserRole.role_id == Role.id)
+        .where(
+            UserRole.user_id == user.id,
+            UserRole.active.is_(True),
+            Role.active.is_(True),
+            Role.deleted_at.is_(None),
+        )
     )
     return [row[0] for row in rows]
+
+
+def get_permissions_for_roles(role_names: list[str]) -> list[str]:
+    permissions = {"profile:read", "profile:write"}
+    for role_name in role_names:
+        permissions.update(ROLE_PERMISSIONS.get(role_name, set()))
+    if "view:all" in permissions:
+        permissions.update(
+            {
+                "view:dashboard",
+                "view:cameras",
+                "view:map",
+                "view:events",
+                "view:vehicles",
+                "view:reports",
+            }
+        )
+    if "edit:all" in permissions:
+        permissions.update({"admin:orgs", "admin:users", "edit:org"})
+    return sorted(permissions)
 
 
 def authenticate_user(db: Session, username: str, password: str) -> tuple[User, list[str]] | None:
@@ -27,32 +70,24 @@ def create_jwt_for_user(db: Session, user: User) -> str:
 
 def ensure_default_roles(db: Session) -> None:
     existing = set(db.scalars(select(Role.name)).all())
-    for role_name in DEFAULT_ROLES:
-        if role_name not in existing:
-            db.add(Role(name=role_name))
+    for role_name, description in DEFAULT_ROLES.items():
+        role = db.scalar(select(Role).where(Role.name == role_name))
+        if role:
+            changed = False
+            if role.description != description:
+                role.description = description
+                changed = True
+            if not role.active:
+                role.active = True
+                changed = True
+            if role.deleted_at is not None:
+                role.deleted_at = None
+                changed = True
+            if changed:
+                db.add(role)
+        elif role_name not in existing:
+            db.add(Role(name=role_name, description=description))
     db.flush()
-
-    obsolete_roles = db.scalars(
-        select(Role).where(Role.name.notin_(DEFAULT_ROLES))
-    ).all()
-    if obsolete_roles:
-        viewer_role = db.scalar(select(Role).where(Role.name == "viewer"))
-        for role in obsolete_roles:
-            affected_user_ids = db.scalars(
-                select(UserRole.user_id).where(UserRole.role_id == role.id)
-            ).all()
-            for user_id in affected_user_ids:
-                already_has_viewer = db.scalar(
-                    select(UserRole).where(
-                        UserRole.user_id == user_id,
-                        UserRole.role_id == viewer_role.id,
-                    )
-                )
-                if not already_has_viewer:
-                    db.add(UserRole(user_id=user_id, role_id=viewer_role.id))
-            db.execute(delete(UserRole).where(UserRole.role_id == role.id))
-            db.delete(role)
-
     db.commit()
 
 

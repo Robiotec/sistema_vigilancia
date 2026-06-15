@@ -1,10 +1,13 @@
 """Router de organizaciones, usuarios, telemetría y catálogo de dispositivos."""
 from __future__ import annotations
 
+import csv
+import io
 import json
+from urllib.parse import urlencode
 
 from fastapi import APIRouter, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 
 from back.app.context import (
     _num_id,
@@ -14,6 +17,7 @@ from back.app.context import (
     get_token,
     merge_live_telemetry,
     require_admin_role,
+    require_master_role,
     resolve_source_id,
     companies_for_options,
 )
@@ -36,17 +40,23 @@ async def organization_create(request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
+    if not require_master_role(token):
         return JSONResponse({"error": "forbidden"}, status_code=403)
     p = await request.json()
     name = _text(p.get("nombre")).strip()
+    description = _text(p.get("descripcion")).strip()
     if not name:
         return JSONResponse({"error": "nombre_requerido"}, status_code=400)
     active = p.get("activa", True)
     if isinstance(active, str):
         active = active.lower() != "false"
     try:
-        company = call_api("/companies", method="POST", token=token, data={"name": name, "active": active})
+        company = call_api(
+            "/companies",
+            method="POST",
+            token=token,
+            data={"name": name, "address": description or None, "active": active},
+        )
     except RuntimeError as exc:
         msg = str(exc).lower()
         if "unique" in msg or "already" in msg or "duplicat" in msg:
@@ -60,7 +70,7 @@ async def organization_update(org_id: str, request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
+    if not require_master_role(token):
         return JSONResponse({"error": "forbidden"}, status_code=403)
     companies = companies_for_options(token)
     source_id = resolve_source_id(companies, org_id)
@@ -68,13 +78,19 @@ async def organization_update(org_id: str, request: Request):
         return JSONResponse({"error": "organization_not_found"}, status_code=404)
     p = await request.json()
     name = _text(p.get("nombre")).strip()
+    description = _text(p.get("descripcion")).strip()
     if not name:
         return JSONResponse({"error": "nombre_requerido"}, status_code=400)
     active = p.get("activa", True)
     if isinstance(active, str):
         active = active.lower() != "false"
     try:
-        company = call_api(f"/companies/{source_id}", method="PUT", token=token, data={"name": name, "active": active})
+        company = call_api(
+            f"/companies/{source_id}",
+            method="PUT",
+            token=token,
+            data={"name": name, "address": description or None, "active": active},
+        )
     except RuntimeError as exc:
         msg = str(exc).lower()
         if "unique" in msg or "already" in msg or "duplicat" in msg:
@@ -88,7 +104,7 @@ def organization_delete(org_id: str, request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
+    if not require_master_role(token):
         return JSONResponse({"error": "forbidden"}, status_code=403)
     companies = companies_for_options(token)
     source_id = resolve_source_id(companies, org_id)
@@ -160,12 +176,37 @@ def user_role_options(request: Request):
     if not token:
         return []
     try:
+        me = call_api("/auth/me", token=token) or {}
+    except RuntimeError:
+        return []
+    my_roles = set(me.get("roles") or [])
+    try:
         raw = call_api("/roles", token=token) or []
     except RuntimeError:
         return []
+    if "master" in my_roles:
+        allowed = None
+    elif "admin" in my_roles:
+        allowed = {"operator_cameras", "operator_map", "viewer"}
+    else:
+        allowed = set()
+    labels = {
+        "master": "Master ROBIOTEC",
+        "admin": "Administrador de organización",
+        "operator_cameras": "Operador solo cámaras",
+        "operator_map": "Operador solo mapa de carros",
+        "viewer": "Visor sin edición",
+    }
+    supported = set(labels)
     return [
-        {"id": r.get("id"), "codigo": r.get("name"), "nombre": r.get("name")}
-        for r in raw if r.get("active") and not r.get("deleted_at")
+        {"id": r.get("id"), "codigo": r.get("name"), "nombre": labels.get(r.get("name"), r.get("name"))}
+        for r in raw
+        if (
+            r.get("active")
+            and not r.get("deleted_at")
+            and r.get("name") in supported
+            and (allowed is None or r.get("name") in allowed)
+        )
     ]
 
 
@@ -189,3 +230,213 @@ def telemetry(request: Request):
     except RuntimeError:
         live_items = []
     return merge_live_telemetry(base_items, live_items if isinstance(live_items, list) else [])
+
+
+@router.get("/telemetry/history")
+def telemetry_history(request: Request):
+    """Historial de posiciones de un vehículo para un día (proxy a API Central)."""
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    params = dict(request.query_params)
+    # Mapear device_id → vehicle_id usando catálogo
+    device_id = params.pop("device_id", None)
+    vehicle_id = _resolve_vehicle_id(request, device_id) if device_id else params.get("vehicle_id")
+    if not vehicle_id:
+        return JSONResponse({"error": "Se requiere device_id o vehicle_id"}, status_code=400)
+    params["vehicle_id"] = vehicle_id
+    try:
+        result = call_api(f"/telemetry/history?{urlencode(params)}", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+    return result if isinstance(result, list) else result or []
+
+
+@router.get("/telemetry/km-summary")
+def telemetry_km_summary(request: Request):
+    """Resumen de km por día para un rango (proxy a API Central)."""
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    params = dict(request.query_params)
+    device_id = params.pop("device_id", None)
+    vehicle_id = _resolve_vehicle_id(request, device_id) if device_id else params.get("vehicle_id")
+    if not vehicle_id:
+        return JSONResponse({"error": "Se requiere device_id o vehicle_id"}, status_code=400)
+    params["vehicle_id"] = vehicle_id
+    try:
+        result = call_api(f"/telemetry/km-summary?{urlencode(params)}", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+    return result or []
+
+
+@router.get("/telemetry/km-summary/export")
+def telemetry_km_summary_export(request: Request):
+    """Exporta resumen de km como CSV."""
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    params = dict(request.query_params)
+    device_id = params.pop("device_id", None)
+    label = params.pop("label", device_id or "vehiculo")
+    vehicle_id = _resolve_vehicle_id(request, device_id) if device_id else params.get("vehicle_id")
+    if not vehicle_id:
+        return JSONResponse({"error": "Se requiere device_id"}, status_code=400)
+    params["vehicle_id"] = vehicle_id
+    try:
+        rows = call_api(f"/telemetry/km-summary?{urlencode(params)}", token=token) or []
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow(["Vehículo", "Fecha", "Km recorridos", "Velocidad máx (km/h)", "Puntos GPS", "Encendido ON", "Encendido OFF"])
+    total_km = 0.0
+    for r in rows:
+        km = round(float(r.get("km", 0)), 3)
+        total_km += km
+        writer.writerow([
+            label,
+            r.get("date", ""),
+            f"{km:.3f}",
+            f"{float(r.get('max_speed', 0)):.1f}",
+            r.get("points", 0),
+            r.get("ignition_on", 0),
+            r.get("ignition_off", 0),
+        ])
+    writer.writerow(["", "TOTAL", f"{total_km:.3f}", "", "", "", ""])
+
+    buf.seek(0)
+    filename = f"km_{label.replace(' ', '_')}_{params.get('from_date', 'rango')}_a_{params.get('to_date', '')}.csv"
+    return StreamingResponse(
+        iter([buf.getvalue()]),
+        media_type="text/csv; charset=utf-8",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@router.get("/telemetry/km-fleet")
+def telemetry_km_fleet(request: Request):
+    """Resumen agregado de km para la flota en un rango de fechas."""
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    params = dict(request.query_params)
+    if not params.get("from_date") or not params.get("to_date"):
+        return JSONResponse({"error": "Se requieren from_date y to_date"}, status_code=400)
+    params.setdefault("group_by", "summary")
+    try:
+        result = call_api(f"/telemetry/km-fleet?{urlencode(params)}", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+    return result or {"vehicles": [], "daily": [], "monthly": [], "totals": {}}
+
+
+@router.get("/geofences")
+def geofences(request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    try:
+        result = call_api("/telemetry/geofences", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+    return result or []
+
+
+@router.post("/geofences")
+async def geofence_create(request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    payload = await request.json()
+    try:
+        result = call_api("/telemetry/geofences", method="POST", token=token, data=payload)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+    return JSONResponse(result, status_code=201)
+
+
+@router.put("/geofences/{geofence_id}")
+async def geofence_update(geofence_id: str, request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    payload = await request.json()
+    try:
+        return call_api(f"/telemetry/geofences/{geofence_id}", method="PUT", token=token, data=payload)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+
+
+@router.delete("/geofences/{geofence_id}")
+def geofence_delete(geofence_id: str, request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    try:
+        return call_api(f"/telemetry/geofences/{geofence_id}", method="DELETE", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+
+
+@router.get("/geofence-alerts")
+def geofence_alerts(request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    query = urlencode(dict(request.query_params))
+    suffix = f"?{query}" if query else ""
+    try:
+        result = call_api(f"/telemetry/geofence-alerts{suffix}", token=token)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=502)
+    return result or []
+
+
+@router.patch("/geofence-alerts/{alert_id}/processed")
+async def geofence_alert_processed(alert_id: str, request: Request):
+    token = get_token(request)
+    if not token:
+        return JSONResponse({"error": "authentication_required"}, status_code=401)
+    payload = await request.json()
+    try:
+        return call_api(f"/telemetry/geofence-alerts/{alert_id}/processed", method="PATCH", token=token, data=payload)
+    except RuntimeError as exc:
+        return JSONResponse({"error": str(exc)}, status_code=400)
+
+
+def _resolve_vehicle_id(request: Request, device_id: str) -> str | None:
+    """Busca vehicle_id (UUID) a partir del device_id (unique_code/placa) usando el catálogo."""
+    normalized_device_id = _text(device_id)
+    if not normalized_device_id:
+        return None
+    try:
+        device_list = json.loads(build_context(request)["__DEVICE_CATALOG_JSON__"])
+        for d in device_list:
+            extra = d.get("extra") if isinstance(d.get("extra"), dict) else {}
+            vehicle_source_id = _text(
+                d.get("vehicle_source_id")
+                or d.get("source_id")
+                or d.get("vehicle_id")
+                or extra.get("vehicle_source_id")
+                or extra.get("source_id")
+                or extra.get("vehicle_id")
+            )
+            candidates = {
+                vehicle_source_id,
+                _text(d.get("device_id")),
+                _text(d.get("api_device_id")),
+                _text(d.get("unique_code")),
+                _text(d.get("plate")),
+                _text(d.get("id")),
+                _text(extra.get("api_device_id")),
+                _text(extra.get("gps_api_id")),
+            }
+            if normalized_device_id in {item for item in candidates if item}:
+                return vehicle_source_id or (normalized_device_id if len(normalized_device_id) == 36 else None)
+    except Exception:
+        pass
+    # Si es UUID directamente, devolverlo
+    return normalized_device_id if len(normalized_device_id) == 36 else None

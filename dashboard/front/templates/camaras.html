@@ -16,59 +16,8 @@
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     crossorigin=""
   />
-  <link rel="stylesheet" href="/static/web_app.css?v=__STATIC_ASSET_VERSION__" />
-  <style>
-    .camera-pill {
-      position: relative;
-    }
-
-    .camera-pill::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 20;
-      border-radius: inherit;
-      cursor: pointer;
-      pointer-events: none;
-    }
-
-    .camera-pill-frame {
-      pointer-events: none !important;
-    }
-
-    .camera-pill-inference {
-      z-index: 30;
-    }
-
-    .camera-pill-preview--snapshot {
-      display: block;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      min-height: 86px;
-      overflow: hidden;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: radial-gradient(circle at 50% 20%, rgba(241, 56, 17, 0.14), transparent 48%), #050709;
-      position: relative;
-    }
-
-    .camera-pill-snapshot {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: inherit;
-      transition: opacity 0.3s ease;
-    }
-
-    .camera-pill-snapshot.is-loading {
-      opacity: 0.4;
-    }
-
-    .camera-pill-snapshot.is-error {
-      opacity: 0.15;
-    }
-  </style>
+  <link rel="stylesheet" href="/static/src/css/web_app.css?v=__STATIC_ASSET_VERSION__" />
+  <link rel="stylesheet" href="/static/src/css/cameras.css?v=__STATIC_ASSET_VERSION__" />
 </head>
 <body class="page-cameras">
   <div class="app-shell is-sidebar-collapsed">
@@ -130,32 +79,6 @@
                   </article>
                 </div>
               </section>
-            <!--
-              <section class="camera-side-card plate-preview-shell" aria-label="Vista previa de placas">
-                <div class="camera-side-head">
-                  <div class="plate-preview-copy-wrap">
-                    <div class="ops-eyebrow">Placas</div>
-                    <span class="camera-side-kicker">Selecciona una</span>
-                  </div>
-                </div>
-                <div class="plate-preview-list" aria-label="Lista de placas detectadas">
-                  __PLATE_PREVIEW_CHOICES__
-                </div>
-                <div class="plate-preview-inline">
-                  <input
-                    class="plate-preview-output"
-                    id="plate-preview-output"
-                    type="text"
-                    value="__PLATE_PREVIEW_SELECTED__"
-                    readonly
-                    spellcheck="false"
-                    aria-label="Placa seleccionada"
-                  />
-                  <button class="camera-cta plate-preview-copy" id="plate-preview-copy" type="button" aria-label="Copiar placa seleccionada">Copiar</button>
-                </div>
-                <span class="plate-preview-status" id="plate-preview-status">Selecciona y copia la placa.</span>
-              </section>
-            -->
             </aside>
           </section>
         </section>
@@ -191,7 +114,7 @@
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
-    window.__WEB_APP_CONFIG__ = {
+    window.ROBIOTEC_WEB_APP_CONFIG = {
       cameras: __CAMERA_ITEMS_JSON__,
       devices: __DEVICE_CATALOG_JSON__,
       defaultCamera: __DEFAULT_CAMERA_JSON__,
@@ -201,8 +124,8 @@
       emptyCameraMessage: "No ha seleccionado ninguna cámara.",
     };
   </script>
-  <script src="/static/cameras_page_viewer.js?v=__STATIC_ASSET_VERSION__"></script>
-  <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
+  <script src="/static/src/js/cameras_page_viewer.js?v=__STATIC_ASSET_VERSION__"></script>
+  <script src="/static/src/js/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
   <script type="module" src="/static/web_app/cameras/admin_fallback.js?v=__STATIC_ASSET_VERSION__"></script>
 </body>
 </html>

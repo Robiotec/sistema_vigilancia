@@ -1,0 +1,230 @@
+<section class="page-section-shell page-vehicle-registry-shell admin-tab-panel" data-admin-tab-panel="vehiculos" hidden>
+  <div class="page-section-head">
+    <div>
+      <div class="ops-eyebrow">Vehículos y drones</div>
+      <h2>Flota registrada</h2>
+    </div>
+    <div class="camera-page-actions">
+      <button class="camera-register-open" id="vehicle-register-open" type="button">
+        Registrar nuevo vehículo
+      </button>
+      <button type="button" id="fleet-km-open" class="fleet-km-open-btn">
+        Ver km de flota
+      </button>
+    </div>
+  </div>
+
+  <div class="vehicle-registry-workbench">
+    <section class="ops-card page-panel vehicle-registry-main-card">
+      <div class="ops-head vehicle-registry-detail-head">
+        <div>
+          <div class="ops-eyebrow">Detalle</div>
+          <h2 id="vehicle-registry-detail-title">Selecciona un registro</h2>
+          <p class="vehicle-registry-detail-copy" id="vehicle-registry-detail-copy">
+            Haz clic en un dron o auto del panel derecho para ver su información completa aquí.
+          </p>
+        </div>
+      </div>
+      <div class="vehicle-registry-detail" id="vehicle-registry-detail"></div>
+    </section>
+
+    <aside class="vehicle-registry-rail">
+      <div class="vehicle-registry-rail-list" id="vehicle-registry-rail-list"></div>
+    </aside>
+  </div>
+</section>
+
+<div class="fleet-km-modal" id="fleet-km-modal" hidden>
+  <div class="fleet-km-backdrop" id="fleet-km-backdrop"></div>
+  <div class="fleet-km-dialog" role="dialog" aria-modal="true" aria-labelledby="fleet-km-title">
+    <header class="fleet-km-dialog-head">
+      <div>
+        <div class="ops-eyebrow">Gestión de flota</div>
+        <h2 id="fleet-km-title">Kilómetros recorridos por vehículo</h2>
+      </div>
+      <button class="fleet-km-close" id="fleet-km-close" type="button" aria-label="Cerrar">×</button>
+    </header>
+    <div class="fleet-km-dialog-body">
+      <div class="fleet-km-controls">
+        <label class="vehicle-km-label">Desde
+          <input type="date" id="fleet-km-from" />
+        </label>
+        <label class="vehicle-km-label">Hasta
+          <input type="date" id="fleet-km-to" />
+        </label>
+        <label class="vehicle-km-label">Vista
+          <select id="fleet-km-report-mode">
+            <option value="vehicle">Por vehículo</option>
+            <option value="daily">Diario</option>
+            <option value="monthly">Mensual</option>
+          </select>
+        </label>
+        <div class="fleet-km-presets" aria-label="Rangos rápidos">
+          <button type="button" class="vehicle-km-preset" data-fleet-km-range="today">Hoy</button>
+          <button type="button" class="vehicle-km-preset" data-fleet-km-range="week">7 días</button>
+          <button type="button" class="vehicle-km-preset" data-fleet-km-range="month">Este mes</button>
+        </div>
+        <button type="button" id="fleet-km-load" class="vehicle-km-load">Cargar</button>
+        <button type="button" id="fleet-km-export-csv" class="vehicle-km-export-fleet" style="display:none">Exportar CSV</button>
+      </div>
+      <div id="fleet-km-results"></div>
+    </div>
+  </div>
+</div>
+
+<div class="camera-register-modal" id="vehicle-register-modal" hidden>
+  <div class="camera-register-modal-backdrop" id="vehicle-register-backdrop"></div>
+  <section
+    class="camera-register-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="vehicle-register-title"
+  >
+    <header class="camera-register-dialog-head">
+      <div>
+        <div class="ops-eyebrow">Alta de vehículo</div>
+        <h2 id="vehicle-register-title">Registrar nuevo vehículo</h2>
+        <p id="vehicle-register-copy">Selecciona si quieres registrar un dron o un automóvil y define cómo llegará su telemetría o video.</p>
+      </div>
+      <button class="camera-register-close" id="vehicle-register-close" type="button" aria-label="Cerrar modal">
+        ×
+      </button>
+    </header>
+
+    <form class="camera-register-form" id="vehicle-register-form">
+      <div class="camera-register-grid">
+        <div class="camera-register-stack">
+          <div class="camera-register-intro">
+            <strong>Registro manual</strong>
+            <p>Guarda vehículos reales en PostgreSQL, enlazando organización, propietario, telemetría y cámaras montadas en la unidad.</p>
+          </div>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">1</span>
+              <span>Organización</span>
+            </span>
+            <select id="vehicle-register-organization" name="organizacion_id" required></select>
+            <span class="camera-register-help">El vehículo quedará dentro de esta organización y heredará su alcance operativo.</span>
+          </label>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">2</span>
+              <span>Propietario</span>
+            </span>
+            <select id="vehicle-register-owner" name="propietario_usuario_id" required></select>
+            <span class="camera-register-help">Solo se muestran responsables visibles para tu sesión y filtro actual.</span>
+          </label>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">3</span>
+              <span>Tipo de vehículo</span>
+            </span>
+            <select id="vehicle-register-type" name="vehicle_type" required>
+              <option value="drone_robiotec">Dron Robiotec</option>
+              <option value="drone_dji">Dron DJI</option>
+              <option value="auto">Vehículo terrestre</option>
+            </select>
+            <span class="camera-register-help" id="vehicle-register-type-help">Elige el tipo real del vehículo según el catálogo de la base de datos.</span>
+          </label>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">4</span>
+              <span>Nombre o alias</span>
+            </span>
+            <input
+              id="vehicle-register-label"
+              name="label"
+              type="text"
+              placeholder="Unidad Alpha"
+              autocomplete="off"
+              required
+            />
+            <span class="camera-register-help">Usa un nombre corto y reconocible para el operador.</span>
+          </label>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">5</span>
+              <span>Modo de integración</span>
+            </span>
+            <select id="vehicle-register-telemetry-mode" name="telemetry_mode" required>
+              <option value="api">API GPS</option>
+              <option value="rtmp">Video RTMP</option>
+            </select>
+            <span class="camera-register-help" id="vehicle-register-telemetry-help">Elige cómo quieres enlazar la posición del vehículo dentro del mapa.</span>
+          </label>
+
+          <div class="vehicle-register-drone-grid" id="vehicle-register-api-fields" hidden>
+            <label class="camera-register-field">
+              <span class="camera-register-label">
+                <span class="camera-register-step">6</span>
+                <span>ID en la API</span>
+              </span>
+              <input
+                id="vehicle-register-api-device-id"
+                name="api_device_id"
+                type="text"
+                placeholder="drone"
+                autocomplete="off"
+              />
+              <span class="camera-register-help">Debe coincidir con el id que devuelve API CENTRAL en la telemetría del vehículo.</span>
+            </label>
+          </div>
+
+          <label class="camera-register-field">
+            <span class="camera-register-label">
+              <span class="camera-register-step">6</span>
+              <span>Observaciones</span>
+            </span>
+            <textarea
+              id="vehicle-register-notes"
+              name="notes"
+              rows="4"
+              placeholder="Ejemplo: dron de patrullaje, color gris, asignado al turno nocturno."
+            ></textarea>
+            <span class="camera-register-help">Campo opcional para notas operativas, color, responsable o particularidades.</span>
+          </label>
+
+          <section class="vehicle-register-camera-shell" id="vehicle-register-camera-shell">
+            <div class="camera-register-intro">
+              <strong>Cámaras asociadas</strong>
+              <p>Selecciona las cámaras móviles que quedarán montadas en este vehículo.</p>
+            </div>
+            <div class="vehicle-register-camera-list" id="vehicle-register-camera-list"></div>
+          </section>
+        </div>
+
+        <div class="camera-register-map-stack">
+          <div class="camera-register-intro">
+            <strong>Guía rápida</strong>
+            <p id="vehicle-register-type-note">Al registrar un vehículo puedes dejarlo como ficha operativa o enlazarlo a una fuente de telemetría por API.</p>
+          </div>
+
+          <div class="camera-register-guide">
+            <article class="camera-register-guide-item">
+              <strong>Dron</strong>
+              <p>Úsalo para aeronaves no tripuladas y equipos de vuelo. Puedes consumir su posición desde una API externa.</p>
+            </article>
+            <article class="camera-register-guide-item">
+              <strong>Automóvil</strong>
+              <p>Úsalo para carros, camionetas o patrullas. Puedes dejarlo como ficha manual o conectarlo a una API GPS.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="camera-register-actions">
+        <div class="ops-note camera-register-feedback" id="vehicle-register-feedback" hidden></div>
+        <div class="camera-register-action-row">
+          <button class="camera-register-secondary camera-register-danger" id="vehicle-register-delete" type="button" hidden>Eliminar vehículo</button>
+          <button class="camera-register-secondary" id="vehicle-register-cancel" type="button">Cancelar</button>
+          <button class="camera-register-submit" id="vehicle-register-submit" type="submit">Guardar vehículo</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

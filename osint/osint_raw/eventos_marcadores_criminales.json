@@ -34,7 +34,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 70,
+      "total_clicks": 73,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -54,7 +54,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "468797",
@@ -88,7 +89,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 96,
+      "total_clicks": 101,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -108,7 +109,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "468796",
@@ -142,7 +144,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 39,
+      "total_clicks": 44,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -162,7 +164,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "448653",
@@ -212,7 +215,8 @@
       "nacionalidad": null,
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "93688",
@@ -246,7 +250,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 148,
+      "total_clicks": 151,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -266,7 +270,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "93672",
@@ -300,7 +305,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 538,
+      "total_clicks": 546,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -320,7 +325,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86657",
@@ -354,7 +360,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 968,
+      "total_clicks": 983,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -374,7 +380,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83402",
@@ -408,7 +415,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1173,
+      "total_clicks": 1183,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -428,7 +435,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83387",
@@ -462,7 +470,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 454,
+      "total_clicks": 455,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -482,7 +490,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83374",
@@ -516,7 +525,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1106,
+      "total_clicks": 1111,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -536,7 +545,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83373",
@@ -570,7 +580,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1025,
+      "total_clicks": 1033,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -590,7 +600,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83365",
@@ -624,7 +635,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1060,
+      "total_clicks": 1075,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -644,7 +655,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83360",
@@ -698,7 +710,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83358",
@@ -752,7 +765,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83353",
@@ -786,7 +800,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 572,
+      "total_clicks": 578,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -806,7 +820,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83352",
@@ -840,7 +855,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 310,
+      "total_clicks": 311,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -860,7 +875,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83351",
@@ -914,7 +930,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83350",
@@ -968,7 +985,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83349",
@@ -1002,7 +1020,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 777,
+      "total_clicks": 782,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1022,7 +1040,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83348",
@@ -1056,7 +1075,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 664,
+      "total_clicks": 673,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1076,7 +1095,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83347",
@@ -1110,7 +1130,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 576,
+      "total_clicks": 581,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1130,7 +1150,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83346",
@@ -1164,7 +1185,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 720,
+      "total_clicks": 727,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1184,7 +1205,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83345",
@@ -1218,7 +1240,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1970,
+      "total_clicks": 1993,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1238,7 +1260,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83344",
@@ -1292,7 +1315,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83343",
@@ -1326,7 +1350,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 330,
+      "total_clicks": 331,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1346,7 +1370,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83342",
@@ -1380,7 +1405,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 276,
+      "total_clicks": 280,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1400,7 +1425,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83341",
@@ -1434,7 +1460,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 290,
+      "total_clicks": 295,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1454,7 +1480,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83340",
@@ -1488,7 +1515,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 234,
+      "total_clicks": 239,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1508,7 +1535,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83339",
@@ -1542,7 +1570,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 222,
+      "total_clicks": 225,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1562,7 +1590,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83338",
@@ -1596,7 +1625,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 228,
+      "total_clicks": 230,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1616,7 +1645,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83337",
@@ -1650,7 +1680,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 163,
+      "total_clicks": 167,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1670,7 +1700,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83336",
@@ -1724,7 +1755,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83335",
@@ -1758,7 +1790,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 368,
+      "total_clicks": 374,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1778,7 +1810,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83334",
@@ -1812,7 +1845,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 541,
+      "total_clicks": 550,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1832,7 +1865,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83333",
@@ -1866,7 +1900,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 593,
+      "total_clicks": 599,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1886,7 +1920,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83332",
@@ -1920,7 +1955,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 656,
+      "total_clicks": 660,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1940,7 +1975,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83331",
@@ -1974,7 +2010,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 314,
+      "total_clicks": 318,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1994,7 +2030,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83330",
@@ -2028,7 +2065,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 391,
+      "total_clicks": 395,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2048,7 +2085,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83329",
@@ -2064,384 +2102,6 @@
       "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c3cf499-5923-490b-a4a7-86f7dca86458.png",
       "archivos": [
         "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/7c3cf499-5923-490b-a4a7-86f7dca86458.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 399,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83328",
-      "codigo_alfanumerico": "MCRI-20260111-083328",
-      "latitud": -0.261581762863853,
-      "longitud": -78.52578294967655,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los TWS Crew\" en Quito, sector: Paredes de los Condominios Jardines del Sur, diagonal a la Universidad Salesiana Uespa.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:45:02.628Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 327,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83327",
-      "codigo_alfanumerico": "MCRI-20260111-083327",
-      "latitud": -0.26099355104368527,
-      "longitud": -78.52685382789156,
-      "circunstancias_hecho": "Presencia de graffiti en Quito, sector:  Parque El Calzado (Solanda).",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:42:13.074Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 40,
-        "nombre": "Latin King",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 340,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83326",
-      "codigo_alfanumerico": "MCRI-20260111-083326",
-      "latitud": -0.2565614561307627,
-      "longitud": -78.52426281398317,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Inkas Beach\" en Quito, sector: Av. Moraspungo alado Izquierdo del hospital IESS Quito Sur.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:36:15.859Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 391,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83325",
-      "codigo_alfanumerico": "MCRI-20260111-083325",
-      "latitud": -0.25507394579384157,
-      "longitud": -78.52295981563897,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los ODKS Crew\" en Quito, sector: Av. Moraspungo al frente de la Gasolinera Petro Ecuador.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:24:48.345Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 427,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83324",
-      "codigo_alfanumerico": "MCRI-20260111-083324",
-      "latitud": -0.249249409149396,
-      "longitud": -78.52099760340086,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Moon Crew\" en Quito, sector: Av. Maldonado, alado de la Gasolinera Terpel sentido  Sur-Norte.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:21:35.754Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 423,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83323",
-      "codigo_alfanumerico": "MCRI-20260111-083323",
-      "latitud": -0.24592358708813947,
-      "longitud": -78.51967251183488,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los VES Crew\" en Quito, sector: Av. Maldonado, paredes de la Clínica la Villaflora sentido Sur-Norte.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:05:22.644Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png"
-      ],
-      "cantidad": 0,
-      "tipo_interes_gdo": {
-        "id": 41,
-        "nombre": "Los Lobos",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
-        "color": null
-      },
-      "canton": {
-        "nombre": "QUITO"
-      },
-      "tipo_evento": {
-        "id": "MARCADORES_CRIMINALES",
-        "nombre": "Marcadores Criminales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
-        "color": null,
-        "tipo_evento_padre": null
-      },
-      "total_clicks": 224,
-      "parpadear": false,
-      "enviar_revision": false,
-      "correccion": null,
-      "operativo": null,
-      "unidad_ppnn_evento": null,
-      "infraestructura_evento": null,
-      "paises_relacionados_evento": null,
-      "calificacion": "0",
-      "tarea_id": null,
-      "org_marcador_criminal": [],
-      "nacionalidad": {
-        "id": 49,
-        "pais": "Ecuador",
-        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
-        "codigoISO2": "EC",
-        "gentilicio": "Ecuatoriano/a"
-      },
-      "actor_marcador_evento": [],
-      "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
-    },
-    {
-      "id": "83322",
-      "codigo_alfanumerico": "MCRI-20260111-083322",
-      "latitud": -0.24574738011978128,
-      "longitud": -78.51895789881135,
-      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los FDS Crew RFS\" en Quito, sector: Debajo del puente alado Izquierdo de la Plaza Produbanco.",
-      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
-      "verificado": true,
-      "visible": true,
-      "url_noticia": null,
-      "fecha_creacion": "2026-01-11T05:02:21.224Z",
-      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png",
-      "archivos": [
-        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png"
       ],
       "cantidad": 0,
       "tipo_interes_gdo": {
@@ -2480,7 +2140,393 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83328",
+      "codigo_alfanumerico": "MCRI-20260111-083328",
+      "latitud": -0.261581762863853,
+      "longitud": -78.52578294967655,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los TWS Crew\" en Quito, sector: Paredes de los Condominios Jardines del Sur, diagonal a la Universidad Salesiana Uespa.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:45:02.628Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/243998de-4615-43e0-8c30-29617fd48b30.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 333,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83327",
+      "codigo_alfanumerico": "MCRI-20260111-083327",
+      "latitud": -0.26099355104368527,
+      "longitud": -78.52685382789156,
+      "circunstancias_hecho": "Presencia de graffiti en Quito, sector:  Parque El Calzado (Solanda).",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:42:13.074Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/557afd7d-05f4-4b2c-8abb-ebc28566236a.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 40,
+        "nombre": "Latin King",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/latinking.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 347,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83326",
+      "codigo_alfanumerico": "MCRI-20260111-083326",
+      "latitud": -0.2565614561307627,
+      "longitud": -78.52426281398317,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Inkas Beach\" en Quito, sector: Av. Moraspungo alado Izquierdo del hospital IESS Quito Sur.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:36:15.859Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/9aea2b97-5627-499d-bc0b-99fb1fbc18d9.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 396,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83325",
+      "codigo_alfanumerico": "MCRI-20260111-083325",
+      "latitud": -0.25507394579384157,
+      "longitud": -78.52295981563897,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los ODKS Crew\" en Quito, sector: Av. Moraspungo al frente de la Gasolinera Petro Ecuador.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:24:48.345Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/492f6268-3024-489e-b64f-34e69366bea4.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 433,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83324",
+      "codigo_alfanumerico": "MCRI-20260111-083324",
+      "latitud": -0.249249409149396,
+      "longitud": -78.52099760340086,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los Moon Crew\" en Quito, sector: Av. Maldonado, alado de la Gasolinera Terpel sentido  Sur-Norte.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:21:35.754Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6a510969-07a8-4833-a721-2c65bde41290.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 428,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83323",
+      "codigo_alfanumerico": "MCRI-20260111-083323",
+      "latitud": -0.24592358708813947,
+      "longitud": -78.51967251183488,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los VES Crew\" en Quito, sector: Av. Maldonado, paredes de la Clínica la Villaflora sentido Sur-Norte.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:05:22.644Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/6e984525-be80-4a97-b4e8-9402a4691e91.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 227,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
+    },
+    {
+      "id": "83322",
+      "codigo_alfanumerico": "MCRI-20260111-083322",
+      "latitud": -0.24574738011978128,
+      "longitud": -78.51895789881135,
+      "circunstancias_hecho": "Presencia de graffiti de \"Los Lobos\" con \"Los FDS Crew RFS\" en Quito, sector: Debajo del puente alado Izquierdo de la Plaza Produbanco.",
+      "fecha_infraccion": "2026-01-11T02:41:00.000Z",
+      "verificado": true,
+      "visible": true,
+      "url_noticia": null,
+      "fecha_creacion": "2026-01-11T05:02:21.224Z",
+      "url_foto": "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/232375f3-5016-4659-a3c3-e62a57a409fd.png"
+      ],
+      "cantidad": 0,
+      "tipo_interes_gdo": {
+        "id": 41,
+        "nombre": "Los Lobos",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/LosLobos.png",
+        "color": null
+      },
+      "canton": {
+        "nombre": "QUITO"
+      },
+      "tipo_evento": {
+        "id": "MARCADORES_CRIMINALES",
+        "nombre": "Marcadores Criminales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS+OSINT_TERRITORIO_GRAFITI_ON.svg",
+        "color": null,
+        "tipo_evento_padre": null
+      },
+      "total_clicks": 409,
+      "parpadear": false,
+      "enviar_revision": false,
+      "correccion": null,
+      "operativo": null,
+      "unidad_ppnn_evento": null,
+      "infraestructura_evento": null,
+      "paises_relacionados_evento": null,
+      "calificacion": "0",
+      "tarea_id": null,
+      "org_marcador_criminal": [],
+      "nacionalidad": {
+        "id": 49,
+        "pais": "Ecuador",
+        "banderaURL": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+        "codigoISO2": "EC",
+        "gentilicio": "Ecuatoriano/a"
+      },
+      "actor_marcador_evento": [],
+      "empresa_marcador_evento": [],
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83321",
@@ -2514,7 +2560,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 472,
+      "total_clicks": 479,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2534,7 +2580,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83320",
@@ -2568,7 +2615,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 359,
+      "total_clicks": 362,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2588,7 +2635,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83319",
@@ -2622,7 +2670,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 313,
+      "total_clicks": 317,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2642,7 +2690,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83318",
@@ -2676,7 +2725,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 322,
+      "total_clicks": 327,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2696,7 +2745,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83317",
@@ -2730,7 +2780,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 291,
+      "total_clicks": 294,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2750,7 +2800,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83316",
@@ -2784,7 +2835,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 463,
+      "total_clicks": 469,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2804,7 +2855,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83315",
@@ -2838,7 +2890,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 410,
+      "total_clicks": 416,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2858,7 +2910,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83314",
@@ -2892,7 +2945,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1432,
+      "total_clicks": 1452,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2912,7 +2965,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83313",
@@ -2946,7 +3000,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 591,
+      "total_clicks": 599,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2966,7 +3020,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83311",
@@ -3000,7 +3055,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 406,
+      "total_clicks": 410,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3020,7 +3075,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83310",
@@ -3054,7 +3110,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 650,
+      "total_clicks": 659,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3074,7 +3130,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83309",
@@ -3128,7 +3185,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83308",
@@ -3162,7 +3220,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 406,
+      "total_clicks": 411,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3182,7 +3240,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83307",
@@ -3216,7 +3275,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1008,
+      "total_clicks": 1012,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3236,7 +3295,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83306",
@@ -3270,7 +3330,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 447,
+      "total_clicks": 456,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3290,7 +3350,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83305",
@@ -3324,7 +3385,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 404,
+      "total_clicks": 408,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3344,7 +3405,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83304",
@@ -3378,7 +3440,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 308,
+      "total_clicks": 310,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3398,7 +3460,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83303",
@@ -3432,7 +3495,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 374,
+      "total_clicks": 377,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3452,7 +3515,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83302",
@@ -3486,7 +3550,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 346,
+      "total_clicks": 348,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3506,7 +3570,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83301",
@@ -3540,7 +3605,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 540,
+      "total_clicks": 549,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3560,7 +3625,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83300",
@@ -3594,7 +3660,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 500,
+      "total_clicks": 503,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3614,7 +3680,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83299",
@@ -3648,7 +3715,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 471,
+      "total_clicks": 478,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3668,7 +3735,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83298",
@@ -3702,7 +3770,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 564,
+      "total_clicks": 569,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3722,7 +3790,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83297",
@@ -3756,7 +3825,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 599,
+      "total_clicks": 607,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3776,7 +3845,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83296",
@@ -3810,7 +3880,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1241,
+      "total_clicks": 1255,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3830,7 +3900,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83295",
@@ -3864,7 +3935,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 469,
+      "total_clicks": 473,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3884,7 +3955,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83294",
@@ -3918,7 +3990,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 671,
+      "total_clicks": 685,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3938,7 +4010,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83293",
@@ -3972,7 +4045,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 400,
+      "total_clicks": 404,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3992,7 +4065,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83291",
@@ -4026,7 +4100,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 661,
+      "total_clicks": 671,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4046,7 +4120,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83289",
@@ -4080,7 +4155,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 784,
+      "total_clicks": 794,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4100,7 +4175,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83288",
@@ -4134,7 +4210,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 786,
+      "total_clicks": 792,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4154,7 +4230,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83287",
@@ -4188,7 +4265,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 675,
+      "total_clicks": 681,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4208,7 +4285,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83286",
@@ -4242,7 +4320,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 748,
+      "total_clicks": 758,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4262,7 +4340,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83285",
@@ -4296,7 +4375,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 738,
+      "total_clicks": 751,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4316,7 +4395,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83282",
@@ -4370,7 +4450,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83281",
@@ -4404,7 +4485,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 640,
+      "total_clicks": 645,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4424,7 +4505,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83280",
@@ -4478,7 +4560,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83279",
@@ -4512,7 +4595,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 684,
+      "total_clicks": 690,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4532,7 +4615,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83278",
@@ -4566,7 +4650,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 565,
+      "total_clicks": 570,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4586,7 +4670,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83277",
@@ -4620,7 +4705,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 612,
+      "total_clicks": 623,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4640,7 +4725,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83275",
@@ -4674,7 +4760,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 952,
+      "total_clicks": 965,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4694,7 +4780,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83274",
@@ -4728,7 +4815,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 981,
+      "total_clicks": 993,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4748,7 +4835,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83273",
@@ -4782,7 +4870,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 412,
+      "total_clicks": 419,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4802,7 +4890,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83272",
@@ -4836,7 +4925,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 389,
+      "total_clicks": 391,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4856,7 +4945,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83271",
@@ -4890,7 +4980,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 572,
+      "total_clicks": 577,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4910,7 +5000,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83264",
@@ -4944,7 +5035,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 949,
+      "total_clicks": 970,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -4964,7 +5055,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     }
   ]
 }

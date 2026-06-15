@@ -1,12 +1,14 @@
 """Router de vehículos y drones."""
 from __future__ import annotations
 
+import concurrent.futures
 from typing import Any
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 
 from back.app.context import (
+    _num_id,
     _text,
     auth_json_response,
     call_api,
@@ -18,6 +20,7 @@ from back.app.context import (
     is_auth_error,
     normalize_drone_item,
     normalize_vehicle_item,
+    require_admin_request,
     resolve_source_id,
 )
 from back.app.state import empresa_mapper, rbox_mapper, settings, stream_config_mapper
@@ -27,6 +30,7 @@ router = APIRouter(prefix="/api", tags=["vehicles"])
 
 @router.get("/vehicle-form-options")
 def vehicle_form_options(request: Request):
+    require_admin_request(request)
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
@@ -43,7 +47,19 @@ def vehicle_form_options(request: Request):
         return cameras
     return {
         "organizations": [empresa_mapper.item(c) for c in companies],
-        "owners": [{"id": int(_text(u.get("id")) or 0), "source_id": u.get("id"), "nombre_usuario": u.get("username"), "username": u.get("username")} for u in users],
+        "owners": [
+            {
+                "id": _num_id(u.get("id")),
+                "source_id": u.get("id"),
+                "nombre_usuario": u.get("username"),
+                "username": u.get("username"),
+                "display_name": u.get("name") or u.get("email") or u.get("username"),
+                "company_id": str(u.get("company_id")) if u.get("company_id") else None,
+                "organizacion_source_id": str(u.get("company_id")) if u.get("company_id") else None,
+                "organizacion_id": _num_id(u.get("company_id")) if u.get("company_id") else None,
+            }
+            for u in users
+        ],
         "vehicle_types": [
             {"id": 1, "codigo": "drone_robiotec", "nombre": "Dron Robiotec", "categoria": "dron"},
             {"id": 2, "codigo": "drone_dji", "nombre": "Dron DJI", "categoria": "dron"},
@@ -60,13 +76,29 @@ def vehicle_registry(request: Request):
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
     try:
-        companies, users = display_maps(token)
-        vehicles = [normalize_vehicle_item(v, companies, users) for v in (call_api("/vehicles", token=token) or [])]
-        stream_configs = call_api("/stream-configs", token=token) or []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+            companies_future = executor.submit(companies_for_options, token)
+            vehicles_future = executor.submit(call_api, "/vehicles", token=token)
+            streams_future = executor.submit(call_api, "/stream-configs", token=token)
+            drones_future = executor.submit(call_api, "/drones", token=token)
+            companies_payload = companies_future.result() or []
+            try:
+                stream_configs = streams_future.result() or []
+            except RuntimeError:
+                stream_configs = []
+            try:
+                users_payload = call_api("/users", token=token) or []
+            except RuntimeError:
+                users_payload = []
+            vehicles_payload = vehicles_future.result() or []
+            drones_payload = drones_future.result() or []
+        companies = {str(item.get("id")): item for item in companies_payload}
+        users = {str(item.get("id")): item for item in users_payload}
+        vehicles = [normalize_vehicle_item(v, companies, users) for v in vehicles_payload]
         stream_by_drone = stream_config_mapper.by_drone(stream_configs)
         drones = [
             normalize_drone_item(d, stream_by_drone.get(str(d.get("id"))), companies, users)
-            for d in (call_api("/drones", token=token) or [])
+            for d in drones_payload
         ]
     except RuntimeError as exc:
         if is_auth_error(exc):
@@ -77,6 +109,7 @@ def vehicle_registry(request: Request):
 
 @router.post("/vehicle-registry")
 async def vehicle_create(request: Request):
+    require_admin_request(request)
     token = get_token(request)
     p = await request.json()
     companies = companies_for_options(token)
@@ -147,6 +180,7 @@ async def vehicle_create(request: Request):
 
 @router.put("/vehicle-registry/{registration_id}")
 async def vehicle_update(registration_id: str, request: Request):
+    require_admin_request(request)
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
@@ -191,6 +225,7 @@ async def vehicle_update(registration_id: str, request: Request):
 
 @router.delete("/vehicle-registry/{registration_id}")
 def vehicle_delete(registration_id: str, request: Request):
+    require_admin_request(request)
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)

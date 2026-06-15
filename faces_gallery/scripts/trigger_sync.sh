@@ -1,25 +1,20 @@
 #!/usr/bin/env bash
-# trigger_sync.sh
-# Lanza robiotec-face-sync.service en 10.0.0.2 y espera resultado.
-# Requiere: export SSHPASS=<password_robiotec>
-# Uso: ./trigger_sync.sh [--follow]
 set -euo pipefail
 
-HOST="robiotec@10.0.0.2"
-SERVICE="robiotec-face-sync"
-SSH_CMD="sshpass -e ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10"
+HOST="${FACE_SYNC_HOST:-robiotec@10.0.0.2}"
+SERVICE="${FACE_SYNC_SERVICE:-robiotec-face-sync}"
 
 if [[ -z "${SSHPASS:-}" ]]; then
-    echo "ERROR: Variable SSHPASS no definida. Ejecutar: export SSHPASS=<password>"
-    exit 1
+  echo "ERROR: define SSHPASS antes de ejecutar este script."
+  exit 1
 fi
-export SSHPASS
 
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Lanzando $SERVICE en $HOST ..."
+export SSHPASS
+SSH_CMD="sshpass -e ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10"
+
+echo "Lanzando ${SERVICE}.service en $HOST"
 $SSH_CMD "$HOST" "sudo systemctl start ${SERVICE}.service"
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Servicio iniciado"
 
 if [[ "${1:-}" == "--follow" ]]; then
-    echo "--- Logs en tiempo real ---"
-    $SSH_CMD "$HOST" "sudo journalctl -u $SERVICE --no-pager -f -n 30"
+  $SSH_CMD "$HOST" "sudo journalctl -u $SERVICE --no-pager -f -n 30"
 fi

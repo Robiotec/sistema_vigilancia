@@ -14,7 +14,7 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
-from fastapi import Request
+from fastapi import HTTPException, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 
 from back.app.state import (
@@ -41,6 +41,9 @@ from back.app.services.notification_settings import load_notification_settings
 _CONTEXT_CACHE: dict[str, tuple[dict, float]] = {}
 _CONTEXT_TTL = 30.0
 _CONTEXT_LOCK = threading.Lock()
+_SESSION_CACHE: dict[str, tuple[dict[str, Any] | None, float]] = {}
+_SESSION_TTL = 30.0
+_SESSION_LOCK = threading.Lock()
 
 
 def clear_context_cache() -> None:
@@ -88,6 +91,101 @@ def require_admin_role(token: str | None) -> bool:
     return bool({"master", "admin"}.intersection(get_token_roles(token)))
 
 
+def require_master_role(token: str | None) -> bool:
+    if not token:
+        return False
+    return "master" in set(get_token_roles(token))
+
+
+ROLE_LABELS = {
+    "master": "Master ROBIOTEC",
+    "admin": "Administrador de organizacion",
+    "operator_cameras": "Operador de camaras",
+    "operator_map": "Operador de mapa vehicular",
+    "viewer": "Visor",
+}
+
+ROLE_PERMISSIONS = {
+    "master": {"admin_users", "admin_orgs", "edit", "dashboard", "cameras", "map", "events", "vehicles", "reports", "notifications"},
+    "admin": {"admin_users", "edit", "dashboard", "cameras", "map", "events", "vehicles", "reports", "notifications"},
+    "viewer": {"dashboard", "cameras", "map", "events", "vehicles", "reports"},
+    "operator_cameras": {"cameras"},
+    "operator_map": {"map", "vehicles"},
+}
+
+PAGE_PERMISSION = {
+    "index.html": "dashboard",
+    "perfil.html": "profile",
+    "camaras.html": "cameras",
+    "mapa.html": "map",
+    "eventos.html": "events",
+    "registro_vehiculos.html": "vehicles",
+    "reportes.html": "reports",
+    "notificaciones.html": "notifications",
+    "usuarios.html": "admin_users",
+    "registros.html": "admin_users",
+}
+
+SIDEBAR_LINKS = [
+    {"permission": "dashboard", "href": "/", "icon": "⌂", "title": "Dashboard", "copy": "Resumen ejecutivo"},
+    {"permission": "profile", "href": "/perfil", "icon": "◎", "title": "Perfil", "copy": "Informacion de usuario"},
+    {"permission": "cameras", "href": "/camaras", "icon": "⌖", "title": "Camaras", "copy": "Video en vivo"},
+    {"permission": "map", "href": "/mapa", "icon": "◎", "title": "Vehiculos", "copy": "Posicion y telemetria"},
+    {"permission": "events", "href": "/eventos", "icon": "▦", "title": "Dispositivos", "copy": "Gestion y estados"},
+    {"permission": "notifications", "href": "/notificaciones", "icon": "✉", "title": "Notificaciones", "copy": "Correo y Telegram"},
+    {"permission": "vehicles", "href": "/registro-vehiculos", "icon": "▤", "title": "Vehiculos y km", "copy": "Kilometraje y flota"},
+    {"permission": "reports", "href": "/reportes", "icon": "▥", "title": "Reportes", "copy": "RRHH y estadisticas"},
+    {"permission": "admin_users", "href": "/registros", "icon": "▦", "title": "Administracion", "copy": "Org, usuarios y flota"},
+]
+
+
+def permissions_for_roles(roles: set[str] | list[str]) -> set[str]:
+    permissions = {"profile"}
+    for role_name in roles:
+        permissions.update(ROLE_PERMISSIONS.get(str(role_name), set()))
+    return permissions
+
+
+def can_access_template(template: str, roles: set[str] | list[str]) -> bool:
+    if template == "login.html":
+        return True
+    needed = PAGE_PERMISSION.get(template, "dashboard")
+    return needed in permissions_for_roles(roles)
+
+
+def default_path_for_roles(roles: set[str] | list[str]) -> str:
+    permissions = permissions_for_roles(roles)
+    for permission, path in (
+        ("dashboard", "/"),
+        ("cameras", "/camaras"),
+        ("map", "/mapa"),
+        ("events", "/eventos"),
+        ("vehicles", "/registro-vehiculos"),
+        ("reports", "/reportes"),
+        ("profile", "/perfil"),
+    ):
+        if permission in permissions:
+            return path
+    return "/perfil"
+
+
+def sidebar_links_html(roles: set[str] | list[str]) -> str:
+    permissions = permissions_for_roles(roles)
+    items = []
+    for link in SIDEBAR_LINKS:
+        if link["permission"] not in permissions:
+            continue
+        title = escape(link["title"])
+        copy = escape(link["copy"])
+        items.append(
+            f'<a class="sidebar-link" href="{escape(link["href"])}">'
+            f'<span class="sidebar-icon" aria-hidden="true">{escape(link["icon"])}</span>'
+            f'<span class="sidebar-link-copy"><strong>{title}</strong><span>{copy}</span></span>'
+            f'<span class="sidebar-link-tooltip" aria-hidden="true">{title}</span></a>'
+        )
+    return "".join(items)
+
+
 def is_auth_error(error: Exception | str) -> bool:
     return helper.is_auth_error(error)
 
@@ -110,6 +208,56 @@ def api_error_response(error: Exception | str) -> JSONResponse:
 
 def call_api(path: str, *, method: str = "GET", token: str | None = None, data: Any = None) -> Any:
     return api_client.request(path, method=method, token=token, data=data)
+
+
+def _session_from_token(token: str | None) -> dict[str, Any] | None:
+    if not token:
+        return None
+    now = time.monotonic()
+    with _SESSION_LOCK:
+        cached = _SESSION_CACHE.get(token)
+        if cached and (now - cached[1]) < _SESSION_TTL:
+            return cached[0]
+    try:
+        session = call_api("/auth/me", token=token) or None
+    except RuntimeError as exc:
+        text = str(exc).lower()
+        if "no disponible" in text:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="api_central_no_disponible",
+            ) from exc
+        session = None
+    if not isinstance(session, dict) or not session.get("id"):
+        session = None
+    with _SESSION_LOCK:
+        _SESSION_CACHE[token] = (session, time.monotonic())
+        cutoff = time.monotonic() - 300
+        stale = [key for key, value in _SESSION_CACHE.items() if value[1] < cutoff]
+        for key in stale:
+            del _SESSION_CACHE[key]
+    return session
+
+
+def require_authenticated_request(request: Request) -> dict[str, Any]:
+    session = _session_from_token(get_token(request))
+    if not session:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="authentication_required")
+    return session
+
+
+def require_admin_request(request: Request) -> dict[str, Any]:
+    session = require_authenticated_request(request)
+    if not set(session.get("roles") or []).intersection({"master", "admin"}):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="forbidden")
+    return session
+
+
+def require_master_request(request: Request) -> dict[str, Any]:
+    session = require_authenticated_request(request)
+    if "master" not in set(session.get("roles") or []):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="forbidden")
+    return session
 
 
 # ---------------------------------------------------------------------------
@@ -299,8 +447,27 @@ def template_source(name: str, seen: set[Path] | None = None) -> str:
 # Telemetría
 # ---------------------------------------------------------------------------
 
+def _telemetry_source_key(item: dict[str, Any]) -> str:
+    extra = item.get("extra") if isinstance(item.get("extra"), dict) else {}
+    return _text(
+        item.get("vehicle_source_id")
+        or item.get("source_id")
+        or item.get("vehicle_id")
+        or extra.get("vehicle_source_id")
+        or extra.get("source_id")
+        or extra.get("vehicle_id")
+    )
+
+
 def _telemetry_device_key(item: dict[str, Any]) -> str:
-    return _text(item.get("device_id") or item.get("api_device_id") or item.get("camera_name"))
+    extra = item.get("extra") if isinstance(item.get("extra"), dict) else {}
+    return _telemetry_source_key(item) or _text(
+        item.get("device_id")
+        or item.get("api_device_id")
+        or extra.get("api_device_id")
+        or extra.get("gps_api_id")
+        or item.get("camera_name")
+    )
 
 
 def merge_live_telemetry(
@@ -314,17 +481,32 @@ def merge_live_telemetry(
         current = merged.get(key, {})
         current_extra = current.get("extra") if isinstance(current.get("extra"), dict) else {}
         live_extra = live.get("extra") if isinstance(live.get("extra"), dict) else {}
+        vehicle_source_id = _telemetry_source_key(live) or _telemetry_source_key(current)
+        device_id = _text(
+            live.get("device_id")
+            or live.get("api_device_id")
+            or live_extra.get("api_device_id")
+            or live_extra.get("gps_api_id")
+            or current.get("device_id")
+            or current.get("api_device_id")
+            or current_extra.get("api_device_id")
+            or key
+        )
+        merged_extra = {**current_extra, **live_extra}
+        if vehicle_source_id:
+            merged_extra["vehicle_source_id"] = vehicle_source_id
         merged[key] = {
             **current,
             **live,
-            "device_id": key,
+            "device_id": device_id,
+            "vehicle_source_id": vehicle_source_id or _text(live.get("vehicle_source_id") or current.get("vehicle_source_id")),
             "camera_id": live.get("camera_id") or current.get("camera_id"),
             "camera_name": _text(live.get("camera_name") or current.get("camera_name")),
             "viewer_url": _text(live.get("viewer_url") or current.get("viewer_url")),
             "source": _text(live.get("source") or current.get("source")),
-            "display_name": _text(live.get("display_name") or current.get("display_name") or key),
+            "display_name": _text(live.get("display_name") or current.get("display_name") or device_id or key),
             "capabilities": current.get("capabilities") or live.get("capabilities") or {},
-            "extra": {**current_extra, **live_extra},
+            "extra": merged_extra,
         }
     return list(merged.values())
 
@@ -440,8 +622,11 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
 
     username = _text(me.get("username"), "robiotec")
     user_roles = set(me.get("roles") or ["master"])
-    role = ", ".join(user_roles)
+    ordered_roles = sorted(user_roles)
+    role = ", ".join(ROLE_LABELS.get(item, item) for item in ordered_roles)
     is_admin = bool(user_roles.intersection({"master", "admin"}))
+    is_master = "master" in user_roles
+    permissions = permissions_for_roles(user_roles)
     db_codes, db_codes_error = fetch_db_camera_unique_codes()
     db_names, db_names_error = fetch_db_camera_names()
     notif = load_notification_settings()
@@ -453,14 +638,8 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
 
     return {
         "__AUTH_USERNAME__": username,
-        "__DEVELOPER_MENU_LINK__": (
-            '<a class="sidebar-link" href="/usuarios"><span class="sidebar-icon">◎</span>'
-            '<span class="sidebar-link-copy"><strong>Usuarios</strong><span>Roles y accesos</span></span>'
-            '<span class="sidebar-link-tooltip">Usuarios</span></a>'
-            '<a class="sidebar-link" href="/registros"><span class="sidebar-icon">▦</span>'
-            '<span class="sidebar-link-copy"><strong>Registros</strong><span>Empresas y permisos</span></span>'
-            '<span class="sidebar-link-tooltip">Registros</span></a>'
-        ),
+        "__SIDEBAR_NAV_LINKS__": sidebar_links_html(user_roles),
+        "__DEVELOPER_MENU_LINK__": "",
         "__STATIC_ASSET_VERSION__": str(int(time.time())),
         "__CAMERA_ITEMS_JSON__": _json(camera_items),
         "__DEVICE_CATALOG_JSON__": _json(devices),
@@ -471,12 +650,15 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__CAMERA_SWITCHER_FALLBACK__": camera_switcher_fallback(camera_items),
         "__INFERENCE_TOOLBAR_HIDDEN__": "" if is_admin else "hidden",
         "__USER_IS_ADMIN__": "true" if is_admin else "false",
-        "__CAMERA_PAGE_ACTION__": '<button class="camera-register-open" id="camera-register-open" type="button">Registrar cámara</button>',
-        "__CAMERA_ADMIN_MODAL__": template_source("partials/camera_admin_modal.html"),
+        "__VEHICLE_REGISTRY_MODE_CLASS__": "" if is_admin else "is-vehicle-registry-readonly",
+        "__CAMERA_PAGE_ACTION__": (
+            '<button class="camera-register-open" id="camera-register-open" type="button">Registrar cámara</button>'
+            if is_admin else ""
+        ),
+        "__CAMERA_ADMIN_MODAL__": template_source("partials/camera_admin_modal.html") if is_admin else "",
         "__CAMERA_ADMIN_ACCESS_NOTE__": "",
         "__PLATE_PREVIEW_CHOICES__": "",
         "__PLATE_PREVIEW_SELECTED__": "",
-        "__WEB_APP_CONFIG__": "{}",
         "__TELEMETRY_FOCUS_RAIL__": template_source("partials/telemetry_focus_rail.html"),
         "__ARCOM_MIN_ZOOM__": "11",
         "__TELEMETRY_MAP_MIN_ZOOM__": "6",
@@ -513,11 +695,13 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__NOTIFICATION_TELEGRAM_TOKEN__": "",
         "__USER_ADMIN_ACCESS_NOTE__": "",
         "__ORGANIZATION_ADMIN_ACCESS_NOTE__": "",
-        "__USER_ADMIN_MODE_LABEL__": "Master",
-        "__USER_ADMIN_SCOPE_LABEL__": "Global",
+        "__USER_ADMIN_MODE_LABEL__": "Master" if is_master else "Organizacion",
+        "__USER_ADMIN_SCOPE_LABEL__": "Global" if is_master else "Mi organizacion",
         "__USER_ADMIN_SCOPE_ROLE__": role,
-        "__ROLE_ADMIN_HERO_CARD__": template_source("partials/user_admin_role_hero_card.html") if is_admin else "",
-        "__ROLE_ADMIN_SECTION__": template_source("partials/user_admin_role_section.html") if is_admin else "",
+        "__ROLE_ADMIN_HERO_CARD__": template_source("partials/user_admin_role_hero_card.html") if is_master else "",
+        "__ROLE_ADMIN_SECTION__": template_source("partials/user_admin_role_section.html") if is_master else "",
+        "__ACCESS_PERMISSIONS_JSON__": _json(sorted(permissions)),
+        "__DEFAULT_AUTH_PATH__": default_path_for_roles(user_roles),
     }
 
 
@@ -527,17 +711,21 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
 
 def render_page(request: Request, template: str) -> HTMLResponse | RedirectResponse:
     token = get_token(request)
+    me: dict[str, Any] = {}
     if template != "login.html":
         if not token:
-            return RedirectResponse("/login")
+            return RedirectResponse("/login", status_code=302)
         try:
-            call_api("/auth/me", token=token)
+            me = call_api("/auth/me", token=token) or {}
         except RuntimeError as exc:
             if is_auth_error(exc):
-                response = RedirectResponse("/login")
+                response = RedirectResponse("/login", status_code=302)
                 response.delete_cookie(SESSION_COOKIE)
                 return response
             raise
+        roles = set(me.get("roles") or [])
+        if not can_access_template(template, roles):
+            return RedirectResponse(default_path_for_roles(roles), status_code=302)
     context = build_context(request)
     source = template_renderer.render_source(template, context)
     return HTMLResponse(source)

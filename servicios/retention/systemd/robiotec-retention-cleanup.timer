@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Robiotec retention cleanup every two months
+
+[Timer]
+OnCalendar=*-01/2-01 03:40:00
+Persistent=true
+Unit=robiotec-retention-cleanup.service
+
+[Install]
+WantedBy=timers.target

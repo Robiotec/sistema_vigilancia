@@ -64,7 +64,6 @@ class RemoteCameraEvent:
                 {"label": "cédula", "value": str(payload.get("person_id") or extra_info.get("cedula") or "Sin dato")},
             ]
             if confidence_pct:
-                print("Confidence:", confidence_pct)
                 rows.append({"label": "confianza", "value": confidence_pct})
             for k, v in extra_info.items():
                 if k.lower() not in {"nombre", "apellido", "cedula"}:
@@ -445,7 +444,8 @@ class RemoteDetectionFeedService:
             raise FileNotFoundError("Ruta vacía")
         if not url.startswith(("http://", "https://")):
             raise FileNotFoundError(f"Ruta no es URL MinIO: {url}")
-        req = urllib.request.Request(url, headers={"User-Agent": "RobiotecDashboard/1.0"})
+        internal_url = self._internal_minio_url(url)
+        req = urllib.request.Request(internal_url, headers={"User-Agent": "RobiotecDashboard/1.0"})
         try:
             with urllib.request.urlopen(req, timeout=15) as resp:
                 content = resp.read()
@@ -460,11 +460,30 @@ class RemoteDetectionFeedService:
             raise FileNotFoundError("Ruta vacía")
         if not url.startswith(("http://", "https://")):
             raise FileNotFoundError(f"Ruta no es URL MinIO: {url}")
+        url = self._internal_minio_url(url)
         with self._cache_lock(url):
             return self._cache_remote_video_locked(url)
 
+    def _internal_minio_url(self, url: str) -> str:
+        parsed = urlparse(url)
+        endpoint = str(self.settings.minio_endpoint or "").strip()
+        bucket = str(self.settings.minio_bucket or "").strip().strip("/")
+        if not parsed.netloc or not endpoint or not bucket:
+            return url
+
+        public_endpoint = str(self.settings.minio_public_endpoint or "").strip()
+        public_host = str(self.settings.public_host or "").strip()
+        candidates = {endpoint, public_endpoint}
+        if public_host:
+            candidates.add(f"{public_host}:9000")
+
+        if parsed.netloc not in {item for item in candidates if item} and not parsed.path.startswith(f"/{bucket}/"):
+            return url
+
+        scheme = "https" if bool(self.settings.minio_secure) else "http"
+        return urlunparse(parsed._replace(scheme=scheme, netloc=endpoint))
+
     def _cache_remote_video_locked(self, url: str) -> tuple[Path, str]:
-        from urllib.parse import urlparse
         parsed = urlparse(url)
         suffix = PurePosixPath(parsed.path).suffix or ".mp4"
         cache_key = hashlib.sha256(url.encode("utf-8")).hexdigest()
@@ -788,4 +807,3 @@ class RemoteDetectionFeedService:
         if completed.returncode != 0:
             raise RuntimeError(completed.stderr.strip() or "No se pudo convertir el video a H.264")
         partial_path.replace(browser_path)
-

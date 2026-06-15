@@ -56,7 +56,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86521",
@@ -110,7 +111,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86520",
@@ -164,7 +166,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86518",
@@ -218,7 +221,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86506",
@@ -274,7 +278,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86504",
@@ -326,7 +331,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86475",
@@ -380,7 +386,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83518",
@@ -436,7 +443,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83517",
@@ -492,7 +500,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83516",
@@ -548,7 +557,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83514",
@@ -604,7 +614,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     }
   ]
 }

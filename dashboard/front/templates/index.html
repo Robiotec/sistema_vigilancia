@@ -11,8 +11,8 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="/static/web_app.css?v=__STATIC_ASSET_VERSION__" />
-  <link rel="stylesheet" href="/static/style_alarmas.css?v=__STATIC_ASSET_VERSION__" />
+  <link rel="stylesheet" href="/static/src/css/web_app.css?v=__STATIC_ASSET_VERSION__" />
+  <link rel="stylesheet" href="/static/src/css/style_alarmas.css?v=__STATIC_ASSET_VERSION__" />
 </head>
 <body class="page-dashboard">
   <div class="app-shell is-sidebar-collapsed">
@@ -256,7 +256,7 @@
 	  </div>
 	
 	  <script>
-    window.__WEB_APP_CONFIG__ = {
+    window.ROBIOTEC_WEB_APP_CONFIG = {
       cameras: __CAMERA_ITEMS_JSON__,
       homeCameraCodes: __HOME_CAMERA_CODES_JSON__,
       homeCameraNames: __HOME_CAMERA_NAMES_JSON__,
@@ -268,7 +268,7 @@
   </script>
   <script>
     (() => {
-      const config = window.__WEB_APP_CONFIG__ || {};
+      const config = window.ROBIOTEC_WEB_APP_CONFIG || {};
       const select = document.getElementById("home-history-camera-select");
       const status = document.getElementById("home-history-camera-status");
       const nameSelect = document.getElementById("home-history-camera-name-select");
@@ -681,6 +681,6 @@
 	      window.setInterval(() => void loadHistory(), 5000);
 	    })();
 	  </script>
-	  <script src="/static/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
+	  <script src="/static/src/js/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
 </body>
 </html>

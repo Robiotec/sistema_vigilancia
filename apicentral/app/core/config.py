@@ -14,9 +14,20 @@ class Settings(BaseSettings):
     opaque_token_expire_seconds: int = Field(alias="OPAQUE_TOKEN_EXPIRE_SECONDS")
     mediamtx_api_url: str = Field(alias="MEDIAMTX_API_URL")
     mediamtx_webrtc_base_url: str = Field(alias="MEDIAMTX_WEBRTC_BASE_URL")
-    public_host: str = Field(default="207.246.68.223", alias="PUBLIC_HOST")
+    public_host: str = Field(default="127.0.0.1", alias="PUBLIC_HOST")
     mediamtx_rtsp_port: int = Field(default=8554, alias="MEDIAMTX_RTSP_PORT")
     mediamtx_rtmp_port: int = Field(default=1935, alias="MEDIAMTX_RTMP_PORT")
+    service_ingest_token: str = Field(default="", alias="SERVICE_INGEST_TOKEN")
+    minio_endpoint: str = Field(default="127.0.0.1:9000", alias="MINIO_ENDPOINT")
+    minio_access_key: str = Field(default="", alias="MINIO_ACCESS_KEY")
+    minio_secret_key: str = Field(default="", alias="MINIO_SECRET_KEY")
+    minio_bucket: str = Field(default="eventos", alias="MINIO_BUCKET")
+    minio_secure: bool = Field(default=False, alias="MINIO_SECURE")
+    minio_public_endpoint: str = Field(default="127.0.0.1:9000", alias="MINIO_PUBLIC_ENDPOINT")
+    faces_gallery_dir: str = Field(
+        default="/root/robiotec/faces_gallery/data", alias="FACES_GALLERY_DIR"
+    )
+    faces_gallery_token: str = Field(default="", alias="FACES_GALLERY_TOKEN")
     arcom_geojson: str = Field(
         default="/root/robiotec/arcom/arcom_catastro.geojson", alias="ARCOM_GEOJSON"
     )
@@ -28,7 +39,7 @@ class Settings(BaseSettings):
     )
     api_host: str = Field(alias="API_HOST")
     api_port: int = Field(alias="API_PORT")
-    master_username: str = Field(alias="MASTER_USERNAME")
+    master_username: str = Field(default="robiotec", alias="MASTER_USERNAME")
     master_password: str = Field(alias="MASTER_PASSWORD")
     field_encryption_key: str | None = Field(default=None, alias="FIELD_ENCRYPTION_KEY")
     cors_origins: str = Field(default="http://127.0.0.1:5173,http://localhost:5173", alias="CORS_ORIGINS")

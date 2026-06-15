@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
-from app.api.routes import admin, arcom, auth, mediamtx, osint, server, streams, telemetry
+from app.api.routes import admin, arcom, auth, faces_gallery, ingest, mediamtx, osint, server, streams, telemetry
 from app.core.config import get_settings
 from app.db.session import Base, SessionLocal, engine
 from app.models import entities  # noqa: F401
@@ -49,6 +49,8 @@ app.include_router(auth.router)
 app.include_router(streams.router)
 app.include_router(mediamtx.router)
 app.include_router(telemetry.router)
+app.include_router(ingest.router)
+app.include_router(faces_gallery.router)
 app.include_router(arcom.router)
 app.include_router(osint.router)
 app.include_router(admin.router)

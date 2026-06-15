@@ -4,7 +4,7 @@ from __future__ import annotations
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 
-from back.app.context import call_api, get_token, is_auth_error
+from back.app.context import call_api, default_path_for_roles, get_token, is_auth_error
 from back.app.state import SESSION_COOKIE
 
 router = APIRouter(prefix="/api", tags=["auth"])
@@ -20,8 +20,13 @@ async def api_login(request: Request) -> JSONResponse:
         result = call_api("/auth/login", method="POST", data={"username": username, "password": password})
     except RuntimeError as exc:
         return JSONResponse({"ok": False, "message": str(exc)}, status_code=401)
-    response = JSONResponse({"ok": True, "redirect": "/"})
-    response.set_cookie(SESSION_COOKIE, result["access_token"], httponly=True, samesite="lax")
+    access_token = result["access_token"]
+    try:
+        me = call_api("/auth/me", token=access_token) or {}
+    except RuntimeError:
+        me = {}
+    response = JSONResponse({"ok": True, "redirect": default_path_for_roles(set(me.get("roles") or []))})
+    response.set_cookie(SESSION_COOKIE, access_token, httponly=True, samesite="lax")
     return response
 
 
@@ -38,4 +43,12 @@ def auth_session(request: Request):
     if not token:
         return JSONResponse({"authenticated": False}, status_code=401)
     me = call_api("/auth/me", token=token)
-    return {"authenticated": True, "user": {"username": me.get("username"), "roles": me.get("roles", [])}}
+    return {
+        "authenticated": True,
+        "user": {
+            "username": me.get("username"),
+            "roles": me.get("roles", []),
+            "permissions": me.get("permissions", []),
+            "redirect": default_path_for_roles(set(me.get("roles") or [])),
+        },
+    }

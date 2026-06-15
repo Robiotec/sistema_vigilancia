@@ -1,131 +1,311 @@
-# Sistema de videovigilancia inteligente Robiotec
+# Robiotec
 
-Arquitectura modular para una sola VM:
+Sistema de videovigilancia, telemetria y administracion multi-organizacion para ROBIOTEC.
 
-- `apicentralt`: API FastAPI, autenticacion, autorizacion, Telemetria y control de streams.
-- `db`: scripts SQL iniciales de PostgreSQL.
-- `mediamtx`: configuracion base de MediaMTX con autenticacion HTTP contra la API.
-- `dashboard`: frontend separado de la API.
-- `arcom`: descarga local del Catastro Minero Nacional y archivos generados para capas geograficas.
-- `osint`: descarga local de capas OSINT externas y GeoJSON normalizado para el mapa.
-- `servicios`: workers, agentes y simuladores auxiliares.
+Estado de entrega: 2026-06-14. Este documento describe el arbol activo del repo, los servicios que se usan y las validaciones ejecutadas en esta pasada.
 
-## Mapa ARCOM
+## Arquitectura
 
-La capa `Capa ARCOM` del mapa se alimenta del Catastro Minero Nacional.
-La responsabilidad esta separada asi:
+Robiotec esta compuesto por:
 
-```text
-arcom/download_arcom.py
-  Descarga desde ArcGIS REST oficial de ARCOM y genera archivos locales.
+| Componente | Ruta | Tecnologia | Funcion |
+| --- | --- | --- | --- |
+| API Central | `apicentral/` | FastAPI, SQLAlchemy, PostgreSQL, MinIO | Autenticacion, usuarios, organizaciones, camaras, streams, telemetria, geocercas, eventos e ingest central. |
+| Dashboard | `dashboard/` | FastAPI, HTML templates, CSS, JS | Interfaz web, proxy autenticado hacia API Central, mapa de flota, camaras, reportes, administracion y notificaciones. |
+| MediaMTX | `mediamtx/` | MediaMTX | RTSP/RTMP/HLS/WebRTC para video. La API de control escucha localmente. |
+| Migraciones | `db/sql/` | SQL PostgreSQL | Modelo SaaS, telemetria, reportes, geocercas, outbox y optimizaciones. |
+| Servicios | `servicios/` | systemd helpers, scripts de arranque | Instalacion y operacion de API, dashboard, MediaMTX, descargas ARCOM/OSINT, retencion y workers remotos. |
+| Datos ARCOM/OSINT | `arcom/`, `osint/` | Python, GeoJSON/GPKG/CSV | Capas geoespaciales usadas por el mapa. |
+| Faces Gallery | `faces_gallery/` | Embeddings, FAISS, scripts operativos | Galeria de embeddings faciales consumida por Jetson mediante API central. |
+| Artemis | `dashboard/back/app/services/artemis/` | Python background service | Integracion de telemetria vehicular Artemis embebida en el dashboard. |
 
-arcom/arcom_catastro.gpkg
-  GeoPackage local generado. Util para GIS, respaldo y uso externo.
-
-arcom/arcom_catastro.geojson
-  GeoJSON local generado. API Central lo lee para servir al mapa.
-
-apicentral/app/services/arcom_service.py
-  Lee el GeoJSON, filtra por bbox y detecta si una coordenada cae dentro de una concesion.
-
-apicentral/app/api/routes/arcom.py
-  Router publico interno de API Central:
-  GET /arcom/concessions
-  GET /arcom/concession-lookup
-
-dashboard/back/app/application.py
-  Solo conserva proxy /api/arcom/... hacia API Central para que el frontend use rutas relativas.
-
-dashboard/front/static/web_app.js
-  Consume /api/arcom/concessions y /api/arcom/concession-lookup para pintar la capa y detectar concesiones.
-
-servicios/arcom/
-  Unidad systemd, timer semanal, scripts operativos y logs de descarga.
-```
-
-Flujo operativo:
+## Arbol activo
 
 ```text
-ARCOM oficial
-  -> servicio semanal robiotec-arcom-download.timer
-  -> arcom/arcom_catastro.geojson + arcom/arcom_catastro.gpkg
-  -> API Central /arcom/...
-  -> Dashboard /api/arcom/... proxy
-  -> mapa Leaflet
+robiotec/
+  apicentral/          API principal
+  dashboard/           Interfaz web y proxy autenticado
+  db/sql/              Migraciones SQL versionadas
+  servicios/           Servicios systemd y scripts de operacion
+  mediamtx/            Configuracion de streaming
+  arcom/               Descarga/capas ARCOM
+  osint/               Descarga/capas OSINT
+  faces_gallery/       Embeddings faciales y scripts de sincronizacion
 ```
 
-## Mapa OSINT
+Se retiraron del entregable las piezas locales que no estaban integradas al runtime actual: `hunter/`, `creaciion_zona/`, `simuladores/`, notas operativas antiguas, backups sueltos, artefactos `.codex` y datos runtime versionados.
 
-La capa `Capa OSINT` descarga diariamente datos publicos de
-`https://vectorinternational.ai/api`, los normaliza localmente y los publica
-desde API Central.
+`faces_gallery/` se mantiene porque forma parte del runtime de reconocimiento facial. Los archivos pesados generados viven en `faces_gallery/data/` y no se versionan; la carpeta y sus scripts operativos si quedan documentados.
+
+## Seguridad y acceso
+
+Las credenciales no deben vivir en codigo, README ni logs. Los secretos se cargan por variables de entorno:
+
+- API Central: `apicentral/.env`.
+- Dashboard: `dashboard/.env`.
+- MediaMTX: `mediamtx/.env`.
+- Servicios: `servicios/.env.example` como plantilla.
+
+Variables clave:
+
+- `MASTER_USERNAME` y `MASTER_PASSWORD`: usuario master inicial.
+- `JWT_SECRET_KEY`: firma JWT.
+- `DATABASE_URL`: conexion PostgreSQL.
+- `SECRET_ENCRYPTION_KEY`: cifrado de secretos de streams.
+- `MINIO_ACCESS_KEY`, `MINIO_SECRET_KEY`: acceso MinIO.
+- `SERVICE_INGEST_TOKEN`: token para ingest remoto centralizado.
+- `FACES_GALLERY_DIR`, `FACES_GALLERY_TOKEN`: carpeta y token para que Jetson descargue embeddings faciales desde API Central.
+- `TELEGRAM_BOT_TOKEN`, `TELEGRAM_DEFAULT_CHAT_IDS`: Telegram.
+- `SMTP_SENDER_EMAIL`, `SMTP_SENDER_PASSWORD`, `NOTIFICATION_DEFAULT_RECIPIENTS`: correo.
+
+## Roles
+
+El usuario `master` administra todo el sistema:
+
+- Crea organizaciones.
+- Crea administradores por organizacion.
+- Crea operadores por organizacion.
+- Gestiona roles globales y de organizacion.
+- Ve y edita camaras, vehiculos, drones, geocercas, reportes y configuraciones.
+
+Roles operativos:
+
+| Rol | Alcance |
+| --- | --- |
+| `admin` | Administra recursos de su organizacion. |
+| `viewer` | Visualiza todo lo autorizado sin editar. |
+| `operator_cameras` | Acceso operativo a camaras. |
+| `operator_map` | Acceso operativo a mapa vehicular, rutas y kilometraje. |
+
+El dashboard decide la ruta inicial y permisos visibles a partir de `/auth/me` y de los permisos calculados por API Central.
+
+## Funcionalidades
+
+### Administracion
+
+La pantalla principal de administracion esta en `/registros` y unifica:
+
+- Organizaciones.
+- Usuarios.
+- Roles.
+- Camaras.
+- Vehiculos.
+
+Los recursos se filtran por organizacion. El master tiene alcance global; usuarios no master quedan limitados a su `company_id`.
+
+### Mapa y flota
+
+El mapa de flota:
+
+- Inicia centrado en Ecuador.
+- Usa `vehicle_source_id` estable para seleccionar vehiculos y evitar mezclar marcadores.
+- Dibuja ruta historica por vehiculo con `/api/telemetry/history`.
+- Consulta kilometraje diario, mensual o por rango con endpoints optimizados.
+- Permite geocercas tipo poligono con nombre, color y guardado desde una ventana flotante.
+
+Tablas principales:
+
+- `vehicles`
+- `vehicle_telemetry`
+- `geofences`
+- `vehicle_geofence_states`
+- `geofence_alerts`
+
+### Camaras y video
+
+El flujo de camaras usa:
+
+- `cameras`
+- `rboxes`
+- `stream_configs`
+- `stream_paths`
+- `stream_templates`
+- `stream_access_tokens`
+- `device_publish_tokens`
+
+MediaMTX publica video y API Central valida permisos para streams. La API de MediaMTX queda local; los puertos de streaming publicos se exponen por diseno operativo.
+
+### Eventos y evidencias
+
+Los eventos se consultan desde:
+
+- `camera_event_history`
+- `camera_alert_outbox`
+- MinIO para evidencias y clips.
+
+El dashboard sirve crops/videos bajo demanda y mantiene cache local temporal en `dashboard/back/app/data/`, ignorado por git.
+
+### Faces Gallery
+
+La galeria local de embeddings se sirve desde API Central con token dedicado:
+
+- `GET /faces-gallery/manifest`
+- `GET /faces-gallery/metadata`
+- `GET /faces-gallery/files/{filename}`
+
+Por el proxy del dashboard tambien queda disponible como `/api/faces-gallery/...`. Archivos permitidos: `embeddings.npz`, `gallery.faiss`, `metadata.json`, `idx_to_cedula.json`, `state.json` y `version`.
+
+Las Jetson deben usar `X-Robiotec-Faces-Token` o `Authorization: Bearer <token>`. Si `FACES_GALLERY_TOKEN` esta vacio, la API responde `faces_gallery_disabled`.
+
+### Reportes
+
+Reportes activos:
+
+- Personas por dia.
+- Persona individual.
+- Sesiones por rango.
+- Resumen mensual.
+- Placas y exportacion CSV.
+- Kilometraje por vehiculo y por flota.
+
+Las consultas de kilometraje usan agregacion por rango y limites de fechas para no bloquear el dashboard en periodos largos.
+
+### Ingest remoto 10.0.0.2
+
+El worker remoto de media/eventos publica contra la API central por `/api/ingest` usando token de servicio. No debe escribir directo a PostgreSQL ni MinIO desde el host remoto.
+
+## Base de datos
+
+Tablas detectadas en produccion:
 
 ```text
-osint/download_osint.py
-  Descarga endpoints OSINT y genera archivos locales.
-
-osint/osint_raw/*.json
-  Respuestas crudas por endpoint.
-
-osint/osint_layers.geojson
-  GeoJSON normalizado. API Central lo lee para servir al mapa.
-
-apicentral/app/services/osint_service.py
-  Lee el GeoJSON y filtra features por bbox.
-
-apicentral/app/api/routes/osint.py
-  Router de API Central:
-  GET /osint/layers
-  GET /osint/report
-
-dashboard/back/app/application.py
-  Proxy /api/osint/... hacia API Central.
-
-dashboard/front/static/web_app.js
-  Consume /api/osint/layers cuando el usuario activa `Capa OSINT`.
-
-servicios/osint/
-  Unidad systemd, timer diario, scripts operativos y logs de descarga.
+areas
+camera_alert_outbox
+camera_event_history
+camera_inference_view_requests
+cameras
+companies
+device_publish_tokens
+drone_dji_configs
+drone_robiotec_configs
+drone_telemetry
+drones
+geofence_alerts
+geofences
+notification_email_recipients
+notification_telegram_chat_ids
+rboxes
+remote_manifest_cursors
+roles
+stream_access_tokens
+stream_configs
+stream_paths
+stream_templates
+user_areas
+user_roles
+users
+vehicle_geofence_states
+vehicle_telemetry
+vehicles
 ```
 
-## Requisitos
+Migracion aplicada para flota/geocercas:
 
-- Python 3.12+
-- `uv`
-- PostgreSQL 15+
-- MediaMTX
+- `db/sql/17_create_fleet_geofences.sql`
 
-## Instalacion base
+Optimizacion disponible para reportes de kilometraje:
+
+- `db/sql/18_optimize_vehicle_km_reports.sql`
+
+## Servicios
+
+Servicios residentes:
+
+- `robiotec-apicentral.service`
+- `robiotec-dashboard.service`
+- `robiotec-mediamtx.service`
+- `postgresql`
+- `minio`
+
+Tareas programadas o one-shot:
+
+- `robiotec-arcom-download.service`
+- `robiotec-osint-download.service`
+- `robiotec-retention-cleanup.service`
+- `robiotec-log-cleaner.service`
+- `robiotec-plate-lookup-sync.service`
+- `robiotec-state-camera-sync.service`
+
+Puertos locales verificados:
+
+- API Central: `127.0.0.1:8003`
+- Dashboard: `127.0.0.1:8010`
+- PostgreSQL: `127.0.0.1:5432`
+- MinIO: `127.0.0.1:9000`, `127.0.0.1:9001`
+- MediaMTX API: `127.0.0.1:9997`
+
+Puertos publicos esperados:
+
+- Nginx: `80`, `443`
+- MediaMTX streaming: `1935`, `8554`, `8888`, `8889`, `8890`, UDP `8189`, UDP `8000`, UDP `8001`
+
+## Comandos de operacion
+
+Instalar o actualizar units:
 
 ```bash
-cd apicentral
-uv init --app --name apicentral
-uv add fastapi uvicorn sqlalchemy psycopg[binary] pydantic-settings python-jose[cryptography] passlib[bcrypt] httpx python-multipart
-uv sync
-cp .env.example .env
-uv run uvicorn app.main:app --host 0.0.0.0 --port 8003
+sudo ./servicios/install-systemd.sh
 ```
 
-Ejecutar SQL inicial:
+Aplicar migraciones SQL:
 
 ```bash
-psql -U postgres -v app_password='<password_seguro>' -f db/sql/00_create_database.sql
-psql -U postgres -d robiotec_vms -f db/sql/01_create_extensions.sql
-psql -U postgres -d robiotec_vms -f db/sql/02_create_tables.sql
-psql -U postgres -d robiotec_vms -f db/sql/03_create_default_roles.sql
+set -a
+. apicentral/.env
+set +a
+PSQL_URL="${DATABASE_URL/postgresql+psycopg:/postgresql:}"
+psql "$PSQL_URL" -v ON_ERROR_STOP=1 -f db/sql/17_create_fleet_geofences.sql
 ```
 
-Para crear el usuario master por SQL, genere primero un hash bcrypt y paselo como variable:
+Reiniciar servicios principales:
 
 ```bash
-psql -U postgres -d robiotec_vms -v master_password_hash='<bcrypt_hash>' -f db/sql/04_create_master_user.sql
+sudo systemctl restart robiotec-apicentral.service robiotec-dashboard.service robiotec-mediamtx.service
 ```
 
-La API tambien crea o corrige el usuario master al arrancar. El usuario master unico para API, base de datos funcional y dashboard es `robiotec` con clave `Robiotec@2026`.
+Ver estado:
 
-## Seguridad operativa
+```bash
+systemctl is-active robiotec-apicentral.service robiotec-dashboard.service robiotec-mediamtx.service postgresql minio
+```
 
-- No exponer `MEDIAMTX_API_URL` fuera de localhost o red privada.
-- No publicar archivos `.env`.
-- El dashboard nunca debe recibir URLs RTSP reales.
-- MediaMTX debe llamar a `POST /mediamtx/auth` para `publish` y `read`.
+## Validaciones ejecutadas
+
+```bash
+dashboard/.venv/bin/python -m py_compile dashboard/back/app/application.py dashboard/back/app/routers/data.py dashboard/back/app/routers/org.py dashboard/back/app/context.py dashboard/back/app/domain/vehicles/telemetry.py dashboard/back/app/domain/device_catalog.py dashboard/back/app/routers/events.py dashboard/back/app/routers/reports.py
+apicentral/.venv/bin/python -m py_compile apicentral/app/api/routes/telemetry.py apicentral/app/api/routes/admin.py apicentral/app/api/routes/auth.py apicentral/app/api/routes/ingest.py apicentral/app/services/fleet.py apicentral/app/services/permission_service.py apicentral/app/main.py
+apicentral/.venv/bin/python -m py_compile apicentral/app/api/routes/faces_gallery.py
+node --check dashboard/front/static/web_app.js
+node --check dashboard/front/static/cameras_page_viewer.js
+PYTHONPATH=dashboard dashboard/.venv/bin/python -m unittest discover -s dashboard/back/tests -v
+```
+
+Smoke tests autenticados:
+
+- Login master: `200`.
+- `/api/auth/session`: `200`.
+- `/api/organizations`: `200`.
+- `/api/users`: `200`.
+- `/api/user-roles`: `200`.
+- `/api/cameras`: `200`.
+- `/api/vehicle-registry?limit=5`: `200`.
+- `/api/geofences`: `200`.
+- `/api/telemetry`: `200`.
+- `/api/objetivos/DRONE`: `200`.
+- `/api/reports/overview?from_date=2026-06-01&to_date=2026-06-14`: `200`.
+- `/mapa`: `200`.
+- `/registros`: `200`.
+- `/notificaciones`: `200`.
+
+Prueba de geocerca:
+
+- Crear geocerca temporal: `201`.
+- Eliminar geocerca temporal: `200`.
+
+## Notas de produccion
+
+- No versionar evidencias, clips, crops, caches, backups ni credenciales.
+- Mantener PostgreSQL, MinIO, API Central y Dashboard en loopback detras de Nginx.
+- Mantener la exposicion publica solo para Nginx y puertos de streaming necesarios.
+- Revisar logs de systemd despues de cada despliegue.
+- Ejecutar migraciones SQL con `ON_ERROR_STOP=1`.

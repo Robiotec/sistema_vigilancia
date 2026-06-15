@@ -14,6 +14,7 @@ class EmpresaMapper(BaseHelper):
             "source_id": empresa.get("id"),
             "nombre": empresa.get("name") or empresa.get("nombre"),
             "ruc": empresa.get("ruc"),
+            "descripcion": empresa.get("address") or empresa.get("description") or empresa.get("descripcion"),
             "activa": empresa.get("active", empresa.get("estado", True)),
         }
 

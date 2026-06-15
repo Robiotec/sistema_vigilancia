@@ -18,6 +18,8 @@ def _get_pool() -> psycopg2.pool.ThreadedConnectionPool:
         with _pool_lock:
             if _pool is None:
                 s = get_settings()
+                if not s.database_url:
+                    raise RuntimeError("DATABASE_URL no configurado para el dashboard")
                 _pool = psycopg2.pool.ThreadedConnectionPool(
                     minconn=2,
                     maxconn=10,
@@ -29,6 +31,8 @@ def _get_pool() -> psycopg2.pool.ThreadedConnectionPool:
 def get_connection() -> psycopg2.extensions.connection:
     """Devuelve una conexión directa (no pooled) para uso transaccional manual."""
     s = get_settings()
+    if not s.database_url:
+        raise RuntimeError("DATABASE_URL no configurado para el dashboard")
     return psycopg2.connect(dsn=s.database_url)
 
 

@@ -1,37 +1,22 @@
 #!/usr/bin/env bash
-# pull_logs.sh
-# Descarga logs recientes de los servicios de rostros desde 10.0.0.2.
-# Requiere: export SSHPASS=<password_robiotec>
-# Uso: ./pull_logs.sh [--lines N]   (default N=200)
 set -euo pipefail
 
-HOST="robiotec@10.0.0.2"
+HOST="${FACE_SYNC_HOST:-robiotec@10.0.0.2}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOGS_DIR="$SCRIPT_DIR/../logs"
-LINES="200"
-
-while [[ $# -gt 0 ]]; do
-    case "$1" in
-        --lines) LINES="$2"; shift 2 ;;
-        *) shift ;;
-    esac
-done
+LINES="${LINES:-200}"
 
 if [[ -z "${SSHPASS:-}" ]]; then
-    echo "ERROR: Variable SSHPASS no definida. Ejecutar: export SSHPASS=<password>"
-    exit 1
+  echo "ERROR: define SSHPASS antes de ejecutar este script."
+  exit 1
 fi
-export SSHPASS
 
+export SSHPASS
 SSH_CMD="sshpass -e ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10"
 mkdir -p "$LOGS_DIR"
-TS="$(date '+%Y-%m-%d %H:%M:%S')"
 
-for SERVICE in robiotec-face-sync robiotec-face-embeddings; do
-    LOGFILE="$LOGS_DIR/${SERVICE}.log"
-    echo "[$TS] Descargando $LINES líneas: $SERVICE ..."
-    $SSH_CMD "$HOST" "journalctl -u $SERVICE --no-pager -n $LINES 2>&1" > "$LOGFILE"
-    echo "  -> $(wc -l < "$LOGFILE") líneas en $LOGFILE"
+for SERVICE in "${FACE_SYNC_SERVICE:-robiotec-face-sync}" "${FACE_EMBEDDINGS_SERVICE:-robiotec-face-embeddings}"; do
+  LOGFILE="$LOGS_DIR/${SERVICE}.log"
+  $SSH_CMD "$HOST" "journalctl -u $SERVICE --no-pager -n $LINES 2>&1" > "$LOGFILE"
+  echo "$SERVICE -> $LOGFILE"
 done
-
-echo "[$TS] Logs actualizados en $LOGS_DIR"

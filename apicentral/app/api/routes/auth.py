@@ -6,7 +6,12 @@ from app.api.deps import get_current_user
 from app.core.security import hash_password, verify_password
 from app.db.session import get_db
 from app.schemas.auth import LoginRequest, TokenResponse, UserMe
-from app.services.auth_service import authenticate_user, create_jwt_for_user, get_user_roles
+from app.services.auth_service import (
+    authenticate_user,
+    create_jwt_for_user,
+    get_permissions_for_roles,
+    get_user_roles,
+)
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -22,6 +27,7 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse
 
 @router.get("/me", response_model=UserMe)
 def me(current_user=Depends(get_current_user), db: Session = Depends(get_db)) -> UserMe:
+    roles = get_user_roles(db, current_user)
     return UserMe(
         id=current_user.id,
         username=current_user.username,
@@ -29,7 +35,8 @@ def me(current_user=Depends(get_current_user), db: Session = Depends(get_db)) ->
         email=current_user.email,
         company_id=current_user.company_id,
         active=current_user.active,
-        roles=get_user_roles(db, current_user),
+        roles=roles,
+        permissions=get_permissions_for_roles(roles),
     )
 
 
@@ -58,6 +65,7 @@ def update_me(
         current_user.email = payload.email
     db.commit()
     db.refresh(current_user)
+    roles = get_user_roles(db, current_user)
     return UserMe(
         id=current_user.id,
         username=current_user.username,
@@ -65,6 +73,6 @@ def update_me(
         email=current_user.email,
         company_id=current_user.company_id,
         active=current_user.active,
-        roles=get_user_roles(db, current_user),
+        roles=roles,
+        permissions=get_permissions_for_roles(roles),
     )
-

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 from back.app.context import render_page
 
@@ -46,7 +46,7 @@ def registro_vehiculos(request: Request):
 
 @router.get("/usuarios", response_class=HTMLResponse)
 def usuarios(request: Request):
-    return render_page(request, "usuarios.html")
+    return RedirectResponse("/registros#usuarios", status_code=302)
 
 
 @router.get("/notificaciones", response_class=HTMLResponse)
@@ -57,6 +57,11 @@ def notificaciones(request: Request):
 @router.get("/registros", response_class=HTMLResponse)
 def registros(request: Request):
     return render_page(request, "registros.html")
+
+
+@router.get("/reportes", response_class=HTMLResponse)
+def reportes(request: Request):
+    return render_page(request, "reportes.html")
 
 
 @router.get("/health")

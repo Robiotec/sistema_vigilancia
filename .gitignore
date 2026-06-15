@@ -14,25 +14,37 @@ build/
 node_modules/
 dashboard/dist/
 *.log
+*.zip
+*.tar
+*.tar.gz
+*.tgz
 mediamtx/mediamtx
 mediamtx/mediamtx.exe
 
 .python-version
 pyproject.toml
 uv.lock
+.agents/
+.claude/
+.codex
+dashboard/.codex
 
 # videos
 *.mp4
 
 # data
 dashboard/back/app/data/event_videos/
+dashboard/back/app/data/telegram_clip_crops/
 dashboard/back/app/data/*.lock
 dashboard/back/app/data/*.json
 
 # faces gallery (datos binarios generados)
-faces_gallery/data/
-faces_gallery/logs/
+faces_gallery/data/*
+!faces_gallery/data/.gitkeep
+faces_gallery/logs/*
+!faces_gallery/logs/.gitkeep
 
 # archivos temporales
 tmp_*/
 *.bak-*
+*backup*

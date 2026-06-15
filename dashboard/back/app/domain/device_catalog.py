@@ -76,6 +76,7 @@ class DeviceCatalogBuilder(BaseHelper):
             "display_name": self.text(item.get("label") or item.get("identifier")),
             "device_kind": "vehicle",
             "vehicle_source_id": self.text(item.get("source_id") or item.get("registration_id")),
+            "company_id": self.text(item.get("organizacion_source_id") or item.get("company_id") or item.get("organization_id")),
             "vehicle_type": "dron" if is_drone else "automovil",
             "vehicle_type_code": self.text(item.get("vehicle_type_code") or item.get("vehicle_type")),
             "api_device_id": self.text(item.get("api_device_id")),

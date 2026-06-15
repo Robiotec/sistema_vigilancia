@@ -10,6 +10,7 @@ Esta carpeta concentra las unidades systemd, scripts operativos y logs de los se
 - `arcom`: descarga semanal del Catastro Minero Nacional y genera `arcom/arcom_catastro.gpkg`.
 - `osint`: descarga diaria de capas OSINT y genera `osint/osint_layers.geojson`.
 - `log-cleaner`: limpieza semanal de logs cada lunes a las `03:00`.
+- `retention`: limpieza bimestral de datos antiguos en PostgreSQL, archivos runtime y MinIO.
 
 Cada servicio tiene esta estructura:
 
@@ -23,7 +24,7 @@ Cada servicio tiene esta estructura:
 cd /root/robiotec/servicios
 ./install-systemd.sh
 systemctl start robiotec-apicentral robiotec-dashboard robiotec-mediamtx
-systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robiotec-log-cleaner.timer
+systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robiotec-log-cleaner.timer robiotec-retention-cleanup.timer
 ```
 
 ## Ver logs
@@ -35,6 +36,7 @@ systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robi
 /root/robiotec/servicios/arcom/scripts/logs.sh
 /root/robiotec/servicios/osint/scripts/logs.sh
 /root/robiotec/servicios/log-cleaner/scripts/logs.sh
+/root/robiotec/servicios/retention/scripts/logs.sh
 ```
 
 ## ARCOM
@@ -93,6 +95,31 @@ Ejecucion manual:
 ```bash
 /root/robiotec/servicios/osint/scripts/download.sh
 systemctl start robiotec-osint-download.service
+```
+
+## Retencion de datos
+
+El timer `robiotec-retention-cleanup.timer` corre cada dos meses, el dia 1 a las
+`03:40`, y ejecuta `servicios/retention/scripts/cleanup.py`.
+
+Limpia por lotes para evitar bloquear el dashboard:
+
+- `vehicle_telemetry` y `drone_telemetry`: mayores a `180` dias.
+- `camera_event_history`, `geofence_alerts` y alertas enviadas/fallidas: mayores a `365` dias.
+- `stream_access_tokens` y `device_publish_tokens` vencidos: mayores a `30` dias.
+- Archivos runtime de `event_videos`, `telegram_clip_crops` y `cache`: mayores a `365` dias.
+- Objetos MinIO del bucket `eventos`, alias `local`: mayores a `365` dias.
+
+Validacion manual sin borrar:
+
+```bash
+/root/robiotec/servicios/retention/scripts/run.sh --dry-run
+```
+
+Ejecucion manual real:
+
+```bash
+systemctl start robiotec-retention-cleanup.service
 ```
 
 ## Carpetas auxiliares

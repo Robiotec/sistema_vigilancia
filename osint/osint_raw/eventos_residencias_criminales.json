@@ -32,7 +32,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 125,
+      "total_clicks": 135,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -52,7 +52,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "93599",
@@ -84,7 +85,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 102,
+      "total_clicks": 111,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -104,7 +105,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86975",
@@ -136,7 +138,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 196,
+      "total_clicks": 206,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -156,7 +158,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86889",
@@ -188,7 +191,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 92,
+      "total_clicks": 100,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -208,7 +211,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86871",
@@ -240,7 +244,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 141,
+      "total_clicks": 145,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -260,7 +264,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86857",
@@ -292,7 +297,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 130,
+      "total_clicks": 134,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -312,7 +317,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86856",
@@ -344,7 +350,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 90,
+      "total_clicks": 95,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -364,7 +370,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86855",
@@ -396,7 +403,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 457,
+      "total_clicks": 467,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -416,7 +423,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86834",
@@ -448,7 +456,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 63,
+      "total_clicks": 65,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -468,7 +476,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86833",
@@ -500,7 +509,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 47,
+      "total_clicks": 50,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -520,7 +529,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86832",
@@ -552,7 +562,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 116,
+      "total_clicks": 122,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -572,7 +582,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86831",
@@ -604,7 +615,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 166,
+      "total_clicks": 177,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -624,7 +635,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86830",
@@ -656,7 +668,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 352,
+      "total_clicks": 365,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -676,7 +688,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86794",
@@ -708,7 +721,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 147,
+      "total_clicks": 151,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -728,7 +741,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86793",
@@ -760,7 +774,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 436,
+      "total_clicks": 446,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -780,7 +794,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86760",
@@ -812,7 +827,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 220,
+      "total_clicks": 227,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -832,7 +847,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86741",
@@ -864,7 +880,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 222,
+      "total_clicks": 229,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -884,7 +900,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86733",
@@ -916,7 +933,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 124,
+      "total_clicks": 125,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -936,7 +953,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86688",
@@ -968,7 +986,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 226,
+      "total_clicks": 230,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -988,7 +1006,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86674",
@@ -1020,7 +1039,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 172,
+      "total_clicks": 173,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1040,7 +1059,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86673",
@@ -1072,7 +1092,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 286,
+      "total_clicks": 290,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1092,7 +1112,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86619",
@@ -1124,7 +1145,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 142,
+      "total_clicks": 143,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1144,7 +1165,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86615",
@@ -1176,7 +1198,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 93,
+      "total_clicks": 96,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1196,7 +1218,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86614",
@@ -1228,7 +1251,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 71,
+      "total_clicks": 76,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1248,7 +1271,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86613",
@@ -1280,7 +1304,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 115,
+      "total_clicks": 120,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1300,7 +1324,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86609",
@@ -1352,7 +1377,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86608",
@@ -1404,7 +1430,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86607",
@@ -1436,7 +1463,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 122,
+      "total_clicks": 124,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1456,7 +1483,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86606",
@@ -1488,7 +1516,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 104,
+      "total_clicks": 105,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1508,7 +1536,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86605",
@@ -1540,7 +1569,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 149,
+      "total_clicks": 151,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1560,7 +1589,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86604",
@@ -1592,7 +1622,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 176,
+      "total_clicks": 179,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1612,7 +1642,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86603",
@@ -1644,7 +1675,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 444,
+      "total_clicks": 445,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1664,7 +1695,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86495",
@@ -1696,7 +1728,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 449,
+      "total_clicks": 452,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1716,7 +1748,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86468",
@@ -1748,7 +1781,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 243,
+      "total_clicks": 244,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1768,7 +1801,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86467",
@@ -1800,7 +1834,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1390,
+      "total_clicks": 1408,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1820,7 +1854,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86384",
@@ -1852,7 +1887,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 916,
+      "total_clicks": 926,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1872,7 +1907,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86382",
@@ -1904,7 +1940,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1675,
+      "total_clicks": 1690,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1924,7 +1960,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "86362",
@@ -1956,7 +1993,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1256,
+      "total_clicks": 1262,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -1976,7 +2013,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83963",
@@ -2008,7 +2046,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 413,
+      "total_clicks": 424,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2028,7 +2066,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83962",
@@ -2060,7 +2099,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 466,
+      "total_clicks": 479,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2080,7 +2119,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83579",
@@ -2112,7 +2152,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 583,
+      "total_clicks": 593,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2132,7 +2172,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83578",
@@ -2164,7 +2205,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 354,
+      "total_clicks": 357,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2184,7 +2225,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83577",
@@ -2216,7 +2258,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 403,
+      "total_clicks": 409,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2236,7 +2278,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83568",
@@ -2268,7 +2311,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 804,
+      "total_clicks": 822,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2288,7 +2331,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83567",
@@ -2320,7 +2364,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 283,
+      "total_clicks": 286,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2340,7 +2384,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83566",
@@ -2372,7 +2417,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 506,
+      "total_clicks": 519,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2392,7 +2437,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83565",
@@ -2424,7 +2470,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 797,
+      "total_clicks": 800,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2444,7 +2490,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83564",
@@ -2476,7 +2523,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 364,
+      "total_clicks": 365,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2496,7 +2543,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83563",
@@ -2528,7 +2576,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 309,
+      "total_clicks": 310,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2548,7 +2596,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83562",
@@ -2580,7 +2629,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 840,
+      "total_clicks": 854,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2600,7 +2649,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83561",
@@ -2632,7 +2682,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 404,
+      "total_clicks": 414,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2652,7 +2702,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83559",
@@ -2684,7 +2735,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 469,
+      "total_clicks": 474,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2704,7 +2755,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83558",
@@ -2736,7 +2788,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 446,
+      "total_clicks": 453,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2756,7 +2808,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83557",
@@ -2788,7 +2841,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 391,
+      "total_clicks": 405,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2808,7 +2861,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83556",
@@ -2840,7 +2894,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 367,
+      "total_clicks": 375,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2860,7 +2914,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83555",
@@ -2892,7 +2947,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 254,
+      "total_clicks": 263,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2912,7 +2967,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83554",
@@ -2944,7 +3000,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 947,
+      "total_clicks": 959,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -2964,7 +3020,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83553",
@@ -2996,7 +3053,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 336,
+      "total_clicks": 340,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3016,7 +3073,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83552",
@@ -3048,7 +3106,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 454,
+      "total_clicks": 475,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3068,7 +3126,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83550",
@@ -3100,7 +3159,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 473,
+      "total_clicks": 483,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3120,7 +3179,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83549",
@@ -3152,7 +3212,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 361,
+      "total_clicks": 365,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3172,7 +3232,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83548",
@@ -3204,7 +3265,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 633,
+      "total_clicks": 643,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3224,7 +3285,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83509",
@@ -3256,7 +3318,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 631,
+      "total_clicks": 645,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3276,7 +3338,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83508",
@@ -3308,7 +3371,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 655,
+      "total_clicks": 669,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3328,7 +3391,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83507",
@@ -3360,7 +3424,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 668,
+      "total_clicks": 681,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3380,7 +3444,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83505",
@@ -3412,7 +3477,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 719,
+      "total_clicks": 722,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3432,7 +3497,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83504",
@@ -3464,7 +3530,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1256,
+      "total_clicks": 1262,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3484,7 +3550,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83503",
@@ -3516,7 +3583,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1358,
+      "total_clicks": 1366,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3536,7 +3603,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83502",
@@ -3568,7 +3636,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1082,
+      "total_clicks": 1085,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3588,7 +3656,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83501",
@@ -3620,7 +3689,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1469,
+      "total_clicks": 1475,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3640,7 +3709,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83500",
@@ -3672,7 +3742,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1144,
+      "total_clicks": 1153,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3692,7 +3762,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83499",
@@ -3724,7 +3795,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 720,
+      "total_clicks": 724,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3744,7 +3815,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83497",
@@ -3776,7 +3848,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 1462,
+      "total_clicks": 1470,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3796,7 +3868,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     },
     {
       "id": "83496",
@@ -3828,7 +3901,7 @@
         "color": null,
         "tipo_evento_padre": null
       },
-      "total_clicks": 708,
+      "total_clicks": 717,
       "parpadear": false,
       "enviar_revision": false,
       "correccion": null,
@@ -3848,7 +3921,8 @@
       },
       "actor_marcador_evento": [],
       "empresa_marcador_evento": [],
-      "peso_prod_narcotico": null
+      "peso_prod_narcotico": null,
+      "flujo_aprobaciones": null
     }
   ]
 }

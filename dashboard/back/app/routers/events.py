@@ -1,13 +1,14 @@
 """Router de historial de eventos y archivos multimedia de eventos."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 
-from back.app.context import _text, get_token
+from back.app.context import _text, require_authenticated_request
+from back.app.services.db_pool import fetch_all
 from back.app.state import remote_detection_feed
 
-router = APIRouter(prefix="/api", tags=["events"])
+router = APIRouter(prefix="/api", tags=["events"], dependencies=[Depends(require_authenticated_request)])
 
 
 def _camera_lookup_from_request(request: Request, *, camera: str = "", camera_name: str = ""):
@@ -107,6 +108,89 @@ def camera_event_video(path: str):
     except Exception as exc:
         return JSONResponse({"error": str(exc)}, status_code=503)
     return FileResponse(local_path, media_type=media_type)
+
+
+@router.post("/plate-file-detail")
+async def plate_file_detail(request: Request):
+    try:
+        payload = await request.json()
+    except Exception:
+        payload = {}
+    file_path = _text(payload.get("file") if isinstance(payload, dict) else "")
+    if not file_path:
+        return JSONResponse({"ok": False, "error": "file_required"}, status_code=400)
+
+    basename = file_path.rsplit("/", 1)[-1]
+    rows = fetch_all(
+        """
+        SELECT
+            id,
+            event_type,
+            camera_id,
+            camera_name,
+            detected_at,
+            title,
+            plate,
+            json_file_path,
+            image_file_path,
+            crop_path,
+            video_file_path,
+            detail_payload
+        FROM camera_event_history
+        WHERE crop_path = %s
+           OR image_file_path = %s
+           OR json_file_path = %s
+           OR video_file_path = %s
+           OR crop_path ILIKE %s
+           OR image_file_path ILIKE %s
+           OR json_file_path ILIKE %s
+        ORDER BY detected_at DESC, created_at DESC
+        LIMIT 1
+        """,
+        (
+            file_path,
+            file_path,
+            file_path,
+            file_path,
+            f"%/{basename}",
+            f"%/{basename}",
+            f"%/{basename}",
+        ),
+    )
+    if not rows:
+        return JSONResponse({"ok": False, "error": "plate_file_not_found"}, status_code=404)
+
+    row = dict(rows[0])
+    detail = row.get("detail_payload") if isinstance(row.get("detail_payload"), dict) else {}
+    detail = dict(detail)
+    detected_at = row.get("detected_at")
+    detail.update(
+        {
+            "event_id": str(row.get("id") or ""),
+            "event_type": row.get("event_type"),
+            "camera_id": row.get("camera_id"),
+            "camera_name": row.get("camera_name"),
+            "detected_at": detected_at.isoformat() if hasattr(detected_at, "isoformat") else detected_at,
+            "title": row.get("title"),
+            "plate": row.get("plate") or detail.get("plate"),
+            "json_file_path": row.get("json_file_path"),
+            "image_file_path": row.get("image_file_path"),
+            "crop_path": row.get("crop_path") or file_path,
+            "video_file_path": row.get("video_file_path"),
+        }
+    )
+    return {"ok": True, "detail": detail}
+
+
+@router.get("/plate-crop-image")
+def plate_crop_image(path: str):
+    try:
+        content, media_type = remote_detection_feed.read_remote_file(path)
+    except FileNotFoundError:
+        return Response(status_code=404)
+    except Exception as exc:
+        return JSONResponse({"error": str(exc)}, status_code=503)
+    return Response(content=content, media_type=media_type, headers={"Cache-Control": "public, max-age=300"})
 
 
 @router.get("/events")

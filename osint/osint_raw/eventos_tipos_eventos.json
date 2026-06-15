@@ -6,7 +6,7 @@
       {
         "id": "ATAQUE_ARMADO",
         "nombre": "Ataque Armado",
-        "cantidad_eventos": "20",
+        "cantidad_eventos": "21",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -15,7 +15,7 @@
       {
         "id": "EXPLOSION",
         "nombre": "Explosión",
-        "cantidad_eventos": "12",
+        "cantidad_eventos": "8",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -24,7 +24,7 @@
       {
         "id": "EXTORSION_VACUNA",
         "nombre": "Extorsión",
-        "cantidad_eventos": "5",
+        "cantidad_eventos": "4",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -33,7 +33,7 @@
       {
         "id": "FEMINICIDIO",
         "nombre": "Feminicidio",
-        "cantidad_eventos": "5",
+        "cantidad_eventos": "4",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -42,7 +42,7 @@
       {
         "id": "HOMICIDO_SICARIATO",
         "nombre": "Homicidios/Sicariatos",
-        "cantidad_eventos": "128",
+        "cantidad_eventos": "147",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -51,7 +51,7 @@
       {
         "id": "MICROTRAFICO_DROGAS",
         "nombre": "Microtráfico",
-        "cantidad_eventos": "6",
+        "cantidad_eventos": "3",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -78,7 +78,7 @@
       {
         "id": "ROBO_ASALTO",
         "nombre": "Robos/Asaltos",
-        "cantidad_eventos": "20",
+        "cantidad_eventos": "24",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -87,16 +87,7 @@
       {
         "id": "SECUESTO_RETENCION",
         "nombre": "Secuestros",
-        "cantidad_eventos": "4",
-        "grupo": "Delitos",
-        "color": "#DD0B0C",
-        "tipo_zona": null,
-        "orden_categoria": 1
-      },
-      {
-        "id": "VIOLACION",
-        "nombre": "Violación",
-        "cantidad_eventos": "2",
+        "cantidad_eventos": "3",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -105,7 +96,7 @@
       {
         "id": "AMENAZAS",
         "nombre": "Amenazas",
-        "cantidad_eventos": "13",
+        "cantidad_eventos": "12",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -141,7 +132,7 @@
       {
         "id": "NOTICIAS",
         "nombre": "Noticias",
-        "cantidad_eventos": "75",
+        "cantidad_eventos": "82",
         "grupo": "Intervención",
         "color": "#27a044",
         "tipo_zona": null,
@@ -150,7 +141,7 @@
       {
         "id": "OPERATIVOS_FFOO",
         "nombre": "Operativos FFOO",
-        "cantidad_eventos": "212",
+        "cantidad_eventos": "181",
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": null,
@@ -177,7 +168,7 @@
       {
         "id": "UNIDADES_PPNN",
         "nombre": "Unidades PPNN",
-        "cantidad_eventos": 1501,
+        "cantidad_eventos": 1502,
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": {

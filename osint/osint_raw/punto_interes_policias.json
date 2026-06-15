@@ -18003,6 +18003,23 @@
     },
     {
       "titulo": "",
+      "id": "477279",
+      "nombre": "Unidades PPNN",
+      "latitud": 6.2476598,
+      "longitud": -75.565816,
+      "tipo_punto_interes_id": null,
+      "tipo_interes": null,
+      "url_icono": "",
+      "pop_up": false,
+      "agrupacion": "Unidades PPNN",
+      "descripcion": "COLOMBIA / 10 DE JUNIO DE 2026.\r\n\r\nCapturados 9 integrantes de 'Los Náuticos'.\r\n\r\nLa red usaba academias de tiro legalmente constituidas para desviar armas y municiones desde EE.UU. hacia el Clan del Golfo.\r\n\r\nGolpe a la logística criminal.",
+      "archivos": [
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/2c81144d-3f2d-4889-bfe9-bde1a77e0755.png",
+        "https://osint360bucket.s3.us-east-2.amazonaws.com/incidencias/e6cde64c-b0c0-40be-bcf8-f6eaf617a5de.png"
+      ]
+    },
+    {
+      "titulo": "",
       "id": "464089",
       "nombre": "Unidades PPNN",
       "latitud": 1.0144375,

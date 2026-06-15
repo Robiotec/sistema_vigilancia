@@ -4,7 +4,7 @@ from __future__ import annotations
 from fastapi import APIRouter, Form, Request
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from back.app.context import _text, auth_json_response, get_token
+from back.app.context import _text, auth_json_response, get_token, require_admin_request
 from back.app.services.notification_settings import (
     add_email_recipient_to_db,
     add_telegram_chat_id_to_db,
@@ -35,9 +35,7 @@ def notification_settings_get(request: Request):
 
 @router.put("/notification-settings")
 async def notification_settings_update(request: Request):
-    token = get_token(request)
-    if not token:
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     saved = save_notification_settings(payload if isinstance(payload, dict) else {})
     if isinstance(saved.get("telegram"), dict):
@@ -59,8 +57,7 @@ def notification_email_recipients_get(request: Request):
 
 @router.post("/notification-email-recipients")
 async def notification_email_recipient_create(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     email = _text(payload.get("email") if isinstance(payload, dict) else "")
     try:
@@ -72,8 +69,7 @@ async def notification_email_recipient_create(request: Request):
 
 @router.post("/notification-email-recipients/form")
 def notification_email_recipient_create_form(request: Request, email: str = Form("")):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         add_email_recipient_to_db(email)
     except Exception:
@@ -83,8 +79,7 @@ def notification_email_recipient_create_form(request: Request, email: str = Form
 
 @router.delete("/notification-email-recipients")
 async def notification_email_recipient_delete(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     email = _text(payload.get("email") if isinstance(payload, dict) else "")
     try:
@@ -96,8 +91,7 @@ async def notification_email_recipient_delete(request: Request):
 
 @router.post("/notification-email-recipients/delete")
 async def notification_email_recipient_delete_post(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     email = _text(payload.get("email") if isinstance(payload, dict) else "")
     try:
@@ -109,8 +103,7 @@ async def notification_email_recipient_delete_post(request: Request):
 
 @router.post("/notification-email-recipients/delete-form")
 def notification_email_recipient_delete_form(request: Request, email: str = Form("")):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         remove_email_recipient_from_db(email)
     except Exception:
@@ -132,8 +125,7 @@ def notification_telegram_chat_ids_get(request: Request):
 
 @router.post("/notification-telegram-chat-ids")
 async def notification_telegram_chat_id_create(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
     try:
@@ -145,8 +137,7 @@ async def notification_telegram_chat_id_create(request: Request):
 
 @router.post("/notification-telegram-chat-ids/form")
 def notification_telegram_chat_id_create_form(request: Request, chat_id: str = Form("")):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         add_telegram_chat_id_to_db(chat_id)
     except Exception:
@@ -156,8 +147,7 @@ def notification_telegram_chat_id_create_form(request: Request, chat_id: str = F
 
 @router.delete("/notification-telegram-chat-ids")
 async def notification_telegram_chat_id_delete(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
     try:
@@ -169,8 +159,7 @@ async def notification_telegram_chat_id_delete(request: Request):
 
 @router.post("/notification-telegram-chat-ids/delete")
 async def notification_telegram_chat_id_delete_post(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     payload = await request.json()
     chat_id = _text(payload.get("chat_id") if isinstance(payload, dict) else "")
     try:
@@ -182,8 +171,7 @@ async def notification_telegram_chat_id_delete_post(request: Request):
 
 @router.post("/notification-telegram-chat-ids/delete-form")
 def notification_telegram_chat_id_delete_form(request: Request, chat_id: str = Form("")):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         remove_telegram_chat_id_from_db(chat_id)
     except Exception:
@@ -195,8 +183,7 @@ def notification_telegram_chat_id_delete_form(request: Request, chat_id: str = F
 
 @router.post("/notification-settings/test-email")
 def notification_settings_test_email(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     try:
         sent = send_configured_email()
     except Exception as exc:
@@ -206,8 +193,7 @@ def notification_settings_test_email(request: Request):
 
 @router.post("/notification-settings/test-email-form")
 def notification_settings_test_email_form(request: Request):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         send_configured_email()
     except Exception:
@@ -217,8 +203,7 @@ def notification_settings_test_email_form(request: Request):
 
 @router.post("/notification-settings/test-telegram")
 def notification_settings_test_telegram(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     try:
         delivery = send_configured_telegram_alert()
     except Exception as exc:
@@ -228,8 +213,7 @@ def notification_settings_test_telegram(request: Request):
 
 @router.post("/notification-settings/test-telegram-form")
 def notification_settings_test_telegram_form(request: Request):
-    if not get_token(request):
-        return RedirectResponse("/login", status_code=303)
+    require_admin_request(request)
     try:
         send_configured_telegram_alert()
     except Exception:
@@ -247,8 +231,7 @@ def notification_settings_clip_notifier_status(request: Request):
 
 @router.post("/notification-settings/clip-notifier-check")
 def notification_settings_clip_notifier_check(request: Request):
-    if not get_token(request):
-        return auth_json_response()
+    require_admin_request(request)
     feeder = _app_module._telegram_feeder
     if not feeder:
         return JSONResponse({"ok": False, "error": "Feeder no iniciado"}, status_code=503)

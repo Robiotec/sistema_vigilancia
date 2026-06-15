@@ -73013,62 +73013,6 @@
         "org_id": "33"
       },
       {
-        "id": 42,
-        "nombre": "Mafia 18",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
-        "color": "#8A3333",
-        "org_id": "18"
-      },
-      {
-        "id": 43,
-        "nombre": "Mafia Duende",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/mafiaduendeTrebol.png",
-        "color": "#3E7A5E",
-        "org_id": "17"
-      },
-      {
-        "id": 46,
-        "nombre": "R7",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
-        "color": "#2F7A75",
-        "org_id": "15"
-      },
-      {
-        "id": 36,
-        "nombre": "Fatales",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_FATALES.svg",
-        "color": "#A89738",
-        "org_id": "26"
-      },
-      {
-        "id": 45,
-        "nombre": "Nueva Escuela",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_NUEVA_ESCUELA.svg",
-        "color": "#B85E2F",
-        "org_id": "16"
-      },
-      {
-        "id": 31,
-        "nombre": "AK47",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/AK47.png",
-        "color": "#8A8438",
-        "org_id": "31"
-      },
-      {
-        "id": 51,
-        "nombre": "Frente Oliver Sinisterra",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
-        "color": "#3F5091",
-        "org_id": "24"
-      },
-      {
-        "id": 38,
-        "nombre": "Katerpiler",
-        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_KATERPILLER.svg",
-        "color": "#9B6348",
-        "org_id": "22"
-      },
-      {
         "id": 37,
         "nombre": "Gangsters",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_GANGSTER.svg",
@@ -73090,6 +73034,13 @@
         "org_id": "28"
       },
       {
+        "id": 43,
+        "nombre": "Mafia Duende",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/mafiaduendeTrebol.png",
+        "color": "#3E7A5E",
+        "org_id": "17"
+      },
+      {
         "id": 52,
         "nombre": "Comandos de la Frontera",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Comandos-de-la-frontera.svg",
@@ -73097,11 +73048,60 @@
         "org_id": "29"
       },
       {
+        "id": 31,
+        "nombre": "AK47",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconosbandas/AK47.png",
+        "color": "#8A8438",
+        "org_id": "31"
+      },
+      {
         "id": 50,
         "nombre": "Frente Iván Ríos",
         "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Ivan-Rios.svg",
         "color": "#707F3F",
         "org_id": "25"
+      },
+      {
+        "id": 38,
+        "nombre": "Katerpiler",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_KATERPILLER.svg",
+        "color": "#9B6348",
+        "org_id": "22"
+      },
+      {
+        "id": 42,
+        "nombre": "Mafia 18",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_MAFIA_18.svg",
+        "color": "#8A3333",
+        "org_id": "18"
+      },
+      {
+        "id": 46,
+        "nombre": "R7",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_R7.svg",
+        "color": "#2F7A75",
+        "org_id": "15"
+      },
+      {
+        "id": 51,
+        "nombre": "Frente Oliver Sinisterra",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/Frente-Oliver-Sinisterra.svg",
+        "color": "#3F5091",
+        "org_id": "24"
+      },
+      {
+        "id": 36,
+        "nombre": "Fatales",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_FATALES.svg",
+        "color": "#A89738",
+        "org_id": "26"
+      },
+      {
+        "id": 45,
+        "nombre": "Nueva Escuela",
+        "url_icono": "https://osint360bucket.s3.us-east-2.amazonaws.com/archivos_generales/iconos-svg/ICONOS_OSINT_NUEVA_ESCUELA.svg",
+        "color": "#B85E2F",
+        "org_id": "16"
       }
     ]
   }

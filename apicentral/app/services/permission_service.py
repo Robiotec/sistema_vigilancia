@@ -13,8 +13,10 @@ def user_can_access_stream(db: Session, user: User, stream_path: StreamPath) -> 
         return False
     if "admin" in roles:
         return True
+    if not roles.intersection({"viewer", "operator_cameras"}):
+        return False
     if stream_path.area_id is None:
-        return "viewer" in roles
+        return True
     return db.scalar(
         select(
             exists().where(

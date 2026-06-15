@@ -37,15 +37,11 @@ CREATE INDEX IF NOT EXISTS idx_notification_telegram_chat_ids_active
 
 DEFAULT_NOTIFICATION_SETTINGS: dict[str, Any] = {
     "email": {
-        "sender_email": "robiotec@grupominerobonanza.com",
-        "sender_password": "Bonanz@2024",
+        "sender_email": "",
+        "sender_password": "",
         "smtp_host": "smtp.office365.com",
         "smtp_port": 587,
-        "recipients": [
-            "yuchuari@grupominerobonanza.com",
-            "pclemente@grupominerobonanza.com",
-            "dguevara@grupominerobonanza.com",
-        ],
+        "recipients": [],
         "subject": "Correo Informativo - Prueba de Envío",
         "message": (
             "Estimados,\n"
@@ -55,7 +51,7 @@ DEFAULT_NOTIFICATION_SETTINGS: dict[str, Any] = {
     },
     "telegram": {
         "bot_token": "",
-        "chat_ids": ["-1003416074376"],
+        "chat_ids": [],
         "message": (
             "ALERTA\n\n"
             "Se detecto una persona en un area restringida.\n\n"
@@ -85,7 +81,20 @@ def _normalized_lines(value: Any) -> list[str]:
 
 
 def _deep_defaults() -> dict[str, Any]:
-    return copy.deepcopy(DEFAULT_NOTIFICATION_SETTINGS)
+    defaults = copy.deepcopy(DEFAULT_NOTIFICATION_SETTINGS)
+    try:
+        from back.app.config import get_settings
+
+        settings = get_settings()
+        defaults["email"]["sender_email"] = settings.smtp_sender_email.strip()
+        defaults["email"]["sender_password"] = settings.smtp_sender_password.strip()
+        defaults["email"]["smtp_host"] = settings.smtp_host.strip() or defaults["email"]["smtp_host"]
+        defaults["email"]["smtp_port"] = settings.smtp_port
+        defaults["email"]["recipients"] = _normalized_lines(settings.notification_default_recipients)
+        defaults["telegram"]["chat_ids"] = _normalized_lines(settings.telegram_default_chat_ids)
+    except Exception:
+        pass
+    return defaults
 
 
 def _db_execute(query: str, params: tuple[Any, ...] | None = None) -> None:

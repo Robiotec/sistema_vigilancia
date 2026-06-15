@@ -35,7 +35,7 @@ from app.models.entities import (
 )
 from app.schemas.common import MessageResponse
 from app.schemas.stream import StreamPathCreate
-from app.services.auth_service import get_user_roles
+from app.services.auth_service import ADMIN_ASSIGNABLE_ROLES, DEFAULT_ROLES, get_user_roles
 
 router = APIRouter(tags=["admin"])
 CAMERA_INFERENCE_TYPES = {"rostro", "placa", "zona", "movimiento", "inactiva"}
@@ -189,6 +189,112 @@ def require_admin(current_user=Depends(get_current_user), db: Session = Depends(
     if not roles.intersection({"master", "admin"}):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
     return current_user
+
+
+def _roles_for(db: Session, user: User) -> set[str]:
+    return set(get_user_roles(db, user))
+
+
+def _is_master(db: Session, user: User) -> bool:
+    return "master" in _roles_for(db, user)
+
+
+def _require_master(db: Session, user: User) -> None:
+    if not _is_master(db, user):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Solo master puede realizar esta accion")
+
+
+def _scope_query(query, model, current_user: User, db: Session):
+    if _is_master(db, current_user):
+        return query
+    if model is Company:
+        return query.where(Company.id == current_user.company_id)
+    if hasattr(model, "company_id"):
+        return query.where(model.company_id == current_user.company_id)
+    return query
+
+
+def _assert_item_scope(item, current_user: User, db: Session) -> None:
+    if _is_master(db, current_user):
+        return
+    if isinstance(item, Company):
+        allowed = item.id == current_user.company_id
+    elif hasattr(item, "company_id"):
+        allowed = item.company_id == current_user.company_id
+    else:
+        allowed = True
+    if not allowed:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Recurso fuera de la organizacion")
+
+
+def _assert_company_write(model, data: dict[str, Any], current_user: User, db: Session) -> None:
+    if _is_master(db, current_user):
+        return
+    if model in {Company, Role}:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Solo master puede administrar este recurso")
+    if hasattr(model, "company_id"):
+        if not current_user.company_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Usuario sin organizacion")
+        requested_company_id = _coerce_uuid(data.get("company_id")) if data.get("company_id") else current_user.company_id
+        if requested_company_id != current_user.company_id:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No puede operar otra organizacion")
+        data["company_id"] = current_user.company_id
+
+
+def _assert_model_read(model, current_user: User, db: Session) -> None:
+    roles = _roles_for(db, current_user)
+    if roles.intersection({"master", "admin", "viewer"}):
+        return
+    if model is Company:
+        return
+    if "operator_cameras" in roles and model in {Camera, StreamPath}:
+        return
+    if "operator_map" in roles and model in {Vehicle, Drone, StreamPath}:
+        return
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
+
+
+def _normalize_role_names(role_names: list[str] | None) -> list[str]:
+    normalized = []
+    for role_name in role_names or ["viewer"]:
+        value = str(role_name or "").strip()
+        if value and value not in normalized:
+            normalized.append(value)
+    return normalized or ["viewer"]
+
+
+def _validate_assignable_user(
+    data: dict[str, Any],
+    role_names: list[str],
+    current_user: User,
+    db: Session,
+) -> None:
+    if _is_master(db, current_user):
+        unsupported_roles = set(role_names) - set(DEFAULT_ROLES)
+        if unsupported_roles:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Rol invalido")
+        if "master" in role_names:
+            if len(set(role_names)) > 1:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="El rol master no debe combinarse con roles de organizacion",
+                )
+            data["company_id"] = None
+        elif not data.get("company_id"):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Todo usuario no master debe estar asignado a una organizacion",
+            )
+        return
+    if not current_user.company_id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Administrador sin organizacion")
+    forbidden_roles = set(role_names) - ADMIN_ASSIGNABLE_ROLES
+    if forbidden_roles:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Un administrador de organizacion solo puede crear operadores o visores",
+        )
+    data["company_id"] = current_user.company_id
 
 
 def _slug(value: str) -> str:
@@ -373,29 +479,44 @@ def _create_camera_with_stream(db: Session, data: dict[str, Any]) -> Camera:
 
 
 def crud_routes(prefix: str, model, create_schema, allow_read: bool = False):
-    read_deps = [Depends(get_current_user)] if allow_read else [Depends(require_admin)]
-    write_deps = [Depends(require_admin)]
+    read_guard = get_current_user if allow_read else require_admin
     local_router = APIRouter(prefix=prefix)
 
-    @local_router.get("", dependencies=read_deps)
-    def list_items(db: Session = Depends(get_db)):
+    @local_router.get("")
+    def list_items(db: Session = Depends(get_db), current_user=Depends(read_guard)):
+        _assert_model_read(model, current_user, db)
         query = select(model)
         if hasattr(model, "deleted_at"):
             query = query.where(model.deleted_at.is_(None))
+        query = _scope_query(query, model, current_user, db)
         return db.scalars(query).all()
 
-    @local_router.get("/{item_id}", dependencies=read_deps)
-    def get_item(item_id: UUID, db: Session = Depends(get_db)):
+    @local_router.get("/{item_id}")
+    def get_item(item_id: UUID, db: Session = Depends(get_db), current_user=Depends(read_guard)):
+        _assert_model_read(model, current_user, db)
         item = db.get(model, item_id)
         if not item or (hasattr(item, "deleted_at") and item.deleted_at is not None):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recurso no encontrado")
+        _assert_item_scope(item, current_user, db)
         return item
 
-    @local_router.put("/{item_id}", dependencies=write_deps)
-    def update_item(item_id: UUID, payload: dict[str, Any], db: Session = Depends(get_db)):
+    @local_router.put("/{item_id}")
+    def update_item(
+        item_id: UUID,
+        payload: dict[str, Any],
+        db: Session = Depends(get_db),
+        current_user=Depends(require_admin),
+    ):
         item = db.get(model, item_id)
         if not item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recurso no encontrado")
+        _assert_item_scope(item, current_user, db)
+        if model in {Company, Role}:
+            _require_master(db, current_user)
+        if model is User and "role_names" in payload:
+            _validate_assignable_user(payload, _normalize_role_names(payload.get("role_names")), current_user, db)
+        else:
+            _assert_company_write(model, payload, current_user, db)
         drone_extra = {}
         if model is Drone:
             drone_extra = {
@@ -465,13 +586,20 @@ def crud_routes(prefix: str, model, create_schema, allow_read: bool = False):
         db.refresh(item)
         return item
 
-    @local_router.post("", dependencies=write_deps)
-    def create_item(payload: create_schema, db: Session = Depends(get_db)):  # type: ignore[valid-type]
+    @local_router.post("")
+    def create_item(
+        payload: create_schema,
+        db: Session = Depends(get_db),
+        current_user=Depends(require_admin),
+    ):  # type: ignore[valid-type]
         data = payload.model_dump()
         if model is User:
-            role_names = data.pop("role_names")
+            role_names = _normalize_role_names(data.pop("role_names"))
+            _validate_assignable_user(data, role_names, current_user, db)
             data["password_hash"] = hash_password(data.pop("password"))
             data["name"] = data.get("name") or data.get("username")
+        else:
+            _assert_company_write(model, data, current_user, db)
         drone_extra = {}
         if model is Drone:
             cameras = data.pop("cameras", [])
@@ -565,11 +693,18 @@ def crud_routes(prefix: str, model, create_schema, allow_read: bool = False):
         db.refresh(item)
         return item
 
-    @local_router.delete("/{item_id}", response_model=MessageResponse, dependencies=write_deps)
-    def delete_item(item_id: UUID, db: Session = Depends(get_db)) -> MessageResponse:
+    @local_router.delete("/{item_id}", response_model=MessageResponse)
+    def delete_item(
+        item_id: UUID,
+        db: Session = Depends(get_db),
+        current_user=Depends(require_admin),
+    ) -> MessageResponse:
         item = db.get(model, item_id)
         if not item:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Recurso no encontrado")
+        _assert_item_scope(item, current_user, db)
+        if model in {Company, Role}:
+            _require_master(db, current_user)
         now = utcnow()
         if model is Camera:
             for stream_config in db.scalars(select(StreamConfig).where(StreamConfig.camera_id == item_id)).all():
@@ -631,9 +766,12 @@ def list_rbox_cameras(rbox_id: UUID, db: Session = Depends(get_db), current_user
     ]
 
 
-@router.get("/users", dependencies=[Depends(require_admin)])
-def list_users(db: Session = Depends(get_db)):
-    users = db.scalars(select(User).where(User.deleted_at.is_(None))).all()
+@router.get("/users")
+def list_users(db: Session = Depends(get_db), current_user=Depends(require_admin)):
+    query = select(User).where(User.deleted_at.is_(None))
+    if not _is_master(db, current_user):
+        query = query.where(User.company_id == current_user.company_id)
+    users = db.scalars(query).all()
     result = []
     for u in users:
         role_names = list(db.scalars(
@@ -653,12 +791,23 @@ def list_users(db: Session = Depends(get_db)):
     return result
 
 
-@router.put("/users/{item_id}", dependencies=[Depends(require_admin)])
-def update_user(item_id: UUID, payload: dict[str, Any], db: Session = Depends(get_db)):
+@router.put("/users/{item_id}")
+def update_user(
+    item_id: UUID,
+    payload: dict[str, Any],
+    db: Session = Depends(get_db),
+    current_user=Depends(require_admin),
+):
     user = db.get(User, item_id)
     if not user or user.deleted_at is not None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario no encontrado")
+    _assert_item_scope(user, current_user, db)
     role_names = payload.pop("role_names", None)
+    normalized_role_names = _normalize_role_names(role_names) if role_names is not None else None
+    if normalized_role_names is not None:
+        _validate_assignable_user(payload, normalized_role_names, current_user, db)
+    elif not _is_master(db, current_user):
+        payload["company_id"] = current_user.company_id
     raw_password = payload.pop("password", None)
     for key, value in payload.items():
         if key == "id" or not hasattr(user, key):
@@ -666,9 +815,9 @@ def update_user(item_id: UUID, payload: dict[str, Any], db: Session = Depends(ge
         setattr(user, key, value)
     if raw_password:
         user.password_hash = hash_password(raw_password)
-    if role_names is not None:
-        roles = db.scalars(select(Role).where(Role.name.in_(role_names))).all()
-        if len(roles) != len(set(role_names)):
+    if normalized_role_names is not None:
+        roles = db.scalars(select(Role).where(Role.name.in_(normalized_role_names))).all()
+        if len(roles) != len(set(normalized_role_names)):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Rol invalido")
         db.query(UserRole).filter(UserRole.user_id == user.id).delete()
         for role in roles:
@@ -676,17 +825,19 @@ def update_user(item_id: UUID, payload: dict[str, Any], db: Session = Depends(ge
     db.commit()
     db.refresh(user)
     return {"id": str(user.id), "username": user.username, "name": user.name,
-            "email": user.email, "active": user.active}
+            "email": user.email, "active": user.active,
+            "company_id": str(user.company_id) if user.company_id else None,
+            "role_names": normalized_role_names or get_user_roles(db, user)}
 
 
-router.include_router(crud_routes("/companies", Company, CompanyCreate))
+router.include_router(crud_routes("/companies", Company, CompanyCreate, allow_read=True))
 router.include_router(crud_routes("/roles", Role, RoleCreate))
 router.include_router(crud_routes("/users", User, UserCreate))
 router.include_router(crud_routes("/areas", Area, AreaCreate))
 router.include_router(crud_routes("/cameras", Camera, CameraCreate, allow_read=True))
 router.include_router(crud_routes("/rboxes", RBox, RBoxCreate))
-router.include_router(crud_routes("/vehicles", Vehicle, VehicleCreate))
-router.include_router(crud_routes("/drones", Drone, DroneCreate))
-router.include_router(crud_routes("/stream-paths", StreamPath, StreamPathCreate))
+router.include_router(crud_routes("/vehicles", Vehicle, VehicleCreate, allow_read=True))
+router.include_router(crud_routes("/drones", Drone, DroneCreate, allow_read=True))
+router.include_router(crud_routes("/stream-paths", StreamPath, StreamPathCreate, allow_read=True))
 router.include_router(crud_routes("/stream-templates", StreamTemplate, StreamTemplateCreate))
 router.include_router(crud_routes("/stream-configs", StreamConfig, StreamConfigCreate))

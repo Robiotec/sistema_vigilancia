@@ -37,7 +37,9 @@ from back.app.context import (
     fetch_db_camera_rows,
     fetch_db_camera_unique_codes,
     get_token,
-    require_admin_role,
+    is_auth_error,
+    require_admin_request,
+    require_authenticated_request,
     normalize_camera_item,
     normalize_drone_item,
     normalize_vehicle_item,
@@ -674,14 +676,23 @@ def camera_form_options(request: Request):
         vehicles = call_api("/vehicles", token=token) or []
         rboxes = call_api("/rboxes", token=token) or []
     except RuntimeError as exc:
-        if auth_json_response() and False:
-            pass
-        from back.app.context import is_auth_error, auth_json_response
         if is_auth_error(exc):
             return auth_json_response()
         raise
     return {
-        "owners": [{"id": _num_id(u.get("id")), "source_id": u.get("id"), "nombre_usuario": u.get("username"), "username": u.get("username")} for u in users],
+        "owners": [
+            {
+                "id": _num_id(u.get("id")),
+                "source_id": u.get("id"),
+                "nombre_usuario": u.get("username"),
+                "username": u.get("username"),
+                "display_name": u.get("name") or u.get("email") or u.get("username"),
+                "company_id": str(u.get("company_id")) if u.get("company_id") else None,
+                "organizacion_source_id": str(u.get("company_id")) if u.get("company_id") else None,
+                "organizacion_id": _num_id(u.get("company_id")) if u.get("company_id") else None,
+            }
+            for u in users
+        ],
         "organizations": [empresa_mapper.item(c) for c in companies],
         "camera_types": [
             {"id": 1, "codigo": "fixed", "nombre": "Cámara fija"},
@@ -707,6 +718,7 @@ def camera_form_options(request: Request):
 
 @router.post("/camera-rtsp-preview")
 async def camera_rtsp_preview(request: Request):
+    require_admin_request(request)
     return camera_form_mapper.rtsp_preview(await request.json())
 
 
@@ -736,7 +748,8 @@ def cameras_registry(request: Request):
 
 
 @router.get("/camera-unique-codes")
-def camera_unique_codes():
+def camera_unique_codes(request: Request):
+    require_authenticated_request(request)
     codes, error = fetch_db_camera_unique_codes()
     if error:
         return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
@@ -744,7 +757,8 @@ def camera_unique_codes():
 
 
 @router.get("/camera-names")
-def camera_names():
+def camera_names(request: Request):
+    require_authenticated_request(request)
     names, error = fetch_db_camera_names()
     if error:
         return JSONResponse({"error": error, "items": [], "total": 0}, status_code=502)
@@ -811,8 +825,7 @@ async def camera_inference_update(camera_id: str, request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
-        return JSONResponse({"error": "forbidden"}, status_code=403)
+    require_admin_request(request)
     p = await request.json()
     inference_enabled = bool(p.get("hacer_inferencia"))
     raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
@@ -842,6 +855,7 @@ async def camera_notifications_update(camera_id: str, request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
+    require_admin_request(request)
     p = await request.json()
     notif_telegram = bool(p.get("notification_telegram", True))
     notif_email = bool(p.get("notification_email", True))
@@ -872,8 +886,7 @@ async def camera_inference_update_by_name(request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
-        return JSONResponse({"error": "forbidden"}, status_code=403)
+    require_admin_request(request)
     p = await request.json()
     raw_inference_type = p.get("inference_type") or p.get("tipo_inferencia")
     if raw_inference_type is None:
@@ -945,8 +958,7 @@ async def camera_inference_view_state(request: Request):
     token = get_token(request)
     if not token:
         return JSONResponse({"error": "authentication_required"}, status_code=401)
-    if not require_admin_role(token):
-        return JSONResponse({"error": "forbidden"}, status_code=403)
+    require_admin_request(request)
     payload = await request.json()
     camera_key = payload.get("camera") or payload.get("camera_name") or payload.get("path")
     active = bool(payload.get("active"))

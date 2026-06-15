@@ -5,10 +5,23 @@ import time
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse
+from sqlalchemy.orm import Session
 
-router = APIRouter(tags=["server"])
+from app.api.deps import get_current_user
+from app.db.session import get_db
+from app.services.auth_service import get_user_roles
+
+
+def require_server_access(current_user=Depends(get_current_user), db: Session = Depends(get_db)):
+    roles = set(get_user_roles(db, current_user))
+    if not roles.intersection({"master", "admin"}):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
+    return current_user
+
+
+router = APIRouter(tags=["server"], dependencies=[Depends(require_server_access)])
 
 _CPU_LOCK = threading.Lock()
 _CPU_SNAPSHOT: dict[str, tuple[int, int]] | None = None

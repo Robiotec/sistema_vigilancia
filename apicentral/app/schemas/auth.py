@@ -21,10 +21,10 @@ class UserMe(BaseModel):
     company_id: UUID | None
     active: bool = True
     roles: list[str]
+    permissions: list[str] = []
 
 
 class StreamTokenResponse(BaseModel):
     token: str
     expires_in: int
     viewer_url: str
-

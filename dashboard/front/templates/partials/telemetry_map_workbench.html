@@ -45,6 +45,12 @@
         <button class="camera-register-secondary telemetry-map-recenter" id="telemetry-map-recenter" type="button">
           Recentrar
         </button>
+        <button class="camera-register-secondary telemetry-geofence-new" id="fleet-geofence-new" type="button">
+          Nueva zona
+        </button>
+        <button class="camera-register-secondary telemetry-geofence-refresh" id="fleet-geofence-refresh" type="button">
+          Geocercas
+        </button>
         <button class="camera-register-secondary telemetry-map-swap" id="telemetry-map-swap" type="button">
           Intercambiar vista
         </button>
@@ -64,6 +70,22 @@
         </select>
       </div>
       <div class="map-canvas page-map-canvas is-preparing-map" id="telemetry-map"></div>
+      <div class="telemetry-geofence-draw-panel" id="geofence-draw-panel" role="dialog" aria-modal="false" aria-labelledby="geofence-draw-title" hidden>
+        <div class="telemetry-geofence-draw-head">
+          <strong id="geofence-draw-title">Nueva geocerca</strong>
+          <span id="geofence-draw-count">0 puntos</span>
+        </div>
+        <input class="telemetry-geofence-name" id="geofence-draw-name" type="text" maxlength="160" placeholder="Nombre de zona">
+        <label class="telemetry-geofence-color" for="geofence-draw-color">
+          <span>Color</span>
+          <input id="geofence-draw-color" type="color" value="#14b8a6">
+        </label>
+        <div class="telemetry-geofence-actions">
+          <button class="camera-register-primary" id="geofence-draw-save" type="button" disabled>Guardar</button>
+          <button class="camera-register-secondary" id="geofence-draw-cancel" type="button">Cancelar</button>
+        </div>
+        <div class="telemetry-geofence-feedback" id="geofence-draw-feedback" aria-live="polite"></div>
+      </div>
       <div class="telemetry-map-overlay-box" id="telemetry-map-overlay-box" aria-hidden="true" hidden>
         <div class="telemetry-map-overlay-preview" id="telemetry-map-overlay-preview"></div>
         <button class="telemetry-map-overlay-close" id="telemetry-map-overlay-close" type="button" aria-label="Cerrar vista previa">&times;</button>

@@ -17,6 +17,8 @@ class RBoxMapper(BaseHelper):
             "id": self.num_id(rbox.get("id")),
             "source_id": rbox.get("id"),
             "nombre": rbox.get("name"),
+            "organizacion_id": self.num_id(rbox.get("company_id")),
+            "organizacion_source_id": self.text(rbox.get("company_id")),
             "codigo_unico": rbox.get("serial") or rbox.get("codigo_unico"),
             "ip_local": rbox.get("local_ip") or rbox.get("ip_local"),
             "ip_publica": rbox.get("public_ip") or rbox.get("ip_publica"),

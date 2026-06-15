@@ -12,7 +12,7 @@ from back.app.config import get_settings
 from back.app.services.notification_settings import load_notification_settings, load_telegram_chat_ids_from_db
 
 DEFAULT_BOT_TOKEN = ""
-DEFAULT_CHAT_IDS = ["-1003416074376"]
+DEFAULT_CHAT_IDS: list[str] = []
 DEFAULT_MESSAGE = """
 ALERTA
 
@@ -75,7 +75,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 def normalized_chat_ids(raw_chat_ids: list[str]) -> list[str]:
     resolved = [str(item).strip() for item in raw_chat_ids if str(item).strip()]
-    return resolved or list(DEFAULT_CHAT_IDS)
+    if not resolved:
+        raise ValueError("No hay chat ID de Telegram configurado.")
+    return resolved
 
 
 def configured_telegram_settings() -> dict:
@@ -348,7 +350,7 @@ def main() -> int:
     settings = configured_telegram_settings()
 
     token = args.token or configured_bot_token(settings)
-    chat_ids = normalized_chat_ids(args.chat_ids or list(settings.get("chat_ids") or []))
+    chat_ids = args.chat_ids or list(settings.get("chat_ids") or [])
     message = str(args.message or settings.get("message") or DEFAULT_MESSAGE).strip()
     image_path = Path(args.image or settings.get("image_path") or str(DEFAULT_IMAGE_PATH)).expanduser().resolve()
 

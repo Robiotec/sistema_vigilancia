@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ROBIOTEC Reportes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/png" href="/static/src/assets/logoSimplificadoC.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/static/src/css/web_app.css?v=__STATIC_ASSET_VERSION__" />
+</head>
+<body class="page-reports">
+  <div class="app-shell is-sidebar-collapsed">
+    __INCLUDE:partials/app_sidebar.html__
+
+    <main class="app-main">
+      <header class="top top-page top-page-events" id="dashboard-top">
+        <div class="heading">
+          <div class="eyebrow">RRHH y Estadísticas</div>
+          <h2 class="title">Reportes</h2>
+        </div>
+
+        <div class="page-hero-strip" aria-label="Resumen de reportes">
+          <article class="page-hero-card">
+            <span class="page-hero-kicker">Personas</span>
+            <strong id="reports-kpi-people">--</strong>
+          </article>
+          <article class="page-hero-card">
+            <span class="page-hero-kicker">Eventos rostro</span>
+            <strong id="reports-kpi-person-events">--</strong>
+          </article>
+          <article class="page-hero-card">
+            <span class="page-hero-kicker">Placas</span>
+            <strong id="reports-kpi-plates">--</strong>
+          </article>
+          <article class="page-hero-card">
+            <span class="page-hero-kicker">Cámaras activas</span>
+            <strong id="reports-kpi-cameras">--</strong>
+          </article>
+        </div>
+      </header>
+
+      <div class="wrap">
+        <section class="page-section-shell reports-shell">
+          <div class="page-section-head reports-head">
+            <div>
+              <div class="ops-eyebrow">Control y presentación</div>
+            </div>
+            <div class="reports-global-controls">
+              <label class="reports-field reports-field-camera">
+                <span>Cámara</span>
+                <select id="reports-camera-id">
+                  <option value="">Todas</option>
+                </select>
+              </label>
+              <label class="reports-field reports-field-small">
+                <span>Brecha</span>
+                <input id="reports-gap-minutes" type="number" min="1" max="720" step="1" value="15" />
+              </label>
+              <button class="reports-action" id="reports-refresh" type="button">Actualizar</button>
+            </div>
+          </div>
+
+          <div class="reports-tabs" role="tablist" aria-label="Secciones de reportes">
+            <button class="reports-tab is-active" type="button" data-reports-tab="personnel">Personal</button>
+            <button class="reports-tab" type="button" data-reports-tab="plates">Placas</button>
+          </div>
+
+          <section class="reports-panel is-active" data-reports-panel="personnel">
+            <div class="reports-subtabs" role="tablist" aria-label="Reportes de personal">
+              <button class="reports-subtab is-active" type="button" data-reports-personnel-tab="daily">Diario</button>
+              <button class="reports-subtab" type="button" data-reports-personnel-tab="individual">Individual</button>
+              <button class="reports-subtab" type="button" data-reports-personnel-tab="monthly">Mensual</button>
+            </div>
+
+            <section class="reports-view is-active" data-reports-personnel-panel="daily">
+              <div class="reports-toolbar">
+                <label class="reports-field">
+                  <span>Desde</span>
+                  <input id="reports-daily-from" type="date" />
+                </label>
+                <label class="reports-field">
+                  <span>Hasta</span>
+                  <input id="reports-daily-to" type="date" />
+                </label>
+                <button class="reports-action" id="reports-daily-load" type="button">Cargar</button>
+                <a class="reports-action reports-action-secondary" id="reports-daily-export" href="#" download>Exportar CSV</a>
+                <span class="reports-result-count" id="reports-daily-count">--</span>
+              </div>
+              <div class="reports-table-wrap">
+                <table class="reports-table">
+                  <thead>
+                    <tr>
+                      <th>Cédula</th>
+                      <th>Nombre</th>
+                      <th>Fecha</th>
+                      <th>Entrada</th>
+                      <th>Salida</th>
+                      <th>Horas</th>
+                      <th>Reingresos</th>
+                      <th>Detecciones</th>
+                      <th>Cámaras</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-daily-body"></tbody>
+                </table>
+              </div>
+              <div class="reports-empty" id="reports-daily-empty" hidden>Sin datos para el rango seleccionado.</div>
+            </section>
+
+            <section class="reports-view" data-reports-personnel-panel="individual">
+              <div class="reports-toolbar">
+                <label class="reports-field reports-field-id">
+                  <span>Cédula</span>
+                  <input id="reports-person-id" type="text" inputmode="numeric" autocomplete="off" placeholder="0943965657" />
+                </label>
+                <label class="reports-field">
+                  <span>Desde</span>
+                  <input id="reports-individual-from" type="date" />
+                </label>
+                <label class="reports-field">
+                  <span>Hasta</span>
+                  <input id="reports-individual-to" type="date" />
+                </label>
+                <label class="reports-field">
+                  <span>Día</span>
+                  <select id="reports-individual-day">
+                    <option value="">Todos</option>
+                  </select>
+                </label>
+                <button class="reports-action" id="reports-individual-load" type="button">Consultar</button>
+                <a class="reports-action reports-action-secondary" id="reports-individual-export" href="#" download>Exportar CSV</a>
+              </div>
+
+              <div class="reports-individual-grid">
+                <section class="reports-nested-panel">
+                  <div class="reports-panel-title">Resumen</div>
+                  <div class="reports-table-wrap">
+                    <table class="reports-table">
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Entrada</th>
+                          <th>Salida</th>
+                          <th>Horas</th>
+                          <th>Sesiones</th>
+                          <th>Reingresos</th>
+                          <th>Cámaras</th>
+                        </tr>
+                      </thead>
+                      <tbody id="reports-individual-body"></tbody>
+                    </table>
+                  </div>
+                  <div class="reports-empty" id="reports-individual-empty" hidden>Sin registros para la cédula consultada.</div>
+                </section>
+
+                <section class="reports-nested-panel">
+                  <div class="reports-panel-title">Sesiones</div>
+                  <div class="reports-table-wrap">
+                    <table class="reports-table">
+                      <thead>
+                        <tr>
+                          <th>Fecha</th>
+                          <th>Sesión</th>
+                          <th>Entrada</th>
+                          <th>Salida estimada</th>
+                          <th>Minutos fuera</th>
+                          <th>Detecciones</th>
+                          <th>Cámaras</th>
+                        </tr>
+                      </thead>
+                      <tbody id="reports-sessions-body"></tbody>
+                    </table>
+                  </div>
+                  <div class="reports-empty" id="reports-sessions-empty" hidden>Sin sesiones detectadas.</div>
+                </section>
+              </div>
+            </section>
+
+            <section class="reports-view" data-reports-personnel-panel="monthly">
+              <div class="reports-toolbar">
+                <label class="reports-field">
+                  <span>Mes</span>
+                  <input id="reports-month" type="month" />
+                </label>
+                <button class="reports-action" id="reports-month-load" type="button">Cargar</button>
+                <a class="reports-action reports-action-secondary" id="reports-month-export" href="#" download>Exportar CSV</a>
+                <span class="reports-result-count" id="reports-month-count">--</span>
+              </div>
+              <div class="reports-table-wrap">
+                <table class="reports-table">
+                  <thead>
+                    <tr>
+                      <th>Cédula</th>
+                      <th>Nombre</th>
+                      <th>Días</th>
+                      <th>Horas</th>
+                      <th>Promedio</th>
+                      <th>Sesiones</th>
+                      <th>Reingresos</th>
+                      <th>Detecciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reports-month-body"></tbody>
+                </table>
+              </div>
+              <div class="reports-empty" id="reports-month-empty" hidden>Sin datos para el mes seleccionado.</div>
+            </section>
+          </section>
+
+          <section class="reports-panel" data-reports-panel="plates">
+            <div class="reports-toolbar">
+              <label class="reports-field">
+                <span>Desde</span>
+                <input id="reports-plates-from" type="date" />
+              </label>
+              <label class="reports-field">
+                <span>Hasta</span>
+                <input id="reports-plates-to" type="date" />
+              </label>
+              <button class="reports-action" id="reports-plates-load" type="button">Cargar</button>
+              <a class="reports-action reports-action-secondary" id="reports-plates-export" href="#" download>Exportar CSV</a>
+              <span class="reports-result-count" id="reports-plates-count">--</span>
+            </div>
+            <div class="reports-table-wrap">
+              <table class="reports-table">
+                <thead>
+                  <tr>
+                    <th>Placa</th>
+                    <th>Cámara</th>
+                    <th>Detecciones</th>
+                    <th>Días</th>
+                    <th>Primera</th>
+                    <th>Última</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-plates-body"></tbody>
+              </table>
+            </div>
+            <div class="reports-empty" id="reports-plates-empty" hidden>Sin placas para el rango seleccionado.</div>
+          </section>
+        </section>
+
+        <div class="errors">__ERROR_BLOCK__</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    window.ROBIOTEC_WEB_APP_CONFIG = {
+      cameras: __CAMERA_ITEMS_JSON__,
+      devices: __DEVICE_CATALOG_JSON__,
+      defaultCamera: __DEFAULT_CAMERA_JSON__,
+      staticAssetVersion: "__STATIC_ASSET_VERSION__",
+      telemetryRefreshMs: __TELEMETRY_REFRESH_MS__,
+      startWithoutCamera: true,
+      emptyCameraMessage: "No ha seleccionado ninguna cámara.",
+    };
+  </script>
+  <script src="/static/src/js/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
+</body>
+</html>

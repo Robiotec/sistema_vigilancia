@@ -326,7 +326,10 @@ class DroneTelemetry(Base):
 
 class VehicleTelemetry(Base):
     __tablename__ = "vehicle_telemetry"
-    __table_args__ = (Index("ix_vehicle_telemetry_vehicle_received_desc", "vehicle_id", "received_at"),)
+    __table_args__ = (
+        Index("ix_vehicle_telemetry_vehicle_received_desc", "vehicle_id", "received_at"),
+        Index("ix_vehicle_telemetry_received_vehicle", "received_at", "vehicle_id"),
+    )
 
     id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     vehicle_id: Mapped[UUID | None] = mapped_column(ForeignKey("vehicles.id"), nullable=True)
