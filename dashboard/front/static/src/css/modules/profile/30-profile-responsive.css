@@ -1,0 +1,66 @@
+/* Module: profile responsive adjustments.
+ * Entry: perfil.css. Keep import order in the entrypoint.
+ */
+
+@media (max-width: 1100px) {
+  .profile-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-quick-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .page-profile .app-header {
+    padding: 14px 14px 12px 76px;
+  }
+
+  .page-profile .app-header-content {
+    padding-right: 56px;
+  }
+
+  .page-profile .app-header-content,
+  .page-profile .app-header-actions {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .page-profile .app-header-content,
+  .profile-identity {
+    flex-direction: column;
+  }
+
+  .page-profile .app-content {
+    padding: 12px;
+  }
+
+  .profile-hero {
+    min-height: 230px;
+    padding: 20px;
+  }
+
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    font-size: 1.35rem;
+  }
+
+  .profile-stats,
+  .profile-panels,
+  .profile-quick-links {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-data-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .profile-data-value {
+    text-align: left;
+  }
+}

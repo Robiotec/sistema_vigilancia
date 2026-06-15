@@ -21,6 +21,12 @@ from back.app.services.artemis import ArtemisTracker
 
 ROOT = Path(__file__).resolve().parents[2]
 STATIC = ROOT / "front" / "static"
+STATIC_ASSETS = STATIC / "assets"
+STATIC_ICONS = STATIC / "icons"
+if not STATIC_ASSETS.exists():
+    STATIC_ASSETS = STATIC / "src" / "assets"
+if not STATIC_ICONS.exists():
+    STATIC_ICONS = STATIC / "src" / "icons"
 _DASHBOARD_DIR = ROOT  # /root/robiotec/dashboard
 
 _telegram_feeder: DBTelegramFeeder | None = None
@@ -28,8 +34,8 @@ _artemis_tracker: ArtemisTracker | None = None
 
 app = FastAPI(title="Robiotec Dashboard", version="0.2.0")
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
-app.mount("/assets", StaticFiles(directory=STATIC / "assets"), name="assets")
-app.mount("/icons", StaticFiles(directory=STATIC / "icons"), name="icons")
+app.mount("/assets", StaticFiles(directory=STATIC_ASSETS), name="assets")
+app.mount("/icons", StaticFiles(directory=STATIC_ICONS), name="icons")
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 

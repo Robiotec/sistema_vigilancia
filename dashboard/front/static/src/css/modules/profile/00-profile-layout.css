@@ -1,0 +1,99 @@
+/* Module: profile page shell, header and shared text treatments.
+ * Entry: perfil.css. Keep import order in the entrypoint.
+ */
+
+/* Estilos especificos del perfil. El layout base vive en web_app.css. */
+
+.page-profile .app-main {
+  grid-template-rows: auto minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 14% 12%, rgba(241, 56, 17, 0.16), transparent 26%),
+    radial-gradient(circle at 86% 18%, rgba(20, 184, 166, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(20, 20, 20, 0.58), rgba(13, 13, 13, 0.88));
+}
+
+.page-profile .app-header {
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  padding: 18px 22px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(17, 17, 17, 0.94), rgba(17, 17, 17, 0.78)),
+    radial-gradient(circle at 92% 0%, rgba(241, 56, 17, 0.14), transparent 34%);
+  backdrop-filter: blur(18px);
+}
+
+.page-profile .app-header-content,
+.profile-identity,
+.profile-card-head,
+.profile-data-item,
+.profile-quick-link {
+  display: flex;
+  align-items: center;
+}
+
+.page-profile .app-header-content {
+  justify-content: space-between;
+  gap: 18px;
+  padding-right: 76px;
+}
+
+.page-profile .app-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.page-profile .app-header-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.page-profile .app-header-copy span,
+.profile-kicker,
+.profile-card-kicker,
+.profile-stat-label,
+.profile-data-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.page-profile .app-header-copy strong {
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.page-profile .app-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.page-profile .app-header-chip {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.page-profile .app-header-chip--accent {
+  border-color: rgba(241, 56, 17, 0.46);
+  background: rgba(241, 56, 17, 0.14);
+  color: #ffffff;
+}
+

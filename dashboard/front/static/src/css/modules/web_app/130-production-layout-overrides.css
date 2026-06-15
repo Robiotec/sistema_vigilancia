@@ -1,0 +1,108 @@
+/* Module: production layout final overrides.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+/* Ajustes finales de layout para produccion: sin zoom artificial, contenido centrado
+   y capas de mapa por debajo de formularios flotantes. */
+.app-main {
+  overflow: auto;
+}
+
+.wrap,
+.top-page {
+  width: min(100%, 1760px);
+  margin-inline: auto;
+}
+
+.wrap {
+  padding-inline: clamp(14px, 2vw, 28px);
+}
+
+.page-dashboard .wrap,
+.page-map .wrap,
+.page-map .top-page-map {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+.page-map .wrap {
+  padding: clamp(12px, 1.5vw, 22px);
+}
+
+.page-map .map-workbench {
+  min-height: calc(100dvh - 150px);
+}
+
+.page-map .telemetry-map-stage,
+.page-map .page-map-canvas,
+.page-map .map-canvas {
+  min-height: 520px;
+}
+
+.leaflet-container {
+  z-index: 0;
+}
+
+.leaflet-popup-pane {
+  z-index: 650;
+}
+
+.telemetry-geofence-draw-panel {
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 30000;
+  max-height: min(84dvh, 520px);
+  overflow: auto;
+}
+
+.admin-unified-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding-block: 10px;
+  background:
+    linear-gradient(180deg, rgba(20, 20, 20, 0.96), rgba(20, 20, 20, 0.88));
+  backdrop-filter: blur(12px);
+}
+
+.admin-unified-tabs {
+  max-width: 100%;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.admin-unified-tab {
+  flex: 0 0 auto;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 980px) {
+  .wrap,
+  .top-page {
+    width: 100%;
+  }
+
+  .page-map .map-workbench {
+    min-height: 0;
+    height: auto;
+  }
+
+  .page-map .telemetry-map-stage,
+  .page-map .page-map-canvas,
+  .page-map .map-canvas {
+    min-height: min(68dvh, 620px);
+  }
+
+  .telemetry-geofence-draw-panel {
+    width: min(420px, calc(100vw - 28px));
+    bottom: 14px;
+  }
+}
+

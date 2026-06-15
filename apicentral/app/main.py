@@ -3,8 +3,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.openapi.utils import get_openapi
 
-from app.api.routes import admin, arcom, auth, faces_gallery, ingest, mediamtx, osint, server, streams, telemetry
+from app.api.routes import admin, arcom, auth, faces_gallery, ingest, mediamtx, orchestrator, osint, server, streams, telemetry
 from app.core.config import get_settings
 from app.db.session import Base, SessionLocal, engine
 from app.models import entities  # noqa: F401
@@ -30,9 +31,10 @@ app = FastAPI(
     title="Robiotec API Central",
     version="0.1.0",
     lifespan=lifespan,
-    docs_url=None,
-    redoc_url=None,
-    openapi_url=None,
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json",
+    swagger_ui_parameters={"persistAuthorization": True},
 )
 
 settings = get_settings()
@@ -51,6 +53,7 @@ app.include_router(mediamtx.router)
 app.include_router(telemetry.router)
 app.include_router(ingest.router)
 app.include_router(faces_gallery.router)
+app.include_router(orchestrator.router)
 app.include_router(arcom.router)
 app.include_router(osint.router)
 app.include_router(admin.router)
@@ -60,3 +63,23 @@ app.include_router(server.router)
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        routes=app.routes,
+    )
+    schema["paths"] = {
+        path if path.startswith("/api/") else f"/api{path}": definition
+        for path, definition in schema.get("paths", {}).items()
+    }
+    schema.pop("servers", None)
+    app.openapi_schema = schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi

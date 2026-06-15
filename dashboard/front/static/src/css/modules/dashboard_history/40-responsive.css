@@ -1,0 +1,65 @@
+/* Module: dashboard history responsive adjustments.
+ * Entry: style_alarmas.css. Keep import order in the entrypoint.
+ */
+
+@media (max-width: 1200px) {
+  .home-history-panel {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .home-history-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .home-history-filters,
+  .home-history-main {
+    min-height: auto;
+  }
+
+  .home-history-filters-body {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .home-history-panel {
+    gap: 12px;
+  }
+
+  .home-history-filters,
+  .home-history-main {
+    padding: 14px;
+  }
+
+  .home-history-toolbar,
+  .home-history-events-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-history-results-note {
+    text-align: left;
+  }
+
+  .home-history-filter-button {
+    width: 100%;
+  }
+
+  .home-history-event-card {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-history-event-card {
+    flex-direction: column;
+  }
+
+  .home-history-event-dismiss {
+    align-self: flex-end;
+  }
+}

@@ -1,0 +1,1650 @@
+/* Module: mobile login refinements and OSINT map markers.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+/* =========================
+   LOGIN RESPONSIVE SOLO MÓVIL
+   Pegar al final del CSS
+   ========================= */
+
+@media (max-width: 900px) {
+  .page-login {
+    padding: 10px;
+    align-items: start;
+  }
+
+  .login-shell {
+    width: 100%;
+    min-height: auto;
+    grid-template-columns: 1fr;
+    border-radius: 22px;
+  }
+
+  .login-hero,
+  .login-panel {
+    padding: 20px 18px;
+  }
+
+  .login-hero {
+    gap: 18px;
+  }
+
+  .login-hero::before {
+    inset: 14px;
+    border-radius: 18px;
+  }
+
+  .login-copy {
+    gap: 10px;
+  }
+
+  .login-copy h1 {
+    font-size: clamp(1.45rem, 4.8vw, 2rem);
+    line-height: 1.08;
+  }
+
+  .login-copy p,
+  .login-panel-head p,
+  .login-alt-card p,
+  .login-footnote {
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  .login-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .login-glance-card {
+    padding: 14px;
+    border-radius: 16px;
+    gap: 6px;
+  }
+
+  .login-hero-band {
+    gap: 8px;
+  }
+
+  .login-hero-band span {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+  }
+
+  .login-panel {
+    gap: 16px;
+    align-content: start;
+  }
+
+  .login-panel-head {
+    gap: 6px;
+  }
+
+  .login-panel-head h2 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .login-panel-badge {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+
+  .login-panel-badge img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .login-form {
+    gap: 14px;
+  }
+
+  .login-field {
+    gap: 6px;
+  }
+
+  .login-field > span {
+    font-size: 0.82rem;
+  }
+
+  .login-field input {
+    min-height: 50px;
+    padding: 0 14px;
+    border-radius: 14px;
+    font-size: 16px; /* evita zoom raro en iPhone */
+  }
+
+  .login-form-row {
+    gap: 10px;
+  }
+
+  .login-submit {
+    min-height: 50px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+  }
+
+  .login-divider {
+    margin: 2px 0;
+  }
+
+  .login-alt-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .login-alt-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-login {
+    padding: 0;
+    min-height: 100dvh;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(241, 56, 17, 0.24), transparent 22%),
+      radial-gradient(circle at 82% 12%, rgba(255, 173, 132, 0.12), transparent 18%),
+      radial-gradient(circle at 50% 100%, rgba(241, 56, 17, 0.1), transparent 28%),
+      linear-gradient(180deg, #090b11 0%, #11141b 42%, #090b10 100%);
+  }
+
+  .page-login::before,
+  .page-login::after {
+    display: block;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(42px);
+    opacity: 0.9;
+  }
+
+  .page-login::before {
+    width: 210px;
+    height: 210px;
+    top: 7%;
+    right: -72px;
+    background: rgba(241, 56, 17, 0.26);
+    border-radius: 999px;
+  }
+
+  .page-login::after {
+    width: 180px;
+    height: 180px;
+    bottom: 8%;
+    left: -56px;
+    background: rgba(255, 189, 156, 0.16);
+    border-radius: 34px;
+  }
+
+  .login-shell {
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: clamp(18px, 5.4vw, 28px) 14px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .login-shell::before,
+  .login-shell::after {
+    display: none;
+  }
+
+  /* En celular deja el formulario como protagonista */
+  .login-hero {
+    display: none;
+  }
+
+  .login-panel {
+    position: relative;
+    isolation: isolate;
+    justify-items: center;
+    width: min(100%, 404px);
+    min-height: auto;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 18px 22px;
+    gap: 20px;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+      linear-gradient(180deg, rgba(17, 20, 27, 0.96), rgba(8, 10, 16, 0.98));
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.42),
+      0 0 0 1px rgba(241, 56, 17, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+
+  .login-panel::before,
+  .login-panel::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .login-panel::before {
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(241, 56, 17, 0.18), transparent 24%),
+      radial-gradient(circle at 86% 0%, rgba(255, 215, 194, 0.08), transparent 24%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.018) 0 1px,
+        rgba(255, 255, 255, 0) 1px 16px
+      );
+    opacity: 0.92;
+  }
+
+  .login-panel::after {
+    inset: 14px;
+    z-index: 0;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 28%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 0 46px rgba(241, 56, 17, 0.08);
+  }
+
+  .login-panel-head {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 352px;
+    justify-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .login-panel-head h2 {
+    font-size: clamp(1.92rem, 8vw, 2.42rem);
+    line-height: 1;
+    letter-spacing: -0.06em;
+    text-shadow: 0 10px 24px rgba(241, 56, 17, 0.14);
+  }
+
+  .login-panel-head > p:not(.login-panel-copy-mobile) {
+    display: none;
+  }
+
+  .login-panel-head h2,
+  .login-panel-copy-mobile {
+    display: none;
+  }
+
+  .login-mobile-brand {
+    justify-content: center;
+    width: 100%;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .login-mobile-brand-logo {
+    width: min(196px, 62vw);
+  }
+
+  .login-panel-badge {
+    display: none;
+  }
+
+  .login-panel-copy-mobile {
+    display: none;
+    margin: 0 auto;
+    max-width: 28ch;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.94rem;
+    line-height: 1.48;
+  }
+
+  .login-mobile-pills {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .login-mobile-pills span {
+    min-height: 34px;
+    padding: 0 13px;
+    border-color: rgba(241, 56, 17, 0.24);
+    background: rgba(241, 56, 17, 0.08);
+  }
+
+  .login-form {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 348px;
+    justify-self: center;
+    justify-items: stretch;
+    gap: 18px;
+    padding: 20px 18px 18px;
+    margin-inline: auto;
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.038), rgba(255, 255, 255, 0.02));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 18px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .login-field {
+    width: 100%;
+    justify-items: stretch;
+    text-align: left;
+    gap: 8px;
+  }
+
+  .login-field > span {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .login-field input {
+    width: 100%;
+    min-height: 58px;
+    border-radius: 20px;
+    padding: 0 18px;
+    border-color: rgba(241, 56, 17, 0.18);
+    text-align: left;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.032)),
+      linear-gradient(
+        120deg,
+        rgba(241, 56, 17, 0.12),
+        rgba(255, 255, 255, 0.022) 30%,
+        rgba(241, 56, 17, 0.08) 68%,
+        rgba(255, 255, 255, 0.022)
+      );
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 12px 26px rgba(0, 0, 0, 0.12);
+  }
+
+  .login-password-wrap input {
+    padding-right: 62px;
+  }
+
+  .login-password-toggle {
+    right: 8px;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .login-form-row {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-checkbox {
+    justify-content: center;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .login-checkbox-copy-desktop {
+    display: none;
+  }
+
+  .login-checkbox-copy-mobile {
+    display: inline;
+  }
+
+  .login-link {
+    font-size: 0.8rem;
+  }
+
+  .login-link-desktop {
+    display: none;
+  }
+
+  .login-link-mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(241, 56, 17, 0.24);
+    background: rgba(241, 56, 17, 0.1);
+    color: #ffd0ba;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .login-feedback {
+    min-height: 1.3em;
+    font-size: 0.82rem;
+    margin-top: 2px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-submit {
+    width: 100%;
+    justify-self: center;
+    min-height: 58px;
+    border-radius: 20px;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    background:
+      linear-gradient(180deg, rgba(255, 112, 72, 1), rgba(241, 56, 17, 0.98) 38%, rgba(171, 28, 6, 0.94));
+    border-color: rgba(255, 177, 145, 0.34);
+    box-shadow:
+      0 22px 40px rgba(0, 0, 0, 0.26),
+      0 0 34px rgba(241, 56, 17, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .login-submit:hover,
+  .login-submit:focus-visible {
+    transform: translateY(-2px);
+    box-shadow:
+      0 26px 44px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(241, 56, 17, 0.24),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+
+  .login-divider,
+  .login-alt-grid,
+  .login-footnote {
+    display: none;
+  }
+
+  .login-divider span {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .login-shell {
+    padding: 18px 12px;
+  }
+
+  .login-panel {
+    width: min(100%, 388px);
+    padding: 24px 14px 18px;
+    border-radius: 24px;
+  }
+
+  .login-panel-head,
+  .login-form {
+    max-width: 100%;
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 312px;
+    padding: 18px 14px 16px;
+  }
+
+  .login-panel::after {
+    inset: 10px;
+    border-radius: 18px;
+  }
+
+  .login-panel-head h2 {
+    font-size: clamp(1.72rem, 8vw, 2rem);
+  }
+
+  .login-field input {
+    min-height: 52px;
+    border-radius: 18px;
+    width: 100%;
+  }
+
+  .login-password-wrap input {
+    padding-right: 56px;
+  }
+
+  .login-password-toggle {
+    width: 38px;
+    height: 38px;
+    right: 7px;
+  }
+
+  .login-submit {
+    min-height: 52px;
+    border-radius: 18px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --app-zoom-scale: 1;
+  }
+
+  .app-shell.is-sidebar-collapsed {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .app-main {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .wrap,
+  .page-dashboard .wrap,
+  .page-map .wrap,
+  .page-events .wrap,
+  .page-vehicle-registry .wrap,
+  .page-user-admin .wrap,
+  .page-cameras .wrap {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    align-content: start;
+    gap: 12px;
+    padding: 12px 12px calc(22px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .top,
+  .top-page,
+  .page-dashboard .top-dashboard,
+  .page-map .top-page-map,
+  .page-events .top-page-events {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .heading,
+  .camera-page-actions,
+  .page-section-head > div,
+  .dashboard-block-head > div {
+    min-width: 0;
+  }
+
+  .camera-page-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .camera-register-open,
+  .page-vehicle-registry #vehicle-register-open,
+  .page-user-admin #user-admin-refresh {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dashboard-block,
+  .page-section-shell,
+  .camera-selector-panel,
+  .camera-side-card,
+  .ops-card,
+  .vehicle-registry-section,
+  .info-item {
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .page-section-head,
+  .dashboard-block-head,
+  .page-map .ops-head,
+  .page-events .logs-toolbar,
+  .page-map .telemetry-map-controls,
+  .vehicle-item-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .page-dashboard .wrap {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .page-dashboard .dashboard-block-video {
+    overflow: visible;
+  }
+
+  .page-dashboard .dashboard-mobile-panel-switcher {
+    position: sticky;
+    top: calc(env(safe-area-inset-top, 0px) + 74px);
+    z-index: 16;
+    display: grid;
+  }
+
+  .page-dashboard .dashboard-block-video .camera-stage {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .page-dashboard .dashboard-ops-grid {
+    order: 1;
+    grid-template-columns: 1fr;
+    grid-row: auto;
+  }
+
+  .page-dashboard .camera-selector-panel {
+    order: 2;
+    grid-column: auto;
+    position: static;
+  }
+
+  .page-dashboard .dashboard-camera-preview-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-dashboard .dashboard-camera-preview-close {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-map-stage,
+  .page-dashboard .telemetry-sync-shell .page-map-canvas,
+  .page-dashboard .telemetry-sync-shell .map-canvas {
+    min-height: 320px;
+    height: auto;
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-map-stage {
+    display: grid;
+    gap: 10px;
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter {
+    position: static;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-focus-card,
+  .page-dashboard .telemetry-sync-shell .telemetry-summary {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="map"] .camera-selector-panel {
+    display: none;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-ops-grid {
+    display: none;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage {
+    display: grid;
+    align-content: start;
+    height: 100%;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage.has-multiple {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 4px;
+    scroll-snap-type: y proximity;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-block-video,
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-block-video .camera-stage,
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .camera-selector-panel,
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview {
+    min-height: min(68dvh, 640px);
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview {
+    grid-template-rows: auto minmax(0, 1fr);
+    align-content: stretch;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage .camera-card {
+    width: 100%;
+    height: min(56dvh, 460px);
+    min-height: min(56dvh, 460px);
+    max-height: min(56dvh, 460px);
+    aspect-ratio: auto;
+    scroll-snap-align: start;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage .camera-meta {
+    display: none !important;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage .camera-card::after {
+    display: none;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="map"] .telemetry-sync-shell .page-map-canvas,
+  .page-dashboard[data-dashboard-mobile-view="map"] .telemetry-sync-shell .map-canvas {
+    min-height: 360px;
+    height: min(58dvh, 500px);
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="map"] .telemetry-sync-shell .telemetry-map-stage {
+    min-height: min(58dvh, 500px);
+  }
+
+  .page-cameras .camera-stage {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    min-height: auto;
+    align-items: start;
+  }
+
+  .page-cameras .camera-selector-panel {
+    position: static;
+    order: 2;
+    overflow: visible;
+  }
+
+  .page-cameras .camera-side-panel {
+    order: 3;
+  }
+
+  .page-cameras .face-preview-shell {
+    max-height: none;
+  }
+
+  .page-cameras .face-preview-grid {
+    max-height: min(42dvh, 360px);
+  }
+
+  .page-cameras .camera-switcher {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: min(32dvh, 280px);
+    padding-bottom: 0;
+  }
+
+  .page-cameras .page-section-shell,
+  .page-cameras .viewer-shell,
+  .page-cameras .primary-view {
+    overflow: visible;
+  }
+
+  .page-cameras .viewer-shell {
+    order: 1;
+    height: auto;
+    min-height: min(60dvh, 520px);
+    grid-template-rows: auto minmax(0, 1fr) !important;
+  }
+
+  .page-cameras .camera-inference-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-cameras .camera-inference-field {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .page-cameras .camera-inference-field select {
+    width: 100%;
+  }
+
+  .page-cameras .camera-inference-active {
+    margin-left: 0;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .page-cameras .primary-view {
+    display: grid;
+    align-content: stretch;
+    height: auto;
+    min-height: min(56dvh, 460px);
+  }
+
+  .page-cameras .primary-view .camera-card {
+    width: 100%;
+    height: min(56dvh, 460px);
+    min-height: min(56dvh, 460px);
+    max-height: min(56dvh, 460px);
+    aspect-ratio: auto;
+  }
+
+  .page-cameras .primary-view .camera-meta {
+    display: none !important;
+  }
+
+  .page-cameras .primary-view .camera-card::after {
+    display: none;
+  }
+
+  .page-map .page-map-shell,
+  .page-events .page-events-shell {
+    overflow: visible;
+  }
+
+  .page-map .map-workbench,
+  .page-events .events-workbench,
+  .page-vehicle-registry .vehicle-registry-workbench,
+  .page-user-admin .user-admin-workbench {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    height: auto;
+  }
+
+  .page-map .telemetry-map-controls,
+  .page-map .telemetry-map-mode,
+  .page-map .telemetry-map-style-wrap,
+  .page-map .telemetry-map-style,
+  .page-map .telemetry-map-recenter {
+    width: 100%;
+  }
+
+  .page-map .telemetry-map-stage {
+    display: grid;
+    gap: 10px;
+  }
+
+  .page-map .telemetry-map-filter {
+    position: static;
+    width: 100%;
+    max-width: none;
+  }
+
+  .page-map .page-map-canvas,
+  .page-map .map-canvas {
+    min-height: 320px;
+    height: min(54dvh, 440px);
+  }
+
+  .page-map .telemetry-summary,
+  .page-map .telemetry-focus-card,
+  .page-events .event-feed,
+  .page-events .logs-detail,
+  .page-vehicle-registry .vehicle-registry-detail {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .page-events .logs-mode-switch,
+  .page-events .logs-filter,
+  .page-events .logs-filter select {
+    width: 100%;
+  }
+
+  .page-events .logs-mode-switch {
+    overflow: auto;
+    padding-bottom: 2px;
+  }
+
+  .page-vehicle-registry .page-section-head,
+  .page-user-admin .page-section-head {
+    grid-template-columns: 1fr;
+  }
+
+  .page-vehicle-registry .vehicle-registry-main-card,
+  .page-vehicle-registry .vehicle-registry-rail,
+  .page-user-admin .user-admin-main-card,
+  .page-user-admin .user-admin-rail,
+  .page-user-admin .page-panel {
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+  }
+
+  .page-user-admin .user-admin-form-grid,
+  .page-user-admin .camera-admin-conditional-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-shell.is-sidebar-collapsed .app-sidebar {
+    grid-template-rows: auto 1fr auto;
+    gap: 14px;
+    padding:
+      calc(env(safe-area-inset-top, 0px) + 18px)
+      12px
+      calc(env(safe-area-inset-bottom, 0px) + 16px);
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-header {
+    justify-items: stretch;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-header-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-brand-row {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    font-size: 1rem;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-brand-copy,
+  .app-shell.is-sidebar-collapsed .sidebar-link-copy {
+    display: grid;
+    max-width: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-nav-head,
+  .app-shell.is-sidebar-collapsed .sidebar-footer,
+  .app-shell.is-sidebar-collapsed .sidebar-brand-meta {
+    max-height: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-nav {
+    width: 100%;
+    align-content: start;
+    justify-items: stretch;
+    gap: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-link,
+  .app-shell.is-sidebar-collapsed .sidebar-link-logout {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    min-height: 48px;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 11px 12px 11px 10px;
+    border-radius: 16px;
+    transform: none;
+    overflow: hidden;
+    isolation: auto;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-link:hover,
+  .app-shell.is-sidebar-collapsed .sidebar-link:focus-visible,
+  .app-shell.is-sidebar-collapsed .sidebar-link-logout:hover,
+  .app-shell.is-sidebar-collapsed .sidebar-link-logout:focus-visible {
+    transform: translateX(2px);
+    z-index: auto;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-link::before {
+    display: block;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-link-tooltip {
+    display: none;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-toggle {
+    left: 14px;
+    right: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    --mobile-sidebar-width: min(340px, calc(100vw - 18px));
+  }
+
+  .top,
+  .top-page,
+  .page-dashboard .top-dashboard,
+  .page-map .top-page-map,
+  .page-events .top-page-events {
+    padding-right: 12px;
+    padding-left: 72px;
+  }
+
+  .title {
+    font-size: clamp(1rem, 6vw, 1.3rem);
+  }
+
+  .eyebrow,
+  .page-hero-kicker,
+  .hero-stat-kicker,
+  .dashboard-camera-preview-kicker,
+  .vehicle-registry-section-kicker {
+    letter-spacing: 0.1em;
+  }
+
+  .dashboard-block,
+  .page-section-shell,
+  .camera-selector-panel,
+  .camera-side-card,
+  .ops-card {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .plate-preview-list,
+  .plate-preview-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .plate-preview-list {
+    max-height: min(28dvh, 220px);
+  }
+
+  .plate-preview-copy {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-map-stage,
+  .page-dashboard .telemetry-sync-shell .page-map-canvas,
+  .page-dashboard .telemetry-sync-shell .map-canvas,
+  .page-map .page-map-canvas,
+  .page-map .map-canvas {
+    min-height: 280px;
+    height: min(48dvh, 380px);
+  }
+
+  .page-dashboard .telemetry-sync-shell .telemetry-map-overlay-box,
+  .page-map .telemetry-map-overlay-box {
+    --telemetry-overlay-width: 190px;
+    --telemetry-overlay-height: 112px;
+  }
+
+  .page-dashboard .dashboard-camera-preview-stage .camera-card {
+    min-height: 160px;
+  }
+
+  .page-dashboard .dashboard-mobile-panel-switcher {
+    top: calc(env(safe-area-inset-top, 0px) + 68px);
+    padding: 5px;
+    border-radius: 16px;
+  }
+
+  .page-dashboard .dashboard-mobile-panel-button {
+    min-height: 42px;
+    padding: 9px 10px;
+    font-size: 0.8rem;
+  }
+
+  .page-dashboard[data-dashboard-mobile-view="cameras"] .dashboard-camera-preview-stage .camera-card,
+  .page-cameras .primary-view .camera-card {
+    height: min(52dvh, 400px);
+    min-height: min(52dvh, 400px);
+    max-height: min(52dvh, 400px);
+  }
+
+  .page-cameras .viewer-shell {
+    min-height: min(56dvh, 440px);
+  }
+
+  .page-cameras .primary-view {
+    min-height: min(52dvh, 400px);
+  }
+
+  .vehicle-registry-section,
+  .vehicle-item,
+  .user-admin-rail,
+  .page-user-admin .page-panel {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    --mobile-sidebar-width: min(360px, calc(100vw - 18px));
+  }
+
+  .app-sidebar,
+  .app-shell.is-sidebar-collapsed .app-sidebar {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 14px;
+    padding:
+      calc(env(safe-area-inset-top, 0px) + 18px)
+      14px
+      calc(env(safe-area-inset-bottom, 0px) + 16px);
+    border-radius: 0 22px 22px 0;
+    overflow: hidden;
+  }
+
+  .app-shell.is-sidebar-mobile-open .app-sidebar {
+    left: 0;
+  }
+
+  .sidebar-header,
+  .app-shell.is-sidebar-collapsed .sidebar-header {
+    justify-items: stretch;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  .sidebar-header-bar,
+  .app-shell.is-sidebar-collapsed .sidebar-header-bar {
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .sidebar-brand-row,
+  .app-shell.is-sidebar-collapsed .sidebar-brand-row {
+    min-width: 0;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .sidebar-logo,
+  .app-shell.is-sidebar-collapsed .sidebar-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 0.86rem;
+  }
+
+  .sidebar-brand-copy,
+  .app-shell.is-sidebar-collapsed .sidebar-brand-copy,
+  .sidebar-brand-meta,
+  .app-shell.is-sidebar-collapsed .sidebar-brand-meta,
+  .sidebar-nav-head,
+  .app-shell.is-sidebar-collapsed .sidebar-nav-head,
+  .sidebar-footer,
+  .app-shell.is-sidebar-collapsed .sidebar-footer {
+    max-width: none;
+    max-height: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .sidebar-brand-copy strong {
+    font-size: 0.8rem;
+  }
+
+  .sidebar-brand-copy span,
+  .sidebar-brand-note {
+    font-size: 0.7rem;
+  }
+
+  .sidebar-nav,
+  .app-shell.is-sidebar-collapsed .sidebar-nav {
+    width: 100%;
+    min-height: 0;
+    align-content: start;
+    justify-items: stretch;
+    gap: 8px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 2px;
+    scrollbar-gutter: stable;
+  }
+
+  .sidebar-link,
+  .sidebar-link-logout,
+  .app-shell.is-sidebar-collapsed .sidebar-link,
+  .app-shell.is-sidebar-collapsed .sidebar-link-logout {
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    min-height: 52px;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 10px 12px 10px 10px;
+    border-radius: 15px;
+    transform: none;
+    overflow: hidden;
+    isolation: auto;
+  }
+
+  .sidebar-link::before,
+  .app-shell.is-sidebar-collapsed .sidebar-link::before {
+    display: block;
+  }
+
+  .sidebar-icon,
+  .app-shell.is-sidebar-collapsed .sidebar-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 1.15rem;
+  }
+
+  .sidebar-link-copy,
+  .app-shell.is-sidebar-collapsed .sidebar-link-copy {
+    display: grid;
+    min-width: 0;
+    max-width: none;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .sidebar-link-copy strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.82rem;
+    line-height: 1.2;
+  }
+
+  .sidebar-link-copy span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+
+  .sidebar-link-tooltip,
+  .app-shell.is-sidebar-collapsed .sidebar-link-tooltip {
+    display: none;
+  }
+
+  .sidebar-toggle,
+  .app-shell.is-sidebar-collapsed .sidebar-toggle {
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 14px);
+    left: 14px;
+    right: auto;
+    width: 46px;
+    height: 46px;
+    z-index: 730;
+    border-radius: 16px;
+  }
+
+  .app-shell.is-sidebar-mobile-open .sidebar-toggle {
+    left: min(calc(var(--mobile-sidebar-width) - 23px), calc(100vw - 58px));
+  }
+}
+
+@media (max-width: 380px) {
+  .app-shell {
+    --mobile-sidebar-width: min(330px, calc(100vw - 14px));
+  }
+
+  .sidebar-link-copy span,
+  .sidebar-footer-copy,
+  .sidebar-brand-note {
+    display: none;
+  }
+
+  .sidebar-link,
+  .sidebar-link-logout,
+  .app-shell.is-sidebar-collapsed .sidebar-link,
+  .app-shell.is-sidebar-collapsed .sidebar-link-logout {
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 900px) {
+  .theme-toggle {
+    top: calc(env(safe-area-inset-top, 0px) + 16px);
+    right: 12px;
+    width: 58px;
+    height: 32px;
+    z-index: 71;
+  }
+
+  .theme-toggle-thumb {
+    width: 22px;
+    height: 22px;
+  }
+
+  body[data-theme="light"] .theme-toggle-thumb {
+    transform: translateX(26px);
+  }
+
+  body.is-sidebar-mobile-open .theme-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+
+  .top,
+  .top-page,
+  .page-dashboard .top-dashboard,
+  .page-map .top-page-map,
+  .page-events .top-page-events {
+    padding-right: 84px;
+  }
+
+  .leaflet-top {
+    margin-top: 6px;
+  }
+
+  .leaflet-left {
+    margin-left: 6px;
+  }
+
+  .leaflet-right {
+    margin-right: 6px;
+  }
+
+  .leaflet-bottom {
+    margin-bottom: 6px;
+  }
+
+  .page-map .leaflet-top,
+  .page-dashboard .leaflet-top {
+    margin-top: 12px;
+  }
+
+  .page-map .telemetry-map-overlay-box,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-overlay-box {
+    z-index: 320;
+  }
+}
+
+@media (max-width: 640px) {
+  .theme-toggle {
+    right: 10px;
+    width: 54px;
+    height: 30px;
+  }
+
+  .theme-toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  body[data-theme="light"] .theme-toggle-thumb {
+    transform: translateX(24px);
+  }
+
+  .top,
+  .top-page,
+  .page-dashboard .top-dashboard,
+  .page-map .top-page-map,
+  .page-events .top-page-events {
+    padding-right: 74px;
+  }
+
+  .page-map .leaflet-top,
+  .page-dashboard .leaflet-top {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-block-head h2,
+  .page-section-head h2,
+  .user-admin-rail-head h3 {
+    font-size: clamp(1.04rem, 4.5vw, 1.3rem);
+    line-height: 1.14;
+  }
+
+  .dashboard-block-head p,
+  .page-section-head p,
+  .vehicle-registry-section-head p,
+  .user-admin-rail-head p,
+  .camera-register-help,
+  .camera-register-map-head span,
+  .event-meta,
+  .event-detail,
+  .empty-state,
+  .telemetry-detail,
+  .telemetry-battery-copy p,
+  .telemetry-focus-meta,
+  .telemetry-focus-note,
+  .logs-detail-copy,
+  .vehicle-registry-summary-identifier,
+  .vehicle-registry-summary-time,
+  .vehicle-item-meta,
+  .vehicle-item-time {
+    font-size: 0.92rem;
+    line-height: 1.56;
+  }
+
+  .dashboard-camera-preview-name,
+  .camera-pill-title,
+  .page-dashboard .dashboard-camera-preview-stage .camera-name,
+  .telemetry-focus-name,
+  .logs-detail-title,
+  .vehicle-registry-summary-top strong,
+  .vehicle-item-title,
+  .vehicle-item-detail-value {
+    font-size: 1rem;
+    line-height: 1.34;
+  }
+
+  .logs-summary-card strong,
+  .telemetry-battery-copy strong {
+    font-size: 1.06rem;
+  }
+
+  .telemetry-focus-stat strong {
+    font-size: 0.98rem;
+  }
+
+  .page-dashboard .dashboard-camera-preview-stage .camera-state,
+  .camera-pill-status,
+  .telemetry-focus-kicker,
+  .telemetry-battery-kicker,
+  .telemetry-focus-stat span,
+  .logs-filter span,
+  .logs-summary-card span,
+  .logs-detail-kicker,
+  .vehicle-item-detail-label,
+  .vehicle-registry-section-kicker,
+  .dashboard-camera-preview-kicker {
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+  }
+
+  .camera-pill-topline,
+  .event-topline,
+  .vehicle-registry-summary-top,
+  .telemetry-title,
+  .location-row-head,
+  .telemetry-focus-top {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .dashboard-camera-preview-empty,
+  .logs-detail-empty,
+  .vehicle-registry-section-empty {
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+
+  .camera-pill-status,
+  .telemetry-focus-meta,
+  .telemetry-detail,
+  .telemetry-focus-note,
+  .dashboard-camera-preview-empty,
+  .logs-detail-copy,
+  .logs-detail-meta-row strong,
+  .event-meta,
+  .event-detail,
+  .vehicle-registry-summary-identifier,
+  .vehicle-item-meta,
+  .vehicle-item-detail-value,
+  .camera-register-help,
+  .user-admin-rail-head p {
+    overflow-wrap: anywhere;
+  }
+
+  .telemetry-row-state,
+  .vehicle-registry-summary-pill,
+  .vehicle-item-manual-summary,
+  .vehicle-item-badge {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .logs-detail-meta-row {
+    align-items: flex-start;
+  }
+
+  .logs-detail-meta-row strong {
+    text-align: left;
+  }
+
+  .page-map .telemetry-map-filter,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter {
+    width: min(168px, calc(100% - 20px));
+    max-width: min(168px, calc(100% - 20px));
+    padding: 10px 11px 11px;
+  }
+
+  .page-map .telemetry-map-filter label,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter label {
+    margin-bottom: 6px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+  }
+
+  .page-map .telemetry-map-filter select,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter select {
+    min-height: 40px;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-block-head p,
+  .page-section-head p,
+  .vehicle-registry-section-head p,
+  .user-admin-rail-head p,
+  .camera-register-help,
+  .camera-register-map-head span,
+  .event-meta,
+  .event-detail,
+  .empty-state,
+  .telemetry-detail,
+  .telemetry-battery-copy p,
+  .telemetry-focus-meta,
+  .telemetry-focus-note,
+  .logs-detail-copy,
+  .vehicle-registry-summary-identifier,
+  .vehicle-registry-summary-time,
+  .vehicle-item-meta,
+  .vehicle-item-time {
+    font-size: 0.9rem;
+    line-height: 1.54;
+  }
+
+  .dashboard-camera-preview-name,
+  .camera-pill-title,
+  .telemetry-focus-name,
+  .logs-detail-title,
+  .vehicle-registry-summary-top strong,
+  .vehicle-item-title,
+  .vehicle-item-detail-value {
+    font-size: 0.98rem;
+  }
+
+  .page-dashboard .dashboard-camera-preview-stage .camera-meta {
+    padding: 10px;
+  }
+
+  .page-dashboard .dashboard-camera-preview-stage .camera-badges {
+    top: 10px;
+    left: 10px;
+    max-width: calc(100% - 52px);
+  }
+
+  .page-map .telemetry-map-filter,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter {
+    width: min(164px, calc(100% - 20px));
+    max-width: min(164px, calc(100% - 20px));
+  }
+
+  .page-map .telemetry-focus-top {
+    gap: 8px;
+  }
+
+  .page-map .telemetry-focus-stats {
+    gap: 7px;
+  }
+
+  .logs-mode-pill,
+  .camera-register-open,
+  .page-vehicle-registry #vehicle-register-open,
+  .page-user-admin #user-admin-refresh {
+    min-height: 44px;
+  }
+}
+
+.opensky-aircraft-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  transform-origin: center center;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+}
+
+.osint-map-icon {
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
+  padding: 3px;
+}
+
+.osint-map-icon img,
+.leaflet-marker-icon.osint-map-icon {
+  object-fit: contain;
+}
+
+.osint-map-fallback-icon {
+  background: transparent;
+  border: 0;
+}
+
+.osint-map-fallback-icon span {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  color: #fff;
+  background: var(--osint-icon-color, #ef4444);
+  font-size: 0.78rem;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   GESTIÓN DE DISPOSITIVOS  ·  page-device-mgmt
+   ═══════════════════════════════════════════════════════════════════ */

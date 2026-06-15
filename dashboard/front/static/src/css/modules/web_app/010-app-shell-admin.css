@@ -1,0 +1,942 @@
+/* Module: application shell base and admin workbench surfaces.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+.app-shell {
+  --sidebar-motion-duration: 0.34s;
+  --sidebar-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 288px minmax(0, 1fr);
+  transition: grid-template-columns var(--sidebar-motion-duration) var(--sidebar-motion-ease);
+}
+
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  isolation: isolate;
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 16px;
+  margin: 0;
+  padding: 18px 12px 16px;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  background:
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.14), transparent 24%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03), transparent 28%),
+    linear-gradient(180deg, rgba(20, 24, 33, 0.98), rgba(13, 17, 25, 0.995));
+  box-shadow:
+    18px 0 42px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: visible;
+  transition:
+    padding var(--sidebar-motion-duration) var(--sidebar-motion-ease),
+    gap var(--sidebar-motion-duration) var(--sidebar-motion-ease),
+    box-shadow var(--sidebar-motion-duration) ease,
+    background var(--sidebar-motion-duration) ease,
+    border-color var(--sidebar-motion-duration) ease;
+}
+
+.app-sidebar::before,
+.app-sidebar::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.app-sidebar::before {
+  top: 0;
+  right: -10px;
+  width: 20px;
+  height: 100%;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 244, 235, 0.16), transparent 18%),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 236, 220, 0.08) 14%,
+      rgba(252, 107, 78, 0.36) 50%,
+      rgba(255, 232, 210, 0.12) 84%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 244, 235, 0.22) 46%,
+      rgba(255, 255, 255, 0)
+    );
+  background-repeat: no-repeat;
+  background-position:
+    50% 0,
+    50% 0,
+    calc(50% + 0.5px) 0;
+  background-size:
+    18px 18%,
+    12px 100%,
+    1px 100%;
+  box-shadow:
+    0 0 12px rgba(241, 56, 17, 0.12),
+    0 0 26px rgba(255, 228, 205, 0);
+  opacity: 0.54;
+  transform-origin: center;
+  animation: sidebar-edge-pulse 6.2s ease-in-out infinite;
+}
+
+.app-sidebar::after {
+  top: -18%;
+  right: -11px;
+  width: 22px;
+  height: 18%;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 247, 239, 0.24), transparent 60%),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 239, 228, 0.1) 28%,
+      rgba(255, 255, 255, 0.20) 38%,
+      rgba(255, 255, 255, 0.78) 56%,
+      rgba(255, 233, 213, 0.22) 72%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  box-shadow:
+    0 0 18px rgba(241, 56, 17, 0.16),
+    0 0 34px rgba(255, 226, 203, 0.08);
+  filter: blur(6px);
+  opacity: 0;
+  animation: sidebar-edge-glint 6.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.app-shell.is-sidebar-collapsed {
+  grid-template-columns: 80px minmax(0, 1fr);
+}
+
+.camera-register-danger {
+  border-color: rgba(248, 113, 113, 0.36);
+  background: rgba(127, 29, 29, 0.22);
+  color: #fecaca;
+}
+
+.camera-register-danger:hover,
+.camera-register-danger:focus-visible {
+  border-color: rgba(248, 113, 113, 0.58);
+  background: rgba(153, 27, 27, 0.28);
+}
+
+.user-admin-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.95fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.admin-unified-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.admin-unified-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-unified-tab {
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.76);
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.admin-unified-tab:hover,
+.admin-unified-tab:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(241, 56, 17, 0.34);
+  color: rgba(255, 255, 255, 0.94);
+  outline: none;
+}
+
+.admin-unified-tab.is-active {
+  border-color: rgba(241, 56, 17, 0.48);
+  background: rgba(241, 56, 17, 0.16);
+  color: #fff7ed;
+}
+
+.admin-organization-filter {
+  display: grid;
+  gap: 6px;
+  min-width: min(100%, 320px);
+}
+
+.admin-organization-filter span {
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-organization-filter select {
+  min-height: 42px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.82);
+  color: var(--brand-white);
+  padding: 0 12px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.admin-tab-panel[hidden] {
+  display: none;
+}
+
+.admin-tab-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.page-admin-unified .camera-admin-management-dialog {
+  max-height: none;
+}
+
+.page-admin-unified .camera-admin-modal-workbench {
+  min-height: min(70vh, 760px);
+}
+
+.user-admin-main-card {
+  display: grid;
+  gap: 20px;
+}
+
+.user-admin-detail-head {
+  padding-bottom: 0;
+}
+
+.user-admin-detail-copy {
+  margin: 8px 0 0;
+  max-width: 72ch;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.user-admin-form {
+  display: grid;
+  gap: 18px;
+}
+
+.user-admin-form-grid,
+.camera-admin-conditional-grid,
+.camera-admin-rtsp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.user-admin-form-grid > .camera-register-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.camera-admin-form-grid > .camera-register-field:last-child {
+  grid-column: auto;
+}
+
+.camera-admin-form-grid > .camera-admin-rtsp-builder {
+  grid-column: 1 / -1;
+}
+
+.camera-admin-rtsp-builder {
+  display: grid;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(241, 56, 17, 0.16);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(10, 16, 25, 0.94)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.08), transparent 38%);
+}
+
+.camera-admin-rtsp-head,
+.camera-admin-map-trigger-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.camera-admin-rtsp-head strong,
+.camera-admin-map-trigger-head strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.98rem;
+}
+
+.camera-admin-rtsp-head p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.72);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.camera-admin-rtsp-preview {
+  min-height: 24px;
+  color: rgba(226, 232, 240, 0.84);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.camera-admin-action-intro {
+  display: grid;
+  gap: 6px;
+}
+
+.camera-admin-action-kicker {
+  color: rgba(241, 56, 17, 0.76);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.camera-admin-action-copy {
+  margin: 0;
+  max-width: 68ch;
+  color: rgba(226, 232, 240, 0.7);
+  line-height: 1.55;
+}
+
+.camera-admin-action-cluster {
+  display: grid;
+  gap: 12px;
+}
+
+.camera-admin-action-group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, max-content));
+  justify-content: end;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(241, 56, 17, 0.16);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.08), transparent 40%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 20px 38px rgba(0, 0, 0, 0.16);
+}
+
+.camera-admin-mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: start;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.camera-admin-quick-action {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--brand-white);
+  border-radius: 16px;
+  padding: 11px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.camera-admin-copy-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.camera-admin-code-field {
+  grid-column: 1 / -1;
+}
+
+.camera-admin-result-row,
+.camera-admin-list-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.camera-admin-result-row span,
+.camera-admin-list-code span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.camera-admin-rbox-directory {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.camera-admin-rbox-item {
+  display: grid;
+  text-align: left;
+}
+
+.camera-admin-quick-action:hover,
+.camera-admin-quick-action:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(241, 56, 17, 0.34);
+  background: rgba(241, 56, 17, 0.08);
+}
+
+.camera-admin-quick-action.is-active {
+  border-color: rgba(241, 56, 17, 0.42);
+  background:
+    linear-gradient(180deg, rgba(241, 56, 17, 0.18), rgba(241, 56, 17, 0.08));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+}
+
+.camera-admin-quick-action-title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.camera-admin-quick-action-note {
+  color: rgba(226, 232, 240, 0.62);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.camera-admin-quick-action-rbox .camera-admin-quick-action-title::before {
+  content: "RB";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: rgba(241, 56, 17, 0.2);
+  color: rgba(255, 248, 243, 0.98);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+}
+
+.camera-admin-submit-primary {
+  min-width: 164px;
+  justify-self: end;
+}
+
+.camera-admin-delete-action {
+  justify-self: end;
+}
+
+.camera-admin-map-trigger {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.16);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.82), rgba(10, 16, 25, 0.94)),
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 38%);
+}
+
+.camera-admin-map-trigger-head p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.72);
+  line-height: 1.55;
+  max-width: 56ch;
+}
+
+.camera-admin-map-summary {
+  color: rgba(226, 232, 240, 0.84);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.camera-admin-map-dialog {
+  width: min(1080px, calc(100vw - 32px));
+}
+
+.camera-admin-management-dialog {
+  width: min(1900px, calc(100vw - 16px));
+  max-height: min(96dvh, 1040px);
+}
+
+.camera-admin-modal-workbench {
+  min-height: 0;
+  overflow: hidden;
+  grid-template-columns: minmax(0, 1.9fr) minmax(320px, 0.85fr);
+}
+
+.camera-admin-management-dialog .user-admin-main-card {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* El rail usa flex para que cámaras y RBoxes se vean correctamente */
+.camera-admin-management-dialog .user-admin-rail {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* La lista de cámaras ocupa todo el espacio disponible */
+.camera-admin-management-dialog .user-admin-rail > .user-admin-rail-list {
+  flex: 1;
+  min-height: 80px;
+}
+
+/* La sección de RBoxes ocupa hasta un 52% del rail */
+.camera-admin-management-dialog .camera-admin-rbox-directory {
+  flex-shrink: 1;
+  flex-basis: 52%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 12px;
+  margin-top: 0;
+}
+
+/* La lista de RBoxes hace scroll internamente */
+.camera-admin-management-dialog .camera-admin-rbox-directory .user-admin-rail-list {
+  flex: 1;
+  min-height: 0;
+}
+
+.camera-admin-management-dialog .user-admin-form {
+  min-height: 0;
+  overflow: auto;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.camera-admin-map-dialog .camera-register-map {
+  min-height: min(58vh, 520px);
+}
+
+.camera-admin-conditional-grid > .camera-register-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.camera-admin-rtsp-grid > .camera-register-field:last-child {
+  grid-column: 1 / -1;
+}
+
+.user-admin-note {
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.86), rgba(10, 16, 25, 0.94));
+  color: rgba(226, 232, 240, 0.72);
+  border-radius: 18px;
+  padding: 14px 16px;
+  line-height: 1.6;
+}
+
+.user-admin-note strong {
+  color: #f8fafc;
+}
+
+.user-admin-rail {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(17, 23, 32, 0.98), rgba(11, 16, 24, 0.98)),
+    radial-gradient(circle at top right, rgba(241, 56, 17, 0.08), transparent 40%);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.26);
+}
+
+.user-admin-rail-head {
+  display: grid;
+  gap: 8px;
+}
+
+.user-admin-rail-head h3 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.02rem;
+}
+
+.user-admin-rail-head p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.68);
+  line-height: 1.55;
+}
+
+.user-admin-rail-list {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.user-admin-summary-item {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  color: #f8fafc;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.user-admin-summary-item:hover,
+.user-admin-summary-item:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(241, 56, 17, 0.24);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+}
+
+.user-admin-summary-item:focus-visible {
+  outline: 2px solid rgba(241, 56, 17, 0.34);
+  outline-offset: 2px;
+}
+
+.user-admin-summary-item.is-active {
+  border-color: rgba(241, 56, 17, 0.36);
+  background: linear-gradient(180deg, rgba(241, 56, 17, 0.12), rgba(255, 255, 255, 0.05));
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+}
+
+.user-admin-summary-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.user-admin-summary-top strong {
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.user-admin-role-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  background: rgba(15, 118, 110, 0.16);
+  color: #a5f3fc;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.user-admin-summary-meta {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 0.86rem;
+}
+
+.user-admin-empty {
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 20px;
+  color: rgba(226, 232, 240, 0.7);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
+}
+
+.page-user-admin .wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-user-admin .app-main {
+  min-height: var(--app-height);
+}
+
+.page-user-admin .page-user-admin-shell {
+  flex: 0 0 auto;
+}
+
+.page-user-admin .page-section-head p,
+.page-user-admin .camera-register-help,
+.page-user-admin .user-admin-detail-copy,
+.page-user-admin .user-admin-note,
+.page-user-admin .user-admin-rail-head p,
+.page-user-admin .user-admin-summary-meta {
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.notification-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.notification-admin-card {
+  display: grid;
+  gap: 18px;
+}
+
+.page-notification-admin .user-admin-form-grid > .camera-register-field:nth-last-child(-n + 2) {
+  grid-column: 1 / -1;
+}
+
+.notification-email-recipient-field,
+.notification-email-table-wrap {
+  grid-column: 1 / -1;
+}
+
+.notification-email-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.notification-email-table-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.notification-email-count {
+  flex: 0 0 auto;
+  color: rgba(226, 232, 240, 0.66);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.notification-email-table-scroll {
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.notification-email-table {
+  width: 100%;
+  min-width: 420px;
+  border-collapse: collapse;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.notification-email-table th,
+.notification-email-table td {
+  padding: 11px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+.notification-email-table th {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.notification-email-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.notification-email-index {
+  width: 54px;
+  color: rgba(226, 232, 240, 0.58);
+  font-weight: 900;
+}
+
+.notification-email-address {
+  overflow-wrap: anywhere;
+}
+
+.notification-email-empty {
+  color: rgba(226, 232, 240, 0.58);
+  text-align: center;
+}
+
+.notification-email-action {
+  width: 96px;
+  text-align: right;
+}
+
+.notification-email-remove {
+  border: 1px solid rgba(248, 113, 113, 0.22);
+  background: rgba(127, 29, 29, 0.18);
+  color: #fecaca;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.notification-email-remove:hover,
+.notification-email-remove:focus-visible {
+  border-color: rgba(248, 113, 113, 0.42);
+  background: rgba(127, 29, 29, 0.28);
+}
+
+.notification-email-remove:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.page-notification-admin textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.page-notification-admin .user-admin-feedback[data-tone="success"] {
+  color: #bbf7d0;
+  border-color: rgba(34, 197, 94, 0.28);
+  background: rgba(22, 101, 52, 0.2);
+}
+
+.page-notification-admin .user-admin-feedback[data-tone="error"] {
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.28);
+  background: rgba(127, 29, 29, 0.24);
+}
+
+.page-notification-admin .user-admin-feedback[data-tone="info"] {
+  color: #fde68a;
+  border-color: rgba(245, 158, 11, 0.28);
+  background: rgba(120, 53, 15, 0.22);
+}
+
+@media (max-width: 1180px) {
+  .user-admin-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .notification-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-admin-conditional-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-admin-action-group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+  }
+
+  .camera-admin-submit-primary {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+  }
+
+  .camera-admin-map-trigger-head {
+    flex-direction: column;
+  }
+
+  .user-admin-rail-list {
+    max-height: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .camera-admin-management-dialog .user-admin-detail-copy {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .user-admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-admin-action-group {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-admin-delete-action {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .user-admin-rail {
+    padding: 16px;
+  }
+
+  .user-admin-summary-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell,
+  .app-sidebar,
+  .sidebar-header,
+  .sidebar-header-bar,
+  .sidebar-brand-row,
+  .sidebar-logo,
+  .sidebar-brand-copy,
+  .sidebar-brand-meta,
+  .sidebar-nav,
+  .sidebar-nav-head,
+  .sidebar-link,
+  .sidebar-link-copy,
+  .sidebar-icon,
+  .sidebar-footer,
+  .sidebar-toggle {
+    transition-duration: 0.01ms !important;
+  }
+
+  .app-sidebar::before,
+  .app-sidebar::after {
+    animation: none;
+  }
+
+  .app-sidebar::before {
+    opacity: 0.48;
+    transform: none;
+  }
+
+  .app-sidebar::after {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,228 @@
+/* Module: history toolbar, event list and pagination.
+ * Entry: style_alarmas.css. Keep import order in the entrypoint.
+ */
+
+.home-history-main {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+}
+
+.home-history-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-history-search {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.home-history-search:hover,
+.home-history-search:focus-within {
+  border-color: rgba(255, 106, 0, 0.24);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.home-history-search-icon {
+  color: #ff6200;
+  font-size: 0.92rem;
+  flex: 0 0 auto;
+}
+
+.home-history-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f6f1ee;
+  font: inherit;
+}
+
+.home-history-search input::placeholder {
+  color: rgba(255, 220, 199, 0.32);
+}
+
+.home-history-filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 104px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 106, 0, 0.18);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(138, 61, 27, 0.95), rgba(104, 45, 19, 0.98));
+  color: #fff4ec;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.home-history-filter-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.home-history-results-note {
+  margin: 0;
+  color: rgba(255, 228, 211, 0.42);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.home-history-events-list {
+  display: grid;
+  gap: 10px;
+  flex: 1 1 auto;
+}
+
+.home-history-event-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.home-history-event-empty {
+  cursor: default;
+}
+
+.home-history-event-card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.home-history-event-copy {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-history-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.home-history-event-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 106, 0, 0.14);
+  color: #ff7519;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.home-history-event-time {
+  color: rgba(255, 220, 199, 0.36);
+  font-size: 0.75rem;
+}
+
+.home-history-event-title {
+  margin: 0;
+  color: #fcf8f5;
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.home-history-event-summary {
+  margin: 0;
+  color: rgba(255, 229, 214, 0.48);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.home-history-event-dismiss {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(245, 235, 229, 0.72);
+  font: inherit;
+  font-size: 0.98rem;
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.home-history-event-dismiss:hover {
+  background: rgba(255, 106, 0, 0.12);
+  border-color: rgba(255, 106, 0, 0.22);
+  transform: scale(1.04);
+}
+
+.home-history-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.home-history-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(247, 238, 232, 0.74);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.home-history-page:hover,
+.home-history-page.is-active {
+  background: linear-gradient(180deg, rgba(139, 62, 27, 0.96), rgba(108, 46, 20, 0.98));
+  border-color: rgba(255, 106, 0, 0.28);
+  color: #fff6ef;
+  transform: translateY(-1px);
+}
+
+.home-history-page:disabled {
+  cursor: default;
+  opacity: 0.45;
+  transform: none;
+}
+
+.home-history-page-arrow {
+  font-size: 1rem;
+}
+

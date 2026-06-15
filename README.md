@@ -164,6 +164,13 @@ Las consultas de kilometraje usan agregacion por rango y limites de fechas para 
 
 El worker remoto de media/eventos publica contra la API central por `/api/ingest` usando token de servicio. No debe escribir directo a PostgreSQL ni MinIO desde el host remoto.
 
+El orquestador remoto consulta la inferencia que debe ejecutar desde:
+
+- `GET /api/orchestrator/inference-configs`
+- `GET /api/orchestrator/inference-configs/{camera_key}`
+
+Ambos endpoints usan `X-Robiotec-Ingest-Token` o `Authorization: Bearer <SERVICE_INGEST_TOKEN>`. Si una camara responde `hacer_inferencia=false` o `inference_type=inactiva`, el orquestador debe detener cualquier inferencia activa para esa camara.
+
 ## Base de datos
 
 Tablas detectadas en produccion:

@@ -1,0 +1,129 @@
+/* Module: profile cards, quick links and light theme variants.
+ * Entry: perfil.css. Keep import order in the entrypoint.
+ */
+
+.profile-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.profile-card {
+  min-width: 0;
+  padding: 20px;
+}
+
+.profile-card--wide {
+  grid-column: 1 / -1;
+}
+
+.profile-card-head {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.profile-card-title {
+  margin: 0;
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 1.26rem;
+  color: #ffffff;
+}
+
+.profile-data-list {
+  display: grid;
+  gap: 10px;
+}
+
+.profile-data-item {
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 54px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.profile-data-label {
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.profile-data-value {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.profile-quick-links {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.profile-quick-link {
+  min-height: 58px;
+  justify-content: center;
+  padding: 12px 14px;
+  border: 1px solid rgba(241, 56, 17, 0.22);
+  border-radius: 14px;
+  background: rgba(241, 56, 17, 0.12);
+  color: #ffffff;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.profile-quick-link:hover,
+.profile-quick-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(241, 56, 17, 0.58);
+  background: rgba(241, 56, 17, 0.2);
+  outline: none;
+}
+
+body[data-theme="light"].page-profile .app-main {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(241, 56, 17, 0.16), transparent 28%),
+    linear-gradient(180deg, rgba(255, 250, 247, 0.82), rgba(244, 237, 232, 0.94));
+}
+
+body[data-theme="light"].page-profile .app-header,
+body[data-theme="light"].page-profile .profile-stat,
+body[data-theme="light"].page-profile .profile-card {
+  border-color: rgba(15, 23, 42, 0.11);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.1);
+}
+
+body[data-theme="light"].page-profile .app-header-copy strong,
+body[data-theme="light"].page-profile .profile-card-title,
+body[data-theme="light"].page-profile .profile-stat-value,
+body[data-theme="light"].page-profile .profile-data-value {
+  color: #111827;
+}
+
+body[data-theme="light"].page-profile .app-header-copy span,
+body[data-theme="light"].page-profile .profile-card-kicker,
+body[data-theme="light"].page-profile .profile-stat-label,
+body[data-theme="light"].page-profile .profile-data-label {
+  color: rgba(15, 23, 42, 0.58);
+}
+
+body[data-theme="light"].page-profile .profile-data-item {
+  border-color: rgba(15, 23, 42, 0.1);
+  background: rgba(15, 23, 42, 0.035);
+}
+
+body[data-theme="light"].page-profile .profile-card-head {
+  border-bottom-color: rgba(15, 23, 42, 0.1);
+}
+

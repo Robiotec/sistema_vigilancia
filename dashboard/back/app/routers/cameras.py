@@ -561,13 +561,39 @@ def _authorized_camera_viewer(
     try:
         status_payload = call_api(f"/streams/{encoded_path}/status", token=token) or {}
     except Exception:
-        return _video_unavailable_payload()
+        status_payload = {}
     if status_payload.get("online") is not True:
-        return _video_unavailable_payload()
+        try:
+            if not _mediamtx_path_has_source(path):
+                return _video_unavailable_payload()
+        except Exception:
+            return _video_unavailable_payload()
+        webrtc_base = _text(getattr(settings, "mediamtx_webrtc_base_url", "/mediamtx")).rstrip("/")
+        viewer_url = f"{webrtc_base}/{quote(path, safe='/')}/"
+        kicked_sessions = _kick_webrtc_readers_for_path(path) if exclusive else 0
+        return {
+            "online": True, "path": path, "inference_type": _text(inference_type),
+            "exclusive": bool(exclusive), "kicked_sessions": kicked_sessions,
+            "token": "", "expires_in": None, "viewer_url": viewer_url, "stream_url": viewer_url,
+            "message": "Video disponible",
+        }
     try:
         token_payload = call_api(f"/stream/token/{encoded_path}", method="POST", token=token) or {}
     except Exception:
-        return _video_unavailable_payload("No se pudo generar el token de visualización para este video.")
+        try:
+            if not _mediamtx_path_has_source(path):
+                return _video_unavailable_payload("No se pudo generar el token de visualización para este video.")
+        except Exception:
+            return _video_unavailable_payload("No se pudo generar el token de visualización para este video.")
+        webrtc_base = _text(getattr(settings, "mediamtx_webrtc_base_url", "/mediamtx")).rstrip("/")
+        viewer_url = f"{webrtc_base}/{quote(path, safe='/')}/"
+        kicked_sessions = _kick_webrtc_readers_for_path(path) if exclusive else 0
+        return {
+            "online": True, "path": path, "inference_type": _text(inference_type),
+            "exclusive": bool(exclusive), "kicked_sessions": kicked_sessions,
+            "token": "", "expires_in": None, "viewer_url": viewer_url, "stream_url": viewer_url,
+            "message": "Video disponible",
+        }
     viewer_url = _text(token_payload.get("viewer_url"))
     if not viewer_url:
         return _video_unavailable_payload("No se pudo generar el enlace protegido para este video.")

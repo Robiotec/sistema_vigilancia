@@ -1,0 +1,6 @@
+/*
+ * Camera stylesheet entrypoint.
+ * Used by camaras.html; camera.css aliases this file for compatibility.
+ */
+
+@import url("./modules/cameras/00-camera-pill.css");

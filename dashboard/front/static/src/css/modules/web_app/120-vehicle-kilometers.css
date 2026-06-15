@@ -1,0 +1,287 @@
+/* Module: vehicle kilometers panel and controls.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+.vehicle-km-panel {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+.vehicle-km-panel-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+.vehicle-km-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-end;
+  margin-bottom: 0.75rem;
+}
+.vehicle-km-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+.vehicle-km-label input[type="date"],
+.vehicle-km-label select {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  color: inherit;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+}
+.vehicle-km-label select {
+  min-height: 31px;
+}
+.vehicle-km-load {
+  padding: 0.35rem 0.85rem;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-end;
+}
+.vehicle-km-load:hover { background: #2563eb; }
+.vehicle-km-load:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+.vehicle-km-export {
+  padding: 0.35rem 0.85rem;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 6px;
+  color: #22c55e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  align-self: flex-end;
+}
+.vehicle-km-export:hover { background: rgba(34,197,94,0.25); }
+.vehicle-km-loading, .vehicle-km-empty, .vehicle-km-error {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  padding: 0.5rem 0;
+}
+.vehicle-km-error { color: #f87171; }
+.vehicle-km-summary-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.vehicle-km-kpi {
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+.vehicle-km-kpi strong {
+  font-size: 1.1rem;
+  color: #e2e8f0;
+}
+.vehicle-km-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+.vehicle-km-table th {
+  text-align: left;
+  padding: 0.3rem 0.5rem;
+  color: #64748b;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  white-space: nowrap;
+}
+.vehicle-km-table td {
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  white-space: nowrap;
+}
+.km-row-active td:nth-child(2) { color: #22c55e; }
+.km-row-empty { opacity: 0.45; }
+.km-ign-on  { color: #22c55e; font-size: 0.72rem; margin-right: 0.25rem; }
+.km-ign-off { color: #f59e0b; font-size: 0.72rem; }
+
+/* ── Route toggle button ─────────────────────────────────── */
+.route-toggle-bar {
+  margin: 0.6rem 0 0.25rem;
+}
+.route-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid rgba(99,179,237,0.35);
+  background: rgba(99,179,237,0.08);
+  color: #90cdf4;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.route-toggle-btn::before {
+  content: "○";
+  font-size: 0.7rem;
+}
+.route-toggle-btn.is-active {
+  background: rgba(59,130,246,0.22);
+  border-color: rgba(59,130,246,0.6);
+  color: #93c5fd;
+}
+.route-toggle-btn.is-active::before {
+  content: "●";
+  color: #3b82f6;
+}
+.route-toggle-btn:hover {
+  background: rgba(59,130,246,0.3);
+  border-color: rgba(59,130,246,0.75);
+  color: #bfdbfe;
+}
+
+/* ── Fleet km open button ────────────────────────────────────────────────── */
+.fleet-km-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid rgba(99,179,237,0.4);
+  background: rgba(99,179,237,0.1);
+  color: #90cdf4;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.fleet-km-open-btn:hover { background: rgba(99,179,237,0.22); border-color: rgba(99,179,237,0.65); }
+
+/* ── Fleet km modal ──────────────────────────────────────────────────────── */
+.fleet-km-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-y: auto;
+}
+.fleet-km-modal[hidden] { display: none; }
+.fleet-km-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(3px);
+}
+.fleet-km-dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 860px;
+  background: #1a202c;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 4rem);
+}
+.fleet-km-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.fleet-km-dialog-head h2 {
+  margin: 0.2rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+.fleet-km-close {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.fleet-km-close:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.fleet-km-dialog-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+.fleet-km-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.fleet-km-presets {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.vehicle-km-preset {
+  min-height: 34px;
+  border: 1px solid rgba(99,179,237,0.32);
+  border-radius: 8px;
+  background: rgba(99,179,237,0.08);
+  color: #bfdbfe;
+  padding: 0.35rem 0.7rem;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.vehicle-km-preset:hover,
+.vehicle-km-preset:focus-visible {
+  border-color: rgba(99,179,237,0.66);
+  background: rgba(99,179,237,0.2);
+  outline: none;
+}
+.fleet-km-kpi-row { margin-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem; }
+.fleet-km-table-wrap { overflow-x: auto; }
+.fleet-km-table { width: 100%; min-width: 480px; }
+.fleet-km-table tfoot tr td { border-top: 2px solid rgba(255,255,255,0.15); font-weight: 700; color: #93c5fd; }
+.fleet-km-total-row td { padding-top: 0.5rem; }
+.vehicle-km-export-fleet {
+  display: inline-flex;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid rgba(74,222,128,0.4);
+  background: rgba(74,222,128,0.08);
+  color: #86efac;
+  cursor: pointer;
+}
+.vehicle-km-export-fleet:hover { background: rgba(74,222,128,0.18); }
+
+body.is-vehicle-registry-readonly #vehicle-register-open,
+body.is-vehicle-registry-readonly .vehicle-item-actions,
+body.is-vehicle-registry-readonly #vehicle-register-modal {
+  display: none !important;
+}
+

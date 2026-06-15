@@ -1,0 +1,324 @@
+/* Module: delivery UI final adjustments.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+/* Ajustes de entrega UI: camaras, mapa, reportes, administracion y km. */
+.page-cameras .camera-stage,
+.page-cameras .camera-stage.has-multiple {
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) minmax(230px, 300px);
+  gap: 14px;
+}
+
+.page-cameras .camera-selector-panel,
+.page-cameras .camera-side-panel,
+.page-cameras .viewer-shell,
+.page-cameras .primary-view {
+  min-width: 0;
+}
+
+.page-cameras .camera-switcher {
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.page-cameras .camera-pill {
+  min-height: 124px;
+  padding: 8px 38px 9px 8px;
+  border-radius: 14px;
+  gap: 6px;
+}
+
+.page-cameras .camera-pill-preview {
+  min-height: 58px;
+  border-radius: 10px;
+}
+
+.page-cameras .camera-pill-title {
+  font-size: 0.78rem;
+  line-height: 1.18;
+}
+
+.page-cameras .camera-pill-association,
+.page-cameras .camera-pill-status,
+.page-cameras .camera-pill-tag {
+  font-size: 0.64rem;
+}
+
+.page-cameras .camera-pill-inference {
+  top: 8px;
+  right: 8px;
+  bottom: auto;
+  width: 28px;
+  height: 28px;
+}
+
+.page-cameras .primary-view,
+.page-cameras .primary-view .camera-card,
+.page-cameras .cameras-page-large-card {
+  min-height: min(62vh, 680px);
+}
+
+.page-cameras .camera-inference-toolbar {
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.page-cameras .camera-inference-active {
+  max-width: min(100%, 280px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-map .ops-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.page-map .telemetry-map-controls {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: visible;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.page-map .telemetry-map-controls > * {
+  flex: 0 1 auto;
+}
+
+.page-map .telemetry-map-mode,
+.page-map .telemetry-map-switch,
+.page-map .telemetry-map-style,
+.page-map .camera-register-secondary {
+  min-height: 34px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+}
+
+.page-map .telemetry-map-mode,
+.page-map .telemetry-map-switch {
+  padding-inline: 10px;
+}
+
+.page-map .telemetry-map-style-wrap {
+  min-width: 126px;
+}
+
+.page-map .telemetry-osint-layer-wrap {
+  min-width: min(210px, 100%);
+}
+
+.page-map .telemetry-map-recenter,
+.page-map .telemetry-geofence-new,
+.page-map .telemetry-geofence-refresh,
+.page-map .telemetry-track-export,
+.page-map .telemetry-track-clear {
+  min-width: auto;
+  padding-inline: 10px;
+}
+
+.page-map .map-workbench {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.54fr);
+  gap: 14px;
+}
+
+.page-map .map-workbench[data-video-layout="video"] {
+  grid-template-columns: minmax(340px, 0.54fr) minmax(0, 1fr);
+}
+
+.page-map .telemetry-rail {
+  gap: 14px;
+}
+
+.page-map .map-workbench[data-video-layout="video"] .telemetry-rail {
+  grid-template-rows: minmax(440px, 1fr) minmax(170px, 0.34fr);
+}
+
+.page-map .map-workbench[data-video-layout="video"] .telemetry-video-stage {
+  min-height: 440px;
+}
+
+.page-map .telemetry-video-stage iframe,
+.page-map .telemetry-video-stage video,
+.telemetry-map-overlay-preview video,
+.telemetry-map-overlay-preview iframe {
+  object-fit: contain;
+}
+
+.page-map .telemetry-map-filter {
+  width: min(300px, calc(100% - 28px));
+  max-width: min(300px, calc(100% - 28px));
+}
+
+.page-map .telemetry-focus-shell,
+.page-map .telemetry-focus-card {
+  overflow: auto;
+}
+
+.page-map .telemetry-focus-info-grid,
+.page-map .telemetry-focus-stats {
+  grid-template-columns: 1fr;
+}
+
+.page-map .telemetry-focus-stat {
+  padding: 10px 11px;
+}
+
+.page-map .telemetry-focus-stat strong {
+  font-size: 0.94rem;
+}
+
+.fleet-km-modal {
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.fleet-km-dialog {
+  width: min(1120px, calc(100vw - 48px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  border-radius: 12px;
+}
+
+.fleet-km-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(130px, 1fr)) minmax(190px, auto) auto auto;
+  align-items: end;
+  gap: 10px;
+}
+
+.fleet-km-presets {
+  justify-content: flex-start;
+}
+
+.fleet-km-table-wrap {
+  max-height: min(56dvh, 560px);
+  overflow: auto;
+}
+
+.page-reports .page-section-shell,
+.page-reports .reports-shell,
+.reports-panel,
+.reports-view {
+  overflow: visible;
+}
+
+.reports-head {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, auto);
+  align-items: end;
+  gap: 16px;
+}
+
+.reports-global-controls,
+.reports-toolbar {
+  position: relative;
+  z-index: 3;
+  align-items: end;
+  gap: 10px;
+}
+
+.reports-tabs,
+.reports-subtabs {
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+.reports-action,
+.reports-result-count {
+  flex: 0 0 auto;
+}
+
+.reports-table-wrap {
+  max-height: none;
+  overflow: auto;
+}
+
+.page-admin-unified .top-page {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.36fr) minmax(0, 1.64fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.page-admin-unified .page-hero-strip {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(126px, 1fr);
+  min-width: 0;
+  width: 100%;
+  direction: ltr;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.page-admin-unified .page-hero-card {
+  min-width: 126px;
+  min-height: 74px;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.page-admin-unified .page-hero-kicker {
+  font-size: 0.64rem;
+}
+
+.page-admin-unified .page-hero-card strong {
+  font-size: 0.94rem;
+}
+
+.page-admin-unified .admin-unified-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px) auto;
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.page-admin-unified .admin-unified-tabs {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.page-admin-unified .admin-unified-tab {
+  max-width: none;
+  border-radius: 10px;
+}
+
+.page-admin-unified .user-admin-workbench,
+.page-admin-unified .vehicle-registry-workbench {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.58fr);
+}
+
+@media (max-width: 1320px) {
+  .page-cameras .camera-stage,
+  .page-cameras .camera-stage.has-multiple,
+  .page-map .map-workbench,
+  .page-map .map-workbench[data-video-layout="video"] {
+    grid-template-columns: 1fr;
+  }
+
+  .page-map .telemetry-rail,
+  .page-map .map-workbench[data-video-layout="video"] .telemetry-rail {
+    grid-template-rows: minmax(320px, auto) minmax(220px, auto);
+  }
+
+  .page-admin-unified .top-page,
+  .page-admin-unified .admin-unified-toolbar,
+  .reports-head {
+    grid-template-columns: 1fr;
+  }
+
+  .page-admin-unified .user-admin-workbench,
+  .page-admin-unified .vehicle-registry-workbench,
+  .fleet-km-controls {
+    grid-template-columns: 1fr;
+  }
+}

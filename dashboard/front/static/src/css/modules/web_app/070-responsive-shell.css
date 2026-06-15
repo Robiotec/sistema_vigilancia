@@ -1,0 +1,1098 @@
+/* Module: viewport-fit shell rules and responsive application layouts.
+ * Entry: web_app.css. Keep import order in the entrypoint.
+ */
+
+/* Viewport-fit application shell */
+:root {
+  --app-height: 100dvh;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: var(--app-height);
+  min-height: var(--app-height);
+}
+
+.app-shell {
+  height: var(--app-height);
+  min-height: var(--app-height);
+  overflow: hidden;
+}
+
+.app-sidebar {
+  height: var(--app-height);
+}
+
+.sidebar-nav {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.app-main {
+  height: var(--app-height);
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.top {
+  position: relative;
+  top: auto;
+  flex: 0 0 auto;
+}
+
+.wrap {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  align-content: stretch;
+  padding: 14px 16px 16px;
+}
+
+.dashboard-block,
+.page-section-shell,
+.ops-card,
+.camera-stage,
+.camera-selector-panel,
+.viewer-shell,
+.primary-view,
+.map-workbench,
+.events-workbench,
+.telemetry-rail,
+.event-rail,
+.page-support-grid {
+  min-height: 0;
+}
+
+.camera-switcher,
+.telemetry-summary,
+.event-feed,
+.info-stack,
+.sidebar-nav {
+  overscroll-behavior: contain;
+}
+
+.camera-stage {
+  height: 100%;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.camera-selector-panel {
+  position: relative;
+  top: auto;
+  height: 100%;
+  overflow: hidden;
+}
+
+.camera-switcher {
+  max-height: none;
+  min-height: 0;
+}
+
+.viewer-shell {
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  overflow: hidden;
+}
+
+.primary-view {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.primary-view .camera-card {
+  height: 100%;
+  min-height: 0;
+}
+
+.ops-grid {
+  min-height: 0;
+  height: 100%;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.ops-card {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.page-panel,
+.page-feed,
+.page-map-canvas,
+.map-main-card,
+.telemetry-list-card,
+.events-main-card {
+  min-height: 0;
+  height: 100%;
+}
+
+.map-workbench,
+.events-workbench {
+  height: 100%;
+  align-items: stretch;
+}
+
+.telemetry-rail,
+.event-rail {
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-canvas {
+  min-height: 0;
+  height: 100%;
+}
+
+.event-feed {
+  max-height: none;
+  min-height: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.telemetry-summary,
+.info-stack,
+.camera-switcher {
+  min-height: 0;
+  overflow: auto;
+}
+
+.errors {
+  grid-column: 1 / -1;
+}
+
+.page-dashboard .app-main {
+  display: flex;
+  flex-direction: column;
+  height: var(--app-height);
+  overflow: hidden;
+}
+
+.page-dashboard .wrap {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  grid-template-columns: minmax(0, 1.42fr) minmax(340px, 0.9fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.page-dashboard .dashboard-block-video {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.page-dashboard .dashboard-ops-grid {
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  align-self: stretch;
+  height: 100%;
+}
+
+.page-dashboard .dashboard-block-video .camera-stage {
+  grid-template-columns: minmax(0, 1fr) min(370px, 28vw);
+  gap: 10px;
+  height: 100%;
+  align-items: stretch;
+}
+
+.page-dashboard .camera-selector-panel {
+  grid-column: 2;
+  gap: 12px;
+  padding: 12px;
+}
+
+.page-dashboard .dashboard-camera-preview {
+  gap: 10px;
+  padding: 10px;
+}
+
+.page-dashboard .dashboard-camera-preview-head {
+  gap: 10px;
+}
+
+.page-dashboard .dashboard-camera-preview-close {
+  padding: 7px 10px;
+}
+
+.page-dashboard .dashboard-camera-preview-empty {
+  padding: 18px 12px;
+}
+
+.page-dashboard .dashboard-camera-preview-stage {
+  gap: 10px;
+  padding-right: 0;
+}
+
+.page-dashboard .dashboard-camera-preview-stage .camera-card {
+  min-height: 180px;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.24);
+}
+
+.page-dashboard .dashboard-camera-preview-stage .camera-badges {
+  top: 42px;
+  left: 11px;
+  max-width: calc(100% - 58px);
+}
+
+.page-dashboard .dashboard-camera-preview-stage .camera-meta {
+  padding: 11px 11px 9px;
+}
+
+.page-dashboard .dashboard-camera-preview-stage .camera-name {
+  font-size: 0.86rem;
+}
+
+.page-dashboard .dashboard-camera-preview-stage .camera-state {
+  font-size: 0.76rem;
+}
+
+.page-dashboard .dashboard-ops-grid .ops-card-audio {
+  align-content: start;
+}
+
+.page-dashboard .dashboard-locations-shell {
+  padding: 12px;
+  min-height: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(27, 29, 30, 0.92), rgba(17, 19, 20, 0.94)),
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.08), transparent 36%);
+}
+
+.page-dashboard .telemetry-sync-shell {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.page-dashboard .telemetry-sync-shell .map-workbench {
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  height: 100%;
+}
+
+.page-dashboard .telemetry-sync-shell .map-main-card,
+.page-dashboard .telemetry-sync-shell .telemetry-rail,
+.page-dashboard .telemetry-sync-shell .telemetry-focus-shell {
+  min-height: 0;
+}
+
+.page-dashboard .telemetry-sync-shell .map-main-card {
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-stage {
+  position: relative;
+  min-height: 200px;
+  height: 100%;
+}
+
+.page-dashboard .telemetry-sync-shell .page-map-canvas,
+.page-dashboard .telemetry-sync-shell .map-canvas {
+  height: 100%;
+  min-height: 200px;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 460;
+  width: min(180px, calc(100% - 28px));
+  max-width: min(180px, calc(100% - 28px));
+  padding: 9px 10px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(18, 24, 26, 0.92), rgba(10, 14, 17, 0.86));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(16px);
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.68rem;
+  letter-spacing: 0.07em;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter select {
+  min-height: 38px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter select option {
+  background: #1a1a2e;
+  color: #f8fafc;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-map-overlay-box {
+  --telemetry-overlay-width: 220px;
+  --telemetry-overlay-height: 132px;
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 450;
+  width: min(var(--telemetry-overlay-width), calc(100% - 28px));
+  height: min(var(--telemetry-overlay-height), calc(100% - 28px));
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  pointer-events: none;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-rail {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-focus-card {
+  max-height: min(24vh, 220px);
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.page-dashboard .telemetry-sync-shell .telemetry-summary {
+  max-height: min(32vh, 260px);
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.page-dashboard .dashboard-map-workbench {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+}
+
+.page-dashboard .dashboard-map-main-card {
+  min-height: 0;
+}
+
+.page-dashboard .dashboard-map-canvas {
+  min-height: min(68vh, 760px);
+}
+
+.page-cameras .wrap {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.page-cameras .camera-stage,
+.page-cameras .camera-stage.has-multiple {
+  grid-template-columns: minmax(300px, 340px) minmax(0, 1.7fr) minmax(300px, 340px);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.page-cameras .page-section-shell {
+  overflow: hidden;
+}
+
+.page-cameras .camera-switcher {
+  gap: 14px;
+  padding-right: 8px;
+}
+
+.page-cameras .camera-side-panel,
+.page-cameras .face-preview-shell {
+  height: 100%;
+  min-height: 0;
+}
+
+.page-cameras .camera-side-panel {
+  align-content: stretch;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.page-cameras .face-preview-shell {
+  max-height: none;
+}
+
+.page-cameras .face-preview-grid {
+  height: 100%;
+  max-height: none;
+  scrollbar-color: rgba(255, 122, 45, 0.7) transparent;
+  scrollbar-width: thin;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: transparent;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(255, 122, 45, 0.62);
+  background-clip: padding-box;
+}
+
+.page-cameras .face-preview-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 122, 45, 0.86);
+  background-clip: padding-box;
+}
+
+.page-cameras .camera-pill-shell {
+  min-height: auto;
+}
+
+.page-cameras .camera-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  height: auto;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.page-cameras .camera-pill.is-active {
+  transform: none;
+}
+
+.page-cameras .camera-pill-preview {
+  flex: 0 0 auto;
+  min-height: 0;
+  border-radius: 10px;
+}
+
+.page-cameras .camera-pill-main {
+  gap: 3px;
+  min-width: 0;
+  padding-right: 48px;
+}
+
+.page-cameras .camera-pill-topline {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+.page-cameras .camera-pill-title {
+  font-size: 0.84rem;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+}
+
+.page-cameras .camera-pill-association {
+  padding-left: 19px;
+  font-size: 0.66rem;
+  line-height: 1.28;
+}
+
+.page-cameras .camera-pill-status,
+.page-cameras .camera-pill-tags {
+  display: none;
+}
+
+.page-cameras .camera-pill-inference {
+  top: auto;
+  right: 16px;
+  bottom: 16px;
+}
+
+.page-support-grid-cameras {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.page-map .wrap {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.page-events .wrap {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.page-map .page-map-shell {
+  overflow: hidden;
+}
+
+.page-events .page-events-shell {
+  overflow: hidden;
+}
+
+.page-map .map-workbench {
+  grid-template-columns: minmax(0, 1.64fr) minmax(420px, 0.98fr);
+}
+
+.page-events .events-workbench {
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+}
+
+.page-vehicle-registry .wrap {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.page-vehicle-registry .app-main {
+  overflow: auto;
+}
+
+.page-user-admin .app-main {
+  overflow: auto;
+}
+
+.page-vehicle-registry .wrap,
+.page-user-admin .wrap {
+  height: auto;
+  overflow: visible;
+  align-content: start;
+  padding-bottom: 24px;
+}
+
+.page-vehicle-registry .page-vehicle-registry-shell {
+  min-height: 0;
+  overflow: visible;
+}
+
+.page-user-admin .page-user-admin-shell,
+.page-user-admin .user-admin-main-card,
+.page-user-admin .user-admin-rail,
+.page-user-admin .page-panel {
+  min-height: 0;
+  height: auto;
+  overflow: visible;
+}
+
+.page-vehicle-registry .page-section-head > div:first-child,
+.page-vehicle-registry .ops-head > div:first-child,
+.page-vehicle-registry .vehicle-item-heading,
+.page-vehicle-registry .camera-register-stack,
+.page-vehicle-registry .camera-register-map-stack {
+  min-width: 0;
+}
+
+.page-vehicle-registry .vehicle-registry-workbench {
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.55fr);
+  gap: 18px;
+  min-height: 0;
+  align-items: start;
+}
+
+.page-vehicle-registry .vehicle-registry-main-card {
+  min-height: clamp(520px, 78vh, 920px);
+  height: auto;
+  overflow: hidden;
+}
+
+.page-vehicle-registry .vehicle-registry-rail,
+.page-vehicle-registry .page-info-card,
+.page-vehicle-registry .page-accent-card {
+  min-height: 0;
+  height: auto;
+  overflow: visible;
+}
+
+.page-vehicle-registry .vehicle-registry-rail-list {
+  min-height: 0;
+}
+
+.page-vehicle-registry .vehicle-registry-detail {
+  min-height: clamp(440px, 62vh, 760px);
+  max-height: min(78vh, 880px);
+  padding-right: 8px;
+  padding-bottom: 4px;
+  scrollbar-gutter: stable;
+}
+
+.page-vehicle-registry .info-stack {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+.page-vehicle-registry .page-section-head p,
+.page-vehicle-registry .info-item p,
+.page-vehicle-registry .vehicle-item-title,
+.page-vehicle-registry .vehicle-item-manual-summary,
+.page-vehicle-registry .vehicle-item-meta,
+.page-vehicle-registry .vehicle-item-detail-value,
+.page-vehicle-registry .vehicle-item-notes,
+.page-vehicle-registry .vehicle-registry-summary-identifier,
+.page-vehicle-registry .vehicle-registry-detail-copy,
+.page-vehicle-registry .camera-register-help,
+.page-vehicle-registry .camera-register-guide-item p,
+.page-vehicle-registry .camera-register-intro p {
+  overflow-wrap: anywhere;
+}
+
+.page-vehicle-registry .vehicle-item {
+  gap: 12px;
+}
+
+.page-vehicle-registry .camera-register-dialog {
+  width: min(1180px, calc(100vw - 32px));
+  max-height: min(92dvh, 940px);
+}
+
+.page-vehicle-registry .camera-register-grid {
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
+}
+
+.page-vehicle-registry .camera-register-field textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .app-sidebar {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .app-main {
+    height: 100%;
+  }
+
+  .dashboard-hero-panel,
+  .page-hero-strip {
+    display: none;
+  }
+
+  .wrap {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .page-dashboard .wrap {
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1.08fr) minmax(0, 0.92fr) auto;
+  }
+
+  .page-dashboard .dashboard-block-video,
+  .page-dashboard .dashboard-ops-grid {
+    grid-column: 1;
+  }
+
+  .page-dashboard .camera-selector-panel {
+    grid-column: 1;
+  }
+
+  .page-dashboard .dashboard-block-video {
+    grid-row: 1;
+  }
+
+  .page-dashboard .dashboard-ops-grid {
+    grid-row: 2;
+  }
+
+  .page-dashboard .dashboard-ops-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .page-dashboard .dashboard-ops-grid .ops-card-audio {
+    grid-column: 1 / -1;
+  }
+
+  .page-dashboard .dashboard-locations-shell {
+    grid-column: 1 / -1;
+  }
+
+  .page-cameras .wrap {
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .page-support-grid-cameras {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-map .map-workbench,
+  .page-events .events-workbench,
+  .page-dashboard .dashboard-map-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-registry-workbench {
+    grid-template-columns: 1fr;
+  }
+
+  .page-vehicle-registry .wrap,
+  .page-map .wrap {
+    height: auto;
+    overflow: visible;
+    grid-template-rows: auto auto;
+  }
+
+  .page-vehicle-registry .page-vehicle-registry-shell,
+  .page-vehicle-registry .vehicle-registry-main-card,
+  .page-vehicle-registry .vehicle-registry-rail {
+    overflow: visible;
+  }
+
+  .page-vehicle-registry .vehicle-registry-main-card,
+  .page-vehicle-registry .page-info-card,
+  .page-vehicle-registry .page-accent-card {
+    min-height: 0;
+    height: auto;
+  }
+
+  .page-vehicle-registry .vehicle-registry-detail {
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .page-vehicle-registry .camera-register-dialog {
+    width: min(960px, calc(100vw - 24px));
+  }
+
+  .page-vehicle-registry .camera-register-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-map .map-workbench,
+  .page-events .events-workbench {
+    grid-template-rows: minmax(0, 1fr) minmax(160px, 0.42fr);
+  }
+
+  .page-events .event-feed,
+  .page-events .logs-detail {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .page-map .page-map-shell {
+    overflow: visible;
+  }
+
+  .page-map .map-workbench {
+    grid-template-rows: auto auto;
+    height: auto;
+    position: static;
+  }
+
+  .page-map .telemetry-rail {
+    grid-column: auto;
+    grid-row: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    width: auto;
+    padding: 0;
+    height: auto;
+    overflow: visible;
+    pointer-events: auto;
+  }
+
+  .page-map .map-main-card,
+  .page-map .telemetry-rail,
+  .page-map .telemetry-list-card,
+  .page-map .telemetry-video-shell,
+  .page-map .telemetry-focus-shell {
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+  }
+
+  .page-map .page-map-canvas {
+    height: min(62vh, 560px);
+    min-height: min(62vh, 560px);
+  }
+
+  .page-map .telemetry-summary,
+  .page-map .telemetry-focus-card {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .page-map .telemetry-video-stage,
+  .page-map .map-workbench[data-video-layout="video"] .telemetry-video-stage {
+    height: min(48vh, 360px);
+    min-height: 220px;
+  }
+
+  .page-map .telemetry-map-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page-map .telemetry-map-recenter {
+    min-width: 0;
+  }
+
+  .page-dashboard .dashboard-map-workbench {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .viewer-audio-dock {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    padding: 12px;
+  }
+
+  .viewer-audio-dock .audio-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-stage {
+    min-height: 0;
+  }
+
+  .page-feed,
+  .page-map-canvas,
+  .primary-view .camera-card {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .subtitle {
+    display: none;
+  }
+
+  .page-support-grid-cameras {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-item-top {
+    flex-direction: column;
+  }
+
+  .vehicle-item-badges {
+    justify-content: flex-start;
+  }
+
+  .vehicle-registry-section-head {
+    flex-direction: column;
+  }
+
+  .vehicle-registry-section-count {
+    align-self: flex-start;
+  }
+
+  .vehicle-item-manual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-item-manual {
+    min-height: 0;
+  }
+
+  .page-vehicle-registry .page-section-shell,
+  .page-vehicle-registry .vehicle-registry-main-card,
+  .page-vehicle-registry .page-info-card,
+  .page-vehicle-registry .page-accent-card {
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .page-vehicle-registry .page-section-head {
+    gap: 12px;
+  }
+
+  .page-vehicle-registry .vehicle-registry-detail {
+    gap: 12px;
+  }
+
+  .page-events .logs-toolbar {
+    padding: 12px;
+  }
+
+  .page-events .logs-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-events .logs-detail-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-events .logs-detail-meta-row strong {
+    text-align: left;
+  }
+
+  .page-map .page-section-shell {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  .page-map .page-section-head {
+    padding: 0;
+  }
+
+  .page-map .telemetry-toolbar {
+    gap: 12px;
+  }
+
+  .page-map .page-section-badge {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .page-map .map-main-card,
+  .page-map .telemetry-list-card,
+  .page-map .telemetry-video-shell,
+  .page-map .telemetry-focus-shell {
+    padding: 12px;
+  }
+
+  .page-map .telemetry-focus-content {
+    grid-template-columns: 1fr;
+  }
+
+  .page-map .telemetry-list-card,
+  .page-map .telemetry-video-shell,
+  .page-map .telemetry-focus-shell {
+    min-height: 0;
+    height: auto;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .page-map .ops-head {
+    gap: 10px;
+  }
+
+  .page-map .telemetry-map-controls {
+    gap: 8px;
+  }
+
+  .page-map .telemetry-focus-info-grid,
+  .page-map .telemetry-focus-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .page-map .telemetry-map-mode,
+  .page-map .telemetry-map-switch,
+  .page-map .telemetry-map-recenter,
+  .page-map .telemetry-map-swap,
+  .page-map .telemetry-map-style-wrap,
+  .page-map .telemetry-map-style {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-map .telemetry-map-style-wrap {
+    min-width: 0;
+  }
+
+  .page-map .page-map-canvas {
+    height: 360px;
+    min-height: 360px;
+  }
+
+  .page-map .telemetry-map-filter {
+    top: 10px;
+    right: 10px;
+    width: min(104px, calc(100% - 20px));
+    max-width: none;
+    padding: 8px 9px 9px;
+  }
+
+  .page-map .telemetry-map-overlay-box {
+    --telemetry-overlay-width: 200px;
+    --telemetry-overlay-height: 120px;
+    left: 10px;
+    bottom: 10px;
+    width: min(var(--telemetry-overlay-width), calc(100% - 20px));
+    height: min(var(--telemetry-overlay-height), calc(100% - 20px));
+    border-radius: 16px;
+  }
+
+  .page-map .telemetry-battery-visual {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .page-map .telemetry-gauge-grid,
+  .page-map .telemetry-gauge-values,
+  .page-map .telemetry-focus-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .page-map .telemetry-attitude-dial,
+  .page-map .telemetry-heading-dial {
+    width: min(100%, 148px);
+  }
+}
+
+@media (max-height: 900px) {
+  .hero-stat,
+  .page-hero-card {
+    padding: 12px 14px;
+  }
+
+  .hero-stat p,
+  .page-hero-card p {
+    display: none;
+  }
+
+  .wrap {
+    padding: 12px 14px 14px;
+    gap: 12px;
+  }
+}
+
+@media (max-height: 780px) {
+  .dashboard-hero-panel,
+  .page-hero-strip {
+    display: none;
+  }
+}
+
+.map-main-card,
+.events-main-card,
+.vehicle-registry-main-card,
+.telemetry-list-card,
+.page-accent-card,
+.page-info-card {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.page-cameras .page-support-grid-cameras {
+  height: 100%;
+}
+
+.page-cameras .page-support-grid-cameras > .ops-card {
+  height: 100%;
+}
+
+.page-map .telemetry-summary {
+  height: auto;
+}
+
+.page-vehicle-registry .info-stack,
+.page-events .info-stack,
+.page-cameras .info-stack {
+  height: 100%;
+}
