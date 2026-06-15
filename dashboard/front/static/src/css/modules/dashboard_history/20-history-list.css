@@ -90,6 +90,7 @@
   display: grid;
   gap: 10px;
   flex: 1 1 auto;
+  overflow-y: auto;
 }
 
 .home-history-event-card {

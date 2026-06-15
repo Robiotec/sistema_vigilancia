@@ -9,10 +9,13 @@
 }
 
 .profile-shell {
-  width: min(1180px, 100%);
+  /*width: min(1280px, 100%);*/
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   display: grid;
   gap: 16px;
+  border: 1px solid #51ff00;
 }
 
 .profile-hero {
@@ -23,8 +26,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   background:
-    linear-gradient(135deg, rgba(241, 56, 17, 0.2), rgba(21, 21, 21, 0.72) 44%, rgba(16, 16, 16, 0.96)),
-    radial-gradient(circle at 82% 24%, rgba(20, 184, 166, 0.18), transparent 26%);
+  linear-gradient(135deg, rgba(241, 56, 17, 0.2), rgba(21, 21, 21, 0.72) 44%, rgba(16, 16, 16, 0.96)),
+  radial-gradient(circle at 82% 24%, rgba(20, 184, 166, 0.18), transparent 26%);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -43,8 +46,8 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(241, 56, 17, 0.98), rgba(161, 35, 13, 0.94)),
-    radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.34), transparent 34%);
+  linear-gradient(180deg, rgba(241, 56, 17, 0.98), rgba(161, 35, 13, 0.94)),
+  radial-gradient(circle at 28% 16%, rgba(255, 255, 255, 0.34), transparent 34%);
   box-shadow: 0 20px 36px rgba(0, 0, 0, 0.28);
   font-family: "Space Grotesk", "Manrope", sans-serif;
   font-size: 1.6rem;
