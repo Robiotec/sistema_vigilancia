@@ -1,0 +1,8 @@
+/*
+ * ESTILOS RESPONSIVE COMPARTIDOS: adaptaciones moviles de paginas autenticadas.
+ */
+
+/* Estilos responsive generales. */
+@import url("./modules/web_app/070-responsive-shell.css");
+/* Estilos moviles compartidos de la app. */
+@import url("./modules/shared/090-mobile-app-responsive.css");

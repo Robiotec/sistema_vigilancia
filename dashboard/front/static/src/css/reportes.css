@@ -1,0 +1,12 @@
+/*
+ * TEMPLATE reportes.html: reportes, tablas y estadisticas.
+ */
+
+/* Estilos compartidos: tema, estructura, menu y encabezados. */
+@import url("./common.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Estilos de reportes. */
+@import url("./modules/web_app/110-reports.css");
+/* Estos son los ajustes finales compartidos. */
+@import url("./final_overrides.css");

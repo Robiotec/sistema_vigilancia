@@ -1,0 +1,20 @@
+/*
+ * ESTILOS PARA EL TEMPLATE index.html: dashboard e historial de eventos.
+ */
+
+/* Estilos compartidos: tema, estructura, menu y encabezados. */
+@import url("./common.css");
+/* Estilos de estructura del historial del dashboard. */
+@import url("./modules/dashboard_history/00-history-shell.css");
+/* Estilos de filtros del historial. */
+@import url("./modules/dashboard_history/10-history-filters.css");
+/* Estilos de lista y paginacion del historial. */
+@import url("./modules/dashboard_history/20-history-list.css");
+/* Estilos del modal de evento del historial. */
+@import url("./modules/dashboard_history/30-event-modal.css");
+/* Estilos responsive del historial. */
+@import url("./modules/dashboard_history/40-responsive.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Estilos de los ajustes finales compartidos. */
+@import url("./final_overrides.css");

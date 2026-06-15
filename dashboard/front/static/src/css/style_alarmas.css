@@ -1,10 +1,6 @@
 /*
- * Dashboard alarm/history stylesheet.
- * Modules keep the same cascade order as the original style_alarmas.css.
+ * ALIAS DE COMPATIBILIDAD: estilos antiguos de alarmas y eventos.
  */
 
-@import url("./modules/dashboard_history/00-history-shell.css");
-@import url("./modules/dashboard_history/10-history-filters.css");
-@import url("./modules/dashboard_history/20-history-list.css");
-@import url("./modules/dashboard_history/30-event-modal.css");
-@import url("./modules/dashboard_history/40-responsive.css");
+/* Estos son los estilos del template index.html. */
+@import url("./index.css");

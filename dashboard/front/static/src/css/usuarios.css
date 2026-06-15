@@ -1,0 +1,14 @@
+/*
+ * TEMPLATE usuarios.html: administracion de usuarios.
+ */
+
+/* Estilos compartidos de pantallas administrativas. */
+@import url("./admin_common.css");
+/* Estilos del modal de registro. */
+@import url("./modules/shared/040-camera-register-modal.css");
+/* Estilos de campos y botones del formulario de registro. */
+@import url("./modules/web_app/050-camera-register-form.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Estilos de los ajustes finales compartidos. */
+@import url("./final_overrides.css");

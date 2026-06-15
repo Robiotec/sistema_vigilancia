@@ -1,0 +1,268 @@
+/*
+ * ESTILOS COMPARTIDOS: modal de registro de camaras/vehiculos.
+ */
+
+.camera-register-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.camera-register-modal[hidden] {
+  display: none;
+}
+
+.camera-register-modal.is-admin-embedded {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  display: block;
+  padding: 0;
+}
+
+.camera-register-modal.is-admin-embedded .camera-register-modal-backdrop,
+.camera-register-modal.is-admin-embedded .camera-register-close {
+  display: none;
+}
+
+.camera-register-modal.is-admin-embedded .camera-register-dialog {
+  width: 100%;
+  max-height: none;
+  box-shadow: none;
+}
+
+.camera-register-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 7, 11, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.camera-register-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100vw - 32px));
+  max-height: min(90dvh, 900px);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(25, 28, 34, 0.98), rgba(15, 17, 23, 0.98)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.12), transparent 38%);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.camera-register-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.camera-register-dialog-head h2 {
+  margin: 4px 0 6px;
+  font-size: clamp(1.35rem, 1.2rem + 0.45vw, 1.8rem);
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+}
+
+.camera-register-dialog-head p {
+  margin: 0;
+  max-width: 62ch;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+.camera-register-close {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--brand-white);
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.camera-register-close:hover,
+.camera-register-close:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(241, 56, 17, 0.58);
+  background: rgba(241, 56, 17, 0.12);
+}
+
+.camera-register-form {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 14px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.camera-register-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  min-height: 0;
+  overflow: auto;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.camera-register-stack,
+.camera-register-map-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.vehicle-register-drone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.vehicle-register-drone-grid[hidden] {
+  display: none;
+}
+
+.vehicle-register-camera-shell {
+  display: grid;
+  gap: 12px;
+}
+
+.vehicle-register-camera-list {
+  display: grid;
+  gap: 10px;
+}
+
+.vehicle-register-camera-item {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.vehicle-register-camera-item.is-selected {
+  border-color: rgba(72, 186, 255, 0.4);
+  background: rgba(72, 186, 255, 0.08);
+}
+
+.vehicle-register-camera-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.vehicle-register-camera-head input[type="checkbox"] {
+  inline-size: 18px;
+  block-size: 18px;
+  accent-color: #48baff;
+}
+
+.vehicle-register-camera-head span {
+  display: grid;
+  gap: 2px;
+}
+
+.vehicle-register-camera-head strong {
+  font-size: 0.95rem;
+}
+
+.vehicle-register-camera-head small,
+.vehicle-register-camera-item p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.vehicle-register-camera-position {
+  inline-size: 100%;
+  min-block-size: 42px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 18, 28, 0.72);
+  color: inherit;
+}
+
+.vehicle-register-camera-position:disabled {
+  opacity: 0.55;
+}
+
+.camera-register-intro {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+
+.camera-register-intro strong {
+  font-size: 0.95rem;
+}
+
+.camera-register-guide {
+  display: grid;
+  gap: 10px;
+}
+
+.camera-register-guide-item {
+  display: grid;
+  gap: 5px;
+  padding: 12px 14px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.camera-register-guide-item strong {
+  font-size: 0.88rem;
+}
+
+.camera-register-guide-item p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.camera-register-guide-item code,
+.camera-register-example code {
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 0.76rem;
+  word-break: break-all;
+}
+
+.camera-register-field {
+  display: grid;
+  gap: 8px;
+}
+
+#camera-admin-form.is-rbox-mode .camera-register-field[hidden] {
+  display: none !important;
+}
+
+.camera-admin-conditional-grid[hidden] {
+  display: none !important;
+}

@@ -1,20 +1,48 @@
 /*
- * Main web application stylesheet.
- * Modules are imported in the original cascade order from the former monolithic web_app.css.
+ * ENTRYPOINT LEGACY: compatibilidad.
  */
 
+/* Estilos base del tema y variables globales. */
 @import url("./modules/web_app/000-foundation-theme.css");
+
+/* Estilos legacy del shell/admin completo. */
 @import url("./modules/web_app/010-app-shell-admin.css");
+
+/* Estilos para el menu lateral. */
 @import url("./modules/web_app/020-sidebar-navigation.css");
+
+/* Estilos compartidos de headers, wraps y bloques. */
 @import url("./modules/web_app/030-page-layouts-camera-overview.css");
+
+/* Estilos legacy de camaras, eventos y modales. */
 @import url("./modules/web_app/040-modals-cameras-events.css");
+
+/* Estilos de campos y botones del formulario de registro. */
 @import url("./modules/web_app/050-camera-register-form.css");
+
+/* Estilos de mapa, telemetria, logs y vehiculos. */
+
 @import url("./modules/web_app/060-map-telemetry-registry.css");
+/* Estilos responsive generales. */
+
 @import url("./modules/web_app/070-responsive-shell.css");
+/* Estilos principales del login. */
+
 @import url("./modules/web_app/080-login.css");
+/* Estilos legacy de responsive movil e iconos OSINT. */
+
 @import url("./modules/web_app/090-login-mobile-osint.css");
+/* Estilos de gestion de dispositivos. */
+
 @import url("./modules/web_app/100-device-management.css");
+/* Estilos de reportes. */
 @import url("./modules/web_app/110-reports.css");
+
+/* Estilos del panel de kilometros. */
 @import url("./modules/web_app/120-vehicle-kilometers.css");
+
+/* Estos son ajustes finales de layout. */
 @import url("./modules/web_app/130-production-layout-overrides.css");
+
+/* Estos son ajustes finales de UI. */
 @import url("./modules/web_app/140-delivery-ui-overrides.css");

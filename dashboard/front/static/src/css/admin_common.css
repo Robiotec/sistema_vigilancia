@@ -1,0 +1,16 @@
+/*
+ *TEMPLATES ADMINISTRATIVOS: usuarios, notificaciones y registros.
+ */
+
+/* Estilos base del tema y variables globales. */
+@import url("./modules/web_app/000-foundation-theme.css");
+/* Estilos de estructura principal de la app. */
+@import url("./modules/shared/010-app-shell.css");
+/* Estilos de administracion, usuarios y notificaciones. */
+@import url("./modules/pages/admin/010-admin-workbench.css");
+/* Estilos para el menu lateral. */
+@import url("./modules/web_app/020-sidebar-navigation.css");
+/* Estilos compartidos de headers, wraps y bloques. */
+@import url("./modules/web_app/030-page-layouts-camera-overview.css");
+/* Estilos compartidos de tarjetas y workbenches. */
+@import url("./modules/shared/040-page-workbenches.css");

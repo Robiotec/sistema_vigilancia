@@ -1,0 +1,102 @@
+/*
+ * ESTILOS COMPARTIDOS: tarjetas, workbenches y bloques generales de pagina.
+ */
+
+.page-section-badge {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(241, 56, 17, 0.26);
+  background: rgba(241, 56, 17, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.page-support-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.page-support-grid-cameras {
+  grid-template-columns: minmax(260px, 320px) minmax(320px, 0.95fr) minmax(320px, 1fr);
+}
+
+.page-accent-card {
+  background:
+    linear-gradient(180deg, rgba(33, 24, 22, 0.94), rgba(20, 17, 16, 0.96)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.12), transparent 44%);
+}
+
+.page-info-card {
+  background:
+    linear-gradient(180deg, rgba(31, 31, 31, 0.92), rgba(20, 20, 20, 0.96));
+}
+
+.page-register-card {
+  background:
+    linear-gradient(180deg, rgba(29, 26, 24, 0.94), rgba(18, 17, 16, 0.98)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.08), transparent 42%);
+}
+
+.info-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.info-item {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.info-item strong {
+  font-size: 0.94rem;
+}
+
+.info-item p,
+.camera-register-intro p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.map-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.map-main-card {
+  min-height: min(78vh, 920px);
+}
+
+.telemetry-rail,
+.event-rail {
+  display: grid;
+  gap: 16px;
+}
+
+.telemetry-list-card {
+  min-height: min(48vh, 520px);
+  align-content: start;
+}
+
+.events-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.events-main-card {
+  min-height: min(74vh, 860px);
+}
+

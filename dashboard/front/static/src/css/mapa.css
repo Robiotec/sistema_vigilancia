@@ -1,0 +1,14 @@
+/*
+ * TEMPLATE mapa.html: mapa, telemetria y controles OSINT.
+ */
+
+/* Estilos compartidos: tema, estructura, menu y encabezados. */
+@import url("./common.css");
+/* Estilos de mapa, telemetria, logs y vehiculos. */
+@import url("./modules/web_app/060-map-telemetry-registry.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Estilos de iconos OSINT del mapa. */
+@import url("./modules/pages/mapa/090-osint-map-icons.css");
+/* Estilos de los ajustes finales compartidos. */
+@import url("./final_overrides.css");

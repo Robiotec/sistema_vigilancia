@@ -1,9 +1,18 @@
 /*
- * Profile stylesheet.
- * Modules keep the same cascade order as the original perfil.css.
+ * TEMPLATE perfil.html: perfil de usuario.
  */
 
+/* Estilos compartidos: tema, estructura, menu y encabezados. */
+@import url("./common.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Ajustes finales compartidos. */
+@import url("./final_overrides.css");
+/* Estilos de layout del perfil. */
 @import url("./modules/profile/00-profile-layout.css");
+/* Estilos de hero y estadisticas del perfil. */
 @import url("./modules/profile/10-profile-hero-stats.css");
+/* Estilos de tarjetas del perfil. */
 @import url("./modules/profile/20-profile-cards-theme.css");
+/* Estos son los estilos responsive del perfil. */
 @import url("./modules/profile/30-profile-responsive.css");

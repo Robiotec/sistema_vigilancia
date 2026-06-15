@@ -1,0 +1,18 @@
+/*
+ * ESTILOS COMPARTIDOS: tema, estructura, menu, encabezados y contenedores.
+ */
+
+/* Estos son los estilos base del tema y variables globales. */
+@import url("./modules/web_app/000-foundation-theme.css");
+
+/* Estilos de estructura principal: app-shell, app-main y sidebar base. */
+@import url("./modules/shared/010-app-shell.css");
+
+/* ESTILOS PARA EL MENU: sidebar, enlaces, iconos, colapsado y comportamiento visual. */
+@import url("./modules/web_app/020-sidebar-navigation.css");
+
+/* Estilos compartidos de encabezados, titulos, wrap y bloques generales de pagina. */
+@import url("./modules/web_app/030-page-layouts-camera-overview.css");
+
+/* Estilos compartidos de tarjetas/workbenches usados por varias paginas. */
+@import url("./modules/shared/040-page-workbenches.css");

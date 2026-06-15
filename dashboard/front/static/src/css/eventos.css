@@ -1,0 +1,16 @@
+/*
+ * TEMPLATE eventos.html: gestion de dispositivos.
+ */
+
+/* Estilos compartidos: tema, estructura, menu y encabezados. */
+@import url("./common.css");
+/* Estilos de indicadores LED de camara. */
+@import url("./modules/shared/040-camera-status-indicators.css");
+/* Estilos del modal de registro. */
+@import url("./modules/shared/040-camera-register-modal.css");
+/* Estilos responsive compartidos. */
+@import url("./responsive.css");
+/* Estilos de gestion de dispositivos. */
+@import url("./modules/web_app/100-device-management.css");
+/* Estilos de los ajustes finales compartidos. */
+@import url("./final_overrides.css");

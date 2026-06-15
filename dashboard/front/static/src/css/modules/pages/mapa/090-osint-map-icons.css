@@ -1,0 +1,37 @@
+/*
+ * ESTILOS DEL TEMPLATE mapa.html: iconos OSINT/Leaflet.
+ */
+
+.osint-map-icon {
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
+  padding: 3px;
+}
+
+.osint-map-icon img,
+.leaflet-marker-icon.osint-map-icon {
+  object-fit: contain;
+}
+
+.osint-map-fallback-icon {
+  background: transparent;
+  border: 0;
+}
+
+.osint-map-fallback-icon span {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  color: #fff;
+  background: var(--osint-icon-color, #ef4444);
+  font-size: 0.78rem;
+  font-weight: 900;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.42);
+}
+
+
