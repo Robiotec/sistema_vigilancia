@@ -6,7 +6,7 @@
       {
         "id": "ATAQUE_ARMADO",
         "nombre": "Ataque Armado",
-        "cantidad_eventos": "21",
+        "cantidad_eventos": "22",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -42,7 +42,7 @@
       {
         "id": "HOMICIDO_SICARIATO",
         "nombre": "Homicidios/Sicariatos",
-        "cantidad_eventos": "147",
+        "cantidad_eventos": "159",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -78,7 +78,7 @@
       {
         "id": "ROBO_ASALTO",
         "nombre": "Robos/Asaltos",
-        "cantidad_eventos": "24",
+        "cantidad_eventos": "21",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -132,7 +132,7 @@
       {
         "id": "NOTICIAS",
         "nombre": "Noticias",
-        "cantidad_eventos": "82",
+        "cantidad_eventos": "85",
         "grupo": "Intervención",
         "color": "#27a044",
         "tipo_zona": null,
@@ -141,7 +141,7 @@
       {
         "id": "OPERATIVOS_FFOO",
         "nombre": "Operativos FFOO",
-        "cantidad_eventos": "181",
+        "cantidad_eventos": "191",
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": null,

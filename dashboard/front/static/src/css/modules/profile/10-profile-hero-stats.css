@@ -5,7 +5,7 @@
 .page-profile .app-content {
   min-height: 0;
   overflow: auto;
-  padding: 22px;
+  padding: 15px;
 }
 
 .profile-shell {
@@ -15,14 +15,14 @@
   margin: 0 auto;
   display: grid;
   gap: 16px;
-  border: 1px solid #51ff00;
 }
 
 .profile-hero {
-  min-height: 210px;
+  min-height: 155px;
+  height: 100%;
   display: flex;
   align-items: flex-end;
-  padding: 26px;
+  padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   background:
@@ -33,13 +33,13 @@
 }
 
 .profile-identity {
-  gap: 18px;
+  gap: 10px;
   min-width: 0;
 }
 
 .profile-avatar {
-  width: 86px;
-  height: 86px;
+  width: 96px;
+  height: 96px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;

@@ -23,7 +23,7 @@
 
 .page-cameras .camera-pill {
   min-height: 124px;
-  padding: 8px 38px 9px 8px;
+  /* padding: 8px 38px 9px 8px; */
   border-radius: 14px;
   gap: 6px;
 }

@@ -28,16 +28,43 @@
 
 .page-map .wrap {
   padding: clamp(12px, 1.5vw, 22px);
+  overflow: visible;
+  align-content: start;
+}
+
+.page-map .app-main {
+  height: auto;
+  min-height: var(--app-height);
+  overflow: auto;
+}
+
+.page-map .page-map-shell {
+  height: auto;
+  overflow: visible;
 }
 
 .page-map .map-workbench {
-  min-height: calc(100dvh - 150px);
+  grid-template-rows: auto;
+  align-items: start;
+  height: auto;
+  min-height: 0;
 }
 
-.page-map .telemetry-map-stage,
+.page-map .map-main-card {
+  height: auto;
+  min-height: 0;
+  grid-template-rows: auto auto;
+}
+
+.page-map .telemetry-map-stage {
+  height: clamp(260px, 42dvh, 340px);
+  min-height: 260px;
+}
+
 .page-map .page-map-canvas,
 .page-map .map-canvas {
-  min-height: 520px;
+  height: 100%;
+  min-height: 0;
 }
 
 .leaflet-container {
@@ -94,10 +121,15 @@
     height: auto;
   }
 
-  .page-map .telemetry-map-stage,
+  .page-map .telemetry-map-stage {
+    height: clamp(240px, 42dvh, 320px);
+    min-height: 240px;
+  }
+
   .page-map .page-map-canvas,
   .page-map .map-canvas {
-    min-height: min(68dvh, 620px);
+    height: 100%;
+    min-height: 0;
   }
 
   .telemetry-geofence-draw-panel {
@@ -105,4 +137,3 @@
     bottom: 14px;
   }
 }
-

@@ -201,7 +201,7 @@
 .camera-stage {
   display: grid;
   grid-template-columns: minmax(250px, 310px) minmax(0, 1fr);
-  gap: 16px;
+  gap: 12px;
   align-items: start;
   min-height: min(74vh, 820px);
 }
@@ -214,8 +214,8 @@
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
-    radial-gradient(circle at top left, rgba(241, 56, 17, 0.08), transparent 44%);
+  linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+  radial-gradient(circle at top left, rgba(241, 56, 17, 0.08), transparent 44%);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
 }
 
@@ -246,7 +246,7 @@
   color: rgba(255, 248, 243, 0.98);
   border-color: rgba(241, 56, 17, 0.42);
   background:
-    linear-gradient(180deg, rgba(241, 56, 17, 0.22), rgba(241, 56, 17, 0.1));
+  linear-gradient(180deg, rgba(241, 56, 17, 0.22), rgba(241, 56, 17, 0.1));
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
 }
 
@@ -257,12 +257,12 @@
   grid-template-rows: auto minmax(0, 1fr);
   align-content: stretch;
   gap: 16px;
-  padding: 18px;
+  padding: 15px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    linear-gradient(180deg, rgba(36, 36, 36, 0.94), rgba(20, 20, 20, 0.98)),
-    radial-gradient(circle at top left, rgba(241, 56, 17, 0.09), transparent 40%);
+  linear-gradient(180deg, rgba(36, 36, 36, 0.94), rgba(20, 20, 20, 0.98)),
+  radial-gradient(circle at top left, rgba(241, 56, 17, 0.09), transparent 40%);
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
 }
 
@@ -757,12 +757,14 @@
 
 .camera-pill-shell {
   position: relative;
+  width: 100%;
   min-height: 0;
 }
 
 .camera-pill {
   position: relative;
   display: grid;
+  display: block;
   gap: 9px;
   width: 100%;
   min-height: 176px;
@@ -775,6 +777,7 @@
   text-align: left;
   cursor: pointer;
   transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  border: 1px solid #ff330077;
 }
 
 .camera-pill::after {
@@ -1106,8 +1109,8 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
-  font-size: 1.14rem;
-  padding: 23px 14px;
+  font-size: clamp(0.5rem, 1.5vw, 0.50rem);
+  padding: 15px 14px;
   position: relative;
   z-index: 12;
   overflow: visible;
@@ -1136,7 +1139,7 @@
 }
 
 .camera-inference-field span {
-  font-size: 1.3rem;
+  font-size: 1.0rem;
 }
 
 .camera-inference-field select {

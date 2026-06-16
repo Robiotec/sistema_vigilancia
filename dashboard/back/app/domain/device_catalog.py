@@ -105,21 +105,40 @@ class DeviceCatalogBuilder(BaseHelper):
                 f'alt="{escape(label)}" loading="lazy" decoding="async" />'
                 '</span>'
             )
-            rows.append(
-                '<article class="camera-pill-shell">'
-                f'<a class="camera-pill" href="/camaras?camera={quote(name)}" data-camera-name="{escape(name)}" '
-                f'onclick="const openCamera=window[&quot;_&quot;+&quot;_ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN_&quot;+&quot;_&quot;]; return openCamera ? openCamera({escape(json.dumps(name))}) : true">'
-                f'{preview}'
-                '<span class="camera-pill-main">'
-                '<span class="camera-pill-topline">'
-                '<span class="camera-pill-led tone-idle"></span>'
-                f'<span class="camera-pill-title">{escape(label)}</span>'
-                '</span>'
-                f'<span class="camera-pill-association">{escape("Asociada a " + name if item.get("tipo_camara_codigo") in {"drone", "vehicle"} else camera_type)}</span>'
-                '<span class="camera-pill-status">Lista</span>'
-                '</span>'
-                f'<span class="camera-pill-tags"><span class="camera-pill-tag">{escape(camera_type)}</span></span>'
-                '</a>'
-                '</article>'
-            )
+            rows.append(f"""
+                        <article class="camera-pill-shell">
+                        <a class="camera-pill"
+                            href="/camaras?camera={quote(name)}"
+                            data-camera-name="{escape(name)}">
+                            {preview}
+                            <span class="camera-pill-main">
+                                <span class="camera-pill-topline">
+                                    <span class="camera-pill-led tone-idle"></span>
+                                    <span class="camera-pill-title">{escape(label)}</span>
+                                </span>
+                                <span class="camera-pill-status">Lista</span>
+                                <span class="camera-pill-tags">
+                                    <span class="camera-pill-tag">{escape(camera_type)}</span>
+                                </span>
+                            </span>
+                        </a>
+                        </article>
+                        """)
+            #   rows.append(
+            #       '<article class="camera-pill-shell">'
+            #       f'<a class="camera-pill" href="/camaras?camera={quote(name)}" data-camera-name="{escape(name)}" '
+            #       f'onclick="const openCamera=window[&quot;_&quot;+&quot;_ROBIOTEC_CAMERA_PAGE_VIEWER_OPEN_&quot;+&quot;_&quot;]; return openCamera ? openCamera({escape(json.dumps(name))}) : true">'
+            #       f'{preview}'
+            #       '<span class="camera-pill-main">'
+            #       '<span class="camera-pill-topline">'
+            #       '<span class="camera-pill-led tone-idle"></span>'
+            #       f'<span class="camera-pill-title">{escape(label)}</span>'
+            #       '</span>'
+            #       f'<span class="camera-pill-association">{escape("Asociada a " + name if item.get("tipo_camara_codigo") in {"drone", "vehicle"} else camera_type)}</span>'
+            #       '<span class="camera-pill-status">Lista</span>'
+            #       '</span>'
+            #       f'<span class="camera-pill-tags"><span class="camera-pill-tag">{escape(camera_type)}</span></span>'
+            #       '</a>'
+            #       '</article>'
+            #   )
         return "".join(rows) or '<div class="empty-state">No hay cámaras registradas.</div>'

@@ -1511,7 +1511,7 @@ function setTelemetryMapManualControl(isManual) {
   telemetryMapManualControl = Boolean(isManual);
   if (telemetryMapMode) {
     telemetryMapMode.dataset.mode = telemetryMapManualControl ? "manual" : "auto";
-    telemetryMapMode.textContent = telemetryMapManualControl ? "Vista manual" : "Seguimiento automático";
+    //telemetryMapMode.textContent = telemetryMapManualControl ? "Vista manual" : "Seguimiento automático";
   }
 }
 

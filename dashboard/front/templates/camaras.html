@@ -39,7 +39,6 @@
             <aside class="camera-selector-panel" aria-label="Selector lateral de cámaras">
               <div class="selector-head">
                 <div class="ops-eyebrow">Cámaras</div>
-                <h2>Selecciona el canal</h2>
               </div>
               <div class="camera-switcher" id="camera-switcher" aria-label="Selector de cámaras">__CAMERA_SWITCHER_FALLBACK__</div>
             </aside>
@@ -81,35 +80,8 @@
             </aside>
           </section>
         </section>
-
-        <div class="camera-pool" id="camera-pool" hidden>
-          __CAMERA_STREAMS__
-        </div>
-
-        <div class="errors">__ERROR_BLOCK__</div>
-      </div>
     </main>
   </div>
-  __CAMERA_ADMIN_MODAL__
-  <div class="plate-file-modal" id="plate-file-modal" hidden>
-    <button class="plate-file-modal-backdrop" id="plate-file-modal-backdrop" type="button" aria-label="Cerrar detalle de placa"></button>
-    <section class="plate-file-dialog" role="dialog" aria-modal="true" aria-labelledby="plate-file-modal-title">
-      <button class="plate-file-close" id="plate-file-close" type="button" aria-label="Cerrar detalle de placa">×</button>
-      <span class="plate-file-eyebrow">Crop</span>
-      <h3 id="plate-file-modal-title">Detalle de placa</h3>
-      <strong id="plate-file-plate">__PLATE_PREVIEW_SELECTED__</strong>
-      <div class="plate-file-content" id="plate-file-content"></div>
-    </section>
-  </div>
-  <div class="event-video-modal" id="event-video-modal" hidden>
-    <button class="event-video-modal-backdrop" id="event-video-modal-backdrop" type="button" aria-label="Cerrar video detectado"></button>
-    <section class="event-video-dialog" role="dialog" aria-modal="true" aria-labelledby="event-video-modal-title">
-      <button class="event-video-close" id="event-video-close" type="button" aria-label="Cerrar video detectado">×</button>
-      <span class="event-video-eyebrow">Evento</span>
-      <h3 id="event-video-modal-title">Video detectado</h3>
-      <video class="event-video-player" id="event-video-player" controls preload="metadata" playsinline></video>
-      <div class="event-video-meta" id="event-video-meta"></div>
-    </section>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
