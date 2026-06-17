@@ -285,3 +285,29 @@ body.is-vehicle-registry-readonly #vehicle-register-modal {
   display: none !important;
 }
 
+
+/* Scroll en resultados de km */
+.vehicle-km-results {
+  max-height: 320px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.vehicle-km-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.vehicle-km-results::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.vehicle-km-results::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.vehicle-km-results::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

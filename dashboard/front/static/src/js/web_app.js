@@ -8609,11 +8609,12 @@ function renderManualVehicleRegistryItem(item) {
 
   return `
     <article class="vehicle-item vehicle-item-manual">
+    <!--
       <div class="vehicle-item-top">
         <div class="vehicle-item-heading">
-          <!--<div class="vehicle-item-title">${escapeHtml(String(item.label || "registro manual").toUpperCase())}</div>-->
+          <div class="vehicle-item-title">${escapeHtml(String(item.label || "registro manual").toUpperCase())}</div>
           <div class="vehicle-item-time">${escapeHtml(formatDateTime(item.ts))}</div>
-          <!--<div class="vehicle-item-manual-summary">${escapeHtml(manualSummary)}</div>-->
+          <div class="vehicle-item-manual-summary">${escapeHtml(manualSummary)}</div>
         </div>
         <div class="vehicle-item-badges">
           <span class="vehicle-item-badge">${badgeLabel}</span>
@@ -8621,6 +8622,7 @@ function renderManualVehicleRegistryItem(item) {
           ${item.has_live_telemetry ? `<span class="vehicle-item-badge vehicle-item-badge-soft">${escapeHtml(telemetryBadge)}</span>` : ""}
         </div>
       </div>
+      -->
       ${CAN_MANAGE_VEHICLE_REGISTRY ? `<div class="vehicle-item-actions">
         <button
           class="camera-register-secondary"
