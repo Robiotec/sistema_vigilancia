@@ -57,7 +57,7 @@
 }
 
 .page-map .telemetry-map-stage {
-  height: clamp(260px, 42dvh, 340px);
+  height: clamp(260px, 70dvh, 720px);
   min-height: 260px;
 }
 

@@ -24,7 +24,7 @@
       {
         "id": "EXTORSION_VACUNA",
         "nombre": "Extorsión",
-        "cantidad_eventos": "4",
+        "cantidad_eventos": "5",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -33,7 +33,7 @@
       {
         "id": "FEMINICIDIO",
         "nombre": "Feminicidio",
-        "cantidad_eventos": "4",
+        "cantidad_eventos": "3",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -42,7 +42,7 @@
       {
         "id": "HOMICIDO_SICARIATO",
         "nombre": "Homicidios/Sicariatos",
-        "cantidad_eventos": "159",
+        "cantidad_eventos": "167",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -78,7 +78,7 @@
       {
         "id": "ROBO_ASALTO",
         "nombre": "Robos/Asaltos",
-        "cantidad_eventos": "21",
+        "cantidad_eventos": "24",
         "grupo": "Delitos",
         "color": "#DD0B0C",
         "tipo_zona": null,
@@ -96,7 +96,7 @@
       {
         "id": "AMENAZAS",
         "nombre": "Amenazas",
-        "cantidad_eventos": "12",
+        "cantidad_eventos": "13",
         "grupo": "Señales",
         "color": "#E8AB01",
         "tipo_zona": null,
@@ -132,7 +132,7 @@
       {
         "id": "NOTICIAS",
         "nombre": "Noticias",
-        "cantidad_eventos": "85",
+        "cantidad_eventos": "91",
         "grupo": "Intervención",
         "color": "#27a044",
         "tipo_zona": null,
@@ -141,7 +141,7 @@
       {
         "id": "OPERATIVOS_FFOO",
         "nombre": "Operativos FFOO",
-        "cantidad_eventos": "191",
+        "cantidad_eventos": "202",
         "grupo": "Intervención",
         "color": "#0933DD",
         "tipo_zona": null,

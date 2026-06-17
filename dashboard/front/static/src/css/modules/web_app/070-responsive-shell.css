@@ -550,17 +550,20 @@ body {
 
 .page-vehicle-registry .wrap {
   grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  overflow: hidden;
+  align-content: stretch;
+  padding: 14px 16px 16px;
 }
 
 .page-vehicle-registry .app-main {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .page-user-admin .app-main {
   overflow: auto;
 }
 
-.page-vehicle-registry .wrap,
 .page-user-admin .wrap {
   height: auto;
   overflow: visible;
@@ -570,7 +573,8 @@ body {
 
 .page-vehicle-registry .page-vehicle-registry-shell {
   min-height: 0;
-  overflow: visible;
+  height: 100%;
+  overflow: hidden;
 }
 
 .page-user-admin .page-user-admin-shell,
@@ -594,13 +598,24 @@ body {
   grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.55fr);
   gap: 18px;
   min-height: 0;
+  max-height: 100%;
+  height: 100%;
   align-items: start;
+  overflow: hidden;
 }
 
 .page-vehicle-registry .vehicle-registry-main-card {
-  min-height: clamp(520px, 78vh, 920px);
+  min-height: 0;
+  max-height: 100%;
+  height: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.page-vehicle-registry .page-panel {
+  min-height: 0;
   height: auto;
-  overflow: hidden;
 }
 
 .page-vehicle-registry .vehicle-registry-rail,
@@ -616,8 +631,9 @@ body {
 }
 
 .page-vehicle-registry .vehicle-registry-detail {
-  min-height: clamp(440px, 62vh, 760px);
-  max-height: min(78vh, 880px);
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto;
   padding-right: 8px;
   padding-bottom: 4px;
   scrollbar-gutter: stable;

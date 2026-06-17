@@ -8611,9 +8611,9 @@ function renderManualVehicleRegistryItem(item) {
     <article class="vehicle-item vehicle-item-manual">
       <div class="vehicle-item-top">
         <div class="vehicle-item-heading">
-          <div class="vehicle-item-title">${escapeHtml(String(item.label || "registro manual").toUpperCase())}</div>
+          <!--<div class="vehicle-item-title">${escapeHtml(String(item.label || "registro manual").toUpperCase())}</div>-->
           <div class="vehicle-item-time">${escapeHtml(formatDateTime(item.ts))}</div>
-          <div class="vehicle-item-manual-summary">${escapeHtml(manualSummary)}</div>
+          <!--<div class="vehicle-item-manual-summary">${escapeHtml(manualSummary)}</div>-->
         </div>
         <div class="vehicle-item-badges">
           <span class="vehicle-item-badge">${badgeLabel}</span>
@@ -8840,7 +8840,6 @@ function renderVehicleRegistry(items) {
         tone: "drones",
         kicker: "Clasificacion",
         title: "Drones registrados",
-        description: "Aqui aparecen los drones registrados manualmente dentro del sistema.",
         items: droneEntries,
         emptyMessage: "No se encuentran drones registrados.",
         renderer: renderVehicleRegistrySummaryItem,
@@ -8849,7 +8848,6 @@ function renderVehicleRegistry(items) {
         tone: "vehicles",
         kicker: "Clasificacion",
         title: "Autos / carros registrados",
-        description: "Aqui se muestran los automoviles, camionetas o unidades registradas manualmente dentro del sistema.",
         items: carEntries,
         emptyMessage: "No se encuentran vehiculos registrados.",
         renderer: renderVehicleRegistrySummaryItem,

@@ -146,9 +146,11 @@
   flex: 0 0 auto;
   margin-top: 6px;
   padding-top: 14px;
+  /*
   background:
     linear-gradient(180deg, rgba(15, 17, 23, 0.12), rgba(15, 17, 23, 0.96) 28%, rgba(15, 17, 23, 0.98));
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .camera-register-action-row {
