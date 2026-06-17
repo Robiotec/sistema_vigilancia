@@ -8643,24 +8643,36 @@ function renderManualVehicleRegistryItem(item) {
       </div>` : ""}
       <div class="vehicle-item-manual-grid">
         <article class="vehicle-item-detail-card">
-          <span class="vehicle-item-detail-label">Identificador</span>
+          <span class="vehicle-item-detail-label"> <i class="fas fa-car"></i> Placa</span>
+          <strong class="vehicle-item-detail-value vehicle-item-detail-value-code">${escapeHtml(String(item.label || item.identifier || "--"))}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fa-solid fa-fingerprint"></i> Identificador</span>
           <strong class="vehicle-item-detail-value vehicle-item-detail-value-code">${escapeHtml(String(item.identifier || "--"))}</strong>
         </article>
         <article class="vehicle-item-detail-card">
-          <span class="vehicle-item-detail-label">Modo de telemetría</span>
+          <span class="vehicle-item-detail-label"> <i class="fas fa-satellite"></i> Modo de telemetría</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(telemetryBadge)}</strong>
         </article>
         <article class="vehicle-item-detail-card">
-          <span class="vehicle-item-detail-label">Organización</span>
+          <span class="vehicle-item-detail-label"> <i class="fas fa-building"></i> Organización</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(String(item.organizacion_nombre || "--"))}</strong>
         </article>
         <article class="vehicle-item-detail-card">
-          <span class="vehicle-item-detail-label">Propietario</span>
-          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.propietario_display_name || item.propietario_usuario || "--"))}</strong>
+          <span class="vehicle-item-detail-label"> <i class="fas fa-user"></i> Propietario</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.propietario_usuario || item.propietario_display_name || "--").toUpperCase())}</strong>
+        </article>
+        <article class="vehicle-item-detail-card vehicle-item-km-total">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-road"></i> Km totales</span>
+          <strong class="vehicle-item-detail-value vehicle-km-total-value">--</strong>
+        </article>
+        <article class="vehicle-item-detail-card vehicle-item-active-days">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-calendar-check"></i> Días activos</span>
+          <strong class="vehicle-item-detail-value vehicle-active-days-value">--</strong>
         </article>
         ${telemetryMode === "api" && hasApiConnection ? `
           <article class="vehicle-item-detail-card">
-            <span class="vehicle-item-detail-label">ID API generado</span>
+            <span class="vehicle-item-detail-label"> <i class="fas fa-plug"></i> ID API generado</span>
             <strong class="vehicle-item-detail-value vehicle-item-detail-value-code">${escapeHtml(String(item.api_device_id || item.identifier || "--"))}</strong>
             <button class="vehicle-item-copy" type="button" data-copy-value="${escapeHtml(String(item.api_device_id || item.identifier || ""))}">Copiar</button>
           </article>
@@ -8826,6 +8838,7 @@ function renderVehicleRegistry(items) {
         });
       }
     }
+    //console.log("Rendering vehicle registry detail for item:", selectedItem);
     vehicleRegistryDetail.innerHTML = selectedItem
       ? renderManualVehicleRegistryItem(selectedItem)
       : manualEntries.length > 0
@@ -12021,11 +12034,19 @@ async function loadKmSummary(panel) {
     const totalKm = data.reduce((s, r) => s + (Number(r.km) || 0), 0);
     const activeDays = data.filter((r) => Number(r.km) > 0).length;
 
+    // Actualizar las tarjetas en el grid si existen
+    const kmTotalValue = vehicleRegistryDetail?.querySelector(".vehicle-km-total-value");
+    const activeDaysValue = vehicleRegistryDetail?.querySelector(".vehicle-active-days-value");
+    if (kmTotalValue) kmTotalValue.textContent = totalKm.toFixed(2);
+    if (activeDaysValue) activeDaysValue.textContent = String(activeDays);
+
     resultsEl.innerHTML = `
+      <!--
       <div class="vehicle-km-summary-row">
         <span class="vehicle-km-kpi"><strong>${totalKm.toFixed(2)}</strong> km totales</span>
         <span class="vehicle-km-kpi"><strong>${activeDays}</strong> días activos</span>
       </div>
+      -->
       <table class="vehicle-km-table">
         <thead>
           <tr>
