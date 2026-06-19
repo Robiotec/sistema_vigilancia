@@ -175,6 +175,12 @@ const cameraRegisterLocation = document.getElementById("camera-register-location
 const cameraRegisterSubmit = document.getElementById("camera-register-submit");
 const cameraRegisterFeedback = document.getElementById("camera-register-feedback");
 const vehicleRegisterOpen = document.getElementById("vehicle-register-open");
+const vehicleRegistryEditSelected = document.getElementById("vehicle-registry-edit-selected");
+const vehicleRegistryDeleteSelected = document.getElementById("vehicle-registry-delete-selected");
+const vehicleRegistrySelectedActionButtons = [
+  vehicleRegistryEditSelected,
+  vehicleRegistryDeleteSelected,
+].filter(Boolean);
 const vehicleRegisterModal = document.getElementById("vehicle-register-modal");
 const vehicleRegisterBackdrop = document.getElementById("vehicle-register-backdrop");
 const vehicleRegisterClose = document.getElementById("vehicle-register-close");
@@ -7669,6 +7675,16 @@ function formatDateTime(ts) {
   });
 }
 
+function formatDateOnly(ts) {
+  if (!ts) return "--";
+  const date = new Date(ts * 1000);
+  return date.toLocaleDateString("es-EC", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  }).replace(/\./g, "");
+}
+
 function basename(path) {
   const raw = String(path || "").trim();
   if (!raw) return "";
@@ -8515,7 +8531,8 @@ function renderVehicleRegistrySummary(items) {
     const newestTs = Array.isArray(items) && items.length > 0
       ? Math.max(...items.map((item) => Number(item.ts) || 0))
       : 0;
-    vehicleRegistryUpdated.textContent = newestTs ? formatDateTime(newestTs) : "--";
+    vehicleRegistryUpdated.textContent = newestTs ? formatDateOnly(newestTs) : "--";
+    vehicleRegistryUpdated.title = newestTs ? formatDateTime(newestTs) : "";
   }
 }
 
@@ -8572,6 +8589,33 @@ function findSelectedVehicleRegistryItem(items) {
   return source.find((item) => vehicleRegistryManualKey(item) === selectedVehicleRegistryKey) || null;
 }
 
+function syncVehicleRegistrySelectedActions(item) {
+  const registrationId = CAN_MANAGE_VEHICLE_REGISTRY
+    ? normalizeVehicleRegistrationId(item && item.registration_id)
+    : null;
+  vehicleRegistrySelectedActionButtons.forEach((button) => {
+    button.hidden = !registrationId;
+    button.disabled = !registrationId;
+    button.setAttribute("data-vehicle-registration-id", registrationId || "");
+  });
+}
+
+function handleVehicleRegistryActionButton(button) {
+  if (!button || !CAN_MANAGE_VEHICLE_REGISTRY) return;
+  const registrationId = normalizeVehicleRegistrationId(button.getAttribute("data-vehicle-registration-id"));
+  if (!registrationId) return;
+  const action = String(button.getAttribute("data-vehicle-action") || "").trim().toLowerCase();
+  const item = findVehicleRegistryItemByRegistrationId(registrationId);
+  if (!item) return;
+  if (action === "edit") {
+    void openVehicleRegisterModal(item);
+    return;
+  }
+  if (action === "delete") {
+    void deleteVehicleRegistryEntry(registrationId);
+  }
+}
+
 function renderVehicleRegistrySummaryItem(item) {
   const isDrone = isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type);
   const itemKey = vehicleRegistryManualKey(item);
@@ -8623,24 +8667,6 @@ function renderManualVehicleRegistryItem(item) {
         </div>
       </div>
       -->
-      ${CAN_MANAGE_VEHICLE_REGISTRY ? `<div class="vehicle-item-actions">
-        <button
-          class="camera-register-secondary"
-          type="button"
-          data-vehicle-action="edit"
-          data-vehicle-registration-id="${escapeHtml(String(item.registration_id || ""))}"
-        >
-          Editar
-        </button>
-        <button
-          class="camera-register-secondary camera-register-danger"
-          type="button"
-          data-vehicle-action="delete"
-          data-vehicle-registration-id="${escapeHtml(String(item.registration_id || ""))}"
-        >
-          Eliminar
-        </button>
-      </div>` : ""}
       <div class="vehicle-item-manual-grid">
         <article class="vehicle-item-detail-card">
           <span class="vehicle-item-detail-label"> <i class="fas fa-car"></i> Placa</span>
@@ -8890,6 +8916,8 @@ function renderVehicleRegistry(items) {
   if (selectedVehicleRegistryKey && !selectedItem) {
     selectedVehicleRegistryKey = null;
   }
+
+  syncVehicleRegistrySelectedActions(selectedItem);
 
   if (vehicleRegistryDetailTitle) {
     vehicleRegistryDetailTitle.textContent = selectedItem
@@ -11027,6 +11055,10 @@ if (vehicleRegisterOpen) {
   });
 }
 
+vehicleRegistrySelectedActionButtons.forEach((button) => {
+  button.addEventListener("click", () => handleVehicleRegistryActionButton(button));
+});
+
 if (cameraRegisterForm) {
   cameraRegisterForm.addEventListener("submit", registerCamera);
 }
@@ -11810,20 +11842,7 @@ if (vehicleRegistryDetail) {
     const button = event.target instanceof Element
       ? event.target.closest("[data-vehicle-action][data-vehicle-registration-id]")
       : null;
-    if (!button) return;
-    if (!CAN_MANAGE_VEHICLE_REGISTRY) return;
-    const registrationId = normalizeVehicleRegistrationId(button.getAttribute("data-vehicle-registration-id"));
-    if (!registrationId) return;
-    const action = String(button.getAttribute("data-vehicle-action") || "").trim().toLowerCase();
-    const item = findVehicleRegistryItemByRegistrationId(registrationId);
-    if (!item) return;
-    if (action === "edit") {
-      void openVehicleRegisterModal(item);
-      return;
-    }
-    if (action === "delete") {
-      void deleteVehicleRegistryEntry(registrationId);
-    }
+    if (button) handleVehicleRegistryActionButton(button);
   });
 }
 

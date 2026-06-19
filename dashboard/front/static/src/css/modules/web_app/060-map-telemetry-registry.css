@@ -1910,8 +1910,8 @@
 
 .vehicle-registry-section {
   display: grid;
-  gap: 12px;
-  padding: 14px;
+  gap: 10px;
+  padding: 10px;
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
@@ -1934,6 +1934,7 @@
     linear-gradient(180deg, rgba(255, 165, 0, 0.06), rgba(255, 140, 0, 0.02)),
     radial-gradient(circle at top right, rgba(255, 166, 0, 0.10), transparent 8%);
   border: 1px solid #ff660097;
+  margin-bottom: 4px;
 }
 
 .vehicle-registry-section.is-evidence {

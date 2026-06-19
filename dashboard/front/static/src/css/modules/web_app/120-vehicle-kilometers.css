@@ -166,6 +166,15 @@
 }
 .fleet-km-open-btn:hover { background: rgba(99,179,237,0.22); border-color: rgba(99,179,237,0.65); }
 
+.page-vehicle-registry .camera-page-actions {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.page-vehicle-registry .vehicle-registry-selected-action {
+  min-height: 48px;
+}
+
 /* ── Fleet km modal ──────────────────────────────────────────────────────── */
 .fleet-km-modal {
   position: fixed;
@@ -280,6 +289,8 @@
 .vehicle-km-export-fleet:hover { background: rgba(74,222,128,0.18); }
 
 body.is-vehicle-registry-readonly #vehicle-register-open,
+body.is-vehicle-registry-readonly #vehicle-registry-edit-selected,
+body.is-vehicle-registry-readonly #vehicle-registry-delete-selected,
 body.is-vehicle-registry-readonly .vehicle-item-actions,
 body.is-vehicle-registry-readonly #vehicle-register-modal {
   display: none !important;
