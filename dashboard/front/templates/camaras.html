@@ -80,8 +80,30 @@
             </aside>
           </section>
         </section>
+      </div>
     </main>
   </div>
+
+  <div class="plate-file-modal" id="plate-file-modal" hidden>
+    <button class="plate-file-modal-backdrop" id="plate-file-modal-backdrop" type="button" aria-label="Cerrar detalle del evento"></button>
+    <section class="plate-file-dialog" role="dialog" aria-modal="true" aria-labelledby="plate-file-modal-title">
+      <button class="plate-file-close" id="plate-file-close" type="button" aria-label="Cerrar detalle">&times;</button>
+      <span class="plate-file-eyebrow">Detalle del evento</span>
+      <h3 id="plate-file-modal-title">Evento detectado</h3>
+      <strong id="plate-file-plate">--</strong>
+      <div class="plate-file-content" id="plate-file-content"></div>
+    </section>
+  </div>
+
+  <div class="event-video-modal" id="event-video-modal" hidden>
+    <button class="event-video-modal-backdrop" id="event-video-modal-backdrop" type="button" aria-label="Cerrar video del evento"></button>
+    <section class="event-video-dialog" role="dialog" aria-modal="true" aria-labelledby="event-video-modal-title">
+      <button class="event-video-close" id="event-video-close" type="button" aria-label="Cerrar video">&times;</button>
+      <span class="event-video-eyebrow">Video del evento</span>
+      <h3 id="event-video-modal-title">Video detectado</h3>
+      <video class="event-video-player" id="event-video-player" controls playsinline preload="metadata"></video>
+      <div class="event-video-meta" id="event-video-meta"></div>
+    </section>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>

@@ -8684,12 +8684,14 @@ function renderManualVehicleRegistryItem(item) {
             <button class="vehicle-item-copy" type="button" data-copy-value="${escapeHtml(String(item.rtmp_url || ""))}">Copiar</button>
           </article>
         ` : ""}
+        <!--
         ${telemetryMode === "rtmp" || isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type) ? `
           <article class="vehicle-item-detail-card">
             <span class="vehicle-item-detail-label">Path MediaMTX</span>
             <strong class="vehicle-item-detail-value vehicle-item-detail-value-code">${escapeHtml(String(item.mediamtx_path || item.video_path || item.identifier || "--"))}</strong>
           </article>
         ` : ""}
+        -->
         ${cameraLinks.length > 0 ? `
           <article class="vehicle-item-detail-card vehicle-item-detail-card-wide">
             <span class="vehicle-item-detail-label">Cámaras asociadas</span>
@@ -8823,7 +8825,7 @@ function renderVehicleRegistrySection({ tone, kicker, title, description, items,
   const source = Array.isArray(items) ? items : [];
   const countLabel = source.length === 1 ? "1 registro" : `${source.length} registros`;
   return `
-    <section class="vehicle-registry-section ${tone ? `is-${tone}` : ""}">
+    <section class="vehicle-registry-section ${tone ? `is-${tone}` : ""}" data-vehicle-registry-section="${escapeHtml(tone || "default")}">
       <div class="vehicle-registry-section-head">
         <div class="vehicle-registry-section-copy">
           <span class="vehicle-registry-section-kicker">${escapeHtml(kicker)}</span>
@@ -8839,6 +8841,37 @@ function renderVehicleRegistrySection({ tone, kicker, title, description, items,
       </div>
     </section>
   `;
+}
+
+function vehicleRegistrySectionScrollKey(section, index) {
+  if (!(section instanceof Element)) return `section:${index}`;
+  const explicitKey = String(section.getAttribute("data-vehicle-registry-section") || "").trim();
+  if (explicitKey) return explicitKey;
+  const toneClass = Array.from(section.classList).find((className) => className.startsWith("is-"));
+  return toneClass ? toneClass.slice(3) : `section:${index}`;
+}
+
+function captureVehicleRegistryRailScrollState() {
+  const state = new Map();
+  if (!vehicleRegistryRailList) return state;
+  vehicleRegistryRailList.querySelectorAll(".vehicle-registry-section").forEach((section, index) => {
+    const list = section.querySelector(".vehicle-registry-section-list");
+    if (!list) return;
+    state.set(vehicleRegistrySectionScrollKey(section, index), Number(list.scrollTop) || 0);
+  });
+  return state;
+}
+
+function restoreVehicleRegistryRailScrollState(state) {
+  if (!vehicleRegistryRailList || !(state instanceof Map) || state.size === 0) return;
+  vehicleRegistryRailList.querySelectorAll(".vehicle-registry-section").forEach((section, index) => {
+    const list = section.querySelector(".vehicle-registry-section-list");
+    if (!list) return;
+    const scrollTop = state.get(vehicleRegistrySectionScrollKey(section, index));
+    if (Number.isFinite(scrollTop)) {
+      list.scrollTop = scrollTop;
+    }
+  });
 }
 
 function renderVehicleRegistry(items) {
@@ -8902,6 +8935,7 @@ function renderVehicleRegistry(items) {
   }
 
   if (vehicleRegistryRailList) {
+    const railScrollState = captureVehicleRegistryRailScrollState();
     vehicleRegistryRailList.innerHTML = [
       renderVehicleRegistrySection({
         tone: "drones",
@@ -8920,6 +8954,7 @@ function renderVehicleRegistry(items) {
         renderer: renderVehicleRegistrySummaryItem,
       }),
     ].join("");
+    restoreVehicleRegistryRailScrollState(railScrollState);
   }
 }
 
@@ -12580,6 +12615,8 @@ function initReportsPage() {
     monthLoaded: false,
     platesLoaded: false,
   };
+  const reportsPageSizeOptions = [5, 10, 20, 30, 40, 50];
+  const reportsPaginationByTable = new Map();
 
   const ecDate = (offsetDays = 0) => {
     const now = Date.now() - 5 * 3600 * 1000 + offsetDays * 86400000;
@@ -12678,17 +12715,194 @@ function initReportsPage() {
     }
   }
 
+  function reportsPaginationKey(tbody) {
+    return String(tbody?.id || "").trim() || `reports-table-${reportsPaginationByTable.size + 1}`;
+  }
+
+  function getReportsPaginationEntry(tbody) {
+    const key = reportsPaginationKey(tbody);
+    let entry = reportsPaginationByTable.get(key);
+    if (!entry) {
+      entry = {
+        key,
+        rows: [],
+        htmlForRow: null,
+        emptyEl: null,
+        colspan: 1,
+        currentPage: 1,
+        pageSize: 5,
+        top: null,
+        bottom: null,
+        select: null,
+        summary: null,
+      };
+      reportsPaginationByTable.set(key, entry);
+    }
+    return entry;
+  }
+
+  function ensureReportsPaginationControls(tbody) {
+    const entry = getReportsPaginationEntry(tbody);
+    if (entry.top?.isConnected && entry.bottom?.isConnected) return entry;
+
+    const tableWrap = tbody?.closest?.(".reports-table-wrap");
+    if (!tableWrap) return entry;
+
+    const top = document.createElement("div");
+    top.className = "reports-pagination-top";
+    top.setAttribute("data-reports-pagination-for", entry.key);
+
+    const label = document.createElement("label");
+    label.className = "reports-page-size";
+    label.innerHTML = `
+      <span>Filas</span>
+      <select aria-label="Filas por página">
+        ${reportsPageSizeOptions.map((option) => `<option value="${option}">${option}</option>`).join("")}
+      </select>
+    `;
+
+    const summary = document.createElement("span");
+    summary.className = "reports-page-summary";
+    summary.setAttribute("aria-live", "polite");
+
+    const select = label.querySelector("select");
+    if (select) {
+      select.value = String(entry.pageSize);
+      select.addEventListener("change", () => {
+        const nextSize = Number(select.value);
+        entry.pageSize = reportsPageSizeOptions.includes(nextSize) ? nextSize : 5;
+        entry.currentPage = 1;
+        renderReportsPage(tbody);
+      });
+    }
+
+    top.append(label, summary);
+
+    const bottom = document.createElement("nav");
+    bottom.className = "reports-pagination";
+    bottom.setAttribute("aria-label", "Paginación de reporte");
+    bottom.setAttribute("data-reports-pagination-for", entry.key);
+    bottom.addEventListener("click", (event) => {
+      const button = event.target instanceof Element
+        ? event.target.closest("[data-reports-page], [data-reports-page-action]")
+        : null;
+      if (!button || button.hasAttribute("disabled")) return;
+      const totalPages = Math.max(1, Math.ceil(entry.rows.length / entry.pageSize));
+      const action = String(button.getAttribute("data-reports-page-action") || "").trim();
+      if (action === "prev") {
+        entry.currentPage = Math.max(1, entry.currentPage - 1);
+      } else if (action === "next") {
+        entry.currentPage = Math.min(totalPages, entry.currentPage + 1);
+      } else {
+        const targetPage = Number(button.getAttribute("data-reports-page"));
+        if (Number.isFinite(targetPage)) {
+          entry.currentPage = Math.max(1, Math.min(totalPages, Math.round(targetPage)));
+        }
+      }
+      renderReportsPage(tbody);
+    });
+
+    tableWrap.before(top);
+    tableWrap.after(bottom);
+
+    entry.top = top;
+    entry.bottom = bottom;
+    entry.select = select;
+    entry.summary = summary;
+    return entry;
+  }
+
+  function reportsVisiblePageNumbers(currentPage, totalPages) {
+    const pages = new Set([1, 2, 3, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+    return Array.from(pages)
+      .filter((page) => page >= 1 && page <= totalPages)
+      .sort((a, b) => a - b);
+  }
+
+  function renderReportsPaginationButtons(entry, totalPages) {
+    if (!entry.bottom) return;
+    const currentPage = entry.currentPage;
+    const pageButtons = [];
+    let previousPage = 0;
+    reportsVisiblePageNumbers(currentPage, totalPages).forEach((page) => {
+      if (previousPage && page - previousPage > 1) {
+        pageButtons.push('<span class="reports-pagination-ellipsis" aria-hidden="true">...</span>');
+      }
+      pageButtons.push(`
+        <button
+          class="reports-page-button ${page === currentPage ? "is-active" : ""}"
+          type="button"
+          data-reports-page="${page}"
+          ${page === currentPage ? 'aria-current="page"' : ""}
+        >${page}</button>
+      `);
+      previousPage = page;
+    });
+
+    entry.bottom.innerHTML = `
+      <button class="reports-page-button reports-page-arrow" type="button" data-reports-page-action="prev" title="Página anterior" aria-label="Página anterior" ${currentPage <= 1 ? "disabled" : ""}>&lsaquo;</button>
+      ${pageButtons.join("")}
+      <button class="reports-page-button reports-page-arrow" type="button" data-reports-page-action="next" title="Página siguiente" aria-label="Página siguiente" ${currentPage >= totalPages ? "disabled" : ""}>&rsaquo;</button>
+    `;
+  }
+
+  function renderReportsPage(tbody) {
+    if (!tbody) return;
+    const entry = getReportsPaginationEntry(tbody);
+    const list = Array.isArray(entry.rows) ? entry.rows : [];
+    const totalRows = list.length;
+    const totalPages = Math.max(1, Math.ceil(totalRows / entry.pageSize));
+    entry.currentPage = Math.max(1, Math.min(totalPages, Math.round(Number(entry.currentPage) || 1)));
+
+    if (entry.select) entry.select.value = String(entry.pageSize);
+    if (entry.top) entry.top.hidden = totalRows === 0;
+    if (entry.bottom) entry.bottom.hidden = totalRows === 0;
+
+    if (entry.emptyEl) entry.emptyEl.hidden = totalRows > 0;
+    if (!totalRows) {
+      tbody.innerHTML = "";
+      if (entry.summary) entry.summary.textContent = "Sin registros";
+      if (entry.bottom) entry.bottom.innerHTML = "";
+      return;
+    }
+
+    const startIndex = (entry.currentPage - 1) * entry.pageSize;
+    const pageRows = list.slice(startIndex, startIndex + entry.pageSize);
+    tbody.innerHTML = typeof entry.htmlForRow === "function"
+      ? pageRows.map(entry.htmlForRow).join("")
+      : "";
+
+    if (entry.summary) {
+      entry.summary.textContent = `${fmtInt(startIndex + 1)}-${fmtInt(Math.min(startIndex + entry.pageSize, totalRows))} de ${fmtInt(totalRows)} registros`;
+    }
+    renderReportsPaginationButtons(entry, totalPages);
+  }
+
   function renderRows(tbody, emptyEl, rows, htmlForRow, colspan) {
     if (!tbody) return;
-    const list = Array.isArray(rows) ? rows : [];
-    tbody.innerHTML = list.map(htmlForRow).join("");
-    if (emptyEl) emptyEl.hidden = list.length > 0;
-    if (!list.length) {
-      tbody.innerHTML = "";
+    const entry = ensureReportsPaginationControls(tbody);
+    entry.rows = Array.isArray(rows) ? rows : [];
+    entry.htmlForRow = htmlForRow;
+    entry.emptyEl = emptyEl;
+    entry.colspan = colspan;
+    entry.currentPage = 1;
+    renderReportsPage(tbody);
+  }
+
+  function clearReportsPagination(tbody) {
+    if (!tbody) return;
+    const entry = getReportsPaginationEntry(tbody);
+    entry.rows = [];
+    if (entry.top) entry.top.hidden = true;
+    if (entry.bottom) {
+      entry.bottom.hidden = true;
+      entry.bottom.innerHTML = "";
     }
+    if (entry.summary) entry.summary.textContent = "";
   }
 
   function renderError(tbody, emptyEl, message, colspan) {
+    clearReportsPagination(tbody);
     if (emptyEl) emptyEl.hidden = true;
     if (tbody) {
       tbody.innerHTML = `<tr><td colspan="${colspan}" class="reports-table-error">${escapeHtml(message || "No se pudo cargar el reporte.")}</td></tr>`;
