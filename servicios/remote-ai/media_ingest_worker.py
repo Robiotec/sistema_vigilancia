@@ -27,6 +27,7 @@ def _env(key: str, default: str = "") -> str:
 MANIFEST_PATH = Path(_env("AI_RESULTS_DIR", "/home/robiotec/robiotec-ai/results")) / "manifest.jsonl"
 STATE_FILE = Path(_env("INGEST_STATE_FILE", "/home/robiotec/robiotec-ai/data/manifest_ingest_state.json"))
 POLL_INTERVAL = float(_env("INGEST_POLL_INTERVAL", "4"))
+INGEST_BATCH_SIZE = max(1, min(int(_env("INGEST_BATCH_SIZE", "100")), 500))
 
 API_INGEST_BASE = _env("API_INGEST_BASE", "https://robio-ai.com/api/ingest").rstrip("/")
 API_INGEST_TOKEN = _env("API_INGEST_TOKEN") or _env("SERVICE_INGEST_TOKEN")
@@ -150,10 +151,12 @@ def _insert_rows(rows: list[dict[str, Any]]) -> None:
     unique = list({_compute_uid(row): row for row in rows}.values())
     if not unique:
         return
-    if len(unique) == 1:
-        _api_post_json("camera-events", unique[0])
-    else:
-        _api_post_json("camera-events/batch", {"items": unique})
+    for index in range(0, len(unique), INGEST_BATCH_SIZE):
+        chunk = unique[index:index + INGEST_BATCH_SIZE]
+        if len(chunk) == 1:
+            _api_post_json("camera-events", chunk[0])
+        else:
+            _api_post_json("camera-events/batch", {"items": chunk})
     logger.info("[ingest] %d evento(s) enviados por API.", len(unique))
 
 

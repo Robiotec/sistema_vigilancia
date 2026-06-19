@@ -48,3 +48,9 @@ faces_gallery/logs/*
 tmp_*/
 *.bak-*
 *backup*
+
+
+# Extensiones de OSINT que no deben de subir a GitHub
+osint/osint_descarga_reporte.json
+osint/osint_layers.json
+osint/osint_raw/**

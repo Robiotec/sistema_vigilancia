@@ -8722,6 +8722,41 @@ function _ecuadorToday() {
   return new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
 }
 
+function _setVehicleKmDetailValues(panel, totalKm, activeDays) {
+  const vehicleItem = panel?.closest?.(".vehicle-item") || vehicleRegistryDetail;
+  const kmTotalValue = vehicleItem?.querySelector(".vehicle-km-total-value");
+  const activeDaysValue = vehicleItem?.querySelector(".vehicle-active-days-value");
+  const kmValue = Number(totalKm);
+  const activeValue = Number(activeDays);
+  if (kmTotalValue) {
+    kmTotalValue.textContent = Number.isFinite(kmValue) ? kmValue.toFixed(2) : "--";
+  }
+  if (activeDaysValue) {
+    activeDaysValue.textContent = Number.isFinite(activeValue) ? String(activeValue) : "--";
+  }
+}
+
+function _syncVisibleKmPanelState(vehicleId, { resultsHtml, exportHref, totalKm, activeDays, summaryLoaded = false } = {}) {
+  const panel = vehicleRegistryDetail?.querySelector(".vehicle-km-panel");
+  if (!panel || String(panel.dataset.vehicleId || "") !== String(vehicleId || "")) return;
+  if (typeof resultsHtml === "string") {
+    const resultsEl = panel.querySelector(".vehicle-km-results");
+    if (resultsEl) resultsEl.innerHTML = resultsHtml;
+  }
+  const exportEl = panel.querySelector(".vehicle-km-export");
+  if (exportEl) {
+    if (exportHref) {
+      exportEl.href = exportHref;
+      exportEl.style.display = "inline-block";
+    } else {
+      exportEl.style.display = "none";
+    }
+  }
+  if (summaryLoaded) {
+    _setVehicleKmDetailValues(panel, totalKm, activeDays);
+  }
+}
+
 function _restoreKmPanelState(registrationId) {
   const saved = _kmPanelState.get(registrationId);
   if (!saved) return;
@@ -8739,6 +8774,21 @@ function _restoreKmPanelState(registrationId) {
     const exportEl = panel.querySelector(".vehicle-km-export");
     if (exportEl) { exportEl.href = saved.exportHref; exportEl.style.display = "inline-block"; }
   }
+  if (saved.summaryLoaded) {
+    _setVehicleKmDetailValues(panel, saved.totalKm, saved.activeDays);
+  }
+}
+
+function _autoLoadKmSummary(registrationId) {
+  const saved = _kmPanelState.get(registrationId);
+  if (saved?.summaryLoaded || saved?.loading || saved?.autoAttempted) return;
+  window.setTimeout(() => {
+    const currentPanel = vehicleRegistryDetail?.querySelector(".vehicle-km-panel");
+    if (!currentPanel || String(currentPanel.dataset.vehicleId || "") !== registrationId) return;
+    const currentState = _kmPanelState.get(registrationId);
+    if (currentState?.summaryLoaded || currentState?.loading || currentState?.autoAttempted) return;
+    void loadKmSummary(currentPanel, { auto: true });
+  }, 0);
 }
 
 function renderVehicleKmPanel(item) {
@@ -8845,7 +8895,9 @@ function renderVehicleRegistry(items) {
         ? '<div class="vehicle-registry-detail-empty">Selecciona un dron o un auto del panel derecho para abrir su ficha completa en este espacio.</div>'
         : '<div class="empty-state">Sin vehículos registrados todavía.</div>';
     if (selectedItem?.registration_id) {
-      _restoreKmPanelState(String(selectedItem.registration_id));
+      const selectedRegistrationId = String(selectedItem.registration_id);
+      _restoreKmPanelState(selectedRegistrationId);
+      _autoLoadKmSummary(selectedRegistrationId);
     }
   }
 
@@ -12009,17 +12061,30 @@ document.addEventListener("click", (e) => {
   }
 });
 
-async function loadKmSummary(panel) {
+async function loadKmSummary(panel, options = {}) {
   const vehicleId = panel.dataset.vehicleId;
   const label = panel.dataset.vehicleLabel || vehicleId;
   const from = panel.querySelector(".vehicle-km-from")?.value;
   const to = panel.querySelector(".vehicle-km-to")?.value;
   const resultsEl = panel.querySelector(".vehicle-km-results");
   const exportEl = panel.querySelector(".vehicle-km-export");
+  const auto = Boolean(options.auto);
 
   if (!vehicleId || !from || !to || !resultsEl) return;
-  resultsEl.innerHTML = '<div class="vehicle-km-loading">Cargando…</div>';
+  const previousState = _kmPanelState.get(vehicleId) || {};
+  const loadingHtml = '<div class="vehicle-km-loading">Cargando…</div>';
+  _kmPanelState.set(vehicleId, {
+    ...previousState,
+    from,
+    to,
+    loading: true,
+    autoAttempted: auto || previousState.autoAttempted,
+    resultsHtml: loadingHtml,
+    exportHref: "",
+  });
+  resultsEl.innerHTML = loadingHtml;
   if (exportEl) exportEl.style.display = "none";
+  _syncVisibleKmPanelState(vehicleId, { resultsHtml: loadingHtml, exportHref: "" });
 
   try {
     const data = await fetchJson(
@@ -12028,17 +12093,29 @@ async function loadKmSummary(panel) {
     );
     if (!Array.isArray(data) || data.length === 0) {
       resultsEl.innerHTML = '<div class="vehicle-km-empty">Sin datos para el período seleccionado.</div>';
+      _kmPanelState.set(vehicleId, {
+        ...(_kmPanelState.get(vehicleId) || {}),
+        from,
+        to,
+        totalKm: 0,
+        activeDays: 0,
+        summaryLoaded: true,
+        loading: false,
+        resultsHtml: resultsEl.innerHTML,
+        exportHref: "",
+      });
+      _syncVisibleKmPanelState(vehicleId, {
+        resultsHtml: resultsEl.innerHTML,
+        exportHref: "",
+        totalKm: 0,
+        activeDays: 0,
+        summaryLoaded: true,
+      });
       return;
     }
 
     const totalKm = data.reduce((s, r) => s + (Number(r.km) || 0), 0);
     const activeDays = data.filter((r) => Number(r.km) > 0).length;
-
-    // Actualizar las tarjetas en el grid si existen
-    const kmTotalValue = vehicleRegistryDetail?.querySelector(".vehicle-km-total-value");
-    const activeDaysValue = vehicleRegistryDetail?.querySelector(".vehicle-active-days-value");
-    if (kmTotalValue) kmTotalValue.textContent = totalKm.toFixed(2);
-    if (activeDaysValue) activeDaysValue.textContent = String(activeDays);
 
     resultsEl.innerHTML = `
       <!--
@@ -12074,9 +12151,35 @@ async function loadKmSummary(panel) {
       exportEl.href = exportHref;
       exportEl.style.display = "inline-block";
     }
-    _kmPanelState.set(vehicleId, { from, to, resultsHtml: resultsEl.innerHTML, exportHref });
+    _kmPanelState.set(vehicleId, {
+      ...(_kmPanelState.get(vehicleId) || {}),
+      from,
+      to,
+      totalKm,
+      activeDays,
+      summaryLoaded: true,
+      loading: false,
+      resultsHtml: resultsEl.innerHTML,
+      exportHref,
+    });
+    _syncVisibleKmPanelState(vehicleId, {
+      resultsHtml: resultsEl.innerHTML,
+      exportHref,
+      totalKm,
+      activeDays,
+      summaryLoaded: true,
+    });
   } catch (err) {
     resultsEl.innerHTML = `<div class="vehicle-km-error">Error cargando datos: ${escapeHtml(String(err?.message || err))}</div>`;
+    _kmPanelState.set(vehicleId, {
+      ...(_kmPanelState.get(vehicleId) || {}),
+      from,
+      to,
+      loading: false,
+      resultsHtml: resultsEl.innerHTML,
+      exportHref: "",
+    });
+    _syncVisibleKmPanelState(vehicleId, { resultsHtml: resultsEl.innerHTML, exportHref: "" });
   }
 }
 

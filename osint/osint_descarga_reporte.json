@@ -1,5 +1,5 @@
 {
-  "downloaded_at": "2026-06-17T09:30:16.154143+00:00",
+  "downloaded_at": "2026-06-18T09:30:11.290303+00:00",
   "base_url": "https://vectorinternational.ai/api",
   "endpoints": {
     "punto_interes_gdos": "/punto-interes/gdos",
@@ -18,7 +18,7 @@
     "eventos_paso_oficial": "/eventos/eventos-capas-id?id_tipo_evento=PASO_OFICIAL",
     "eventos_mineria_ilegal": "/eventos/eventos-capas-id?id_tipo_evento=MINERIA_ILEGAL"
   },
-  "feature_count": 30331,
+  "feature_count": 30342,
   "geojson_file": "/root/robiotec/osint/osint_layers.geojson",
-  "geojson_size_mb": 24.34
+  "geojson_size_mb": 24.36
 }

@@ -210,15 +210,19 @@
   align-items: center;
   justify-content: flex-end;
   align-self: center;
+  gap: 15px;
+  padding: 10px 0;
+  margin-left: 4px;
+  padding-left: 4px;
 }
 
 .camera-register-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(241, 56, 17, 0.45);
+  border: 1px solid rgb(241, 92, 17);
   background:
-    linear-gradient(180deg, rgba(241, 56, 17, 0.2), rgba(241, 56, 17, 0.1));
+    linear-gradient(180deg, rgba(255, 102, 0, 0.2), rgba(241, 56, 17, 0.1));
   color: var(--brand-white);
   border-radius: 16px;
   padding: 13px 16px;
