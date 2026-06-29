@@ -1,8 +1,8 @@
 import enum
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from uuid import uuid4
 
-from sqlalchemy import Boolean, DateTime, Enum, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
+from sqlalchemy import Boolean, Date, DateTime, Enum, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -162,9 +162,11 @@ class Vehicle(Base):
     owner_user_id: Mapped[UUID | None] = mapped_column(ForeignKey("users.id"), nullable=True, index=True)
     name: Mapped[str] = mapped_column(String(160))
     vehicle_type: Mapped[str] = mapped_column(String(60), default="auto")
+    vehicle_subtype: Mapped[str | None] = mapped_column(String(60), nullable=True)
     unique_code: Mapped[str | None] = mapped_column(String(120), nullable=True)
     plate: Mapped[str | None] = mapped_column(String(40), nullable=True)
     model: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    driver_name: Mapped[str | None] = mapped_column(String(160), nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     can_publish: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -339,3 +341,27 @@ class VehicleTelemetry(Base):
     heading: Mapped[float | None] = mapped_column(Float, nullable=True)
     payload: Mapped[dict] = mapped_column(JSONB)
     received_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class VehicleRouteSegment(Base):
+    __tablename__ = "vehicle_route_segments"
+    __table_args__ = (
+        UniqueConstraint("vehicle_id", "to_telemetry_id", name="uq_vehicle_route_segment_to_point"),
+        Index("ix_vehicle_route_segments_vehicle_day", "vehicle_id", "local_day"),
+        Index("ix_vehicle_route_segments_day_kind", "local_day", "segment_kind"),
+    )
+
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    vehicle_id: Mapped[UUID] = mapped_column(ForeignKey("vehicles.id"), index=True)
+    from_telemetry_id: Mapped[UUID | None] = mapped_column(ForeignKey("vehicle_telemetry.id"), nullable=True)
+    to_telemetry_id: Mapped[UUID] = mapped_column(ForeignKey("vehicle_telemetry.id"))
+    local_day: Mapped[date] = mapped_column(Date, index=True)
+    segment_kind: Mapped[str] = mapped_column(String(24), default="raw")
+    segment_reason: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    distance_km: Mapped[float] = mapped_column(Float, default=0.0)
+    elapsed_seconds: Mapped[float] = mapped_column(Float, default=0.0)
+    implied_speed_kmh: Mapped[float] = mapped_column(Float, default=0.0)
+    confidence: Mapped[float | None] = mapped_column(Float, nullable=True)
+    geometry: Mapped[dict] = mapped_column(JSONB)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)

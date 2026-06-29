@@ -337,14 +337,16 @@ body {
   letter-spacing: 0.07em;
 }
 
-.page-dashboard .telemetry-sync-shell .telemetry-map-filter select {
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter select,
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter input {
   min-height: 38px;
   padding: 8px 10px;
   border-radius: 10px;
   font-size: 0.9rem;
 }
 
-.page-dashboard .telemetry-sync-shell .telemetry-map-filter select option {
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter select option,
+.page-dashboard .telemetry-sync-shell .telemetry-map-filter datalist option {
   background: #1a1a2e;
   color: #f8fafc;
 }
@@ -839,7 +841,6 @@ body {
   .page-map .map-main-card,
   .page-map .telemetry-rail,
   .page-map .telemetry-list-card,
-  .page-map .telemetry-video-shell,
   .page-map .telemetry-focus-shell {
     min-height: 0;
     height: auto;
@@ -856,12 +857,6 @@ body {
     height: auto;
     max-height: none;
     overflow: visible;
-  }
-
-  .page-map .telemetry-video-stage,
-  .page-map .map-workbench[data-video-layout="video"] .telemetry-video-stage {
-    height: min(48vh, 360px);
-    min-height: 220px;
   }
 
   .page-map .telemetry-map-controls {
@@ -989,7 +984,6 @@ body {
 
   .page-map .map-main-card,
   .page-map .telemetry-list-card,
-  .page-map .telemetry-video-shell,
   .page-map .telemetry-focus-shell {
     padding: 12px;
   }
@@ -999,7 +993,6 @@ body {
   }
 
   .page-map .telemetry-list-card,
-  .page-map .telemetry-video-shell,
   .page-map .telemetry-focus-shell {
     min-height: 0;
     height: auto;
@@ -1023,7 +1016,6 @@ body {
   .page-map .telemetry-map-mode,
   .page-map .telemetry-map-switch,
   .page-map .telemetry-map-recenter,
-  .page-map .telemetry-map-swap,
   .page-map .telemetry-map-style-wrap,
   .page-map .telemetry-map-style {
     width: 100%;

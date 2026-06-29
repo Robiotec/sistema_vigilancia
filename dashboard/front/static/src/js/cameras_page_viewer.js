@@ -627,7 +627,7 @@ const INFERENCE_LOADING_SRCDOC = [
           <span class="event-card__badge" style="font:800 12px/1.25 system-ui,sans-serif;margin-bottom:2px">PERSONA</span>
           <strong style="font:900 19px/1.12 system-ui;color:#fff4ed;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(name)}</strong>
           ${cedula ? `<span style="font:800 16px/1.18 system-ui;color:rgba(255,214,191,.9)">ID: ${escapeHtml(cedula)}</span>` : ""}
-          <time style="font:800 16px/1.18 system-ui;color:rgba(248,250,252,.92);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+          <time style="font:400 13px/1.15 system-ui;color:rgba(248,250,252,.92);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
         </div>
       </article>`;
   }

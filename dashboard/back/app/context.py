@@ -651,10 +651,6 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__INFERENCE_TOOLBAR_HIDDEN__": "" if is_admin else "hidden",
         "__USER_IS_ADMIN__": "true" if is_admin else "false",
         "__VEHICLE_REGISTRY_MODE_CLASS__": "" if is_admin else "is-vehicle-registry-readonly",
-        "__CAMERA_PAGE_ACTION__": (
-            '<button class="camera-register-open" id="camera-register-open" type="button">Registrar cámara</button>'
-            if is_admin else ""
-        ),
         "__CAMERA_ADMIN_MODAL__": template_source("partials/camera_admin_modal.html") if is_admin else "",
         "__CAMERA_ADMIN_ACCESS_NOTE__": "",
         "__PLATE_PREVIEW_CHOICES__": "",
@@ -701,6 +697,7 @@ def _build_context_uncached(request: Request) -> dict[str, str]:
         "__ROLE_ADMIN_HERO_CARD__": template_source("partials/user_admin_role_hero_card.html") if is_master else "",
         "__ROLE_ADMIN_SECTION__": template_source("partials/user_admin_role_section.html") if is_master else "",
         "__ACCESS_PERMISSIONS_JSON__": _json(sorted(permissions)),
+        "__USER_ROLES_JSON__": _json(ordered_roles),
         "__DEFAULT_AUTH_PATH__": default_path_for_roles(user_roles),
     }
 

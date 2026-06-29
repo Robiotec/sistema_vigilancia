@@ -12,3 +12,42 @@
 @import url("./modules/pages/mapa/090-osint-map-icons.css");
 /* Estilos de los ajustes finales compartidos. */
 @import url("./final_overrides.css");
+
+/* Override directo del mapa: este archivo si viaja con cache-buster desde el template. */
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid {
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr) !important;
+  gap: 10px;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-concession-card,
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-focus-stats {
+  grid-column: auto !important;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-focus-stats:only-child {
+  grid-column: 1 / -1;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stat {
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 12px;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stat strong {
+  font-size: 0.84rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  body.page-map .telemetry-focus-shell .telemetry-focus-info-grid,
+  body.page-map .telemetry-focus-shell .telemetry-focus-stats {
+    grid-template-columns: 1fr !important;
+  }
+}

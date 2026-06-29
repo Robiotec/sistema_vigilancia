@@ -16,6 +16,7 @@ from app.models.entities import (
     Drone,
     DroneTelemetry,
     Vehicle,
+    VehicleRouteSegment,
     VehicleTelemetry,
 )
 from app.schemas.common import MessageResponse
@@ -27,6 +28,7 @@ from app.services.fleet import (
     MAX_SEGMENT_DISTANCE_KM,
     MAX_SEGMENT_GAP_SECONDS,
     build_route_points,
+    build_hybrid_segment,
     coerce_float,
     gps_datetime_from_payload,
     is_valid_coordinate,
@@ -35,6 +37,7 @@ from app.services.fleet import (
     point_in_geofence,
     summarize_daily_mileage,
 )
+from app.core.config import get_settings
 
 router = APIRouter(prefix="/telemetry", tags=["telemetry"])
 
@@ -298,6 +301,13 @@ def _assert_geofence_tables_ready(db: Session) -> None:
         raise HTTPException(status_code=503, detail="geofences_not_ready")
 
 
+def _ensure_route_segment_table(db: Session) -> None:
+    try:
+        VehicleRouteSegment.__table__.create(bind=db.get_bind(), checkfirst=True)
+    except Exception:
+        db.rollback()
+
+
 def _json_object(value: Any) -> dict[str, Any]:
     if isinstance(value, dict):
         return value
@@ -330,6 +340,157 @@ def _row_value(row: Any, key: str) -> Any:
     if hasattr(row, "get"):
         return row.get(key)
     return getattr(row, key, None)
+
+
+def _active_geofences_for_vehicle(db: Session, vehicle: Vehicle) -> list[dict[str, Any]]:
+    if not _geofence_tables_ready(db):
+        return []
+    params: dict[str, Any] = {}
+    company_clause = ""
+    if vehicle.company_id:
+        company_clause = "AND company_id = :company_id"
+        params["company_id"] = vehicle.company_id
+    rows = db.execute(
+        text(
+            f"""
+            SELECT id, name, geofence_type, geometry
+            FROM geofences
+            WHERE deleted_at IS NULL
+              AND active IS TRUE
+              {company_clause}
+            """
+        ),
+        params,
+    ).mappings().all()
+    return [dict(row) for row in rows]
+
+
+def _point_inside_geofences(point: dict[str, Any], geofences: list[dict[str, Any]]) -> bool:
+    lat = coerce_float(point.get("lat"))
+    lon = coerce_float(point.get("lon"))
+    if lat is None or lon is None:
+        return False
+    for geofence in geofences:
+        if point_in_geofence(lat, lon, str(geofence.get("geofence_type") or ""), _json_object(geofence.get("geometry"))):
+            return True
+    return False
+
+
+def _segment_inside_geofences(previous: dict[str, Any], point: dict[str, Any], geofences: list[dict[str, Any]]) -> bool:
+    if not geofences:
+        return False
+    if _point_inside_geofences(previous, geofences) or _point_inside_geofences(point, geofences):
+        return True
+    mid_lat = (float(previous["lat"]) + float(point["lat"])) / 2
+    mid_lon = (float(previous["lon"]) + float(point["lon"])) / 2
+    return _point_inside_geofences({"lat": mid_lat, "lon": mid_lon}, geofences)
+
+
+def _segment_geometry_payload(latlon: list[list[float]]) -> dict[str, Any]:
+    return {"type": "LineString", "coordinate_order": "latlon", "coordinates": latlon}
+
+
+def _segment_geometry_latlon(geometry: Any) -> list[list[float]]:
+    payload = _json_object(geometry)
+    coordinates = payload.get("coordinates")
+    if not isinstance(coordinates, list):
+        return []
+    result: list[list[float]] = []
+    for point in coordinates:
+        if not isinstance(point, list) or len(point) < 2:
+            continue
+        lat = coerce_float(point[0])
+        lon = coerce_float(point[1])
+        if lat is not None and lon is not None:
+            result.append([lat, lon])
+    return result
+
+
+def _apply_segment_to_point(point: dict[str, Any], segment: VehicleRouteSegment | None) -> None:
+    if not segment:
+        return
+    point["segment_status"] = segment.segment_kind
+    point["segment_reason"] = segment.segment_reason
+    point["distance_km"] = float(segment.distance_km or 0.0)
+    point["elapsed_seconds"] = float(segment.elapsed_seconds or 0.0)
+    point["implied_speed_kmh"] = float(segment.implied_speed_kmh or 0.0)
+    point["counted_for_km"] = segment.segment_kind in {"osrm", "raw"}
+    point["segment_geometry"] = _segment_geometry_latlon(segment.geometry)
+
+
+def _materialize_hybrid_route_segments(
+    db: Session,
+    *,
+    vehicle: Vehicle,
+    points: list[dict[str, Any]],
+    target_day: date,
+) -> dict[str, VehicleRouteSegment]:
+    _ensure_route_segment_table(db)
+    point_ids = [str(point.get("telemetry_id") or "") for point in points if point.get("telemetry_id")]
+    if len(point_ids) < 2:
+        return {}
+    existing_rows = db.scalars(
+        select(VehicleRouteSegment).where(
+            VehicleRouteSegment.vehicle_id == vehicle.id,
+            VehicleRouteSegment.local_day == target_day,
+            VehicleRouteSegment.to_telemetry_id.in_(point_ids),
+        )
+    ).all()
+    by_to_id = {str(row.to_telemetry_id): row for row in existing_rows}
+    geofences = _active_geofences_for_vehicle(db, vehicle)
+    settings = get_settings()
+    osrm_base_url = str(settings.osrm_base_url or "").strip()
+    osrm_remaining = max(0, int(settings.osrm_max_segments_per_request or 0))
+    osrm_deadline = time.monotonic() + max(0.5, float(settings.osrm_request_budget_seconds or 0.0))
+    osrm_timeout = max(0.2, min(1.0, float(settings.osrm_request_timeout_seconds or 0.8)))
+    created = False
+    for index in range(1, len(points)):
+        previous = points[index - 1]
+        point = points[index]
+        to_id = str(point.get("telemetry_id") or "")
+        from_id = str(previous.get("telemetry_id") or "")
+        if not to_id or not from_id or to_id in by_to_id:
+            continue
+        inside_geofence = _segment_inside_geofences(previous, point, geofences)
+        point_status = str(point.get("segment_status") or "normal").lower()
+        can_try_osrm = (
+            bool(osrm_base_url)
+            and osrm_remaining > 0
+            and time.monotonic() < osrm_deadline
+            and point_status not in {"gap", "suspicious"}
+            and not inside_geofence
+        )
+        segment = build_hybrid_segment(
+            previous,
+            point,
+            inside_geofence=inside_geofence,
+            osrm_base_url=osrm_base_url if can_try_osrm else "",
+            confidence_min=settings.osrm_match_confidence_min,
+            timeout_seconds=osrm_timeout,
+        )
+        if can_try_osrm:
+            osrm_remaining -= 1
+        elif segment.get("segment_kind") == "raw" and not inside_geofence:
+            segment["segment_reason"] = "osrm_budget_deferred" if osrm_base_url else "osrm_disabled"
+        row = VehicleRouteSegment(
+            vehicle_id=vehicle.id,
+            from_telemetry_id=from_id,
+            to_telemetry_id=to_id,
+            local_day=target_day,
+            segment_kind=segment["segment_kind"],
+            segment_reason=segment.get("segment_reason"),
+            distance_km=float(segment.get("distance_km") or 0.0),
+            elapsed_seconds=float(segment.get("elapsed_seconds") or 0.0),
+            implied_speed_kmh=float(segment.get("implied_speed_kmh") or 0.0),
+            confidence=segment.get("confidence"),
+            geometry=_segment_geometry_payload(segment.get("geometry") or []),
+        )
+        db.add(row)
+        by_to_id[to_id] = row
+        created = True
+    if created:
+        db.commit()
+    return by_to_id
 
 
 def _first_present(*values: Any) -> Any:
@@ -683,9 +844,12 @@ def telemetry_history(
     points, diagnostics = build_route_points(rows, include_invalid=include_invalid)
     filtered = [p for p in points if local_date_for_point(p) == target_day.isoformat()]
     if filtered:
+        segment_map = _materialize_hybrid_route_segments(db, vehicle=vehicle, points=filtered, target_day=target_day)
         filtered[0]["segment_status"] = "start"
         filtered[0]["segment_reason"] = None
         filtered[0]["counted_for_km"] = False
+        for point in filtered[1:]:
+            _apply_segment_to_point(point, segment_map.get(str(point.get("telemetry_id") or "")))
     for point in filtered:
         point["diagnostics"] = diagnostics
     return filtered
@@ -827,17 +991,53 @@ def telemetry_km_fleet(
         text(
             f"""
             WITH scoped_vehicles AS (
-                SELECT v.id, v.company_id, v.name, v.plate, v.unique_code
-                FROM vehicles v
-                WHERE v.active IS TRUE
-                  AND v.deleted_at IS NULL
-                  {company_filter}
+                SELECT
+                    base.id,
+                    base.company_id,
+                    base.name,
+                    base.plate,
+                    base.unique_code,
+                    base.vehicle_type,
+                    base.vehicle_subtype,
+                    base.driver_name,
+                    COALESCE(
+                        NULLIF(UPPER(REGEXP_REPLACE(base.plate_match, '^([A-Z]{{2,4}})[ -]?([0-9]{{3,5}})$', '\\1-\\2')), ''),
+                        NULLIF(base.plate, ''),
+                        NULLIF(base.name, ''),
+                        NULLIF(base.unique_code, ''),
+                        base.id::text
+                    ) AS fleet_label,
+                    COALESCE(
+                        NULLIF(REGEXP_REPLACE(UPPER(base.plate_match), '[^A-Z0-9]', '', 'g'), ''),
+                        NULLIF(REGEXP_REPLACE(UPPER(COALESCE(base.plate, base.name, base.unique_code, base.id::text)), '[^A-Z0-9]', '', 'g'), ''),
+                        base.id::text
+                    ) AS fleet_key
+                FROM (
+                    SELECT
+                        v.id,
+                        v.company_id,
+                        v.name,
+                        v.plate,
+                        v.unique_code,
+                        v.vehicle_type,
+                        v.vehicle_subtype,
+                        v.driver_name,
+                        SUBSTRING(UPPER(COALESCE(v.plate, v.name, v.unique_code, '')) FROM '([A-Z]{{2,4}}[ -]?[0-9]{{3,5}})') AS plate_match
+                    FROM vehicles v
+                    WHERE v.active IS TRUE
+                      AND v.deleted_at IS NULL
+                      {company_filter}
+                ) base
             ),
             raw_points AS (
                 SELECT
                     vt.id,
                     vt.vehicle_id,
-                    sv.name AS label,
+                    sv.fleet_key,
+                    sv.fleet_label,
+                    sv.driver_name,
+                    sv.vehicle_type,
+                    sv.vehicle_subtype,
                     vt.latitude,
                     vt.longitude,
                     vt.speed,
@@ -873,7 +1073,7 @@ def telemetry_km_fleet(
                     LAG(p.gps_at) OVER w AS prev_gps_at,
                     LAG(p.local_day) OVER w AS prev_local_day
                 FROM points p
-                WINDOW w AS (PARTITION BY p.vehicle_id ORDER BY p.gps_at ASC, p.received_at ASC, p.id ASC)
+                WINDOW w AS (PARTITION BY p.fleet_key ORDER BY p.gps_at ASC, p.received_at ASC, p.id ASC)
             ),
             distance_calc AS (
                 SELECT
@@ -905,8 +1105,11 @@ def telemetry_km_fleet(
             ),
             daily AS (
                 SELECT
-                    s.vehicle_id,
-                    MIN(s.label) AS label,
+                    s.fleet_key,
+                    MIN(s.fleet_label) AS label,
+                    MIN(NULLIF(s.driver_name, '')) AS driver_name,
+                    MIN(NULLIF(s.vehicle_type, '')) AS vehicle_type,
+                    MIN(NULLIF(s.vehicle_subtype, '')) AS vehicle_subtype,
                     s.local_day AS period,
                     COUNT(*)::bigint AS points,
                     MAX(COALESCE(s.speed, 0)) AS max_speed,
@@ -925,22 +1128,37 @@ def telemetry_km_fleet(
                 FROM segments s
                 WHERE s.local_day >= CAST(:from_d AS date)
                   AND s.local_day <= CAST(:to_d AS date)
-                GROUP BY s.vehicle_id, s.local_day
+                GROUP BY s.fleet_key, s.local_day
             ),
             vehicle_rows AS (
                 SELECT
                     'vehicle'::text AS row_type,
-                    sv.id::text AS vehicle_id,
-                    sv.name::text AS label,
+                    sg.vehicle_id,
+                    sg.label,
+                    sg.driver_name,
+                    sg.vehicle_type,
+                    sg.vehicle_subtype,
+                    sg.source_count,
                     NULL::date AS period,
                     COALESCE(SUM(d.km), 0)::double precision AS total_km,
                     COALESCE(MAX(d.max_speed), 0)::double precision AS max_speed,
                     NULL::bigint AS active_vehicles,
                     COUNT(d.period) FILTER (WHERE d.km > 0.05)::bigint AS active_days,
                     COALESCE(SUM(d.points), 0)::bigint AS total_points
-                FROM scoped_vehicles sv
-                LEFT JOIN daily d ON d.vehicle_id = sv.id
-                GROUP BY sv.id, sv.name
+                FROM (
+                    SELECT
+                        sv.fleet_key,
+                        STRING_AGG(DISTINCT sv.id::text, ',') AS vehicle_id,
+                        MIN(sv.fleet_label)::text AS label,
+                        MIN(NULLIF(sv.driver_name, ''))::text AS driver_name,
+                        MIN(NULLIF(sv.vehicle_type, ''))::text AS vehicle_type,
+                        MIN(NULLIF(sv.vehicle_subtype, ''))::text AS vehicle_subtype,
+                        COUNT(DISTINCT sv.id)::bigint AS source_count
+                    FROM scoped_vehicles sv
+                    GROUP BY sv.fleet_key
+                ) sg
+                LEFT JOIN daily d ON d.fleet_key = sg.fleet_key
+                GROUP BY sg.fleet_key, sg.vehicle_id, sg.label, sg.driver_name, sg.vehicle_type, sg.vehicle_subtype, sg.source_count
             ),
             daily_periods AS (
                 SELECT generate_series(CAST(:from_d AS date), CAST(:to_d AS date), INTERVAL '1 day')::date AS period
@@ -950,10 +1168,14 @@ def telemetry_km_fleet(
                     'daily'::text AS row_type,
                     NULL::text AS vehicle_id,
                     NULL::text AS label,
+                    NULL::text AS driver_name,
+                    NULL::text AS vehicle_type,
+                    NULL::text AS vehicle_subtype,
+                    NULL::bigint AS source_count,
                     p.period AS period,
                     COALESCE(SUM(d.km), 0)::double precision AS total_km,
                     COALESCE(MAX(d.max_speed), 0)::double precision AS max_speed,
-                    COUNT(DISTINCT d.vehicle_id) FILTER (WHERE d.km > 0.05)::bigint AS active_vehicles,
+                    COUNT(DISTINCT d.fleet_key) FILTER (WHERE d.km > 0.05)::bigint AS active_vehicles,
                     CASE WHEN COALESCE(SUM(d.km), 0) > 0.05 THEN 1 ELSE 0 END::bigint AS active_days,
                     COALESCE(SUM(d.points), 0)::bigint AS total_points
                 FROM daily_periods p
@@ -972,10 +1194,14 @@ def telemetry_km_fleet(
                     'monthly'::text AS row_type,
                     NULL::text AS vehicle_id,
                     NULL::text AS label,
+                    NULL::text AS driver_name,
+                    NULL::text AS vehicle_type,
+                    NULL::text AS vehicle_subtype,
+                    NULL::bigint AS source_count,
                     p.period AS period,
                     COALESCE(SUM(d.km), 0)::double precision AS total_km,
                     COALESCE(MAX(d.max_speed), 0)::double precision AS max_speed,
-                    COUNT(DISTINCT d.vehicle_id) FILTER (WHERE d.km > 0.05)::bigint AS active_vehicles,
+                    COUNT(DISTINCT d.fleet_key) FILTER (WHERE d.km > 0.05)::bigint AS active_vehicles,
                     COUNT(DISTINCT d.period) FILTER (WHERE d.km > 0.05)::bigint AS active_days,
                     COALESCE(SUM(d.points), 0)::bigint AS total_points
                 FROM monthly_periods p
@@ -1023,6 +1249,11 @@ def telemetry_km_fleet(
             item.update({
                 "vehicle_id": row.get("vehicle_id"),
                 "label": row.get("label") or row.get("vehicle_id"),
+                "driver_name": row.get("driver_name") or "",
+                "chofer": row.get("driver_name") or "",
+                "vehicle_type": row.get("vehicle_type") or "",
+                "vehicle_subtype": row.get("vehicle_subtype") or "",
+                "source_count": int(row.get("source_count") or 1),
             })
             vehicles.append(item)
         elif row_type == "daily":

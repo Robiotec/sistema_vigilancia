@@ -114,7 +114,6 @@
 
 .page-map .telemetry-map-recenter,
 .page-map .telemetry-geofence-new,
-.page-map .telemetry-geofence-refresh,
 .page-map .telemetry-track-export,
 .page-map .telemetry-track-clear {
   min-width: auto;
@@ -126,24 +125,11 @@
   gap: 14px;
 }
 
-.page-map .map-workbench[data-video-layout="video"] {
-  grid-template-columns: minmax(340px, 0.54fr) minmax(0, 1fr);
-}
-
 .page-map .telemetry-rail {
   gap: 14px;
+  grid-template-rows: minmax(0, 1fr);
 }
 
-.page-map .map-workbench[data-video-layout="video"] .telemetry-rail {
-  grid-template-rows: minmax(440px, 1fr) minmax(170px, 0.34fr);
-}
-
-.page-map .map-workbench[data-video-layout="video"] .telemetry-video-stage {
-  min-height: 440px;
-}
-
-.page-map .telemetry-video-stage iframe,
-.page-map .telemetry-video-stage video,
 .telemetry-map-overlay-preview video,
 .telemetry-map-overlay-preview iframe {
   object-fit: contain;
@@ -154,22 +140,50 @@
   max-width: min(300px, calc(100% - 28px));
 }
 
-.page-map .telemetry-focus-shell,
+.page-map .telemetry-focus-shell {
+  overflow: hidden;
+}
+
 .page-map .telemetry-focus-card {
-  overflow: auto;
+  overflow: hidden;
 }
 
-.page-map .telemetry-focus-info-grid,
-.page-map .telemetry-focus-stats {
-  grid-template-columns: 1fr;
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid {
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr) !important;
+  gap: 10px;
 }
 
-.page-map .telemetry-focus-stat {
-  padding: 10px 11px;
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-concession-card,
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-focus-stats {
+  grid-column: auto !important;
 }
 
-.page-map .telemetry-focus-stat strong {
-  font-size: 0.94rem;
+body.page-map .telemetry-focus-shell .telemetry-focus-info-grid .telemetry-focus-stats:only-child {
+  grid-column: 1 / -1;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stat {
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 12px;
+}
+
+body.page-map .telemetry-focus-shell .telemetry-focus-stat strong {
+  font-size: 0.84rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  body.page-map .telemetry-focus-shell .telemetry-focus-info-grid,
+  body.page-map .telemetry-focus-shell .telemetry-focus-stats {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 .fleet-km-modal {
@@ -300,14 +314,8 @@
 @media (max-width: 1320px) {
   .page-cameras .camera-stage,
   .page-cameras .camera-stage.has-multiple,
-  .page-map .map-workbench,
-  .page-map .map-workbench[data-video-layout="video"] {
+  .page-map .map-workbench {
     grid-template-columns: 1fr;
-  }
-
-  .page-map .telemetry-rail,
-  .page-map .map-workbench[data-video-layout="video"] .telemetry-rail {
-    grid-template-rows: minmax(320px, auto) minmax(220px, auto);
   }
 
   .page-admin-unified .top-page,

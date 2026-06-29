@@ -104,11 +104,11 @@ El timer `robiotec-retention-cleanup.timer` corre cada dos meses, el dia 1 a las
 
 Limpia por lotes para evitar bloquear el dashboard:
 
-- `vehicle_telemetry` y `drone_telemetry`: mayores a `180` dias.
-- `camera_event_history`, `geofence_alerts` y alertas enviadas/fallidas: mayores a `365` dias.
+- `vehicle_telemetry` y `drone_telemetry`: mayores a `90` dias.
+- `camera_event_history`, `geofence_alerts` y alertas enviadas/fallidas: mayores a `90` dias.
 - `stream_access_tokens` y `device_publish_tokens` vencidos: mayores a `30` dias.
-- Archivos runtime de `event_videos`, `telegram_clip_crops` y `cache`: mayores a `365` dias.
-- Objetos MinIO del bucket `eventos`, alias `local`: mayores a `365` dias.
+- Archivos runtime de `event_videos`, `telegram_clip_crops` y `cache`: mayores a `90` dias.
+- Objetos MinIO del bucket `eventos`, alias `local`: mayores a `90` dias.
 
 Validacion manual sin borrar:
 

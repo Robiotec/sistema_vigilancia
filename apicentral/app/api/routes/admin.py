@@ -119,9 +119,11 @@ class VehicleCreate(BaseModel):
     owner_user_id: UUID | None = None
     name: str
     vehicle_type: str = "auto"
+    vehicle_subtype: str | None = None
     unique_code: str | None = None
     plate: str | None = None
     model: str | None = None
+    driver_name: str | None = None
     description: str | None = None
     active: bool = True
     can_publish: bool = True

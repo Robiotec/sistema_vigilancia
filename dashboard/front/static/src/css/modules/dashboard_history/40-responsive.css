@@ -56,10 +56,10 @@
 
 @media (max-width: 560px) {
   .home-history-event-card {
-    flex-direction: column;
+    display: grid;
   }
 
   .home-history-event-dismiss {
-    align-self: flex-end;
+    align-self: auto;
   }
 }

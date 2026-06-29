@@ -49,12 +49,6 @@
         <button class="camera-register-secondary telemetry-geofence-new" id="fleet-geofence-new" type="button">
           Nueva zona
         </button>
-        <button class="camera-register-secondary telemetry-geofence-refresh" id="fleet-geofence-refresh" type="button">
-          Geocercas
-        </button>
-        <button class="camera-register-secondary telemetry-map-swap" id="telemetry-map-swap" type="button">
-          Intercambiar vista
-        </button>
         <button class="camera-register-secondary telemetry-track-export" id="telemetry-track-export" type="button">
           Exportar rutas
         </button>
@@ -66,9 +60,15 @@
     <div class="telemetry-map-stage">
       <div class="telemetry-monitor-filter telemetry-map-filter">
         <label for="telemetry-device-filter">Monitorear vehículo</label>
-        <select id="telemetry-device-filter">
-          <option value="">Todos los dispositivos</option>
-        </select>
+        <input
+          id="telemetry-device-filter"
+          type="text"
+          list="telemetry-device-options"
+          autocomplete="off"
+          placeholder="Todos los dispositivos"
+          aria-label="Buscar vehículo por placa o nombre"
+        />
+        <datalist id="telemetry-device-options"></datalist>
       </div>
       <div class="map-canvas page-map-canvas is-preparing-map" id="telemetry-map"></div>
       <div class="telemetry-geofence-draw-panel" id="geofence-draw-panel" role="dialog" aria-modal="false" aria-labelledby="geofence-draw-title" hidden>

@@ -3,7 +3,9 @@ const config = window.ROBIOTEC_WEB_APP_CONFIG || {};
 window.__ROBIOTEC_CAMERA_ADMIN_MAIN__ = true;
 const IS_DEDICATED_CAMERAS_PAGE = Boolean(document.body?.classList.contains("page-cameras"));
 const ACCESS_PERMISSIONS = new Set(Array.isArray(config.accessPermissions) ? config.accessPermissions : []);
+const USER_ROLES = new Set(Array.isArray(config.userRoles) ? config.userRoles : []);
 const USER_IS_ADMIN = config.userIsAdmin === true || String(config.userIsAdmin || "").toLowerCase() === "true";
+const CAN_MANAGE_GEOFENCES = USER_IS_ADMIN || USER_ROLES.has("master") || USER_ROLES.has("admin") || USER_ROLES.has("operator_map");
 const CAN_MANAGE_VEHICLE_REGISTRY = USER_IS_ADMIN
   || ACCESS_PERMISSIONS.has("edit")
   || ACCESS_PERMISSIONS.has("admin_users")
@@ -58,6 +60,7 @@ const TELEMETRY_MAP_INITIAL_PREVIEW_MS = 650;
 const TELEMETRY_SELECTED_VEHICLE_ZOOM = 16;
 const TELEMETRY_SELECTION_MAP_MOVE_MS = 1200;
 const GEOFENCE_DEFAULT_COLOR = "#14b8a6";
+const FLEET_GEOFENCE_PANE = "fleet-geofence-pane";
 const SINGLE_STREAM_BREAKPOINT_PX = 960;
 const THEME_STORAGE_KEY = "robiotec.theme";
 const TELEMETRY_MAP_STYLE_STORAGE_KEY = "robiotec.telemetry.map.style";
@@ -79,20 +82,20 @@ const TELEMETRY_MAP_MIN_ZOOM = Number.isFinite(Number(config.telemetryMapMinZoom
   : 6;
 const TELEMETRY_MAP_MAX_ZOOM = Number.isFinite(Number(config.telemetryMapMaxZoom))
   ? Math.max(TELEMETRY_MAP_MIN_ZOOM, Math.min(24, Number(config.telemetryMapMaxZoom)))
-  : 18;
+  : 19;
 const DARK_TILE_URL = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
 const DARK_TILE_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-const GRAY_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
-const GRAY_TILE_ATTRIBUTION = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ';
+const ESRI_STREET_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}";
+const ESRI_STREET_TILE_ATTRIBUTION = "Tiles &copy; Esri";
 const RELIEF_TILE_URL = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}";
 const RELIEF_TILE_ATTRIBUTION = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community';
 const TELEMETRY_MAP_STYLE_DEFINITIONS = {
   gray: {
-    baseUrl: GRAY_TILE_URL,
+    baseUrl: ESRI_STREET_TILE_URL,
     baseOptions: {
-      maxZoom: TELEMETRY_MAP_MAX_ZOOM,
-      maxNativeZoom: 16,
-      attribution: GRAY_TILE_ATTRIBUTION,
+      maxZoom: 19,
+      maxNativeZoom: 19,
+      attribution: ESRI_STREET_TILE_ATTRIBUTION,
     },
   },
   satellite: {
@@ -160,7 +163,6 @@ const audioToggle = document.getElementById("audio-toggle");
 const audioVolume = document.getElementById("audio-volume");
 const audioSummary = document.getElementById("audio-summary");
 const audioControls = document.querySelector(".audio-controls");
-const cameraRegisterOpen = document.getElementById("camera-register-open");
 const cameraRegisterModal = document.getElementById("camera-register-modal");
 const cameraRegisterBackdrop = document.getElementById("camera-register-backdrop");
 const cameraRegisterClose = document.getElementById("camera-register-close");
@@ -194,9 +196,12 @@ const vehicleRegisterOwner = document.getElementById("vehicle-register-owner");
 const vehicleRegisterType = document.getElementById("vehicle-register-type");
 const vehicleRegisterTypeHelp = document.getElementById("vehicle-register-type-help");
 const vehicleRegisterTypeNote = document.getElementById("vehicle-register-type-note");
+const vehicleRegisterSubtypeField = document.getElementById("vehicle-register-subtype-field");
+const vehicleRegisterSubtype = document.getElementById("vehicle-register-subtype");
 const vehicleRegisterTelemetryMode = document.getElementById("vehicle-register-telemetry-mode");
 const vehicleRegisterTelemetryHelp = document.getElementById("vehicle-register-telemetry-help");
 const vehicleRegisterLabel = document.getElementById("vehicle-register-label");
+const vehicleRegisterDriver = document.getElementById("vehicle-register-driver");
 const vehicleRegisterIdentifierLabel = document.getElementById("vehicle-register-identifier-label");
 const vehicleRegisterIdentifier = document.getElementById("vehicle-register-identifier");
 const vehicleRegisterIdentifierHelp = document.getElementById("vehicle-register-identifier-help");
@@ -345,6 +350,7 @@ const cameraAdminMap = document.getElementById("camera-admin-map");
 const cameraAdminMapLocation = document.getElementById("camera-admin-map-location");
 const cameraAdminGeneratedResult = document.getElementById("camera-admin-generated-result");
 const telemetryDeviceFilter = document.getElementById("telemetry-device-filter");
+const telemetryDeviceOptions = document.getElementById("telemetry-device-options");
 const telemetryFocusCard = document.getElementById("telemetry-focus-card");
 const telemetryMapOverlayBox = document.getElementById("telemetry-map-overlay-box");
 const telemetryMapOverlayOrganization = document.getElementById("telemetry-map-overlay-organization");
@@ -354,18 +360,14 @@ const telemetryMapMode = document.getElementById("telemetry-map-mode");
 const telemetryMapStyleSelect = document.getElementById("telemetry-map-style");
 const telemetryMapRecenter = document.getElementById("telemetry-map-recenter");
 const fleetGeofenceNew = document.getElementById("fleet-geofence-new");
-const fleetGeofenceRefresh = document.getElementById("fleet-geofence-refresh");
 const geofenceDrawPanel = document.getElementById("geofence-draw-panel");
+const geofenceDrawTitle = document.getElementById("geofence-draw-title");
 const geofenceDrawName = document.getElementById("geofence-draw-name");
 const geofenceDrawColor = document.getElementById("geofence-draw-color");
 const geofenceDrawSave = document.getElementById("geofence-draw-save");
 const geofenceDrawCancel = document.getElementById("geofence-draw-cancel");
 const geofenceDrawCount = document.getElementById("geofence-draw-count");
 const geofenceDrawFeedback = document.getElementById("geofence-draw-feedback");
-const telemetryMapSwap = document.getElementById("telemetry-map-swap");
-const telemetryVideoTitle = document.getElementById("telemetry-video-title");
-const telemetryVideoState = document.getElementById("telemetry-video-state");
-const telemetryVideoStage = document.getElementById("telemetry-video-stage");
 const telemetryMiningToggle = document.getElementById("telemetry-mining-toggle");
 const telemetryOsintLayerSelect = document.getElementById("telemetry-osint-layer");
 const telemetryOpenskyToggle = document.getElementById("telemetry-opensky-toggle");
@@ -381,6 +383,15 @@ const vehicleRegistryRailList = document.getElementById("vehicle-registry-rail-l
 const vehicleRegistryTotal = document.getElementById("vehicle-registry-total");
 const vehicleRegistryCameras = document.getElementById("vehicle-registry-cameras");
 const vehicleRegistryUpdated = document.getElementById("vehicle-registry-updated");
+const vehicleRegistryTabs = Array.from(document.querySelectorAll("[data-vehicle-registry-view]"));
+const vehicleRegistryViewPanels = Array.from(document.querySelectorAll("[data-vehicle-registry-view-panel]"));
+const vehicleRouteFilter = document.getElementById("vehicle-route-filter");
+const vehicleRouteOptions = document.getElementById("vehicle-route-options");
+const vehicleRouteDate = document.getElementById("vehicle-route-date");
+const vehicleRouteLoad = document.getElementById("vehicle-route-load");
+const vehicleRouteStatus = document.getElementById("vehicle-route-status");
+const vehicleRouteMap = document.getElementById("vehicle-route-map");
+const vehicleRouteSummary = document.getElementById("vehicle-route-summary");
 const telemetryMap = document.getElementById("telemetry-map");
 const locationsMap = document.getElementById("locations-map");
 const locationsSummary = document.getElementById("locations-summary");
@@ -398,7 +409,7 @@ const LOCATION_TAG_LABELS = {
   audio: "Audio",
   telemetry: "GPS",
 };
-const USER_CAN_MANAGE_CAMERA_INFERENCE = Boolean(cameraRegisterOpen || cameraRegisterModal);
+const USER_CAN_MANAGE_CAMERA_INFERENCE = Boolean(cameraRegisterModal);
 const cameraStatuses = new Map();
 const mapMarkerIconCache = new Map();
 
@@ -658,6 +669,7 @@ let lastTelemetryCoordinates = [];
 let lastTelemetrySnapshot = [];
 let activeTelemetryDeviceId = null;
 let lastTelemetryFilterSignature = "";
+let telemetryFilterOptions = [];
 let telemetryMapManualControl = false;
 let telemetryMapProgrammaticInteractionUntil = 0;
 let telemetryMapInitialPreviewUntil = 0;
@@ -678,6 +690,8 @@ let lastFleetGeofences = [];
 let geofenceDraftLayer = null;
 let geofenceDraftPoints = [];
 let geofenceDrawingActive = false;
+let geofenceEditingId = null;
+let geofenceEditingItem = null;
 let geofenceDraftDoubleClickZoomWasEnabled = false;
 let selectedMiningConcessionInfo = null;
 let selectedMiningConcessionDeviceId = "";
@@ -689,15 +703,18 @@ let locationsMapAutoFitDone = false;
 let lastLocationMarkerCount = 0;
 let lastLocationBoundsSignature = "";
 let lastLocationCoordinates = [];
+let vehicleRouteMapInstance = null;
+let vehicleRouteLayer = null;
+let vehicleRoutePointsLayer = null;
+let vehicleRouteStartMarker = null;
+let vehicleRouteEndMarker = null;
+let vehicleRouteGeofenceLayer = null;
+let vehicleRouteLeafletLoadPromise = null;
 let telemetryOverlayCameraName = null;
 let telemetryOverlaySourceKind = "";
 let telemetryOverlaySelectionLabel = "";
 let telemetryOverlayPlayerKey = null;
 let telemetryOverlayRenderToken = 0;
-let telemetryVideoCameraName = "";
-let telemetryVideoPlayerKey = null;
-let telemetryVideoRenderToken = 0;
-let telemetryMapVideoLayout = "map";
 let statusIntervalId = null;
 let eventIntervalId = null;
 let telemetryIntervalId = null;
@@ -1594,44 +1611,6 @@ function navigateToCameraView(cameraName) {
   window.location.assign(`${target.pathname}${target.search}`);
 }
 
-function destroyTelemetryVideoPanelPlayer() {
-  if (telemetryVideoPlayerKey) {
-    destroyHlsPlayer(telemetryVideoPlayerKey);
-    telemetryVideoPlayerKey = null;
-  }
-  if (!telemetryVideoStage) return;
-  const video = telemetryVideoStage.querySelector("video");
-  if (video) {
-    try { video.pause(); } catch (error) {}
-    try {
-      video.removeAttribute("src");
-      video.load();
-    } catch (error) {}
-  }
-  const frame = telemetryVideoStage.querySelector("iframe");
-  if (frame) {
-    try {
-      frame.srcdoc = "";
-      frame.src = "about:blank";
-    } catch (error) {}
-  }
-}
-
-function resetTelemetryVideoPanel(message = "Selecciona un vehículo con cámara asociada para ver el video.") {
-  telemetryVideoRenderToken += 1;
-  telemetryVideoCameraName = "";
-  destroyTelemetryVideoPanelPlayer();
-  if (telemetryVideoTitle) telemetryVideoTitle.textContent = "Cámara asociada";
-  if (telemetryVideoState) telemetryVideoState.textContent = "Sin selección";
-  if (telemetryVideoStage) {
-    telemetryVideoStage.innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
-  }
-}
-
-function normalizeTelemetryCameraLookup(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
 function isGroundTelemetryVehicle(item) {
   const extra = item && typeof item.extra === "object" && item.extra ? item.extra : {};
   const values = [
@@ -1653,135 +1632,6 @@ function isGroundTelemetryVehicle(item) {
     || value === "truck"
     || value === "artemis"
   ));
-}
-
-function resolveTelemetryCameraForItem(item, cameraName = "") {
-  const extra = item && typeof item.extra === "object" && item.extra ? item.extra : {};
-  const candidates = [
-    cameraName,
-    item && item.camera_name,
-    item && item.mediamtx_path,
-    item && item.viewer_url,
-    item && item.video_path,
-    extra.camera_name,
-    extra.mediamtx_path,
-    extra.viewer_url,
-    extra.video_path,
-  ]
-    .map((value) => String(value || "").trim())
-    .filter(Boolean);
-
-  for (const candidate of candidates) {
-    const exact = getCameraByName(candidate);
-    if (exact) return exact;
-  }
-
-  const normalizedCandidates = new Set(candidates.map((candidate) => normalizeTelemetryCameraLookup(candidate)));
-  return CAMERAS.find((camera) => {
-    const cameraValues = [
-      camera && camera.name,
-      camera && camera.display_name,
-      camera && camera.path,
-      camera && camera.codigo_unico,
-      camera && camera.url,
-      camera && camera.viewer_url,
-      camera && camera.stream_url,
-    ].map((value) => normalizeTelemetryCameraLookup(value)).filter(Boolean);
-    return cameraValues.some((value) => normalizedCandidates.has(value));
-  }) || null;
-}
-
-async function renderTelemetryVehicleVideo(cameraName, label = "") {
-  if (!telemetryVideoStage) return;
-  const normalizedCameraName = String(cameraName || "").trim();
-  const selectedItem = getSelectedTelemetryItem(lastTelemetrySnapshot);
-  const cameraId = Number(selectedItem && selectedItem.camera_id || 0);
-  const hasCameraId = Number.isInteger(cameraId) && cameraId > 0;
-  const camera = resolveTelemetryCameraForItem(selectedItem, normalizedCameraName);
-  if (!hasCameraId && !camera) {
-    resetTelemetryVideoPanel("El vehículo seleccionado no tiene cámara asociada.");
-    return;
-  }
-  const resolvedCameraName = camera && camera.name ? camera.name : normalizedCameraName;
-  const panelKey = hasCameraId ? `id:${cameraId}` : `name:${resolvedCameraName}`;
-  if (
-    telemetryVideoCameraName === panelKey
-    && telemetryVideoStage.querySelector("video, iframe")
-  ) {
-    if (telemetryVideoTitle) telemetryVideoTitle.textContent = label || (camera && camera.display_name) || resolvedCameraName;
-    if (telemetryVideoState && !telemetryVideoState.textContent.trim()) telemetryVideoState.textContent = "Video";
-    return;
-  }
-
-  const renderToken = telemetryVideoRenderToken + 1;
-  telemetryVideoRenderToken = renderToken;
-  telemetryVideoCameraName = panelKey;
-  destroyTelemetryVideoPanelPlayer();
-  telemetryVideoStage.innerHTML = "";
-  if (telemetryVideoTitle) telemetryVideoTitle.textContent = label || (camera && camera.display_name) || resolvedCameraName || "Cámara asociada";
-  if (telemetryVideoState) telemetryVideoState.textContent = "Conectando";
-
-  try {
-    if (renderToken !== telemetryVideoRenderToken) {
-      destroyTelemetryVideoPanelPlayer();
-      return;
-    }
-    const frame = document.createElement("iframe");
-    frame.className = "telemetry-video-frame";
-    frame.loading = "eager";
-    frame.allow = "autoplay; fullscreen; picture-in-picture";
-    frame.referrerPolicy = "strict-origin-when-cross-origin";
-    frame.setAttribute("allowfullscreen", "");
-    frame.setAttribute("title", `Video ${label || resolvedCameraName || cameraId}`);
-    if (camera) {
-      frame.src = buildCameraPreviewFrameUrl(camera, { exclusive: true });
-    } else {
-      const target = new URL("/api/camera-preview-frame", window.location.origin);
-      if (hasCameraId) {
-        target.searchParams.set("camera_id", String(cameraId));
-      } else {
-        target.searchParams.set("camera", resolvedCameraName);
-      }
-      target.searchParams.set("exclusive", "1");
-      target.searchParams.set("_", String(Date.now()));
-      frame.src = `${target.pathname}${target.search}`;
-    }
-    telemetryVideoStage.appendChild(frame);
-    if (telemetryVideoState) telemetryVideoState.textContent = "Video";
-  } catch (error) {
-    if (renderToken !== telemetryVideoRenderToken) return;
-    destroyTelemetryVideoPanelPlayer();
-    telemetryVideoStage.innerHTML = '<div class="empty-state">No se pudo abrir el video asociado al vehículo.</div>';
-    if (telemetryVideoState) telemetryVideoState.textContent = "No disponible";
-  }
-}
-
-function syncTelemetryVideoPanelFromSelection(items = lastTelemetrySnapshot) {
-  if (!telemetryVideoStage) return;
-  const selectedItem = getSelectedTelemetryItem(items);
-  if (!selectedItem) {
-    resetTelemetryVideoPanel(activeTelemetryDeviceId ? "No hay telemetría para el vehículo seleccionado." : "Selecciona un vehículo para ver su cámara asociada.");
-    return;
-  }
-  const cameraName = String(selectedItem.camera_name || "").trim();
-  const label = telemetryLabel(selectedItem);
-  void renderTelemetryVehicleVideo(cameraName, label);
-}
-
-function setTelemetryMapVideoLayout(layout) {
-  telemetryMapVideoLayout = layout === "video" ? "video" : "map";
-  const workbench = telemetryMap && telemetryMap.closest(".map-workbench");
-  if (workbench) {
-    workbench.dataset.videoLayout = telemetryMapVideoLayout;
-  }
-  if (telemetryMapSwap) {
-    telemetryMapSwap.textContent = telemetryMapVideoLayout === "video" ? "Mapa grande" : "Video grande";
-  }
-  if (mapInstance && typeof mapInstance.invalidateSize === "function") {
-    window.setTimeout(() => {
-      try { mapInstance.invalidateSize(); } catch (error) {}
-    }, 120);
-  }
 }
 
 function selectCameraFromMap(cameraName, { focusMarker = false } = {}) {
@@ -2816,8 +2666,33 @@ function getVehicleTypeCatalog() {
   return [
     { id: 1, codigo: "drone_robiotec", nombre: "Dron Robiotec", categoria: "dron" },
     { id: 2, codigo: "drone_dji", nombre: "Dron DJI", categoria: "dron" },
-    { id: 3, codigo: "auto", nombre: "Vehículo terrestre", categoria: "automovil" },
+    { id: 3, codigo: "auto", nombre: "Vehículo terrestre", categoria: "vehiculo" },
   ];
+}
+
+function getVehicleSubtypeCatalog() {
+  return [
+    { codigo: "", nombre: "Sin especificar" },
+    { codigo: "camioneta", nombre: "Camioneta" },
+    { codigo: "camion", nombre: "Camión" },
+    { codigo: "volqueta", nombre: "Volqueta" },
+    { codigo: "retroexcavadora", nombre: "Retroexcavadora" },
+    { codigo: "otra", nombre: "Otra" },
+  ];
+}
+
+function vehicleTypeLabelFromCode(value) {
+  const code = normalizeVehicleTypeCode(value);
+  const match = getVehicleTypeCatalog().find((type) => normalizeVehicleTypeCode(type && type.codigo) === code);
+  if (match && match.nombre) return String(match.nombre).trim();
+  return code ? code.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase()) : "Vehículo terrestre";
+}
+
+function vehicleSubtypeLabelFromCode(value) {
+  const code = normalizeVehicleTypeCode(value);
+  const match = getVehicleSubtypeCatalog().find((type) => normalizeVehicleTypeCode(type && type.codigo) === code);
+  if (match && match.nombre) return String(match.nombre).trim();
+  return code ? code.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase()) : "";
 }
 
 function getVehicleRegisterSelectedCameraLinks() {
@@ -2913,6 +2788,16 @@ function syncVehicleRegisterCatalogOptions({ selectedLinks } = {}) {
       </option>
     `).join("");
     vehicleRegisterType.value = nextVehicleType;
+  }
+
+  if (vehicleRegisterSubtype) {
+    const currentSubtype = normalizeVehicleTypeCode(vehicleRegisterSubtype.value || "");
+    vehicleRegisterSubtype.innerHTML = getVehicleSubtypeCatalog().map((type) => `
+      <option value="${escapeHtml(String(type.codigo || ""))}">
+        ${escapeHtml(String(type.nombre || type.codigo || ""))}
+      </option>
+    `).join("");
+    vehicleRegisterSubtype.value = currentSubtype;
   }
 
   renderVehicleRegisterCameraList(selectedLinks);
@@ -3068,6 +2953,13 @@ function updateVehicleRegisterTypeCopy() {
       ? "DJI publica video por RTMP al path generado; no se espera telemetría desde este registro."
       : "Copia el ID generado después de guardar. Ese ID identifica la telemetría enviada a la API.";
   }
+  if (vehicleRegisterSubtypeField) {
+    vehicleRegisterSubtypeField.hidden = isDrone;
+  }
+  if (vehicleRegisterSubtype) {
+    vehicleRegisterSubtype.disabled = isDrone;
+    if (isDrone) vehicleRegisterSubtype.value = "";
+  }
   if (vehicleRegisterApiFields) {
     vehicleRegisterApiFields.hidden = true;
   }
@@ -3148,8 +3040,14 @@ function populateVehicleRegisterState(item) {
   if (vehicleRegisterType) {
     vehicleRegisterType.value = normalizeVehicleTypeCode(item.vehicle_type_code || item.vehicle_type || "drone_robiotec");
   }
+  if (vehicleRegisterSubtype) {
+    vehicleRegisterSubtype.value = normalizeVehicleTypeCode(item.vehicle_subtype || item.tipo_automovil_codigo || "");
+  }
   if (vehicleRegisterLabel) {
     vehicleRegisterLabel.value = String(item.label || "").trim();
+  }
+  if (vehicleRegisterDriver) {
+    vehicleRegisterDriver.value = String(item.driver_name || item.chofer || "").trim();
   }
   if (vehicleRegisterIdentifier) {
     vehicleRegisterIdentifier.value = String(item.identifier || "").trim();
@@ -3688,74 +3586,6 @@ async function toggleCameraInference(cameraName) {
   } finally {
     setCameraInferenceUpdating(cameraName, false);
   }
-}
-
-function addRegisteredCamera(payload) {
-  const camera = payload && typeof payload.camera === "object" ? payload.camera : null;
-  if (!camera || !camera.name || !camera.dom_id) {
-    throw new Error("invalid_camera_payload");
-  }
-
-  const existingCamera = getCameraByName(camera.name);
-  if (!existingCamera) {
-    CAMERAS.push(camera);
-    CAMERA_BY_DOM_ID.set(camera.dom_id, camera);
-  }
-
-  if (payload && typeof payload.device === "object") {
-    upsertDevice(payload.device);
-  }
-
-  ensureCameraCard(existingCamera || camera);
-  bindCardInteraction(existingCamera || camera);
-  renderSwitcher();
-  applyCapabilityBadges();
-  activeCamera = camera.name;
-  persistActiveCameraSelection(camera.name);
-  updateFocusUi();
-  syncStreaming();
-  refreshStatus();
-  refreshTelemetry();
-  refreshEvents();
-}
-
-function friendlyCameraRegisterError(error) {
-  const code = String((error && error.message) || "").trim();
-  if (code.includes("Traceback")) {
-    return "Ocurrió un error interno registrando la cámara.";
-  }
-  switch (code) {
-    case "camera_already_exists":
-      return "Ese nombre ya existe en el sistema.";
-    case "invalid_camera_name":
-      return "El nombre solo puede usar letras, números, puntos, guiones y guion bajo.";
-    case "invalid_camera_location":
-      return "Selecciona una ubicación válida en el mapa o ingresa latitud y longitud correctas.";
-    case "invalid_camera_source":
-      return "La fuente debe ser una URL web válida: HLS (.m3u8), video directo o una página del reproductor.";
-    case "unsupported_camera_source_protocol":
-      return "Esta app ya no abre RTSP/WebRTC directo. Registra la URL web final que entrega tu backend de video.";
-    case "invalid_camera_payload":
-      return "No pude interpretar la respuesta del registro.";
-    default:
-      return code || "No se pudo registrar la cámara.";
-  }
-}
-
-function cameraSourceProtocolError(source) {
-  const normalized = String(source || "").trim().toLowerCase();
-  if (!normalized) return "";
-  if (!isHttpCameraSource(normalized)) {
-    return "Registra la URL web final del video. Usa http:// o https://, por ejemplo un .m3u8, .mp4 o una página del visor.";
-  }
-  if (
-    normalized.startsWith("webrtc://")
-    || normalized.startsWith("whip://")
-    || normalized.startsWith("whep://")
-  ) {
-    return "Esta app ya no abre WebRTC directo. Registra la URL web final que entrega tu backend de video.";
-  }
-  return "";
 }
 
 function friendlyVehicleRegisterError(error) {
@@ -4771,60 +4601,6 @@ async function fetchJson(url, options = {}) {
   }
 }
 
-async function registerCamera(event) {
-  event.preventDefault();
-  if (!cameraRegisterName || !cameraRegisterSource || !cameraRegisterLat || !cameraRegisterLon || !cameraRegisterSubmit) return;
-
-  const cameraName = cameraRegisterName.value.trim();
-  const source = cameraRegisterSource.value.trim();
-  const lat = Number(cameraRegisterLat.value);
-  const lon = Number(cameraRegisterLon.value);
-  if (!cameraName || !source || !cameraRegisterLat.value.trim() || !cameraRegisterLon.value.trim()) {
-    setCameraRegisterFeedback("Completa el nombre, la URL y la ubicación de la cámara.", "error");
-    return;
-  }
-  const sourceProtocolError = cameraSourceProtocolError(source);
-  if (sourceProtocolError) {
-    setCameraRegisterFeedback(sourceProtocolError, "error");
-    return;
-  }
-  if (getCameraByName(cameraName)) {
-    setCameraRegisterFeedback("Ese nombre ya existe en el sistema.", "error");
-    return;
-  }
-  if (!Number.isFinite(lat) || !Number.isFinite(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180) {
-    setCameraRegisterFeedback("Selecciona una ubicación válida en el mapa o ingresa coordenadas correctas.", "error");
-    return;
-  }
-
-  const originalLabel = cameraRegisterSubmit.textContent || "Registrar cámara";
-  cameraRegisterSubmit.disabled = true;
-  cameraRegisterSubmit.textContent = "Registrando...";
-  setCameraRegisterFeedback("Guardando la cámara en la configuración...", "info");
-
-  try {
-    const payload = await fetchJson("/api/cameras", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        camera_name: cameraName,
-        source,
-        lat,
-        lon,
-      }),
-      timeoutMs: 10000,
-    });
-    addRegisteredCamera(payload);
-    resetCameraRegisterState();
-    closeCameraRegisterModal();
-  } catch (error) {
-    setCameraRegisterFeedback(friendlyCameraRegisterError(error), "error");
-  } finally {
-    cameraRegisterSubmit.disabled = false;
-    cameraRegisterSubmit.textContent = originalLabel;
-  }
-}
-
 async function registerVehicle(event) {
   event.preventDefault();
   if (!CAN_MANAGE_VEHICLE_REGISTRY) {
@@ -4836,15 +4612,16 @@ async function registerVehicle(event) {
     || !vehicleRegisterLabel
     || !vehicleRegisterSubmit
     || !vehicleRegisterOrganization
-    || !vehicleRegisterOwner
   ) return;
 
   const vehicleTypeCode = normalizeVehicleTypeCode(vehicleRegisterType.value || "");
   const isDrone = isDroneVehicleTypeCode(vehicleTypeCode);
   const telemetryMode = String(vehicleRegisterTelemetryMode && vehicleRegisterTelemetryMode.value || "manual").trim().toLowerCase() || "manual";
   const organizationId = String(vehicleRegisterOrganization.value || "").trim();
-  const ownerUserId = String(vehicleRegisterOwner.value || "").trim();
+  const ownerUserId = vehicleRegisterOwner ? String(vehicleRegisterOwner.value || "").trim() : "";
   const label = vehicleRegisterLabel.value.trim();
+  const driverName = vehicleRegisterDriver ? vehicleRegisterDriver.value.trim() : "";
+  const vehicleSubtype = !isDrone && vehicleRegisterSubtype ? normalizeVehicleTypeCode(vehicleRegisterSubtype.value || "") : "";
   const identifier = vehicleRegisterIdentifier ? vehicleRegisterIdentifier.value.trim() : "";
   const notes = vehicleRegisterNotes ? vehicleRegisterNotes.value.trim() : "";
   const apiDeviceId = vehicleRegisterApiDeviceId ? vehicleRegisterApiDeviceId.value.trim() : "";
@@ -4856,10 +4633,6 @@ async function registerVehicle(event) {
   }
   if (!organizationId) {
     setVehicleRegisterFeedback("Selecciona la organización que será dueña del vehículo.", "error");
-    return;
-  }
-  if (!ownerUserId) {
-    setVehicleRegisterFeedback("Selecciona el propietario del vehículo.", "error");
     return;
   }
   if (!vehicleTypeCode) {
@@ -4889,7 +4662,9 @@ async function registerVehicle(event) {
           organizacion_id: organizationId,
           propietario_usuario_id: ownerUserId,
           vehicle_type_code: vehicleTypeCode,
+          vehicle_subtype: vehicleSubtype,
           label,
+          driver_name: driverName,
           identifier,
           notes,
           telemetry_mode: telemetryMode,
@@ -7750,6 +7525,222 @@ function hasValidCoordinates(item) {
   return Number.isFinite(Number(item && item.lat)) && Number.isFinite(Number(item && item.lon));
 }
 
+function normalizeTelemetryPlateValue(value) {
+  const raw = String(value || "").trim().toUpperCase();
+  if (!raw) return "";
+  const compact = raw.replace(/\s+/g, "").replace(/[^A-Z0-9-]/g, "");
+  const match = compact.match(/^([A-Z]{2,4})-?([0-9]{3,5})$/);
+  return match ? `${match[1]}-${match[2]}` : "";
+}
+
+function extractTelemetryPlateFromText(value) {
+  const raw = String(value || "").trim().toUpperCase();
+  if (!raw) return "";
+  const direct = normalizeTelemetryPlateValue(raw);
+  if (direct) return direct;
+  const match = raw.match(/(?:^|[^A-Z0-9])([A-Z]{2,4})[-\s]?([0-9]{3,5})(?=$|[^A-Z0-9])/);
+  return match ? `${match[1]}-${match[2]}` : "";
+}
+
+function telemetryCanonicalPlate(item) {
+  if (!item || typeof item !== "object") return "";
+  const extra = telemetryExtra(item);
+  const candidates = [
+    telemetryPlateLabel(item),
+    item.plate,
+    item.placa,
+    item.vehicle_plate,
+    item.license_plate,
+    item.plate_number,
+    item.matricula,
+    item.display_name,
+    item.name,
+    item.vehicle_name,
+    item.label,
+    item.camera_name,
+    item.device_id,
+    extra.plate,
+    extra.placa,
+    extra.vehicle_plate,
+    extra.license_plate,
+    extra.plate_number,
+    extra.matricula,
+    extra.display_name,
+    extra.name,
+    extra.vehicle_name,
+    extra.label,
+    extra.api_device_id,
+    extra.gps_api_id,
+  ];
+  for (const candidate of candidates) {
+    const plate = extractTelemetryPlateFromText(candidate);
+    if (plate) return plate;
+  }
+  return "";
+}
+
+function telemetryPrimaryVehicleLabel(item) {
+  const plate = telemetryCanonicalPlate(item);
+  if (plate) return plate;
+  const raw = String(telemetryNameLabel(item) || telemetryLabel(item) || "").trim();
+  if (!raw) return "";
+  return raw.split(/\s+[·|]\s+|\s+-\s+/)[0].trim() || raw;
+}
+
+function telemetryVehicleIdentityKey(item) {
+  const plate = telemetryCanonicalPlate(item);
+  return plate ? `plate:${plate.replace(/[^A-Z0-9]/g, "")}` : "";
+}
+
+function isUuidLike(value) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || "").trim());
+}
+
+function uniqueTelemetryRouteSourceIds(values) {
+  const seen = new Set();
+  const result = [];
+  values.flatMap((value) => Array.isArray(value) ? value : [value]).forEach((value) => {
+    const text = String(value || "").trim();
+    if (!text) return;
+    const key = text.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    result.push(text);
+  });
+  return result;
+}
+
+function telemetryRouteSourceIds(item) {
+  if (!item || typeof item !== "object") return [];
+  const extra = telemetryExtra(item);
+  return uniqueTelemetryRouteSourceIds([
+    item.route_source_ids,
+    extra.route_source_ids,
+    telemetryVehicleSourceId(item),
+    item.source_id,
+    item.vehicle_id,
+    extra.vehicle_source_id,
+    extra.source_id,
+    extra.vehicle_id,
+    telemetryDeviceIdentifier(item),
+    item.device_id,
+    item.api_device_id,
+    item.identifier,
+    item.unique_code,
+    extra.api_device_id,
+    extra.gps_api_id,
+    extra.imei,
+    extra.identifier,
+    extra.unique_code,
+    telemetryCanonicalPlate(item),
+  ]);
+}
+
+function telemetryTimestampMs(item) {
+  const extra = telemetryExtra(item);
+  const candidates = [
+    extra.gps_datetime_iso,
+    extra.gps_datetime,
+    item.received_at,
+    item.timestamp,
+    item.ts,
+    extra.received_at,
+    extra.timestamp,
+  ];
+  for (const candidate of candidates) {
+    if (candidate === null || candidate === undefined || candidate === "") continue;
+    if (Number.isFinite(Number(candidate))) {
+      const numeric = Number(candidate);
+      return numeric > 100000000000 ? numeric : numeric * 1000;
+    }
+    const parsed = Date.parse(String(candidate));
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return 0;
+}
+
+function compareTelemetryFreshness(left, right) {
+  const leftHasCoords = hasValidCoordinates(left) ? 1 : 0;
+  const rightHasCoords = hasValidCoordinates(right) ? 1 : 0;
+  if (leftHasCoords !== rightHasCoords) return rightHasCoords - leftHasCoords;
+  return telemetryTimestampMs(right) - telemetryTimestampMs(left);
+}
+
+function mergeVehicleTelemetryGroup(group) {
+  const items = (Array.isArray(group) ? group : []).filter((item) => item && typeof item === "object");
+  if (!items.length) return null;
+  const sorted = [...items].sort(compareTelemetryFreshness);
+  const primary = sorted[0];
+  const plate = telemetryCanonicalPlate(primary) || items.map(telemetryCanonicalPlate).find(Boolean) || "";
+  const label = plate || telemetryPrimaryVehicleLabel(primary) || items.map(telemetryPrimaryVehicleLabel).find(Boolean) || telemetryLabel(primary);
+  const routeSourceIds = uniqueTelemetryRouteSourceIds(items.map((item) => telemetryRouteSourceIds(item)));
+  const preferredVehicleSourceId = routeSourceIds.find(isUuidLike) || telemetryVehicleSourceId(primary) || routeSourceIds[0] || "";
+  const mergedExtra = items.reduce((acc, item) => ({
+    ...acc,
+    ...(telemetryExtra(item)),
+  }), {});
+  const mergedCapabilities = items.reduce((acc, item) => ({
+    ...acc,
+    ...(item.capabilities && typeof item.capabilities === "object" ? item.capabilities : {}),
+  }), {});
+  const fallbackWith = (getter) => {
+    for (const item of sorted) {
+      const value = getter(item);
+      if (value !== null && value !== undefined && String(value).trim() !== "") return value;
+    }
+    return "";
+  };
+  const merged = {
+    ...primary,
+    device_id: fallbackWith((item) => item.device_id) || routeSourceIds[0] || "",
+    vehicle_source_id: preferredVehicleSourceId,
+    route_source_ids: routeSourceIds,
+    camera_id: fallbackWith((item) => item.camera_id) || null,
+    camera_name: fallbackWith((item) => item.camera_name),
+    viewer_url: fallbackWith((item) => item.viewer_url),
+    source: fallbackWith((item) => item.source),
+    display_name: String(label || "").trim() || fallbackWith((item) => item.display_name),
+    plate: plate || fallbackWith((item) => item.plate || item.placa),
+    placa: plate || fallbackWith((item) => item.placa || item.plate),
+    vehicle_type: fallbackWith((item) => item.vehicle_type),
+    device_kind: fallbackWith((item) => item.device_kind) || "vehicle",
+    capabilities: mergedCapabilities,
+    extra: {
+      ...mergedExtra,
+      route_source_ids: routeSourceIds,
+      matched_vehicle_label: label,
+      matched_vehicle_plate: plate,
+    },
+  };
+  if (items.length > 1) {
+    merged.matched_vehicle_count = items.length;
+  }
+  return merged;
+}
+
+function collapseDuplicateVehicleTelemetry(items) {
+  const groups = new Map();
+  const standalone = [];
+  (Array.isArray(items) ? items : []).forEach((item) => {
+    if (!item || typeof item !== "object") return;
+    const plate = telemetryCanonicalPlate(item);
+    const normalizedItem = plate
+      ? { ...item, plate, placa: plate, display_name: plate }
+      : item;
+    const identityKey = telemetryVehicleIdentityKey(normalizedItem);
+    if (!identityKey) {
+      standalone.push(normalizedItem);
+      return;
+    }
+    if (!groups.has(identityKey)) groups.set(identityKey, []);
+    groups.get(identityKey).push(normalizedItem);
+  });
+  return [
+    ...Array.from(groups.values()).map(mergeVehicleTelemetryGroup).filter(Boolean),
+    ...standalone,
+  ];
+}
+
 function buildSynchronizedTelemetrySnapshot(items) {
   const merged = new Map();
   const source = Array.isArray(items) ? items : [];
@@ -7846,7 +7837,7 @@ function buildSynchronizedTelemetrySnapshot(items) {
     merged.set(deviceKey, nextItem);
   });
 
-  return Array.from(merged.values())
+  return collapseDuplicateVehicleTelemetry(Array.from(merged.values()))
     .sort((left, right) => telemetryLabel(left).localeCompare(telemetryLabel(right)));
 }
 
@@ -8549,8 +8540,11 @@ function buildVehicleRegistryItems(evidenceItems, manualItems) {
       vehicle_type: String(item.vehicle_type || "").trim().toLowerCase(),
       vehicle_type_code: normalizeVehicleTypeCode(item.vehicle_type_code || item.tipo_vehiculo_codigo || item.vehicle_type),
       vehicle_type_name: String(item.vehicle_type_name || item.tipo_vehiculo_nombre || "").trim(),
+      vehicle_subtype: normalizeVehicleTypeCode(item.vehicle_subtype || item.tipo_automovil_codigo || ""),
+      vehicle_subtype_name: String(item.vehicle_subtype_name || item.tipo_automovil_nombre || "").trim(),
       label: String(item.label || "").trim(),
       identifier: String(item.identifier || "").trim(),
+      driver_name: String(item.driver_name || item.chofer || "").trim(),
       notes: String(item.notes || "").trim(),
       source: String(item.source || "vehicle_registry"),
       telemetry_mode: String(item.telemetry_mode || "manual").trim().toLowerCase(),
@@ -8639,6 +8633,8 @@ function renderVehicleRegistrySummaryItem(item) {
 
 function renderManualVehicleRegistryItem(item) {
   const badgeLabel = String(item.vehicle_type_name || item.vehicle_type || "vehiculo").toUpperCase();
+  const driverName = String(item.driver_name || item.chofer || "").trim();
+  const subtypeLabel = String(item.vehicle_subtype_name || vehicleSubtypeLabelFromCode(item.vehicle_subtype) || "").trim();
   const telemetryMode = String(item.telemetry_mode || "manual").trim().toLowerCase() || "manual";
   const hasApiConnection = Boolean(String(item.api_device_id || item.identifier || "").trim());
   const cameraLinks = Array.isArray(item.camera_links) ? item.camera_links : [];
@@ -8677,16 +8673,24 @@ function renderManualVehicleRegistryItem(item) {
           <strong class="vehicle-item-detail-value vehicle-item-detail-value-code">${escapeHtml(String(item.identifier || "--"))}</strong>
         </article>
         <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-id-card"></i> Chofer</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(driverName || "--")}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-truck-pickup"></i> Tipo de vehículo</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.vehicle_type_name || vehicleTypeLabelFromCode(item.vehicle_type_code || item.vehicle_type) || "--"))}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-truck"></i> Tipo de automóvil</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(subtypeLabel || "--")}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
           <span class="vehicle-item-detail-label"> <i class="fas fa-satellite"></i> Modo de telemetría</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(telemetryBadge)}</strong>
         </article>
         <article class="vehicle-item-detail-card">
           <span class="vehicle-item-detail-label"> <i class="fas fa-building"></i> Organización</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(String(item.organizacion_nombre || "--"))}</strong>
-        </article>
-        <article class="vehicle-item-detail-card">
-          <span class="vehicle-item-detail-label"> <i class="fas fa-user"></i> Propietario</span>
-          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.propietario_usuario || item.propietario_display_name || "--").toUpperCase())}</strong>
         </article>
         <article class="vehicle-item-detail-card vehicle-item-km-total">
           <span class="vehicle-item-detail-label"> <i class="fas fa-road"></i> Km totales</span>
@@ -8847,10 +8851,10 @@ function renderVehicleKmPanel(item) {
   `;
 }
 
-function renderVehicleRegistrySection({ tone, kicker, title, description, items, emptyMessage, renderer }) {
-  const source = Array.isArray(items) ? items : [];
-  const countLabel = source.length === 1 ? "1 registro" : `${source.length} registros`;
-  return `
+  function renderVehicleRegistrySection({ tone, kicker, title, description, items, emptyMessage, renderer }) {
+    const source = Array.isArray(items) ? items : [];
+    const countLabel = source.length === 1 ? "1 registro" : `${source.length} registros`;
+    return `
     <section class="vehicle-registry-section ${tone ? `is-${tone}` : ""}" data-vehicle-registry-section="${escapeHtml(tone || "default")}">
       <div class="vehicle-registry-section-head">
         <div class="vehicle-registry-section-copy">
@@ -8865,11 +8869,385 @@ function renderVehicleRegistrySection({ tone, kicker, title, description, items,
           ? source.map((entry) => renderer(entry)).join("")
           : `<div class="vehicle-registry-section-empty">${escapeHtml(emptyMessage)}</div>`}
       </div>
-    </section>
-  `;
-}
+      </section>
+    `;
+  }
 
-function vehicleRegistrySectionScrollKey(section, index) {
+  function activeVehicleRegistryView() {
+    const active = vehicleRegistryTabs.find((button) => button.classList.contains("is-active"));
+    return String(active?.getAttribute("data-vehicle-registry-view") || "registry").trim() || "registry";
+  }
+
+  function setVehicleRegistryView(view) {
+    const nextView = String(view || "registry").trim() || "registry";
+    vehicleRegistryTabs.forEach((button) => {
+      button.classList.toggle("is-active", button.getAttribute("data-vehicle-registry-view") === nextView);
+    });
+    vehicleRegistryViewPanels.forEach((panel) => {
+      const isActive = panel.getAttribute("data-vehicle-registry-view-panel") === nextView;
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+    if (nextView === "routes") {
+      syncVehicleRouteControls();
+      void ensureVehicleRouteMap().then(() => {
+        void refreshVehicleRouteGeofences();
+        if (vehicleRouteMapInstance) {
+          vehicleRouteMapInstance.invalidateSize();
+          window.setTimeout(() => vehicleRouteMapInstance && vehicleRouteMapInstance.invalidateSize(), 180);
+        }
+      });
+    }
+  }
+
+  function ensureLeafletForVehicleRoute() {
+    if (typeof window.L !== "undefined" && typeof window.L.map === "function") {
+      return Promise.resolve(window.L);
+    }
+    if (vehicleRouteLeafletLoadPromise) return vehicleRouteLeafletLoadPromise;
+    vehicleRouteLeafletLoadPromise = new Promise((resolve, reject) => {
+      if (!document.querySelector('link[data-vehicle-route-leaflet="css"]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+        link.setAttribute("data-vehicle-route-leaflet", "css");
+        document.head.appendChild(link);
+      }
+      const existing = document.querySelector('script[data-vehicle-route-leaflet="js"]');
+      if (existing) {
+        existing.addEventListener("load", () => resolve(window.L), { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      script.crossOrigin = "";
+      script.setAttribute("data-vehicle-route-leaflet", "js");
+      script.onload = () => resolve(window.L);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+    return vehicleRouteLeafletLoadPromise;
+  }
+
+  async function ensureVehicleRouteMap() {
+    if (!vehicleRouteMap) return null;
+    await ensureLeafletForVehicleRoute();
+    if (vehicleRouteMapInstance) return vehicleRouteMapInstance;
+    vehicleRouteMapInstance = window.L.map(vehicleRouteMap, {
+      zoomControl: true,
+      preferCanvas: true,
+    }).setView(ECUADOR_MAP_CENTER, ECUADOR_MAP_ZOOM);
+    window.L.tileLayer(ESRI_STREET_TILE_URL, {
+      attribution: ESRI_STREET_TILE_ATTRIBUTION,
+      maxZoom: 19,
+      maxNativeZoom: 19,
+    }).addTo(vehicleRouteMapInstance);
+    ensureVehicleRouteGeofenceLayer();
+    return vehicleRouteMapInstance;
+  }
+
+  function ensureVehicleRouteGeofenceLayer() {
+    if (!vehicleRouteMapInstance || typeof window.L === "undefined") return null;
+    const paneName = "vehicle-route-geofence-pane";
+    if (!vehicleRouteMapInstance.getPane(paneName)) {
+      const pane = vehicleRouteMapInstance.createPane(paneName);
+      pane.style.zIndex = "460";
+      pane.style.pointerEvents = "auto";
+    }
+    if (!vehicleRouteGeofenceLayer) {
+      vehicleRouteGeofenceLayer = window.L.featureGroup().addTo(vehicleRouteMapInstance);
+    }
+    return vehicleRouteGeofenceLayer;
+  }
+
+  function routeGeofencePopupMarkup(item) {
+    return `
+      <strong>${escapeHtml(String(item?.name || "Geocerca").toUpperCase())}</strong><br>
+      Tipo: ${escapeHtml(String(item?.type || item?.geofence_type || "--").toUpperCase())}<br>
+      Estado: ${item?.active === false ? "Inactiva" : "Activa"}
+    `;
+  }
+
+  function renderVehicleRouteGeofences(items) {
+    const layer = ensureVehicleRouteGeofenceLayer();
+    if (!layer) return;
+    layer.clearLayers();
+    const source = Array.isArray(items) ? items : [];
+    source.forEach((item) => {
+      const type = String(item?.type || item?.geofence_type || "").toLowerCase();
+      const active = item?.active !== false;
+      const color = geofenceColor(item, active ? GEOFENCE_DEFAULT_COLOR : "#94a3b8");
+      const style = {
+        pane: "vehicle-route-geofence-pane",
+        color,
+        weight: 2,
+        opacity: active ? 0.86 : 0.55,
+        fillColor: color,
+        fillOpacity: active ? 0.12 : 0.08,
+        dashArray: active ? null : "6 6",
+      };
+      let shape = null;
+      if (type === "circle") {
+        const circle = geofenceCircleData(item);
+        if (circle) shape = window.L.circle([circle.lat, circle.lon], { ...style, radius: circle.radius });
+      } else if (type === "polygon") {
+        const latlngs = geofencePolygonLatLngs(item);
+        if (latlngs.length >= 3) shape = window.L.polygon(latlngs, style);
+      }
+      if (!shape) return;
+      shape.bindTooltip(String(item?.name || "Geocerca"), {
+        sticky: true,
+        direction: "top",
+        className: "ops-map-tooltip",
+      });
+      shape.bindPopup(routeGeofencePopupMarkup(item));
+      shape.addTo(layer);
+    });
+    if (!vehicleRouteLayer && source.length > 0 && typeof layer.getBounds === "function") {
+      const bounds = layer.getBounds();
+      if (bounds && bounds.isValid && bounds.isValid()) {
+        vehicleRouteMapInstance.fitBounds(bounds, { padding: [48, 48], maxZoom: 13 });
+      }
+    }
+  }
+
+  function normalizeGeofenceListResponse(data) {
+    if (Array.isArray(data)) return data;
+    if (!data || typeof data !== "object") return [];
+    if (Array.isArray(data.items)) return data.items;
+    if (Array.isArray(data.geofences)) return data.geofences;
+    if (Array.isArray(data.results)) return data.results;
+    if (Array.isArray(data.data)) return data.data;
+    return [];
+  }
+
+  async function refreshVehicleRouteGeofences() {
+    if (!vehicleRouteMapInstance) return;
+    try {
+      const data = await fetchJson("/api/geofences", { timeoutMs: 8000 });
+      lastFleetGeofences = normalizeGeofenceListResponse(data);
+      renderVehicleRouteGeofences(lastFleetGeofences);
+    } catch (error) {
+      renderVehicleRouteGeofences([]);
+      if (vehicleRouteStatus) vehicleRouteStatus.textContent = "No se pudieron cargar las geocercas.";
+    }
+  }
+
+  function vehicleRoutePlateKey(item) {
+    const raw = String(item?.label || item?.identifier || "").trim().toUpperCase();
+    if (!raw || !(reHasLetter(raw) && /\d/.test(raw))) return "";
+    return raw.replace(/[^A-Z0-9]/g, "");
+  }
+
+  function reHasLetter(value) {
+    return /[A-Z]/.test(String(value || "").toUpperCase());
+  }
+
+  function vehicleRouteSourceIdsForItem(item) {
+    if (!item || typeof item !== "object") return [];
+    const plateKey = vehicleRoutePlateKey(item);
+    const related = (Array.isArray(lastVehicleRegistrySnapshot) ? lastVehicleRegistrySnapshot : [])
+      .filter((entry) => entry && entry.entry_kind === "manual")
+      .filter((entry) => !isDroneVehicleTypeCode(entry.vehicle_type_code || entry.vehicle_type))
+      .filter((entry) => plateKey && vehicleRoutePlateKey(entry) === plateKey);
+    const sourceItems = related.length > 0 ? related : [item];
+    const vehicleIds = uniqueTelemetryRouteSourceIds(sourceItems
+      .map((entry) => entry.registration_id)
+      .filter((value) => isUuidLike(value)));
+    if (vehicleIds.length > 0) return vehicleIds;
+    return uniqueTelemetryRouteSourceIds(sourceItems.map((entry) => [
+      entry.api_device_id,
+      entry.identifier,
+      entry.label,
+    ]));
+  }
+
+  function vehicleRouteLabel(item) {
+    const label = String(item?.label || item?.identifier || "").trim();
+    const subtype = String(item?.vehicle_subtype_name || vehicleSubtypeLabelFromCode(item?.vehicle_subtype) || "").trim();
+    return subtype ? `${label} · ${subtype}` : label;
+  }
+
+  function normalizeVehicleRouteSearch(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9]+/g, " ")
+      .trim();
+  }
+
+  function vehicleRouteItems() {
+    return (Array.isArray(lastVehicleRegistrySnapshot) ? lastVehicleRegistrySnapshot : [])
+      .filter((item) => item && item.entry_kind === "manual")
+      .filter((item) => !isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type))
+      .filter((item) => vehicleRouteSourceIdsForItem(item).length > 0)
+      .sort((left, right) => String(left.label || left.identifier || "").localeCompare(String(right.label || right.identifier || ""), "es"));
+  }
+
+  function vehicleRouteSearchText(item) {
+    return normalizeVehicleRouteSearch([
+      vehicleRouteLabel(item),
+      item?.label,
+      item?.identifier,
+      item?.vehicle_subtype_name,
+      vehicleSubtypeLabelFromCode(item?.vehicle_subtype),
+      item?.driver_name,
+      item?.organization_name,
+    ].filter(Boolean).join(" "));
+  }
+
+  function vehicleRouteItemFromInput(value) {
+    const query = normalizeVehicleRouteSearch(value);
+    if (!query) return null;
+    const items = vehicleRouteItems();
+    const exact = items.find((item) => {
+      const label = normalizeVehicleRouteSearch(vehicleRouteLabel(item));
+      const name = normalizeVehicleRouteSearch(item?.label || item?.identifier || "");
+      return label === query || name === query || vehicleRoutePlateKey(item) === query.replace(/[^A-Z0-9]/g, "");
+    });
+    if (exact) return exact;
+    const matches = items.filter((item) => vehicleRouteSearchText(item).includes(query));
+    return matches.length === 1 ? matches[0] : null;
+  }
+
+  function setVehicleRouteFilterItem(item) {
+    if (!vehicleRouteFilter || !item) return;
+    vehicleRouteFilter.value = vehicleRouteLabel(item) || "";
+    vehicleRouteFilter.dataset.vehicleRouteKey = vehicleRegistryManualKey(item);
+  }
+
+  function syncVehicleRouteControls() {
+    if (vehicleRouteDate) {
+      const today = _ecuadorToday();
+      vehicleRouteDate.max = today;
+      if (!vehicleRouteDate.value) vehicleRouteDate.value = today;
+    }
+    if (!vehicleRouteFilter || !vehicleRouteOptions) return;
+    const selectedKey = String(vehicleRouteFilter.dataset.vehicleRouteKey || "").trim();
+    const vehicles = vehicleRouteItems();
+    vehicleRouteOptions.innerHTML = vehicles.map((item) => (
+      `<option value="${escapeHtml(vehicleRouteLabel(item) || "Vehículo sin nombre")}"></option>`
+    )).join("");
+    const selectedItem = vehicles.find((item) => vehicleRegistryManualKey(item) === selectedKey);
+    if (selectedItem) {
+      setVehicleRouteFilterItem(selectedItem);
+    }
+  }
+
+  function selectedVehicleRouteItem() {
+    const key = String(vehicleRouteFilter?.dataset.vehicleRouteKey || "").trim();
+    const items = vehicleRouteItems();
+    const keyed = key ? items.find((item) => vehicleRegistryManualKey(item) === key) : null;
+    if (keyed) return keyed;
+    const typed = vehicleRouteItemFromInput(vehicleRouteFilter?.value || "");
+    if (typed) setVehicleRouteFilterItem(typed);
+    return typed;
+  }
+
+  function clearVehicleRouteMap() {
+    const map = vehicleRouteMapInstance;
+    if (!map) return;
+    [vehicleRouteLayer, vehicleRoutePointsLayer, vehicleRouteStartMarker, vehicleRouteEndMarker].forEach((layer) => {
+      if (layer) map.removeLayer(layer);
+    });
+    vehicleRouteLayer = null;
+    vehicleRoutePointsLayer = null;
+    vehicleRouteStartMarker = null;
+    vehicleRouteEndMarker = null;
+  }
+
+  function vehicleRoutePointTimeLabel(point) {
+    const value = String(point?.timestamp || "").trim();
+    if (!value) return "--";
+    const parsed = Date.parse(value);
+    if (!Number.isFinite(parsed)) return value;
+    return new Date(parsed).toLocaleTimeString("es-EC", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  }
+
+  async function loadSelectedVehicleRouteMap() {
+    if (!vehicleRouteFilter || !vehicleRouteDate || !vehicleRouteStatus) return;
+    const item = selectedVehicleRouteItem();
+    const date = normalizeRouteDate(vehicleRouteDate.value);
+    vehicleRouteDate.value = date;
+    if (!item) {
+      vehicleRouteStatus.textContent = "Escribe y selecciona un vehículo.";
+      return;
+    }
+    setVehicleRouteFilterItem(item);
+    const sources = vehicleRouteSourceIdsForItem(item);
+    if (!sources.length) {
+      vehicleRouteStatus.textContent = "El vehículo seleccionado no tiene fuente de telemetría.";
+      return;
+    }
+    vehicleRouteStatus.textContent = "Cargando recorrido...";
+    if (vehicleRouteLoad) vehicleRouteLoad.disabled = true;
+    try {
+      const map = await ensureVehicleRouteMap();
+      void refreshVehicleRouteGeofences();
+      clearVehicleRouteMap();
+      const routePoints = await fetchRoutePointsForSources(sources, date);
+      if (!Array.isArray(routePoints) || routePoints.length < 2) {
+        vehicleRouteStatus.textContent = "Sin recorrido para ese día.";
+        if (vehicleRouteSummary) vehicleRouteSummary.innerHTML = "";
+        return;
+      }
+      const latlngs = routePoints.map((point) => [point.lat, point.lon]);
+      vehicleRouteLayer = window.L.layerGroup().addTo(map);
+      for (let index = 1; index < routePoints.length; index += 1) {
+        const previous = routePoints[index - 1];
+        const point = routePoints[index];
+        window.L.polyline(
+          routeSegmentLatLngs(previous, point),
+          routeSegmentStyle(point.segment_status || classifyLiveRouteSegment(previous, point)),
+        ).addTo(vehicleRouteLayer);
+      }
+      vehicleRoutePointsLayer = window.L.layerGroup(
+        routePoints.map((point) => window.L.circleMarker([point.lat, point.lon], {
+          radius: 2,
+          stroke: false,
+          fillColor: "#60a5fa",
+          fillOpacity: 0.72,
+          interactive: false,
+        })),
+      ).addTo(map);
+      vehicleRouteStartMarker = window.L.circleMarker(latlngs[0], {
+        radius: 7,
+        color: "#16a34a",
+        fillColor: "#22c55e",
+        fillOpacity: 1,
+        weight: 2,
+      }).bindTooltip("Inicio del recorrido").addTo(map);
+      vehicleRouteEndMarker = window.L.circleMarker(latlngs[latlngs.length - 1], {
+        radius: 7,
+        color: "#dc2626",
+        fillColor: "#ef4444",
+        fillOpacity: 1,
+        weight: 2,
+      }).bindTooltip("Último punto registrado").addTo(map);
+      fitMapToCoordinates(map, latlngs, { maxZoom: 15, singleZoom: 15 });
+      const km = routePoints.reduce((sum, point) => sum + Number(point.distance_km || 0), 0);
+      const sourceCount = sources.length;
+      vehicleRouteStatus.textContent = `${routePoints.length.toLocaleString()} puntos cargados.`;
+      if (vehicleRouteSummary) {
+        vehicleRouteSummary.innerHTML = `
+          <span><strong>${escapeHtml(String(item.label || item.identifier || "Vehículo"))}</strong></span>
+          <span>${Number(km || 0).toFixed(2)} km</span>
+          <span>${routePoints.length.toLocaleString()} puntos</span>
+          <span>${sourceCount} fuente${sourceCount !== 1 ? "s" : ""}</span>
+          <span>${escapeHtml(vehicleRoutePointTimeLabel(routePoints[0]))} - ${escapeHtml(vehicleRoutePointTimeLabel(routePoints[routePoints.length - 1]))}</span>
+        `;
+      }
+    } catch (error) {
+      vehicleRouteStatus.textContent = "No se pudo cargar el recorrido.";
+    } finally {
+      if (vehicleRouteLoad) vehicleRouteLoad.disabled = false;
+      if (vehicleRouteMapInstance) vehicleRouteMapInstance.invalidateSize();
+    }
+  }
+
+  function vehicleRegistrySectionScrollKey(section, index) {
   if (!(section instanceof Element)) return `section:${index}`;
   const explicitKey = String(section.getAttribute("data-vehicle-registry-section") || "").trim();
   if (explicitKey) return explicitKey;
@@ -8912,6 +9290,7 @@ function renderVehicleRegistry(items) {
   const droneEntries = manualEntries.filter((item) => isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type));
   const carEntries = manualEntries.filter((item) => !isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type));
   const selectedItem = findSelectedVehicleRegistryItem(manualEntries);
+  syncVehicleRouteControls();
 
   if (selectedVehicleRegistryKey && !selectedItem) {
     selectedVehicleRegistryKey = null;
@@ -9156,6 +9535,7 @@ function telemetryMarkerKey(item) {
 function telemetryMatchesSelection(item, selectionKey) {
   const key = String(selectionKey || "").trim();
   if (!key || !item || typeof item !== "object") return false;
+  if (telemetryRouteSourceIds(item).some((sourceId) => sourceId === key)) return true;
   const sourceId = telemetryVehicleSourceId(item);
   if (sourceId && sourceId === key) return true;
   const deviceId = telemetryDeviceIdentifier(item);
@@ -9203,6 +9583,205 @@ function getSelectableTelemetryItems(items) {
     .sort((left, right) => telemetryLabel(left).localeCompare(telemetryLabel(right)));
 }
 
+function normalizeTelemetrySearch(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function compactTelemetryTextParts(parts) {
+  const seen = new Set();
+  const compacted = [];
+  parts.forEach((part) => {
+    const text = String(part || "").trim();
+    if (!text) return;
+    const key = normalizeTelemetrySearch(text);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    compacted.push(text);
+  });
+  return compacted;
+}
+
+function telemetryPlateLabel(item) {
+  const extra = telemetryExtra(item);
+  return String(
+    item?.plate
+    || item?.placa
+    || item?.vehicle_plate
+    || item?.license_plate
+    || item?.plate_number
+    || item?.matricula
+    || extra.plate
+    || extra.placa
+    || extra.vehicle_plate
+    || extra.license_plate
+    || extra.plate_number
+    || extra.matricula
+    || "",
+  ).trim();
+}
+
+function telemetryNameLabel(item) {
+  const extra = telemetryExtra(item);
+  return String(
+    item?.name
+    || item?.vehicle_name
+    || item?.vehicle_label
+    || item?.label
+    || item?.display_name
+    || extra.name
+    || extra.vehicle_name
+    || extra.vehicle_label
+    || extra.display_name
+    || extra.label
+    || "",
+  ).trim();
+}
+
+function telemetryFilterDisplayValue(item) {
+  const selectionKey = telemetrySelectionKey(item);
+  const deviceLabel = telemetryDeviceIdentifier(item);
+  const label = telemetryPrimaryVehicleLabel(item)
+    || telemetryLabel(item)
+    || telemetryNameLabel(item)
+    || telemetryPlateLabel(item)
+    || deviceLabel
+    || selectionKey;
+  return String(label || selectionKey || "").trim().toUpperCase();
+}
+
+function telemetryFilterSearchText(item, displayValue) {
+  const extra = telemetryExtra(item);
+  return normalizeTelemetrySearch(compactTelemetryTextParts([
+    displayValue,
+    telemetryLabel(item),
+    telemetryNameLabel(item),
+    telemetryPlateLabel(item),
+    telemetrySelectionKey(item),
+    telemetryDeviceIdentifier(item),
+    item?.camera_name,
+    item?.device_id,
+    item?.api_device_id,
+    item?.identifier,
+    item?.unique_code,
+    item?.source_id,
+    item?.vehicle_source_id,
+    item?.vehicle_id,
+    extra.camera_name,
+    extra.device_id,
+    extra.api_device_id,
+    extra.gps_api_id,
+    extra.imei,
+    extra.identifier,
+    extra.unique_code,
+    extra.source_id,
+    extra.vehicle_source_id,
+    extra.vehicle_id,
+    extra.company,
+  ]).join(" "));
+}
+
+function buildTelemetryFilterOptions(items) {
+  const options = getSelectableTelemetryItems(items)
+    .map((item) => {
+      const selectionKey = telemetrySelectionKey(item);
+      const value = telemetryFilterDisplayValue(item);
+      return {
+        item,
+        selectionKey,
+        value,
+        searchText: telemetryFilterSearchText(item, value),
+      };
+    })
+    .filter((option) => option.selectionKey && option.value);
+
+  return options;
+}
+
+function filteredTelemetryFilterOptions(query) {
+  const terms = normalizeTelemetrySearch(query).split(/\s+/).filter(Boolean);
+  if (!terms.length) return telemetryFilterOptions;
+  return telemetryFilterOptions.filter((option) => (
+    terms.every((term) => option.searchText.includes(term))
+  ));
+}
+
+function renderTelemetryDeviceOptions(query = "") {
+  if (!telemetryDeviceOptions) return;
+  const nextMarkup = filteredTelemetryFilterOptions(query)
+    .slice(0, 80)
+    .map((option) => `<option value="${escapeHtml(option.value)}"></option>`)
+    .join("");
+  if (nextMarkup === lastTelemetryFilterSignature) return;
+  telemetryDeviceOptions.innerHTML = nextMarkup;
+  lastTelemetryFilterSignature = nextMarkup;
+}
+
+function telemetryFilterOptionBySelectionKey(selectionKey) {
+  const key = String(selectionKey || "").trim();
+  if (!key) return null;
+  return telemetryFilterOptions.find((option) => option.selectionKey === key) || null;
+}
+
+function telemetryFilterOptionFromInput(value) {
+  const key = normalizeTelemetrySearch(value);
+  if (!key) return null;
+  return telemetryFilterOptions.find((option) => normalizeTelemetrySearch(option.value) === key) || null;
+}
+
+function clearTelemetrySelectionForSearch() {
+  if (!activeTelemetryDeviceId) return;
+  activeTelemetryDeviceId = null;
+  syncTelemetryMapOverlayFromTelemetrySelection(lastTelemetrySnapshot);
+  updateMap(lastTelemetrySnapshot);
+}
+
+function applyTelemetryDeviceFilterInput() {
+  if (!telemetryDeviceFilter) return;
+  const rawValue = String(telemetryDeviceFilter.value || "");
+  const query = rawValue.trim();
+  renderTelemetryDeviceOptions(query);
+
+  if (!query) {
+    setTelemetrySelection("", { recenter: true });
+    return;
+  }
+
+  const exactOption = telemetryFilterOptionFromInput(query);
+  if (exactOption) {
+    setTelemetrySelection(exactOption.selectionKey, { recenter: true });
+    return;
+  }
+
+  clearTelemetrySelectionForSearch();
+}
+
+function commitTelemetryDeviceFilterInput() {
+  if (!telemetryDeviceFilter) return;
+  const query = String(telemetryDeviceFilter.value || "").trim();
+  if (!query) {
+    setTelemetrySelection("", { recenter: true });
+    renderTelemetryDeviceOptions("");
+    return;
+  }
+
+  const exactOption = telemetryFilterOptionFromInput(query);
+  const matches = filteredTelemetryFilterOptions(query);
+  const option = exactOption || (matches.length === 1 ? matches[0] : null);
+  if (!option) {
+    renderTelemetryDeviceOptions(query);
+    clearTelemetrySelectionForSearch();
+    return;
+  }
+
+  telemetryDeviceFilter.value = option.value;
+  renderTelemetryDeviceOptions(option.value);
+  setTelemetrySelection(option.selectionKey, { recenter: true });
+}
+
 function getSelectedTelemetryItem(items) {
   const source = Array.isArray(items) ? items : [];
   if (!activeTelemetryDeviceId) {
@@ -9214,10 +9793,10 @@ function getSelectedTelemetryItem(items) {
 function setTelemetrySelection(deviceId, { recenter = true } = {}) {
   activeTelemetryDeviceId = String(deviceId || "").trim() || null;
   if (telemetryDeviceFilter && document.activeElement !== telemetryDeviceFilter) {
-    telemetryDeviceFilter.value = activeTelemetryDeviceId || "";
+    const selectedOption = telemetryFilterOptionBySelectionKey(activeTelemetryDeviceId);
+    telemetryDeviceFilter.value = selectedOption ? selectedOption.value : "";
   }
   syncTelemetryMapOverlayFromTelemetrySelection(lastTelemetrySnapshot);
-  syncTelemetryVideoPanelFromSelection(lastTelemetrySnapshot);
   if (recenter) {
     if (activeTelemetryDeviceId) {
       const selectedItem = getSelectedTelemetryItem(lastTelemetrySnapshot);
@@ -9232,10 +9811,10 @@ function setTelemetrySelection(deviceId, { recenter = true } = {}) {
 function syncTelemetryDeviceFilter(items) {
   if (!telemetryDeviceFilter) return;
 
-  const droneItems = getSelectableTelemetryItems(items);
+  const nextOptions = buildTelemetryFilterOptions(items);
   const availableIds = new Set(
-    droneItems
-      .map((item) => telemetrySelectionKey(item))
+    nextOptions
+      .map((option) => option.selectionKey)
       .filter(Boolean),
   );
 
@@ -9243,28 +9822,15 @@ function syncTelemetryDeviceFilter(items) {
     activeTelemetryDeviceId = null;
   }
 
-  const nextValue = activeTelemetryDeviceId || "";
-  const nextMarkup = [
-    '<option value="">Todos los dispositivos</option>',
-    ...droneItems.map((item) => {
-      const selectionKey = telemetrySelectionKey(item);
-      const deviceLabel = telemetryDeviceIdentifier(item);
-      const label = telemetryLabel(item) || deviceLabel || selectionKey;
-      const suffix = deviceLabel && deviceLabel !== label ? ` · ${deviceLabel}` : "";
-      return `<option value="${escapeHtml(selectionKey)}">${escapeHtml(`${label}${suffix}`.toUpperCase())}</option>`;
-    }),
-  ].join("");
   const isFocused = document.activeElement === telemetryDeviceFilter;
-  const optionsChanged = nextMarkup !== lastTelemetryFilterSignature;
+  telemetryFilterOptions = nextOptions;
 
-  if (optionsChanged && !isFocused) {
-    telemetryDeviceFilter.innerHTML = nextMarkup;
-    lastTelemetryFilterSignature = nextMarkup;
+  if (!isFocused) {
+    const selectedOption = telemetryFilterOptionBySelectionKey(activeTelemetryDeviceId);
+    telemetryDeviceFilter.value = selectedOption ? selectedOption.value : "";
   }
-  if (!isFocused && telemetryDeviceFilter.value !== nextValue) {
-    telemetryDeviceFilter.value = nextValue;
-  }
-  telemetryDeviceFilter.disabled = droneItems.length === 0;
+  renderTelemetryDeviceOptions(isFocused ? telemetryDeviceFilter.value : "");
+  telemetryDeviceFilter.disabled = telemetryFilterOptions.length === 0;
 }
 
 function telemetryHighlights(item) {
@@ -9751,6 +10317,11 @@ function setOsintLayerSelection(selection) {
 
 function ensureFleetGeofenceLayer() {
   if (!mapInstance || typeof window.L === "undefined") return null;
+  if (!mapInstance.getPane(FLEET_GEOFENCE_PANE)) {
+    const pane = mapInstance.createPane(FLEET_GEOFENCE_PANE);
+    pane.style.zIndex = "470";
+    pane.style.pointerEvents = "auto";
+  }
   if (!fleetGeofenceLayer) {
     fleetGeofenceLayer = window.L.layerGroup().addTo(mapInstance);
   }
@@ -9839,6 +10410,7 @@ function renderGeofenceDraft() {
 
   if (latlngs.length >= 2) {
     window.L.polyline(latlngs, {
+      pane: FLEET_GEOFENCE_PANE,
       color,
       weight: 3,
       opacity: 0.92,
@@ -9847,6 +10419,7 @@ function renderGeofenceDraft() {
   }
   if (latlngs.length >= 3) {
     window.L.polygon(latlngs, {
+      pane: FLEET_GEOFENCE_PANE,
       color,
       weight: 2,
       opacity: 0.95,
@@ -9855,13 +10428,30 @@ function renderGeofenceDraft() {
     }).addTo(layer);
   }
   latlngs.forEach((latlng, index) => {
-    window.L.circleMarker(latlng, {
-      radius: 5,
-      color,
-      weight: 2,
-      fillColor: "#ffffff",
-      fillOpacity: 0.96,
-    }).bindTooltip(String(index + 1), {
+    const marker = window.L.marker(latlng, {
+      draggable: true,
+      icon: window.L.divIcon({
+        className: "geofence-vertex-marker",
+        html: `<span>${escapeHtml(String(index + 1))}</span>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+      }),
+      keyboard: false,
+    });
+    marker.on("dragend", (event) => {
+      const nextLatLng = event.target?.getLatLng?.();
+      if (!nextLatLng) return;
+      geofenceDraftPoints[index] = { lat: Number(nextLatLng.lat), lon: Number(nextLatLng.lng) };
+      renderGeofenceDraft();
+    });
+    marker.on("dblclick", (event) => {
+      event.originalEvent?.preventDefault?.();
+      event.originalEvent?.stopPropagation?.();
+      if (geofenceDraftPoints.length <= 3) return;
+      geofenceDraftPoints.splice(index, 1);
+      renderGeofenceDraft();
+    });
+    marker.bindTooltip("Arrastra para mover. Doble clic para eliminar.", {
       permanent: false,
       direction: "top",
       className: "ops-map-tooltip",
@@ -9879,38 +10469,56 @@ function stopFleetGeofencePolygonDraw({ clearDraft = true } = {}) {
   }
   geofenceDraftDoubleClickZoomWasEnabled = false;
   geofenceDrawingActive = false;
+  geofenceEditingId = null;
+  geofenceEditingItem = null;
   if (telemetryMap) telemetryMap.classList.remove("is-drawing-geofence");
   if (fleetGeofenceNew) fleetGeofenceNew.textContent = "Nueva zona";
+  if (geofenceDrawTitle) geofenceDrawTitle.textContent = "Nueva geocerca";
   if (geofenceDrawPanel) geofenceDrawPanel.hidden = true;
   setGeofenceDrawFeedback("");
   if (clearDraft) {
     geofenceDraftPoints = [];
     clearGeofenceDraftLayer();
   }
+  renderFleetGeofences(lastFleetGeofences);
   updateGeofenceDrawControls();
 }
 
-function startFleetGeofencePolygonDraw() {
+function startFleetGeofencePolygonDraw({ item = null } = {}) {
+  if (!CAN_MANAGE_GEOFENCES) return;
   if (!ensureMap() || !mapInstance || typeof window.L === "undefined") return;
   if (geofenceDrawingActive) {
     stopFleetGeofencePolygonDraw();
-    return;
+    if (!item) return;
   }
+  const editId = item ? String(item.id || "") : "";
+  const editPoints = item ? geofencePolygonLatLngs(item) : [];
   stopTelemetryMapInitialPreview();
   setTelemetryMapManualControl(true);
   geofenceDrawingActive = true;
-  geofenceDraftPoints = [];
+  geofenceEditingId = editId || null;
+  geofenceEditingItem = item || null;
+  geofenceDraftPoints = editPoints.map((point) => ({ lat: Number(point[0]), lon: Number(point[1]) }));
   clearGeofenceDraftLayer();
-  setGeofenceDrawFeedback("");
-  if (geofenceDrawName) geofenceDrawName.value = "";
-  if (geofenceDrawColor) geofenceDrawColor.value = GEOFENCE_DEFAULT_COLOR;
+  setGeofenceDrawFeedback(geofenceEditingId ? "Arrastra los puntos para moverlos. Haz clic en el mapa para agregar puntos." : "Haz clic en el mapa para agregar puntos.");
+  if (geofenceDrawTitle) geofenceDrawTitle.textContent = geofenceEditingId ? "Editar geocerca" : "Nueva geocerca";
+  if (geofenceDrawName) geofenceDrawName.value = geofenceEditingId ? String(item?.name || "") : "";
+  if (geofenceDrawColor) geofenceDrawColor.value = geofenceEditingId ? geofenceColor(item) : GEOFENCE_DEFAULT_COLOR;
   if (geofenceDrawPanel) geofenceDrawPanel.hidden = false;
-  if (fleetGeofenceNew) fleetGeofenceNew.textContent = "Dibujando";
+  if (fleetGeofenceNew) fleetGeofenceNew.textContent = geofenceEditingId ? "Editando" : "Dibujando";
   if (telemetryMap) telemetryMap.classList.add("is-drawing-geofence");
+  const layer = ensureFleetGeofenceLayer();
+  if (layer) layer.clearLayers();
   geofenceDraftDoubleClickZoomWasEnabled = Boolean(mapInstance.doubleClickZoom?.enabled());
   if (mapInstance.doubleClickZoom) mapInstance.doubleClickZoom.disable();
   mapInstance.on("click", handleGeofenceDraftMapClick);
   mapInstance.on("dblclick", handleGeofenceDraftMapDoubleClick);
+  renderGeofenceDraft();
+  if (editPoints.length >= 3) {
+    try {
+      mapInstance.fitBounds(editPoints, { padding: [40, 40], maxZoom: 17 });
+    } catch (error) {}
+  }
   updateGeofenceDrawControls();
 }
 
@@ -9945,6 +10553,7 @@ function handleGeofenceDraftMapDoubleClick(event) {
 }
 
 async function saveFleetGeofencePolygon() {
+  if (!CAN_MANAGE_GEOFENCES) return;
   const name = String(geofenceDrawName?.value || "").trim();
   if (!name || geofenceDraftPoints.length < 3) {
     updateGeofenceDrawControls();
@@ -9967,14 +10576,19 @@ async function saveFleetGeofencePolygon() {
     },
     active: true,
   };
+  if (geofenceEditingItem && typeof geofenceEditingItem === "object") {
+    payload.active = geofenceEditingItem.active !== false;
+    payload.description = geofenceEditingItem.description || "";
+  }
   if (companyId) {
     payload.company_id = companyId;
   }
   if (geofenceDrawSave) geofenceDrawSave.disabled = true;
   setGeofenceDrawFeedback("Guardando...", "");
   try {
-    await fetchJson("/api/geofences", {
-      method: "POST",
+    const isEditing = Boolean(geofenceEditingId);
+    await fetchJson(isEditing ? `/api/geofences/${encodeURIComponent(geofenceEditingId)}` : "/api/geofences", {
+      method: isEditing ? "PUT" : "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
       timeoutMs: 12000,
@@ -10021,15 +10635,18 @@ function geofencePolygonLatLngs(item) {
 
 function geofencePopupMarkup(item) {
   const id = escapeHtml(String(item.id || ""));
+  const actions = CAN_MANAGE_GEOFENCES ? `
+    <div class="geofence-popup-actions">
+      <button type="button" class="geofence-popup-button" data-geofence-edit="${id}">Editar</button>
+      <button type="button" class="geofence-popup-button is-danger" data-geofence-delete="${id}">Eliminar</button>
+    </div>
+  ` : "";
   return `
     <strong>${escapeHtml(String(item.name || "Geocerca").toUpperCase())}</strong><br>
     Tipo: ${escapeHtml(String(item.type || item.geofence_type || "--").toUpperCase())}<br>
     Estado: ${item.active === false ? "Inactiva" : "Activa"}<br>
     ${item.description ? `${escapeHtml(String(item.description))}<br>` : ""}
-    <div class="geofence-popup-actions">
-      <button type="button" class="geofence-popup-button" data-geofence-edit="${id}">Editar</button>
-      <button type="button" class="geofence-popup-button is-danger" data-geofence-delete="${id}">Eliminar</button>
-    </div>
+    ${actions}
   `;
 }
 
@@ -10043,6 +10660,7 @@ function renderFleetGeofences(items) {
     const active = item.active !== false;
     const color = geofenceColor(item, active ? GEOFENCE_DEFAULT_COLOR : "#94a3b8");
     const style = {
+      pane: FLEET_GEOFENCE_PANE,
       color,
       weight: 2,
       opacity: active ? 0.86 : 0.55,
@@ -10059,9 +10677,16 @@ function renderFleetGeofences(items) {
       if (latlngs.length >= 3) shape = window.L.polygon(latlngs, style);
     }
     if (!shape) return;
-    shape.bindTooltip(String(item.name || "Geocerca"));
+    shape.bindTooltip(String(item.name || "Geocerca"), {
+      sticky: true,
+      direction: "top",
+      className: "ops-map-tooltip",
+    });
     shape.bindPopup(geofencePopupMarkup(item));
     shape.addTo(layer);
+    if (typeof shape.bringToFront === "function") {
+      shape.bringToFront();
+    }
   });
 }
 
@@ -10082,31 +10707,37 @@ async function refreshFleetGeofences() {
 }
 
 async function editFleetGeofence(geofenceId) {
+  if (!CAN_MANAGE_GEOFENCES) return;
   const item = lastFleetGeofences.find((entry) => String(entry.id || "") === String(geofenceId || ""));
   if (!item) return;
-  const name = window.prompt("Nombre de la geocerca", String(item.name || ""));
-  if (!name || !name.trim()) return;
-  const currentColor = geofenceColor(item);
-  const colorInput = window.prompt("Color HEX", currentColor);
-  const color = normalizeGeofenceColor(colorInput || currentColor, currentColor);
-  const geometry = {
-    ...(item.geometry || {}),
-    color,
-    style: {
-      ...((item.geometry && typeof item.geometry.style === "object") ? item.geometry.style : {}),
+  const type = String(item.type || item.geofence_type || "").trim().toLowerCase();
+  if (type === "polygon") {
+    startFleetGeofencePolygonDraw({ item });
+    return;
+  }
+  if (type === "circle") {
+    const name = window.prompt("Nombre de la geocerca", String(item.name || ""));
+    if (!name || !name.trim()) return;
+    const currentColor = geofenceColor(item);
+    const colorInput = window.prompt("Color HEX", currentColor);
+    const color = normalizeGeofenceColor(colorInput || currentColor, currentColor);
+    const geometry = {
+      ...(item.geometry || {}),
       color,
-      fillColor: color,
-    },
-  };
-  const payload = {
-    ...item,
-    name: name.trim(),
-    type: item.type || item.geofence_type,
-    active: item.active !== false,
-    color,
-    geometry,
-  };
-  if (String(payload.type || "").toLowerCase() === "circle") {
+      style: {
+        ...((item.geometry && typeof item.geometry.style === "object") ? item.geometry.style : {}),
+        color,
+        fillColor: color,
+      },
+    };
+    const payload = {
+      ...item,
+      name: name.trim(),
+      type: item.type || item.geofence_type,
+      active: item.active !== false,
+      color,
+      geometry,
+    };
     const circle = geofenceCircleData(item);
     const radiusText = window.prompt("Radio en metros", String(circle?.radius || 250));
     const radius = Number(radiusText);
@@ -10116,17 +10747,18 @@ async function editFleetGeofence(geofenceId) {
       payload.lat = circle.lat;
       payload.lon = circle.lon;
     }
+    await fetchJson(`/api/geofences/${encodeURIComponent(String(geofenceId))}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      timeoutMs: 12000,
+    });
+    await refreshFleetGeofences();
   }
-  await fetchJson(`/api/geofences/${encodeURIComponent(String(geofenceId))}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-    timeoutMs: 12000,
-  });
-  await refreshFleetGeofences();
 }
 
 async function deleteFleetGeofence(geofenceId) {
+  if (!CAN_MANAGE_GEOFENCES) return;
   if (!window.confirm("Eliminar esta geocerca")) return;
   await fetchJson(`/api/geofences/${encodeURIComponent(String(geofenceId))}`, {
     method: "DELETE",
@@ -10209,6 +10841,10 @@ function telemetryListMarkup(items) {
 
 function renderTelemetryFocus(items) {
   if (!telemetryFocusCard) return;
+  if (isRouteDateInputFocused()) {
+    _updateRouteToggleBtn();
+    return;
+  }
   if (!Array.isArray(items) || items.length === 0) {
     telemetryFocusCard.innerHTML = '<div class="empty-state">Sin telemetría disponible.</div>';
     return;
@@ -10276,7 +10912,8 @@ function renderTelemetryFocus(items) {
   const showBatteryCard = !isGroundTelemetryVehicle(item);
 
   const hasGpsHistory = isArtemis || (item.device_kind === "vehicle");
-  const routeBtnLabel = routeVisible ? "Ocultar recorrido" : "Ver recorrido del día";
+  const routeControlDate = currentRouteDate();
+  const routeBtnLabel = routeToggleLabel();
 
   telemetryFocusCard.innerHTML = `
     <div class="telemetry-focus-content">
@@ -10289,6 +10926,10 @@ function renderTelemetryFocus(items) {
         <span class="telemetry-focus-freshness" style="color:${colorForFreshness(isVehicleOperational(item) ? item.freshness : "lost")}">${isArtemis ? vehicleOperationalLabel(item) : telemetryFreshnessLabel(item.freshness)}</span>
       </div>
       ${hasGpsHistory ? `<div class="route-toggle-bar">
+        <label class="route-date-field" for="route-date-input">
+          <span>Día</span>
+          <input id="route-date-input" type="date" value="${escapeHtml(routeControlDate)}" max="${escapeHtml(_ecuadorToday())}" aria-label="Fecha del recorrido">
+        </label>
         <button id="route-toggle-btn" class="route-toggle-btn${routeVisible ? " is-active" : ""}" type="button">${escapeHtml(routeBtnLabel)}</button>
       </div>` : ""}
 
@@ -10460,25 +11101,11 @@ function updateMap(items) {
       marker,
       `${telemetryLabel(item).toUpperCase()} · ${statusLabel}`,
     );
-    const extraData = item.extra && typeof item.extra === "object" ? item.extra : {};
-    const isArtemisVehicle = extraData.source === "artemis";
-    bindPrettyPopup(marker, `
-      <strong>${telemetryLabel(item).toUpperCase()}</strong><br>
-      ${isArtemisVehicle ? `Empresa: ${escapeHtml(String(extraData.company || "--"))}<br>` : `ID: ${escapeHtml(String(item.device_id || "--"))}<br>`}
-      Estado: <span style="color:${colorForFreshness(isVehicleOperational(item) ? item.freshness : "lost")};font-weight:700">${statusLabel}</span><br>
-      ${isArtemisVehicle ? `Motor: <span style="color:${extraData.ignition === 'on' ? '#22c55e' : extraData.ignition === 'off' ? '#f59e0b' : '#94a3b8'};font-weight:700">${extraData.ignition === 'on' ? 'ENCENDIDO' : extraData.ignition === 'off' ? 'APAGADO' : 'DESCONOCIDO'}</span><br>` : `ID API: ${escapeHtml(String((extraData.api_device_id || extraData.gps_api_id) || "--"))}<br>`}
-      ${isArtemisVehicle ? `Evento: ${escapeHtml(String(extraData.event || "--"))}<br>` : ""}
-      ${item.vehicle_type ? `Tipo: ${String(item.vehicle_type).toUpperCase()}<br>` : ""}
-      ${!isArtemisVehicle && cameraName ? `Cámara: ${cameraPowerLabel(cameraName)}<br>` : ""}
-      Lat: ${lat.toFixed(6)}<br>
-      Lon: ${lon.toFixed(6)}<br>
-      Velocidad: ${isArtemisVehicle ? formatTelemetryValue(item.speed, " km/h") : formatTelemetryValue(resolveTelemetrySpeed(item), " m/s")}<br>
-      Hora: ${escapeHtml(isArtemisVehicle ? String(extraData.gps_datetime || "--") : resolveTelemetryTimestamp(item).timeLabel)}<br>
-      Rumbo: ${formatTelemetryValue(item.heading, "°")}<br>
-      ${isArtemisVehicle ? `Zona: ${escapeHtml(String(extraData.zone || "--"))}<br>Dirección: ${escapeHtml(String(extraData.address || "--"))}<br>` : `Altitud: ${formatTelemetryValue(item.altitude, " m")}<br>`}
-      ${item.notes ? `Notas: ${escapeHtml(String(item.notes))}<br>` : ""}
-      ${!isArtemisVehicle ? (telemetryHighlights(item) || "") : ""}
-    `);
+    if (typeof marker.unbindPopup === "function" && marker.getPopup()) {
+      marker.unbindPopup();
+      marker.__popupHtml = "";
+      marker.__hoverPopupActive = false;
+    }
     nextIds.add(markerKey);
     bounds.push([lat, lon]);
   });
@@ -10531,7 +11158,6 @@ async function refreshTelemetry() {
       syncTelemetryMapOverlayFromTelemetrySelection(lastTelemetrySnapshot);
     }
     syncTelemetryDeviceFilter(lastTelemetrySnapshot);
-    syncTelemetryVideoPanelFromSelection(lastTelemetrySnapshot);
     updateMap(lastTelemetrySnapshot);
     await refreshHighValueObjectives();
   } catch (error) {
@@ -10539,7 +11165,6 @@ async function refreshTelemetry() {
       syncTelemetryMapOverlayFromTelemetrySelection(lastTelemetrySnapshot);
     }
     syncTelemetryDeviceFilter(lastTelemetrySnapshot);
-    syncTelemetryVideoPanelFromSelection(lastTelemetrySnapshot);
     updateMap(lastTelemetrySnapshot);
     await refreshHighValueObjectives();
   } finally {
@@ -11045,10 +11670,6 @@ if (audioVolume) {
   audioVolume.addEventListener("input", applyAudioState);
 }
 
-if (cameraRegisterOpen) {
-  cameraRegisterOpen.addEventListener("click", openCameraRegisterModal);
-}
-
 if (vehicleRegisterOpen) {
   vehicleRegisterOpen.addEventListener("click", () => {
     void openVehicleRegisterModal();
@@ -11059,8 +11680,45 @@ vehicleRegistrySelectedActionButtons.forEach((button) => {
   button.addEventListener("click", () => handleVehicleRegistryActionButton(button));
 });
 
-if (cameraRegisterForm) {
-  cameraRegisterForm.addEventListener("submit", registerCamera);
+vehicleRegistryTabs.forEach((button) => {
+  button.addEventListener("click", () => {
+    setVehicleRegistryView(button.getAttribute("data-vehicle-registry-view"));
+  });
+});
+
+if (vehicleRouteLoad) {
+  vehicleRouteLoad.addEventListener("click", () => {
+    void loadSelectedVehicleRouteMap();
+  });
+}
+
+if (vehicleRouteFilter) {
+  const handleVehicleRouteFilterChange = () => {
+    const item = vehicleRouteItemFromInput(vehicleRouteFilter.value);
+    if (item) {
+      setVehicleRouteFilterItem(item);
+    } else {
+      vehicleRouteFilter.dataset.vehicleRouteKey = "";
+    }
+    clearVehicleRouteMap();
+    if (vehicleRouteSummary) vehicleRouteSummary.innerHTML = "";
+    if (vehicleRouteStatus) {
+      vehicleRouteStatus.textContent = item
+        ? "Vehículo seleccionado. Carga el recorrido."
+        : "Escribe y selecciona un vehículo.";
+    }
+  };
+  vehicleRouteFilter.addEventListener("input", handleVehicleRouteFilterChange);
+  vehicleRouteFilter.addEventListener("change", handleVehicleRouteFilterChange);
+}
+
+if (vehicleRouteDate) {
+  vehicleRouteDate.addEventListener("change", () => {
+    vehicleRouteDate.value = normalizeRouteDate(vehicleRouteDate.value);
+    clearVehicleRouteMap();
+    if (vehicleRouteSummary) vehicleRouteSummary.innerHTML = "";
+    if (vehicleRouteStatus) vehicleRouteStatus.textContent = "Fecha seleccionada. Carga el recorrido.";
+  });
 }
 
 if (vehicleRegisterForm) {
@@ -11094,6 +11752,10 @@ if (vehicleRegisterType) {
   });
 }
 
+if (vehicleRegisterSubtype) {
+  vehicleRegisterSubtype.addEventListener("change", () => setVehicleRegisterFeedback(""));
+}
+
 if (vehicleRegisterTelemetryMode) {
   vehicleRegisterTelemetryMode.addEventListener("change", () => {
     updateVehicleRegisterTypeCopy();
@@ -11111,6 +11773,10 @@ if (vehicleRegisterOwner) {
 
 if (vehicleRegisterLabel) {
   vehicleRegisterLabel.addEventListener("input", () => setVehicleRegisterFeedback(""));
+}
+
+if (vehicleRegisterDriver) {
+  vehicleRegisterDriver.addEventListener("input", () => setVehicleRegisterFeedback(""));
 }
 
 if (vehicleRegisterIdentifier) {
@@ -11588,11 +12254,16 @@ if (vehicleRegisterBackdrop) {
 }
 
 if (telemetryDeviceFilter) {
-  telemetryDeviceFilter.addEventListener("change", () => {
-    setTelemetrySelection(telemetryDeviceFilter.value, { recenter: true });
+  telemetryDeviceFilter.addEventListener("input", applyTelemetryDeviceFilterInput);
+  telemetryDeviceFilter.addEventListener("search", applyTelemetryDeviceFilterInput);
+  telemetryDeviceFilter.addEventListener("change", commitTelemetryDeviceFilterInput);
+  telemetryDeviceFilter.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    commitTelemetryDeviceFilterInput();
   });
   telemetryDeviceFilter.addEventListener("blur", () => {
-    syncTelemetryDeviceFilter(lastTelemetrySnapshot);
+    commitTelemetryDeviceFilterInput();
   });
 }
 
@@ -11647,13 +12318,12 @@ if (telemetryFocusCard) {
       if (!routeVisible) {
         clearRoute();
         _updateRouteToggleBtn();
-      } else if (_lastRouteDeviceId) {
-        const today = new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
+      } else if (_lastRouteSources.length > 0) {
         _lastRouteReloadAt = 0;
         _lastRoutePoint = null;
-        loadVehicleRoute(_lastRouteDeviceId, today);
+        loadVehicleRoute(_lastRouteSources, currentRouteDate());
       } else {
-        _updateRouteToggleBtn();
+        syncVehicleRoute(lastTelemetrySnapshot);
       }
       return;
     }
@@ -11663,19 +12333,26 @@ if (telemetryFocusCard) {
     if (!row) return;
     setTelemetrySelection(row.getAttribute("data-telemetry-device-id"), { recenter: true });
   });
+
+  const handleRouteDateInput = (event) => {
+    const input = event.target instanceof HTMLInputElement && event.target.id === "route-date-input"
+      ? event.target
+      : null;
+    if (!input) return;
+    if (event.type === "input" && input.value && !/^\d{4}-\d{2}-\d{2}$/.test(input.value)) return;
+    setRouteSelectedDate(input.value, { reload: true });
+  };
+
+  telemetryFocusCard.addEventListener("change", handleRouteDateInput);
+  telemetryFocusCard.addEventListener("input", handleRouteDateInput);
 }
 
 if (telemetryMapRecenter) {
   telemetryMapRecenter.addEventListener("click", requestTelemetryMapRecenter);
 }
 
-if (fleetGeofenceRefresh) {
-  fleetGeofenceRefresh.addEventListener("click", () => {
-    void refreshFleetGeofences();
-  });
-}
-
 if (fleetGeofenceNew) {
+  fleetGeofenceNew.hidden = !CAN_MANAGE_GEOFENCES;
   fleetGeofenceNew.addEventListener("click", () => {
     startFleetGeofencePolygonDraw();
   });
@@ -11728,13 +12405,6 @@ document.addEventListener("keydown", (event) => {
     stopFleetGeofencePolygonDraw();
   }
 });
-
-if (telemetryMapSwap) {
-  setTelemetryMapVideoLayout(telemetryMapVideoLayout);
-  telemetryMapSwap.addEventListener("click", () => {
-    setTelemetryMapVideoLayout(telemetryMapVideoLayout === "video" ? "map" : "video");
-  });
-}
 
 const telemetryTrackExport = document.getElementById("telemetry-track-export");
 if (telemetryTrackExport) {
@@ -12181,7 +12851,7 @@ async function loadKmSummary(panel, options = {}) {
       <table class="vehicle-km-table">
         <thead>
           <tr>
-            <th>Fecha</th><th>Km</th><th>V. máx</th><th>Puntos GPS</th><th>Encendido</th>
+            <th>Fecha</th><th>Km</th><th>Encendido</th>
           </tr>
         </thead>
         <tbody>
@@ -12189,8 +12859,6 @@ async function loadKmSummary(panel, options = {}) {
             <tr class="${Number(r.km) > 0 ? "km-row-active" : "km-row-empty"}">
               <td>${escapeHtml(r.date || "")}</td>
               <td><strong>${Number(r.km || 0).toFixed(2)}</strong></td>
-              <td>${Number(r.max_speed || 0).toFixed(1)} km/h</td>
-              <td>${r.points || 0}</td>
               <td>${r.ignition_on > 0 ? `<span class="km-ign-on">ON×${r.ignition_on}</span>` : ""}
                   ${r.ignition_off > 0 ? `<span class="km-ign-off">OFF×${r.ignition_off}</span>` : ""}
                   ${!r.ignition_on && !r.ignition_off ? "—" : ""}</td>
@@ -12247,12 +12915,63 @@ let routeStartMarker = null;
 let routeEndMarker = null;
 let routeDeviceId = null;
 let routeDate = null;
+let routeSelectedDate = _ecuadorToday();
 let routeVisible = true;
 let routePointRenderer = null;
 let routeRequestToken = 0;
+let _lastRouteDeviceId = null;
+let _lastRouteSources = [];
+let _lastRouteReloadAt = 0;
+let _lastRoutePoint = null; // último punto vivo añadido a la polyline
 const ROUTE_SEGMENT_MAX_GAP_SECONDS = 30 * 60;
 const ROUTE_SEGMENT_MAX_DISTANCE_KM = 8;
 const ROUTE_SEGMENT_MAX_SPEED_KMH = 180;
+const _ROUTE_RELOAD_MS = 5 * 60 * 1000; // recarga completa desde API cada 5 minutos
+
+function normalizeRouteDate(value) {
+  const today = _ecuadorToday();
+  const raw = String(value || "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return today;
+  return raw > today ? today : raw;
+}
+
+function currentRouteDate() {
+  routeSelectedDate = normalizeRouteDate(routeSelectedDate);
+  return routeSelectedDate;
+}
+
+function formatRouteDateLabel(value) {
+  const dateStr = normalizeRouteDate(value);
+  if (dateStr === _ecuadorToday()) return "del día";
+  const yesterday = new Date(Date.now() - 5 * 3600 * 1000 - 86400000).toISOString().slice(0, 10);
+  if (dateStr === yesterday) return "de ayer";
+  const [year, month, day] = dateStr.split("-").map((part) => Number(part));
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const label = date.toLocaleDateString("es-EC", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  }).replace(/\./g, "");
+  return `del ${label}`;
+}
+
+function routeToggleLabel() {
+  return routeVisible ? "Ocultar recorrido" : `Ver recorrido ${formatRouteDateLabel(currentRouteDate())}`;
+}
+
+function isCurrentRouteDateToday() {
+  return currentRouteDate() === _ecuadorToday();
+}
+
+function isRouteDateInputFocused() {
+  return document.activeElement instanceof HTMLInputElement
+    && document.activeElement.id === "route-date-input";
+}
+
+function rememberRouteSources(sources) {
+  _lastRouteSources = normalizeRouteSourceList(sources);
+  _lastRouteDeviceId = routeSourceSignature(_lastRouteSources);
+}
 
 function routePointMarkerOptions() {
   const options = {
@@ -12300,6 +13019,11 @@ function normalizeRoutePoints(points) {
         timestamp: String(point?.gps_time || point?.timestamp || point?.received_at || ""),
         segment_status: String(point?.segment_status || "normal").toLowerCase(),
         segment_reason: String(point?.segment_reason || ""),
+        segment_geometry: Array.isArray(point?.segment_geometry)
+          ? point.segment_geometry
+              .map((coord) => Array.isArray(coord) && coord.length >= 2 ? [Number(coord[0]), Number(coord[1])] : null)
+              .filter((coord) => coord && Number.isFinite(coord[0]) && Number.isFinite(coord[1]))
+          : [],
         distance_km: toFiniteNumber(point?.distance_km) || 0,
         elapsed_seconds: toFiniteNumber(point?.elapsed_seconds) || 0,
         implied_speed_kmh: toFiniteNumber(point?.implied_speed_kmh) || 0,
@@ -12309,24 +13033,70 @@ function normalizeRoutePoints(points) {
     .filter(Boolean);
 }
 
+function routePointTimestampMs(point) {
+  const parsed = Date.parse(String(point?.timestamp || point?.gps_time || point?.received_at || ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function normalizeRouteSourceList(value) {
+  return uniqueTelemetryRouteSourceIds(Array.isArray(value) ? value : [value]);
+}
+
+function routeSourceSignature(sources) {
+  return normalizeRouteSourceList(sources)
+    .map((sourceId) => sourceId.toLowerCase())
+    .sort()
+    .join("|");
+}
+
+function routeSourceQuery(sourceId, dateStr) {
+  const params = new URLSearchParams();
+  params.set(isUuidLike(sourceId) ? "vehicle_id" : "device_id", sourceId);
+  params.set("day", dateStr);
+  return params.toString();
+}
+
+async function fetchRoutePointsForSources(sources, dateStr) {
+  const sourceList = normalizeRouteSourceList(sources);
+  const results = await Promise.allSettled(sourceList.map((sourceId) => (
+    fetchJson(`/api/telemetry/history?${routeSourceQuery(sourceId, dateStr)}`, { timeoutMs: 15000 })
+  )));
+  const seen = new Set();
+  return results
+    .filter((result) => result.status === "fulfilled" && Array.isArray(result.value))
+    .flatMap((result) => normalizeRoutePoints(result.value))
+    .sort((left, right) => routePointTimestampMs(left) - routePointTimestampMs(right))
+    .filter((point) => {
+      const key = [
+        point.timestamp || "",
+        Number(point.lat).toFixed(6),
+        Number(point.lon).toFixed(6),
+      ].join("|");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
+
 function routeSegmentStyle(status) {
   const normalized = String(status || "normal").toLowerCase();
-  if (normalized === "gap") {
+  if (normalized === "raw") {
     return {
       color: "#f97316",
-      weight: 3,
-      opacity: 0.82,
-      dashArray: "9 9",
+      weight: 3.25,
+      opacity: 0.9,
       smoothFactor: 0.4,
+      interactive: false,
     };
   }
-  if (normalized === "suspicious") {
+  if (normalized === "suspicious" || normalized === "gap") {
     return {
       color: "#ef4444",
       weight: 3,
       opacity: 0.86,
-      dashArray: "5 8",
+      dashArray: "3 7",
       smoothFactor: 0.4,
+      interactive: false,
     };
   }
   return {
@@ -12334,7 +13104,15 @@ function routeSegmentStyle(status) {
     weight: 3.5,
     opacity: 0.85,
     smoothFactor: 1.2,
+    interactive: false,
   };
+}
+
+function routeSegmentLatLngs(previous, point) {
+  if (Array.isArray(point?.segment_geometry) && point.segment_geometry.length >= 2) {
+    return point.segment_geometry;
+  }
+  return [[previous.lat, previous.lon], [point.lat, point.lon]];
 }
 
 function routeDistanceKm(a, b) {
@@ -12375,11 +13153,11 @@ function addRouteSegment(previous, point) {
   if (!routePolyline || !mapInstance || typeof window.L === "undefined" || !previous || !point) return;
   const status = point.segment_status || classifyLiveRouteSegment(previous, point);
   const segment = window.L.polyline(
-    [[previous.lat, previous.lon], [point.lat, point.lon]],
+    routeSegmentLatLngs(previous, point),
     routeSegmentStyle(status),
   );
-  if (status === "gap" || status === "suspicious") {
-    const label = status === "gap" ? "Salto GPS" : "Punto sospechoso";
+  if (status === "gap" || status === "suspicious" || status === "raw") {
+    const label = status === "raw" ? "GPS crudo" : "Tramo sospechoso";
     const distance = Number(point.distance_km || 0);
     const speed = Number(point.implied_speed_kmh || 0);
     segment.bindTooltip(`${label} · ${distance.toFixed(2)} km · ${speed.toFixed(1)} km/h`);
@@ -12387,36 +13165,13 @@ function addRouteSegment(previous, point) {
   segment.addTo(routePolyline);
 }
 
-function addRoutePolylineRun(latlngs) {
-  if (!routePolyline || !Array.isArray(latlngs) || latlngs.length < 2 || typeof window.L === "undefined") return;
-  window.L.polyline(latlngs, routeSegmentStyle("normal")).addTo(routePolyline);
-}
-
 function addRouteSegments(routePoints) {
   if (!Array.isArray(routePoints) || routePoints.length < 2) return;
-  let normalRun = [];
-  const flushNormalRun = () => {
-    addRoutePolylineRun(normalRun);
-    normalRun = [];
-  };
-
   for (let index = 1; index < routePoints.length; index += 1) {
     const previous = routePoints[index - 1];
     const point = routePoints[index];
-    const status = point.segment_status || classifyLiveRouteSegment(previous, point);
-
-    if (status === "normal" || status === "start") {
-      if (normalRun.length === 0) {
-        normalRun.push([previous.lat, previous.lon]);
-      }
-      normalRun.push([point.lat, point.lon]);
-      continue;
-    }
-
-    flushNormalRun();
     addRouteSegment(previous, point);
   }
-  flushNormalRun();
 }
 
 function clearRoute() {
@@ -12441,40 +13196,76 @@ function clearRoute() {
   routeDate = null;
 }
 
+function _syncRouteDateInput() {
+  const input = document.getElementById("route-date-input");
+  if (!(input instanceof HTMLInputElement)) return;
+  if (!isRouteDateInputFocused()) {
+    input.value = currentRouteDate();
+  }
+  input.max = _ecuadorToday();
+}
+
 function _updateRouteToggleBtn() {
   const btn = document.getElementById("route-toggle-btn");
+  _syncRouteDateInput();
   if (!btn) return;
   if (routeVisible) {
-    btn.textContent = "Ocultar recorrido";
+    btn.textContent = routeToggleLabel();
     btn.classList.add("is-active");
   } else {
-    btn.textContent = "Ver recorrido del día";
+    btn.textContent = routeToggleLabel();
     btn.classList.remove("is-active");
   }
 }
 
+function setRouteSelectedDate(value, { reload = false } = {}) {
+  const nextDate = normalizeRouteDate(value);
+  const changed = nextDate !== routeSelectedDate;
+  routeSelectedDate = nextDate;
+  _syncRouteDateInput();
+  _updateRouteToggleBtn();
+  if (!changed || !reload) return;
+
+  _lastRouteReloadAt = 0;
+  _lastRoutePoint = null;
+
+  if (!routeVisible) return;
+
+  const selected = getSelectedTelemetryItem(lastTelemetrySnapshot);
+  const routeSources = selected ? telemetryRouteSourceIds(selected) : _lastRouteSources;
+  if (routeSources.length === 0) {
+    clearRoute();
+    _updateRouteToggleBtn();
+    return;
+  }
+  rememberRouteSources(routeSources);
+  loadVehicleRoute(routeSources, routeSelectedDate);
+}
+
 async function loadVehicleRoute(vehicleSourceId, dateStr) {
-  if (!mapInstance || !vehicleSourceId) return;
+  const routeSources = normalizeRouteSourceList(vehicleSourceId);
+  const requestedDate = normalizeRouteDate(dateStr);
+  if (!mapInstance || routeSources.length === 0) return;
+  routeSelectedDate = requestedDate;
   clearRoute();
+  routeDate = requestedDate;
   const requestToken = ++routeRequestToken;
+  const routeSignature = routeSourceSignature(routeSources);
+  rememberRouteSources(routeSources);
   if (!routeVisible) {
     _updateRouteToggleBtn();
     return;
   }
   try {
-    const points = await fetchJson(
-      `/api/telemetry/history?vehicle_id=${encodeURIComponent(vehicleSourceId)}&day=${dateStr}`,
-      { timeoutMs: 15000 }
-    );
-    if (requestToken !== routeRequestToken || (_lastRouteDeviceId && vehicleSourceId !== _lastRouteDeviceId)) {
+    const routePoints = await fetchRoutePointsForSources(routeSources, requestedDate);
+    if (requestToken !== routeRequestToken || (_lastRouteDeviceId && routeSignature !== _lastRouteDeviceId)) {
       return;
     }
-    if (!Array.isArray(points) || points.length < 2) {
+    if (!Array.isArray(routePoints) || routePoints.length < 2) {
       _updateRouteToggleBtn();
       return;
     }
 
-    const routePoints = normalizeRoutePoints(points);
     const latlngs = routePoints.map((point) => [point.lat, point.lon]);
 
     if (latlngs.length < 2) {
@@ -12498,6 +13289,7 @@ async function loadVehicleRoute(vehicleSourceId, dateStr) {
       fillColor: "#22c55e",
       fillOpacity: 1,
       weight: 2,
+      interactive: false,
     }).bindTooltip("Inicio del recorrido").addTo(mapInstance);
 
     routeEndMarker = window.L.circleMarker(latlngs[latlngs.length - 1], {
@@ -12506,10 +13298,11 @@ async function loadVehicleRoute(vehicleSourceId, dateStr) {
       fillColor: "#ef4444",
       fillOpacity: 1,
       weight: 2,
+      interactive: false,
     }).bindTooltip("Último punto registrado").addTo(mapInstance);
 
-    routeDeviceId = vehicleSourceId;
-    routeDate = dateStr;
+    routeDeviceId = routeSignature;
+    routeDate = requestedDate;
     const lastPoint = routePoints[routePoints.length - 1];
     _lastRoutePoint = lastPoint ? { ...lastPoint } : null;
     if (!telemetryMapManualControl) {
@@ -12520,43 +13313,46 @@ async function loadVehicleRoute(vehicleSourceId, dateStr) {
   _updateRouteToggleBtn();
 }
 
-// Cargar ruta cuando se selecciona un vehículo en el mapa
-let _lastRouteDeviceId = null;
-let _lastRouteReloadAt = 0;
-let _lastRoutePoint = null; // último punto vivo añadido a la polyline
-const _ROUTE_RELOAD_MS = 5 * 60 * 1000; // recarga completa desde API cada 5 minutos
-
 function syncVehicleRoute(items) {
   const selected = getSelectedTelemetryItem(items);
   if (!selected) {
     if (routePolyline || routePointsLayer) clearRoute();
     _lastRouteDeviceId = null;
+    _lastRouteSources = [];
     _lastRouteReloadAt = 0;
     _lastRoutePoint = null;
     _updateRouteToggleBtn();
     return;
   }
-  const sourceId = telemetryVehicleSourceId(selected);
+  const routeSources = telemetryRouteSourceIds(selected);
+  const sourceId = routeSourceSignature(routeSources);
   if (!sourceId) {
     if (routePolyline || routePointsLayer) clearRoute();
     _lastRouteDeviceId = null;
+    _lastRouteSources = [];
     _lastRouteReloadAt = 0;
     _lastRoutePoint = null;
     _updateRouteToggleBtn();
     return;
   }
-  const today = new Date(Date.now() - 5 * 3600 * 1000).toISOString().slice(0, 10);
+  const selectedDate = currentRouteDate();
   const now = Date.now();
   const isNewVehicle = sourceId !== _lastRouteDeviceId;
-  const isStale = (now - _lastRouteReloadAt) > _ROUTE_RELOAD_MS;
+  const isNewDate = routeDate !== selectedDate;
+  const isStale = isCurrentRouteDateToday() && (now - _lastRouteReloadAt) > _ROUTE_RELOAD_MS;
 
-  if (isNewVehicle || isStale) {
-    // Carga completa: historial del día desde la API
-    _lastRouteDeviceId = sourceId;
+  if (isNewVehicle || isNewDate || isStale) {
+    // Carga completa: historial de la fecha seleccionada desde la API
+    rememberRouteSources(routeSources);
     _lastRouteReloadAt = now;
     _lastRoutePoint = null;
-    if (routeVisible) loadVehicleRoute(sourceId, today);
-  } else if (routeVisible && routePolyline && selected.lat != null && selected.lon != null) {
+    if (routeVisible) {
+      loadVehicleRoute(routeSources, selectedDate);
+    } else {
+      routeDate = selectedDate;
+      _updateRouteToggleBtn();
+    }
+  } else if (routeVisible && isCurrentRouteDateToday() && routePolyline && selected.lat != null && selected.lon != null) {
     // Actualización en vivo: agregar punto actual a la polyline sin llamada API
     const lat = Number(selected.lat);
     const lon = Number(selected.lon);
@@ -13389,13 +14185,6 @@ initReportsPage();
     });
   }
 
-  function _fmtSpeed(km, spd) {
-    // Si el vehículo no se movió, la velocidad es ruido GPS — no mostrar
-    if (!km || km <= 0.05) return "—";
-    const v = Number(spd || 0);
-    return v > 0 ? v.toFixed(1) : "—";
-  }
-
   function normalizeFleetReport(payload, from, to) {
     if (Array.isArray(payload)) {
       const vehicles = payload;
@@ -13439,118 +14228,120 @@ initReportsPage();
     };
   }
 
-  function currentFleetMode() {
-    const mode = String(fleetModeEl?.value || "vehicle").trim().toLowerCase();
-    return ["vehicle", "daily", "monthly"].includes(mode) ? mode : "vehicle";
+  function normalizeFleetSubtypeKey(value) {
+    const raw = String(value || "").trim().toLowerCase();
+    if (!raw) return "sin_especificar";
+    const normalized = raw
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+    if (!normalized || normalized === "sin_especificar" || normalized === "sin_especificar_") return "sin_especificar";
+    if (normalized === "camion") return "camion";
+    if (normalized === "camioneta") return "camioneta";
+    if (normalized === "volqueta") return "volqueta";
+    if (normalized === "retro" || normalized === "retroescavadora") return "retroexcavadora";
+    if (normalized === "sin_especificar" || normalized === "no_especificado") return "sin_especificar";
+    return normalized;
   }
 
-  function fleetRowsForMode(report, mode) {
-    if (mode === "daily") return Array.isArray(report.daily) ? report.daily : [];
-    if (mode === "monthly") return Array.isArray(report.monthly) ? report.monthly : [];
-    return Array.isArray(report.vehicles) ? report.vehicles : [];
+  function fleetSubtypeLabel(row) {
+    return String(row.vehicle_subtype_name || row.tipo_automovil_nombre || vehicleSubtypeLabelFromCode(row.vehicle_subtype)).trim();
   }
 
-  function fleetPeriodLabel(value, mode) {
-    const raw = String(value || "").slice(0, 10);
-    if (mode !== "monthly") return raw || "Sin fecha";
-    const [year, month] = raw.split("-");
-    return year && month ? `${month}/${year}` : raw || "Sin mes";
+  function fleetSubtypeKey(row) {
+    return normalizeFleetSubtypeKey(fleetSubtypeLabel(row) || row.vehicle_subtype || "");
+  }
+
+  function currentFleetSubtypeFilter() {
+    const value = normalizeFleetSubtypeKey(fleetModeEl?.value || "all");
+    return value === "todos" ? "all" : value;
+  }
+
+  function fleetSubtypeSortRank(row) {
+    const order = {
+      volqueta: 0,
+      camion: 1,
+      camioneta: 2,
+    };
+    const key = fleetSubtypeKey(row);
+    return Object.prototype.hasOwnProperty.call(order, key) ? order[key] : 10;
+  }
+
+  function sortedFleetVehicleRows(rows) {
+    return [...rows].sort((left, right) => {
+      const rankDiff = fleetSubtypeSortRank(left) - fleetSubtypeSortRank(right);
+      if (rankDiff !== 0) return rankDiff;
+      const kmDiff = Number(right.total_km || 0) - Number(left.total_km || 0);
+      if (Math.abs(kmDiff) > 0.001) return kmDiff;
+      return String(left.label || left.vehicle_id || "").localeCompare(String(right.label || right.vehicle_id || ""), "es");
+    });
+  }
+
+  function fleetVehicleRows(report) {
+    const filter = currentFleetSubtypeFilter();
+    const vehicles = Array.isArray(report.vehicles) ? report.vehicles : [];
+    const filtered = filter === "all"
+      ? vehicles
+      : vehicles.filter((row) => fleetSubtypeKey(row) === filter);
+    return sortedFleetVehicleRows(filtered);
+  }
+
+  function fleetVehicleTotals(rows) {
+    return {
+      totalKm: rows.reduce((sum, row) => sum + Number(row.total_km || 0), 0),
+      active: rows.filter((row) => Number(row.total_km || 0) > 0.05).length,
+      totalVehicles: rows.length,
+    };
   }
 
   function renderFleetReport(report, from, to) {
     if (!fleetResultsEl) return;
-    const mode = currentFleetMode();
-    const rows = fleetRowsForMode(report, mode);
-    const totals = report.totals || {};
-    const totalKm = Number(totals.total_km || 0);
-    const totalPts = Number(totals.total_points || 0);
-    const active = Number(totals.active_vehicles || 0);
-    const totalVehicles = Number(totals.total_vehicles || (report.vehicles || []).length);
+    const rows = fleetVehicleRows(report);
+    const { totalKm, active, totalVehicles } = fleetVehicleTotals(rows);
     const days = Number(report.range_days || (Math.round((new Date(to) - new Date(from)) / 86400000) + 1) || 0);
-    const tableHtml = mode === "vehicle"
-      ? renderFleetVehicleTable(rows, totalKm, totalPts)
-      : renderFleetPeriodTable(rows, mode, totalKm, totalPts);
 
     fleetResultsEl.innerHTML = `
       <div class="vehicle-km-summary-row fleet-km-kpi-row">
         <span class="vehicle-km-kpi"><strong>${totalKm.toFixed(2)}</strong> km flota</span>
         <span class="vehicle-km-kpi"><strong>${active}</strong> / ${totalVehicles} activos</span>
         <span class="vehicle-km-kpi"><strong>${days}</strong> día${days !== 1 ? "s" : ""}</span>
-        <span class="vehicle-km-kpi"><strong>${totalPts.toLocaleString()}</strong> puntos GPS</span>
       </div>
-      ${tableHtml}
+      ${renderFleetVehicleTable(rows, totalKm)}
     `;
   }
 
-  function renderFleetVehicleTable(rows, totalKm, totalPts) {
+  function renderFleetVehicleTable(rows, totalKm) {
     return `
       <div class="fleet-km-table-wrap">
         <table class="vehicle-km-table fleet-km-table">
           <thead>
             <tr>
               <th>Vehículo</th>
+              <th>Chofer</th>
+              <th>Tipo de automóvil</th>
               <th>Km totales</th>
-              <th>V. máx (km/h)</th>
               <th>Días activos</th>
-              <th>Puntos GPS</th>
             </tr>
           </thead>
           <tbody>
             ${rows.map((r) => `
               <tr class="${(r.total_km || 0) > 0.05 ? "km-row-active" : "km-row-empty"}">
                 <td><strong>${escapeHtml(r.label || r.vehicle_id)}</strong></td>
+                <td>${escapeHtml(String(r.driver_name || r.chofer || "--").trim() || "--")}</td>
+                <td>${escapeHtml(fleetSubtypeLabel(r) || "--")}</td>
                 <td><strong>${Number(r.total_km || 0).toFixed(2)}</strong></td>
-                <td>${_fmtSpeed(r.total_km, r.max_speed)}</td>
                 <td>${r.active_days || 0}</td>
-                <td>${(r.total_points || 0).toLocaleString()}</td>
               </tr>
             `).join("")}
           </tbody>
           <tfoot>
             <tr class="fleet-km-total-row">
               <td><strong>TOTAL</strong></td>
+              <td>—</td>
+              <td>—</td>
               <td><strong>${totalKm.toFixed(2)}</strong></td>
-              <td>—</td><td>—</td>
-              <td>${totalPts.toLocaleString()}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    `;
-  }
-
-  function renderFleetPeriodTable(rows, mode, totalKm, totalPts) {
-    const label = mode === "monthly" ? "Mes" : "Fecha";
-    const activeLabel = mode === "monthly" ? "Días activos" : "Vehículos activos";
-    return `
-      <div class="fleet-km-table-wrap">
-        <table class="vehicle-km-table fleet-km-table">
-          <thead>
-            <tr>
-              <th>${label}</th>
-              <th>Km flota</th>
-              <th>V. máx (km/h)</th>
-              <th>${activeLabel}</th>
-              <th>Puntos GPS</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map((r) => `
-              <tr class="${(r.total_km || 0) > 0.05 ? "km-row-active" : "km-row-empty"}">
-                <td><strong>${escapeHtml(fleetPeriodLabel(r.period || r.date || r.month, mode))}</strong></td>
-                <td><strong>${Number(r.total_km || 0).toFixed(2)}</strong></td>
-                <td>${_fmtSpeed(r.total_km, r.max_speed)}</td>
-                <td>${mode === "monthly" ? Number(r.active_days || 0) : Number(r.active_vehicles || 0)}</td>
-                <td>${Number(r.total_points || 0).toLocaleString()}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-          <tfoot>
-            <tr class="fleet-km-total-row">
-              <td><strong>TOTAL</strong></td>
-              <td><strong>${Number(totalKm || 0).toFixed(2)}</strong></td>
-              <td>—</td><td>—</td>
-              <td>${Number(totalPts || 0).toLocaleString()}</td>
+              <td>—</td>
             </tr>
           </tfoot>
         </table>
@@ -13567,39 +14358,32 @@ initReportsPage();
       if (!_fleetReport) return;
       const from = fleetFromEl?.value || "";
       const to   = fleetToEl?.value || "";
-      const mode = currentFleetMode();
-      const rows = fleetRowsForMode(_fleetReport, mode);
+      const typeFilter = currentFleetSubtypeFilter();
+      const rows = fleetVehicleRows(_fleetReport);
       if (!rows.length) return;
-      const headers = mode === "vehicle"
-        ? ["Vehículo", "Km totales", "Velocidad máx (km/h)", "Días activos", "Puntos GPS"]
-        : [mode === "monthly" ? "Mes" : "Fecha", "Km flota", "Velocidad máx (km/h)", mode === "monthly" ? "Días activos" : "Vehículos activos", "Puntos GPS"];
+      const headers = ["Vehículo", "Chofer", "Tipo de automóvil", "Km totales", "Días activos"];
       const lines = [
         headers.join(","),
         ...rows.map((r) => {
-          const spd = _fmtSpeed(r.total_km, r.max_speed);
-          const firstCell = mode === "vehicle"
-            ? (r.label || r.vehicle_id)
-            : fleetPeriodLabel(r.period || r.date || r.month, mode);
-          const activeCell = mode === "monthly"
-            ? Number(r.active_days || 0)
-            : mode === "daily"
-              ? Number(r.active_vehicles || 0)
-              : Number(r.active_days || 0);
+          const firstCell = r.label || r.vehicle_id;
+          const driverCell = String(r.driver_name || r.chofer || "").trim();
+          const typeCell = fleetSubtypeLabel(r);
+          const activeCell = Number(r.active_days || 0);
           return [
             csvCell(firstCell),
+            csvCell(driverCell),
+            csvCell(typeCell),
             Number(r.total_km || 0).toFixed(2),
-            spd === "—" ? "" : spd,
             activeCell,
-            r.total_points || 0,
           ].join(",");
         }),
-        ["TOTAL", Number(_fleetReport.totals?.total_km || 0).toFixed(2), "", "", Number(_fleetReport.totals?.total_points || 0)].join(","),
+        ["TOTAL", "", "", fleetVehicleTotals(rows).totalKm.toFixed(2), ""].join(","),
       ];
       const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8;" });
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href = url;
-      a.download = `km_flota_${mode}_${from}_a_${to}.csv`;
+      a.download = `km_flota_${typeFilter}_${from}_a_${to}.csv`;
       a.click();
       URL.revokeObjectURL(url);
     });

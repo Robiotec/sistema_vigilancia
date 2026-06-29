@@ -1,5 +1,5 @@
 /*
- * ESTILOS PARA EL TEMPLATE camaras.html: visor, selector, eventos, tarjetas y registro de camaras.
+ * ESTILOS PARA EL TEMPLATE camaras.html: visor, selector, eventos y tarjetas.
  */
 
 /* Estilos compartidos: tema, estructura, menu y encabezados. */
@@ -11,12 +11,6 @@
 
 /* Indicadores compartidos de estado de camara: led live, busy, error e idle. */
 @import url("./modules/shared/040-camera-status-indicators.css");
-
-/* Modal compartido para registrar camaras/vehiculos desde pantallas relacionadas. */
-@import url("./modules/shared/040-camera-register-modal.css");
-
-/* Campos, labels, botones y mapa dentro del formulario de registro. */
-@import url("./modules/web_app/050-camera-register-form.css");
 
 /* Ajustes puntuales de las pills/tarjetas miniatura de camaras. */
 @import url("./modules/cameras/00-camera-pill.css");

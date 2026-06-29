@@ -28,15 +28,15 @@ class DbRetentionRule:
 
 
 DB_RULES = (
-    DbRetentionRule("vehicle_telemetry", "received_at", "ROBIOTEC_TELEMETRY_RETENTION_DAYS", 180),
-    DbRetentionRule("drone_telemetry", "received_at", "ROBIOTEC_TELEMETRY_RETENTION_DAYS", 180),
-    DbRetentionRule("camera_event_history", "detected_at", "ROBIOTEC_EVENT_RETENTION_DAYS", 365),
-    DbRetentionRule("geofence_alerts", "recorded_at", "ROBIOTEC_EVENT_RETENTION_DAYS", 365),
+    DbRetentionRule("vehicle_telemetry", "received_at", "ROBIOTEC_TELEMETRY_RETENTION_DAYS", 90),
+    DbRetentionRule("drone_telemetry", "received_at", "ROBIOTEC_TELEMETRY_RETENTION_DAYS", 90),
+    DbRetentionRule("camera_event_history", "detected_at", "ROBIOTEC_EVENT_RETENTION_DAYS", 90),
+    DbRetentionRule("geofence_alerts", "recorded_at", "ROBIOTEC_EVENT_RETENTION_DAYS", 90),
     DbRetentionRule(
         "camera_alert_outbox",
         "created_at",
         "ROBIOTEC_EVENT_RETENTION_DAYS",
-        365,
+        90,
         " AND status IN ('sent', 'failed')",
     ),
     DbRetentionRule("stream_access_tokens", "expires_at", "ROBIOTEC_TOKEN_RETENTION_DAYS", 30),
@@ -164,7 +164,7 @@ def iter_cleanup_dirs() -> Iterable[Path]:
 
 
 def cleanup_files(dry_run: bool) -> tuple[int, int]:
-    days = env_int("ROBIOTEC_FILE_RETENTION_DAYS", 365)
+    days = env_int("ROBIOTEC_FILE_RETENTION_DAYS", 90)
     max_delete = env_int("ROBIOTEC_FILE_MAX_DELETE", 5000)
     cutoff = time.time() - days * 86400
     total_files = 0
@@ -200,7 +200,7 @@ def cleanup_minio(dry_run: bool) -> bool:
 
     alias = os.environ.get("ROBIOTEC_MINIO_ALIAS", "local").strip()
     bucket = os.environ.get("MINIO_BUCKET", "eventos").strip()
-    days = env_int("ROBIOTEC_MINIO_RETENTION_DAYS", 365)
+    days = env_int("ROBIOTEC_MINIO_RETENTION_DAYS", 90)
     if not alias or not bucket:
         print("[minio] alias o bucket no configurados")
         return False

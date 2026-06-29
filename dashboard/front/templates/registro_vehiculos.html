@@ -43,58 +43,73 @@
 
       <div class="wrap">
         <section class="page-section-shell page-vehicle-registry-shell">
-          <div class="page-section-head">
-            <div class="camera-page-actions">
-              <button class="camera-register-open" id="vehicle-register-open" type="button">
-                Registrar nuevo vehículo
-              </button>
-              <button type="button" id="fleet-km-open" class="fleet-km-open-btn">
-                KM. de flota
-              </button>
-              <button
-                class="fleet-km-open-btn vehicle-registry-selected-action"
-                id="vehicle-registry-edit-selected"
-                type="button"
-                data-vehicle-action="edit"
-                data-vehicle-registration-id=""
-                hidden
-              >
-                Editar
-              </button>
-              <button
-                class="fleet-km-open-btn vehicle-registry-selected-action"
-                id="vehicle-registry-delete-selected"
-                type="button"
-                data-vehicle-action="delete"
-                data-vehicle-registration-id=""
-                hidden
-              >
-                Eliminar
-              </button>
+          <div class="vehicle-registry-tabs" role="tablist" aria-label="Control vehicular">
+            <button class="vehicle-registry-tab is-active" type="button" data-vehicle-registry-view="registry">Registro de flota</button>
+            <button class="vehicle-registry-tab" type="button" data-vehicle-registry-view="routes">Mapa de recorridos</button>
+          </div>
+
+          <div class="vehicle-registry-view is-active" id="vehicle-registry-view-registry" data-vehicle-registry-view-panel="registry">
+            <div class="page-section-head vehicle-registry-actions-head">
+              <div class="camera-page-actions">
+                <button class="camera-register-open" id="vehicle-register-open" type="button">
+                  Registrar nuevo vehículo
+                </button>
+                <button type="button" id="fleet-km-open" class="fleet-km-open-btn">
+                  KM. de flota
+                </button>
+                <button
+                  class="fleet-km-open-btn vehicle-registry-selected-action"
+                  id="vehicle-registry-edit-selected"
+                  type="button"
+                  data-vehicle-action="edit"
+                  data-vehicle-registration-id=""
+                  hidden
+                >
+                  Editar
+                </button>
+                <button
+                  class="fleet-km-open-btn vehicle-registry-selected-action"
+                  id="vehicle-registry-delete-selected"
+                  type="button"
+                  data-vehicle-action="delete"
+                  data-vehicle-registration-id=""
+                  hidden
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+
+            <div class="vehicle-registry-workbench">
+              <section class="ops-card page-panel vehicle-registry-main-card">
+                <div class="ops-head vehicle-registry-detail-head">
+                  <div></div>
+                </div>
+                <div class="vehicle-registry-detail" id="vehicle-registry-detail"></div>
+              </section>
+
+              <aside class="vehicle-registry-rail">
+                <div class="vehicle-registry-rail-list" id="vehicle-registry-rail-list"></div>
+              </aside>
             </div>
           </div>
 
-          <div class="vehicle-registry-workbench">
-            <section class="ops-card page-panel vehicle-registry-main-card">
-              <div class="ops-head vehicle-registry-detail-head">
-                <div>
-                  <!-- <div class="ops-eyebrow">Detalle</div> -->
-                  <!-- <h2 id="vehicle-registry-detail-title">Selecciona un registro</h2> -->
-                  
-                  <!--
-                  <p class="vehicle-registry-detail-copy" id="vehicle-registry-detail-copy">
-                    Haz clic en un dron o auto del panel derecho para ver su información completa aquí.
-                  </p>
-                  -->
-
-                </div>
+          <div class="vehicle-registry-view" id="vehicle-registry-view-routes" data-vehicle-registry-view-panel="routes" hidden>
+            <section class="ops-card page-panel vehicle-route-map-card">
+              <div class="vehicle-route-toolbar">
+                <label class="vehicle-km-label">Vehículo
+                  <input id="vehicle-route-filter" type="search" list="vehicle-route-options" autocomplete="off" placeholder="Buscar por placa o nombre" />
+                  <datalist id="vehicle-route-options"></datalist>
+                </label>
+                <label class="vehicle-km-label">Día
+                  <input type="date" id="vehicle-route-date" />
+                </label>
+                <button type="button" id="vehicle-route-load" class="vehicle-km-load">Cargar recorrido</button>
+                <span class="vehicle-route-status" id="vehicle-route-status">Selecciona un vehículo y un día.</span>
               </div>
-              <div class="vehicle-registry-detail" id="vehicle-registry-detail"></div>
+              <div class="vehicle-route-map" id="vehicle-route-map"></div>
+              <div class="vehicle-route-summary" id="vehicle-route-summary"></div>
             </section>
-
-            <aside class="vehicle-registry-rail">
-              <div class="vehicle-registry-rail-list" id="vehicle-registry-rail-list"></div>
-            </aside>
           </div>
         </section>
 
@@ -122,11 +137,15 @@
           <label class="vehicle-km-label">Hasta
             <input type="date" id="fleet-km-to" />
           </label>
-          <label class="vehicle-km-label">Vista
+          <label class="vehicle-km-label">Tipo de automóvil
             <select id="fleet-km-report-mode">
-              <option value="vehicle">Por vehículo</option>
-              <option value="daily">Diario</option>
-              <option value="monthly">Mensual</option>
+              <option value="all">Todos</option>
+              <option value="volqueta">Volqueta</option>
+              <option value="camion">Camión</option>
+              <option value="camioneta">Camioneta</option>
+              <option value="retroexcavadora">Retroexcavadora</option>
+              <option value="otra">Otra</option>
+              <option value="sin_especificar">Sin especificar</option>
             </select>
           </label>
           <div class="fleet-km-presets" aria-label="Rangos rápidos">
@@ -166,7 +185,7 @@
           <div class="camera-register-stack">
             <div class="camera-register-intro">
               <strong>Registro manual</strong>
-              <p>Este formulario ahora guarda vehículos reales en PostgreSQL, enlazando organización, propietario, telemetría y las cámaras que viajarán montadas en la unidad.</p>
+              <p>Este formulario ahora guarda vehículos reales en PostgreSQL, enlazando organización, telemetría y las cámaras que viajarán montadas en la unidad.</p>
             </div>
 
             <label class="camera-register-field">
@@ -181,15 +200,6 @@
             <label class="camera-register-field">
               <span class="camera-register-label">
                 <span class="camera-register-step">2</span>
-                <span>Propietario</span>
-              </span>
-              <select id="vehicle-register-owner" name="propietario_usuario_id" required></select>
-              <span class="camera-register-help">Solo podrás asignar usuarios que estén dentro de tu jerarquía operativa.</span>
-            </label>
-
-            <label class="camera-register-field">
-              <span class="camera-register-label">
-                <span class="camera-register-step">3</span>
                 <span>Tipo de vehículo</span>
               </span>
               <select id="vehicle-register-type" name="vehicle_type" required>
@@ -198,6 +208,22 @@
                 <option value="auto">Vehículo terrestre</option>
               </select>
               <span class="camera-register-help" id="vehicle-register-type-help">Elige el tipo real del vehículo según el catálogo de la base de datos.</span>
+            </label>
+
+            <label class="camera-register-field" id="vehicle-register-subtype-field">
+              <span class="camera-register-label">
+                <span class="camera-register-step">3</span>
+                <span>Tipo de automóvil</span>
+              </span>
+              <select id="vehicle-register-subtype" name="vehicle_subtype">
+                <option value="">Sin especificar</option>
+                <option value="camioneta">Camioneta</option>
+                <option value="camion">Camión</option>
+                <option value="volqueta">Volqueta</option>
+                <option value="retroexcavadora">Retroexcavadora</option>
+                <option value="otra">Otra</option>
+              </select>
+              <span class="camera-register-help">Clasificación operativa para vehículos terrestres.</span>
             </label>
 
             <label class="camera-register-field">
@@ -219,6 +245,21 @@
             <label class="camera-register-field">
               <span class="camera-register-label">
                 <span class="camera-register-step">5</span>
+                <span>Chofer</span>
+              </span>
+              <input
+                id="vehicle-register-driver"
+                name="driver_name"
+                type="text"
+                placeholder="Nombre del chofer"
+                autocomplete="off"
+              />
+              <span class="camera-register-help">Asignación operativa editable para vehículos terrestres.</span>
+            </label>
+
+            <label class="camera-register-field">
+              <span class="camera-register-label">
+                <span class="camera-register-step">6</span>
                 <span>Modo de integración</span>
               </span>
               <select id="vehicle-register-telemetry-mode" name="telemetry_mode" required>

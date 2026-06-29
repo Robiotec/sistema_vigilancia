@@ -114,7 +114,44 @@
 
 /* ── Route toggle button ─────────────────────────────────── */
 .route-toggle-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: 0.6rem 0 0.25rem;
+}
+.route-date-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(15, 23, 42, 0.24);
+}
+.route-date-field span {
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(226, 232, 240, 0.68);
+  text-transform: uppercase;
+}
+.route-date-field input {
+  width: 9.5rem;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #e5e7eb;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color-scheme: dark;
+  outline: none;
+}
+.route-date-field input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1) opacity(0.75);
 }
 .route-toggle-btn {
   display: inline-flex;
@@ -149,30 +186,204 @@
   color: #bfdbfe;
 }
 
+@media (max-width: 520px) {
+  .page-vehicle-registry .vehicle-route-map-card {
+    grid-template-rows: auto minmax(320px, 58vh) auto;
+  }
+
+  .page-vehicle-registry .vehicle-route-map {
+    min-height: 320px;
+  }
+
+  .page-vehicle-registry .vehicle-route-toolbar .vehicle-km-label,
+  .page-vehicle-registry .vehicle-route-toolbar .vehicle-km-load,
+  .page-vehicle-registry .vehicle-route-status {
+    width: 100%;
+  }
+
+  .route-toggle-bar {
+    align-items: stretch;
+  }
+  .route-date-field,
+  .route-toggle-btn {
+    width: 100%;
+  }
+  .route-toggle-btn {
+    justify-content: center;
+  }
+  .route-date-field input {
+    flex: 1 1 auto;
+    width: auto;
+  }
+}
+
 /* ── Fleet km open button ────────────────────────────────────────────────── */
 .fleet-km-open-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.9rem 1rem;
+  min-height: 44px;
+  padding: 0.72rem 1rem;
   font-size: 0.82rem;
-  font-weight: 600;
-  border-radius: 15px;
-  border: 1px solid rgb(255, 94, 0);
-  background:rgba(255, 94, 0, 0.113);
+  font-weight: 800;
+  line-height: 1;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 94, 0, 0.58);
+  background: rgba(255, 94, 0, 0.12);
   color: #ffffff;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
-.fleet-km-open-btn:hover { background: rgba(99,179,237,0.22); border-color: rgba(99,179,237,0.65); }
+.fleet-km-open-btn:hover,
+.fleet-km-open-btn:focus-visible {
+  outline: none;
+  background: rgba(255, 94, 0, 0.22);
+  border-color: rgba(255, 94, 0, 0.9);
+  transform: translateY(-1px);
+}
 
 .page-vehicle-registry .camera-page-actions {
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
 }
 
 .page-vehicle-registry .vehicle-registry-selected-action {
   min-height: 48px;
+}
+
+.page-vehicle-registry .page-vehicle-registry-shell {
+  align-content: start;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 14px;
+}
+
+.page-vehicle-registry .page-section-head {
+  margin: 0;
+}
+
+.page-vehicle-registry .vehicle-registry-actions-head {
+  margin: 0 0 14px;
+}
+
+.page-vehicle-registry .vehicle-registry-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.page-vehicle-registry .vehicle-registry-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.72rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 94, 0, 0.42);
+  background: rgba(255, 94, 0, 0.09);
+  color: rgba(255, 255, 255, 0.88);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.page-vehicle-registry .vehicle-registry-tab:hover,
+.page-vehicle-registry .vehicle-registry-tab:focus-visible,
+.page-vehicle-registry .vehicle-registry-tab.is-active {
+  outline: none;
+  border-color: rgba(255, 94, 0, 0.88);
+  background: rgba(255, 94, 0, 0.2);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.page-vehicle-registry .vehicle-registry-view[hidden] {
+  display: none !important;
+}
+
+.page-vehicle-registry .vehicle-registry-view {
+  min-height: 0;
+}
+
+.page-vehicle-registry .vehicle-route-map-card {
+  display: grid;
+  gap: 12px;
+  min-height: min(74vh, 780px);
+  height: 100%;
+  grid-template-rows: auto minmax(520px, 1fr) auto;
+  align-content: stretch;
+}
+
+.page-vehicle-registry .vehicle-route-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 2px;
+}
+
+.page-vehicle-registry .vehicle-route-toolbar .vehicle-km-label {
+  min-width: min(100%, 180px);
+}
+
+.page-vehicle-registry .vehicle-route-toolbar .vehicle-km-label:first-child {
+  flex: 1 1 300px;
+}
+
+.page-vehicle-registry .vehicle-route-toolbar select,
+.page-vehicle-registry .vehicle-route-toolbar input {
+  min-height: 40px;
+  border-radius: 10px;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f8fafc;
+}
+
+.page-vehicle-registry .vehicle-route-status {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  max-width: 100%;
+  padding: 0.42rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.22);
+  color: rgba(226, 232, 240, 0.72);
+  font-size: 0.78rem;
+}
+
+.page-vehicle-registry .vehicle-route-map {
+  min-height: 520px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #08111f;
+}
+
+.page-vehicle-registry .vehicle-route-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 34px;
+}
+
+.page-vehicle-registry .vehicle-route-summary span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 179, 237, 0.22);
+  background: rgba(99, 179, 237, 0.09);
+  color: rgba(226, 232, 240, 0.82);
+  font-size: 0.78rem;
 }
 
 /* ── Fleet km modal ──────────────────────────────────────────────────────── */
@@ -272,7 +483,7 @@
 }
 .fleet-km-kpi-row { margin-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem; }
 .fleet-km-table-wrap { overflow-x: auto; }
-.fleet-km-table { width: 100%; min-width: 480px; }
+.fleet-km-table { width: 100%; min-width: 760px; }
 .fleet-km-table tfoot tr td { border-top: 2px solid rgba(255,255,255,0.15); font-weight: 700; color: #93c5fd; }
 .fleet-km-total-row td { padding-top: 0.5rem; }
 .vehicle-km-export-fleet {

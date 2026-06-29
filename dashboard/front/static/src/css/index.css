@@ -5,15 +5,15 @@
 /* Estilos compartidos: tema, estructura, menu y encabezados. */
 @import url("./common.css");
 /* Estilos de estructura del historial del dashboard. */
-@import url("./modules/dashboard_history/00-history-shell.css");
+@import url("./modules/dashboard_history/00-history-shell.css?v=20260625-grid3");
 /* Estilos de filtros del historial. */
-@import url("./modules/dashboard_history/10-history-filters.css");
+@import url("./modules/dashboard_history/10-history-filters.css?v=20260625-grid3");
 /* Estilos de lista y paginacion del historial. */
-@import url("./modules/dashboard_history/20-history-list.css");
+@import url("./modules/dashboard_history/20-history-list.css?v=20260625-grid3");
 /* Estilos del modal de evento del historial. */
-@import url("./modules/dashboard_history/30-event-modal.css");
+@import url("./modules/dashboard_history/30-event-modal.css?v=20260625-grid3");
 /* Estilos responsive del historial. */
-@import url("./modules/dashboard_history/40-responsive.css");
+@import url("./modules/dashboard_history/40-responsive.css?v=20260625-grid3");
 /* Estilos responsive compartidos. */
 @import url("./responsive.css");
 /* Estilos de los ajustes finales compartidos. */

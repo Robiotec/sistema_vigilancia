@@ -1071,7 +1071,9 @@ body[data-theme="light"] .ops-map-tooltip::before {
 body[data-theme="light"] .page-map .telemetry-map-filter label,
 body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter label,
 body[data-theme="light"] .page-map .telemetry-map-filter select,
+body[data-theme="light"] .page-map .telemetry-map-filter input,
 body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select,
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter input,
 body[data-theme="light"] .viewer-audio-dock .volume-wrap span,
 body[data-theme="light"] .telemetry-map-overlay-organization,
 body[data-theme="light"] .telemetry-map-overlay-close {
@@ -1096,10 +1098,17 @@ body[data-theme="light"] .telemetry-monitor-filter label {
   text-shadow: 0 1px 0 rgba(255, 239, 231, 0.72);
 }
 
+body[data-theme="light"] .telemetry-monitor-filter input::placeholder {
+  color: rgba(31, 41, 55, 0.58);
+}
+
 body[data-theme="light"] .telemetry-monitor-filter select,
+body[data-theme="light"] .telemetry-monitor-filter input,
 body[data-theme="light"] .telemetry-map-style,
 body[data-theme="light"] .page-map .telemetry-map-filter select,
-body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select {
+body[data-theme="light"] .page-map .telemetry-map-filter input,
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select,
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter input {
   color: #1f2937;
   border-color: rgba(219, 74, 29, 0.18);
   background-color: rgba(255, 252, 249, 0.98);
@@ -1117,12 +1126,18 @@ body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-fi
 
 body[data-theme="light"] .telemetry-monitor-filter select:hover,
 body[data-theme="light"] .telemetry-monitor-filter select:focus,
+body[data-theme="light"] .telemetry-monitor-filter input:hover,
+body[data-theme="light"] .telemetry-monitor-filter input:focus,
 body[data-theme="light"] .telemetry-map-style:hover,
 body[data-theme="light"] .telemetry-map-style:focus-visible,
 body[data-theme="light"] .page-map .telemetry-map-filter select:hover,
 body[data-theme="light"] .page-map .telemetry-map-filter select:focus,
+body[data-theme="light"] .page-map .telemetry-map-filter input:hover,
+body[data-theme="light"] .page-map .telemetry-map-filter input:focus,
 body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select:hover,
-body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select:focus {
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter select:focus,
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter input:hover,
+body[data-theme="light"] .page-dashboard .telemetry-sync-shell .telemetry-map-filter input:focus {
   color: #111827;
   border-color: rgba(219, 74, 29, 0.3);
   background-image:

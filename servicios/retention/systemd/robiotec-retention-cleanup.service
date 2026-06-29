@@ -6,10 +6,10 @@ Type=oneshot
 WorkingDirectory=/root/robiotec
 ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/retention/logs
 ExecStart=/root/robiotec/servicios/retention/scripts/run.sh
-Environment=ROBIOTEC_TELEMETRY_RETENTION_DAYS=180
-Environment=ROBIOTEC_EVENT_RETENTION_DAYS=365
-Environment=ROBIOTEC_FILE_RETENTION_DAYS=365
-Environment=ROBIOTEC_MINIO_RETENTION_DAYS=365
+Environment=ROBIOTEC_TELEMETRY_RETENTION_DAYS=90
+Environment=ROBIOTEC_EVENT_RETENTION_DAYS=90
+Environment=ROBIOTEC_FILE_RETENTION_DAYS=90
+Environment=ROBIOTEC_MINIO_RETENTION_DAYS=90
 Environment=ROBIOTEC_TOKEN_RETENTION_DAYS=30
 Environment=ROBIOTEC_RETENTION_BATCH_SIZE=10000
 Environment=ROBIOTEC_MINIO_RETENTION_ENABLED=true

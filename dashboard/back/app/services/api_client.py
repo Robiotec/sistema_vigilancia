@@ -40,7 +40,7 @@ class BaseApiClient:
             except json.JSONDecodeError:
                 payload = {"detail": detail or exc.reason}
             raise RuntimeError(payload.get("detail") or payload.get("error") or exc.reason) from exc
-        except URLError as exc:
+        except (TimeoutError, URLError) as exc:
             raise RuntimeError("API central no disponible") from exc
 
 

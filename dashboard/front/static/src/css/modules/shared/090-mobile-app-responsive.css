@@ -1003,7 +1003,9 @@
   }
 
   .page-map .telemetry-map-filter select,
-  .page-dashboard .telemetry-sync-shell .telemetry-map-filter select {
+  .page-map .telemetry-map-filter input,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter select,
+  .page-dashboard .telemetry-sync-shell .telemetry-map-filter input {
     min-height: 40px;
     font-size: 0.92rem;
   }
@@ -1083,4 +1085,3 @@
   transform-origin: center center;
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
 }
-

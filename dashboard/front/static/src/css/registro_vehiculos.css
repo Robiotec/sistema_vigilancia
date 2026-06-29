@@ -16,3 +16,167 @@
 @import url("./modules/web_app/120-vehicle-kilometers.css");
 /* Estilos de los ajustes finales compartidos. */
 @import url("./final_overrides.css");
+
+/* Overrides finales de esta pagina: deben ir despues de final_overrides.css. */
+body.page-vehicle-registry .wrap {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  align-content: start !important;
+}
+
+body.page-vehicle-registry .page-vehicle-registry-shell {
+  display: grid !important;
+  grid-template-rows: auto auto auto !important;
+  align-content: start !important;
+  gap: 14px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: 18px !important;
+}
+
+body.page-vehicle-registry .page-section-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.page-vehicle-registry .camera-page-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+
+body.page-vehicle-registry .fleet-km-open-btn,
+body.page-vehicle-registry .camera-register-open,
+body.page-vehicle-registry .vehicle-registry-selected-action,
+body.page-vehicle-registry .vehicle-registry-tab {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px !important;
+  padding: 0.72rem 1rem !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 94, 0, 0.62) !important;
+  background: rgba(255, 94, 0, 0.12) !important;
+  color: #fff !important;
+  font: inherit !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+
+body.page-vehicle-registry .fleet-km-open-btn:hover,
+body.page-vehicle-registry .camera-register-open:hover,
+body.page-vehicle-registry .vehicle-registry-selected-action:hover,
+body.page-vehicle-registry .vehicle-registry-tab:hover,
+body.page-vehicle-registry .vehicle-registry-tab:focus-visible,
+body.page-vehicle-registry .vehicle-registry-tab.is-active {
+  outline: none !important;
+  border-color: rgba(255, 94, 0, 0.92) !important;
+  background: rgba(255, 94, 0, 0.24) !important;
+}
+
+body.page-vehicle-registry .vehicle-registry-tabs {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+
+body.page-vehicle-registry .vehicle-registry-view {
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+body.page-vehicle-registry .vehicle-registry-view[hidden] {
+  display: none !important;
+}
+
+body.page-vehicle-registry .vehicle-route-map-card {
+  display: grid !important;
+  grid-template-rows: auto minmax(520px, 64vh) auto !important;
+  gap: 12px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  align-content: start !important;
+  padding: 14px !important;
+  overflow: visible !important;
+}
+
+body.page-vehicle-registry .vehicle-route-toolbar {
+  grid-row: 1 !important;
+  display: grid !important;
+  grid-template-columns: minmax(260px, 1fr) minmax(170px, auto) auto !important;
+  align-items: end !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+
+body.page-vehicle-registry .vehicle-route-map {
+  grid-row: 2 !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 520px !important;
+  height: 64vh !important;
+  max-height: 720px !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: #08111f !important;
+}
+
+body.page-vehicle-registry .vehicle-route-summary {
+  grid-row: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+}
+
+body.page-vehicle-registry .vehicle-route-toolbar .vehicle-km-label {
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+body.page-vehicle-registry .vehicle-route-toolbar select,
+body.page-vehicle-registry .vehicle-route-toolbar input {
+  width: 100% !important;
+  min-height: 40px !important;
+  border-radius: 10px !important;
+  color: #f8fafc !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.page-vehicle-registry .vehicle-route-status {
+  grid-column: 1 / -1 !important;
+  justify-self: start !important;
+  min-height: 40px !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 980px) {
+  body.page-vehicle-registry .vehicle-route-toolbar {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.page-vehicle-registry .vehicle-route-map {
+    height: 54vh !important;
+    min-height: 340px !important;
+  }
+}

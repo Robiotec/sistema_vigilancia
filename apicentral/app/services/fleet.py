@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import json
 import math
 from datetime import date, datetime, timedelta, timezone
 from typing import Any, Iterable
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 
 ECUADOR_TZ = timezone(timedelta(hours=-5))
@@ -140,6 +143,7 @@ def _point_from_row(row: Any) -> dict[str, Any]:
     heading = coerce_float(_row_value(row, "heading"))
     reasons = coordinate_reasons(lat, lon)
     return {
+        "telemetry_id": str(_row_value(row, "id") or ""),
         "lat": lat,
         "lon": lon,
         "speed": speed,
@@ -159,6 +163,138 @@ def _point_from_row(row: Any) -> dict[str, Any]:
         "elapsed_seconds": 0.0,
         "implied_speed_kmh": 0.0,
         "counted_for_km": False,
+    }
+
+
+def _segment_raw_geometry(previous: dict[str, Any], point: dict[str, Any]) -> list[list[float]]:
+    return [[float(previous["lat"]), float(previous["lon"])], [float(point["lat"]), float(point["lon"])]]
+
+
+def _osrm_coordinates_to_latlon(coordinates: Any) -> list[list[float]]:
+    result: list[list[float]] = []
+    if not isinstance(coordinates, list):
+        return result
+    for coord in coordinates:
+        if not isinstance(coord, list) or len(coord) < 2:
+            continue
+        lon = coerce_float(coord[0])
+        lat = coerce_float(coord[1])
+        if lat is not None and lon is not None:
+            result.append([lat, lon])
+    return result
+
+
+def match_segment_with_osrm(
+    previous: dict[str, Any],
+    point: dict[str, Any],
+    *,
+    osrm_base_url: str,
+    confidence_min: float,
+    timeout_seconds: float,
+) -> dict[str, Any] | None:
+    """Map Matching de un tramo. Devuelve None si OSRM no tiene confianza suficiente."""
+    base_url = str(osrm_base_url or "").strip().rstrip("/")
+    if not base_url:
+        return None
+    coords = f"{previous['lon']},{previous['lat']};{point['lon']},{point['lat']}"
+    path = quote(coords, safe=",;")
+    url = (
+        f"{base_url}/match/v1/driving/{path}"
+        "?geometries=geojson&overview=full&steps=false&radiuses=60;60&gaps=ignore"
+    )
+    try:
+        request = Request(url, headers={"User-Agent": "RobiotecFleet/1.0"})
+        with urlopen(request, timeout=max(0.5, float(timeout_seconds or 3.0))) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        return None
+
+    if payload.get("code") != "Ok":
+        return None
+    matchings = payload.get("matchings")
+    if not isinstance(matchings, list) or not matchings:
+        return None
+    matching = matchings[0] if isinstance(matchings[0], dict) else {}
+    confidence = coerce_float(matching.get("confidence")) or 0.0
+    if confidence < float(confidence_min or 0.0):
+        return None
+    geometry = matching.get("geometry") if isinstance(matching.get("geometry"), dict) else {}
+    latlon = _osrm_coordinates_to_latlon(geometry.get("coordinates"))
+    if len(latlon) < 2:
+        return None
+    distance_km = (coerce_float(matching.get("distance")) or 0.0) / 1000.0
+    return {
+        "segment_kind": "osrm",
+        "segment_reason": None,
+        "confidence": confidence,
+        "distance_km": distance_km,
+        "geometry": latlon,
+    }
+
+
+def build_hybrid_segment(
+    previous: dict[str, Any],
+    point: dict[str, Any],
+    *,
+    inside_geofence: bool,
+    osrm_base_url: str,
+    confidence_min: float,
+    timeout_seconds: float,
+) -> dict[str, Any]:
+    raw_geometry = _segment_raw_geometry(previous, point)
+    status = str(point.get("segment_status") or "normal").lower()
+    raw_distance = float(point.get("distance_km") or 0.0)
+    if status in {"gap", "suspicious"}:
+        return {
+            "segment_kind": "suspicious",
+            "segment_status": "suspicious",
+            "segment_reason": point.get("segment_reason") or status,
+            "distance_km": raw_distance,
+            "elapsed_seconds": float(point.get("elapsed_seconds") or 0.0),
+            "implied_speed_kmh": float(point.get("implied_speed_kmh") or 0.0),
+            "confidence": None,
+            "geometry": raw_geometry,
+            "counted_for_km": False,
+        }
+    if inside_geofence:
+        return {
+            "segment_kind": "raw",
+            "segment_status": "raw",
+            "segment_reason": "inside_geofence",
+            "distance_km": raw_distance,
+            "elapsed_seconds": float(point.get("elapsed_seconds") or 0.0),
+            "implied_speed_kmh": float(point.get("implied_speed_kmh") or 0.0),
+            "confidence": None,
+            "geometry": raw_geometry,
+            "counted_for_km": True,
+        }
+
+    matched = match_segment_with_osrm(
+        previous,
+        point,
+        osrm_base_url=osrm_base_url,
+        confidence_min=confidence_min,
+        timeout_seconds=timeout_seconds,
+    )
+    if matched:
+        matched.update({
+            "segment_status": "osrm",
+            "elapsed_seconds": float(point.get("elapsed_seconds") or 0.0),
+            "implied_speed_kmh": float(point.get("implied_speed_kmh") or 0.0),
+            "counted_for_km": True,
+        })
+        return matched
+
+    return {
+        "segment_kind": "raw",
+        "segment_status": "raw",
+        "segment_reason": "osrm_no_match",
+        "distance_km": raw_distance,
+        "elapsed_seconds": float(point.get("elapsed_seconds") or 0.0),
+        "implied_speed_kmh": float(point.get("implied_speed_kmh") or 0.0),
+        "confidence": None,
+        "geometry": raw_geometry,
+        "counted_for_km": True,
     }
 
 

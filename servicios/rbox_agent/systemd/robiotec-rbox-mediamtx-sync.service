@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec RBox MediaMTX dynamic camera sync
+After=network-online.target robiotec-camera-publisher.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=robiotec
+WorkingDirectory=/robiotec/mediamtx
+EnvironmentFile=-/robiotec/mediamtx/.env
+ExecStart=/usr/bin/python3 /robiotec/mediamtx/rbox_mediamtx_sync.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/robiotec/mediamtx/logs/rbox_mediamtx_sync.log
+StandardError=append:/robiotec/mediamtx/logs/rbox_mediamtx_sync.log
+
+[Install]
+WantedBy=multi-user.target

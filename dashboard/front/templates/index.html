@@ -145,77 +145,7 @@
               </div>
 
               <div class="home-history-events-list" id="home-history-events-list">
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Alerta</span>
-                      <span class="home-history-event-time">Hoy · 08:14</span>
-                    </div>
-                    <h4 class="home-history-event-title">Movimiento detectado en perímetro norte</h4>
-                    <p class="home-history-event-summary">La cámara PTZ-04 registró actividad fuera del horario habitual en el acceso norte del complejo.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
-
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Acceso</span>
-                      <span class="home-history-event-time">Hoy · 07:53</span>
-                    </div>
-                    <h4 class="home-history-event-title">Ingreso autorizado en puerta principal</h4>
-                    <p class="home-history-event-summary">Validación correcta de personal operativo en el acceso principal con coincidencia de credencial.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
-
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Vehículo</span>
-                      <span class="home-history-event-time">Ayer · 22:41</span>
-                    </div>
-                    <h4 class="home-history-event-title">Unidad móvil perdió señal temporal</h4>
-                    <p class="home-history-event-summary">El vehículo VIG-12 reportó interrupción breve de transmisión y restableció conexión automáticamente.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
-
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Reconocimiento</span>
-                      <span class="home-history-event-time">Ayer · 19:06</span>
-                    </div>
-                    <h4 class="home-history-event-title">Coincidencia facial en zona de monitoreo</h4>
-                    <p class="home-history-event-summary">Se registró una coincidencia parcial en la cámara interior del bloque administrativo para revisión manual.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
-
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Drone</span>
-                      <span class="home-history-event-time">Ayer · 17:32</span>
-                    </div>
-                    <h4 class="home-history-event-title">Patrullaje aéreo completado</h4>
-                    <p class="home-history-event-summary">El dron RB-Patrol finalizó el recorrido programado y dejó evidencia visual en el corredor occidental.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
-
-                <article class="home-history-event-card">
-                  <div class="home-history-event-copy">
-                    <div class="home-history-event-meta">
-                      <span class="home-history-event-tag">Sistema</span>
-                      <span class="home-history-event-time">Ayer · 15:18</span>
-                    </div>
-                    <h4 class="home-history-event-title">Sincronización de registros completada</h4>
-                    <p class="home-history-event-summary">El sistema consolidó eventos de cámaras, drones y telemetría en el histórico central sin incidencias.</p>
-                  </div>
-                  <button class="home-history-event-dismiss" type="button" aria-label="Eliminar evento">x</button>
-                </article>
+                <article class="home-history-event-card home-history-event-empty">Cargando eventos recientes...</article>
               </div>
 
               <nav class="home-history-pagination" id="home-history-pagination" aria-label="Paginación del historial">
@@ -263,6 +193,9 @@
       defaultCamera: __DEFAULT_CAMERA_JSON__,
       staticAssetVersion: "__STATIC_ASSET_VERSION__",
       telemetryRefreshMs: __TELEMETRY_REFRESH_MS__,
+      userRoles: __USER_ROLES_JSON__,
+      userIsAdmin: __USER_IS_ADMIN__,
+      accessPermissions: __ACCESS_PERMISSIONS_JSON__,
     };
   </script>
   <script>
@@ -409,7 +342,7 @@
 		      const modalMedia = document.getElementById("home-event-media");
 		      const modalGrid = document.getElementById("home-event-detail-grid");
 		      const modalPayload = document.getElementById("home-event-payload");
-		      const state = { page: 1, pageSize: 8, loading: false, timer: 0, items: new Map() };
+		      const state = { page: 1, pageSize: 12, loading: false, timer: 0, items: new Map() };
 	      const $ = (id) => document.getElementById(id);
 	      const categoryLabels = {
 	        alerta: "Alerta",
@@ -494,16 +427,52 @@
 	        });
 	      }
 
-	      function itemSummary(item) {
-	        const parts = [];
-	        if (item.camera_name) parts.push(item.camera_name);
-	        if (item.camera_id) parts.push(item.camera_id);
-	        if (item.track_id !== null && item.track_id !== undefined) parts.push(`track ${item.track_id}`);
-	        if (item.person_name) parts.push(item.person_name);
-	        if (item.person_id) parts.push(`cedula ${item.person_id}`);
-	        if (item.plate) parts.push(`placa ${item.plate}`);
-	        if (item.description) parts.push(item.description);
-	        return parts.join(" · ") || "Evento registrado en el historial.";
+	      function eventImagePath(item) {
+	        return item.crop_path || item.image_file_path || "";
+	      }
+
+	      function eventKindLabel(item) {
+	        const type = String(item.event_type || "").toLowerCase();
+	        const category = String(item.event_category || "").toLowerCase();
+	        if (item.plate || category === "vehiculo" || type.includes("plate") || type.includes("vehicle")) return "Vehículo";
+	        if (item.person_name || item.person_id || category.includes("facial") || type.includes("person") || type.includes("face")) return "Rostro";
+	        return categoryLabels[item.event_category] || item.event_type || "Evento";
+	      }
+
+	      function eventPrimaryTitle(item) {
+	        if (item.plate) return item.plate;
+	        if (item.person_name) return item.person_name;
+	        if (item.person_id) return `Persona ${item.person_id}`;
+	        return item.title || "Evento detectado";
+	      }
+
+	      function eventDetectionText(item) {
+	        if (item.plate) return item.plate;
+	        if (item.person_name) return item.person_name;
+	        if (item.person_id) return item.person_id;
+	        if (item.description) return item.description;
+	        return item.title || "Sin dato";
+	      }
+
+	      function eventShortSummary(item) {
+	        const camera = item.camera_name || item.camera_id || "Sin cámara";
+	        return `Cámara: ${camera} · Tipo: ${eventKindLabel(item)} · ${item.plate ? "Placa" : "Persona"}: ${eventDetectionText(item)}`;
+	      }
+
+	      function eventThumbMarkup(item) {
+	        const imagePath = eventImagePath(item);
+	        if (imagePath) {
+	          return `
+	            <div class="home-history-event-thumb">
+	              <img src="${escapeHtml(mediaUrl("/api/camera-event-crop", imagePath))}" alt="Crop del evento" loading="lazy" />
+	            </div>
+	          `;
+	        }
+	        return `
+	          <div class="home-history-event-thumb home-history-event-thumb--empty" aria-hidden="true">
+	            <span>${escapeHtml(eventKindLabel(item).slice(0, 2).toUpperCase())}</span>
+	          </div>
+	        `;
 	      }
 
 	      function renderItems(items) {
@@ -513,18 +482,19 @@
 	          return;
 	        }
 	        list.innerHTML = items.map((item) => {
-	          const label = categoryLabels[item.event_category] || item.event_type || "Evento";
-	          const origin = originLabels[item.origin] || item.origin || "";
 	          return `
 	            <article class="home-history-event-card" data-event-id="${escapeHtml(item.id)}">
+	              ${eventThumbMarkup(item)}
 	              <div class="home-history-event-copy">
 	                <div class="home-history-event-meta">
-	                  <span class="home-history-event-tag">${escapeHtml(label)}</span>
-	                  <span class="home-history-event-time">${escapeHtml(formatDate(item.detected_at))}</span>
-	                  ${origin ? `<span class="home-history-event-time">${escapeHtml(origin)}</span>` : ""}
+	                  <span class="home-history-event-tag">${escapeHtml(eventKindLabel(item))}</span>
 	                </div>
-	                <h4 class="home-history-event-title">${escapeHtml(item.title || "Evento detectado")}</h4>
-	                <p class="home-history-event-summary">${escapeHtml(itemSummary(item))}</p>
+	                <h4 class="home-history-event-title">${escapeHtml(eventPrimaryTitle(item))}</h4>
+	                <div class="home-history-event-mini">
+	                  <span><strong>Cámara:</strong> ${escapeHtml(item.camera_name || item.camera_id || "Sin cámara")}</span>
+	                  <span><strong>Tipo:</strong> ${escapeHtml(eventKindLabel(item))}</span>
+	                  <span><strong>${item.plate ? "Placa:" : "Persona:"}</strong> ${escapeHtml(eventDetectionText(item))}</span>
+	                </div>
 	              </div>
 	              <button class="home-history-event-dismiss" type="button" data-dismiss-event="${escapeHtml(item.id)}" aria-label="Archivar evento">x</button>
 	            </article>
@@ -574,7 +544,7 @@
 	        const label = categoryLabels[item.event_category] || item.event_type || "Evento";
 	        modalKicker.textContent = label;
 	        modalTitle.textContent = item.title || "Evento detectado";
-	        modalSubtitle.textContent = itemSummary(item);
+	        modalSubtitle.textContent = eventShortSummary(item);
 	        renderModalMedia(item);
 	        modalGrid.innerHTML = detailRows(item).map(([labelText, value]) => `
 	          <div class="home-event-detail-row">

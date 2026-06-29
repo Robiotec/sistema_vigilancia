@@ -1,0 +1,11 @@
+[Unit]
+Description=Robiotec Gallery Sync - cada 5 minutos
+Requires=robiotec-gallery-sync.service
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target

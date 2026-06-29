@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 from urllib.parse import urlencode
 
 from fastapi import APIRouter, Request
@@ -21,6 +22,7 @@ from back.app.context import (
     resolve_source_id,
     companies_for_options,
 )
+from back.app.services.db_pool import fetch_all
 from back.app.state import empresa_mapper, vehicle_telemetry_mapper
 
 router = APIRouter(prefix="/api", tags=["org"])
@@ -241,15 +243,26 @@ def telemetry_history(request: Request):
     params = dict(request.query_params)
     # Mapear device_id → vehicle_id usando catálogo
     device_id = params.pop("device_id", None)
-    vehicle_id = _resolve_vehicle_id(request, device_id) if device_id else params.get("vehicle_id")
-    if not vehicle_id:
+    vehicle_ids = _resolve_vehicle_ids(request, device_id) if device_id else [_text(params.get("vehicle_id"))]
+    vehicle_ids = [item for item in dict.fromkeys(vehicle_ids) if item]
+    if not vehicle_ids:
         return JSONResponse({"error": "Se requiere device_id o vehicle_id"}, status_code=400)
-    params["vehicle_id"] = vehicle_id
-    try:
-        result = call_api(f"/telemetry/history?{urlencode(params)}", token=token)
-    except RuntimeError as exc:
-        return JSONResponse({"error": str(exc)}, status_code=502)
-    return result if isinstance(result, list) else result or []
+    errors: list[str] = []
+    results: list[dict] = []
+    for vehicle_id in vehicle_ids:
+        params["vehicle_id"] = vehicle_id
+        try:
+            result = call_api(f"/telemetry/history?{urlencode(params)}", token=token)
+        except RuntimeError as exc:
+            errors.append(str(exc))
+            continue
+        if isinstance(result, list):
+            results.extend(item for item in result if isinstance(item, dict))
+    if results:
+        return _merge_history_points(results)
+    if errors and len(errors) == len(vehicle_ids):
+        return JSONResponse({"error": errors[0]}, status_code=502)
+    return []
 
 
 @router.get("/telemetry/km-summary")
@@ -291,7 +304,7 @@ def telemetry_km_summary_export(request: Request):
 
     buf = io.StringIO()
     writer = csv.writer(buf)
-    writer.writerow(["Vehículo", "Fecha", "Km recorridos", "Velocidad máx (km/h)", "Puntos GPS", "Encendido ON", "Encendido OFF"])
+    writer.writerow(["Vehículo", "Fecha", "Km recorridos", "Encendido ON", "Encendido OFF"])
     total_km = 0.0
     for r in rows:
         km = round(float(r.get("km", 0)), 3)
@@ -300,12 +313,10 @@ def telemetry_km_summary_export(request: Request):
             label,
             r.get("date", ""),
             f"{km:.3f}",
-            f"{float(r.get('max_speed', 0)):.1f}",
-            r.get("points", 0),
             r.get("ignition_on", 0),
             r.get("ignition_off", 0),
         ])
-    writer.writerow(["", "TOTAL", f"{total_km:.3f}", "", "", "", ""])
+    writer.writerow(["", "TOTAL", f"{total_km:.3f}", "", ""])
 
     buf.seek(0)
     filename = f"km_{label.replace(' ', '_')}_{params.get('from_date', 'rango')}_a_{params.get('to_date', '')}.csv"
@@ -409,9 +420,65 @@ async def geofence_alert_processed(alert_id: str, request: Request):
 
 def _resolve_vehicle_id(request: Request, device_id: str) -> str | None:
     """Busca vehicle_id (UUID) a partir del device_id (unique_code/placa) usando el catálogo."""
+    ids = _resolve_vehicle_ids(request, device_id)
+    return ids[0] if ids else None
+
+
+def _plate_lookup_key(value: str) -> str:
+    text = _text(value).upper()
+    if not (re.search(r"[A-Z]", text) and re.search(r"\d", text)):
+        return ""
+    return re.sub(r"[^A-Z0-9]", "", text)
+
+
+def _resolve_vehicle_ids_from_db(device_id: str) -> list[str]:
     normalized_device_id = _text(device_id)
     if not normalized_device_id:
-        return None
+        return []
+    plate_key = _plate_lookup_key(normalized_device_id)
+    try:
+        rows = fetch_all(
+            """
+            SELECT id::text AS id
+            FROM vehicles
+            WHERE deleted_at IS NULL
+              AND (
+                id::text = %(raw)s
+                OR lower(trim(coalesce(unique_code, ''))) = lower(%(raw)s)
+                OR lower(trim(coalesce(plate, ''))) = lower(%(raw)s)
+                OR (
+                  %(plate_key)s <> ''
+                  AND regexp_replace(upper(coalesce(plate, '')), '[^A-Z0-9]', '', 'g') LIKE %(plate_key_like)s
+                )
+              )
+            ORDER BY
+              CASE
+                WHEN id::text = %(raw)s THEN 0
+                WHEN lower(trim(coalesce(unique_code, ''))) = lower(%(raw)s) THEN 1
+                WHEN lower(trim(coalesce(plate, ''))) = lower(%(raw)s) THEN 2
+                ELSE 3
+              END,
+              plate NULLS LAST,
+              unique_code NULLS LAST
+            LIMIT 12
+            """,
+            {
+                "raw": normalized_device_id,
+                "plate_key": plate_key,
+                "plate_key_like": f"{plate_key}%",
+            },
+        )
+    except Exception:
+        return []
+    return [_text(row.get("id")) for row in rows or [] if _text(row.get("id"))]
+
+
+def _resolve_vehicle_ids(request: Request, device_id: str) -> list[str]:
+    """Busca vehicle_id(s) a partir de UUID, unique_code, IMEI o placa."""
+    normalized_device_id = _text(device_id)
+    if not normalized_device_id:
+        return []
+    resolved: list[str] = []
     try:
         device_list = json.loads(build_context(request)["__DEVICE_CATALOG_JSON__"])
         for d in device_list:
@@ -435,8 +502,36 @@ def _resolve_vehicle_id(request: Request, device_id: str) -> str | None:
                 _text(extra.get("gps_api_id")),
             }
             if normalized_device_id in {item for item in candidates if item}:
-                return vehicle_source_id or (normalized_device_id if len(normalized_device_id) == 36 else None)
+                value = vehicle_source_id or (normalized_device_id if len(normalized_device_id) == 36 else "")
+                if value:
+                    resolved.append(value)
     except Exception:
         pass
-    # Si es UUID directamente, devolverlo
-    return normalized_device_id if len(normalized_device_id) == 36 else None
+    resolved.extend(_resolve_vehicle_ids_from_db(normalized_device_id))
+    if len(normalized_device_id) == 36:
+        resolved.append(normalized_device_id)
+    return [item for item in dict.fromkeys(resolved) if item]
+
+
+def _history_point_sort_key(point: dict) -> str:
+    return _text(point.get("gps_time") or point.get("timestamp") or point.get("received_at"))
+
+
+def _merge_history_points(points: list[dict]) -> list[dict]:
+    seen: set[tuple[str, str, str]] = set()
+    merged: list[dict] = []
+    for point in sorted(points, key=_history_point_sort_key):
+        key = (
+            _history_point_sort_key(point),
+            _text(point.get("lat")),
+            _text(point.get("lon")),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        merged.append(point)
+    if merged:
+        merged[0]["segment_status"] = "start"
+        merged[0]["segment_reason"] = None
+        merged[0]["counted_for_km"] = False
+    return merged

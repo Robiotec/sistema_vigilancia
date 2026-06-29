@@ -37,6 +37,11 @@ class Settings(BaseSettings):
     osint_report: str = Field(
         default="/root/robiotec/osint/osint_descarga_reporte.json", alias="OSINT_REPORT"
     )
+    osrm_base_url: str = Field(default="https://router.project-osrm.org", alias="OSRM_BASE_URL")
+    osrm_match_confidence_min: float = Field(default=0.55, alias="OSRM_MATCH_CONFIDENCE_MIN")
+    osrm_request_timeout_seconds: float = Field(default=0.8, alias="OSRM_REQUEST_TIMEOUT_SECONDS")
+    osrm_max_segments_per_request: int = Field(default=8, alias="OSRM_MAX_SEGMENTS_PER_REQUEST")
+    osrm_request_budget_seconds: float = Field(default=6.0, alias="OSRM_REQUEST_BUDGET_SECONDS")
     api_host: str = Field(alias="API_HOST")
     api_port: int = Field(alias="API_PORT")
     master_username: str = Field(default="robiotec", alias="MASTER_USERNAME")

@@ -24,7 +24,8 @@ def _env(key: str, default: str = "") -> str:
     return os.environ.get(key, default)
 
 
-MANIFEST_PATH = Path(_env("AI_RESULTS_DIR", "/home/robiotec/robiotec-ai/results")) / "manifest.jsonl"
+RESULTS_DIR = _env("AI_RESULTS_DIR") or _env("INGEST_MANIFEST_DIR") or "/home/robiotec/robiotec-ai/results"
+MANIFEST_PATH = Path(RESULTS_DIR) / "manifest.jsonl"
 STATE_FILE = Path(_env("INGEST_STATE_FILE", "/home/robiotec/robiotec-ai/data/manifest_ingest_state.json"))
 POLL_INTERVAL = float(_env("INGEST_POLL_INTERVAL", "4"))
 INGEST_BATCH_SIZE = max(1, min(int(_env("INGEST_BATCH_SIZE", "100")), 500))
@@ -269,16 +270,27 @@ def tick() -> int:
         return 0
 
     size = MANIFEST_PATH.stat().st_size
-    offset = state.get("offset", 0)
-    if size <= offset:
+    offset = int(state.get("offset", 0) or 0)
+    if size < offset:
+        logger.warning(
+            "[ingest] Manifest truncado/rotado: size=%s offset=%s. Reiniciando lectura.",
+            size,
+            offset,
+        )
+        offset = 0
+    if size == offset:
         return 0
 
     with MANIFEST_PATH.open("rb") as fh:
         fh.seek(offset)
         chunk = fh.read(size - offset)
 
-    lines = [line for line in chunk.decode("utf-8", errors="replace").splitlines() if line.strip()]
-    new_offset = offset + len(chunk)
+    last_newline = chunk.rfind(b"\n")
+    if last_newline == -1:
+        return 0
+    processable = chunk[:last_newline + 1]
+    new_offset = offset + last_newline + 1
+    lines = [line for line in processable.decode("utf-8", errors="replace").splitlines() if line.strip()]
     rows = [row for line in lines for row in [_process_line(line)] if row]
     if rows:
         _insert_rows(rows)

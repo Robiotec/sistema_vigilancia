@@ -646,18 +646,21 @@ class RemoteDetectionFeedService:
                 values.append(normalized)
         return values
 
-    @staticmethod
-    def _history_item(row: dict[str, Any]) -> dict[str, Any]:
+    def _history_item(self, row: dict[str, Any]) -> dict[str, Any]:
         detected_at = row.get("detected_at")
         detected_date = row.get("detected_date")
         payload = row.get("detail_payload") if isinstance(row.get("detail_payload"), dict) else {}
+        camera_id = str(row.get("camera_id") or "").strip()
+        raw_camera_name = str(row.get("camera_name") or "").strip()
+        display_camera_name = self._camera_name(camera_id) or self._camera_name(raw_camera_name) or raw_camera_name or camera_id
         return {
             "id": str(row.get("id") or ""),
             "event_type": row.get("event_type"),
             "event_category": row.get("event_category"),
             "origin": row.get("origin"),
             "camera_id": row.get("camera_id"),
-            "camera_name": row.get("camera_name"),
+            "camera_name": display_camera_name,
+            "camera_raw_name": raw_camera_name,
             "camera_location": row.get("camera_location"),
             "event_timestamp": row.get("event_timestamp"),
             "detected_at": detected_at.isoformat() if hasattr(detected_at, "isoformat") else detected_at,
@@ -732,20 +735,45 @@ class RemoteDetectionFeedService:
         return "info" if event_type in {"person", "plate", *VIDEO_EVENT_TYPES} else "warning"
 
     def _camera_name(self, camera_id: str) -> str | None:
-        if camera_id in self._camera_name_cache:
-            return self._camera_name_cache[camera_id]
+        normalized = str(camera_id or "").strip().strip("/")
+        if not normalized:
+            return None
+        if normalized in self._camera_name_cache:
+            return self._camera_name_cache[normalized]
 
-        query = "SELECT name FROM cameras WHERE unique_code = %s LIMIT 1"
+        base = normalized
+        for suffix in ("/INFERENCE_VIEW", "/INFERENCE"):
+            if base.upper().endswith(suffix):
+                base = base[: -len(suffix)].strip("/")
+        query = """
+            SELECT c.name
+            FROM cameras c
+            LEFT JOIN stream_paths sp
+              ON sp.resource_id = c.id
+             AND sp.resource_type = 'camera'
+             AND sp.active = true
+            WHERE c.deleted_at IS NULL
+              AND (
+                c.unique_code = %s
+                OR c.name = %s
+                OR sp.path = %s
+                OR c.unique_code = %s
+                OR c.name = %s
+                OR sp.path = %s
+              )
+            ORDER BY c.active DESC, c.id DESC
+            LIMIT 1
+        """
         try:
             with self._db_connection() as conn:
                 with conn.cursor() as cur:
-                    cur.execute(query, (camera_id,))
+                    cur.execute(query, (normalized, normalized, normalized, base, base, base))
                     row = cur.fetchone()
                     name = str(row[0]).strip() if row and row[0] else None
-                    self._camera_name_cache[camera_id] = name
+                    self._camera_name_cache[normalized] = name
                     return name
         except Exception:
-            self._camera_name_cache[camera_id] = None
+            self._camera_name_cache[normalized] = None
             return None
 
     @staticmethod

@@ -1,0 +1,13 @@
+[Unit]
+Description=Robiotec Gallery Sync - sincronizar faces_gallery desde API central
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=robiotec
+WorkingDirectory=/robiotec/gallery
+EnvironmentFile=/robiotec/gallery/.env
+ExecStart=/usr/bin/python3 /robiotec/gallery/sync_from_api.py
+StandardOutput=append:/robiotec/gallery/sync.log
+StandardError=append:/robiotec/gallery/sync.log
