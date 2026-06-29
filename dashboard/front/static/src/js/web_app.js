@@ -413,6 +413,44 @@ const USER_CAN_MANAGE_CAMERA_INFERENCE = Boolean(cameraRegisterModal);
 const cameraStatuses = new Map();
 const mapMarkerIconCache = new Map();
 
+function bindSidebarToggleEarly() {
+  if (!appShell || !sidebarToggle || sidebarToggle.dataset.sidebarToggleBound === "1") return;
+  const isMobileSidebarViewportEarly = () => window.matchMedia(MOBILE_SIDEBAR_QUERY).matches;
+  const syncSidebarA11yEarly = () => {
+    const isMobile = isMobileSidebarViewportEarly();
+    const collapsed = appShell.classList.contains("is-sidebar-collapsed");
+    const label = isMobile
+      ? (collapsed ? "Abrir menu" : "Cerrar menu")
+      : (collapsed ? "Expandir menu" : "Contraer menu");
+    sidebarToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    sidebarToggle.setAttribute("aria-label", label);
+    sidebarToggle.title = label;
+    if (appSidebar) {
+      appSidebar.setAttribute("aria-hidden", isMobile && collapsed ? "true" : "false");
+    }
+  };
+  const applySidebarStateEarly = (collapsed) => {
+    appShell.classList.toggle("is-sidebar-collapsed", Boolean(collapsed));
+    const isMobileOpen = isMobileSidebarViewportEarly() && !appShell.classList.contains("is-sidebar-collapsed");
+    appShell.classList.toggle("is-sidebar-mobile-open", isMobileOpen);
+    document.body.classList.toggle("is-sidebar-mobile-open", isMobileOpen);
+    syncSidebarA11yEarly();
+  };
+  sidebarToggle.dataset.sidebarToggleBound = "1";
+  sidebarToggle.addEventListener("click", () => {
+    if (isMobileSidebarViewportEarly()) {
+      applySidebarStateEarly(!appShell.classList.contains("is-sidebar-collapsed"));
+      return;
+    }
+    const willCollapse = !appShell.classList.contains("is-sidebar-collapsed");
+    window.localStorage.setItem(SIDEBAR_STORAGE_KEY, willCollapse ? "1" : "0");
+    applySidebarStateEarly(willCollapse);
+  });
+  syncSidebarA11yEarly();
+}
+
+bindSidebarToggleEarly();
+
 function buildCameraIconUrl(filename) {
   if (!filename) return "";
   if (!STATIC_ASSET_VERSION) {
@@ -12622,7 +12660,8 @@ dashboardMobilePanelButtons.forEach((button) => {
   });
 });
 
-if (sidebarToggle) {
+if (sidebarToggle && sidebarToggle.dataset.sidebarToggleBound !== "1") {
+  sidebarToggle.dataset.sidebarToggleBound = "1";
   sidebarToggle.addEventListener("click", () => {
     if (!appShell) return;
     if (isMobileSidebarViewport()) {

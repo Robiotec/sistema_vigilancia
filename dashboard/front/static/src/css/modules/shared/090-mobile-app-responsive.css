@@ -602,6 +602,13 @@
 
   .app-sidebar,
   .app-shell.is-sidebar-collapsed .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--mobile-sidebar-width) - 28px);
+    z-index: 720;
+    width: var(--mobile-sidebar-width);
+    max-width: calc(100vw - 18px);
+    height: 100dvh;
     grid-template-rows: auto minmax(0, 1fr) auto;
     gap: 14px;
     padding:
@@ -610,6 +617,13 @@
       calc(env(safe-area-inset-bottom, 0px) + 16px);
     border-radius: 0 22px 22px 0;
     overflow: hidden;
+    transition:
+      left var(--sidebar-motion-duration) var(--sidebar-motion-ease),
+      padding var(--sidebar-motion-duration) var(--sidebar-motion-ease),
+      gap var(--sidebar-motion-duration) var(--sidebar-motion-ease),
+      box-shadow var(--sidebar-motion-duration) ease,
+      background var(--sidebar-motion-duration) ease,
+      border-color var(--sidebar-motion-duration) ease;
   }
 
   .app-shell.is-sidebar-mobile-open .app-sidebar {
