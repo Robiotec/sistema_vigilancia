@@ -202,6 +202,9 @@ const vehicleRegisterTelemetryMode = document.getElementById("vehicle-register-t
 const vehicleRegisterTelemetryHelp = document.getElementById("vehicle-register-telemetry-help");
 const vehicleRegisterLabel = document.getElementById("vehicle-register-label");
 const vehicleRegisterDriver = document.getElementById("vehicle-register-driver");
+const vehicleRegisterMake = document.getElementById("vehicle-register-make");
+const vehicleRegisterModel = document.getElementById("vehicle-register-model");
+const vehicleRegisterYear = document.getElementById("vehicle-register-year");
 const vehicleRegisterIdentifierLabel = document.getElementById("vehicle-register-identifier-label");
 const vehicleRegisterIdentifier = document.getElementById("vehicle-register-identifier");
 const vehicleRegisterIdentifierHelp = document.getElementById("vehicle-register-identifier-help");
@@ -339,6 +342,11 @@ const cameraAdminRailList = document.getElementById("camera-admin-rail-list");
 const cameraAdminRboxList = document.getElementById("camera-admin-rbox-list");
 const cameraAdminDetailTitle = document.getElementById("camera-admin-detail-title");
 const cameraAdminDetailCopy = document.getElementById("camera-admin-detail-copy");
+const cameraAdminEditorPanel = document.getElementById("camera-admin-editor-panel");
+const cameraAdminEditorBackdrop = document.getElementById("camera-admin-editor-backdrop");
+const cameraAdminEditorClose = document.getElementById("camera-admin-editor-close");
+const cameraAdminNewCameraOpen = document.getElementById("camera-admin-new-camera-open");
+const cameraAdminNewRboxOpen = document.getElementById("camera-admin-new-rbox-open");
 const cameraAdminMapOpen = document.getElementById("camera-admin-map-open");
 const cameraAdminMapSummary = document.getElementById("camera-admin-map-summary");
 const cameraAdminMapModal = document.getElementById("camera-admin-map-modal");
@@ -2211,9 +2219,17 @@ async function copyPlatePreviewText() {
   }
 }
 
-function copyTextFallback(text) {
+const robiotecUiHelpers = window.RobiotecUI || {};
+const copyTextValue = robiotecUiHelpers.copyTextValue || async function copyTextValueFallback(text) {
+  const value = String(text || "").trim();
+  if (!value || value === "--") return false;
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function" && window.isSecureContext) {
+    await navigator.clipboard.writeText(value);
+    return true;
+  }
+
   const helper = document.createElement("textarea");
-  helper.value = text;
+  helper.value = value;
   helper.setAttribute("readonly", "");
   helper.style.position = "fixed";
   helper.style.left = "-9999px";
@@ -2228,17 +2244,33 @@ function copyTextFallback(text) {
   } finally {
     helper.remove();
   }
-}
-
-async function copyTextValue(text) {
-  const value = String(text || "").trim();
-  if (!value || value === "--") return false;
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function" && window.isSecureContext) {
-    await navigator.clipboard.writeText(value);
-    return true;
+};
+const copyButtonDataValue = robiotecUiHelpers.copyButtonDataValue || function copyButtonDataValueFallback(copyButton) {
+  if (!(copyButton instanceof Element)) return "";
+  const targetId = copyButton.getAttribute("data-camera-copy-target");
+  const targetField = targetId ? document.getElementById(targetId) : null;
+  if (targetField && "value" in targetField) {
+    return targetField.value;
   }
-  return copyTextFallback(value);
-}
+  return copyButton.getAttribute("data-copy-value") || "";
+};
+const handleCopyButtonFeedback = robiotecUiHelpers.handleCopyButtonFeedback || function handleCopyButtonFeedbackFallback(copyButton, value = copyButtonDataValue(copyButton)) {
+  if (!(copyButton instanceof HTMLElement)) return;
+  const originalLabel = copyButton.textContent || "Copiar";
+  copyButton.textContent = "Copiando...";
+  void copyTextValue(value)
+    .then((ok) => {
+      copyButton.textContent = ok ? "Copiado" : "No copiado";
+    })
+    .catch(() => {
+      copyButton.textContent = "No copiado";
+    })
+    .finally(() => {
+      window.setTimeout(() => {
+        copyButton.textContent = originalLabel;
+      }, 1200);
+    });
+};
 
 function syncCameraAdminQuickActions(isEditing) {
   const editing = Boolean(isEditing);
@@ -2279,6 +2311,21 @@ function isCameraRegisterModalOpen() {
   );
 }
 
+function isEmbeddedCameraAdminPanel() {
+  return Boolean(
+    cameraRegisterModal
+    && cameraRegisterModal.classList.contains("is-admin-embedded")
+  );
+}
+
+function isCameraAdminEditorOpen() {
+  return Boolean(
+    isEmbeddedCameraAdminPanel()
+    && cameraAdminEditorPanel
+    && cameraAdminEditorPanel.classList.contains("is-editor-open")
+  );
+}
+
 function isVehicleRegisterModalOpen() {
   return Boolean(vehicleRegisterModal && !vehicleRegisterModal.hidden);
 }
@@ -2290,6 +2337,7 @@ function isCameraAdminMapModalOpen() {
 function syncGlobalModalState() {
   const hasOpenModal = (
     isCameraRegisterModalOpen()
+    || isCameraAdminEditorOpen()
     || isCameraAdminMapModalOpen()
     || isVehicleRegisterModalOpen()
   );
@@ -2433,16 +2481,52 @@ function setupEmbeddedCameraAdminPanel() {
   if (!cameraRegisterModal.closest("[data-admin-tab-panel='camaras']")) return;
   cameraRegisterModal.hidden = false;
   cameraRegisterModal.classList.add("is-admin-embedded");
+  if (cameraAdminEditorPanel) {
+    cameraAdminEditorPanel.setAttribute("aria-hidden", "true");
+  }
+}
+
+function focusCameraAdminEditorPrimaryField() {
+  if (!cameraAdminName) return;
+  cameraAdminName.focus();
+  cameraAdminName.select();
+}
+
+function openCameraAdminEditorModal() {
+  if (!isEmbeddedCameraAdminPanel()) {
+    window.requestAnimationFrame(focusCameraAdminEditorPrimaryField);
+    return;
+  }
+  if (!cameraAdminEditorPanel) return;
+  cameraAdminEditorPanel.classList.add("is-editor-open");
+  cameraAdminEditorPanel.setAttribute("aria-hidden", "false");
+  if (cameraAdminEditorBackdrop) {
+    cameraAdminEditorBackdrop.classList.add("is-editor-open");
+  }
+  syncGlobalModalState();
+  window.requestAnimationFrame(focusCameraAdminEditorPrimaryField);
+}
+
+function closeCameraAdminEditorModal() {
+  if (!cameraAdminEditorPanel) return;
+  if (isCameraAdminMapModalOpen()) {
+    closeCameraAdminMapModal();
+  }
+  cameraAdminEditorPanel.classList.remove("is-editor-open");
+  cameraAdminEditorPanel.setAttribute("aria-hidden", "true");
+  if (cameraAdminEditorBackdrop) {
+    cameraAdminEditorBackdrop.classList.remove("is-editor-open");
+  }
+  syncGlobalModalState();
 }
 
 function openCameraRegisterModal() {
   if (!cameraRegisterModal) return;
-  if (cameraRegisterModal.classList.contains("is-admin-embedded")) {
+  if (isEmbeddedCameraAdminPanel()) {
     setActiveAdminTab("camaras", { updateHash: true });
-    if (cameraAdminName) {
-      cameraAdminName.focus();
-      cameraAdminName.select();
-    }
+    resetCameraAdminForm({ creationMode: "camera" });
+    setCameraAdminFeedback("");
+    openCameraAdminEditorModal();
     return;
   }
   if (cameraAdminForm) {
@@ -2998,6 +3082,15 @@ function updateVehicleRegisterTypeCopy() {
     vehicleRegisterSubtype.disabled = isDrone;
     if (isDrone) vehicleRegisterSubtype.value = "";
   }
+  const vehicleInfoFields = document.getElementById("vehicle-register-vehicle-info-fields");
+  if (vehicleInfoFields) {
+    vehicleInfoFields.hidden = isDrone;
+  }
+  [vehicleRegisterMake, vehicleRegisterModel, vehicleRegisterYear].forEach((field) => {
+    if (!field) return;
+    field.disabled = isDrone;
+    if (isDrone) field.value = "";
+  });
   if (vehicleRegisterApiFields) {
     vehicleRegisterApiFields.hidden = true;
   }
@@ -3086,6 +3179,15 @@ function populateVehicleRegisterState(item) {
   }
   if (vehicleRegisterDriver) {
     vehicleRegisterDriver.value = String(item.driver_name || item.chofer || "").trim();
+  }
+  if (vehicleRegisterMake) {
+    vehicleRegisterMake.value = String(item.make || item.marca || "").trim();
+  }
+  if (vehicleRegisterModel) {
+    vehicleRegisterModel.value = String(item.model || item.modelo || "").trim();
+  }
+  if (vehicleRegisterYear) {
+    vehicleRegisterYear.value = item.year || item.anio ? String(item.year || item.anio).trim() : "";
   }
   if (vehicleRegisterIdentifier) {
     vehicleRegisterIdentifier.value = String(item.identifier || "").trim();
@@ -4659,6 +4761,9 @@ async function registerVehicle(event) {
   const ownerUserId = vehicleRegisterOwner ? String(vehicleRegisterOwner.value || "").trim() : "";
   const label = vehicleRegisterLabel.value.trim();
   const driverName = vehicleRegisterDriver ? vehicleRegisterDriver.value.trim() : "";
+  const make = !isDrone && vehicleRegisterMake ? vehicleRegisterMake.value.trim() : "";
+  const model = !isDrone && vehicleRegisterModel ? vehicleRegisterModel.value.trim() : "";
+  const year = !isDrone && vehicleRegisterYear ? vehicleRegisterYear.value.trim() : "";
   const vehicleSubtype = !isDrone && vehicleRegisterSubtype ? normalizeVehicleTypeCode(vehicleRegisterSubtype.value || "") : "";
   const identifier = vehicleRegisterIdentifier ? vehicleRegisterIdentifier.value.trim() : "";
   const notes = vehicleRegisterNotes ? vehicleRegisterNotes.value.trim() : "";
@@ -4703,6 +4808,9 @@ async function registerVehicle(event) {
           vehicle_subtype: vehicleSubtype,
           label,
           driver_name: driverName,
+          make,
+          model,
+          year,
           identifier,
           notes,
           telemetry_mode: telemetryMode,
@@ -4911,6 +5019,9 @@ function setActiveAdminTab(tabName, { updateHash = false } = {}) {
     panel.hidden = !isActive;
     panel.classList.toggle("is-active", isActive);
   });
+  if (nextTab !== "camaras" && isCameraAdminEditorOpen()) {
+    closeCameraAdminEditorModal();
+  }
   if (updateHash && nextTab) {
     window.history.replaceState(null, "", `${window.location.pathname}#${encodeURIComponent(nextTab)}`);
   }
@@ -8559,7 +8670,7 @@ function renderVehicleRegistrySummary(items) {
   if (vehicleRegistryUpdated) {
     const newestTs = Array.isArray(items) && items.length > 0
       ? Math.max(...items.map((item) => Number(item.ts) || 0))
-      : 0;
+      : 0;https://robio-ai.com/login
     vehicleRegistryUpdated.textContent = newestTs ? formatDateOnly(newestTs) : "--";
     vehicleRegistryUpdated.title = newestTs ? formatDateTime(newestTs) : "";
   }
@@ -8619,6 +8730,20 @@ function findSelectedVehicleRegistryItem(items) {
   const source = Array.isArray(items) ? items : [];
   if (!selectedVehicleRegistryKey) return null;
   return source.find((item) => vehicleRegistryManualKey(item) === selectedVehicleRegistryKey) || null;
+}
+
+function findVehicleRegistryItemByKey(key, items = lastVehicleRegistrySnapshot) {
+  const normalizedKey = String(key || "").trim();
+  if (!normalizedKey) return null;
+  const source = Array.isArray(items) ? items : [];
+  return source.find((item) => vehicleRegistryManualKey(item) === normalizedKey) || null;
+}
+
+function vehicleRegistryUsesModalDirectory() {
+  return Boolean(
+    CAN_MANAGE_VEHICLE_REGISTRY
+    && document.querySelector(".vehicle-registry-directory-workbench")
+  );
 }
 
 function syncVehicleRegistrySelectedActions(item) {
@@ -8722,6 +8847,20 @@ function renderManualVehicleRegistryItem(item) {
           <span class="vehicle-item-detail-label"> <i class="fas fa-truck"></i> Tipo de automóvil</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(subtypeLabel || "--")}</strong>
         </article>
+        ${!isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type) ? `
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-industry"></i> Marca</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.make || item.marca || "--"))}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-cogs"></i> Modelo</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.model || item.modelo || "--"))}</strong>
+        </article>
+        <article class="vehicle-item-detail-card">
+          <span class="vehicle-item-detail-label"> <i class="fas fa-calendar"></i> Año</span>
+          <strong class="vehicle-item-detail-value">${escapeHtml(String(item.year || item.anio || "--"))}</strong>
+        </article>
+        ` : ""}
         <article class="vehicle-item-detail-card">
           <span class="vehicle-item-detail-label"> <i class="fas fa-satellite"></i> Modo de telemetría</span>
           <strong class="vehicle-item-detail-value">${escapeHtml(telemetryBadge)}</strong>
@@ -9328,6 +9467,7 @@ function renderVehicleRegistry(items) {
   const droneEntries = manualEntries.filter((item) => isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type));
   const carEntries = manualEntries.filter((item) => !isDroneVehicleTypeCode(item.vehicle_type_code || item.vehicle_type));
   const selectedItem = findSelectedVehicleRegistryItem(manualEntries);
+  const useModalDirectory = vehicleRegistryUsesModalDirectory();
   syncVehicleRouteControls();
 
   if (selectedVehicleRegistryKey && !selectedItem) {
@@ -9353,29 +9493,33 @@ function renderVehicleRegistry(items) {
   }
 
   if (vehicleRegistryDetail) {
-    // Guardar estado del panel km antes de re-renderizar (preserva fechas que el usuario esté editando)
-    const _existingKmPanel = vehicleRegistryDetail.querySelector(".vehicle-km-panel");
-    if (_existingKmPanel) {
-      const _eid = _existingKmPanel.dataset.vehicleId;
-      if (_eid) {
-        const _prev = _kmPanelState.get(_eid) || {};
-        _kmPanelState.set(_eid, {
-          ..._prev,
-          from: _existingKmPanel.querySelector(".vehicle-km-from")?.value || _prev.from,
-          to: _existingKmPanel.querySelector(".vehicle-km-to")?.value || _prev.to,
-        });
+    if (useModalDirectory) {
+      vehicleRegistryDetail.innerHTML = "";
+    } else {
+      // Guardar estado del panel km antes de re-renderizar (preserva fechas que el usuario esté editando)
+      const _existingKmPanel = vehicleRegistryDetail.querySelector(".vehicle-km-panel");
+      if (_existingKmPanel) {
+        const _eid = _existingKmPanel.dataset.vehicleId;
+        if (_eid) {
+          const _prev = _kmPanelState.get(_eid) || {};
+          _kmPanelState.set(_eid, {
+            ..._prev,
+            from: _existingKmPanel.querySelector(".vehicle-km-from")?.value || _prev.from,
+            to: _existingKmPanel.querySelector(".vehicle-km-to")?.value || _prev.to,
+          });
+        }
       }
-    }
-    //console.log("Rendering vehicle registry detail for item:", selectedItem);
-    vehicleRegistryDetail.innerHTML = selectedItem
-      ? renderManualVehicleRegistryItem(selectedItem)
-      : manualEntries.length > 0
-        ? '<div class="vehicle-registry-detail-empty">Selecciona un dron o un auto del panel derecho para abrir su ficha completa en este espacio.</div>'
-        : '<div class="empty-state">Sin vehículos registrados todavía.</div>';
-    if (selectedItem?.registration_id) {
-      const selectedRegistrationId = String(selectedItem.registration_id);
-      _restoreKmPanelState(selectedRegistrationId);
-      _autoLoadKmSummary(selectedRegistrationId);
+      //console.log("Rendering vehicle registry detail for item:", selectedItem);
+      vehicleRegistryDetail.innerHTML = selectedItem
+        ? renderManualVehicleRegistryItem(selectedItem)
+        : manualEntries.length > 0
+          ? '<div class="vehicle-registry-detail-empty">Selecciona un dron o un auto del panel derecho para abrir su ficha completa en este espacio.</div>'
+          : '<div class="empty-state">Sin vehículos registrados todavía.</div>';
+      if (selectedItem?.registration_id) {
+        const selectedRegistrationId = String(selectedItem.registration_id);
+        _restoreKmPanelState(selectedRegistrationId);
+        _autoLoadKmSummary(selectedRegistrationId);
+      }
     }
   }
 
@@ -11779,6 +11923,19 @@ if (cameraAdminForm) {
   cameraAdminForm.addEventListener("submit", submitCameraAdminForm);
 }
 
+if (cameraAdminSubmit) {
+  cameraAdminSubmit.addEventListener("click", (event) => {
+    if (!cameraAdminForm || cameraAdminSubmit.disabled) return;
+    event.preventDefault();
+    if (typeof cameraAdminForm.requestSubmit === "function") {
+      cameraAdminForm.requestSubmit(cameraAdminSubmit);
+      return;
+    }
+    const submitEvent = new Event("submit", { bubbles: true, cancelable: true });
+    cameraAdminForm.dispatchEvent(submitEvent);
+  });
+}
+
 if (cameraRegisterName) {
   cameraRegisterName.addEventListener("input", () => setCameraRegisterFeedback(""));
 }
@@ -12109,11 +12266,39 @@ if (organizationAdminReset) {
 }
 
 if (cameraAdminReset) {
-  cameraAdminReset.addEventListener("click", () => resetCameraAdminForm({ creationMode: "camera" }));
+  cameraAdminReset.addEventListener("click", () => {
+    resetCameraAdminForm({ creationMode: "camera" });
+    openCameraAdminEditorModal();
+  });
 }
 
 if (cameraAdminRbox) {
-  cameraAdminRbox.addEventListener("click", prepareCameraAdminRboxPreset);
+  cameraAdminRbox.addEventListener("click", () => {
+    prepareCameraAdminRboxPreset();
+    openCameraAdminEditorModal();
+  });
+}
+
+if (cameraAdminNewCameraOpen) {
+  cameraAdminNewCameraOpen.addEventListener("click", () => {
+    resetCameraAdminForm({ creationMode: "camera" });
+    openCameraAdminEditorModal();
+  });
+}
+
+if (cameraAdminNewRboxOpen) {
+  cameraAdminNewRboxOpen.addEventListener("click", () => {
+    prepareCameraAdminRboxPreset();
+    openCameraAdminEditorModal();
+  });
+}
+
+if (cameraAdminEditorClose) {
+  cameraAdminEditorClose.addEventListener("click", closeCameraAdminEditorModal);
+}
+
+if (cameraAdminEditorBackdrop) {
+  cameraAdminEditorBackdrop.addEventListener("click", closeCameraAdminEditorModal);
 }
 
 if (cameraRegisterModal) {
@@ -12122,25 +12307,7 @@ if (cameraRegisterModal) {
       ? event.target.closest("[data-copy-value], [data-camera-copy-target]")
       : null;
     if (!copyButton) return;
-    const targetId = copyButton.getAttribute("data-camera-copy-target");
-    const targetField = targetId ? document.getElementById(targetId) : null;
-    const value = targetField && "value" in targetField
-      ? targetField.value
-      : copyButton.getAttribute("data-copy-value");
-    const originalLabel = copyButton.textContent || "Copiar";
-    copyButton.textContent = "Copiando...";
-    void copyTextValue(value)
-      .then((ok) => {
-        copyButton.textContent = ok ? "Copiado" : "No copiado";
-      })
-      .catch(() => {
-        copyButton.textContent = "No copiado";
-      })
-      .finally(() => {
-        window.setTimeout(() => {
-          copyButton.textContent = originalLabel;
-        }, 1200);
-      });
+    handleCopyButtonFeedback(copyButton);
   });
 }
 
@@ -12220,6 +12387,9 @@ userAdminRefreshButtons.forEach((button) => {
 
 if (adminOrganizationFilter) {
   adminOrganizationFilter.addEventListener("change", () => {
+    if (isCameraAdminEditorOpen()) {
+      closeCameraAdminEditorModal();
+    }
     activeAdminOrganizationFilter = String(adminOrganizationFilter.value || "").trim();
     selectedUserAdminId = null;
     selectedOrganizationAdminId = null;
@@ -12521,7 +12691,12 @@ if (vehicleRegistryRailList) {
     const nextKey = String(button.getAttribute("data-vehicle-registry-key") || "").trim();
     if (!nextKey) return;
     selectedVehicleRegistryKey = nextKey;
+    const selectedItem = findVehicleRegistryItemByKey(nextKey, lastVehicleRegistrySnapshot);
     renderVehicleRegistry(lastVehicleRegistrySnapshot);
+    const registrationId = normalizeVehicleRegistrationId(selectedItem && selectedItem.registration_id);
+    if (CAN_MANAGE_VEHICLE_REGISTRY && registrationId) {
+      void openVehicleRegisterModal(selectedItem);
+    }
   });
 }
 
@@ -12531,20 +12706,7 @@ if (vehicleRegistryDetail) {
       ? event.target.closest("[data-copy-value]")
       : null;
     if (copyButton) {
-      const originalLabel = copyButton.textContent || "Copiar";
-      copyButton.textContent = "Copiando...";
-      void copyTextValue(copyButton.getAttribute("data-copy-value"))
-        .then((ok) => {
-          copyButton.textContent = ok ? "Copiado" : "No copiado";
-        })
-        .catch(() => {
-          copyButton.textContent = "No copiado";
-        })
-        .finally(() => {
-          window.setTimeout(() => {
-            copyButton.textContent = originalLabel;
-          }, 1200);
-        });
+      handleCopyButtonFeedback(copyButton);
       return;
     }
     const button = event.target instanceof Element
@@ -12609,6 +12771,7 @@ if (cameraAdminRailList) {
     syncCameraAdminFormState({ preserveDraft: false });
     renderCameraAdminList(lastCameraAdminSnapshot);
     renderCameraAdminRboxList(cameraAdminOptionCatalog.rboxes);
+    openCameraAdminEditorModal();
   };
   cameraAdminRailList.addEventListener("click", selectCameraAdminDirectoryItem);
   cameraAdminRailList.addEventListener("keydown", (event) => {
@@ -12634,6 +12797,7 @@ if (cameraAdminRboxList) {
     syncCameraAdminFormState({ preserveDraft: false });
     renderCameraAdminList(lastCameraAdminSnapshot);
     renderCameraAdminRboxList(cameraAdminOptionCatalog.rboxes);
+    openCameraAdminEditorModal();
   };
   cameraAdminRboxList.addEventListener("click", selectRboxAdminDirectoryItem);
   cameraAdminRboxList.addEventListener("keydown", (event) => {
@@ -12733,6 +12897,10 @@ document.addEventListener("visibilitychange", () => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && isCameraAdminMapModalOpen()) {
     closeCameraAdminMapModal();
+    return;
+  }
+  if (event.key === "Escape" && isCameraAdminEditorOpen()) {
+    closeCameraAdminEditorModal();
     return;
   }
   if (event.key === "Escape" && isCameraRegisterModalOpen()) {
@@ -12965,6 +13133,7 @@ let _lastRoutePoint = null; // último punto vivo añadido a la polyline
 const ROUTE_SEGMENT_MAX_GAP_SECONDS = 30 * 60;
 const ROUTE_SEGMENT_MAX_DISTANCE_KM = 8;
 const ROUTE_SEGMENT_MAX_SPEED_KMH = 180;
+const VEHICLE_ROUTE_LINE_COLOR = "#8b5cf6";
 const _ROUTE_RELOAD_MS = 5 * 60 * 1000; // recarga completa desde API cada 5 minutos
 
 function normalizeRouteDate(value) {
@@ -13095,15 +13264,10 @@ function routeSourceQuery(sourceId, dateStr) {
   return params.toString();
 }
 
-async function fetchRoutePointsForSources(sources, dateStr) {
-  const sourceList = normalizeRouteSourceList(sources);
-  const results = await Promise.allSettled(sourceList.map((sourceId) => (
-    fetchJson(`/api/telemetry/history?${routeSourceQuery(sourceId, dateStr)}`, { timeoutMs: 15000 })
-  )));
+function dedupeRoutePoints(points) {
   const seen = new Set();
-  return results
-    .filter((result) => result.status === "fulfilled" && Array.isArray(result.value))
-    .flatMap((result) => normalizeRoutePoints(result.value))
+  return points
+    .slice()
     .sort((left, right) => routePointTimestampMs(left) - routePointTimestampMs(right))
     .filter((point) => {
       const key = [
@@ -13117,11 +13281,60 @@ async function fetchRoutePointsForSources(sources, dateStr) {
     });
 }
 
+// Cuando un vehiculo tiene mas de un dispositivo GPS (p.ej. una unidad "-SATELITAL" de
+// respaldo), ambos reportan posiciones de forma independiente y con precision distinta.
+// Mezclar todos los puntos por hora crea un recorrido en "tallarin" que salta entre las
+// dos lecturas. Se usa como columna vertebral la fuente con mas puntos ese dia y las
+// demas solo aportan puntos donde esa fuente tiene un hueco real de cobertura.
+const ROUTE_GAP_FILL_SECONDS = ROUTE_SEGMENT_MAX_GAP_SECONDS;
+
+function routeCoverageGapSeconds(basePoints, timestampMs) {
+  let prevTs = null;
+  let nextTs = null;
+  for (const point of basePoints) {
+    const ts = routePointTimestampMs(point);
+    if (ts <= timestampMs) prevTs = ts;
+    if (ts >= timestampMs) {
+      nextTs = ts;
+      break;
+    }
+  }
+  if (prevTs === null || nextTs === null) return Infinity;
+  return (nextTs - prevTs) / 1000;
+}
+
+async function fetchRoutePointsForSources(sources, dateStr) {
+  const sourceList = normalizeRouteSourceList(sources);
+  const results = await Promise.allSettled(sourceList.map((sourceId) => (
+    fetchJson(`/api/telemetry/history?${routeSourceQuery(sourceId, dateStr)}`, { timeoutMs: 15000 })
+  )));
+  const perSource = results
+    .map((result) => (result.status === "fulfilled" ? normalizeRoutePoints(result.value) : []))
+    .map((points) => dedupeRoutePoints(points))
+    .filter((points) => points.length > 0);
+
+  if (perSource.length <= 1) {
+    return dedupeRoutePoints(perSource[0] || []);
+  }
+
+  let baseIndex = 0;
+  perSource.forEach((points, index) => {
+    if (points.length > perSource[baseIndex].length) baseIndex = index;
+  });
+  const basePoints = perSource[baseIndex];
+  const fillerPoints = perSource
+    .filter((_, index) => index !== baseIndex)
+    .flat()
+    .filter((point) => routeCoverageGapSeconds(basePoints, routePointTimestampMs(point)) > ROUTE_GAP_FILL_SECONDS);
+
+  return dedupeRoutePoints([...basePoints, ...fillerPoints]);
+}
+
 function routeSegmentStyle(status) {
   const normalized = String(status || "normal").toLowerCase();
   if (normalized === "raw") {
     return {
-      color: "#f97316",
+      color: VEHICLE_ROUTE_LINE_COLOR,
       weight: 3.25,
       opacity: 0.9,
       smoothFactor: 0.4,
@@ -13130,7 +13343,7 @@ function routeSegmentStyle(status) {
   }
   if (normalized === "suspicious" || normalized === "gap") {
     return {
-      color: "#ef4444",
+      color: VEHICLE_ROUTE_LINE_COLOR,
       weight: 3,
       opacity: 0.86,
       dashArray: "3 7",
@@ -13139,7 +13352,7 @@ function routeSegmentStyle(status) {
     };
   }
   return {
-    color: "#3b82f6",
+    color: VEHICLE_ROUTE_LINE_COLOR,
     weight: 3.5,
     opacity: 0.85,
     smoothFactor: 1.2,
@@ -14124,6 +14337,13 @@ initReportsPage();
   const fleetExportBtn = document.getElementById("fleet-km-export-csv");
   const fleetModeEl = document.getElementById("fleet-km-report-mode");
   const fleetPresetButtons = Array.from(document.querySelectorAll("[data-fleet-km-range]"));
+  const fleetDailyReportSettings = document.getElementById("fleet-daily-report-settings");
+  const fleetDailyReportEnabled = document.getElementById("fleet-daily-report-enabled");
+  const fleetDailyReportTime = document.getElementById("fleet-daily-report-time");
+  const fleetDailyReportRecipients = document.getElementById("fleet-daily-report-recipients");
+  const fleetDailyReportSave = document.getElementById("fleet-daily-report-save");
+  const fleetDailyReportSendNow = document.getElementById("fleet-daily-report-send-now");
+  const fleetDailyReportStatus = document.getElementById("fleet-daily-report-status");
 
   if (!fleetModal || !fleetOpenBtn) return;
 
@@ -14165,13 +14385,119 @@ initReportsPage();
     }
     fleetModal.hidden = false;
     document.body.style.overflow = "hidden";
+    if (CAN_MANAGE_VEHICLE_REGISTRY) {
+      void loadFleetDailyReportSettings();
+    }
   }
   function closeFleetModal() {
     fleetModal.hidden = true;
     document.body.style.overflow = "";
   }
 
+  function setFleetDailyReportStatus(message, isError = false) {
+    if (!fleetDailyReportStatus) return;
+    fleetDailyReportStatus.textContent = message;
+    fleetDailyReportStatus.classList.toggle("is-error", Boolean(isError));
+  }
+
+  function setFleetDailyReportBusy(isBusy) {
+    [fleetDailyReportSave, fleetDailyReportSendNow].forEach((button) => {
+      if (button) button.disabled = Boolean(isBusy);
+    });
+  }
+
+  function fleetDailyRecipientsValue() {
+    return String(fleetDailyReportRecipients?.value || "")
+      .split(/[\n,;]+/)
+      .map((email) => email.trim())
+      .filter(Boolean);
+  }
+
+  function applyFleetDailyReportSettings(payload) {
+    const settings = payload?.settings && typeof payload.settings === "object" ? payload.settings : {};
+    const hasWorkerStatus = Boolean(payload?.status && typeof payload.status === "object");
+    const status = hasWorkerStatus ? payload.status : {};
+    if (fleetDailyReportEnabled) fleetDailyReportEnabled.checked = Boolean(settings.enabled);
+    if (fleetDailyReportTime) fleetDailyReportTime.value = String(settings.send_time || "07:00").slice(0, 5);
+    const reportRecipients = Array.isArray(settings.recipients) ? settings.recipients : [];
+    const fallbackRecipients = Array.isArray(settings.fallback_recipients) ? settings.fallback_recipients : [];
+    if (fleetDailyReportRecipients) {
+      const recipients = reportRecipients.length ? reportRecipients : fallbackRecipients;
+      fleetDailyReportRecipients.value = recipients.join("\n");
+    }
+    const lastSent = settings.last_sent_date || status.last_sent_date || "";
+    const running = status.running === false ? "pausado" : "activo";
+    const mode = settings.enabled ? `programado ${settings.send_time || "07:00"}` : "desactivado";
+    const source = !reportRecipients.length && fallbackRecipients.length ? "; correos de alertas" : "";
+    const workerText = hasWorkerStatus ? `; worker ${running}` : "";
+    setFleetDailyReportStatus(lastSent ? `${mode}; ultimo ${lastSent}${workerText}${source}` : `${mode}${workerText}${source}`);
+  }
+
+  async function loadFleetDailyReportSettings() {
+    if (!fleetDailyReportSettings || !CAN_MANAGE_VEHICLE_REGISTRY) return;
+    setFleetDailyReportStatus("Cargando configuracion...");
+    try {
+      const payload = await fetchJson("/api/fleet-daily-report-settings", { timeoutMs: 10000 });
+      applyFleetDailyReportSettings(payload);
+    } catch (err) {
+      setFleetDailyReportStatus(`Error: ${String(err?.message || err)}`, true);
+    }
+  }
+
+  async function saveFleetDailyReportSettings() {
+    if (!CAN_MANAGE_VEHICLE_REGISTRY) return;
+    setFleetDailyReportBusy(true);
+    setFleetDailyReportStatus("Guardando configuracion...");
+    try {
+      const payload = await fetchJson("/api/fleet-daily-report-settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          enabled: Boolean(fleetDailyReportEnabled?.checked),
+          send_time: fleetDailyReportTime?.value || "07:00",
+          recipients: fleetDailyRecipientsValue(),
+        }),
+        timeoutMs: 10000,
+      });
+      applyFleetDailyReportSettings(payload);
+      const enabled = Boolean(payload?.settings?.enabled);
+      setFleetDailyReportStatus(`Configuracion guardada. Envio ${enabled ? "activo" : "desactivado"}.`);
+    } catch (err) {
+      setFleetDailyReportStatus(`Error: ${String(err?.message || err)}`, true);
+    } finally {
+      setFleetDailyReportBusy(false);
+    }
+  }
+
+  async function sendFleetDailyReportNow() {
+    if (!CAN_MANAGE_VEHICLE_REGISTRY) return;
+    setFleetDailyReportBusy(true);
+    setFleetDailyReportStatus("Enviando PDF...");
+    try {
+      const payload = await fetchJson("/api/fleet-daily-report/send-now", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          date: fleetToEl?.value || _ecMinus(1),
+          recipients: fleetDailyRecipientsValue(),
+        }),
+        timeoutMs: 60000,
+      });
+      setFleetDailyReportStatus(`PDF enviado a ${Number(payload.total || 0)} correo(s)`);
+    } catch (err) {
+      setFleetDailyReportStatus(`Error: ${String(err?.message || err)}`, true);
+    } finally {
+      setFleetDailyReportBusy(false);
+    }
+  }
+
   fleetOpenBtn.addEventListener("click", openFleetModal);
+  if (fleetDailyReportSave) {
+    fleetDailyReportSave.addEventListener("click", saveFleetDailyReportSettings);
+  }
+  if (fleetDailyReportSendNow) {
+    fleetDailyReportSendNow.addEventListener("click", sendFleetDailyReportNow);
+  }
   fleetPresetButtons.forEach((button) => {
     button.addEventListener("click", () => {
       setFleetRange(button.dataset.fleetKmRange, { load: true });

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Ingresar a Robiotec{% endblock %}
+{% block body_class %}page-login{% endblock %}
+
+{% block app_shell %}
+<main class="login-shell">
+  <section class="login-hero" aria-label="Resumen de plataforma">
+    <div class="login-hero-top">
+      <div class="login-mark" aria-hidden="true">
+        <img src="/static/brand/logoSimplificadoC.png" alt="">
+      </div>
+      <div class="login-brand">
+        <img class="login-brand-logo" src="/static/brand/LoogoBlanco.png" alt="ROBIOTEC">
+        <span>Security</span>
+      </div>
+    </div>
+
+    <div class="login-copy">
+      <span class="login-kicker">Ingreso seguro</span>
+      <h1>Video, telemetría y alertas desde un solo control</h1>
+    </div>
+
+    <div class="login-hero-grid">
+      <article class="login-glance-card">
+        <span>Supervisión</span>
+        <strong>canales sincronizados</strong>
+        <p>Lectura rápida para centros de mando y turnos operativos.</p>
+      </article>
+      <article class="login-glance-card">
+        <span>Telemetría</span>
+        <strong>Rastreo multi-dispositivo</strong>
+        <p>Vehículos, drones y nodos móviles en una sola vista.</p>
+      </article>
+      <article class="login-glance-card">
+        <span>Eventos</span>
+        <strong>Alertas con prioridad visual</strong>
+        <p>Evidencia, contexto y respuesta sin cambiar de consola.</p>
+      </article>
+    </div>
+
+    <div class="login-hero-band" aria-label="Capacidades principales">
+      <span>Monitoreo visual</span>
+      <span>Estado de misión</span>
+      <span>Respuesta operativa</span>
+    </div>
+  </section>
+
+  <section id="login-root" class="login-panel" data-next="{{ request.GET.next|default:'/' }}" aria-label="Formulario de acceso"></section>
+</main>
+{% endblock %}

@@ -1,0 +1,194 @@
+Migracion Robiotec a Django + DRF + Celery + TypeScript
+Fecha de inicio: 2026-07-01
+
+Objetivo
+- Reconstruir la plataforma sobre Django como backend principal.
+- Usar Django REST Framework para APIs.
+- Usar PostgreSQL como base de datos principal.
+- Usar Celery + Redis para tareas pesadas y programadas.
+- Mantener Bootstrap como lenguaje visual.
+- Pasar el frontend a TypeScript modular con componentes compartidos.
+- Mantener IA, streaming, GPS, drones, RBox y monitoreo como procesos independientes comunicados por REST.
+- No tocar ni refactorizar faces_gallery en esta fase.
+
+Decision operativa
+- No usaremos Docker como base de produccion.
+- Los procesos se manejaran con systemd, igual que los servicios actuales.
+- La nueva plataforma se crea en paralelo para no romper apicentral/dashboard actuales.
+
+Avance
+- [2026-07-01] Iniciada la migracion con enfoque incremental.
+- [2026-07-01] Detectada estructura actual: apicentral y dashboard usan FastAPI; servicios usan systemd; la base esta documentada en db/sql.
+- [2026-07-01] Decidido crear un nuevo proyecto en plataforma/ con modelos puente hacia tablas existentes.
+- [2026-07-01] Creada carpeta plataforma/ con proyecto Django base.
+- [2026-07-01] Agregada configuracion Django para PostgreSQL, DRF, Celery, Redis, static files y zona horaria America/Guayaquil.
+- [2026-07-01] Agregados modelos puente managed=False para reutilizar tablas existentes sin destruir la base actual.
+- [2026-07-01] Agregadas apps iniciales: core, organizations, accounts, devices, streaming, fleet, geofences, alerts, reports y frontend.
+- [2026-07-01] Agregados endpoints DRF iniciales de solo lectura para camaras, RBox, vehiculos, drones y telemetria vehicular.
+- [2026-07-01] Agregados servicios de dominio iniciales para catalogo de camaras, MediaMTX, kilometraje, geocercas, alertas y reporte diario.
+- [2026-07-01] Agregadas tareas Celery base para streaming, reportes, alertas y geocercas.
+- [2026-07-01] Agregado frontend TypeScript modular con ApiClient, ModalController, DataTable, ToastBus y FormBinder.
+- [2026-07-01] Agregadas unidades systemd para Django, Celery worker y Celery beat.
+- [2026-07-01] Validado: python3 -m compileall -q plataforma.
+- [2026-07-01] Validado: git diff --check -- plataforma MIGRACION_DJANGO_PROGRESO.txt.
+- [2026-07-01] Instalado python3.12-venv para poder crear entorno virtual local.
+- [2026-07-01] Creado plataforma/.venv e instaladas dependencias Python desde requirements.txt.
+- [2026-07-01] Creado plataforma/.env real con valores tomados de la configuracion existente, sin versionarlo.
+- [2026-07-01] Agregada carga nativa de plataforma/.env en settings/base.py.
+- [2026-07-01] Validado: python manage.py check sin errores.
+- [2026-07-01] Validada conexion real a PostgreSQL leyendo companies, cameras, rboxes y vehicles.
+- [2026-07-01] Aplicadas migraciones internas Django: auth, admin, contenttypes y sessions.
+- [2026-07-01] Instalado Redis para Celery.
+- [2026-07-01] Instaladas dependencias frontend y actualizado Vite/TypeScript/Bootstrap desde npm.
+- [2026-07-01] Validado: npm run typecheck.
+- [2026-07-01] Validado: npm run build.
+- [2026-07-01] Validado: python manage.py collectstatic --noinput.
+- [2026-07-01] Registrados modelos puente en Django admin para inspeccion operativa.
+- [2026-07-01] Instaladas y habilitadas unidades systemd: robiotec-django, robiotec-celery y robiotec-celerybeat.
+- [2026-07-01] Validado servicio Django: http://127.0.0.1:8020/health/ responde status ok.
+- [2026-07-01] Validada API inicial: http://127.0.0.1:8020/api/v1/devices/cameras/ devuelve datos reales.
+- [2026-07-01] Validado Celery: celery inspect ping responde pong.
+- [2026-07-01] Ajustado Celery beat para guardar estado runtime en servicios/plataforma/celerybeat-schedule.
+- [2026-07-01] Agregado backend de autenticacion Django sobre usuarios legacy de la tabla users.
+- [2026-07-01] El backend legacy valida hashes bcrypt existentes y sincroniza un usuario interno Django para sesiones/admin.
+- [2026-07-01] Validado flujo de autenticacion fallida controlada sin errores.
+- [2026-07-01] Iniciado primer modulo migrado: Administracion de camaras y RBox.
+- [2026-07-01] Agregada API de organizaciones para listar empresas y areas desde Django.
+- [2026-07-01] Convertidos endpoints Django de camaras/RBox a CRUD; luego se reforzaron con permisos por rol.
+- [2026-07-01] Agregado servicio CameraAdminService: genera codigo CAM, preserva unique_code al editar, construye RTSP Dahua/Hikvision, cifra claves RTSP y aprovisiona stream_paths/stream_configs.
+- [2026-07-01] Agregado servicio RBoxAdminService: genera serial RBOX y aplica soft delete.
+- [2026-07-01] Agregados campos puente faltantes: vehicle_subtype, driver_name, notification_telegram y notification_email.
+- [2026-07-01] Ajustado LegacyTimestampMixin para crear registros nuevos con created_at/updated_at.
+- [2026-07-01] Copiada al .env local de plataforma la clave de cifrado compatible con apicentral, sin versionarla ni exponerla.
+- [2026-07-01] Creada pantalla Django /administracion/dispositivos/ con listas de Camaras y RBox y modal compartido de edicion.
+- [2026-07-01] Agregado modulo TypeScript DeviceAdminPage con carga de datos, formularios, POST/PATCH/DELETE y feedback por toast.
+- [2026-07-01] Validado CRUD de servicios con transaccion rollback: crea RBox, camara y stream sin dejar datos de prueba.
+- [2026-07-01] Validado: escritura anonima a endpoints de administracion devuelve 403.
+- [2026-07-01] Validado: /administracion/dispositivos/ responde HTML y carga main.js compilado.
+- [2026-07-01] Agregado servicio LegacyRoleService para permisos compartidos por roles actuales.
+- [2026-07-01] Agregados endpoints Django de autenticacion: /api/v1/auth/login/, /api/v1/auth/logout/ y /api/v1/auth/session/.
+- [2026-07-01] Agregada pantalla visual /login/ con TypeScript y Bootstrap.
+- [2026-07-01] Agregado control de sesion en la barra superior con nombre de usuario y boton Salir.
+- [2026-07-01] Protegida /administracion/dispositivos/ con LoginRequiredMixin.
+- [2026-07-01] Reforzados permisos de dispositivos: lectura requiere rol con vista y escritura requiere admin/master.
+- [2026-07-01] Corregido puente user_roles para no consultar columna id inexistente.
+- [2026-07-01] Convertidos viewsets de Camaras/RBox a ModelViewSet; POST/PATCH/DELETE ya llegan al CRUD real.
+- [2026-07-01] Validado login HTTP completo con cookie de sesion: login page 200, auth 200, session 200, admin 200 y API camaras 200.
+- [2026-07-01] Validado: escritura autenticada llega a validacion 400 con payload vacio, escritura anonima queda en 403.
+- [2026-07-01] Agregada configuracion config.settings.test con SQLite temporal para pruebas automatizadas sin tocar PostgreSQL real.
+- [2026-07-01] Agregado helper LegacySchemaTestCase para crear esquema legacy minimo dentro de la base de pruebas.
+- [2026-07-01] Agregados 6 tests automatizados para auth legacy, permisos por rol, RBoxAdminService y CameraAdminService.
+- [2026-07-01] Validado: python manage.py test apps.devices.tests --settings=config.settings.test pasa OK.
+- [2026-07-01] Creado plataforma/PLAN_REEMPLAZO_DASHBOARD.md con orden de migracion pantalla por pantalla.
+- [2026-07-01] Revisado pendiente de migraciones propias: por ahora no aplica porque no se crearon tablas nuevas de plataforma; las tablas legacy siguen en managed=False.
+- [2026-07-01] Iniciado reemplazo de pantalla Administracion de vehiculos dentro de /administracion/dispositivos/.
+- [2026-07-01] Agregado VehicleAdminService con normalizacion de placa, generacion/preservacion de codigo GPS, deduplicacion por empresa y soft delete.
+- [2026-07-01] Convertido endpoint Django /api/v1/devices/vehicles/ a CRUD con permisos por rol.
+- [2026-07-01] Extendida DeviceAdminPage TypeScript para mostrar Vehiculos junto a Camaras y RBox y editar/crear desde el mismo modal compartido.
+- [2026-07-01] Agregados 4 tests de vehiculos; suite devices queda en 10 tests OK.
+- [2026-07-01] Validado: python manage.py check, python manage.py test apps.devices.tests --settings=config.settings.test y npm run typecheck pasan OK.
+- [2026-07-01] Iniciado reemplazo de pantalla Mapa y recorridos en Django con nueva ruta /mapa/.
+- [2026-07-01] Agregado FleetMapService con ultimas ubicaciones por vehiculo y recorrido diario segmentado por saltos de tiempo, distancia y velocidad.
+- [2026-07-01] Agregados endpoints /api/v1/fleet/latest/ y /api/v1/fleet/vehicles/<id>/route/.
+- [2026-07-01] Agregada pantalla TypeScript FleetMapPage con Leaflet, marcadores de flota, selector de vehiculo/fecha, linea morada de recorrido y puntos celestes.
+- [2026-07-01] Corregida deduplicacion logica de flota en mapa: PostgreSQL real baja de 32 registros fuente a 24 vehiculos logicos.
+- [2026-07-01] Agregados 3 tests de flota; suite devices+fleet queda en 13 tests OK.
+- [2026-07-01] Validado: python manage.py check, python manage.py test apps.fleet.tests apps.devices.tests --settings=config.settings.test y npm run typecheck pasan OK.
+- [2026-07-01] Desplegada plataforma Django en Nginx para el dominio robio-ai.com en modo hibrido.
+- [2026-07-01] Rutas Django publicadas por dominio: /, /login/, /api/v1/, /mapa/, /administracion/dispositivos/, /admin/ y /health/.
+- [2026-07-01] Conservadas rutas legacy por dominio para video, alertas y pantallas no migradas: /login, /api/login, /api/ingest/, /api/orchestrator/, /mediamtx/ y fallback al dashboard viejo.
+- [2026-07-01] Ajustado .env de plataforma para robio-ai.com, www.robio-ai.com, cookies seguras y host publico de streams.
+- [2026-07-01] Validado Nginx: root Django 200, login Django 200, API health 200, static Django 200, rutas protegidas redirigen/403 y legacy login/static siguen respondiendo.
+- [2026-07-01] Por solicitud operativa, restaurado Nginx del dominio robio-ai.com al dashboard legacy en 127.0.0.1:8010. La plataforma Django queda activa en 8020 para seguir migrando y probando sin afectar el dominio publico.
+- [2026-07-01] Copiada la carcasa visual del dashboard actual al nuevo Django: sidebar colapsable, login oscuro independiente, paneles, listas, botones, tablas y modales con estilo Robiotec.
+- [2026-07-01] Agregado componente TypeScript AppSidebar para reutilizar el colapso del menu lateral en todas las pantallas migradas.
+- [2026-07-01] Compilado frontend Django y publicado en staticfiles; reiniciado robiotec-django en 8020. El dominio robio-ai.com sigue apuntando a 8010.
+- [2026-07-01] Validado despues del cambio visual: python manage.py check, suite devices+fleet+reports, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Notificaciones en Django con ruta /notificaciones/ manteniendo el estilo del dashboard viejo.
+- [2026-07-01] Agregado NotificationChannelService para leer/escribir notification_settings.json y reutilizar tablas legacy de correos y chat IDs.
+- [2026-07-01] Agregados endpoints /api/v1/alerts/notification-settings/, /notification-email-recipients/, /notification-telegram-chat-ids/ y pruebas manuales de email/Telegram.
+- [2026-07-01] La API de notificaciones no expone claves SMTP ni token de Telegram; al guardar campos vacios conserva los secretos existentes.
+- [2026-07-01] Agregada pagina TypeScript NotificationsPage con paneles, listas y formularios siguiendo la carcasa visual Robiotec.
+- [2026-07-01] Validado modulo notificaciones: python manage.py check, suite alerts+devices+fleet+reports con 18 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Eventos de camaras e IA en Django con ruta /eventos/ manteniendo la carcasa visual del dashboard viejo.
+- [2026-07-01] Agregado EventHistoryService sobre la tabla legacy camera_event_history con filtros por texto, fecha, hora, camara, categoria, tipo, origen y estado.
+- [2026-07-01] Agregados endpoints /api/v1/events/history/, /history/filter-options/, /history/<id>/status/, /media/crop/ y /media/video/.
+- [2026-07-01] Agregada pagina TypeScript EventsHistoryPage con filtros, listado, detalle, evidencia de imagen/video y cambio de estado.
+- [2026-07-01] Agregados 3 tests automatizados para historial de eventos.
+- [2026-07-01] Iniciado modulo Usuarios, empresas y permisos en Django con ruta /usuarios/.
+- [2026-07-01] Agregado UserAccessAdminService para administrar usuarios legacy, roles soportados y organizaciones sin duplicar logica de permisos.
+- [2026-07-01] Agregados endpoints /api/v1/accounts/access/, /users/ y /companies/ con alcance global para master y alcance de organizacion para admin.
+- [2026-07-01] Agregada pagina TypeScript UserAccessPage con listas compactas, resumen, roles y modales Bootstrap para usuarios/organizaciones.
+- [2026-07-01] Agregados 3 tests automatizados para usuarios, roles, alcance por organizacion y administracion de empresas.
+- [2026-07-01] Validado avance actual: python manage.py check, suite accounts+alerts+devices+fleet+reports con 24 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Centro de camaras en Django con ruta /camaras/ manteniendo la distribucion selector-video-eventos del dashboard viejo.
+- [2026-07-01] Agregado CameraViewerService para catalogo de camaras activas, path MediaMTX, URL WebRTC, estado online y eventos recientes por camara.
+- [2026-07-01] Agregados endpoints /api/v1/streaming/camera-viewer/ y /api/v1/streaming/camera-viewer/<camera_id>/events/.
+- [2026-07-01] El catalogo del visor respeta alcance por organizacion: master ve todo, admin ve solo su empresa.
+- [2026-07-01] Agregada pagina TypeScript CameraViewerPage con selector lateral, iframe MediaMTX, detalle del stream y feed de eventos recientes.
+- [2026-07-01] Agregados 3 tests automatizados para visor de camaras, estado MediaMTX/eventos y alcance por organizacion.
+- [2026-07-01] Validado modulo camaras: servicio real devuelve 5 camaras activas y MediaMTX responde ok; suite accounts+alerts+devices+fleet+reports+streaming con 27 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Reportes de detecciones en Django con ruta /reportes/.
+- [2026-07-01] Agregado DetectionReportService para reportes de personal diario, individual, sesiones, mensual, placas, KPIs y selector de camaras.
+- [2026-07-01] Agregados endpoints /api/v1/reports/detection/cameras/, /overview/, /personnel/daily/, /personnel/individual/, /personnel/sessions/, /personnel/monthly/ y /plates/.
+- [2026-07-01] Los endpoints de reportes soportan CSV con format=csv para las tablas principales.
+- [2026-07-01] Agregada pagina TypeScript DetectionReportsPage con KPIs, filtros, pestañas, tablas y exportacion CSV manteniendo estilo Robiotec.
+- [2026-07-01] Agregados 2 tests automatizados para reportes de detecciones, sesiones por brecha y rangos invalidos.
+- [2026-07-01] Validado servicio real de reportes: ultimos 7 dias devuelven 5 camaras, 851 eventos de personas, 11 personas, 4918 eventos de placas y 2649 placas.
+- [2026-07-01] Validado modulo reportes: suite accounts+alerts+devices+fleet+reports+streaming con 29 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Perfil en Django con ruta /perfil/.
+- [2026-07-01] Agregado ProfileService para leer perfil propio, estadisticas por alcance, actualizar nombre/correo y cambiar contrasena validando contrasena actual.
+- [2026-07-01] Agregado endpoint /api/v1/auth/profile/ para GET/PUT del perfil autenticado.
+- [2026-07-01] Agregada pagina TypeScript ProfilePage con identidad, KPIs, datos de cuenta y formulario de seguridad manteniendo estilo Robiotec.
+- [2026-07-01] Agregados 3 tests automatizados para perfil, conteos por organizacion y cambio de contrasena.
+- [2026-07-01] Validado servicio real de perfil con usuario activo sin exponer secretos; suite accounts+alerts+devices+fleet+reports+streaming con 32 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Geocercas en Django con ruta /geocercas/ y API /api/v1/geofences/.
+- [2026-07-01] Agregado GeofenceAdminService para CRUD de geocercas polygon/circle, color, alcance por organizacion y borrado logico.
+- [2026-07-01] Agregados endpoints /api/v1/geofences/overview/, /geofences/, /alerts/ y /alerts/<id>/processed/.
+- [2026-07-01] Agregada pagina TypeScript GeofenceAdminPage con resumen, lista, alertas recientes y modal Bootstrap para crear/editar/eliminar.
+- [2026-07-01] La pantalla /mapa/ ahora dibuja la capa de geocercas desde la API Django nueva.
+- [2026-07-01] Agregados 3 tests automatizados para geocercas, alcance por organizacion y alertas procesadas.
+- [2026-07-01] Validado modulo geocercas: BD real expone 19 geocercas y 2467 alertas; suite accounts+alerts+devices+fleet+geofences+reports+streaming con 35 tests, npm run typecheck y npm run build pasan OK.
+- [2026-07-01] Iniciado modulo Servicios externos en Django con ruta /servicios/ y API /api/v1/operations/overview/.
+- [2026-07-01] Agregado OperationsMonitorService de solo lectura para revisar systemd, endpoints locales y MediaMTX sin importar procesos pesados.
+- [2026-07-01] Agregada pagina TypeScript OperationsPage con resumen, procesos systemd, endpoints y paths MediaMTX manteniendo estilo Robiotec.
+- [2026-07-01] Agregados 2 tests automatizados para reglas de salud critico/secundario y endpoints caidos.
+- [2026-07-01] Validado modulo servicios externos: monitor real devuelve warning con 9 servicios OK, 4 advertencias, 0 errores, 4 endpoints OK y 8/8 paths MediaMTX listos; suite completa queda en 37 tests OK.
+- [2026-07-02] Iniciado modulo Administracion de drones dentro de /administracion/dispositivos/.
+- [2026-07-02] Agregado DroneAdminService con alta, edicion, codigo estable, proveedor/tipo, soft delete y aprovisionamiento de stream_paths/stream_configs para MediaMTX.
+- [2026-07-02] Convertido endpoint /api/v1/devices/drones/ de solo lectura a CRUD con permisos por rol.
+- [2026-07-02] Extendida DeviceAdminPage para listar drones y crear/editar/eliminar desde el mismo modal compartido de dispositivos.
+- [2026-07-02] Agregados 4 tests automatizados para drones: stream, duplicados, edicion preservando codigo y borrado logico.
+- [2026-07-02] Validado modulo drones: BD real expone 2 drones, 2 paths activos y 2 stream_configs activos; suite completa queda en 41 tests OK, npm run typecheck y npm run build pasan OK.
+- [2026-07-02] Ajustada paridad visual/funcional de /camaras/: visor central grande con MediaMTX WebRTC/WHEP en tiempo real y snapshots solo como miniaturas/respaldo.
+- [2026-07-02] Ajustada paridad visual/funcional de /mapa/: panel izquierdo de unidad seleccionada, capacidades compartidas para carros/drones, camaras asociadas, geocercas internas y lookup ARCOM de zona minera.
+- [2026-07-02] Agregados artefactos TypeScript reutilizables FleetDeviceModel y RealtimeCameraFrame para evitar bifurcar logica entre carros, drones, telemetria y camaras.
+- [2026-07-02] Backend de flota ahora entrega camaras asociadas con path/viewer_url/whep_url/online y Django proxya /api/v1/fleet/geointel/arcom/concession-lookup/.
+- [2026-07-02] Agregados tests de contrato para whep_url en catalogo de camaras y camaras asociadas en payload de flota.
+- [2026-07-02] Validado cambio: npm run typecheck OK, npm run build OK, manage.py check OK, collectstatic OK, robiotec-django y robiotec-celery activos, beta.robio-ai.com responde login en /camaras/ y /mapa/.
+- [2026-07-02] Tests Django especificos no pudieron ejecutarse porque PostgreSQL nego permiso para crear la base de datos de test.
+- [2026-07-02] Segunda pasada de paridad en /camaras/: selector lateral tipo pill con snapshot/estado/tags, toolbar de inferencia estilo dashboard viejo y tarjetas de eventos por tipo.
+- [2026-07-02] Agregado endpoint /api/v1/streaming/camera-viewer/<id>/inference/ para cambiar inference_type desde el visor sin recalcular RTSP ni tocar campos de administracion.
+- [2026-07-02] Validado segunda pasada camaras: npm run typecheck OK, npm run build OK, manage.py check OK, collectstatic OK y robiotec-django activo; test unitario sigue bloqueado por permiso CREATE DATABASE.
+- [2026-07-02] Ajustado layout de /camaras/ como mesa de trabajo fija: sin scroll de pagina en escritorio, lista/eventos con scroll interno, video en tiempo real contenido en viewport y despliegue aplicado en beta.robio-ai.com.
+- [2026-07-02] Simplificada cabecera de /camaras/: eliminado pie Empresa/Stream/Origen/Estado y fusionados inferencia, nombre, estado y tags en una sola barra superior compacta.
+- [2026-07-02] Agregado toggle de vista en /camaras/ para alternar video Normal vs Inferencia sin cambiar la configuracion IA; backend entrega normal_path/inference_path con viewer_url/whep_url y estado online por cada variante.
+- [2026-07-02] Validado toggle de video: npm run typecheck OK, npm run build OK, manage.py check OK, collectstatic OK, robiotec-django activo y catalogo real muestra 5 camaras con normal e /INFERENCE online; test Django sigue bloqueado por permiso CREATE DATABASE.
+- [2026-07-02] Corregido layout de /mapa/: pantalla fija en escritorio, sidebar con scroll interno, canvas Leaflet a altura completa e invalidateSize con ResizeObserver para evitar area gris bajo los tiles.
+- [2026-07-02] Corregido recorrido diario en /mapa/: backend Django materializa/cachea segmentos OSRM en vehicle_route_segments con presupuesto corto, expone segment_status/geometry, frontend dibuja ruta morada solida/discontinua, puntos celestes, marcador de inicio y marcador "Va por aqui"; validado con GTJ-8181 02/07/2026 (33 segmentos: 14 OSRM, 12 sospechosos, 7 crudos).
+
+Pendiente inmediato
+- Completar prueba visual manual en navegador de crear/editar Camara y RBox con usuario real.
+- Completar prueba visual manual de crear/editar/eliminar Vehiculos con usuario real.
+- Completar prueba visual manual de /mapa/ con usuario real, confirmando panel izquierdo, zona minera ARCOM y camaras asociadas por unidad.
+- Completar prueba visual manual de /camaras/ con video real embebido desde MediaMTX/WHEP.
+- Completar prueba visual manual de /reportes/ con datos reales y exportacion CSV.
+- Completar prueba visual manual de /perfil/ y cambio de contrasena con usuario real.
+- Completar prueba visual manual de /gestion-kilometros/ y envio PDF con SMTP real.
+- Completar prueba visual manual de /notificaciones/ y pruebas reales de correo/Telegram.
+- Completar prueba visual manual de /eventos/ con evidencia real de camaras/IA.
+- Completar prueba visual manual de /usuarios/ con usuario master/admin real.
+- Completar prueba visual manual de /geocercas/ y confirmar capa de geocercas en /mapa/.
+- Completar prueba visual manual de /servicios/ con usuario admin/master real.
+- Completar prueba visual manual de crear/editar/eliminar Drones con usuario real.
+- Continuar siguiente modulo recomendado: areas/perfiles avanzados y controles pendientes, sin mover el dominio de 8010 hasta validacion.

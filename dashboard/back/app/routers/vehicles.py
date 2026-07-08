@@ -23,6 +23,11 @@ from back.app.context import (
     require_admin_request,
     resolve_source_id,
 )
+from back.app.services.fleet_daily_report import (
+    load_fleet_daily_report_settings,
+    save_fleet_daily_report_settings,
+    send_fleet_report_for_date,
+)
 from back.app.state import empresa_mapper, rbox_mapper, settings, stream_config_mapper
 
 router = APIRouter(prefix="/api", tags=["vehicles"])
@@ -30,6 +35,17 @@ router = APIRouter(prefix="/api", tags=["vehicles"])
 
 def _vehicle_plate_key(value: Any) -> str:
     return _text(value).strip().upper()
+
+
+def _vehicle_year(value: Any) -> int | None:
+    text = _text(value).strip()
+    if not text:
+        return None
+    try:
+        year = int(float(text))
+    except ValueError:
+        return None
+    return year if 1950 <= year <= 2100 else None
 
 
 def _plate_conflicts_in_company(
@@ -200,7 +216,9 @@ async def vehicle_create(request: Request):
             "vehicle_subtype": vehicle_subtype,
             "unique_code": identifier,
             "plate": identifier,
+            "make": _text(p.get("make") or p.get("marca")) or None,
             "model": _text(p.get("model") or p.get("modelo")) or None,
+            "year": _vehicle_year(p.get("year") or p.get("anio") or p.get("año")),
             "driver_name": driver_name,
             "active": True,
             "can_publish": True,
@@ -251,7 +269,9 @@ async def vehicle_update(registration_id: str, request: Request):
         "name": label,
         "vehicle_type": vehicle_type,
         "vehicle_subtype": vehicle_subtype,
+        "make": _text(p.get("make") or p.get("marca")) or None,
         "model": _text(p.get("model") or p.get("modelo")) or None,
+        "year": _vehicle_year(p.get("year") or p.get("anio") or p.get("año")),
         "driver_name": driver_name,
         "active": True,
         "can_publish": True,
@@ -290,3 +310,45 @@ def vehicle_delete(registration_id: str, request: Request):
             raise
         call_api(f"/drones/{registration_id}", method="DELETE", token=token)
     return {"ok": True}
+
+
+@router.get("/fleet-daily-report-settings")
+def fleet_daily_report_settings_get(request: Request):
+    require_admin_request(request)
+    try:
+        from back.app import application as _app_module
+
+        worker = _app_module._fleet_report_worker
+        status = worker.status() if worker else {"running": False}
+        return {"ok": True, "settings": load_fleet_daily_report_settings(), "status": status}
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo leer la configuracion.")}, status_code=502)
+
+
+@router.put("/fleet-daily-report-settings")
+async def fleet_daily_report_settings_update(request: Request):
+    require_admin_request(request)
+    payload = await request.json()
+    try:
+        saved = save_fleet_daily_report_settings(payload if isinstance(payload, dict) else {})
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": _text(exc, "No se pudo guardar la configuracion.")}, status_code=400)
+    return {"ok": True, "settings": saved}
+
+
+@router.post("/fleet-daily-report/send-now")
+async def fleet_daily_report_send_now(request: Request):
+    require_admin_request(request)
+    payload = await request.json()
+    source = payload if isinstance(payload, dict) else {}
+    try:
+        result = send_fleet_report_for_date(
+            source.get("date") or source.get("report_date"),
+            recipients=source.get("recipients"),
+            mark_sent=False,
+        )
+    except ValueError as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=400)
+    except Exception as exc:
+        return JSONResponse({"ok": False, "error": str(exc)}, status_code=502)
+    return result

@@ -16,3 +16,233 @@
 @import url("./modules/web_app/120-vehicle-kilometers.css");
 /* Estilos de los ajustes finales compartidos. */
 @import url("./final_overrides.css");
+
+/* Editor emergente del administrador de camaras/RBox.
+   Va aqui porque este entrypoint si tiene cache-busting; los @import internos no. */
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-modal-workbench {
+  display: block !important;
+  min-height: 0;
+  overflow: visible;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel {
+  display: none !important;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-backdrop.is-editor-open {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 420 !important;
+  display: block !important;
+  background: rgba(5, 7, 11, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 430 !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(1080px, calc(100vw - 180px));
+  max-width: calc(100vw - 180px);
+  max-height: min(86dvh, 860px);
+  margin: 0 !important;
+  padding: 22px;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(25, 28, 34, 0.98), rgba(15, 17, 23, 0.98)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.12), transparent 38%);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open .camera-admin-editor-close {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open .user-admin-form {
+  min-height: 0;
+  overflow: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+}
+
+.page-admin-unified #camera-admin-map-modal {
+  z-index: 460;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 16px;
+  min-height: min(70vh, 760px);
+  overflow: hidden;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+  gap: 14px;
+}
+
+.page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-column {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 1180px) {
+  .page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open {
+    width: min(980px, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
+  }
+
+  .page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-grid {
+    grid-template-columns: 1fr;
+    overflow: auto;
+    padding-right: 4px;
+    scrollbar-gutter: stable;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open {
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .page-admin-unified .camera-register-modal.is-admin-embedded .camera-admin-directory-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Directorio de vehiculos: lista principal + edicion en modal. */
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-workbench {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-workbench .vehicle-registry-preview-card {
+  display: none !important;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  gap: 16px !important;
+  min-height: min(70vh, 760px) !important;
+  padding: 18px !important;
+  border-radius: 22px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background:
+    linear-gradient(180deg, rgba(17, 23, 32, 0.98), rgba(11, 16, 24, 0.98)),
+    radial-gradient(circle at top right, rgba(241, 56, 17, 0.08), transparent 40%) !important;
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.26) !important;
+  overflow: hidden !important;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-head {
+  display: grid;
+  gap: 8px;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-head h3 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.02rem;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-head p {
+  margin: 0;
+  max-width: 72ch;
+  color: rgba(226, 232, 240, 0.72);
+  line-height: 1.55;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel .vehicle-registry-rail-list {
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start !important;
+  overflow: auto !important;
+  padding-right: 4px !important;
+  scrollbar-gutter: stable !important;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel .vehicle-registry-section {
+  min-height: 0;
+}
+
+body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel .vehicle-registry-section-list {
+  max-height: min(58vh, 620px) !important;
+}
+
+body.page-vehicle-registry .vehicle-register-dialog {
+  width: min(1120px, calc(100vw - 180px));
+  max-width: calc(100vw - 180px);
+  max-height: min(90dvh, 900px);
+}
+
+body.page-vehicle-registry .vehicle-register-dialog .camera-register-form,
+body.page-vehicle-registry .vehicle-register-dialog .camera-register-grid {
+  min-height: 0;
+}
+
+body.page-vehicle-registry .vehicle-register-dialog .camera-register-grid {
+  max-height: none;
+}
+
+@media (max-width: 1180px) {
+  body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel .vehicle-registry-rail-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.page-vehicle-registry .vehicle-register-dialog {
+    width: min(980px, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
+  }
+}
+
+@media (max-width: 720px) {
+  body.page-vehicle-registry:not(.is-vehicle-registry-readonly) .vehicle-registry-directory-panel {
+    padding: 14px !important;
+  }
+
+  body.page-vehicle-registry .vehicle-register-dialog {
+    width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 16px;
+    border-radius: 18px;
+  }
+}

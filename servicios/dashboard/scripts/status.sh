@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 set -eu
 
-pgrep -af "uvicorn app.main:app --host 0.0.0.0 --port 8010" || {
-  echo "Dashboard no esta corriendo"
-  exit 1
-}
+echo "Dashboard legacy retirado. Servicio principal: robiotec-django.service en puerto 8020."
+exit 1

@@ -6,6 +6,7 @@ import json
 import os
 import shlex
 import signal
+import socket
 import sys
 import time
 from pathlib import Path
@@ -78,7 +79,9 @@ PUBLISH_TRANSPORT = env_first("RBOX_PUBLISH_TRANSPORT", default="srt").lower()
 LOCAL_RTSP_PORT = int(env_first("RBOX_LOCAL_RTSP_PORT", "RTSP_PORT", default="8554"))
 FFMPEG_BIN = env_first("RBOX_FFMPEG_BIN", default="/usr/bin/ffmpeg")
 FFMPEG_LOG_LEVEL = env_first("RBOX_FFMPEG_LOG_LEVEL", default="warning")
+CAMERA_PROBE_TIMEOUT = float(env_first("RBOX_CAMERA_PROBE_TIMEOUT", default="2.0"))
 STATE_FILE = Path(env_first("RBOX_SYNC_STATE_FILE", default="/robiotec/mediamtx/.rbox_sync_state.json"))
+last_camera_reachability: dict[str, bool] = {}
 
 
 def api_context():
@@ -179,6 +182,31 @@ def list_path_configs() -> dict[str, dict[str, Any]]:
     return {str(item.get("name", "")).strip("/"): item for item in items if item.get("name")}
 
 
+def camera_source_reachable(camera: dict[str, Any]) -> bool:
+    path = str(camera.get("mediamtx_path") or camera.get("unique_code") or "").strip("/")
+    source = str(camera.get("rtsp_url") or "").strip()
+    parsed = urlparse(source)
+    if parsed.scheme.lower() not in {"rtsp", "rtsps"}:
+        return True
+    host = parsed.hostname
+    port = parsed.port or 554
+    if not host:
+        return False
+
+    try:
+        with socket.create_connection((host, port), timeout=CAMERA_PROBE_TIMEOUT):
+            reachable = True
+    except OSError:
+        reachable = False
+
+    previous = last_camera_reachability.get(path)
+    if previous is not reachable:
+        state = "disponible" if reachable else "sin conexion local"
+        log(f"Camara {path or source} {state} ({host}:{port})")
+        last_camera_reachability[path] = reachable
+    return reachable
+
+
 def central_publish_target(camera: dict[str, Any]) -> str:
     path = str(camera.get("mediamtx_path") or camera.get("unique_code") or "").strip("/")
     output_url = str(camera.get("output_url") or camera.get("output_rtsp_url") or "").strip()
@@ -273,6 +301,8 @@ def sync_once() -> float:
 
     targets: dict[str, dict[str, Any]] = {}
     for camera in cameras:
+        if not camera_source_reachable(camera):
+            continue
         path, config = target_path_config(camera)
         targets[path] = config
 

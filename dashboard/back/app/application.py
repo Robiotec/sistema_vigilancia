@@ -18,6 +18,7 @@ from back.app.routers import auth, cameras, data, events, notifications, org, pa
 from back.app.routers.cameras import _reload_cam_path_map, start_cam_path_map_refresher
 from back.app.services.db_telegram_feeder import DBTelegramFeeder
 from back.app.services.artemis import ArtemisTracker
+from back.app.services.fleet_daily_report import FleetDailyReportWorker
 
 ROOT = Path(__file__).resolve().parents[2]
 STATIC = ROOT / "front" / "static"
@@ -31,6 +32,7 @@ _DASHBOARD_DIR = ROOT  # /root/robiotec/dashboard
 
 _telegram_feeder: DBTelegramFeeder | None = None
 _artemis_tracker: ArtemisTracker | None = None
+_fleet_report_worker: FleetDailyReportWorker | None = None
 
 app = FastAPI(title="Robiotec Dashboard", version="0.2.0")
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
@@ -107,7 +109,7 @@ async def invalidate_context_on_write(request: Request, call_next):
 
 @app.on_event("startup")
 def on_startup() -> None:
-    global _telegram_feeder, _artemis_tracker
+    global _telegram_feeder, _artemis_tracker, _fleet_report_worker
     for directory in _CACHE_DIRS:
         directory.mkdir(parents=True, exist_ok=True)
     start_cam_path_map_refresher()
@@ -126,6 +128,9 @@ def on_startup() -> None:
     # Artemis fleet tracker: extrae posiciones de theo.24hm.net → telemetría
     _artemis_tracker = ArtemisTracker()
     _artemis_tracker.start()
+    # Reporte diario PDF de flota: usa la misma configuracion SMTP de alertas
+    _fleet_report_worker = FleetDailyReportWorker()
+    _fleet_report_worker.start()
     # Limpieza diaria de cache local (videos y crops descargados desde MinIO)
     threading.Thread(
         target=_daily_cache_cleanup_loop,
@@ -137,11 +142,13 @@ def on_startup() -> None:
 
 @app.on_event("shutdown")
 def on_shutdown() -> None:
-    global _telegram_feeder, _artemis_tracker
+    global _telegram_feeder, _artemis_tracker, _fleet_report_worker
     if _telegram_feeder:
         _telegram_feeder.stop()
     if _artemis_tracker:
         _artemis_tracker.stop()
+    if _fleet_report_worker:
+        _fleet_report_worker.stop()
 
 
 app.include_router(pages.router)

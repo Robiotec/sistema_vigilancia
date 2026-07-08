@@ -417,6 +417,116 @@
   scrollbar-gutter: stable;
 }
 
+#camera-admin-map-modal {
+  z-index: 280;
+}
+
+.camera-admin-editor-backdrop,
+.camera-admin-editor-close {
+  display: none;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-modal-workbench {
+  display: block;
+  min-height: 0;
+  overflow: visible;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-editor-panel {
+  display: none;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-editor-backdrop.is-editor-open {
+  position: fixed;
+  inset: 0;
+  z-index: 230;
+  display: block;
+  background: rgba(5, 7, 11, 0.74);
+  backdrop-filter: blur(10px);
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open {
+  position: fixed;
+  inset: 24px;
+  z-index: 240;
+  width: min(1180px, calc(100vw - 32px));
+  max-height: min(92dvh, 940px);
+  margin: auto;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 18px;
+  overflow: hidden;
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(25, 28, 34, 0.98), rgba(15, 17, 23, 0.98)),
+    radial-gradient(circle at top left, rgba(241, 56, 17, 0.12), transparent 38%);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open .camera-admin-editor-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 16px;
+  min-height: min(70vh, 760px);
+  overflow: hidden;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-action {
+  min-height: 42px;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-grid {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.74fr);
+  gap: 14px;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-column {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-subhead {
+  gap: 6px;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-directory-subhead h3 {
+  font-size: 0.96rem;
+}
+
+.camera-register-modal.is-admin-embedded .camera-admin-rbox-directory {
+  flex-basis: auto;
+  flex-shrink: 1;
+  min-height: 0;
+  margin-top: 0;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .camera-admin-map-dialog .camera-register-map {
   min-height: min(58vh, 520px);
 }
@@ -725,6 +835,17 @@
     grid-template-columns: 1fr;
   }
 
+  .camera-register-modal.is-admin-embedded .camera-admin-directory-grid {
+    grid-template-columns: 1fr;
+    overflow: auto;
+    padding-right: 4px;
+    scrollbar-gutter: stable;
+  }
+
+  .camera-register-modal.is-admin-embedded .camera-admin-directory-column {
+    min-height: 260px;
+  }
+
   .notification-admin-grid {
     grid-template-columns: 1fr;
   }
@@ -760,6 +881,23 @@
 
 @media (max-width: 720px) {
   .user-admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-register-modal.is-admin-embedded .camera-admin-editor-panel.is-editor-open {
+    inset: 10px;
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .camera-register-modal.is-admin-embedded .camera-admin-directory-panel {
+    min-height: 0;
+  }
+
+  .camera-register-modal.is-admin-embedded .camera-admin-directory-actions {
+    display: grid;
     grid-template-columns: 1fr;
   }
 

@@ -2,10 +2,13 @@
 set -eu
 
 SERVICES_DIR="/root/robiotec/servicios"
+PLATFORM_DIR="/root/robiotec/plataforma"
 SYSTEMD_DIR="/etc/systemd/system"
 
+install -m 0644 "$PLATFORM_DIR/systemd/robiotec-django.service" "$SYSTEMD_DIR/robiotec-django.service"
+install -m 0644 "$PLATFORM_DIR/systemd/robiotec-celery.service" "$SYSTEMD_DIR/robiotec-celery.service"
+install -m 0644 "$PLATFORM_DIR/systemd/robiotec-celerybeat.service" "$SYSTEMD_DIR/robiotec-celerybeat.service"
 install -m 0644 "$SERVICES_DIR/apicentral/systemd/robiotec-apicentral.service" "$SYSTEMD_DIR/robiotec-apicentral.service"
-install -m 0644 "$SERVICES_DIR/dashboard/systemd/robiotec-dashboard.service" "$SYSTEMD_DIR/robiotec-dashboard.service"
 install -m 0644 "$SERVICES_DIR/mediamtx/systemd/robiotec-mediamtx.service" "$SYSTEMD_DIR/robiotec-mediamtx.service"
 install -m 0644 "$SERVICES_DIR/arcom/systemd/robiotec-arcom-download.service" "$SYSTEMD_DIR/robiotec-arcom-download.service"
 install -m 0644 "$SERVICES_DIR/arcom/systemd/robiotec-arcom-download.timer" "$SYSTEMD_DIR/robiotec-arcom-download.timer"
@@ -18,7 +21,9 @@ install -m 0644 "$SERVICES_DIR/retention/systemd/robiotec-retention-cleanup.time
 
 systemctl daemon-reload
 systemctl enable robiotec-apicentral.service
-systemctl enable robiotec-dashboard.service
+systemctl enable robiotec-django.service
+systemctl enable robiotec-celery.service
+systemctl enable robiotec-celerybeat.service
 systemctl enable robiotec-mediamtx.service
 systemctl enable robiotec-arcom-download.timer
 systemctl enable robiotec-osint-download.timer
@@ -26,5 +31,5 @@ systemctl enable robiotec-log-cleaner.timer
 systemctl enable robiotec-retention-cleanup.timer
 
 echo "Servicios instalados. Para arrancar:"
-echo "  systemctl start robiotec-apicentral robiotec-dashboard robiotec-mediamtx"
+echo "  systemctl start robiotec-django robiotec-celery robiotec-celerybeat robiotec-apicentral robiotec-mediamtx"
 echo "  systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robiotec-log-cleaner.timer robiotec-retention-cleanup.timer"

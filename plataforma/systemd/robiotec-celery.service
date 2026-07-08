@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec Celery Worker
+After=network-online.target postgresql.service redis-server.service robiotec-django.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/plataforma
+EnvironmentFile=-/root/robiotec/plataforma/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/plataforma/logs
+ExecStart=/root/robiotec/plataforma/.venv/bin/celery -A config worker --loglevel=INFO --queues=default,streaming,reports,alerts,fleet --concurrency=2
+Restart=always
+RestartSec=5
+StandardOutput=append:/root/robiotec/servicios/plataforma/logs/celery.log
+StandardError=append:/root/robiotec/servicios/plataforma/logs/celery.log
+
+[Install]
+WantedBy=multi-user.target

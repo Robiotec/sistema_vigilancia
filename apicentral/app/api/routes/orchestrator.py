@@ -305,14 +305,20 @@ def list_inference_configs(
     response_model=RBoxCameraConfigResponse,
     summary="Camaras asociadas a una RBox para publicacion",
     description=(
-        "Devuelve las camaras activas que una RBox debe leer localmente y publicar "
+        "Devuelve las camaras asignadas que una RBox debe leer localmente y publicar "
         "en el MediaMTX central. `rbox_key` puede ser UUID o serial."
     ),
     dependencies=[Depends(_require_service_token)],
 )
 def list_rbox_camera_publish_configs(
     rbox_key: str,
-    active_only: bool = Query(default=True, description="Excluir camaras inactivas o eliminadas."),
+    active_only: bool = Query(
+        default=True,
+        description=(
+            "Parametro conservado por compatibilidad. En camaras RBox la disponibilidad "
+            "local la decide la RBox, no el estado active de la DB central."
+        ),
+    ),
     poll_after_seconds: int = Query(default=5, ge=1, le=300),
     db: Session = Depends(get_db),
     settings: Settings = Depends(get_settings),
@@ -360,11 +366,7 @@ def list_rbox_camera_publish_configs(
         )
         .order_by(Camera.name)
     )
-    if active_only:
-        stmt = stmt.where(
-            Camera.active.is_(True),
-            Camera.status != "inactivo",
-        )
+    _ = active_only
 
     cameras = list(db.scalars(stmt).all())
     stream_by_camera = _stream_configs_by_camera(db, cameras)

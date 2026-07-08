@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Robiotec Dashboard{% endblock %}
+
+{% block content %}
+<section class="rb-page-shell">
+  <div class="row g-3 align-items-stretch">
+    <div class="col-12 col-xl-4">
+      <div class="rb-panel h-100">
+        <h1 class="h4 mb-3">Operaciones</h1>
+        <div class="list-group list-group-flush rb-list">
+          {% for link in dashboard_links %}
+          <a class="list-group-item list-group-item-action" href="{{ link.href }}">{{ link.title }} · {{ link.copy }}</a>
+          {% empty %}
+          <a class="list-group-item list-group-item-action" href="/perfil/">Perfil de usuario</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-8">
+      <div class="rb-panel h-100">
+        <div id="dashboard-root" data-api-health-url="/api/v1/health/"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

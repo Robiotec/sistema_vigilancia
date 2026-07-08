@@ -1,5 +1,7 @@
-INFO:     Started server process [415282]
+INFO:     Started server process [1041710]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8010 (Press CTRL+C to quit)
-INFO:     127.0.0.1:47728 - "GET /static/cameras_page_viewer.js HTTP/1.1" 200 OK
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+INFO:     157.100.126.154:0 - "GET /api/evidence?kind=plate_snapshot&limit=80 HTTP/1.0" 200 OK
+INFO:     157.100.126.154:0 - "GET /api/vehicle-registry?limit=80 HTTP/1.0" 200 OK
+INFO:     157.100.126.154:0 - "GET /api/camera-events?camera_name=PORTON%20IZQUIERDA&limit=8 HTTP/1.0" 401 Unauthorized

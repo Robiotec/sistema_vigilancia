@@ -93,7 +93,9 @@ CREATE TABLE IF NOT EXISTS vehicles (
     vehicle_type varchar(60) NOT NULL DEFAULT 'auto',
     unique_code varchar(120) UNIQUE,
     plate varchar(40),
+    make varchar(100),
     model varchar(100),
+    year integer,
     active boolean NOT NULL DEFAULT true,
     can_publish boolean NOT NULL DEFAULT true
 );

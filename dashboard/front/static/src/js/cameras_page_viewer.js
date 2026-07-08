@@ -598,9 +598,9 @@ const INFERENCE_LOADING_SRCDOC = [
           <span class="event-card__badge">PLACA</span>
           <strong style="font:900 17px/1.22 monospace,system-ui;color:#fff;letter-spacing:.05em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(plate)}</strong>
           ${marca  ? `<span style="font:700 13px/1.35 system-ui;color:rgba(226,232,240,.94);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(marca)}</span>` : ""}
-          ${modelo ? `<span style="font:800 14.5px/1.35 system-ui;color:rgba(248,250,252,.98);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(modelo)}</span>` : ""}
+          ${modelo ? `<span style="font:700 14.5px/1.35 system-ui;color:rgba(248,250,252,.98);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(modelo)}</span>` : ""}
           
-          <time style="font:600 11.5px/1.45 system-ui;color:rgba(203,213,225,.72);margin-top:3px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
+          <time style="font:300 10.5px/1.15 system-ui;color:rgba(203,213,225,.72);margin-top:3px" datetime="${escapeHtml(datetime)}">${escapeHtml(tsLabel)}</time>
         </div>
       </article>`;
   }
@@ -679,7 +679,7 @@ const INFERENCE_LOADING_SRCDOC = [
           <span class="event-card__badge">ZONA</span>
           <span class="event-card__title" style="font:800 15.5px/1.16 system-ui,sans-serif;color:#fff4ed;margin-bottom:1px">Alerta de zona</span>
           <span class="event-card__sub" style="font:800 14.5px/1.2 system-ui,sans-serif;color:rgba(255,214,191,.9)">Duración: ${escapeHtml(durationLabel)}</span>
-          <time class="event-card__time" style="font:800 15px/1.2 system-ui,sans-serif;color:rgba(255,248,243,.9);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
+          <time class="event-card__time" style="font:400 13px/1.2 system-ui,sans-serif;color:rgba(255,248,243,.9);margin-top:1px" datetime="${escapeHtml(datetime)}">${escapeHtml(timestampLabel)}</time>
         </div>
       </article>`;
   }

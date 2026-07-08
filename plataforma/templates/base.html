@@ -1,0 +1,70 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Robiotec{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/main.css' %}?v={{ dashboard_asset_version|default:'dev' }}">
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="rb-app {% block body_class %}{% endblock %}">
+    {% block app_shell %}
+    <div class="app-shell is-sidebar-collapsed" id="app-shell">
+      <aside class="app-sidebar" id="app-sidebar" aria-label="Menú del sistema">
+        <div class="sidebar-header">
+          <div class="sidebar-header-bar">
+            <a class="sidebar-brand-row" href="/" aria-label="Inicio Robiotec">
+              <span class="sidebar-logo" aria-hidden="true">RB</span>
+              <span class="sidebar-brand-copy">
+                <strong>ROBIOTEC</strong>
+                <span>Security</span>
+              </span>
+            </a>
+            <button
+              class="sidebar-toggle"
+              id="sidebar-toggle"
+              type="button"
+              aria-label="Expandir menú"
+              aria-controls="app-sidebar"
+              aria-expanded="false"
+            ></button>
+          </div>
+          <div class="sidebar-brand-meta">
+            <span class="sidebar-brand-kicker">Security Console</span>
+            <p class="sidebar-brand-note">Monitoreo visual, telemetría y eventos desde un único punto de control.</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Navegación principal">
+          <div class="sidebar-nav-head">
+            <span>Navegación</span>
+            <strong>Centro operativo</strong>
+          </div>
+          {% for link in sidebar_links %}
+          <a class="sidebar-link {% if link.is_current %}is-current{% endif %}" href="{{ link.href }}">
+            <span class="sidebar-icon" aria-hidden="true">{{ link.icon_svg }}</span>
+            <span class="sidebar-link-copy"><strong>{{ link.title }}</strong><span>{{ link.copy }}</span></span>
+            <span class="sidebar-link-tooltip" aria-hidden="true">{{ link.title }}</span>
+          </a>
+          {% endfor %}
+        </nav>
+
+        <div class="sidebar-session" id="session-actions" data-variant="sidebar"></div>
+      </aside>
+
+      <main class="app-main">
+        <div class="wrap rb-dashboard-wrap">
+          {% block content %}{% endblock %}
+        </div>
+      </main>
+    </div>
+    {% endblock %}
+    <div id="toast-region" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    <script type="module" src="{% static 'dashboard/assets/main.js' %}?v={{ dashboard_asset_version|default:'dev' }}"></script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

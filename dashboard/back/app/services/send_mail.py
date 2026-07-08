@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -47,9 +49,33 @@ def validate_email_settings_value(settings: dict) -> None:
     except SystemExit as exc:
         raise ValueError(str(exc)) from exc
 
+def _attachment_parts(settings: dict) -> list[MIMEBase]:
+    parts: list[MIMEBase] = []
+    attachments = settings.get("attachments")
+    if not isinstance(attachments, list):
+        return parts
+    for attachment in attachments:
+        if not isinstance(attachment, dict):
+            continue
+        filename = str(attachment.get("filename") or "adjunto.bin").strip() or "adjunto.bin"
+        content = attachment.get("content", b"")
+        if isinstance(content, str):
+            payload = content.encode("utf-8")
+        else:
+            payload = bytes(content or b"")
+        mime_type = str(attachment.get("mime_type") or "application/octet-stream")
+        maintype, _, subtype = mime_type.partition("/")
+        part = MIMEBase(maintype or "application", subtype or "octet-stream")
+        part.set_payload(payload)
+        encoders.encode_base64(part)
+        part.add_header("Content-Disposition", "attachment", filename=filename)
+        parts.append(part)
+    return parts
+
 def send_email(settings: dict) -> list[str]:
     validate_email_settings_value(settings)
     sent: list[str] = []
+    attachments = _attachment_parts(settings)
 
     server = smtplib.SMTP(settings["smtp_host"], settings["smtp_port"])
     try:
@@ -62,6 +88,8 @@ def send_email(settings: dict) -> list[str]:
             msg["To"] = recipient
             msg["Subject"] = settings["subject"]
             msg.attach(MIMEText(settings["message"], "plain"))
+            for part in attachments:
+                msg.attach(part)
             server.sendmail(settings["sender_email"], recipient, msg.as_string())
             sent.append(recipient)
     finally:

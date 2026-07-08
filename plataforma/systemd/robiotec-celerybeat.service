@@ -1,0 +1,18 @@
+[Unit]
+Description=Robiotec Celery Beat Scheduler
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/plataforma
+EnvironmentFile=-/root/robiotec/plataforma/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/plataforma/logs
+ExecStart=/root/robiotec/plataforma/.venv/bin/celery -A config beat --loglevel=INFO --pidfile= --schedule=/root/robiotec/servicios/plataforma/celerybeat-schedule
+Restart=always
+RestartSec=5
+StandardOutput=append:/root/robiotec/servicios/plataforma/logs/celerybeat.log
+StandardError=append:/root/robiotec/servicios/plataforma/logs/celerybeat.log
+
+[Install]
+WantedBy=multi-user.target

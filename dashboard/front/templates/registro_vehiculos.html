@@ -80,15 +80,20 @@
               </div>
             </div>
 
-            <div class="vehicle-registry-workbench">
-              <section class="ops-card page-panel vehicle-registry-main-card">
+            <div class="vehicle-registry-workbench vehicle-registry-directory-workbench">
+              <section class="ops-card page-panel vehicle-registry-main-card vehicle-registry-preview-card">
                 <div class="ops-head vehicle-registry-detail-head">
                   <div></div>
                 </div>
                 <div class="vehicle-registry-detail" id="vehicle-registry-detail"></div>
               </section>
 
-              <aside class="vehicle-registry-rail">
+              <aside class="vehicle-registry-rail vehicle-registry-directory-panel">
+                <div class="vehicle-registry-directory-head">
+                  <div class="ops-eyebrow">Directorio</div>
+                  <h3>Vehículos registrados</h3>
+                  <p>Haz clic sobre una unidad para editar su información en una ventana emergente.</p>
+                </div>
                 <div class="vehicle-registry-rail-list" id="vehicle-registry-rail-list"></div>
               </aside>
             </div>
@@ -156,6 +161,30 @@
           <button type="button" id="fleet-km-load" class="vehicle-km-load">Cargar</button>
           <button type="button" id="fleet-km-export-csv" class="vehicle-km-export-fleet" style="display:none">⬇ Exportar CSV</button>
         </div>
+        <section class="fleet-daily-report-settings" id="fleet-daily-report-settings" aria-label="Reporte diario PDF">
+          <div class="fleet-daily-report-head">
+            <div>
+              <strong>Reporte diario PDF</strong>
+              <span id="fleet-daily-report-status">Configuracion no cargada</span>
+            </div>
+            <label class="fleet-daily-report-toggle">
+              <input type="checkbox" id="fleet-daily-report-enabled" />
+              <span>Envio diario</span>
+            </label>
+          </div>
+          <div class="fleet-daily-report-grid">
+            <label class="vehicle-km-label">Hora
+              <input type="time" id="fleet-daily-report-time" />
+            </label>
+            <label class="vehicle-km-label fleet-daily-report-recipients">Correos
+              <textarea id="fleet-daily-report-recipients" rows="3" placeholder="correo@dominio.com"></textarea>
+            </label>
+          </div>
+          <div class="fleet-daily-report-actions">
+            <button type="button" id="fleet-daily-report-save" class="vehicle-km-load">Guardar envio diario</button>
+            <button type="button" id="fleet-daily-report-send-now" class="vehicle-km-export-fleet">Enviar PDF ahora</button>
+          </div>
+        </section>
         <div id="fleet-km-results"></div>
       </div>
     </div>
@@ -164,7 +193,7 @@
   <div class="camera-register-modal" id="vehicle-register-modal" hidden>
     <div class="camera-register-modal-backdrop" id="vehicle-register-backdrop"></div>
     <section
-      class="camera-register-dialog"
+      class="camera-register-dialog vehicle-register-dialog"
       role="dialog"
       aria-modal="true"
       aria-labelledby="vehicle-register-title"
@@ -351,6 +380,7 @@
       accessPermissions: __ACCESS_PERMISSIONS_JSON__,
     };
   </script>
+  <script src="/static/src/js/shared/ui_helpers.js?v=__STATIC_ASSET_VERSION__"></script>
   <script src="/static/src/js/web_app.js?v=__STATIC_ASSET_VERSION__"></script>
 </body>
 </html>

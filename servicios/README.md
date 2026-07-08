@@ -5,7 +5,7 @@ Esta carpeta concentra las unidades systemd, scripts operativos y logs de los se
 ## Servicios principales
 
 - `apicentral`: API FastAPI en puerto `8003`.
-- `dashboard`: dashboard FastAPI/Jinja en puerto `8010`.
+- `plataforma`: dashboard principal Django/Gunicorn en puerto `8020`.
 - `mediamtx`: servidor MediaMTX.
 - `arcom`: descarga semanal del Catastro Minero Nacional y genera `arcom/arcom_catastro.gpkg`.
 - `osint`: descarga diaria de capas OSINT y genera `osint/osint_layers.geojson`.
@@ -23,7 +23,7 @@ Cada servicio tiene esta estructura:
 ```bash
 cd /root/robiotec/servicios
 ./install-systemd.sh
-systemctl start robiotec-apicentral robiotec-dashboard robiotec-mediamtx
+systemctl start robiotec-django robiotec-celery robiotec-celerybeat robiotec-apicentral robiotec-mediamtx
 systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robiotec-log-cleaner.timer robiotec-retention-cleanup.timer
 ```
 
@@ -31,7 +31,7 @@ systemctl start robiotec-arcom-download.timer robiotec-osint-download.timer robi
 
 ```bash
 /root/robiotec/servicios/apicentral/scripts/logs.sh
-/root/robiotec/servicios/dashboard/scripts/logs.sh
+journalctl -u robiotec-django.service -f
 /root/robiotec/servicios/mediamtx/scripts/logs.sh
 /root/robiotec/servicios/arcom/scripts/logs.sh
 /root/robiotec/servicios/osint/scripts/logs.sh
@@ -51,7 +51,7 @@ API Central publica esos datos en:
 - `GET /arcom/concessions?bbox=west,south,east,north&limit=120`
 - `GET /arcom/concession-lookup?lat=-3.015&lon=-78.48`
 
-El dashboard conserva sus rutas `/api/arcom/...` como proxy hacia API Central,
+La plataforma conserva sus rutas `/api/arcom/...` como proxy hacia API Central,
 para que la capa visible `Capa ARCOM` siga funcionando en el mapa.
 
 Requisitos del host:

@@ -1,0 +1,20 @@
+[Unit]
+Description=Robiotec Django Platform
+After=network-online.target postgresql.service redis-server.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/robiotec/plataforma
+EnvironmentFile=-/root/robiotec/plataforma/.env
+ExecStartPre=/usr/bin/mkdir -p /root/robiotec/servicios/plataforma/logs
+ExecStart=/root/robiotec/plataforma/.venv/bin/gunicorn config.wsgi:application --bind 0.0.0.0:8020 --workers 3 --timeout 120 --graceful-timeout 10
+KillSignal=SIGQUIT
+TimeoutStopSec=15
+Restart=always
+RestartSec=3
+StandardOutput=append:/root/robiotec/servicios/plataforma/logs/django.log
+StandardError=append:/root/robiotec/servicios/plataforma/logs/django.log
+
+[Install]
+WantedBy=multi-user.target

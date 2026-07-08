@@ -13,7 +13,13 @@ dist/
 build/
 node_modules/
 dashboard/dist/
+plataforma/staticfiles/
+plataforma/apps/frontend/static/dashboard/assets/
+plataforma/apps/frontend/static/dashboard/.vite/
 *.log
+*.out
+celerybeat-schedule*
+.uv-cache/
 *.zip
 *.tar
 *.tar.gz

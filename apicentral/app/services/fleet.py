@@ -192,7 +192,7 @@ def match_segment_with_osrm(
     confidence_min: float,
     timeout_seconds: float,
 ) -> dict[str, Any] | None:
-    """Map Matching de un tramo. Devuelve None si OSRM no tiene confianza suficiente."""
+    """Map Matching de un tramo; usa route como fallback para pares GPS."""
     base_url = str(osrm_base_url or "").strip().rstrip("/")
     if not base_url:
         return None
@@ -207,26 +207,69 @@ def match_segment_with_osrm(
         with urlopen(request, timeout=max(0.5, float(timeout_seconds or 3.0))) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except Exception:
+        return route_segment_with_osrm(previous, point, osrm_base_url=base_url, timeout_seconds=timeout_seconds)
+
+    if payload.get("code") == "Ok":
+        matchings = payload.get("matchings")
+        if isinstance(matchings, list) and matchings:
+            matching = matchings[0] if isinstance(matchings[0], dict) else {}
+            confidence = coerce_float(matching.get("confidence")) or 0.0
+            geometry = matching.get("geometry") if isinstance(matching.get("geometry"), dict) else {}
+            latlon = _osrm_coordinates_to_latlon(geometry.get("coordinates"))
+            if confidence >= float(confidence_min or 0.0) and len(latlon) >= 2:
+                distance_km = (coerce_float(matching.get("distance")) or 0.0) / 1000.0
+                return {
+                    "segment_kind": "osrm",
+                    "segment_reason": None,
+                    "confidence": confidence,
+                    "distance_km": distance_km,
+                    "geometry": latlon,
+                }
+
+    return route_segment_with_osrm(previous, point, osrm_base_url=base_url, timeout_seconds=timeout_seconds)
+
+
+def route_segment_with_osrm(
+    previous: dict[str, Any],
+    point: dict[str, Any],
+    *,
+    osrm_base_url: str,
+    timeout_seconds: float,
+) -> dict[str, Any] | None:
+    base_url = str(osrm_base_url or "").strip().rstrip("/")
+    if not base_url:
+        return None
+    coords = f"{previous['lon']},{previous['lat']};{point['lon']},{point['lat']}"
+    path = quote(coords, safe=",;")
+    url = (
+        f"{base_url}/route/v1/driving/{path}"
+        "?geometries=geojson&overview=full&steps=false"
+    )
+    try:
+        request = Request(url, headers={"User-Agent": "RobiotecFleet/1.0"})
+        with urlopen(request, timeout=max(0.5, float(timeout_seconds or 3.0))) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
         return None
 
     if payload.get("code") != "Ok":
         return None
-    matchings = payload.get("matchings")
-    if not isinstance(matchings, list) or not matchings:
+    routes = payload.get("routes")
+    if not isinstance(routes, list) or not routes:
         return None
-    matching = matchings[0] if isinstance(matchings[0], dict) else {}
-    confidence = coerce_float(matching.get("confidence")) or 0.0
-    if confidence < float(confidence_min or 0.0):
-        return None
-    geometry = matching.get("geometry") if isinstance(matching.get("geometry"), dict) else {}
+    route = routes[0] if isinstance(routes[0], dict) else {}
+    geometry = route.get("geometry") if isinstance(route.get("geometry"), dict) else {}
     latlon = _osrm_coordinates_to_latlon(geometry.get("coordinates"))
     if len(latlon) < 2:
         return None
-    distance_km = (coerce_float(matching.get("distance")) or 0.0) / 1000.0
+    distance_km = (coerce_float(route.get("distance")) or 0.0) / 1000.0
+    raw_distance_km = haversine_km(previous["lat"], previous["lon"], point["lat"], point["lon"])
+    if distance_km <= 0 or (raw_distance_km > 0 and distance_km > max(raw_distance_km * 4, raw_distance_km + 2.0)):
+        return None
     return {
         "segment_kind": "osrm",
-        "segment_reason": None,
-        "confidence": confidence,
+        "segment_reason": "route_fallback",
+        "confidence": None,
         "distance_km": distance_km,
         "geometry": latlon,
     }

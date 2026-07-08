@@ -219,7 +219,9 @@ Optimizacion disponible para reportes de kilometraje:
 Servicios residentes:
 
 - `robiotec-apicentral.service`
-- `robiotec-dashboard.service`
+- `robiotec-django.service`
+- `robiotec-celery.service`
+- `robiotec-celerybeat.service`
 - `robiotec-mediamtx.service`
 - `postgresql`
 - `minio`
@@ -236,7 +238,7 @@ Tareas programadas o one-shot:
 Puertos locales verificados:
 
 - API Central: `127.0.0.1:8003`
-- Dashboard: `127.0.0.1:8010`
+- Dashboard principal Django: `127.0.0.1:8020`
 - PostgreSQL: `127.0.0.1:5432`
 - MinIO: `127.0.0.1:9000`, `127.0.0.1:9001`
 - MediaMTX API: `127.0.0.1:9997`
@@ -267,13 +269,13 @@ psql "$PSQL_URL" -v ON_ERROR_STOP=1 -f db/sql/17_create_fleet_geofences.sql
 Reiniciar servicios principales:
 
 ```bash
-sudo systemctl restart robiotec-apicentral.service robiotec-dashboard.service robiotec-mediamtx.service
+sudo systemctl restart robiotec-django.service robiotec-celery.service robiotec-celerybeat.service robiotec-apicentral.service robiotec-mediamtx.service
 ```
 
 Ver estado:
 
 ```bash
-systemctl is-active robiotec-apicentral.service robiotec-dashboard.service robiotec-mediamtx.service postgresql minio
+systemctl is-active robiotec-django.service robiotec-celery.service robiotec-celerybeat.service robiotec-apicentral.service robiotec-mediamtx.service postgresql minio
 ```
 
 ## Validaciones ejecutadas

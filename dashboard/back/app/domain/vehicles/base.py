@@ -47,6 +47,10 @@ class VehicleNormalizer(BaseHelper):
         vehicle_subtype = self.text(vehicle.get("vehicle_subtype"))
         vehicle_subtype_name = vehicle_subtype_label(vehicle_subtype)
         driver_name = self.text(vehicle.get("driver_name"))
+        make = self.text(vehicle.get("make"))
+        model_name = self.text(vehicle.get("model"))
+        year = vehicle.get("year")
+        year = int(year) if isinstance(year, (int, float)) or (isinstance(year, str) and year.strip().isdigit()) else None
         generated_id = self.text(vehicle.get("unique_code") or vehicle.get("plate"), self.text(vehicle.get("id")))
         company = (companies or {}).get(str(vehicle.get("company_id")), {})
         owner = (users or {}).get(str(vehicle.get("owner_user_id")), {})
@@ -70,6 +74,12 @@ class VehicleNormalizer(BaseHelper):
             "nombre": self.text(vehicle.get("name"), "Vehiculo"),
             "driver_name": driver_name,
             "chofer": driver_name,
+            "make": make,
+            "marca": make,
+            "model": model_name,
+            "modelo": model_name,
+            "year": year,
+            "anio": year,
             "telemetry_mode": "api",
             "api_device_id": generated_id,
             "generated_id": generated_id,

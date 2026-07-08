@@ -32,7 +32,9 @@
   color: #94a3b8;
 }
 .vehicle-km-label input[type="date"],
-.vehicle-km-label select {
+.vehicle-km-label input[type="time"],
+.vehicle-km-label select,
+.vehicle-km-label textarea {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 6px;
@@ -42,6 +44,12 @@
 }
 .vehicle-km-label select {
   min-height: 31px;
+}
+.vehicle-km-label textarea {
+  min-width: 260px;
+  min-height: 76px;
+  resize: vertical;
+  line-height: 1.35;
 }
 .vehicle-km-load {
   padding: 0.35rem 0.85rem;
@@ -481,6 +489,64 @@
   background: rgba(99,179,237,0.2);
   outline: none;
 }
+.fleet-daily-report-settings {
+  border: 1px solid rgba(148,163,184,0.22);
+  border-radius: 8px;
+  background: rgba(15,23,42,0.58);
+  padding: 0.95rem;
+  margin: 0 0 1.2rem;
+}
+.fleet-daily-report-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.fleet-daily-report-head strong {
+  display: block;
+  color: #f8fafc;
+  font-size: 0.95rem;
+}
+.fleet-daily-report-head span {
+  display: block;
+  margin-top: 0.18rem;
+  color: #94a3b8;
+  font-size: 0.76rem;
+}
+.fleet-daily-report-head span.is-error {
+  color: #f87171;
+}
+.fleet-daily-report-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 36px;
+  color: #dbeafe;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.fleet-daily-report-toggle input {
+  width: 17px;
+  height: 17px;
+  accent-color: #22c55e;
+}
+.fleet-daily-report-grid {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(260px, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+}
+.fleet-daily-report-recipients textarea {
+  width: 100%;
+}
+.fleet-daily-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
 .fleet-km-kpi-row { margin-bottom: 0.9rem; flex-wrap: wrap; gap: 1rem; }
 .fleet-km-table-wrap { overflow-x: auto; }
 .fleet-km-table { width: 100%; min-width: 760px; }
@@ -498,11 +564,16 @@
   cursor: pointer;
 }
 .vehicle-km-export-fleet:hover { background: rgba(74,222,128,0.18); }
+.vehicle-km-export-fleet:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
 
 body.is-vehicle-registry-readonly #vehicle-register-open,
 body.is-vehicle-registry-readonly #vehicle-registry-edit-selected,
 body.is-vehicle-registry-readonly #vehicle-registry-delete-selected,
 body.is-vehicle-registry-readonly .vehicle-item-actions,
+body.is-vehicle-registry-readonly #fleet-daily-report-settings,
 body.is-vehicle-registry-readonly #vehicle-register-modal {
   display: none !important;
 }
@@ -532,4 +603,17 @@ body.is-vehicle-registry-readonly #vehicle-register-modal {
 
 .vehicle-km-results::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 720px) {
+  .fleet-daily-report-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .fleet-daily-report-grid {
+    grid-template-columns: 1fr;
+  }
+  .fleet-daily-report-recipients textarea {
+    min-width: 0;
+  }
 }

@@ -48,6 +48,7 @@ _KM_FLEET_CACHE_TTL_SECONDS = 45.0
 _KM_FLEET_CACHE_MAX_ITEMS = 128
 _km_fleet_cache: dict[tuple[str, str, str, str], tuple[float, dict[str, Any]]] = {}
 _km_fleet_cache_lock = threading.Lock()
+_RETRYABLE_OSRM_SEGMENT_REASONS = {"osrm_budget_deferred", "osrm_disabled"}
 
 
 def _freshness(received_at) -> str:
@@ -418,6 +419,25 @@ def _apply_segment_to_point(point: dict[str, Any], segment: VehicleRouteSegment 
     point["segment_geometry"] = _segment_geometry_latlon(segment.geometry)
 
 
+def _route_segment_can_retry_osrm(segment: VehicleRouteSegment | None) -> bool:
+    if not segment:
+        return False
+    return (
+        str(segment.segment_kind or "").lower() == "raw"
+        and str(segment.segment_reason or "").lower() in _RETRYABLE_OSRM_SEGMENT_REASONS
+    )
+
+
+def _update_route_segment_row(row: VehicleRouteSegment, segment: dict[str, Any]) -> None:
+    row.segment_kind = segment["segment_kind"]
+    row.segment_reason = segment.get("segment_reason")
+    row.distance_km = float(segment.get("distance_km") or 0.0)
+    row.elapsed_seconds = float(segment.get("elapsed_seconds") or 0.0)
+    row.implied_speed_kmh = float(segment.get("implied_speed_kmh") or 0.0)
+    row.confidence = segment.get("confidence")
+    row.geometry = _segment_geometry_payload(segment.get("geometry") or [])
+
+
 def _materialize_hybrid_route_segments(
     db: Session,
     *,
@@ -443,14 +463,15 @@ def _materialize_hybrid_route_segments(
     osrm_remaining = max(0, int(settings.osrm_max_segments_per_request or 0))
     osrm_deadline = time.monotonic() + max(0.5, float(settings.osrm_request_budget_seconds or 0.0))
     osrm_timeout = max(0.2, min(1.0, float(settings.osrm_request_timeout_seconds or 0.8)))
-    created = False
+    changed = False
     for index in range(1, len(points)):
         previous = points[index - 1]
         point = points[index]
         to_id = str(point.get("telemetry_id") or "")
         from_id = str(previous.get("telemetry_id") or "")
-        if not to_id or not from_id or to_id in by_to_id:
+        if not to_id or not from_id:
             continue
+        existing = by_to_id.get(to_id)
         inside_geofence = _segment_inside_geofences(previous, point, geofences)
         point_status = str(point.get("segment_status") or "normal").lower()
         can_try_osrm = (
@@ -460,6 +481,8 @@ def _materialize_hybrid_route_segments(
             and point_status not in {"gap", "suspicious"}
             and not inside_geofence
         )
+        if existing and not (_route_segment_can_retry_osrm(existing) and can_try_osrm):
+            continue
         segment = build_hybrid_segment(
             previous,
             point,
@@ -472,6 +495,10 @@ def _materialize_hybrid_route_segments(
             osrm_remaining -= 1
         elif segment.get("segment_kind") == "raw" and not inside_geofence:
             segment["segment_reason"] = "osrm_budget_deferred" if osrm_base_url else "osrm_disabled"
+        if existing:
+            _update_route_segment_row(existing, segment)
+            changed = True
+            continue
         row = VehicleRouteSegment(
             vehicle_id=vehicle.id,
             from_telemetry_id=from_id,
@@ -487,8 +514,8 @@ def _materialize_hybrid_route_segments(
         )
         db.add(row)
         by_to_id[to_id] = row
-        created = True
-    if created:
+        changed = True
+    if changed:
         db.commit()
     return by_to_id
 

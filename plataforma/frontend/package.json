@@ -1,0 +1,24 @@
+{
+  "name": "robiotec-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite --host 0.0.0.0 --port 5174",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@types/leaflet": "^1.9.21",
+    "@types/leaflet-draw": "^1.0.13",
+    "bootstrap": "^5.3.8",
+    "leaflet": "^1.9.4",
+    "leaflet-draw": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.2.11",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.2"
+  }
+}

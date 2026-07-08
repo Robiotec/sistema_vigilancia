@@ -4,16 +4,17 @@
     <header class="camera-register-dialog-head">
       <div>
         <div class="ops-eyebrow">Centro de cámaras</div>
-        <h2 id="camera-register-title">Administrar cámaras</h2>
+        <h2 id="camera-register-title">Administrador de cámaras y RBox</h2>
         <p>
-          Registra una cámara nueva o selecciona una existente del directorio para editarla sin salir del visor principal.
+          Revisa el directorio de cámaras y RBox. Selecciona un registro para editarlo en una ventana emergente.
         </p>
       </div>
       <button class="camera-register-close" id="camera-register-close" type="button" aria-label="Cerrar administrador de cámaras">&times;</button>
     </header>
 
     <div class="user-admin-workbench camera-admin-modal-workbench">
-      <section class="ops-card page-panel user-admin-main-card camera-admin-modal-main-card">
+      <div class="camera-admin-editor-backdrop" id="camera-admin-editor-backdrop"></div>
+      <section class="ops-card page-panel user-admin-main-card camera-admin-modal-main-card camera-admin-editor-panel" id="camera-admin-editor-panel" aria-labelledby="camera-admin-detail-title">
         <div class="ops-head user-admin-detail-head">
           <div>
             <div class="ops-eyebrow">Edición</div>
@@ -22,6 +23,7 @@
               Completa el formulario para crear una cámara nueva. Si seleccionas una del panel derecho, aquí podrás actualizarla o eliminarla.
             </p>
           </div>
+          <button class="camera-register-close camera-admin-editor-close" id="camera-admin-editor-close" type="button" aria-label="Cerrar editor de cámaras">&times;</button>
         </div>
 
         <form class="user-admin-form" id="camera-admin-form" novalidate>
@@ -327,20 +329,32 @@
         </form>
       </section>
 
-      <aside class="user-admin-rail">
+      <aside class="user-admin-rail camera-admin-directory-panel">
         <div class="user-admin-rail-head">
           <div class="ops-eyebrow">Directorio</div>
-          <h3>Cámaras registradas</h3>
-          <p>Selecciona una cámara para cargarla en el formulario y administrarla sin salir de este modal.</p>
+          <h3>Cámaras y RBox registradas</h3>
+          <p>Haz clic sobre cualquier elemento para abrir su edición.</p>
         </div>
-        <div class="user-admin-rail-list" id="camera-admin-rail-list"></div>
-        <div class="camera-admin-rbox-directory">
-          <div class="user-admin-rail-head">
-            <div class="ops-eyebrow">RBox</div>
-            <h3>RBox registradas</h3>
-            <p>Consulta las bases creadas y copia su código para configurar publicadores.</p>
+        <div class="camera-admin-directory-actions">
+          <button class="camera-register-open camera-admin-directory-action" id="camera-admin-new-camera-open" type="button">Nueva cámara</button>
+          <button class="camera-register-secondary camera-admin-directory-action" id="camera-admin-new-rbox-open" type="button">Nueva RBox</button>
+        </div>
+        <div class="camera-admin-directory-grid">
+          <div class="camera-admin-directory-column">
+            <div class="user-admin-rail-head camera-admin-directory-subhead">
+              <div class="ops-eyebrow">Cámaras</div>
+              <h3>Cámaras registradas</h3>
+            </div>
+            <div class="user-admin-rail-list" id="camera-admin-rail-list"></div>
           </div>
-          <div class="user-admin-rail-list" id="camera-admin-rbox-list"></div>
+          <div class="camera-admin-rbox-directory camera-admin-directory-column">
+            <div class="user-admin-rail-head camera-admin-directory-subhead">
+              <div class="ops-eyebrow">RBox</div>
+              <h3>RBox registradas</h3>
+              <p>Copia el ID para configurar publicadores.</p>
+            </div>
+            <div class="user-admin-rail-list" id="camera-admin-rbox-list"></div>
+          </div>
         </div>
       </aside>
     </div>

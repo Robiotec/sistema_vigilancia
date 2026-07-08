@@ -1860,6 +1860,11 @@
   box-shadow: none;
 }
 
+.camera-admin-editor-backdrop,
+.camera-admin-editor-close {
+  display: none;
+}
+
 .camera-register-modal-backdrop {
   position: absolute;
   inset: 0;

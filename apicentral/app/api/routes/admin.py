@@ -122,7 +122,9 @@ class VehicleCreate(BaseModel):
     vehicle_subtype: str | None = None
     unique_code: str | None = None
     plate: str | None = None
+    make: str | None = None
     model: str | None = None
+    year: int | None = None
     driver_name: str | None = None
     description: str | None = None
     active: bool = True
